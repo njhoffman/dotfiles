@@ -1,0 +1,62 @@
+[options]
+allow_bold          = false
+audible_bell        = false
+bold_is_bright      = true
+clickable_url       = false
+cursor_blink        = on
+cursor_shape        = ibeam
+dynamic_title       = true
+scroll_on_keystroke = true
+scroll_on_output    = false
+scrollback_lines    = 10000
+
+font = DejaVu Sans Mono Nerd Font 10
+
+[hints]
+border_width = 0.5
+roundness = 2.0
+padding = 2
+
+[colors]
+
+# special
+foreground      = #B8B8C8
+foreground_bold = #b7b8b9
+cursor          = #b7b8b9
+background      = #000000
+
+highlight         = #4c566a
+
+# black
+color0  = #0c0d0e
+color8  = #737475
+
+# red
+color1  = #bf515a
+color9  = #bf515a
+
+# green
+color2  = #00c07c
+color10 = #00c07c
+
+# yellow
+color3  = #ebcb8b
+color11 = #ebcb8b
+
+# blue
+color4  = #3182bd
+color12 = #3182bd
+
+# magenta
+color5  = #6a6bcf
+color13 = #6a6bcf
+
+# cyan
+color6  = #80b1d3
+color14 = #80b1d3
+
+# white
+color7  = #b7b8b9
+color15 = #fcfdfe
+
+# vim: ft=dosini cms=#%s

@@ -1,0 +1,6 @@
+[module/fs-root]
+type = internal/fs
+mount-0 = /
+label-mounted =  %{F#00a653}%percentage_used%%%{F-} used of %mountpoint%
+
+; vim:syn=dosini

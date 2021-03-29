@@ -1,0 +1,31 @@
+{
+    "type": "phrase",
+    "description": "Shift-Tab with Ctrl-P",
+    "modes": [
+        3
+    ],
+    "usageCount": 0,
+    "prompt": false,
+    "omitTrigger": false,
+    "matchCase": false,
+    "showInTrayMenu": false,
+    "abbreviation": {
+        "abbreviations": [],
+        "backspace": true,
+        "ignoreCase": false,
+        "immediate": false,
+        "triggerInside": false,
+        "wordChars": "[\\w]"
+    },
+    "hotkey": {
+        "modifiers": [
+            "<ctrl>"
+        ],
+        "hotKey": "p"
+    },
+    "filter": {
+        "regex": "google-chrome.Google-chrome",
+        "isRecursive": false
+    },
+    "sendMode": "kb"
+}

@@ -1,0 +1,26 @@
+Creating default role:
+{{{bash
+  sudo -u postgres -i
+  createuser -U postgres -s nicholas
+  psql competitive_insights
+}}}
+
+Migrating Databases
+{{{bash
+  sudo -u postgres -i
+  psql competitive_insights
+  TRUNCATE TABLE commercial_impressions migrations migraitons_lock;
+  env DEBUG=knex:query knex migrate:latest
+  node ./lib/one-time/build-dev-database/index.js
+}}}
+
+Viewing Information
+{{{bash
+          # (S => show system objects, + verbose)
+  \l[+]   # databases
+  \du[S+] # users
+  \dt[S+] # tables
+  \di[S+] # indexes
+  \dT[S+] # datatypes
+  \dp     # table, view, and sequence access privileges
+}}}

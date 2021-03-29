@@ -1,0 +1,11 @@
+[module/taskwarrior]
+interval = 30
+type = custom/script
+exec = $HOME/.config/polybar/scripts/taskwarrior.sh
+format = <label>
+; format-foreground = #FFF
+; format-background = #400
+; format-prefix = "  "
+click-left = task "$((`cat /tmp/tw_polybar_id`))" done
+
+; vim:ft=dosini

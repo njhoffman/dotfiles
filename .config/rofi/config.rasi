@@ -1,0 +1,22 @@
+configuration {
+  sort: true;
+  sorting-method: "fzf";
+	modi: "combi,run,window,ssh";
+	lines: 15;
+	columns: 1;
+	font: "Source Code Pro Regular 16";
+	bw: 3;
+	padding: 10;
+	show-icons: true;
+	disable-history: true;
+	sidebar-mode: true;
+  theme: "gruvbox-dark-hard";
+	combi-modi: "drun,window";
+	matching: "fuzzy";
+	combi-hide-mode-prefix: true;
+  color-window: "#2e3440, #2e3440, #2e3440";
+  color-normal: "#2e3440, #d8dee9, #2e3440, #2e3440, #bf616a";
+  color-active: "#2e3440, #b48ead, #2e3440, #2e3440, #93e5cc";
+  color-urgent: "#2e3440, #ebcb8b, #2e3440, #2e3440, #ebcb8b";
+}
+@import "/home/nicholas/.local/share/rofi/themes/gruvbox-dark-hard.rasi"

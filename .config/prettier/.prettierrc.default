@@ -1,0 +1,10 @@
+{
+  "arrowParens": "avoid",
+  "editorConfig": true,
+  "endOfLine": "lf",
+  "printWidth": 100,
+  "rcVerbose": false,
+  "semi": true,
+  "singleQuote": true,
+  "trailingComma": "none"
+}

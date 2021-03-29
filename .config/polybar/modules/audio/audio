@@ -1,0 +1,6 @@
+include-file = ~/.config/polybar/modules/audio/mpd
+include-file = ~/.config/polybar/modules/audio/mpd-wide
+include-file = ~/.config/polybar/modules/audio/pulse
+include-file = ~/.config/polybar/modules/audio/pulse-wide
+
+; vim:ft=dosini

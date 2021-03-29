@@ -1,0 +1,79 @@
+version: 1
+description: Rules for Kubernetes spec files
+type: Kubernetes
+files:
+  - '*.yml'
+rules:
+  - id: ALLOW_KIND
+    severity: FAILURE
+    message: Allowed kinds
+    resource: '*'
+    assertions:
+      - key: kind
+        op: in
+        value: Pod,Policy,ServiceAccount,NetworkPolicy
+    tags:
+      - kind
+
+  - id: POD_CONTAINERS
+    severity: FAILURE
+    message: Pod must include containers
+    resource: Pod
+    assertions:
+      - key: spec.containers
+        op: present
+    tags:
+      - pod
+
+  - id: POD_SECURITY_CONTEXT
+    severity: FAILURE
+    message: Pod should set securityContent
+    resource: Pod
+    assertions:
+      - key: spec.securityContext.runAsNonRoot
+        op: eq
+        value: true
+      - key: spec.securityContext.readOnlyRootFilesystem
+        op: eq
+        value: true
+    tags:
+      - pod
+      - security
+
+  - id: DEFAULT_NAMESPACE
+    severity: FAILURE
+    message: Policy should not use default namespace
+    resource: Policy
+    assertions:
+      - key: spec.namespace
+        op: ne
+        value: default
+    tags:
+      - policy
+
+  - id: NETWORK
+    severity: FAILURE
+    message: Network policy should include from pods
+    resource: NetworkPolicy
+    assertions:
+      - key: spec.allowIncoming.from[].pods
+        op: present
+    tags:
+      - network
+  - id: DOCKER_REGISTRY
+    severity: FAILURE
+    message: Pods should pull from one of these docker registries
+    resource: Pod
+    assertions:
+      - every:
+          key: spec.containers
+          expressions:
+            - or:
+                - key: image
+                  op: starts-with
+                  value: <private docker registry url 1>
+                - key: image
+                  op: starts-with
+                  value: <private docker registry url 2>
+    tags:
+      - pod

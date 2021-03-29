@@ -1,0 +1,23 @@
+== Screen Configuration Notes ==
+  * .xinitrc => i3 => polybar/shell/conky
+  * on .xinitrc load configuration loaded by matching priority:
+    * hostname - edids
+    * edids
+    * default (by resolution)
+  * monitor outputs names must be matched to EDIDs in configuration
+  * configuration will specify for monitors:
+      * is primary monitor?
+      * resolution
+      * relative position (left-of, right-of)
+      * absolute position (--pos 3840x700)
+      * --dpi
+      * --scale
+  * monitors will have their own:
+    * polybar config
+    * shell font sizes, shell theme config, tmux config?
+    * conky config
+    * i3 scratchpad window sizes/positions depending on active monitor
+      * must keep track of scratchpad current monitor and size
+      * if opened on monitor with different resolution resize, otherwise keep saved size unless hotkey used
+      * make compatible with 'move to edge' commands
+  * each configuration should load values from environment variables and contain default values

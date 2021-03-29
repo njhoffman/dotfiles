@@ -1,0 +1,21 @@
+[general]
+targets = competitive_insights
+
+[notifications]
+notifications = True
+only_on_new_tasks = False
+# backend = growlnotify
+# finished_querying_sticky = False
+# task_crud_sticky = True
+
+[competitive_insights]
+service = jira
+jira.import_sprints_as_tags = True
+jira.import_labels_as_tags = True
+jira.label_template = {{label}}
+jira.description_template = {{jiraid}}: {{jirasummary}}
+jira.base_uri = https://sambatv.atlassian.net/
+jira.query = assignee = "Nick Hoffman" AND status != closed and status != resolved
+jira.username = nick.hoffman@samba.tv
+jira.password = sdkmpa18i7a1HCLYaGFW705D
+jira.add_tags = competitive-insights, sambatv

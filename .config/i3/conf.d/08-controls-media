@@ -1,0 +1,20 @@
+# vim:filetype=config
+
+# ========================================================================
+# (controls-media) media controls (volume, play/pause, change track, etc.)
+# ========================================================================
+
+# media player controls
+bindsym XF86AudioPlay exec playerctl play-pause
+bindsym XF86AudioPause exec playerctl pause
+bindsym XF86AudioNext exec playerctl next
+bindsym XF86AudioPrev exec playerctl previous
+
+# pulse audio controls (increase, decrease, mute volume)
+bindsym XF86AudioRaiseVolume exec --no-startup-id "$dir_bin/i3_volume_change.sh +5%"
+bindsym XF86AudioLowerVolume exec --no-startup-id"$dir_bin/i3_volume_change.sh -5%"
+bindsym XF86AudioMute exec --no-startup-id "$dir_bin/i3_volume_change.sh mute"
+
+# print screen
+bindsym Print exec gnome-screenshot
+bindsym $mod+p exec --no-startup-id "$dir_rofi/screenshot.sh"

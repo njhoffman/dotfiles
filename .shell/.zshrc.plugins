@@ -1,0 +1,115 @@
+#!/bin/zsh
+
+# zplug - zsh plugin manager
+export ZPLUG_HOME=$HOME/.zplug
+load_file "$ZPLUG_HOME/init.zsh"
+
+dir=${0%/*}
+
+# oh-my-zsh manages zsh config, zplug manages additional or custom oh-my-zsh plugins
+# zplug update, status, check, list, info
+# zplug "", at:v1, at:4c23b60, defer:2
+
+# git interactive with fzf
+zplug "wfxr/forgit"
+forgit_log=fglo
+forgit_diff=fgd
+forgit_add=fga
+forgit_reset_head=fgrh
+forgit_ignore=fgi
+forgit_restore=fgcf
+forgit_clean=fgclean
+forgit_stash_show=fgss
+forgit_cherry_pick=fgcp
+
+# export DOT_BASE_DIR="$HOME/.shell"
+
+# zplug "ytet5uy4/fzf-widgets"
+#   # Map widgets to key
+#   bindkey '^@'  fzf-select-widget
+#   bindkey '^@.' fzf-edit-dotfiles
+#   bindkey '^@c' fzf-change-directory
+#   bindkey '^@n' fzf-change-named-directory
+#   bindkey '^@f' fzf-edit-files
+#   bindkey '^@k' fzf-kill-processes
+#   bindkey '^@s' fzf-exec-ssh
+#   bindkey '^\'  fzf-change-recent-directory
+#   bindkey '^r'  fzf-insert-history
+#   bindkey '^xf' fzf-insert-files
+#   bindkey '^xd' fzf-insert-directory
+#   bindkey '^xn' fzf-insert-named-directory
+#
+#   ## Git
+#   bindkey '^@g'  fzf-select-git-widget
+#   bindkey '^@ga' fzf-git-add-files
+#   bindkey '^@gc' fzf-git-change-repository
+#
+#   # GitHub
+#   bindkey '^@h'  fzf-select-github-widget
+#   bindkey '^@hs' fzf-github-show-issue
+#   bindkey '^@hc' fzf-github-close-issue
+#
+#   ## Docker
+#   bindkey '^@d'  fzf-select-docker-widget
+#   bindkey '^@dc' fzf-docker-remove-containers
+#   bindkey '^@di' fzf-docker-remove-images
+#   bindkey '^@dv' fzf-docker-remove-volumes
+#
+#   typeset -gA FZF_WIDGET_OPTS
+#   # Enable Exact-match by fzf-insert-history
+#   FZF_WIDGET_OPTS[insert-history]='--exact'
+#
+#   # Start fzf in a tmux pane
+#   FZF_WIDGET_TMUX=1
+# fi
+
+# autoload -Uz chpwd_recent_dirs cdr add-zsh-hook
+# add-zsh-hook chpwd chpwd_recent_dirs
+#
+zplug 'm42e/zsh-histdb-fzf'
+# bindkey '^R' histdb-fzf-widget
+
+load_file "$dir/plugins/alias-tips.zsh"
+load_file "$dir/plugins/zsh-dircolors-solarized.zsh"
+load_file "$dir/plugins/zsh-better-npm-completion.zsh"
+load_file "$dir/plugins/zsh-vim-mode.zsh"
+load_file "$dir/plugins/auto-ls.zsh"
+load_file "$dir/plugins/zsh-histdb.zsh"
+load_file "$dir/plugins/zsh-autoenv.zsh"
+load_file "$dir/plugins/httpstat.zsh"
+load_file "$dir/plugins/zsh-auto-notify.zsh"
+load_file "$dir/plugins/zsh-autosuggestions.zsh"
+# load_file "$dir/plugins/zsh-autocomplete.zsh"
+load_file "$dir/plugins/zsh-completions.zsh"
+load_file "$dir/plugins/zsh-syntax-highlighting.zsh"
+#
+# zplug "Aloxaf/fzf-tab"
+# zstyle ':fzf-tab:*' fzf-command ftb-tmux-popup
+# zstyle ':fzf-tab:complete:*' popup-pad 30 0
+# zstyle ':fzf-tab:complete:cd:*' fzf-preview 'exa -1 --color=always $realpath' # remember to use single quote here!!!
+
+# zstyle ':fzf-tab:complete:cd:*' popup-pad 30 0
+
+zplug 'zsh-users/zsh-history-substring-search'
+
+# install plugins if not intalled, then source and add commands to $PATH
+if ! zplug check --verbose; then
+  zplug install
+fi
+zplug load # --verbose
+
+load_file "$dir/plugins/oh-my-zsh.zsh"
+
+# enable autosuggestions
+# if zplug check 'ytet5uy4/fzf-widgets'; then
+#   source ~/.zplug/repos/zsh-users/zsh-autosuggestions/zsh-autosuggestions.zsh
+# fi
+# zle-line-init() {
+#   _zsh_autosuggest_start
+# }
+# zle -N zle-line-init
+#
+
+local script=${(%):-%x}
+_file_success $script
+

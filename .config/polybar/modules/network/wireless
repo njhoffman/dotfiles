@@ -1,0 +1,56 @@
+[module/network-wireless]
+type = internal/network
+interface = ${global.wireless-interface}
+interval = 2.0
+ping-interval = 10.0
+;udspeed-minwidth = 0
+
+accumulate-stats = true
+
+; All labels support the following tokens:
+;   %ifname%    [wireless+wired]
+;   %local_ip%  [wireless+wired]
+;   %local_ip6% [wireless+wired]
+;   %essid%     [wireless]
+;   %signal%    [wireless]
+;   %upspeed%   [wireless+wired]
+;   %downspeed% [wireless+wired]
+;   %linkspeed% [wired]
+
+format-connected = <ramp-signal> <label-connected>
+format-disconnected = <label-disconnected>
+format-packetloss = <animation-packetloss> <label-connected>
+; format-disconnected = %{A:nm-connection-editor&:}disconnected%{A}
+
+format-connected-prefix =
+format-connected-prefix-foreground = #0a8
+; format-connected-prefix-offset = -3
+; label-connected = %essid% %{T2}%{F#4aa}%local_ip%%{T-}
+label-connected = %{T2}%essid% %{F#0a8}%signal%%{T-}
+label-connected-foreground = ${colors.foreground-alt}
+
+; 😱 😠 😒 😊 😃 😈
+ramp-signal-0 = 😱
+ramp-signal-1 = 直
+ramp-signal-2 = 直
+ramp-signal-3 = 直
+ramp-signal-4 = 直
+ramp-signal-5 = 
+ramp-signal-foreground = ${colors.foreground}
+
+format-disconnected-prefix-foreground = #F66
+label-disconnected = ⭍ not connected
+
+; ⧥ 📶 ⭍ 🗲
+; 🗲 🔌 ⧥ ⭍ ⮀ ﳊ ﳣ ﳤ ﴽ    
+; packetloss animation  disabled for now as it shows during VPN connection
+; animation-packetloss-0 = %{T2} 直%{T-}
+; animation-packetloss-0-foreground = ${colors.foreground}
+
+animation-packetloss-0 = %{T2}  %{T-}
+animation-packetloss-0-foreground = #ffa64c
+animation-packetloss-1 = %{T2}  %{T-}
+animation-packetloss-1-foreground = ${colors.foreground}
+animation-packetloss-framerate = 500
+
+; vim:syn=dosini

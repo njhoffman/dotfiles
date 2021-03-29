@@ -1,0 +1,16 @@
+[main]
+auto_expand = True
+keyring = False
+multi_line = True
+generate_aliases = True
+vi = True
+prompt = '\x1b[35m\u@\x1b[32m\h:\x1b[36m\d>'
+min_num_menu_lines = 10
+wider_completion_menu = True
+
+[colors]
+output.header = "#00dc8f"
+output.odd-row = "#88aacc"
+output.even-row = "#9f9faa"
+# output.odd-row = "#88ccdd"
+# output.even-row = "#77bbdd"

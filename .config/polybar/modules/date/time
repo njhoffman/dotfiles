@@ -1,0 +1,13 @@
+[module/date-time]
+type = internal/date
+label = %{F#3AA}%{F-} %{T2}%time%%{T-}%{F-}
+; date = %m-%d-%Y
+; 
+date = %a %m-%d
+time = %H:%M
+date-alt = %A, %d %B %Y
+time-alt = %H:%M:%S
+
+interval = 5
+
+; vim:syn=dosini

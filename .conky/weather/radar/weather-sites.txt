@@ -1,0 +1,37 @@
+usa  --  Continental US
+lit  --  AR, Little Rock
+prc  --  AZ, Prescott
+bfl  --  CA, Bakersfield
+den  --  CO, Denver
+hfd  --  CT, Hartford
+eyw  --  FL, Key West
+pie  --  FL, St Petersburg
+dsm  --  IA, Des Moines
+myl  --  ID, McCall
+spi  --  IL, Springfield
+sln  --  KS, Salina
+bwg  --  KY, Bowling Green
+msy  --  LA, New Orleans
+cad  --  MI, Cadillac
+stc  --  MN, St Cloud
+jef  --  MO, Jefferson City
+tvr  --  MS, Vicksburg
+lwt  --  MT, Lewistown
+clt  --  NC, Charlotte
+bis  --  ND, Bismarck
+lbf  --  NE, North Platte
+bml  --  NH, Berlin
+row  --  NM, Roswell
+rno  --  NV, Reno
+bgm  --  NY, Binghamton
+day  --  OH, Dayton
+law  --  OK, Lawton
+rdm  --  OR, Redmond
+pir  --  SD, Pierre
+bro  --  TX, Brownsville
+sat  --  TX, San Antonio
+pvu  --  UT, Provo
+fcx  --  VA, Roanoake
+shd  --  VA, Staunton
+tiw  --  WA, Tacoma
+riw  --  WY, Riverton

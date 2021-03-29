@@ -1,0 +1,59 @@
+# vim:filetype=config
+
+# =========================================================
+# (2-set) set variables
+# =========================================================
+
+# resource locations
+set $dir_sys_bin = ~/bin
+set $dir_wal ~/.cache/wal
+set $dir_base ~/.config/i3
+set $dir_config ~/.config/i3/config.d
+set $dir_home_config ~/.config
+set $dir_bin ~/.config/i3/bin
+set $dir_layouts ~/.config/i3/layouts
+set $dir_rofi ~/.config/rofi/scripts
+
+set_from_resource $wmfont i3wm.font pango:DejaVu Sans MonoNerd Font 10
+
+# Set inner/outer gaps
+set_from_resource $gaps_inner i3wm.gaps_inner 20
+set_from_resource $gaps_outer i3wm.gaps_outer 5
+
+# {{{ Color defs - fallback to solarized
+  set_from_resource $color00  color0     #002b36
+  set_from_resource $color01  color1     #dc322f
+  set_from_resource $color02  color2     #859900
+  set_from_resource $color03  color3     #b58900
+  set_from_resource $color04  color4     #268bd2
+  set_from_resource $color05  color5     #d33682
+  set_from_resource $color06  color6     #2aa198
+  set_from_resource $color07  color7     #93a1a1
+  set_from_resource $color08  color8     #586e75
+  set_from_resource $color09  color9     #cb4b16
+  set_from_resource $color10  color10    #85c000
+  set_from_resource $color11  color11    #cccc00
+  set_from_resource $color12  color12    #2c98e4
+  set_from_resource $color13  color13    #6c71c4
+  set_from_resource $color14  color14    #30b8b0
+  set_from_resource $color15  color15    #eee8d5
+  set_from_resource $fground  foreground #eee8d5
+  set_from_resource $bground  background #002b36
+# }}}
+
+# Terminal
+set_from_resource $terminal i3wm.terminal 'xterm-256color'
+set_from_resource $termclass i3wm.terminal_class 'xterm-256color'
+
+# other
+set $editor termite
+set $mod Mod4
+set $exec exec
+
+# {{{ Workspace definitions
+# set $ws_mail 12:<big></big>
+# set $ws_web 13:<big></big>
+# set $ws_doc 14:<big></big>
+# set $ws_games 16:<big></big>
+# set $ws_media 17:♫
+# }}}

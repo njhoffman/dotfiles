@@ -1,0 +1,56 @@
+# vim:ft=bash
+
+# icon_theme        = Oranchelo
+icon_theme          = Papirus-Grey
+icon_theme_fallback = xtg
+font                = San Francisco Text 16
+terminal_exec       = termite
+hover_delay         = 300
+columns             = 1
+hide_back_items     = 0
+# want to destroy each time so it pops up in correct location
+stay_alive          = 0
+
+# open menu where mouse is at
+monitor             = 0
+tint2_look          = 1
+
+csv_cmd             = jgmenu_run pmenu
+# jgmenu_run <cmd> <args> ; pmenu, lx, ob
+csv_single_window   = 1
+# organize apps into directories
+csv_no_dirs         = 1
+csv_name_format     = "%n (%g)"
+
+menu_height_mode    = dynamic
+menu_width          = 800
+menu_height_min     = 560
+menu_height_max     = 960
+menu_padding_top    = 60
+menu_padding_right  = 60
+menu_padding_bottom = 60
+menu_padding_left   = 60
+menu_radius         = 5
+menu_border         = 1
+menu_halign         = center
+menu_valign         = center
+
+icon_size           = 50
+icon_text_spacing   = 15
+item_margin_y       = 5
+item_height         = 60
+item_padding_x      = 20
+item_radius         = 5
+item_border         = 2
+
+sep_height          = 5
+
+color_menu_border   = ${xrdb:color6} 12
+color_menu_bg       = ${xrdb:color0} 30
+color_norm_bg       = ${xrdb:color1} 0
+color_norm_fg       = ${xrdb:color2} 80
+color_sel_bg        = ${xrdb:color3} 0
+color_sel_fg        = ${xrdb:color4} 30
+color_sel_border    = ${xrdb:color5} 0
+color_sep_fg        = ${xrdb:color6} 30
+

@@ -1,0 +1,18 @@
+##########################################
+# directories we never care to search in #
+##########################################
+assets/
+images/
+
+##########################################
+# files we never care to search through
+##########################################
+*.png
+*.jpg
+*.jpeg
+*.svg
+*.min.js
+*.js.map
+tailwind.css
+
+# vim:ft=gitignore

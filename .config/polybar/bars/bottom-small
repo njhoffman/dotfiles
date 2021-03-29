@@ -1,0 +1,16 @@
+[bar/bottom-small]
+inherit = bar/bottom
+height = 20
+
+font-0 = "DejaVuSansMono Nerd Font:size=7;2"
+font-1 = "DejaVuSansMono Nerd Font:size=6;2"
+font-2 = "DejaVuSansMono Nerd Font:size=8;2"
+font-3 = "Noto Color Emoji:scale=14;2"
+font-4 = "PowerlineSymbols:scale=12;2"
+
+; modules-left = power-menu i3 mpd-wide xbacklight
+; modules-center = keyboard-typespeed processes-counter processes-total
+; modules-right = memory cpu temperature date
+
+; vim:ft=dosini
+

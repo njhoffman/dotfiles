@@ -1,0 +1,53 @@
+{
+  "parser": "babel-eslint",
+  "parserOptions": {
+    "ecmaVersion": 6,
+    "sourceType": "module",
+    "ecmaFeatures": {
+      "jsx": true,
+      "experimentalObjectRestSpread": true,
+			"modules": true
+    }
+  },
+  "extends": [
+    "eslint:recommended",
+    "esnext",
+    "esnext/style-guide",
+    "node",
+    "node/style-guide",
+    "airbnb",
+    "plugin:import/recommended",
+    "plugin:react/recommended"
+  ],
+  "plugins": [
+    "babel",
+    "react",
+    "promise",
+    "import"
+  ],
+  "env": {
+    "browser" : true,
+    "node"    : true,
+    "es6"     : true,
+    "mocha"   : true
+  },
+  "globals": {
+    "__DEV__"      : false,
+    "__TEST__"     : false,
+    "__PROD__"     : false,
+    "__COVERAGE__" : false,
+    "__API_URL__"  : false,
+    "__API_PATH__" : false
+  },
+  "rules": {
+    "max-len":                     [1, 120, 2, { ignoreComments: true} ],
+    "key-spacing":                 [0, { align: "value" }],
+    "jsx-quotes":                  [2, "prefer-single"],
+    "no-multi-spaces":             ["error", { exceptions: { "VariableDeclarator": true, "ImportDeclaration" : true } }],
+    "space-before-function-paren": ["error", {"anonymous": "always", "named": "never", "asyncArrow" : "always"}],
+    "semi":                        [2, "always" ],
+    "react/no-typos":              "error",
+    "no-console":                  "warn",
+    "no-unused-vars":                ["error", { "args" : "none" }]
+  }
+}

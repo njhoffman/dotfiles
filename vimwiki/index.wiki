@@ -1,0 +1,408 @@
+Hello, here is some of the additional information you asked for.  I'm working on getting it formatted into my resume along with expanding my resume to two pages but wanted to at least get you the additional information ASAP.
+
+11/2019 - Current
+Independent Contracting
+Fulfilling monthly contracts for the following primary clients:
+  SpaDash (spadash.com): Austin startup that facilitates mobile haircut scheduling. Consists of:
+    - Customer app and provider (hair stylist) app written in React Native for both Android and iPhone
+    - API server and scheduled tasks written in Go, API scheduler and Admin area written in NodeJS
+    - Hosted on AWS and managed with Kubernetes, bitbucket pipelines, and Travis CI.
+    - Has been out of beta since February (it is available in both app stores), average 30% growth every month, currently have 10 providers serving locations around Austin.
+  OneMission Fundraising: onemissionfundraising.com
+    - Non-profit medium-scale e-commerce site written in PHP with Wordpress backend (not my choice), has been a consistent client for almost 10 years.
+    - Provides a way for other fundraisers to sell their products and raise money on our site.
+
+Here is some rough data that provides a little more details about my experience and skill set.
+
+Languages:
+  Javascript: Very strong, 15+ years (10 years in professional capacity).
+    - Variety of front end libraries/frameworks: jQuery, Backbone.js, Vue, ReactJS
+  NodeJS: Very strong, ~7 years
+    - Good familiarity with libraries, different design patterns and API patterns (i.e. REST, GraphQL) to meet different needs.
+  SQL variants: Strong, 10 years in professional capacity.
+    - Feel proficient in database design, optimizing queries, data pipelines, etc with SQL based languages.  Preferred database is PostreSQL.
+  PHP: Strong, ~7 years (3 years in professional capacity, 7 years as maintainer of onemissionfundraising.com)
+  Python: Moderate, 4 years, ~2 years professional capacity
+    - Not my primary language but fairly proficient.  Have been using less as of recent, not as interested in a position for this language.
+  Golang: Average
+    - 1 year in professional capacity for some components of SpaDash project (server API and scheduled CRON tasks)
+    - Still fairly new to the language but learning quickly and prioritizing this as a language to invest my time in.
+  Others: C/C++, Perl, Ruby, Java
+    - I have varying familiarity with these over my professional career but haven't used them to the degree or as of late where I'd want to highlight them in my skill set.
+
+Other Skills:
+  System adminisration, Shell scripting (Bash/Zsh): Strong, 15+ years (~10 years in professional capacity).
+    - Strong understanding of unix based OS, security fundamentals, server configuration, other sysadmin skills.
+  Infrastructure: strong, 5 years in professional capacity:
+    - Experience with AWS service configuration and infrastructure design
+    - Good familiarity with provisioning frameworks/languages like Terraform and Ansible.
+    - Proficient with container creation/config (docker, serverless setups), orchestration and management (Kubernetes, Amazon ECS, Elastic Beanstalk)
+
+
+I will obviously format it better into my updated resume, but this paired with info in my existing resume should hopefully give you the details you need at the moment.
+I'll look out for a text/email today if you want to schedule a call.  Let me know if you need anything else, I'll send my updated resume when complete.  Thanks!
+
+--Nick
+
+
+<service>.<namespace>
+
+General
+  3662  Prometheus 2.0 Stats
+  2     Prometheus Stats
+  11529 NodeJS Application Dashboard
+  139   AWS Billing
+  6483  ElasticSearch
+  6671  Go Processes
+System
+  1860 Node Exporter Full
+Containers
+  11600 Docker Container
+  8321  Docker monitoring with node selection
+  893   Docker and system monitoring
+Network
+  9614  *NGINX Ingress controller
+  4425  Traefik
+Database
+  455  Postgres Overview
+  9628 PostgreSQL Database
+  3742 AAA Postgres_Exporter
+  707  AWS RDS
+
+Grafana metrics
+nhoffmanweb@gmail.com => PubeyPie
+njhoffman1982@gmail.com => TurdFergfusonX
+njhoffman1982psn@gmail.com => LongDng_Silver
+Epic =>
+
+I exclusively use docker-compose for local dev. It slows nothing down - if anything, it streamlines it because I don't have to maintain the server environments on my host; docker takes care of that. All I have locally is nvm, go, and python - just because I use those for dogfood and other general tools, though.
+I use a lot of bind mounts to keep my local project in sync, and that really takes the edge off. To help that along, I've set my local uid to 1000 and I have dev images that set the container uid to the same (translation: no permissions trouble 🦄)
+DC lets me do other fun things to make life good. My favorite is stacking yaml for different tasks. Base yaml + dev yaml exposes extra ports or adds dev-only tooling services; + test yaml changes db data volumes to controlled alternates.
+Using rsync -a I can mirror data volumes - basically the db equivalent of git stash ♥️
+With the right mix of Ansible and Make, this is all no-effort. I can remember the days before docker, but I don't like to lol. Lots of things that are no-effort now were impractical or outright impossible then.
+Oh, another bonus: I have a single global/privileged stack running that has Traefik and Portainer. All running project stacks are published through Traefik, and Portainer is just nice to have around. No port conflicts, and life is easy ♥️
+
+# services:
+temp file is deprecated, use mktemp
+update-alternatives: skipping creation of /usr/share/man/man1/lz* BECAUSE ASSOCIATED FILE OF xz*.gz LINK GROUP LZMA DOESN'T EXIST
+dot_update git not found
+cleanup: #25 7.918 [WARNING]: Updating cache and auto-installing missing dependency: python3-apt
+#25 9.277 [WARNING]: Consider using the apt module rather than running 'apt-get'.  If you
+
+#5 19.31 ln: failed to create symbolic link '/etc/resolv.conf': Device or resource busy
+
+= My Knowledge Base =
+
+[[Spadash Admin Notes]]
+[[OneMission Notes]]
+[[MusicRater Notes]]
+[[Screen Configuration Notes]]
+[[DevTools Notes]]
+[[Misc Notes]]
+
+[[Database Notes]]
+[[Serverless Notes]]
+[[AWS Notes]]
+[[Docker Notes]]
+[[Kubernetes Notes]]
+
+[[Other Shortcuts]]
+[[VimWiki Notes]]
+
+= Quick Notes =
+* i3: $mod+b, $mod+o, $mod+c/d
+* vim: J K s ,x ,e q: q/ ,l ,n ,h ,d ,q gl-
+* vim: ,cd gd/gr/gk, paste special vs. insert :cdo  zs/ze
+* fzf: Ctrl+Alt+a, Ctrl+e, Ctrl+ -p -w -e -r -g -a -d -n
+* tmux: $mod+s | $win+ ; z <back> | $mod Ctrl+[f,u,g] | (visual) o Ctrl+o ctrl+Shift+o
+* shell: Ctrl+P, Ctrl+O, Ctrl+T, Ctrl+W, Ctrl+U (ins), U (cmd) | Ctrl + <tab>
+* vimium: yy | gi | ge | <Alt-m> | ]] / [[
+* neomutt: B, <C-n/o> <Tab> (next new), v m (open html), <C-u> urlscan, | xsel
+
+== broot ==
+  br --height=50 --cmd="search :print_tree"
+  BOOT_CMD_SEPARATOR=;
+  br --cmd cow /        => launch in the / directory and there's a filter typed for you.
+  br --cmd "/^vache;:p" => look for a file whose name starts with "vache" and focus its parent.
+  br -c "/mucca$;:cd"   => search for a file whose name ends with "mucca", and cd to the closest directory
+  BROOT_CMD_SEPARATOR=@ gr -c ":gi@target@:pp" => toggle the git_ignore filter, search for target then prints the selection path on stdout
+
+== Vim ==
+  :%!column -t        => Format into column
+  :%bd|e#
+  :cfdo %s/foo/bar/g|w
+  Ctrl+Q ,n ,p ,x     => Load results in quickfix window, navigate, exit
+  q: q/ <C-f> <C-r>   => Edit/execute command history, search history, enter window from command line (c-f), paste into command (c-r)
+  <C-b/e> <C-w/u>     => Commandline cursor to beginning/end, delete word, delete to beginning
+  ,v ,h ,q ,d         => Vim split window vertical, horizontal, delete split window, delete buffer
+  ,t                  => NerdTreeToggle
+  Ctrl+T (fzf mode)   => Goto beginning of entry
+  gf                  => Goto file, highlighted or special import behavior (plugin?)
+  gd                  => Goto definition
+  di"                 => Delete in ",(,{, etc
+  !cmd %              => run cmd on current buffer, show on screen
+  %!cmd %             => run cmd on buffer and replace with output
+  zC/zO/zA/zR/zM      => Open / close / toggle fold / open all folds / close all folds
+  :set autochdir, :cd => set active directory to current file directory
+  :w suda://%         => write file with sudo
+  :verbose imap <tab> => view keybindings
+  :e %:h/newfile.js   => open file relative to current file
+  :Glog --grep=findme -- % => git log --grep=findme  for commits that touched current buffer
+  :Ggrep findme <tag> => search for find me in --cached (index), branchname, tagname, commit SHA
+  :bro[wse oldfiles]  => Show mru and pick
+
+== Tmux ==
+  tmux list-keys      => list all shortcut keys
+  tmux ls             => list sessions
+  tmux attach #       => attach to session number #
+  $mod Ctrl-o         => swap panes
+  (copy) o            => open
+  (copy) Ctrl+o       => open in $EDITOR
+  (copy) Ctrl+Shift+o => open in google
+  $mod u              => show urls in seperate window
+  $mod Ctrl+f         => file search
+  $mod Ctrl+g         => git status files
+  $mod Alt+h          => git SHA-256 hashes (gitlog)
+  $mod Ctrl+u         => url search
+  $mod Ctrl+d         => number search
+  $mod Alt+i          => ip address search
+
+== Chrome ==
+  F6/Shift+F6  => Switch focus between address bar and page
+  Ctrl+Shift+C => Focus devtools
+  Ctrl+`       => Focus console
+  Ctrl+[/]     => Navigate devtools panels
+
+== Vimium ==
+  * use find before visual/copy mode
+  :vimgrep /copyright.*2018.*shidong/ :cdo s/2016-\zs2018\ze/2020/g
+  Ctrl+Shift+T => Open last closed tab
+  Shift+h/l    => Navigate forward/backward
+  gF/f         => cycle through frames / go to root frame
+  : / o / O    => open volmnibar in (current/new) tab
+  b / B        => open bookmark in current/new tab
+  gi           => go to first input box
+  yy           => yank link to clipboard
+  v (c)        => open visual mode (caret mode), use search first
+  o (visual)   => swap anchor points
+  p / P        => send the selected text to search engine
+  T<enter>     => most recently used tab
+  { / }        => go to beginning / end of paragraph
+  (missing from cvim) zi/zo/z0 => cVim zoom in / zoom out / zoom original
+
+== i3 ==
+  $mod+m                  => snap cursor to middle
+  $mod+left/right/up/down => snap to left/right/top/bottom
+  $mod+Ctrl+Up/Down       => snap to center
+  $mod+Shift+g (gap mode) => o / i (outer/inner) => + / - / 0 (shift for global)
+  $mod+space              => change focus between tiling / floating windows
+  $mod+shift+space        => toggle float window mode
+  $mod+j/k                => next / previous workspace
+  $mod+c/t                => show/hide floating chrome/terminal
+  i3-msg -t get_tree      => dump current i3 tree
+  i3-msg -t subscribe
+  -m '[ "window" ]'       => monitor window changes
+
+== lnav ==
+  i       => toggle histogram mode
+  p       => expand lines
+  Shift+t => toggle elapsed time column
+
+== Google ==
+  related: site: link:
+  before:YYYY-MM-DD after:YYYY-MM-DD
+  "exact"
+  "searching for" OR "multiple phrases"
+  searching for 1991..1998 number ranges
+  using * placeholder
+  search commands:
+    Weather *zip*
+    Define: *word*
+
+{{{sh
+ # installing and setting up tflint
+  curl -L "$(curl -Ls https://api.github.com/repos/terraform-linters/tflint/releases/latest | grep -o -E "https://.+?_linux_amd64.zip")" -o tflint.zip && unzip tflint.zip && rm tflint.zip
+  docker run --rm -v $(pwd):/data -t wata727/tflint
+  tflint -v
+}}}
+╭─  thanatos    ~                                                   SIGINT(2) ↵  6h 35m 25s       04:05 
+
+╭─  thanatos    ~/projects/spadash/infra/spadash-system   nick/api-admin  2                     04:03 
+╰─>>>                                                                                             2.10    100% 
+
+╭─  thanatos    ~/projects/spadash/env/dev                                  minikube ⎈  spadash   03:47 
+╰─>>> kubectl                                                                          apidb    2.84    100% 
+
+╭─  thanatos    ~/projects/spadash/env                                                             03:51 
+╰─>>>                                                                         spadash_august    2.52    100% 
+
+╭─  thanatos    ~/projects/spadash/env                            6h 35m 25s    2.52    100%   03:51 
+╰─>>>                                                          minikube ⎈  test   spadash    spadash_august 
+╰─>>>                                                                                                ⎈      
+
+https://github.com/fannheyward/coc-react-refactor
+https://github.com/vim-test/vim-test
+https://github.com/puremourning/vimspector
+https://github.com/voldikss/coc-tasks
+https://github.com/yuki-ycino/fzf-preview.vim/
+https://github.com/neoclide/coc-snippets
+https://github.com/cyrus-and/chrome-remote-interface
+
+:CocCommand markmap.create
+
+" enable MathJax
+:CocCommand markmap.create --enable-mathjax
+
+coc-lua
+coc-perl
+coc-phpls
+
+coc-highlight
+coc-github
+coc-gist / snippets
+coc-floatinput
+coc-emoji
+coc-todolist
+coc-yank
+coc-tag
+
+Unsorted/Unsorted-2
+6084:8559
+2673 -> 2726
+
+Found 2673 files
+{
+context: {
+  Relax: 186,
+  Heroin: 12,
+  Float: 48,
+  Sleep: 14,
+  Study: 1667,
+  Code: 355,
+  Pool: 1180,
+  Drive: 1030,
+  Lift: 86,
+  Run: 76,
+  Lifting: 47,
+  Running: 57,
+  Lounge: 790,
+  Smoke: 63,
+  Coitus: 84,
+  Longe: 1,
+  Runnig: 2,
+  FixEnding: 1,
+  Nick: 1,
+  EndingFix: 2,
+  Party: 15
+  }
+}
+{
+  mood: {
+    Dreamy: 20,
+      'Very Mellow': 109,
+      Mellow: 556,
+      Upbeat: 119,
+      Intense: 60,
+      Hardcore: 37,
+      Chill: 11,
+      Gloomy: 8,
+      Trippy: 5,
+      Driving: 4,
+      Dark: 3,
+      Uplifting: 2,
+      Ethereal: 1,
+      Groovy: 1
+  }
+}
+{
+picks: {
+  Nick: 1824
+}
+}
+{
+  unrated: 84,
+  rated: 2589,
+  ratings: {
+    '5.0': 1073,
+    '4.5': 284,
+    '3.5': 144,
+    '4.0': 683,
+    '2.5': 134,
+    '3.0': 173,
+    '1.0': 25,
+    '1.5': 7,
+    '3.8': 1,
+    '2.0': 54,
+    '0.5': 1,
+    '1.3': 1,
+    '4.9': 2,
+    '3.6': 7
+  }
+}
+Total:         2673
+
+
+In addition to providing the command-line window, Vim also offers some limited features allowing you to interact with the command-line whilst in command-line mode (without using the arrow keys).
+
+Movement
+<ctrl-b> move the cursor to the beginning of the command-line
+<ctrl-e> move the cursor to the end of the command-line
+Editing
+<ctrl-h> delete the character before the cursor (like backspace)
+<ctrl-w> delete the word before the cursor
+<ctrl-u> delete all the way from the cursor back to the start of the command-line
+You could of course add command-line mappings with :cnoremap to emulate certain other programs' navigation keys. Or install Tim Pope's RSI plugin to use the de facto standard Readline bindings.
+
+Pasting
+You can paste the contents of any register into the command-line at the position of the cursor by pressing <ctrl-r> followed by the character specifying the register. e.g. <ctrl-r>,+ will insert the contents of the clipboard into the command-line; <ctrl-r>," will insert the contents of the "unnamed" register (i.e. the contents of your last delete or yank).
+
+See :help cmdline.txt for further details of all the above.
+
+
+### Merging conflicts with vimdiff
+
+In the middle file (future merged file), you can navigate between conflicts with ]c and [c.
+
+Choose which version you want to keep with :diffget //2 or :diffget //3 (the //2 and //3 are unique identifiers for the target/master copy and the merge/branch copy file names).
+```
+:diffupdate (to remove leftover spacing issues)
+:only (once you’re done reviewing all conflicts, this shows only the middle/merged file)
+:wq (save and quit)
+git add .
+git commit -m “Merge resolved”
+```
+
+If you were trying to do a git pull when you ran into merge conflicts, type git rebase –continue.
+
+:set diffopt+=iwhite
+- ignore whitespace differences
+
+* highlight and shorcuty key when in diff mode
+if &diff
+    set cursorline
+    map ] ]c
+    map [ [c
+    hi DiffAdd    ctermfg=233 ctermbg=LightGreen guifg=#003300 guibg=#DDFFDD gui=none cterm=none
+    hi DiffChange ctermbg=white  guibg=#ececec gui=none   cterm=none
+    hi DiffText   ctermfg=233  ctermbg=yellow  guifg=#000033 guibg=#DDDDFF gui=none cterm=none
+endif
+
+* :set diffopt+=context:0
+  completely fold identical lines
+
+* :diffget identifiers
+  LO local master copy
+  RE remote master to be merged
+  BA common ancestor of remote and local changes.
+
+#### vimdiff commands
+
+]c :        - next difference
+[c :        - previous difference
+do          - diff obtain
+dp          - diff put
+zo          - open folded text
+zc          - close folded text
+:diffupdate - re-scan the files for differences
+do / dp     - diff obtain (bring changes in)/ diff put (send changes out)
+C-W C-W      - toggle between different columns

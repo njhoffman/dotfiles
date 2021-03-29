@@ -1,0 +1,16 @@
+
+[module/weather]
+type = custom/script
+exec = busctl --user -j get-property io.ntfd /weather openweathermap.strings RenderedTemplate | jq -r .data
+# Current temperature in celsius:
+; exec = busctl --user -j call io.ntfd /weather openweathermap.strings CurrentTemperature s "celsius" | jq -r '.data[0]'
+# Forecast temperature in fahrenheit:
+; exec = busctl --user -j call io.ntfd /weather openweathermap.strings CurrentTemperature s "fahrenheit" | jq -r '.data[0]'
+; exec = busctl --user -j get-property io.ntfd /weather openweathermap.strings RenderedTemplate | jq -r .data
+interval = 60
+; font-3 = Material Icons:size=19
+label-font = 6
+label-foreground = #cba900
+
+;
+; vim:ft=dosini

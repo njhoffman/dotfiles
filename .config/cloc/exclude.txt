@@ -1,0 +1,17 @@
+src/app/graphql/fragments/auto-generated.graphql
+src/app/graphql/fragments.graphql
+client/src/app/graphql/fragments/auto-generated.graphql
+client/src/app/graphql/fragments.graphql
+client/package-lock.json
+public/assets/fonts/meteocons/selection.json
+public/manifest.json
+public/material-ui-static/manifest.json
+client/public/assets/fonts/meteocons/selection.json
+client/public/manifest.json
+client/public/material-ui-static/manifest.json
+schema.graphql
+postgraphile.persisted.json
+server/postgraphile.persisted.json
+server/schema.graphql
+server/package-lock.json
+package-lock.json

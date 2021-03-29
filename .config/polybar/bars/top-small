@@ -1,0 +1,21 @@
+[bar/top-small]
+inherit = bar/top
+height = 20
+
+font-0 = "DejaVuSansMono Nerd Font:size=8;2"
+font-1 = "DejaVuSansMono Nerd Font:size=7;2"
+font-2 = "DejaVuSansMono Nerd Font:size=9;2"
+font-3 = "Noto Color Emoji:scale=12;2"
+font-4 = "PowerlineSymbols:scale=12;2"
+
+; modules-left = power-menu i3 keyboard pulseaudio mpd
+; modules-center = xwindow
+; modules-right = taskwarrior bluetooth network-wireless network-vpn temperature battery date-time
+
+; left, center, right, none
+; tray-position = none
+; tray-padding = 4
+; tray-maxsize = 16
+; tray-scale = 1.0
+
+; vim:ft=dosini

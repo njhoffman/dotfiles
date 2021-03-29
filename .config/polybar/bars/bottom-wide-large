@@ -1,0 +1,12 @@
+[bar/bottom-wide-large]
+inherit = bar/bottom-wide
+
+height = 30
+
+font-0 = "DejaVuSansMono Nerd Font:size=10;2"
+font-1 = "DejaVuSansMono Nerd Font:size=9;2"
+font-2 = "DejaVuSansMono Nerd Font:size=12;2"
+font-3 = "Noto Color Emoji:scale=12;2"
+font-4 = "PowerlineSymbols:scale=12;2"
+
+; vim:ft=dosini

@@ -1,0 +1,20 @@
+! vim:syntax=xdefaults
+
+! dclock*width: 30
+! dclock*height: 20
+! xlsfonts
+dclock*font: terminus-32
+dclock*date: %A %B %d
+dclock*smallRatio: 0.5
+dclock*widthFactor: 0.3
+dclock*spaceFactor: 0.13
+dclock*angle: 90
+dclock*background: black
+dclock*foreground: #33ccaa
+dclock*led_off: #001100
+dclock*seconds: true
+dclock*blink: true
+dclock*scroll: true
+dclock*tails: true
+dclock*fade: true
+dclock*fadeRate: 100

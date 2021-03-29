@@ -1,0 +1,151 @@
+# vim:filetype=config
+
+# =============================================================================
+# (controls-windows )settings to control navigation and manipulation of windows
+# =============================================================================
+
+# focus windows that are hovered by the mouse
+#focus_follows_mouse yes
+focus_follows_mouse no
+
+# disable warping mouse cursor to center of newly focused window
+mouse_warping none
+
+# {{{ change focus
+  # focus the parent container
+  bindsym $mod+a focus parent
+  # focus the child container
+  bindsym $mod+z focus child
+  # toggle sticky
+  bindsym $mod+Shift+s sticky toggle
+
+  # override tmux key mapping
+  bindsym Ctrl+h focus left  exec "$dir_bin/i3_window_focus.sh left"
+  bindsym Ctrl+l focus right exec "$dir_bin/i3_window_focus.sh right"
+  bindsym Ctrl+j focus down exec "$dir_bin/i3_window_focus.sh down"
+  bindsym Ctrl+k focus up exec "$dir_bin/i3_window_focus.sh up"
+
+
+  # move all windows to workspace root
+  bindsym $mod+Shift+a [tiling workspace="__focused__"] move workspace "reorder"; [workspace="reorder"] move workspace current
+
+  # set floating modifier to global modifier
+  floating_modifier $mod
+  # change focus between tiling / floating windows
+  bindsym $mod+space focus mode_toggle
+  # toggle tiling / floating
+  bindsym $mod+Shift+space floating toggle
+  # floating_minimum_size 800 x 1200
+  # floating_maximum_size -1 x -1
+# }}}
+
+# {{{ move focused window
+  bindsym $mod+Shift+j move down
+  bindsym $mod+Shift+k move up
+  bindsym $mod+Shift+h move left
+  bindsym $mod+Shift+l move right
+  bindsym $mod+Shift+Up move up
+  bindsym $mod+Shift+Down move down
+  bindsym $mod+Shift+Left move left
+  bindsym $mod+Shift+Right move right
+  # workspace back and forth (with/without active container)
+  workspace_auto_back_and_forth yes
+  bindsym $mod+b workspace back_and_forth
+  bindsym $mod+Shift+b move container to workspace back_and_forth; workspace back_and_forth
+  # toggle fullscreen mode for the focused container
+  bindsym $mod+f fullscreen toggle
+  # change container layout (stacked, tabbed, toggle split)
+  bindsym $mod+Shift+{ layout stacking
+  bindsym $mod+Shift+} layout tabbed
+  bindsym $mod+Shift+| layout toggle split
+# }}}
+
+# {{{ resize focused window
+  bindsym $mod+r mode "resize"
+  mode "resize" {
+    # resizing (px or pt)
+    bindsym h resize shrink width 10 px
+    bindsym l resize grow width 10 px
+    bindsym j resize grow height 10 px
+    bindsym k resize shrink height 10 px
+    bindsym Left resize shrink width 5 px
+    bindsym Right resize grow width 5 px
+    bindsym Down resize grow height 5 px
+    bindsym Up resize shrink height 5 px
+    bindsym Ctrl+h resize shrink width 1 px
+    bindsym Ctrl+l resize grow width 1 px
+    bindsym Ctrl+j resize grow height 1 px
+    bindsym Ctrl+k resize shrink height 1 px
+    # moving
+    bindsym Shift+h move left 10 px
+    bindsym Shift+j move down 10 px
+    bindsym Shift+k move up 10 px
+    bindsym Shift+l move right 10 px
+    bindsym Ctrl+Shift+h move left 1 px
+    bindsym Ctrl+Shift+j move down 1 px
+    bindsym Ctrl+Shift+k move up 1 px
+    bindsym Ctrl+Shift+l move right 1 px
+    # exit resize mode: Enter or Escape
+    bindsym Return mode "default"
+    bindsym Escape mode "default"
+  }
+# }}}
+
+#{{{ snapping windows
+# snapping windows with wmctrl
+# https://gist.github.com/raidzero/dd7e45370b819eeff8aa
+# move to left:
+  # bindcode 59, bindcode 60
+  bindsym $mod+comma exec "$dir_bin/i3_window_reposition.sh third-left"
+  bindsym $mod+period exec "$dir_bin/i3_window_reposition.sh third-right"
+  bindsym $mod+slash exec "$dir_bin/i3_window_reposition.sh restore"
+  bindsym $mod+Shift+c exec "$dir_bin/i3_window_reposition.sh center"
+  bindsym $mod+Shift+v resize set 1000 800, move position center, move to scratchpad
+
+
+  bindsym $mod+Left exec "$dir_bin/i3_window_reposition.sh left"
+  bindsym $mod+Right exec "$dir_bin/i3_window_reposition.sh right"
+  bindsym $mod+Down exec "$dir_bin/i3_window_reposition.sh bottom"
+  bindsym $mod+Up exec "$dir_bin/i3_window_reposition.sh top"
+  bindsym $mod+Ctrl+Up exec "$dir_bin/i3_window_reposition.sh center"
+  bindsym $mod+Ctrl+Down exec "$dir_bin/i3_window_reposition.sh center"
+  # bindsym $mod+Shift+Left exec "notify-send left && $dir_bin/i3_window_snap.sh half-left"
+
+  #move to right:
+  # bindsym $mod+]        exec "$dir_bin/i3_window_snap.sh third-right && notify-send right"
+  bindsym $mod+Shift+.  exec "$dir_bin/i3_window_snap.sh right"
+#}}}
+
+# split orientation
+bindsym $mod+h split h;exec notify-send 'tile horizontally'
+bindsym $mod+v split v;exec notify-send 'tile vertically'
+
+# window kill command
+bindsym $mod+q kill
+
+# change window borders
+bindsym $mod+u border none
+bindsym $mod+y border pixel 2
+bindsym $mod+n border normal 1
+
+# trigger the flashfocus window event
+bindsym $mod+backslash exec --no-startup-id flash_window
+
+# {{{ scatchpad
+  # move the currently focused window to the scratchpad
+  bindsym $mod+Shift+minus move scratchpad
+  # show the next scratchpad window or hide the focused scratchpad window.
+  bindsym $mod+minus scratchpad show
+  # bindsym $mod+i [class="feh"] scratchpad show
+  # bindsym $mod+c [class="Google-chrome" window_role="pop-up"] scratchpad show
+  # bindsym $mod+w [instance="www.windy.com" window_role="pop-up"] scratchpad show
+  bindsym $mod+t [class="Termite" title="scratchpad"] scratchpad show
+  # bindsym $mod+t exec --no-startup-id "$dir_bin/launch-shell-dropdown.sh"
+  # bindsym $mod+e [instance="www.feedly.com" window_role="pop-up"] scratchpad show
+  bindsym $mod+i [title="Redux DevTools"] scratchpad show
+  bindsym $mod+c [title="conky-float"] scratchpad show
+  bindsym $mod+g [class="Gnome-system-monitor"] scratchpad show
+  bindsym $mod+s [class="Slack"] scratchpad show
+  bindsym $mod+Control+c exec "$dir_bin/launch-conky.sh && notify-send 'restarted conky' && i3-msg 'scratchpad show [class=conky-float]'"
+# }}}
+

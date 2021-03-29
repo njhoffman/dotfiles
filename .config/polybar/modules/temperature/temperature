@@ -1,0 +1,22 @@
+[module/temperature]
+type = internal/temperature
+hwmon-path = ${global.temperature-path}
+warn-temperature = 90
+
+; 80: 0-20, 20-40, 40-60, 60-80  
+
+format = <ramp> <label>
+format-warn = %{F#f00} 🌡%{F-} <label-warn>
+
+; label = %temperature-c%
+label = %{T2}%temperature-f%%{T-}
+label-foreground = ${colors.foreground-alt}
+label-warn = %{T2}%temperature-f%%{T-}
+label-warn-foreground = ${colors.error}
+ramp-0=%{F#0ff} 
+ramp-1=%{F#0fa} 
+ramp-2=%{F#aa2} 
+ramp-3=%{F#c80} 
+
+; vim:ft=dosini
+

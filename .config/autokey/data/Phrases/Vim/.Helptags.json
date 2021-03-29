@@ -1,0 +1,32 @@
+{
+    "type": "phrase",
+    "description": "Helptags",
+    "modes": [
+        3
+    ],
+    "usageCount": 9,
+    "prompt": false,
+    "omitTrigger": false,
+    "matchCase": false,
+    "showInTrayMenu": false,
+    "abbreviation": {
+        "abbreviations": [],
+        "backspace": true,
+        "ignoreCase": false,
+        "immediate": false,
+        "triggerInside": false,
+        "wordChars": "[\\w]"
+    },
+    "hotkey": {
+        "modifiers": [
+            "<ctrl>",
+            "<shift>"
+        ],
+        "hotKey": "/"
+    },
+    "filter": {
+        "regex": "termite.Termite|Alacritty.Alacritty",
+        "isRecursive": false
+    },
+    "sendMode": "kb"
+}

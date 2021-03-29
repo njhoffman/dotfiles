@@ -1,0 +1,39 @@
+:project:
+
+beets directory: /Music (does not autoscan)
+mpd_directory: /Music/Sorted
+
+    "node-id3": "tiusnonos/node-id3#master",
+
+
+1. Move downloaded files to /Unsorted directory
+2. Import with beets to /Sorted/Unrated directory
+  1. beet import -s -q --set=Album="Unrated Singles" ./Singles
+  2. beet import --set=Rated=0 ./Album
+3. Use MusicRater to add fields of currenty playing mpd:
+  * TXXX=Rated=1
+  * TXXX=Context=Pool,Workout
+  * TXXX=Mood=Mellow
+  * TXXX=Picks=Nick
+  * TXXX=PrimaryGenre=Rock
+  * TXXX=PrimarySubgenre=Folk-Rock
+  * TIT1=Artist / Singles / Compilations (Grouping)
+  * POPM=Default=None 204/255
+  * if classical:
+    * TXXX=CompositionType=ChamberMusic (Only if classical and non-compilation)
+  * if singles:
+    * TALB=Singles: (Electronica) Indietronica
+4. When finished:
+  * album move to /Sorted/Rated/PrimaryGenre/PrimarySubgenre/Artists
+  * singles move to /Sorted/Rated/PrimaryGenre/PrimarySubgenre/Singles
+  * compilation move to /Sorted/Rated/PrimaryGenre/PrimarySubgenre/Compilations
+  * classical move to /Sorted/Rated/PrimaryGenre/PrimarySubgenre/
+  * beet update (removes from library)
+  * mpd update (should be triggered automatically from beet update)
+
+TODO:
+  -Automatically assign artwork to singles
+  -See if multi-genres widely supported, if not write script to assign to new attribute
+   and populate TCON with PrimaryGenre and PrimarySubgrenre
+  -Write script to lookup composition date of classical pieces
+  -move files to rated by beet import

@@ -1,0 +1,59 @@
+#!/bin/zsh
+
+# track directories for termite spawning
+touch /tmp/whereami
+
+# dbg_output="$HOME/.local/log/zshrc.$(date '+%Y.%m.%d.%H.%M').log"
+dbg_output=/dev/null
+typeset -A _file_times
+
+function _timer_start() {
+  local now=$(($(date +%s%N)/1000000))
+  echo $now
+}
+
+function _timer_stop() {
+  local before=$1
+  local name="$2"
+  local now=$(($(date +%s%N)/1000000))
+  local elapsed=$(($now-$before))
+  echo $elapsed": "$name
+}
+
+# {{{ zshrc loader specific functions
+function _clr() {
+  local code=$1
+  local content=$2
+  # echo "%K{$code}$content%k"
+  echo "%F{$code}${content}%f"
+}
+
+function _file_success() {
+  local script="${1:s/\/home\/nicholas/~}"
+  # print -P "  $(_clr 42 ' ✓ ')$(_clr 243 "$script")"
+  # print -Pn "  $(_clr 42 ' ✓ ')"
+}
+
+function file_missing() {
+  local script="$1"
+  # print -P "  $(_clr 196 ' X ')$(_clr 172 "Could not find: ${script}")"
+}
+
+function load_file() {
+  local filepath="$1"
+  local start=$(($(date +%s%N)/1000000))
+
+  if [[ -f "$filepath" ]]; then
+    source $filepath
+    local end=$(($(date +%s%N)/1000000))
+    local elapsed=$(($end-$start))
+    echo -e "$filepath:\t$elapsed" >> $dbg_output
+  else
+    file_missing "$filepath"
+  fi
+
+}
+echo -e "\n\nStarting shell..." >> $dbg_output;
+
+# }}}
+

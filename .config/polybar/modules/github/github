@@ -1,0 +1,10 @@
+[module/github]
+type = internal/github
+token = ${file:/home/jaagr/.git-token}
+
+label = %{A1:web --new-window https\://github.com/notifications&:}%notifications%%{A}
+label-padding = 2
+label-background = #f0c209
+label-foreground = #000
+
+; vim:syn=dosini

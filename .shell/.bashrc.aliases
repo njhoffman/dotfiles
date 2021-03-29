@@ -1,0 +1,5 @@
+#!/bin/bash
+
+# load global (bash/zsh) aliases
+[[ -f "$HOME/.shell/aliases.sh" ]] && source "$HOME/.shell/aliases.sh"
+

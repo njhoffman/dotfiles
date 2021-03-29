@@ -1,0 +1,68 @@
+directory: ~/Music/Sorted
+library: ~/.beets/musiclibrary.db
+original_date: yes
+id3v23: yes
+import:
+  move: yes
+  copy: no
+  write: yes
+  default_action: asis
+  non_rec_action: asis
+paths:
+  grouping:AlternativeMetal.Artists: Rated/Rock/Alternative-Metal/Artists/$albumartist/$albumtype/$year - $album%aunique{}/$track - $title
+  grouping:AlternativeMetal.Singles: Rated/Rock/Alternative-Metal/Singles/$artist - $title
+  grouping:AlternativeRock.Artists: Rated/Rock/Alternative-Rock/Artists/$albumartist/$albumtype/$year - $album%aunique{}/$track - $title
+  grouping:AlternativeRock.Singles: Rated/Rock/Alternative-Rock/Singles/$artist - $title
+  grouping:Ambient.Artists: Rated/Electronica/Ambient & Instrumental/Artists/$albumartist/$albumtype/$year - $album%aunique{}/$track - $title
+  grouping:Ambient.Singles: Rated/Electronica/Ambient & Instrumental/Singles/$artist - $title
+  grouping:Bigbeat.Artists: Rated/Electronica/Bigbeat & Dubstep/Artists/$albumartist/$albumtype/$year - $album%aunique{}/$track - $title
+  grouping:Bigbeat.Singles: Rated/Electronica/Bigbeat & Dubstep/Singles/$artist - $title
+  grouping:BluesRock.Artists: Rated/Rock/Blues-Rock/Artists/$albumartist/$albumtype/$year - $album%aunique{}/$track - $title
+  grouping:BluesRock.Singles: Rated/Rock/Blues-Rock/Singles/$artist - $title
+  grouping:ContemporaryInstrumental.Artists: Rated/Classical/Contemporary Instrumental/Artists/$albumartist/$albumtype/$year - $album%aunique{}/$track - $title
+  grouping:ContemporaryInstrumental.Singles: Rated/Classical/Contemporary Instrumental/Singles/$artist - $title
+  grouping:Downbeat.Artists: Rated/Electronica/Downbeat & Chillout/Artists/$albumartist/$albumtype/$year - $album%aunique{}/$track - $title
+  grouping:Downbeat.Singles: Rated/Electronica/Downbeat & Chillout/Singles/$artist - $title
+  grouping:ElectronicFunk.Artists: Rated/Electronica/Electronic Funk & Jazz/Artists/$albumartist/$albumtype/$year - $album%aunique{}/$track - $title
+  grouping:ElectronicFunk.Singles: Rated/Electronica/Electronic Funk & Jazz/Singles/$artist - $title
+  grouping:FolkRock.Artists: Rated/Rock/Folk-Rock/Artists/$albumartist/$albumtype/$year - $album%aunique{}/$track - $title
+  grouping:FolkRock.Singles: Rated/Rock/Folk-Rock/Singles/$artist - $title
+  grouping:IndieRock.Artists: Rated/Rock/Indie-Rock/Artists/$albumartist/$albumtype/$year - $album%aunique{}/$track - $title
+  grouping:IndieRock.Singles: Rated/Rock/Indie-Rock/Singles/$artist - $title
+  grouping:Indietronica.Artists: Rated/Electronica/Indietronica & Trip-Hop/Artists/$albumartist/$albumtype/$year - $album%aunique{}/$track - $title
+  grouping:Indietronica.Singles: Rated/Electronica/Indietronica & Trip-Hop/Singles/$artist - $title
+  grouping:PopRock.Artists: Rated/Rock/Pop-Rock/Artists/$albumartist/$albumtype/$year - $album%aunique{}/$track - $title
+  grouping:PopRock.Singles: Rated/Rock/Pop-Rock/Singles/$artist - $title
+  grouping:PsychedelicRock.Artists: Rated/Rock/Psychedelic-Rock/Artists/$albumartist/$albumtype/$year - $album%aunique{}/$track - $title
+  grouping:PsychedelicRock.Singles: Rated/Rock/Psychedelic-Rock/Singles/$artist - $title
+  grouping:Rap-R&B.Artists: Rated/Rap-R&B/Artists/$albumartist/$albumtype/$year - $album%aunique{}/$track - $title
+  grouping:Rap-R&B.Singles: Rated/Rap-R&B/Singles/$artist - $title
+
+  albumtype:soundtrack: Unrated/$albumartist/$year - $album%aunique{}/$track - $title
+  comp:true: Unrated/$albumartist/$year - $album%aunique{}/$track - $title
+  album:Unsorted Singles: Unrated/_Singles/$artist - $title
+  singleton:true: Unrated/_Singles/$artist - $title
+  default: Unrated/$albumartist/$year - $album%aunique{}/$track - $title
+
+plugins: convert info lastimport lastgenre scrub fetchart embedart edit types mpdupdate
+# lyrics
+lastgenre:
+  count: 20
+  canonical: yes
+  source: track
+lyrics:
+  auto: yes
+  force: no
+convert:
+  auto: true
+scrub:
+  auto: no
+edit:
+  itemfields: track title artist album
+mpd:
+  host: 127.0.0.1
+  port: 6600
+types:
+  rating: int
+# beet modify "My favorite track" rating=5
+# beet ls rating:4..5

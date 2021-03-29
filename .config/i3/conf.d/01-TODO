@@ -1,0 +1,28 @@
+# cat conf.d/* > config
+# ==========================================================
+# (1-TODO) TODO
+# ==========================================================
+#
+# Usage:
+# setup/use sticky windows
+# setup/use scratchpad
+# figure out zsh cd functionality
+#
+# Config Tasks:
+# reduce keymappings for window management in windows config
+# add config and multi-monitor polybar launcher in bar config
+# use environment variables to indicate autostart programs (at least some of them like battery)
+# use environment variables to specify layouts or different non-wm apps started by init.sh
+# map $mod+- to ignore conky, system monitor, etc
+#
+# Other:
+# get rid of powerlevel9k-master
+# figure out oh-my-zsh setup and dir in .shell
+# hostname config override, include env _CFG_HOST_OVERRIDE
+# include reference for all these environment variables
+# organize .shell/.zshrc better
+# create script that will itemize version numbers of environment dependencies (most should be in .local/bin)
+# investigate termite not starting
+# add tty to tmux status line
+# create alias to jump to directory of above tty
+#

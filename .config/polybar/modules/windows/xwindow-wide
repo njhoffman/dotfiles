@@ -1,0 +1,10 @@
+[module/xwindow-wide]
+type = internal/xwindow
+label = %title:0:70:...%
+format =   <label>
+; format =   <label>
+label-empty = <empty>
+label-empty-foreground = ${colors.foreground-alt}
+label-maxlen = 75
+
+; vim:ft=dosini

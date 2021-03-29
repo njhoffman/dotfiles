@@ -1,0 +1,114 @@
+# global ignore file for fdfind, ripgrep and ag
+# put file name search specific ignores in .fdignore,
+# file content search (more exclusive) ignores in .rgignore/.agignore
+#
+# fdfind --no-ignore-vcs --hidden --ignore-file ~/.ignore --ingore-file ~/.fdignore
+# rg --no-ignore-vcs --hidden --ignore-file ~/.ignore --ignore-file ~/.rgignore
+# ag --skip-vcs-ignores --hidden --path-to-ignore ~/.ignore --path-to-ignore ~/.agignore
+#
+# ~ 78079, 261502
+# / 1145556789+
+# spadash-admin-client 307360
+
+#####################################
+# directories we never care to search
+#####################################
+.AndroidStudio4.0/
+.cache/
+.cargo/
+.config/Slack
+.config/google-chrome/
+.git/
+.krew/
+.kube/
+.npm/
+.nvm/
+.rustup/
+.rvm/
+.twilio-cli/
+.vim/bundle
+.vim/backup
+.vim/swap
+.vim/undo
+Android/Sdk/
+backup/
+bower_components/
+build/
+apollo-cache/
+cache/
+coverage/
+dist/
+go/pkg
+lib/python3.8/site-packages/
+node_modules/
+packages/
+reports/
+snap/
+tmp/
+tmp/
+vendor/
+yarn/
+
+.local/src/**/*
+!.local/src/*
+
+Downloads/**/*
+!Downloads/*
+
+.local/share/**/*
+!.local/share/*
+
+.zplug/repos/**/*
+!.zplug/repos/*
+
+.local/lib/python3.8/site-packages/**/*
+!.local/lib/python3.8/site-packages/*
+
+##################################
+# files we never care to find
+##################################
+.DS_Store
+*.tags*
+*.tmp*
+*.old
+*.plist
+
+package-lock.json
+yarn.lock
+
+#   --exclude \".git\" \
+#   --exclude \".cache\"  \
+#   --exclude \".cargo\"  \
+#   --exclude \".rbenv\"  \
+#   --exclude \"snap-store\"  \
+#   --exclude \"Android\/Sdk\"  \
+#   --exclude \".npm\"  \
+#   --exclude \"cache\"  \
+#   --exclude \".rustup\"  \
+#   --exclude \".vim\"  \
+#   --exclude \"node_modules\" \
+#   --exclude \"images/\" \
+#   --exclude \"tmp/\" \
+#   --exclude \"vendor/\" \
+#   --exclude \"reports/\" \
+#   --exclude \"coverage/\" \
+#   --exclude \"node_modules/\" \
+#   --exclude \"dist/\" \
+#   --exclude \".git/\" \
+#   --exclude \"*.tags*\" \
+#   --exclude \"*.tmp*\" \
+#   --exclude \"*.old\" \
+#   --exclude \"*.plist\" \
+#   --exclude \".config/google-chrome/\" \
+#   --exclude \".config/Slack\" \
+#   --exclude \".kube/\" \
+#   --exclude \".krew/\" \
+#   --exclude \".rvm/\" \
+#   --exclude \".nvm/\" \
+#   --exclude \"go/pkg\" \
+#   --exclude \"lib/python3.8/site-packages/\" \
+#   --exclude \".AndroidStudio4.0/\" \
+#   --exclude \".local/src/**/\" \
+#   --exclude \"snap/\" \
+
+# vim:ft=gitignore

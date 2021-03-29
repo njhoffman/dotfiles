@@ -1,0 +1,78 @@
+{
+  "segments": {
+    "right": [
+      {
+        "function": "powerline.segments.common.mail.email_imap_alert",
+        "priority": 50,
+        "args": {
+          "interval": 60,
+          "port": 993,
+          "server": "imap.gmail.com",
+          "username": "njhoffman1982",
+          "password": "X!egobnf2985"
+        }
+      },
+      {
+        "function": "powerline.segments.common.sys.cpu_load_percent",
+        "priority": 50,
+        "args": {
+          "interval": 1,
+          "format": "{0:.0f}%"
+        }
+      },
+      {
+        "function": "powerline_taskwarrior.active_task",
+        "priority": 70,
+        "description_length": 40
+      },
+      {
+        "function": "powerline_taskwarrior.context",
+        "priority": 70
+      },
+      {
+        "function": "powerline_taskwarrior.next_task",
+        "priority": 70
+      },
+      {
+        "function": "powerline.segments.common.time.date"
+      },
+      {
+        "function": "powerline.segments.common.net.external_ip",
+        "priority": 50
+      },
+      {
+        "function": "powerline.segments.common.net.internal_ip",
+        "priority": 50
+      },
+      {
+        "function": "powerline.segments.common.net.network_load",
+        "priority": 50,
+        "args": {
+          "interface": "eth0"
+        }
+      },
+      {
+        "function": "powerline.segments.common.wthr.weather",
+        "priority": 50,
+        "args": {
+          "interval": 600,
+          "unit": "F",
+          "location_query": "bettendorf, ia",
+          "temp_coldest": 30,
+          "temp_hottest": 100
+        }
+      },
+      {
+        "function": "powerline.segments.common.time.date"
+      },
+      {
+        "function": "powerline.segments.common.time.date",
+        "name": "time",
+        "args": {
+          "format": "%H:%M",
+          "istime": true
+        }
+      }
+    ]
+  }
+}

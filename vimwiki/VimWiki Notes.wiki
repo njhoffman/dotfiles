@@ -1,0 +1,58 @@
+= Basic VimWiki Markup =
+
+= Header1 =
+== Header2 ==
+=== Header3 ===
+
+*bold text*
+_italic text_
+~~strikeout text~~
+`code (no syntax) text`
+super^script^
+sub,,script,,
+Special words: TODO, DONE, STARTED, FIXME, FIXED, XXX.
+
+[[wiki link]] -- wiki link
+[[wiki link|description]] -- wiki link with description
+[[wiki1:This is a link]] - link to seperate wiki
+
+Lists:
+
+* bullet list item 1
+  - bullet list item 2
+  - bullet list item 3
+    * bullet list item 4
+    * bullet list item 5
+* bullet list item 6
+* bullet list item 7
+  - bullet list item 8
+  - bullet list item 9
+
+1. numbered list item 1
+2. numbered list item 2
+   a) numbered list item 3
+   b) numbered list item 4
+
+TODO:
+
+- [ ] Unchecked box
+- [x] Checked box
+    * [[Tasks]] -- things to be done _yesterday_!!!
+    * [[Project Gutenberg]] -- good books are power.
+    * Scratchpad -- various temporary stuff.
+
+{{{python
+def greet(s):
+    print("Hello, " + s)
+}}}
+
+{{{javascript
+  const hello = "hello";
+}}}
+
+
+| a table |   |
+|---------|---|
+|         |   |
+
+:tags-are-in-this-format:

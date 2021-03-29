@@ -1,0 +1,24 @@
+# vim:filetype=config
+
+# ================================================
+# (4-appearance) appearance of windows
+# ================================================
+
+# font
+font $wmfont
+
+# borders
+hide_edge_borders none
+default_border pixel 3
+default_floating_border pixel 3
+hide_edge_borders smart # none|vertical|horizontal|both|smart
+
+# theme colors
+# <title_border> <border> <background> <text> <indicator> <child_border>
+client.focused #1466aa #14273A #CCCCCC #99ddff #1499dd
+client.focused_inactive #191723 #192733 #CCCCCC #000d1a #001d3a
+client.unfocused #192733 #191723 #CCCCCC #000d1a #001d3a
+client.urgent #aa2733 #192733 #aacccc #000d1a #aa0d1a
+client.placeholder #192733 #192733 #cccccc #000d1a #000d1a
+client.background #000000#!/bin/bash
+

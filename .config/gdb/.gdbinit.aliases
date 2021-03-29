@@ -1,0 +1,231 @@
+# _____________breakpoint aliases_____________
+define bpl
+    info breakpoints
+end
+document bpl
+Syntax: bpl
+| List all breakpoints.
+end
+
+
+define cyclesyntax
+python
+from pygments.styles import *
+for style in get_all_styles():
+  command = 'dashboard -style syntax_highlighting {!r}'.format(style)
+  gdb.execute(command)
+  print(command)
+  if input('Use this style? (y/N) ') == 'y':
+      break
+end
+end
+
+define bp
+    if $argc != 1
+        help bp
+    else
+        break $arg0
+    end
+end
+document bp
+Syntax: bp LOCATION
+| Set breakpoint.
+| LOCATION may be a line number, function name, or "*" and an address.
+| To break on a symbol you must enclose symbol name inside "".
+| Example:
+| bp "[NSControl stringValue]"
+| Or else you can use directly the break command (break [NSControl stringValue])
+end
+
+
+define bpc
+    if $argc != 1
+        help bpc
+    else
+        clear $arg0
+    end
+end
+document bpc
+Syntax: bpc LOCATION
+| Clear breakpoint.
+| LOCATION may be a line number, function name, or "*" and an address.
+end
+
+
+define bpe
+    if $argc != 1
+        help bpe
+    else
+        enable $arg0
+    end
+end
+document bpe
+Syntax: bpe NUM
+| Enable breakpoint with number NUM.
+end
+
+
+define bpd
+    if $argc != 1
+        help bpd
+    else
+        disable $arg0
+    end
+end
+document bpd
+Syntax: bpd NUM
+| Disable breakpoint with number NUM.
+end
+
+
+define bpt
+    if $argc != 1
+        help bpt
+    else
+        tbreak $arg0
+    end
+end
+document bpt
+Syntax: bpt LOCATION
+| Set a temporary breakpoint.
+| This breakpoint will be automatically deleted when hit!.
+| LOCATION may be a line number, function name, or "*" and an address.
+end
+
+
+define bpm
+    if $argc != 1
+        help bpm
+    else
+        awatch $arg0
+    end
+end
+document bpm
+Syntax: bpm EXPRESSION
+| Set a read/write breakpoint on EXPRESSION, e.g. *address.
+end
+
+
+define bhb
+    if $argc != 1
+        help bhb
+    else
+        hb $arg0
+    end
+end
+document bhb
+Syntax: bhb LOCATION
+| Set hardware assisted breakpoint.
+| LOCATION may be a line number, function name, or "*" and an address.
+end
+
+
+define bht
+    if $argc != 1
+        help bht
+    else
+        thbreak $arg0
+    end
+end
+document bht
+Usage: bht LOCATION
+| Set a temporary hardware breakpoint.
+| This breakpoint will be automatically deleted when hit!
+| LOCATION may be a line number, function name, or "*" and an address.
+end
+
+
+# _______________process control______________
+define n
+    if $argc == 0
+        nexti
+    end
+    if $argc == 1
+        nexti $arg0
+    end
+    if $argc > 1
+        help n
+    end
+end
+document n
+Syntax: n <NUM>
+| Step one instruction, but proceed through subroutine calls.
+| If NUM is given, then repeat it NUM times or till program stops.
+| This is alias for nexti.
+end
+
+
+define go
+    if $argc == 0
+        stepi
+    end
+    if $argc == 1
+        stepi $arg0
+    end
+    if $argc > 1
+        help go
+    end
+end
+document go
+Syntax: go <NUM>
+| Step one instruction exactly.
+| If NUM is given, then repeat it NUM times or till program stops.
+| This is alias for stepi.
+end
+
+
+define pret
+    finish
+end
+document pret
+Syntax: pret
+| Execute until selected stack frame returns (step out of current call).
+| Upon return, the value returned is printed and put in the value history.
+end
+
+
+define init
+    set $SHOW_NEST_INSN = 0
+    tbreak _init
+    r
+end
+document init
+Syntax: init
+| Run program and break on _init().
+end
+
+
+define start
+    set $SHOW_NEST_INSN = 0
+    tbreak _start
+    r
+end
+document start
+Syntax: start
+| Run program and break on _start().
+end
+
+
+define sstart
+    set $SHOW_NEST_INSN = 0
+    tbreak __libc_start_main
+    r
+end
+document sstart
+Syntax: sstart
+| Run program and break on __libc_start_main().
+| Useful for stripped executables.
+end
+
+
+define main
+    set $SHOW_NEST_INSN = 0
+    tbreak main
+    r
+end
+document main
+Syntax: main
+| Run program and break on main().
+end
+
+# vim:syntax=gdb

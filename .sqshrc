@@ -1,0 +1,354 @@
+\set session='$HOME/.sqsh_session'
+
+#
+# $history_shorthand : Turns on the ability to perform csh-style
+#             history recall on the command line, such as !20.
+\set history_shorthand=on
+
+\alias go='\go -m pretty'
+#
+# $semicolon_hack : This turns on the ability to use a semicolon as
+#             a sort of in-line go.  It is kind of hacky but seems
+#             to work pretty well.
+#
+\set semicolon_hack=on
+
+
+\set server_color='{0;38;5;44}'
+\set user_color='{0;38;5;117}'
+\set database_color='{0;38;5;117}'
+\set text_color='{0;38;5;81}'
+\set prompt='{0}[$histnum] {0;38;5;109}${username}@{0;38;5;44}${server_name} ${database_color}(${database} ${lineno}){0}>$text_color '
+
+\func -x \toi-import
+  \if [ $# -ne 1 ]
+    \echo "must specify table name"
+    \return 1
+  \fi
+  USE jumpOnIt
+  \echo "truncating ${1}..."
+  TRUNCATE TABLE ${1}
+  go
+  \echo "inserting from /tmp/taponit-sql/${1}.out ..."
+  BULK INSERT ${1} FROM "/tmp/taponit-sql/${1}.out" WITH (FIELDTERMINATOR = '|', ROWTERMINATOR = '0x0a')
+  go
+\done
+
+\func -x \tables
+  USE jumpOnIt
+  SELECT name from sys.tables
+	ORDER BY name
+  go
+\done
+
+\func -x \columns
+  \if [ $# -ne 1 ]
+    \echo "must specify table name"
+    \return 1
+  \fi
+  USE jumpOnIt
+  SELECT column_name FROM information_schema.columns WHERE table_name = \\'${1}\\'
+	ORDER BY column_name
+  go
+\done
+
+\func -x \obj
+   \if [ $# -ne 1 ]
+      \echo "use: \obj [U|V|S|TR|P]"
+      \return 1
+   \fi
+
+   select name from sysobjects where type = "$1"
+   go
+\done
+
+\func -x \campaign-subscribers
+  \if [ $# -ne 1 ]
+    \echo "must specify campaignID"
+    \return 1
+  \fi
+	USE jumpOnIt
+	SELECT DISTINCT
+    c.campaignID,
+		m.marketID,
+    s.number,
+    CONCAT(s.firstName + ' ', s.lastName) AS name,
+		s.subscriberGUID,
+    s.subscriberID,
+    s.created AS optedin,
+    s.mmsEnabled
+		FROM campaign c
+		LEFT OUTER JOIN market m ON c.marketID = m.marketID
+		LEFT OUTER JOIN campaignOfferAssign coa ON c.campaignID = coa.campaignID
+		LEFT OUTER JOIN subscriberMarketAssign sma ON sma.marketID = m.marketID
+		LEFT OUTER JOIN subscriber s ON sma.subscriberID = s.subscriberID
+		LEFT OUTER JOIN mmsSend ms ON (s.number = ms.destination AND ms.campaignID = c.campaignID)
+		LEFT OUTER JOIN smsSend sm ON (s.number = sm.destination AND sm.campaignID = c.campaignID)
+		WHERE c.active = 1
+			AND m.active = 1
+			AND c.campaignID = ${1}
+			AND (sm.smsSendID IS NULL AND ms.mmsSendID IS NULL)
+			AND
+				(SELECT TOP 1 eventActionID
+					FROM subscriberHistory
+					WHERE eventActionID = 3
+						AND subscriberID = s.subscriberID
+						AND sma.created <= c.sendAt
+					ORDER BY sma.created DESC
+				) = 3
+    ORDER BY number ASC
+	go
+\done
+
+\func -x \saved-offers
+  \if [ $# -ne 1 ]
+    \echo "must specify subscriberGUID"
+    \return 1
+  \fi
+	USE jumpOnIt
+	SELECT
+	saveOfferID, a.subscriberID, campaignID, o.offerID, o.name, o.marketID,
+		o.expirationDate, b.name as businessName, b.businessID
+		FROM saveOffer a
+		INNER JOIN offer o ON a.offerID = o.offerID
+		INNER JOIN business b ON o.businessID = b.businessID
+		INNER JOIN subscriber s ON a.subscriberID = s.subscriberID
+		LEFT JOIN market m ON o.marketID = m.marketID
+		WHERE CONVERT(VARCHAR(255), s.subscriberGUID) = "${1}"
+		AND datediff(day, GETUTCDATE(),o.expirationDate) >= -3
+  go
+\done
+
+\func -x \offers-redeemed
+  \if [ $# -ne 1 ]
+    \echo "must specify subscriberGUID"
+    \return 1
+  \fi
+	USE jumpOnIt
+	SELECT DISTINCT TOP 9
+		o.offerID, o.marketID, o.name, o.created, expirationDate,
+		b.businessID, b.name AS businessName, sharable,
+		redeemable, ofR.created AS redeemed
+		FROM subscriber s
+		INNER JOIN subscriberMarketAssign sma ON s.subscriberID = sma.subscriberID
+		INNER JOIN market m ON sma.marketID = m.marketID
+		INNER JOIN offer o ON o.marketID = m.marketID
+		INNER JOIN campaignOfferAssign coa ON o.offerID = coa.offerID
+		INNER JOIN campaign c on coa.campaignID = c.campaignID
+		INNER JOIN business b ON o.businessID = b.businessID
+		LEFT OUTER JOIN offerRedeem ofR ON o.offerID = ofR.offerID
+			AND ofR.subscriberID = s.subscriberID
+		WHERE
+			o.active = 1
+			AND o.deleted = 0
+			AND CONVERT(VARCHAR(255), s.subscriberGUID) = "${1}"
+			AND o.offerID != s.subscribedWithOfferID
+			AND o.isBonusOffer = 0
+			AND c.sendAt <= getUTCDate()
+			AND o.expirationDate >= getUTCDate()
+	UNION
+	SELECT DISTINCT TOP 1
+		o.offerID, o.marketID, o.name, o.created, expirationDate,
+		b.businessID, b.name AS businessName, sharable,
+		redeemable, ofR.created AS redeemed
+		FROM subscriber s
+		INNER JOIN subscriberMarketAssign sma ON s.subscriberID = sma.subscriberID
+		INNER JOIN market m ON sma.marketID = m.marketID
+		INNER JOIN offer o ON o.marketID = m.marketID
+		INNER JOIN campaignOfferAssign coa ON o.offerID = coa.offerID
+		INNER JOIN campaign c on coa.campaignID = c.campaignID
+		INNER JOIN business b ON o.businessID = b.businessID
+		LEFT OUTER JOIN offerRedeem ofR ON o.offerID = ofR.offerID
+			AND ofR.subscriberID = s.subscriberID
+		WHERE
+			o.active = 1
+			AND o.deleted = 0
+			AND CONVERT(VARCHAR(255), s.subscriberGUID) = "${1}"
+			AND o.offerID = s.subscribedWithOfferID
+			AND o.isBonusOffer = 0
+			AND c.sendAt <= getUTCDate()
+			AND o.expirationDate >= getUTCDate()
+	UNION
+	SELECT DISTINCT
+		o.offerID, o.marketID, o.name, o.created, expirationDate,
+		b.businessID, b.name AS businessName, sharable,
+		redeemable, ofR.created AS redeemed
+		FROM subscriber s
+		INNER JOIN subscriberMarketAssign sma ON s.subscriberID = sma.subscriberID
+		INNER JOIN market m ON sma.marketID = m.marketID
+		INNER JOIN offer o ON o.marketID = m.marketID
+		INNER JOIN business b ON o.businessID = b.businessID
+		LEFT OUTER JOIN offerRedeem ofR ON o.offerID = ofR.offerID
+			AND ofR.subscriberID = s.subscriberID
+		WHERE
+			o.active = 1
+			AND o.deleted = 0
+			AND CONVERT(VARCHAR(255), s.subscriberGUID) = "${1}"
+			AND o.isBonusOffer = 0
+			AND isnull(o.includeInViewMoreOffers, 0) = 1
+			AND o.viewMoreOffersStartDate <= getUTCDate()
+			AND o.expirationDate >= getUTCDate()
+	ORDER BY o.created DESC
+  go
+\done
+
+# smsreceive
+# smsReceiveID, smsReceiveGUID, marketID, transactionGUID, connectionGUID, source, sourceCountry, sourceCountryCode, sourceCountryAbbreviation, destination, messageText, concatenatedMessage, sourceNational, udh, concatenatedMessdageReference, concatenatedMessageSegments, concatenatedMessageSegmentNumber, concatenatedMessageSegmentHash, created
+# select smsReceiveID, marketID, source, destination, messageText from smsReceive WHERE sourc
+# mmsSend
+# select mmsSendID, campaignID, marketID, subject, sendStatus, isBonus, created, completed from mmsSend where destination = '15635050765'
+
+\func -x \messages
+  \if [ $# -ne 1 ]
+    \echo "must specify phone number"
+    \return 1
+  \fi
+  USE jumpOnIt
+  \echo '                   '
+  \echo '                   '
+  \echo '*******************'
+  \echo 'SMS Received from' ${1}
+  \echo '                   '
+	SELECT smsReceiveID, marketID, source, destination, messageText, created
+    FROM smsReceive sr
+    WHERE sr.source = \\'${1}\\'
+    ORDER BY created
+  go
+  \echo '                   '
+  \echo '                   '
+  \echo '*******************'
+  \echo 'MMS Sent to' ${1}
+  \echo '                   '
+	SELECT mmsSendID, marketID, campaignID, isBonus, subject, messageText, created, completed
+    FROM mmsSend ms
+    WHERE ms.destination = \\'${1}\\'
+    ORDER BY ms.created
+  go
+  \echo '                   '
+  \echo '                   '
+  \echo '*******************'
+  \echo 'SMS Sent to' ${1}
+  \echo '                   '
+	SELECT smsSendID, marketID, campaignID, messageText, created, completed
+    FROM smsSend ss
+    WHERE ss.destination = \\'${1}\\'
+    ORDER BY ss.created
+  go
+\done
+
+
+
+# add additional subscriber info
+\func -x \subscriber-info
+  \if [ $# -ne 1 ]
+    \echo "must specify subscriberID"
+    \return 1
+  \fi
+  USE jumpOnIt
+	SELECT subscriberID, subscriberGUID, CONCAT(firstName + ' ', lastName) AS name,
+    number, email, zipCode, operator, mmsEnabled, active
+    FROM subscriber s
+    WHERE s.subscriberID = \\'${1}\\'
+  go
+  \echo '                   '
+  \echo '                   '
+  \echo '*******************'
+  \echo 'Events'
+  \echo '                   '
+	SELECT CONCAT(sh.eventActionID, ': ', ea.name) AS SubscriberEvent,
+    CONCAT(m.city, ', ', m.state) AS EventMarket, m.zipCode AS marketZip, sh.created
+    FROM subscriberHistory sh
+    INNER JOIN market m ON m.marketID = sh.marketID
+    INNER JOIN eventAction ea on ea.eventActionID = sh.eventActionID
+  WHERE subscriberID = \\'${1}\\'
+  ORDER BY sh.created DESC
+  \go
+  \echo '                   '
+  \echo '                   '
+  \echo '*******************'
+  \echo 'Assigned Markets'
+  \echo '                   '
+	SELECT CONCAT(m.city, ', ', m.state) AS market, sma.code, sma.created
+    FROM subscriberMarketAssign sma
+    INNER JOIN market m ON sma.marketID = m.marketID
+  WHERE sma.subscriberID = \\'${1}\\'
+  ORDER BY sma.created DESC
+  \go
+  \echo '                   '
+  \echo '                   '
+  \echo '*******************'
+  \echo 'Saved Offers'
+  \echo '                   '
+	SELECT so.offerID, so.campaignID, o.name, so.created
+    FROM saveOffer so
+    INNER JOIN offer o ON o.offerID = so.offerID
+  WHERE so.subscriberID = \\'${1}\\'
+  ORDER BY so.created DESC
+  \go
+  \echo '                   '
+  \echo '                   '
+  \echo '*******************'
+  \echo 'Redeemed Offers'
+  \echo '                   '
+	SELECT ored.offerID, ored.campaignID, o.name, ored.created
+    FROM offerRedeem ored
+    INNER JOIN offer o ON o.offerID = ored.offerID
+  WHERE ored.subscriberID = \\'${1}\\'
+  ORDER BY ored.created DESC
+  \go
+  \echo '                   '
+  \echo '                   '
+  \echo '*******************'
+  \echo 'Shared Offers'
+  \echo '                   '
+	SELECT os.offerID, os.campaignID, o.name, os.sharedTo, os.referrals, os.created
+    FROM offerShare os
+    INNER JOIN offer o ON o.offerID = os.offerID
+  WHERE os.subscriberID = \\'${1}\\'
+  ORDER BY os.created DESC
+  \go
+  \echo '                   '
+  \echo '                   '
+  \echo '*******************'
+  \echo 'Offer Referrals'
+  \echo '                   '
+	SELECT SUBSTRING(CONCAT (oref.offerID, ' ',  o.name), 1, 60) AS referredOffer,
+    SUBSTRING(CONCAT(oref.referredSubscriberID, ' (', s.number, '): ', s.firstName, ' ', s.lastName), 1, 60) as referredSubscriber,
+    SUBSTRING(oref.referrerDomain, 1, 15) as referrerDomain, oref.active, oref.completed, oref.created
+    FROM offerReferral oref
+    INNER JOIN offer o ON o.offerID = oref.offerID
+    INNER JOIN subscriber s ON s.subscriberID = oref.referredSubscriberID
+  WHERE oref.shareSubscriberID = \\'${1}\\'
+  ORDER BY oref.created DESC
+  \go
+\done
+
+
+
+\func -x \genwordlist
+   \if [ $# -ne 1 ]
+      \echo "use: \obj [U|V|S|TR|P]"
+      \return 1
+   \fi
+
+   \echo "" > wordlist
+
+   select name from sysobjects where type = "${1}"
+   order by name
+   \do
+     \echo "#1" >> wordlist
+   \done
+
+   select distinct s.name
+   from
+     sysobjects o,
+     syscolumns s
+   where
+     o.type = "${1}"
+     and o.id=s.id
+   order by s.name
+   \do
+     \echo "#1" >> wordlist
+   \done
+\done
+

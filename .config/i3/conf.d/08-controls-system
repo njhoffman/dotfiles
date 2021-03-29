@@ -1,0 +1,44 @@
+# vim:filetype=config
+
+#===========================================================
+# (controls-system) various system control settings
+# ==========================================================
+
+# {{{ power and login controls
+  # set shut down, restart and locking features
+  bindsym $mod+0 mode "$mode_system"
+  set $mode_system (l)ock, (e)xit, switch_(u)ser, (s)uspend, (h)ibernate, (r)eboot, (Shift+s)hutdown
+  mode "$mode_system" {
+    bindsym s exec --no-startup-id i3exit suspend, mode "default"
+    bindsym u exec --no-startup-id i3exit switch_user, mode "default"
+    bindsym e exec --no-startup-id i3exit logout, mode "default"
+    bindsym h exec --no-startup-id i3exit hibernate, mode "default"
+    bindsym r exec --no-startup-id i3exit reboot, mode "default"
+    bindsym Shift+s exec --no-startup-id i3exit shutdown, mode "default"
+
+    # exit system mode: "Enter" or "Escape"
+    bindsym Return mode "default"
+    bindsym Escape mode "default"
+  }
+# }}}
+
+# screen brightness controls (use xbacklight if supported)
+# %%hotkey: Brightness up 1%
+bindsym XF86MonBrightnessUp exec --no-startup-id "$dir_bin/i3_brightness.sh +1%"
+# %%hotkey: Brightness down 1%
+bindsym XF86MonBrightnessDown exec --no-startup-id "$dir_bin/i3_brightness.sh -1%"
+# bindsym XF86MonBrightnessUp exec xbacklight -inc 20 # increase screen brightness
+# bindsym XF86MonBrightnessDown exec xbacklight -dec 20 # decrease screen brightness
+
+# {{{ reload/restart/exit i3
+# %%hotkey: Reload i3 %%
+  bindsym $mod+Shift+r exec --no-startup-id cat ~/.config/i3/conf.d/* > ~/.config/i3/config && notify-send --icon=gtk-info i3 "i3 reloaded", reload
+  bindsym $mod+Ctrl+r exec --no-startup-id cat ~/.config/i3/conf.d/* > ~/.config/i3/config && notify-send --icon=gtk-info i3 "i3 restarted", restart
+  # invoke system lock
+  bindsym $mod+x exec (i3lock)
+  # exit i3 (logs you out of your X session)
+  bindsym $mod+Shift+e exec "i3-nagbar -t warning -m 'You pressed the exit shortcut. Do you really want to exit i3? This will end your X session.' -b 'Yes, exit i3' 'i3-msg exit'"
+# }}}
+
+bindsym $mod+Shift+F1 $exec --no-startup-id i3hint help
+

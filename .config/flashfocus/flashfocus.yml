@@ -1,0 +1,18 @@
+flash-opacity: 0.6
+default-opacity: 1.0
+time: 300
+simple: false
+ntimepoints: 10
+flash-on-focus: true
+flash-fullscreen: true
+
+rules:
+  - window-class: Termite
+    default-opacity: 0.90
+    flash-opacity: 0.5
+  - window-name: conky-float
+    flash-on-focus: false
+    default-opacity: 1.0
+    flash-opacity: 1.0
+
+flash-lone-windows: 'always'

@@ -1,0 +1,101 @@
+shell:
+  program: /usr/bin/zsh
+  args:
+    - --login
+# Font configuration
+font:
+  normal:
+    family: DejaVu Sans Mono Nerd Font
+    style: Regular
+
+  bold:
+    family: DejaVu Sans Mono Nerd Font
+    style: Regular
+
+  # Italic font face
+  italics:
+    family: DejaVu Sans Mono Nerd Font
+
+    # The `style` can be specified to pick a specific face.
+    style: Italic
+
+  # Bold italic font face
+  bold_italic:
+    family: DejaVu Sans Mono Nerd Font
+    style: Italic
+
+  # Point size
+  size: 6.0
+
+  offset:
+    x: 0
+    y: 0
+
+  dynamic_padding: false
+  padding:
+    x: 0
+    y: 0
+
+colors:
+  # COLORSCHEME: horizon-dark.yaml
+  # Primary colors
+  primary:
+    background: '0x000000'
+    foreground: '0x9898a8'
+
+  # Normal colors
+  normal:
+    # Bright colors
+    black: '0x464646'
+    red: '0xa04658'
+    green: '0x22bb99'
+    yellow: '0xcba397'
+    blue: '0x5192bd'
+    magenta: '0x6a6bcf'
+    cyan: '0x60a1cc'
+    white: '0xd5d8da'
+
+  # Bright colors
+  bright:
+    black: '0x737475'
+    red: '0xdc6a78'
+    green: '0x22bb99'
+    yellow: '0xdbb397'
+    blue: '0x6192df'
+    magenta: '0x7e7bef'
+    cyan: '0x80d1f3'
+    white: '0xd5d8da'
+
+  dim:
+    black: '#000000'
+    red: '#8c4346'
+    green: '#22aa88'
+    yellow: '#97822e'
+    blue: '#41829d'
+    magenta: '#6a6bcf'
+    cyan: '#397eaa'
+    white: '#9a9a9a'
+
+  # cursor:
+  #   text: '0xf1c1c1'
+  #   cursor: '0xff2600'
+  indexed_colors: []
+
+background_opacity: 0.90
+draw_bold_text_with_bright_colors: true
+
+custom_cursor_colors: true
+cursor:
+  style:
+    shape: Beam
+    blinking: Always
+  blink_interval: 300
+  vi_mode_style: Block
+  unfocused_hollow: true
+  thickness: 0.15
+
+live_config_reload: true
+
+key_bindings:
+  - { key: L, mods: Control, action: ReceiveChar }
+  - { key: U, mods: Control, action: ReceiveChar }

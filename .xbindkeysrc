@@ -1,0 +1,2 @@
+"xdotool key --elay 0 --clearmodifiers Ctrl+K"
+  Ctrl + a + Down + Release

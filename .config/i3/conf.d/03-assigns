@@ -1,0 +1,68 @@
+# vim:filetype=config
+
+# =========================================================
+# (3-assigns) manage program specific window modifications
+# =========================================================
+# xwininfo, xprop
+# instance refers to first class listed in xprop
+
+# force floating for all new windows
+# for_window [class="[.]*"] floating enable
+for_window [class=".*"] border pixel 4
+
+for_window [class="Termite" title="floatme"] floating enable, border pixel 3, resize set 1400 1000, move position center
+for_window [instance="^dclock-ws1$"] resize set 87 240, move position 271 0
+for_window [class="Eog"] floating enable
+# for_window [class="Termite" title="scratchpad"] floating enable, resize set 50 ppt 80 ppt, move position center, move to scratchpad
+for_window [class="Termite" title="__scratchpad__"] floating enable, resize set 1000 800, move position center, move to scratchpad
+# for_window [class="Termite" title="dropdown"] floating enable
+for_window [instance="www.windy.com" window_role="pop-up"] floating enable, move position center, move to scratchpad, border pixel 3
+for_window [instance="www.feedly.com" window_role="pop-up"] floating enable, move position center, move to scratchpad, border pixel 3
+# for_window [title="click_conky"] floating enable, move position 1540 40, resize set 365 1030, move to scratchpad
+for_window [title="conky-float"] floating enable, resize set 365 1030, move position 1540 40, move to scratchpad, border normal
+for_window [class="Gnome-system-monitor"] floating enable, resize set 1000 800, move position center, move to scratchpad
+for_window [class="Slack"] floating enable, move to scratchpad
+for_window [class="Nautilus"] floating enable
+
+# Open specific applications in floating mode
+for_window [class=Viewnior|feh|Xzgv|Vimiv|Autokey|Audacious|File-roller|Lens|Lxappearance|Lxtask] floating enable
+for_window [class=URxvt|Firefox|Geany|Evince|Soffice|libreoffice*|mpv|Ghb|Xfburn|Gimp*|Inkscape|Vlc|Lxappearance|Audacity] focus
+for_window [class=Xfburn|GParted|System-config-printer.py|Lxtask|Exo-helper*|Lxrandr|Arandr] focus
+assign [class=Firefox|Transmission-gtk] 2
+assign [class=Thunar|File-roller] 3
+assign [class=Geany|Evince|Gucharmap|Soffice|libreoffice*] 4
+assign [class=Audacity|Vlc|mpv|Ghb|Xfburn|Gimp*|Inkscape] 5
+
+for_window [class="Yad"] floating enable border pixel 1
+for_window [title="alsamixer"] floating enable border pixel 1
+for_window [class="Blueman-manager"] floating enable border normal
+for_window [class="Calamares"] floating enable border normal
+for_window [class="Clipgrab"] floating enable
+for_window [title="File Transfer*"] floating enable
+for_window [class="Calculator"] floating enable border pixel 1
+for_window [class="GParted"] floating enable border normal
+for_window [title="i3_help"] floating enable sticky enable border normal
+for_window [class="Lightdm-gtk-greeter-settings"] floating enable
+for_window [class="Lxappearance"] floating enable sticky enable border normal
+for_window [title="MuseScore: Play Panel"] floating enable
+for_window [class="Nitrogen"] floating enable sticky enable border normal
+for_window [class="Oblogout"] fullscreen enable
+for_window [class="octopi"] floating enable
+for_window [title="About Pale Moon"] floating enable
+for_window [class="Pamac-manager"] floating enable
+for_window [class="Pavu"] floating enable
+for_window [class="Pavucontrol"] floating enable
+for_window [class="qt5ct"] floating enable sticky enable border normal
+for_window [class="Qtconfig-qt4"] floating enable sticky enable border normal
+for_window [class="Simple-scan"] floating enable border normal
+for_window [class="(?i)System-config-printer.py"] floating enable border normal
+for_window [class="Skype"] floating enable border normal
+for_window [class="Tor Browser"] floating enable border normal, resize set 1400 900, move position center
+for_window [class="Thus"] floating enable border normal
+for_window [class="Timeset-gui"] floating enable border normal
+for_window [class="(?i)virtualbox"] floating enable border normal
+for_window [class="Xfburn"] floating enable
+
+# switch to workspace with urgent window automatically
+for_window [urgent=latest] focus
+

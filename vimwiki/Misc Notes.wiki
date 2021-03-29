@@ -1,0 +1,122 @@
+= Songs to Get =
+  - nora van elken - interstellar
+  - nina carr - panuma
+  - lissa - what if we love it
+  - blewbird - touching water
+  - blewbird - time
+  - kudasai - limited
+  - chiccotes beats - before
+  - refeeld - cozy days ft mell-o
+  - pandrezz - lost cause/last time?
+  - no one's perfect x kanisan - nothingness
+  - team astro - insomnia
+  - nokia & donttcry - since
+  - suduaya & cydelix - diamond dust
+  - glimlip x yasper - I'm sorry
+  - kupla - still breathing
+  - flitz & suppe - itsallthere
+  - firetype- misty when I'm with you
+  - mondo loops - lunar drive
+  - xperado verbal reality
+  - transviolet - bad intentions
+  - transviolet - kaleidoscopes
+  - the kooks - bad habit
+  - dont cry - redbone
+
+= Power Monitoring/Configuration =
+
+Optimize for Performance:
+  * install linux-tools-generic linux-tools-common
+  * cpupower frequency-info:
+    * tells you whether acpi or intel_pstate driver being used to manage power
+  * install s-tui stress, run stress test to determine base clock of CPU
+  * to determine boost clock rate, change the driver to acipi-cpufreq:
+    * install acpi-support acpid acpi
+    * disable intel_pstate driver, edit /etc/default/grub:
+      * GRUB_CMDLINE_LINUX_DEFAULT += intel_pstate=disable i.e.
+      * GRUB_CMDLINE_LINUX_DEFAULT="quiet nosplash debug intel_pstate=disable"
+      * sudo update-grub, reboot, cpupower frequency-info => acpi-cpufreq
+    * stress test should now show boost clock rate
+
+Optimize for Power:
+  * install tlp: can shut down hd, bluetooth, control cpu freq settings, etc
+  * configuration: /etc/tlp.conf:
+    * CPU_BOOST_ON_AC=1, CPU_BOOST_ON_BAT=0
+    * CPU_SCALING_[MIN|MAX]_FREQ_ON_[AC|BAT]=0
+  * undervolt cpu, install throttled:
+    * CORE: -120, GPU; -95, CACHE: -120, UNCORE: -85, ANALOGIO: 0
+  * install powertop
+
+= Clipboard =
+  * xclip shows "Target STRING not available" in nvim, just use xsel?
+  * ~/bin/watch-clip
+  * use vim registers to prevent inserting each character one by one
+  reg: " => default register, ""y, ""p
+  reg: + => clipboard register (XA_SECONDARY) desktop clipboard (CTRL-X/CTRL-y)
+  reg: * => x11 primary (XA_PRIMARY), stores mouse selection pasted with middle button
+  "+p    => paste from + after the cursor
+  gg"+yG => cut entire buffer into +
+  :%y *  => copy the entire buffer into *
+  | xsel -b  => (neomutt) Pipe to clipboard
+
+  Copy:
+  - (from tmux): Ctrl-A+y, copies to actual clipboard
+  - (from vim): " and + registers
+  Paste:
+  - (terminal): Ctrl-A+p, Ctrl+Shift+Insert
+  - (vim): "+p or ,p
+
+= Things to Study =
+  - Look at added babel packages to remotedev-app
+  - Look into d-bus
+  - Look into IPC - Semaphores: https://www.tutorialspoint.com/inter_process_communication/inter_process_communication_semaphores.htm
+
+= Raspberry Pi Ideas =
+  - Magic Mirror: https://www.makeuseof.com/tag/6-best-raspberry-pi-smart-mirror-projects-weve-seen-far/
+  - Home Automation: https://www.makeuseof.com/tag/getting-started-openhab-home-automation-raspberry-pi/
+  - NAS Box: https://www.makeuseof.com/tag/turn-your-raspberry-pi-into-a-nas-box/
+
+= TODO =
+  - change vimium visual mode colors
+  - add more automated tmux scripts
+  - implement pywal
+  - look into time transition wallpapers
+  - test ansible provision in docker
+  - test ansible provision in virtual machine
+  - recover music collection
+  - merge changes from movieman and musicman
+  - add different variations to existing polybars
+  - look into transparent gaps
+  - differentiate termite config based on font size
+  - update window snapping shell scripts to
+  - find a way to load custom variables into polybar
+  - find a way to load custom variables into conky
+  - find a way to load custom variables into compton
+  - figure out wallpaper directory from monitor resolutions
+  - setup rotating or randomized wallpapers
+  - add conky fonts to ansible provision
+  - add colorscheme capability to i3 from ~/.Xresources
+  - add colorscheme capability to polybar from ~/.Xresources
+  - add colorscheme capability to rofi from ~/.Xresources
+  - add colorscheme capability to vim
+  - add ELK and collectd setup to ansible
+
+== goto ==
+  - add "goto --config alias1,alias2 dir"
+  - add "goto --config-run alias1,alias2 run_command"
+  - add "goto --config-tmux alias1,alias2 tmux_command"
+
+== mon-cfg ==
+  - merge changes from laptop
+  - remove xrandr command logic
+  - add description field to group and monitor
+  - check resolutions and number if no EDID in cfg
+  - find a way to integrate with login to select group variations
+  - see if possible to change on the fly, disconnect/connect monitors
+  - add conky var exports
+
+== sky pie ==
+  - flashfocus: split time into time_enter, time_exit
+  - flashfocus: split default-opacity into inactive-opacity and active-opacity
+  - colorls: add additional date formatting
+  - build tui to dynamically change shell/window settings

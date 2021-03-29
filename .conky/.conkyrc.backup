@@ -1,0 +1,242 @@
+conky.config = {
+  -- NOTES:
+  --   this layout requires sensors & xdotool
+  --
+  --   colors chart...
+  --     http://www.graphviz.org/doc/info/colors.html
+  --    or...
+  --     cat /usr/share/X11/rgb.txt
+  --
+  --   Gauges:
+  --    syntax: label(no.spaces) unit measure(or conky_parse) max(value) warn(value) xr(rowpos) yc(columnpos)
+  --      unit is such as °F or % ... if none is desired (leave blank), enter 'nil' (no quotes)
+  --      if no warn indication is desired, make value of warn parameter equal value of max
+  --    because lua uses cr and conky does not, we need to put a ${voffset ##} after gauge line to align next item properly
+  -- _____________________________________
+
+  -- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+
+  alignment = 'top_right',
+  background = yes,   -- set to yes if you want Conky to be forked in the background
+  border_width = 1,
+  -- --- change colors as needed ---
+  color1 = 'skyblue4',      -- text/data
+  color2 = 'dodgerblue3',   -- labels
+  color3 = 'deepskyblue2',  -- highlights
+  color4 = 'gray50',        -- bar charts
+  color5 = 'gray17',        -- graph borders
+  color6 = 'yellow1',       -- warning (hi cpu temp)
+  color7 = 'EDEDED',        -- weather data 1
+  color8 = '9EE2FF',        -- weather data 2
+  color9 = 'black',         -- invisible graph borders
+  -- -------------------------------
+  cpu_avg_samples = 1,
+  default_color = 'white',
+  default_gauge_width = 35,
+  default_gauge_height = 35,
+  default_graph_width = 0,
+  default_graph_height = 25,
+  default_outline_color = 'gray17',
+  default_shade_color = 'white',
+  double_buffer = true,
+  no_buffers = true,
+  draw_borders = false,
+  draw_graph_borders = true,
+  draw_outline = true,
+  draw_shades = false,
+  extra_newline = false,
+  font = 'Monospace:size=9',
+  gap_x = 20,
+  gap_y = 40,
+  maximum_width = 350,
+  minimum_width = 350,
+  minimum_height= 1025,
+  net_avg_samples = 1,
+  out_to_console = false,
+  out_to_stderr = false,
+--  own_window_colour = '#000000',
+	own_window = true,
+  own_window_class = 'Conky',
+	own_window_type = 'normal',-- # options are: normal/override/dock/desktop/panel
+	own_window_hints = 'undecorated,below,sticky,skip_taskbar,skip_pager',
+  own_window_transparent = false,   -- should be set to no
+	own_window_argb_visual = true,
+--	own_window_argb_value = 0,
+  out_to_console = false,
+  -- pad_percents = 2,              -- use_spacer must be enabled (not using, throws off other numbers)
+  short_units = true,
+  show_graph_scale = false,
+  show_graph_range = false,
+  stippled_borders = 0,
+  temperature_unit = 'fahrenheit',
+  update_interval = 1.0,
+  uppercase = false,
+  use_spacer = 'none',              -- right, left , none
+  use_xft = true,
+
+  -- --- required for interactive buttons lua ---
+  own_window_title = 'conky-float',
+
+  -- --- Lua Load all ---
+  lua_load = '~/.conky/settings.lua ~/.conky/scripts/loadall.lua',
+  lua_draw_hook_pre = 'conky_main',
+  lua_startup_hook = 'conky_vars',
+  -- --------------------
+  --  API Key
+  template6="f7384f28dec7db208b36e69ccd295958",
+  template7="4671654",
+  template8="imperial",
+  --  Locale (e.g. "es_ES.UTF-8"). Leave empty for default
+  template9=""
+
+};
+
+conky.text = [[
+# ---------------------------
+# ----- SYSINFO -------------
+# ---------------------------
+${color2}Distro: ${color1}${execi 3600 lsb_release -d -s} - ${execi 3600 lsb_release -c -s}
+${color2}Kernel: ${color1}${kernel}  ${alignr}${color2}Name: ${color1}${nodename}
+# ---------------------------
+# ----- WEATHER -------------
+# ---------------------------
+${execi 900 ~/.conky/weather/get_weather ${template6} ${template7} ${template8} ${template9}}\
+${execi 300 cp -f ~/.conky/weather/forecast-icons/#fff__32/$(~/.conky/weather/parse_weather 'first' '.weather[0].id' '0').png ~/.conky/weather/cache/weather-1.png}${image ~/.conky/weather/cache/weather-1.png -p 175,160 -s 38x38}\
+${execi 300 cp -f ~/.conky/weather/forecast-icons/#fff__32/$(~/.conky/weather/parse_weather 'first' '.weather[0].id' '1').png ~/.conky/weather/cache/weather-2.png}${image ~/.conky/weather/cache/weather-2.png -p 235,160 -s 38x38}\
+${execi 300 cp -f ~/.conky/weather/forecast-icons/#fff__32/$(~/.conky/weather/parse_weather 'first' '.weather[0].id' '2').png ~/.conky/weather/cache/weather-3.png}${image ~/.conky/weather/cache/weather-3.png -p 300,160 -s 38x38}\
+${voffset 2}${execi 600 cp -f $HOME/.conky/weather/photos/$(jq .weather[0].id ~/.conky/weather/cache/weather.json).png ~/.conky/weather/cache/weather.png}${image ~/.conky/weather/cache/weather.png -p 0,55 -s 360x94}
+${alignc}${voffset 20 }${font Raleway:size=32}${color3}${execi 600 jq -r .main.temp ~/.conky/weather/cache/weather.json | awk '{print int($1+0.5)}' # round num}${font Raleway:size=16}${if_match "$template8" == "metric"} °C${else}${if_match "$template8" == "imperial"} °F${else}${if_match "$template8" == "default"} K${endif}${endif}${endif}${font}${color}
+${goto 50}${voffset 13}${font Raleway:size=14}${color8}${execi 600 jq -r .weather[0].description ~/.conky/weather/cache/weather.json | sed "s|\<.|\U&|g"}${font}${color}
+${color8}${alignr 44}${voffset -65}${execi 600 jq -r .main.pressure ~/.conky/weather/cache/weather.json | awk '{print int($1+0.5)}' # round num} hPa
+${color8}${alignr 44}${voffset 7}${execi 600 jq -r .main.humidity ~/.conky/weather/cache/weather.json | awk '{print int($1+0.5)}' # round num} %${color}
+${color8}${alignr 44}${voffset 7}${execi 600 jq -r .wind.speed ~/.conky/weather/cache/weather.json | awk '{print int($1+0.5)}' # round num}${if_match "$template8" == "metric"} m/s${else}${if_match "$template8" == "default"} m/s${else}${if_match "$template8" == "imperial"} mph${endif}${endif}${endif}${color}${voffset -10}
+${font Raleway:size=7}\
+${color3}${voffset 18}${goto 185}${execi 300 LANG=${template9} LC_TIME=${template9} date +%^a}${color}
+${color3}${voffset -12}${goto 247}${execi 300 LANG=${template9} LC_TIME=${template9} date -d +1day +%^a}${color}
+${color3}${voffset -12}${goto 315}${execi 300 LANG=${template9} LC_TIME=${template9} date -d +2day +%^a}${color}
+${font Raleway:size=8}\
+${color4}${voffset 32}${goto 170}${execi 300 ~/.conky/weather/parse_weather 'avg' '.main.temp_min' '0'} °F/${execi 300 ~/.conky/weather/parse_weather 'avg' '.main.temp_max' '0'} °F${color}
+${color4}${voffset -14}${goto 235}${execi 300 ~/.conky/weather/parse_weather 'avg' '.main.temp_min' '1'} °F/${execi 300 ~/.conky/weather/parse_weather 'avg' '.main.temp_max' '1'} °F${color}
+${color4}${voffset -14}${goto 300}${execi 300 ~/.conky/weather/parse_weather 'avg' '.main.temp_min' '2'} °F/${execi 300 ~/.conky/weather/parse_weather 'avg' '.main.temp_max' '2'} °F${color}
+${font Raleway:bold:size=12}${color1}
+${image $HOME/.conky/weather/pressure.png -p 315,80 -s 16x16}
+${image $HOME/.conky/weather/humidity.png -p 315,100 -s 16x16}
+${image $HOME/.conky/weather/wind-2.png -p 315,125 -s 16x16}
+${font}${voffset -90}
+# ${execi 1200 curl -s "http://wxdata.weather.com/wxdata/weather/local/USNH0119?cc=*&unit=s&dayf=2" -o /home/nicholas/.conky/weather.xml}
+# ${voffset -5}${color3}Weather ${hr 1}
+# ${color2}  Last:${color1} ${execi 60 grep -oPm1 "(?<=<lsup>)[^<]+" /home/nicholas/.conky/weather.xml}
+# ${color1}        ${execi 60 grep -oPm1 "(?<=<t>)[^<]+" /home/nicholas/.conky/weather.xml}
+# ${color2}  Temp:${color1} ${execi 60 grep -oPm1 "(?<=<tmp>)[^<]+" /home/nicholas/.conky/weather.xml}°F \
+# ${goto 147}${color2}FeelsLike:${color1} ${execi 60 grep -oPm1 "(?<=<flik>)[^<]+" /home/nicholas/.conky/weather.xml}°F
+# ${color2}  Wind:${color1} ${execi 60 grep -oPm1 "(?<=<s>)[^<]+" /home/nicholas/.conky/weather.xml} mph ${execi 60 grep -oPm2 "(?<=<t>)[^<]+" /home/nicholas/.conky/weather.xml | sed -n '2p'} \
+# ${goto 147}${color2} Humidity:${color1} ${execi 60 grep -oPm1 "(?<=<hmid>)[^<]+" /home/nicholas/.conky/weather.xml}%
+# ${color2}   H/L:${color1} ${execi 60 grep -oPm1 "(?<=<hi>)[^<]+" ~/Scripts/lua/weather.xml}°/${execi 60 grep -oPm1 "(?<=<low>)[^<]+" ~/Scripts/lua/weather.xml}°F \
+# ${goto 117}${color2} Pressure:${color1} ${execi 60 grep -oPm1 "(?<=<r>)[^<]+" ~/Scripts/lua/weather.xml} ${execi 60 grep -oPm1 "(?<=<d>)[^<]+" ~/Scripts/lua/weather.xml}
+# ${color2} Sunup:${color1} ${execi 60 grep -oPm1 "(?<=<sunr>)[^<]+" ~/Scripts/lua/weather.xml} \
+# ${goto 117}${color2}  Sundown:${color1} ${execi 60 grep -oPm1 "(?<=<suns>)[^<]+" ~/Scripts/lua/weather.xml}
+# ${color2} Tomor: ${color1}${execi 60 grep -oPm2 "(?<=<hi>)[^<]+" ~/Scripts/lua/weather.xml | sed -n '2p'}°/${execi 60 grep -oPm2 "(?<=<low>)[^<]+" ~/Scripts/lua/weather.xml | sed -n '2p'}°F
+# ${goto 45}${execi 60 grep -A 2 -Pm2 '(?<=<part p="d")[^<]+' ~/Scripts/lua/weather.xml | sed -n '7p' | grep -oPm2 '(?<=<t>)[^<]+'} \
+# wind ${execi 60 grep -oPm4 "(?<=<s>)[^<]+" ~/Scripts/lua/weather.xml | sed -n '4p'} mph \
+# ${execi 60 grep -A 8 -Pm2 '(?<=<part p="d")[^<]+' ~/Scripts/lua/weather.xml | sed -n '18p' | grep -oPm1 '(?<=<t>)[^<]+'}
+# ---------------------------
+# ----- CALENDAR ------------
+# ---------------------------
+#   ${color1}${execi 3600 cal -h}
+#   ${color1}${execpi 3600 DJS=`date +%_d`; cal -h | sed s/"$DJS"'\b'/'${color3}'"$DJS"'${color1}'/ | sed s/^/'${alignr}'/}
+${color1}${alignr}${lua_parse conky_calendar}${voffset -75}
+${color2} Uptime:${color1} ${uptime}
+${color2} ${execi 3600 cat /proc/cpuinfo | grep 'model name' | sed -e 's/model name.*: //'| uniq | cut -c 1-20}
+${color2} Frequency:${color1} ${freq_g} GHz
+${color3} ${hr 1}
+# ---------------------------
+# ----- CPU TEMPS -----------
+# ---------------------------
+# ... label/(no spaces) unit/(type nil if blank) measure/(conky_parse) max warn alarm xr yc ...
+ ${if_match ${memperc}<70}${color2}   MEM:${color1}${else}${color6}  MEM:$endif} ${memperc}%
+ ${if_match ${cpu cpu0}<70}${color2}   CPU:${color1}${else}${color6}  CPU:$endif} ${cpu cpu0}%
+ ${alignr}${color5}${cpugraph cpu0 40,330 13D600 FF3300 -t}${voffset 0}
+ ${if_match ${cpu cpu1}<70}${color2} CPU1:${color1}${else}${color6} CPU1:$endif} ${cpu cpu1}%  ${goto 145}${if_match ${hwmon 4 temp 2}<=115}${color2} ${color1}${else}${color6} $endif}${alignr}${color9}${cpugraph cpu1 14,180 5300D6 0072D6}${voffset 3}
+ ${if_match ${cpu cpu2}<70}${color2} CPU2:${color1}${else}${color6} CPU2:$endif} ${cpu cpu2}%  ${goto 145}${if_match ${hwmon 4 temp 2}<=115}${color2} ${color1}${else}${color6} $endif}${alignr}${color9}${cpugraph cpu2 14,180 5300D6 0072D6}
+ ${lua conky_gauge c1 °F ${hwmon 4 temp 2} 170 130 0 130 450 }${voffset -12}
+ ${if_match ${cpu cpu3}<70}${color2} CPU3:${color1}${else}${color6} CPU3:$endif} ${cpu cpu3}%  ${goto 145}${if_match ${hwmon 4 temp 3}<=115}${color2} ${color1}${else}${color6} $endif}${alignr}${color9}${cpugraph cpu3 14,180 5300D6 0072D6}${voffset 3}
+ ${if_match ${cpu cpu4}<70}${color2} CPU4:${color1}${else}${color6} CPU4:$endif} ${cpu cpu4}%  ${goto 145}${if_match ${hwmon 4 temp 3}<=115}${color2} ${color1}${else}${color6} $endif}${alignr}${color9}${cpugraph cpu4 14,180 5300D6 0072D6}
+ ${lua conky_gauge c2 °F ${hwmon 4 temp 3} 170 130 0 130 488 }${voffset -12}
+ ${if_match ${cpu cpu5}<70}${color2} CPU5:${color1}${else}${color6} CPU5:$endif} ${cpu cpu5}%  ${goto 145}${if_match ${hwmon 4 temp 4}<=115}${color2} ${color1}${else}${color6} $endif}${alignr}${color9}${cpugraph cpu5 14,180 5300D6 0072D6}${voffset 3}
+ ${if_match ${cpu cpu6}<70}${color2} CPU6:${color1}${else}${color6} CPU6:$endif} ${cpu cpu6}%  ${goto 145}${if_match ${hwmon 4 temp 4}<=115}${color2} ${color1}${else}${color6} $endif}${alignr}${color9}${cpugraph cpu6 14,180 5300D6 0072D6}
+ ${lua conky_gauge c3 °F ${hwmon 4 temp 4} 170 130 0 130 525 }${voffset -12}
+ ${if_match ${cpu cpu7}<70}${color2} CPU7:${color1}${else}${color6} CPU7:$endif} ${cpu cpu7}%  ${goto 145}${if_match ${hwmon 4 temp 5}<=115}${color2} ${color1}${else}${color6} $endif}${alignr}${color9}${cpugraph cpu7 14,180 5300D6 0072D6}${voffset 3}
+ ${if_match ${cpu cpu8}<70}${color2} CPU8:${color1}${else}${color6} CPU8:$endif} ${cpu cpu8}%  ${goto 145}${if_match ${hwmon 4 temp 5}<=115}${color2} ${color1}${else}${color6} $endif}${alignr}${color9}${cpugraph cpu8 14,180 5300D6 0072D6}
+ ${lua conky_gauge c4 °F ${hwmon 4 temp 5} 170 130 0 130 560 }
+# ${if_match ${cpu cpu1}<70}${color2} CPU1:${color1}${else}${color6} CPU1:$endif} ${cpu cpu1}%  ${goto 100}${if_match ${hwmon 4 temp 2}<=115}${color2} ${color1}${else}${color6} $endif}${hwmon 4 temp 2}°F ${alignr}${color9}${cpugraph cpu1 15,152 5300D6 0072D6}
+#   ============================================================
+#   ============================================================
+# ---------------------------
+# ----- FANS / TEMPS --------
+# ---------------------------
+# --- sensors vs. hwmon - sensors provides tenths -- but hwmon is more efficient ---
+# --- to match things up, check sensors (-f) against /sys/class/hwmon/ (look at sensors heading vs. hwmon#/name -----
+# ... label/(no spaces) unit/(type nil if blank) measure/(conky_parse) max warn alarm xr yc ...
+# ${lua conky_gauge CPU nil ${hwmon 2 fan 2} 1800 1350 10 25 257 }
+# ${lua conky_gauge Case nil ${hwmon 2 fan 3} 1800 1350 10 70 257 }
+# ${lua conky_gauge GPU % ${execi 5 nvidia-settings -q GPUCurrentFanSpeed | grep Attribute | awk '{print $4}' | sed 's/.$//'} 100 80 10 115 257 }
+# ${lua conky_gauge GPU °F ${execi 1 nvidia-settings -q GPUCoreTemp | awk '{if (NR==2) {printf "%.0f",($4*9)/5+32}}'} 200 150 0 160 257 }
+#   ..... without nvidia ..... ${lua conky_gauge GPU °F ${hwmon 1 temp 1} 200 150 0 160 257 }
+# ${lua conky_gauge Mobo °F ${hwmon 2 temp 2} 160 115 0 205 257 }
+# ${lua conky_gauge T23 °F ${hwmon 2 temp 3} 160 115 0 25 288 }
+# ${lua conky_gauge T01 °F ${hwmon 0 temp 1} 160 115 0 70 288 }
+# ${lua conky_gauge T02 °F ${hwmon 0 temp 2} 160 115 0 115 288 }
+#   --- /dev/sda1: Hitachi HDS721010CLA630: 31-42°C - 88-108°F
+# ${lua conky_gauge SDA °F ${execi 10 hddtemp --u=F /dev/sda | cut -f 4 -d ' ' | sed 's/..$//'} 150 110 0 160 288 }
+#   --- /dev/sdb1: ST1000DM003-9YN162: 33°C - 91°F
+# ${lua conky_gauge SDB °F ${execi 10 hddtemp --u=F /dev/sdb | cut -f 3 -d ' ' | sed 's/..$//'} 150 110 0 205 288 }
+#   ============================================================
+#   ========== use below for 'normal' text-based info ==========
+#   ${color2} Fan1: ${color1}${hwmon 2 fan 2} ${color2}RPM ${goto 118}${color2} Fan2: ${color1}${hwmon 2 fan 3} ${color2}RPM
+#   ${color2} Mobo: ${color1}${hwmon 2 temp 2}°F
+#   ${if_match ${hwmon 2 temp 3}<=115}${color2}  GPU: ${color1}${else}${color6}  GPU: $endif}${hwmon 2 temp 3}°F  ${color2}NVIDIA GeForce GT 620: ${color1}${execi 1 nvidia-settings -q GPUCoreTemp | awk '{if (NR==2) {print ($4*9)/5+32}}'}°F
+#   ${if_match ${hwmon 1 temp 1}<=120}${color2}  GPU: ${color1}${else}${color6}  GPU: $endif}${hwmon 1 temp 1}°F  ${color2}Nouveau - NVIDIA nForce 630M
+#   --- /dev/sda1: Hitachi HDS721010CLA630: 31-42°C - 88-108°F
+#   ${color2} Sda1: ${color1}${execi 10 hddtemp --u=F /dev/sda | cut -f 4 -d ' '}  ${color2}Hitachi (88°F)
+#   --- /dev/sdb1: ST1000DM003-9YN162: 33°C - 91°F
+#   ${color2} Sdb1: ${color1}${execi 10 hddtemp --u=F /dev/sdb | cut -f 3 -d ' '}  ${color2}Seagate (91°F)
+#   ============================================================
+#   ============================================================
+# ---------------------------
+# ----- NETWORK -------------
+# ---------------------------
+${voffset -25}
+${color3}Network ${hr 1}
+${color2}${goto 120}${wireless_essid}${alignr}${color1}${addr wlp2s0} ${color1}
+${color1} ${wireless_link_qual wlp2s0}%${goto 120}${color2}WAN:${alignr}${color1}${exec wget http://ipinfo.io/ip -qO -} ${color1}
+${color2}${goto 120}Connections: ${color1}${alignr}${tcp_portmon 1 65535 count} ${color1}
+${voffset -10}
+${color2} Down: ${color1}${goto 90}${totaldown wlp2s0}${color3}${goto 140}${downspeed wlp2s0}${goto 180}${color2} Up: ${color1}${goto 280}${totalup wlp2s0}${color3}${goto 320}${upspeed wlp2s0}
+${color5} ${downspeedgraph wlp2s0 30,165 5300D6 0072D6 -l} ${goto 180} ${upspeedgraph wlp2s0 30,165 5300D6 0072D6 -l}
+# ---------------------------
+# ----- PROCESSES -----------
+# ---------------------------
+${voffset -15}
+${color3}Processes ${hr 1}
+${color2} Total:${color1} $processes ${color2} ${goto 195} Running:${color1} $running_processes
+${color2}   PID.....CPU%...MEM....${goto 195} Name...........
+${color1}   ${top pid 1} ${if_match ${top cpu 1}<45}${color3}${else}${color6}$endif}${top cpu 1}   ${color1}${top mem_res 1}  ${goto 195} ${if_match ${top cpu 1}<45}${color2}${else}${color6}$endif}${top name 1}
+${color2}   ${color1}${top pid 2} ${top cpu 2}   ${top mem_res 2}  ${goto 195} ${color2}${top name 2}
+${color2}   ${color1}${top pid 3} ${top cpu 3}   ${top mem_res 3}  ${goto 195} ${color2}${top name 3}
+${color2}   ${color1}${top pid 4} ${top cpu 4}   ${top mem_res 4}  ${goto 195} ${color2}${top name 4}
+${color2}   ${color1}${top pid 5} ${top cpu 5}   ${top mem_res 5}  ${goto 195} ${color2}${top name 5}
+${voffset -5}${color2}   .....................................
+${color2}   ${color1}${top_mem pid 1} ${top_mem cpu 1}   ${color3}${top_mem mem_res 1}  ${goto 195} ${color2}${top_mem name 1}
+${color2}   ${color1}${top_mem pid 2} ${top_mem cpu 2}   ${top_mem mem_res 2}  ${goto 195} ${color2}${top_mem name 2}
+${color2}   ${color1}${top_mem pid 3} ${top_mem cpu 3}   ${top_mem mem_res 3}  ${goto 195} ${color2}${top_mem name 3}
+${color2}   ${color1}${top_mem pid 4} ${top_mem cpu 4}   ${top_mem mem_res 4}  ${goto 195} ${color2}${top_mem name 4}
+# ---------------------------
+# ----- FILE SYSTEM ---------
+# ---------------------------
+${voffset -10}
+${color3}Filesystem ${hr 1}
+${color2} DskIO: ${color1}${diskio}  ${alignr}${color5}${diskiograph 8,150 5300D6 0072D6}
+${color2}   RAM:${color1} ${mem} / ${memmax} ${alignr}${color4}${membar 8,150}
+${color2}     /: ${color1}${fs_used /} / ${fs_size /} ${alignr}${color4}${fs_bar 8,150}
+${color2}  Swap:${color1} ${swap} / ${swapmax} ${alignr}${color4}${swapbar 8,150}
+]]

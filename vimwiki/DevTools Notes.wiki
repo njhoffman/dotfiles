@@ -1,0 +1,59 @@
+= DevTools Notes =
+
+- mono repo at https://github.com/reduxjs/redux-devtools/packages
+
+== Chrome Extension ==
+- remote button launches remotedev-app
+- npm start
+  - load folder: ~/forks/redux-devtools-extension/dev
+- npm run build:extension
+  - load folder: ~/forks/redux-devtools-extension/build/extension
+
+== remotedev-app ==
+https://github.com/zalmoxisus/remotedev-app
+ - remotedev-monitor-components v0.0.5
+ - remotedev-inspector-monitor v0.11.0
+ - remotedev-slider v1.1.3
+
+=== remotedev-inspector-monitor ===
+https://github.com/zalmoxisus/remotedev-inspector-monitor
+forked from: https://github.com/alexkuz/redux-devtools-inspector
+  - redux-devtools-inspector more up to date
+
+=== remotedev-monitor-components ===
+ - remotedev-monitor-components v0.0.5
+
+== redux-devtools-cli ==
+fork of: https://github.com/reduxjs/redux-devtools/tree/master/packages/redux-devtools-cli
+- needs redux-devtools/packages/redux-devtools-core
+
+== init steps ==
+{{{sh
+  mkdir ~/forks && cd ~/forks
+  git clone https://github.com/njhoffman/redux-devtools-cli
+
+  git clone https://github.com/zalmoxisus/redux-devtools-extension
+  git clone https://github.com/zalmoxisus/remotedev-app
+  git clone https://github.com/zalmoxisus/remotedev-inspector-monitor
+  git clone https://github.com/njhoffman/redux-devtools-inspector
+
+  cd ~/forks/remotedev-app && npm install --ignore-scripts && npm link
+  cd ~/forks/remotedev-inspector-monitor && npm link
+  cd ~/forks/redux-devtools-inspector && npm link
+
+  cd ~/forks/remotedev-app/node_modules
+  npm link remotedev-inspector monitor
+  npm link redux-devtools-inspector
+
+  cd ~/forks/redux-devtools-extension/node_modules
+  npm link remotedev-app
+}}}
+
+== build steps ==
+{{{sh
+
+
+  cd ~/forks/remotedev-app && npm run build:web
+  # cd ~/forks/redux-devtools-extension && npm start
+
+}}}

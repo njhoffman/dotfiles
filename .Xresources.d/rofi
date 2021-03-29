@@ -1,0 +1,48 @@
+! vim:syntax=xdefaults
+
+! ------------------------------------------------------------------------------
+! Rofi configs
+! ------------------------------------------------------------------------------
+
+! rofi.color-enabled: true
+# ! rofi.color-window: #2e3440, #2e3440, #2e3440
+# ! rofi.color-normal: #2e3440, #d8dee9, #2e3440, #2e3440, #bf616a
+# ! rofi.color-active: #2e3440, #b48ead, #2e3440, #2e3440, #93e5cc
+# ! rofi.color-urgent: #2e3440, #ebcb8b, #2e3440, #2e3440, #ebcb8b
+! rofi.modi: run,drun,window
+
+
+rofi.color-enabled: true
+# rofi.color-window: #1c1c22, #3e646f, #3e646f
+# rofi.color-normal: #1c1c22, #d9d6ca, #85aab6, #d9d6ca, #78824B
+# rofi.color-active: #1c1c22, #d9d6ca, #85aab6, #d9d6ca, #78824B
+# rofi.color-urgent: #1c1c22, #d9d6ca, #85aab6, #d9d6ca, #78824B
+# rofi.sidebar-mode: true
+# rofi.combi-hide-mode-prefix: true
+# rofi.combi-modi: drun,window
+# rofi.modi: combi,run,window,ssh
+# rofi.sort: true
+# rofi.sorting-method: fzf
+# rofi.disable-history: true
+#
+# ! normal, regex, fuzzy, glob
+# ! rofi.matching: fuzzy
+# rofi.matching: fuzzy
+#
+# rofi.show-icons: true
+# rofi.lines: 15
+# rofi.drun-icon.theme:
+# ! Adapta-Nokto, Arc-Dark, DarkBlue, Indego, Monokai, Paper, Pop-Dark,
+# ! gruvbox-dark-hard, gruvbox-dark-soft, gruvbox-dark, solarized, solarized-alternate
+# ! rofi.theme: gruvbox-dark-hard
+#
+# rofi.theme: Arc-Dark
+# rofi.font: Source Code Pro Regular 16
+# ! rofi.font: Source Code Pro Semibold 12
+# ! rofi.font: System Sanfrancisco Display 14
+# rofi.bw: 3
+# rofi.columns: 1
+# rofi.padding: 10
+#
+# ! -1 focused monitor, -2 focused window, -3 position at mouse, -4 monitor with focused window, -5 monitor with mouse
+# rofi.monitor: -1

@@ -1,0 +1,7 @@
+; vim:syn=dosini
+
+[module/counter]
+type = internal/counter
+format = <counter>
+interval = 0.1
+

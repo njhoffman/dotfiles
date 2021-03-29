@@ -1,0 +1,27 @@
+authtoken: 2imBrCv2hx6HsecJ5JVzR_6GkVu47EMXJzz2EQRqjtg
+region: us
+console_ui: true
+console_ui_color: transparent
+http_proxy: false
+inspect_db_size: 50000000
+log_level: info
+log_format: json
+log: /var/log/ngrok.log
+update: true
+update_channel: stable
+# metadata: '{"serial": "00012xa-33rUtz9", "comment": "For customer alan@example.com"}'
+# root_cas: trusted
+# socks5_proxy: "socks5://localhost:9150"
+# web_addr: localhost:4040
+
+tunnels:
+  twilio-app:
+    proto: http
+    bind_tls: true
+    subdomain: spadash-twilio
+    addr: 3001
+  admin-app:
+    proto: http
+    bind_tls: true
+    subdomain: spadash-admin
+    addr: 8080

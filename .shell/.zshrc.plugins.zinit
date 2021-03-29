@@ -1,0 +1,164 @@
+#!/bin/zsh
+
+# zinit - sh -c "$(curl -fsSL https://raw.githubusercontent.com/zdharma/zinit/master/doc/install.sh)"
+
+### Added by Zinit's installer
+if [[ ! -f $HOME/.zinit/bin/zinit.zsh ]]; then
+    print -P "%F{33}▓▒░ %F{220}Installing %F{33}DHARMA%F{220} Initiative Plugin Manager (%F{33}zdharma/zinit%F{220})…%f"
+    command mkdir -p "$HOME/.zinit" && command chmod g-rwX "$HOME/.zinit"
+    command git clone https://github.com/zdharma/zinit "$HOME/.zinit/bin" && \
+        print -P "%F{33}▓▒░ %F{34}Installation successful.%f%b" || \
+        print -P "%F{160}▓▒░ The clone has failed.%f%b"
+fi
+
+source "$HOME/.zinit/bin/zinit.zsh"
+autoload -Uz _zinit
+(( ${+_comps} )) && _comps[zinit]=_zinit
+
+# Load a few important annexes, without Turbo
+# (this is currently required for annexes)
+zinit light-mode for \
+    zinit-zsh/z-a-rust \
+    zinit-zsh/z-a-as-monitor \
+    zinit-zsh/z-a-patch-dl \
+    zinit-zsh/z-a-bin-gem-node
+
+dir=${0%/*}
+
+# oh-my-zsh manages zsh config, zinit manages additional or custom oh-my-zsh plugins
+
+# git interactive with fzf
+# ga	FORGIT_ADD_FZF_OPTS
+# glo	FORGIT_LOG_FZF_OPTS
+# gi	FORGIT_IGNORE_FZF_OPTS
+# gd	FORGIT_DIFF_FZF_OPTS
+# grh	FORGIT_RESET_HEAD_FZF_OPTS
+# gcf	FORGIT_CHECKOUT_FILE_FZF_OPTS
+# gss	FORGIT_STASH_FZF_OPTS
+# gclean	FORGIT_CLEAN_FZF_OPTS
+# grb	FORGIT_REBASE_FZF_OPTS
+# gcb	FORGIT_CHECKOUT_BRANCH_FZF_OPTS
+forgit_log=fglo
+forgit_diff=fgd
+forgit_add=fga
+forgit_reset_head=fgrh
+forgit_ignore=fgi
+forgit_restore=fgcf
+forgit_clean=fgclean
+forgit_stash_show=fgss
+forgit_cherry_pick=fgcp
+# FORGIT_FZF_DEFAULT_OPTS="-p -w80% -h80%"
+zinit light "wfxr/forgit"
+
+# export DOT_BASE_DIR="$HOME/.shell"
+
+zinit light "ytet5uy4/fzf-widgets"
+# # if zplug check 'ytet5uy4/fzf-widgets'; then
+# #   # Map widgets to key
+FZF_WIDGET_TMUX=1
+# FZF_WIDGET_OPTS[fzf-select-widget]='-p 70%'
+# bindkey '^@'  fzf-select-widget
+#   bindkey '^@.' fzf-edit-dotfiles
+#   bindkey '^@c' fzf-change-directory
+#   bindkey '^@n' fzf-change-named-directory
+#   bindkey '^@f' fzf-edit-files
+#   bindkey '^@k' fzf-kill-processes
+#   bindkey '^@s' fzf-exec-ssh
+#   bindkey '^\'  fzf-change-recent-directory
+#   bindkey '^r'  fzf-insert-history
+#   bindkey '^xf' fzf-insert-files
+#   bindkey '^xd' fzf-insert-directory
+#   bindkey '^xn' fzf-insert-named-directory
+#
+#   ## Git
+#   bindkey '^@g'  fzf-select-git-widget
+#   bindkey '^@ga' fzf-git-add-files
+#   bindkey '^@gc' fzf-git-change-repository
+#
+#   # GitHub
+#   bindkey '^@h'  fzf-select-github-widget
+#   bindkey '^@hs' fzf-github-show-issue
+#   bindkey '^@hc' fzf-github-close-issue
+#
+#   ## Docker
+#   bindkey '^@d'  fzf-select-docker-widget
+#   bindkey '^@dc' fzf-docker-remove-containers
+#   bindkey '^@di' fzf-docker-remove-images
+#   bindkey '^@dv' fzf-docker-remove-volumes
+#
+#   typeset -gA FZF_WIDGET_OPTS
+#   # Enable Exact-match by fzf-insert-history
+#   FZF_WIDGET_OPTS[insert-history]='--exact'
+#
+#   # Start fzf in a tmux pane
+#   FZF_WIDGET_TMUX=1
+# fi
+
+# autoload -Uz chpwd_recent_dirs cdr add-zsh-hook
+# add-zsh-hook chpwd chpwd_recent_dirs
+#
+zinit light 'm42e/zsh-histdb-fzf'
+# bindkey '^R' histdb-fzf-widget
+
+zinit light chitoku-k/fzf-zsh-completions
+# composer
+# git
+#   Commit-ish (branch, checkout, cherry-pick, diff, log, merge, pull, rebase, reset, revert, show, and switch)
+#   Commit messaees (commit)
+#   Files (add, checkout, commit, diff, reset, restore, rm, and show)
+#   Remotes (pull)
+# kubectl
+#   Annotations (annotate)
+#   Containers (exec, logs and set)
+# Files (apply)
+# Labels (label)
+# Nodes (cordon, drain, and uncordon)
+# Ports (port-forward)
+# Resources (annotate, autoscale, create, delete, describe, edit, exec, explain, expose, get, label, logs, patch, rollout, set and taint)
+# Taints (taint)
+# make
+# npm
+# systemctl
+# yarn Scripts (run, workspace, and workspace <workspace>)
+# docker
+# Containers (attach, commit, cp, diff, exec, export, inspect, kill, logs, pause, ports, rename, restart, rm, start, stats, stop, update, unpause, and wait)
+# Files (cp)
+# Images (create, history, inspect, rmi, run, save, tag)
+# Networks (inspect)
+# Repositories (push)
+# Volumes (inspect)
+
+load_file "$dir/plugins/alias-tips.zinit.zsh"
+load_file "$dir/plugins/zsh-dircolors-solarized.zinit.zsh"
+load_file "$dir/plugins/zsh-better-npm-completion.zinit.zsh"
+load_file "$dir/plugins/zsh-vim-mode.zinit.zsh"
+load_file "$dir/plugins/auto-ls.zinit.zsh"
+load_file "$dir/plugins/zsh-histdb.zinit.zsh"
+load_file "$dir/plugins/zsh-autoenv.zinit.zsh"
+load_file "$dir/plugins/httpstat.zinit.zsh"
+load_file "$dir/plugins/zsh-auto-notify.zinit.zsh"
+load_file "$dir/plugins/zsh-autosuggestions.zinit.zsh"
+# load_file "$dir/plugins/zsh-autocomplete.zinit.zsh"
+load_file "$dir/plugins/zsh-completions.zinit.zsh"
+load_file "$dir/plugins/zsh-syntax-highlighting.zinit.zsh"
+
+# zinit light zdharma/fast-syntax-highlighting
+#
+zinit light wookayin/fzf-fasd
+#
+# zinit light "Aloxaf/fzf-tab"
+# zstyle ':fzf-tab:*' fzf-command ftb-tmux-popup
+# zstyle ':fzf-tab:complete:*' popup-pad 30 0
+# zstyle ':fzf-tab:complete:cd:*' fzf-preview 'exa -1 --color=always $realpath' # remember to use single quote here!!!
+
+# zstyle ':fzf-tab:complete:cd:*' popup-pad 30 0
+
+zinit light 'zsh-users/zsh-history-substring-search'
+
+zinit light kazhala/dotbare
+
+load_file "$dir/plugins/oh-my-zsh.zsh" 2>/dev/null
+
+local script=${(%):-%x}
+_file_success $script
+

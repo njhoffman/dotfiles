@@ -1,0 +1,40 @@
+== Shortcuts ==
+
+  | xsel -b          => (neomutt) Pipe to clipboard
+  Ctrl+Shift+h/j/k/l => (tmux) navigate tmux panes (autokey)
+  gd                 => (vim) Goto definition
+  di"                => (vim) Delete in ",(,{, etc
+
+=== Chrome/cVim ===
+  Ctrl+Shift+T => Open last closed tab
+  Shift+h/l    => Navigate forward/backward
+  gF/f         => cVim cycle through frames / go to root frame
+  : or /       => cVim open up command or search input
+  gi           => cVim go to first input box
+  gy           => cVim yank link to clipboard
+  zi/zo/z0     => cVim zoom in / zoom out / zoom original
+  b            => cVim search through bookmarks
+
+=== i3 ===
+
+  mod+left/right/up/down => snap to left/right/top/bottom
+  mod+Shift+PgUp/PgDown  => snap to center
+  mod+Shift+g (gap mode) => o / i (outer/inner) => + / - / 0 (shift for global)
+  mod+space              => change focus between tiling / floating windows
+  mod+shift+space        => toggle float window mode
+  mod+j/k                => next / previous workspace
+  mod+c / mod+t          => show/hide floating chrome/terminal
+
+=== Surfing Keys (using Vimium instead) ===
+  ?        => Show help keys
+  I/Ctrl+i => Open vim editor in text box
+
+=== VimWiki Notes ===
+
+  <Leader>ww  – Open the default wiki index file
+  <Leader>ws  – Select and open wiki index file
+  <Enter>     – Follow/Create wiki link
+  <Backspace> – Go back to parent(previous) wiki link
+  <Tab>       – Find next wiki link
+  <Shift-Tab> – Find previous wiki link
+

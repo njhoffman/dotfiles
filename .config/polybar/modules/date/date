@@ -1,0 +1,5 @@
+include-file = ~/.config/polybar/modules/date/date-wide
+include-file = ~/.config/polybar/modules/date/date-small
+include-file = ~/.config/polybar/modules/date/time
+
+; vim:syn=dosini

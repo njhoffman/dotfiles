@@ -1,0 +1,141 @@
+; X resources db (requires xcb-util-xrm)
+; background = ${xrdb:color2:#00ff00}
+; *color2: #8c9440 (.Xresources)
+; key = ${xrdb:KEY:fallback value}
+
+; TODO:
+;  - show total process count
+;  - figure out wireless/vpn packet loss issue
+;  - split up date and time modules
+;  - make aws stats module
+;  - look at ways of highlighting active monitor
+;  - more mpd modules
+;  - better, more consistent external file loading
+;  - better rofi integration
+
+[global]
+monitor = ${env:MONITOR:eDP-1}
+wireless-interface = ${env:POLYBAR_WIRELESS:wlp2s0}
+temperature-path = ${env:POLYBAR_TEMPERATURE:/sys/class/hwmon/hwmon1/temp1_input}
+
+[colors]
+; background = #222
+; background = #bb212121
+; first two bytes code for transparency
+; background = #ff212121
+background = #ff111822
+foreground = #eeffff
+foreground-alt = #888
+secondary = #e60053
+warn = #c60053
+error = #ff0033
+linecolor = #fba922
+bordercolor = #333
+accent = #e60053
+; shaded = #${colTopBarShaded}#
+shaded = #158888
+alert = #bd2c40
+; highlight = #${colFocus}#
+highlight = #d9583c
+
+[settings]
+screenchange-reload = true
+;throttle-output-for = 10
+;throttle-output = 5
+;throttle-input-for = 40
+
+;compositing-background = over
+;compositing-background = screen
+;compositing-foreground = xor
+;compositing-foreground = source
+;compositing-border = over
+
+[global/wm]
+margin-top = 0
+margin-bottom = 0
+
+################################
+############# BARS #############
+################################
+
+include-file = ~/.config/polybar/bars/top
+include-file = ~/.config/polybar/bars/top-small
+include-file = ~/.config/polybar/bars/top-min
+include-file = ~/.config/polybar/bars/top-wide
+include-file = ~/.config/polybar/bars/top-wide-large
+include-file = ~/.config/polybar/bars/top-wide-alt
+include-file = ~/.config/polybar/bars/bottom
+include-file = ~/.config/polybar/bars/bottom-small
+include-file = ~/.config/polybar/bars/bottom-wide
+include-file = ~/.config/polybar/bars/bottom-wide-large
+
+# bar/module specific vars
+bspwm-focused-overline = ${colors.linecolor}
+bspwm-focused-underline = #cc333333
+
+###############################
+########### MODULES ###########
+###############################
+
+include-file = ~/.config/polybar/modules/audio/audio
+include-file = ~/.config/polybar/modules/battery/battery
+include-file = ~/.config/polybar/modules/counter/counter
+include-file = ~/.config/polybar/modules/cpu/cpu
+include-file = ~/.config/polybar/modules/date/date
+include-file = ~/.config/polybar/modules/filesystem/filesystem
+include-file = ~/.config/polybar/modules/github/github
+include-file = ~/.config/polybar/modules/keyboard/keyboard
+include-file = ~/.config/polybar/modules/menu/menu
+include-file = ~/.config/polybar/modules/memory/memory
+include-file = ~/.config/polybar/modules/network/network
+include-file = ~/.config/polybar/modules/processes/processes
+include-file = ~/.config/polybar/modules/taskwarrior/taskwarrior
+include-file = ~/.config/polybar/modules/temperature/temperature
+include-file = ~/.config/polybar/modules/weather/weather
+include-file = ~/.config/polybar/modules/windows/windows
+
+[module/power-usage]
+type = custom/script
+exec = $HOME/.config/polybar/scripts/power-usage.sh
+label = %{T2}%{F#cd0}%{T-}%{T1} %{F#ca0}%output:0:4% W%{T-}
+tail = true
+
+; vim:ft=dosini
+
+[module/xbacklight]
+; type = internal/xbacklight
+type = internal/backlight
+; output = ${global.monitor}
+; ls -1 /sys/class/backlight/
+card = intel_backlight
+enable-scroll = false
+format = %{T3}<ramp>%{T-}%{T2}<label>%{T-}
+ramp-foreground = #aa4
+label-foreground = #aaa
+
+; Available tags:
+;   <label> (default)
+;   <ramp>
+;   <bar>
+
+; Available tokens:
+;   %percentage% (default)
+label = %percentage%%
+
+; Only applies if <ramp> is used
+; ramp-0 = 🌑 ramp-1 = 🌒 ramp-2 = 🌓 ramp-3 = 🌔 ramp-4 = 🌕
+ramp-0 = " "
+ramp-1 = " "
+ramp-2 = " "
+ramp-3 = " "
+ramp-4 = " "
+ramp-5 = " "
+
+;
+; Only applies if <bar> is used
+bar-width = 10
+bar-indicator = |
+bar-fill = ─
+bar-empty = ─
+
+; vim:ft=dosini

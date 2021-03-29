@@ -1,0 +1,26 @@
+{
+    "type": "script",
+    "description": "Lucky same tab",
+    "store": {},
+    "modes": [],
+    "usageCount": 6,
+    "prompt": false,
+    "omitTrigger": false,
+    "showInTrayMenu": false,
+    "abbreviation": {
+        "abbreviations": [],
+        "backspace": true,
+        "ignoreCase": false,
+        "immediate": false,
+        "triggerInside": false,
+        "wordChars": "[\\w]"
+    },
+    "hotkey": {
+        "modifiers": [],
+        "hotKey": ";"
+    },
+    "filter": {
+        "regex": "google-chrome.Google-chrome",
+        "isRecursive": false
+    }
+}

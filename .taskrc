@@ -1,0 +1,6 @@
+taskd.certificate=$HOME/.config/taskwarrior/private.certificate.pem
+taskd.key=$HOME/.config/taskwarrior/private.key.pem
+taskd.ca=$HOME/.config/taskwarrior/ca.cert.pem
+taskd.server=taskwarrior.inthe.am:53589
+taskd.credentials=inthe_am/njhoffman1982/ed19e90f-9bc0-4371-8ab2-43eb077c9356
+taskd.trust=ignore hostname

@@ -1,0 +1,635 @@
+# cat conf.d/* > config
+# ==========================================================
+# (1-TODO) TODO
+# ==========================================================
+#
+# Usage:
+# setup/use sticky windows
+# setup/use scratchpad
+# figure out zsh cd functionality
+#
+# Config Tasks:
+# reduce keymappings for window management in windows config
+# add config and multi-monitor polybar launcher in bar config
+# use environment variables to indicate autostart programs (at least some of them like battery)
+# use environment variables to specify layouts or different non-wm apps started by init.sh
+# map $mod+- to ignore conky, system monitor, etc
+#
+# Other:
+# get rid of powerlevel9k-master
+# figure out oh-my-zsh setup and dir in .shell
+# hostname config override, include env _CFG_HOST_OVERRIDE
+# include reference for all these environment variables
+# organize .shell/.zshrc better
+# create script that will itemize version numbers of environment dependencies (most should be in .local/bin)
+# investigate termite not starting
+# add tty to tmux status line
+# create alias to jump to directory of above tty
+#
+# vim:filetype=config
+
+# =========================================================
+# (2-set) set variables
+# =========================================================
+
+# resource locations
+set $dir_sys_bin = ~/bin
+set $dir_wal ~/.cache/wal
+set $dir_base ~/.config/i3
+set $dir_config ~/.config/i3/config.d
+set $dir_home_config ~/.config
+set $dir_bin ~/.config/i3/bin
+set $dir_layouts ~/.config/i3/layouts
+set $dir_rofi ~/.config/rofi/scripts
+
+set_from_resource $wmfont i3wm.font pango:DejaVu Sans MonoNerd Font 10
+
+# Set inner/outer gaps
+set_from_resource $gaps_inner i3wm.gaps_inner 20
+set_from_resource $gaps_outer i3wm.gaps_outer 5
+
+# {{{ Color defs - fallback to solarized
+  set_from_resource $color00  color0     #002b36
+  set_from_resource $color01  color1     #dc322f
+  set_from_resource $color02  color2     #859900
+  set_from_resource $color03  color3     #b58900
+  set_from_resource $color04  color4     #268bd2
+  set_from_resource $color05  color5     #d33682
+  set_from_resource $color06  color6     #2aa198
+  set_from_resource $color07  color7     #93a1a1
+  set_from_resource $color08  color8     #586e75
+  set_from_resource $color09  color9     #cb4b16
+  set_from_resource $color10  color10    #85c000
+  set_from_resource $color11  color11    #cccc00
+  set_from_resource $color12  color12    #2c98e4
+  set_from_resource $color13  color13    #6c71c4
+  set_from_resource $color14  color14    #30b8b0
+  set_from_resource $color15  color15    #eee8d5
+  set_from_resource $fground  foreground #eee8d5
+  set_from_resource $bground  background #002b36
+# }}}
+
+# Terminal
+set_from_resource $terminal i3wm.terminal 'xterm-256color'
+set_from_resource $termclass i3wm.terminal_class 'xterm-256color'
+
+# other
+set $editor termite
+set $mod Mod4
+set $exec exec
+
+# {{{ Workspace definitions
+# set $ws_mail 12:<big></big>
+# set $ws_web 13:<big></big>
+# set $ws_doc 14:<big></big>
+# set $ws_games 16:<big></big>
+# set $ws_media 17:♫
+# }}}
+# vim:filetype=config
+
+# =========================================================
+# (3-assigns) manage program specific window modifications
+# =========================================================
+# xwininfo, xprop
+# instance refers to first class listed in xprop
+
+# force floating for all new windows
+# for_window [class="[.]*"] floating enable
+for_window [class=".*"] border pixel 4
+
+for_window [class="Termite" title="floatme"] floating enable, border pixel 3, resize set 1400 1000, move position center
+for_window [instance="^dclock-ws1$"] resize set 87 240, move position 271 0
+for_window [class="Eog"] floating enable
+# for_window [class="Termite" title="scratchpad"] floating enable, resize set 50 ppt 80 ppt, move position center, move to scratchpad
+for_window [class="Termite" title="__scratchpad__"] floating enable, resize set 1000 800, move position center, move to scratchpad
+# for_window [class="Termite" title="dropdown"] floating enable
+for_window [instance="www.windy.com" window_role="pop-up"] floating enable, move position center, move to scratchpad, border pixel 3
+for_window [instance="www.feedly.com" window_role="pop-up"] floating enable, move position center, move to scratchpad, border pixel 3
+# for_window [title="click_conky"] floating enable, move position 1540 40, resize set 365 1030, move to scratchpad
+for_window [title="conky-float"] floating enable, resize set 365 1030, move position 1540 40, move to scratchpad, border normal
+for_window [class="Gnome-system-monitor"] floating enable, resize set 1000 800, move position center, move to scratchpad
+for_window [class="Slack"] floating enable, move to scratchpad
+for_window [class="Nautilus"] floating enable
+
+# Open specific applications in floating mode
+for_window [class=Viewnior|feh|Xzgv|Vimiv|Autokey|Audacious|File-roller|Lens|Lxappearance|Lxtask] floating enable
+for_window [class=URxvt|Firefox|Geany|Evince|Soffice|libreoffice*|mpv|Ghb|Xfburn|Gimp*|Inkscape|Vlc|Lxappearance|Audacity] focus
+for_window [class=Xfburn|GParted|System-config-printer.py|Lxtask|Exo-helper*|Lxrandr|Arandr] focus
+assign [class=Firefox|Transmission-gtk] 2
+assign [class=Thunar|File-roller] 3
+assign [class=Geany|Evince|Gucharmap|Soffice|libreoffice*] 4
+assign [class=Audacity|Vlc|mpv|Ghb|Xfburn|Gimp*|Inkscape] 5
+
+for_window [class="Yad"] floating enable border pixel 1
+for_window [title="alsamixer"] floating enable border pixel 1
+for_window [class="Blueman-manager"] floating enable border normal
+for_window [class="Calamares"] floating enable border normal
+for_window [class="Clipgrab"] floating enable
+for_window [title="File Transfer*"] floating enable
+for_window [class="Calculator"] floating enable border pixel 1
+for_window [class="GParted"] floating enable border normal
+for_window [title="i3_help"] floating enable sticky enable border normal
+for_window [class="Lightdm-gtk-greeter-settings"] floating enable
+for_window [class="Lxappearance"] floating enable sticky enable border normal
+for_window [title="MuseScore: Play Panel"] floating enable
+for_window [class="Nitrogen"] floating enable sticky enable border normal
+for_window [class="Oblogout"] fullscreen enable
+for_window [class="octopi"] floating enable
+for_window [title="About Pale Moon"] floating enable
+for_window [class="Pamac-manager"] floating enable
+for_window [class="Pavu"] floating enable
+for_window [class="Pavucontrol"] floating enable
+for_window [class="qt5ct"] floating enable sticky enable border normal
+for_window [class="Qtconfig-qt4"] floating enable sticky enable border normal
+for_window [class="Simple-scan"] floating enable border normal
+for_window [class="(?i)System-config-printer.py"] floating enable border normal
+for_window [class="Skype"] floating enable border normal
+for_window [class="Tor Browser"] floating enable border normal, resize set 1400 900, move position center
+for_window [class="Thus"] floating enable border normal
+for_window [class="Timeset-gui"] floating enable border normal
+for_window [class="(?i)virtualbox"] floating enable border normal
+for_window [class="Xfburn"] floating enable
+
+# switch to workspace with urgent window automatically
+for_window [urgent=latest] focus
+
+# vim:filetype=config
+
+# ================================================
+# (4-appearance) appearance of windows
+# ================================================
+
+# font
+font $wmfont
+
+# borders
+hide_edge_borders none
+default_border pixel 3
+default_floating_border pixel 3
+hide_edge_borders smart # none|vertical|horizontal|both|smart
+
+# theme colors
+# <title_border> <border> <background> <text> <indicator> <child_border>
+client.focused #1466aa #14273A #CCCCCC #99ddff #1499dd
+client.focused_inactive #191723 #192733 #CCCCCC #000d1a #001d3a
+client.unfocused #192733 #191723 #CCCCCC #000d1a #001d3a
+client.urgent #aa2733 #192733 #aacccc #000d1a #aa0d1a
+client.placeholder #192733 #192733 #cccccc #000d1a #000d1a
+client.background #000000#!/bin/bash
+
+# vim:filetype=config
+
+# =========================================================
+# (workspace) workspace commands and settings
+# =========================================================
+
+# {{{ assignment
+  # workspace variables
+  # set $ws1 1 output eDP-1
+  # set $ws2 2 output HDMI-1
+  set $ws1 1
+  set $ws2 2
+  set $ws3 3
+  set $ws4 4
+  set $ws5 5
+  set $ws6 6
+  set $ws7 7
+  set $ws8 8
+
+  # TODO: make environment variable
+  # workspace monitor assignments
+  # workspace 1 output DP-0
+  # workspace 2 output DP-2
+  # workspace 3 output HDMI-0
+  # workspace 4 output DP-4
+# }}}
+
+# {{{ switch to workspace
+  bindsym $mod+1 workspace $ws1
+  bindsym $mod+2 workspace $ws2
+  bindsym $mod+3 workspace $ws3
+  bindsym $mod+4 workspace $ws4
+  bindsym $mod+5 workspace $ws5
+  bindsym $mod+6 workspace $ws6
+  bindsym $mod+7 workspace $ws7
+  bindsym $mod+8 workspace $ws8
+  # move focused container to workspace
+  bindsym $mod+Ctrl+1 move container to workspace $ws1
+  bindsym $mod+Ctrl+2 move container to workspace $ws2
+  bindsym $mod+Ctrl+3 move container to workspace $ws3
+  bindsym $mod+Ctrl+4 move container to workspace $ws4
+  bindsym $mod+Ctrl+5 move container to workspace $ws5
+  bindsym $mod+Ctrl+6 move container to workspace $ws6
+  bindsym $mod+Ctrl+7 move container to workspace $ws7
+  bindsym $mod+Ctrl+8 move container to workspace $ws8
+  # move to workspace with focused container
+  bindsym $mod+Shift+1 move container to workspace $ws1; workspace $ws1
+  bindsym $mod+Shift+2 move container to workspace $ws2; workspace $ws2
+  bindsym $mod+Shift+3 move container to workspace $ws3; workspace $ws3
+  bindsym $mod+Shift+4 move container to workspace $ws4; workspace $ws4
+  bindsym $mod+Shift+5 move container to workspace $ws5; workspace $ws5
+  bindsym $mod+Shift+6 move container to workspace $ws6; workspace $ws6
+  bindsym $mod+Shift+7 move container to workspace $ws7; workspace $ws7
+  bindsym $mod+Shift+8 move container to workspace $ws8; workspace $ws8
+  # navigate workspaces next/previous
+  bindsym $mod+Ctrl+Right workspace next
+  bindsym $mod+Ctrl+Left workspace prev
+  # %%hotkey: Switch to next workspace %%
+  bindsym $mod+j workspace next
+  # %%hotkey: Switch to prev workspace %%
+  bindsym $mod+k workspace prev
+
+  # bindsym Control+$mod+I workspace 2 output HDMI-1; append_layout /home/nicholas/.config/i3/layouts/27-main.json
+  # bindsym Control+$mod+I workspace number 2; append_layout; ~/.config/i3/layouts/27-main.json; exec pidgin
+# }}}
+
+# vim:filetype=config
+
+# ===================================================
+#  (bars) polybar config
+# ===================================================
+
+# just reference source script for now, should config and launch different monitor bars here
+# vim:filetype=config
+
+# ====================================================
+# (gaps) settings for i3-gaps
+# ====================================================
+
+gaps inner $gaps_inner
+gaps outer $gaps_outer
+
+# gaps used if only more than one container on the workspace
+smart_gaps on
+
+# Press $mod+Shift+g to enter the gap mode. Choose o or i for modifying outer/inner gaps. Press one of + / - (in-/decrement for current workspace) or 0 (remove gaps for current workspace). If you also press Shift with these keys, the change will be global for all workspaces.
+set $mode_gaps Gaps: (o) outer, (i) inner
+set $mode_gaps_outer Outer Gaps: +|-|0 (local), Shift + +|-|0 (global)
+set $mode_gaps_inner Inner Gaps: +|-|0 (local), Shift + +|-|0 (global)
+bindsym $mod+Shift+g mode "$mode_gaps"
+
+# {{{ modify gap properties in run-time
+  mode "$mode_gaps" {
+    bindsym o      mode "$mode_gaps_outer"
+    bindsym i      mode "$mode_gaps_inner"
+    bindsym Return mode "default"
+    bindsym Escape mode "default"
+  }
+  mode "$mode_gaps_inner" {
+    bindsym plus  gaps inner current plus 5
+    bindsym minus gaps inner current minus 5
+    bindsym 0     gaps inner current set 0
+
+    bindsym Shift+plus  gaps inner all plus 5
+    bindsym Shift+minus gaps inner all minus 5
+    bindsym Shift+0     gaps inner all set 0
+
+    bindsym Return mode "default"
+    bindsym Escape mode "default"
+  }
+  mode "$mode_gaps_outer" {
+    bindsym plus  gaps outer current plus 5
+    bindsym minus gaps outer current minus 5
+    bindsym 0     gaps outer current set 0
+
+    bindsym Shift+plus  gaps outer all plus 5
+    bindsym Shift+minus gaps outer all minus 5
+    bindsym Shift+0     gaps outer all set 0
+
+    bindsym Return mode "default"
+    bindsym Escape mode "default"
+  }
+# }}}
+
+# {{{ i3-radius rounded corners
+  # https://github.com/terroo/i3-radius
+  for_window [class=".*"] border pixel 2
+  gaps inner 10
+  gaps outer 1
+  #gaps horizontal 2
+
+  smart_borders on
+  smart_borders no_gaps
+  border_radius 5
+# }}}
+# vim:filetype=config
+
+# ========================================================================
+# (controls-media) media controls (volume, play/pause, change track, etc.)
+# ========================================================================
+
+# media player controls
+bindsym XF86AudioPlay exec playerctl play-pause
+bindsym XF86AudioPause exec playerctl pause
+bindsym XF86AudioNext exec playerctl next
+bindsym XF86AudioPrev exec playerctl previous
+
+# pulse audio controls (increase, decrease, mute volume)
+bindsym XF86AudioRaiseVolume exec --no-startup-id "$dir_bin/i3_volume_change.sh +5%"
+bindsym XF86AudioLowerVolume exec --no-startup-id"$dir_bin/i3_volume_change.sh -5%"
+bindsym XF86AudioMute exec --no-startup-id "$dir_bin/i3_volume_change.sh mute"
+
+# print screen
+bindsym Print exec gnome-screenshot
+bindsym $mod+p exec --no-startup-id "$dir_rofi/screenshot.sh"
+# vim:filetype=config
+
+#===========================================================
+# (controls-system) various system control settings
+# ==========================================================
+
+# {{{ power and login controls
+  # set shut down, restart and locking features
+  bindsym $mod+0 mode "$mode_system"
+  set $mode_system (l)ock, (e)xit, switch_(u)ser, (s)uspend, (h)ibernate, (r)eboot, (Shift+s)hutdown
+  mode "$mode_system" {
+    bindsym s exec --no-startup-id i3exit suspend, mode "default"
+    bindsym u exec --no-startup-id i3exit switch_user, mode "default"
+    bindsym e exec --no-startup-id i3exit logout, mode "default"
+    bindsym h exec --no-startup-id i3exit hibernate, mode "default"
+    bindsym r exec --no-startup-id i3exit reboot, mode "default"
+    bindsym Shift+s exec --no-startup-id i3exit shutdown, mode "default"
+
+    # exit system mode: "Enter" or "Escape"
+    bindsym Return mode "default"
+    bindsym Escape mode "default"
+  }
+# }}}
+
+# screen brightness controls (use xbacklight if supported)
+# %%hotkey: Brightness up 1%
+bindsym XF86MonBrightnessUp exec --no-startup-id "$dir_bin/i3_brightness.sh +1%"
+# %%hotkey: Brightness down 1%
+bindsym XF86MonBrightnessDown exec --no-startup-id "$dir_bin/i3_brightness.sh -1%"
+# bindsym XF86MonBrightnessUp exec xbacklight -inc 20 # increase screen brightness
+# bindsym XF86MonBrightnessDown exec xbacklight -dec 20 # decrease screen brightness
+
+# {{{ reload/restart/exit i3
+# %%hotkey: Reload i3 %%
+  bindsym $mod+Shift+r exec --no-startup-id cat ~/.config/i3/conf.d/* > ~/.config/i3/config && notify-send --icon=gtk-info i3 "i3 reloaded", reload
+  bindsym $mod+Ctrl+r exec --no-startup-id cat ~/.config/i3/conf.d/* > ~/.config/i3/config && notify-send --icon=gtk-info i3 "i3 restarted", restart
+  # invoke system lock
+  bindsym $mod+x exec (i3lock)
+  # exit i3 (logs you out of your X session)
+  bindsym $mod+Shift+e exec "i3-nagbar -t warning -m 'You pressed the exit shortcut. Do you really want to exit i3? This will end your X session.' -b 'Yes, exit i3' 'i3-msg exit'"
+# }}}
+
+bindsym $mod+Shift+F1 $exec --no-startup-id i3hint help
+
+# vim:filetype=config
+
+# =============================================================================
+# (controls-windows )settings to control navigation and manipulation of windows
+# =============================================================================
+
+# focus windows that are hovered by the mouse
+#focus_follows_mouse yes
+focus_follows_mouse no
+
+# disable warping mouse cursor to center of newly focused window
+mouse_warping none
+
+# {{{ change focus
+  # focus the parent container
+  bindsym $mod+a focus parent
+  # focus the child container
+  bindsym $mod+z focus child
+  # toggle sticky
+  bindsym $mod+Shift+s sticky toggle
+
+  # override tmux key mapping
+  bindsym Ctrl+h focus left  exec "$dir_bin/i3_window_focus.sh left"
+  bindsym Ctrl+l focus right exec "$dir_bin/i3_window_focus.sh right"
+  bindsym Ctrl+j focus down exec "$dir_bin/i3_window_focus.sh down"
+  bindsym Ctrl+k focus up exec "$dir_bin/i3_window_focus.sh up"
+
+
+  # move all windows to workspace root
+  bindsym $mod+Shift+a [tiling workspace="__focused__"] move workspace "reorder"; [workspace="reorder"] move workspace current
+
+  # set floating modifier to global modifier
+  floating_modifier $mod
+  # change focus between tiling / floating windows
+  bindsym $mod+space focus mode_toggle
+  # toggle tiling / floating
+  bindsym $mod+Shift+space floating toggle
+  # floating_minimum_size 800 x 1200
+  # floating_maximum_size -1 x -1
+# }}}
+
+# {{{ move focused window
+  bindsym $mod+Shift+j move down
+  bindsym $mod+Shift+k move up
+  bindsym $mod+Shift+h move left
+  bindsym $mod+Shift+l move right
+  bindsym $mod+Shift+Up move up
+  bindsym $mod+Shift+Down move down
+  bindsym $mod+Shift+Left move left
+  bindsym $mod+Shift+Right move right
+  # workspace back and forth (with/without active container)
+  workspace_auto_back_and_forth yes
+  bindsym $mod+b workspace back_and_forth
+  bindsym $mod+Shift+b move container to workspace back_and_forth; workspace back_and_forth
+  # toggle fullscreen mode for the focused container
+  bindsym $mod+f fullscreen toggle
+  # change container layout (stacked, tabbed, toggle split)
+  bindsym $mod+Shift+{ layout stacking
+  bindsym $mod+Shift+} layout tabbed
+  bindsym $mod+Shift+| layout toggle split
+# }}}
+
+# {{{ resize focused window
+  bindsym $mod+r mode "resize"
+  mode "resize" {
+    # resizing (px or pt)
+    bindsym h resize shrink width 10 px
+    bindsym l resize grow width 10 px
+    bindsym j resize grow height 10 px
+    bindsym k resize shrink height 10 px
+    bindsym Left resize shrink width 5 px
+    bindsym Right resize grow width 5 px
+    bindsym Down resize grow height 5 px
+    bindsym Up resize shrink height 5 px
+    bindsym Ctrl+h resize shrink width 1 px
+    bindsym Ctrl+l resize grow width 1 px
+    bindsym Ctrl+j resize grow height 1 px
+    bindsym Ctrl+k resize shrink height 1 px
+    # moving
+    bindsym Shift+h move left 10 px
+    bindsym Shift+j move down 10 px
+    bindsym Shift+k move up 10 px
+    bindsym Shift+l move right 10 px
+    bindsym Ctrl+Shift+h move left 1 px
+    bindsym Ctrl+Shift+j move down 1 px
+    bindsym Ctrl+Shift+k move up 1 px
+    bindsym Ctrl+Shift+l move right 1 px
+    # exit resize mode: Enter or Escape
+    bindsym Return mode "default"
+    bindsym Escape mode "default"
+  }
+# }}}
+
+#{{{ snapping windows
+# snapping windows with wmctrl
+# https://gist.github.com/raidzero/dd7e45370b819eeff8aa
+# move to left:
+  # bindcode 59, bindcode 60
+  bindsym $mod+comma exec "$dir_bin/i3_window_reposition.sh third-left"
+  bindsym $mod+period exec "$dir_bin/i3_window_reposition.sh third-right"
+  bindsym $mod+slash exec "$dir_bin/i3_window_reposition.sh restore"
+  bindsym $mod+Shift+c exec "$dir_bin/i3_window_reposition.sh center"
+  bindsym $mod+Shift+v resize set 1000 800, move position center, move to scratchpad
+
+
+  bindsym $mod+Left exec "$dir_bin/i3_window_reposition.sh left"
+  bindsym $mod+Right exec "$dir_bin/i3_window_reposition.sh right"
+  bindsym $mod+Down exec "$dir_bin/i3_window_reposition.sh bottom"
+  bindsym $mod+Up exec "$dir_bin/i3_window_reposition.sh top"
+  bindsym $mod+Ctrl+Up exec "$dir_bin/i3_window_reposition.sh center"
+  bindsym $mod+Ctrl+Down exec "$dir_bin/i3_window_reposition.sh center"
+  # bindsym $mod+Shift+Left exec "notify-send left && $dir_bin/i3_window_snap.sh half-left"
+
+  #move to right:
+  # bindsym $mod+]        exec "$dir_bin/i3_window_snap.sh third-right && notify-send right"
+  bindsym $mod+Shift+.  exec "$dir_bin/i3_window_snap.sh right"
+#}}}
+
+# split orientation
+bindsym $mod+h split h;exec notify-send 'tile horizontally'
+bindsym $mod+v split v;exec notify-send 'tile vertically'
+
+# window kill command
+bindsym $mod+q kill
+
+# change window borders
+bindsym $mod+u border none
+bindsym $mod+y border pixel 2
+bindsym $mod+n border normal 1
+
+# trigger the flashfocus window event
+bindsym $mod+backslash exec --no-startup-id flash_window
+
+# {{{ scatchpad
+  # move the currently focused window to the scratchpad
+  bindsym $mod+Shift+minus move scratchpad
+  # show the next scratchpad window or hide the focused scratchpad window.
+  bindsym $mod+minus scratchpad show
+  # bindsym $mod+i [class="feh"] scratchpad show
+  # bindsym $mod+c [class="Google-chrome" window_role="pop-up"] scratchpad show
+  # bindsym $mod+w [instance="www.windy.com" window_role="pop-up"] scratchpad show
+  bindsym $mod+t [class="Termite" title="scratchpad"] scratchpad show
+  # bindsym $mod+t exec --no-startup-id "$dir_bin/launch-shell-dropdown.sh"
+  # bindsym $mod+e [instance="www.feedly.com" window_role="pop-up"] scratchpad show
+  bindsym $mod+i [title="Redux DevTools"] scratchpad show
+  bindsym $mod+c [title="conky-float"] scratchpad show
+  bindsym $mod+g [class="Gnome-system-monitor"] scratchpad show
+  bindsym $mod+s [class="Slack"] scratchpad show
+  bindsym $mod+Control+c exec "$dir_bin/launch-conky.sh && notify-send 'restarted conky' && i3-msg 'scratchpad show [class=conky-float]'"
+# }}}
+
+# vim:filetype=config
+
+# ==============================================
+# (launchers) program launchers
+# ==============================================
+
+# {{{ terminal
+  # open a terminal tiled
+  # %%hotkey: Launch termite shell %%
+  bindsym $mod+Return exec "$dir_bin/launch-shell.sh"
+  # open a terminal float
+  # %%hotkey: Launch floating termite shell %%
+  bindsym $mod+Shift+Return exec "$dir_bin/launch-shell-float.sh"
+  # move cursor to center of focused window
+  # %%hotkey: Move cursor to center of active window %%
+  bindsym $mod+m exec "$dir_bin/move-cursor-center.sh"
+  # bindsym $mod+c exec "$dir_bin/move-cursor-center.sh focus left"
+# }}}
+
+# start program launcher
+# --no-spawn (redirect to stdout instead of executing)
+# --checkout=<tag> (checkout submenu <tag> on startup)
+# jgmenu_run <cmd>, defaaults to pmenu
+# bindsym $mod+d exec "$dir_bin/move-cursor-center.sh && jgmenu_run &"
+
+# %%hotkey: Show rofi open app menu %%
+bindsym $mod+o --release exec \
+  $dir_bin/move-cursor-center.sh && rofi -show
+# %%hotkey: Show rofi switch window menu
+bindsym $mod+Tab --release exec \
+  $dir_bin/move-cursor-center.sh && rofi -show window
+
+# vim:filetype=config
+
+# ====================================================
+# (autostart) things to run on startup
+# ====================================================
+
+# restore GNOME's settings
+# exec --no-startup-id /usr/libexec/gnome-settings-daemon-localeexec
+
+# run wal to dynamically change window styles based on current background
+# exec_always --no-startup-id wal -i "$(< "${dir_wal}/wal")"
+
+
+# {{{ active wm services
+  # fixes a bug in gnome-settings-daemon: http://feeding.cloud.geek.nz/posts/creating-a-modern-tiling-desktop-environment-using-i3/
+  # exec --no-startup-id dconf write /org/gnome/settings-daemon/plugins/cursor/active false
+
+  # assigns wallpaper to different monitor workspaces
+  exec --no-startup-id "$dir_sys_bin/wallpaper"
+  exec --no-startup-id "nitrogen --restore && while inotifywait -e close_write ~/.config/nitrogen/bg-saved.cfg; do nitrogen --restore; done"
+  # shows basic network information
+  exec --no-startup-id nm-applet
+  # shows clipboard history
+  exec --no-startup-id clipit
+
+  # flashfocus to animate highlight active window
+  exec_always --no-startup-id flashfocus
+
+  # ensure socket open for i3dropdown animation
+  exec --no-startup-id i3 --get-socketpath > /tmp/i3wm-socket-path
+
+  # window blurring/opacity effects
+  # exec --no-startup-id "pkill compton && compton --config $dir_home_config/compton.conf"
+  exec --no-startup-id "compton"
+
+  # TODO: create a service that waits for mpd to be initialized
+  exec --no-startup-id "sleep 10; /usr/local/bin/ntfd"
+
+  # start polybars on multiple monitors
+  exec --no-startup-id "$dir_bin/launch-polybars.sh"
+
+  # sync primary buffer with clipboard
+  # works in conunciton with tmux buffer to xsel --clipboard
+  exec --no-startup-id "xsel -i --primary"
+
+  # load up terminal, chrome and conky to be used as pop-up scratchpads
+  # exec --no-startup-id "google-chrome --app=http://www.google.com"
+  # exec --no-startup-id "google-chrome --app=http://www.windy.com"
+  # exec --no-startup-id "google-chrome --app=http://www.feedly.com"
+  exec --no-startup-id "$dir_bin/launch-shell-scratchpad.sh"
+  # exec --no-startup-id "$dir_bin/launch-conky.sh"
+  exec --no-startup-id guake
+
+  exec --no-startup-id gnome-system-monitor
+
+  # load autokey for enhanced shortcut keys
+  exec --no-startup-id autokey
+# }}}
+
+# {{{ unused wm services
+  # exec --no-startup-id xfce4-power-manager
+  # exec_always --no-startup-id ff-theme-util
+  # exec_always --no-startup-id (nohup compton &)
+  # exec --no-startup-id pamac-tray
+  # exec_always --no-startup-id fix_xcursor
+  # exec --no-startup-id (pkill compton && nohup compton &)
+  # exec_always --no-startup-id (xinput set-prop 12 288 1)
+# }}}
+
+
+# starts and initializes applications that aren't window manager specific
+# TODO: make hostname specific
+# exec_always --no-startup-id "$dir_bin/init.sh"
+

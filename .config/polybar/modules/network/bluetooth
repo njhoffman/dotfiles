@@ -1,0 +1,11 @@
+[module/bluetooth]
+type = custom/script
+interval = 2
+exec = $HOME/.config/polybar/scripts/bluetooth.sh
+; click-left = exec blueberry
+click-right = exec $HOME/.config/polybar/scripts/bluetooth-toggle.sh
+format-padding = 1
+; format-background = #000000
+format-foreground = #ffffff
+
+; vim:ft=dosini

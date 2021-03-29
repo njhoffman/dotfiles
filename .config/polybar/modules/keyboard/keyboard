@@ -1,0 +1,24 @@
+include-file = ~/.config/polybar/modules/keyboard/typespeed
+include-file = ~/.config/polybar/modules/keyboard/keyboard-wide
+include-file = ~/.config/polybar/modules/keyboard/xkeyboard
+
+[module/keyboard]
+type = internal/xkeyboard
+
+blacklist-0 = num lock
+blacklist-1 = scroll lock
+
+format = <label-indicator>
+format-spacing = 0
+
+label-layout = %name%
+label-layout-padding = 2
+label-layout-background = #bc99ed
+label-layout-foreground = #000
+
+label-indicator-on = %name%
+label-indicator-on-background = #4c99ed
+label-indicator-on-foreground = #000
+label-indicator-on-padding = 2
+
+; vim:ft=dosini

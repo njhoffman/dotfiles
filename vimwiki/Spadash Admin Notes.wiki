@@ -1,0 +1,72 @@
+
+shifts/getProvidersWithShifts
+shifts/processProviderShift
+schedule/determineProviderShiftAvailabilityForLocation
+schedule/processLocationAvailability
+schedule/getPotentialAvailabilities
+
+= Spadash Admin Site Notes =
+
+api-database
+migrate create
+FUSE keywords: 473
+FUSE files: 103
+
+7,000 (50,000/month is goal)
+
+== /main ==
+js: 275 mb
+dom: 3,482
+event listeners : 4,500 climbs to 8,000 gets garbage collected
+
+== /customer-accounts (dev) ==
+event listeners: start at 23,668, drops to 304
+js heap: start at 350 mb, drop to 275 mb
+dom nodes: start at 4,207, drop to 1,565
+
+twilio.com: vendor@spadash.com
+
+{{{sh
+  # Switch to the postgres user
+  $ su - postgres
+
+  # Create a database user for Miniflux
+  $ createuser -P miniflux
+  Enter password for new role: ******
+  Enter it again: ******
+
+  # Create a database for miniflux that belongs to our user
+  $ createdb -O miniflux miniflux
+
+  # Create the extension hstore as superuser
+  $ psql miniflux -c 'create extension hstore'
+  CREATE EXTENSION
+}}}
+
+== Git Flow Notes ==
+
+https://gist.github.com/rogerzklotz/86a9b9972ec0a152c57ff40a6bc454e8
+
+{{{sh
+  cd api-server
+  git checkout develop
+  git pull
+  git flow hotfix start 1.0.36
+
+ # Follow-up actions:
+ # - Start committing your hot fixes
+ # - Bump the version number now!
+ # - When done, run:
+ #      git flow hotfix finish '1.0.36'
+
+  git flow feature start spad-xxx
+  # do some feature work
+  git commit -am 'SPAD-XXX My awesome feature'
+  git push
+  # integrate changes pushed to develop since you branches
+  git checkout -  # last branch used, here develop
+  git pull
+  git checkout -  # back to feature branch
+  git rebase develop feature/spad-xxx
+  git push --force
+}}}

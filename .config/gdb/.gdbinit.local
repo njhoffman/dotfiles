@@ -1,0 +1,5 @@
+set $SHOWDATAWIN = 0
+# set to 0 to disable colored display of changed registers
+set $SHOWREGCHANGES = 1
+
+#" vim:syntax=gdb

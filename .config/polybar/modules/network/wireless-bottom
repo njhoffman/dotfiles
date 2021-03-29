@@ -1,0 +1,39 @@
+[module/network-wireless-bottom]
+type = internal/network
+format = <label>
+interface = ${global.wireless-interface}
+interval = 2.0
+ping-interval = 10.0
+
+accumulate-stats = true
+
+format-connected = <label-connected>
+format-disconnected = <label-disconnected>
+format-packetloss = <animation-packetloss> <label-connected>
+
+; format-connected-prefix = "  "
+format-connected-prefix = ""
+format-connected-prefix-foreground = #6F6
+format-connected-prefix-offset = -3
+label-connected = %{T2}%{F#6AC}%upspeed:8%  %{F-}%{F#6CA} %downspeed:8%  %{F-}%{T-}
+label-connected-foreground = ${colors.foreground-alt}
+ramp-signal-0 = 😱
+ramp-signal-1 = 
+ramp-signal-2 = 直
+ramp-signal-3 = 直
+ramp-signal-4 = 直
+ramp-signal-5 = 
+ramp-signal-foreground = ${colors.foreground}
+
+format-disconnected-prefix-foreground = #F66
+label-disconnected = ⭍ not connected
+
+animation-packetloss-0 = %{T2}  %{T-}
+animation-packetloss-0-foreground = #ffa64c
+animation-packetloss-1 = %{T2}  %{T-}
+animation-packetloss-1-foreground = ${colors.foreground}
+animation-packetloss-framerate = 500
+
+; vim:syn=dosini
+
+

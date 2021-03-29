@@ -1,0 +1,42 @@
+{
+  root: true,
+  "parser": "babel-eslint",
+  "extends": [
+    "airbnb-base",
+    "plugin:prettier/recommended"
+  ],
+  "plugins": [
+    "babel",
+    "promise"
+  ],
+  "globals" : {
+    "proxyquire":   false,
+    "expect":       false,
+    "request":      false,
+    "should":       false,
+    "sinon":        false,
+    "jest":         false
+  },
+  "env": {
+    "node" : true,
+    "mocha": true
+  },
+  "rules": {
+    "prettier/prettier":                  "warn",
+    "import/no-unresolved":               0,
+    "newline-per-chained-call":           [2, { "ignoreChainWithDepth" : 2 }],
+    "implicit-arrow-linebreak":           0,
+    "object-curly-newline":               [2, { "consistent": true }],
+    "no-else-return":                     [2, { "allowElseIf" : true }],
+    "arrow-parens":                       0,
+    "no-underscore-dangle":               0,
+    "max-len":                            [1, 120, 2, { ignoreComments: true }],
+    "key-spacing":                        [0, { align: "value" }],
+    "no-multi-spaces":                    ["error", { exceptions: { "VariableDeclarator": true, "ImportDeclaration" : true } }],
+    "function-paren-newline":             0,
+    "space-before-function-paren":        ["error", {"anonymous": "never", "named": "never", "asyncArrow" : "always"}],
+    "semi":                               [2, "always" ],
+    "no-console":                         "warn",
+    "no-unused-vars":                     ["warn", { "args" : "none" }]
+  }
+}

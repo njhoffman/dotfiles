@@ -1,0 +1,20 @@
+[Unit]
+Description=bugwarrior-pull
+
+[Service]
+Environment="DISPLAY=:0"
+ExecStart=/usr/bin/bugwarrior-pull
+Type=oneshot
+
+[Install]
+WantedBy=default.target
+$ cat ~/.config/systemd/user/bugwarrior-pull.timer
+[Unit]
+Description=Run bugwarrior-pull hourly and on boot
+
+[Timer]
+OnBootSec=15min
+OnUnitActiveSec=1h
+
+[Install]
+WantedBy=timers.target

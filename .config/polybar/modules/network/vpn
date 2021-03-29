@@ -1,0 +1,13 @@
+[module/network-vpn]
+type = custom/script
+exec = $HOME/.config/polybar/scripts/network-vpn.sh
+click-left = $HOME/.config/polybar/scripts/network-vpn.sh --toggle &
+format = <label>
+format-foreground = #558899
+format-prefix="嬨 "
+; format-prefix-foreground=#669988
+format-prefix-foreground=#8800ff
+; format-background = #400
+; format-prefix = "  "
+
+; vim:syn=dosini

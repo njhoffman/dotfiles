@@ -1,0 +1,88 @@
+---
+delimiter: ","
+playlist:
+  outputPath: current.m3u
+  outputDirectory: "/home/nicholas/.mpd/playlists/"
+mpd:
+  port: 6600
+  host: localhost
+  baseDirectory: "/home/nicholas/Music/Sorted"
+rating:
+  tag: POPM
+  email: Default
+  max: 5
+  color: "#BBDDFF"
+stats:
+  multiFields:
+  - context
+  - mood
+  - picks
+output:
+  table:
+    color: "#BBBBBB"
+    headers:
+      visible: true
+      capitalize: false
+      color: "#33CCAA"
+    seperators:
+      vertical: false
+      horizontal: false
+  vertical:
+    color: "#BBBBBB"
+    headers:
+      visible: true
+      color: "#33CCAA"
+tags:
+- id: TPE1
+  name: artist
+  tableOrder: 1
+  maxWidth: 20
+- id: TIT2
+  name: title
+  tableOrder: 2
+  maxWidth: 30
+- id: TALB
+  name: album
+  tableOrder: 3
+  maxWidth: 30
+- name: gain
+  id: TXXX.replaygain_track_gain
+  tableOrder: 4
+- id: TXXX.Context
+  name: context
+  tableOrder: 5
+  multi: true
+- id: TXXX.Mood
+  name: mood
+  tableOrder: 6
+  multi: true
+- id: TXXX.Picks
+  name: picks
+  tableOrder: 7
+  multi: true
+- id: TIT1
+  name: grouping
+  tableOrder: 8
+- id: TCOP
+  name: copyright
+  tableOrder: 9
+- name: type
+  id: TXXX.MusicBrainz Album Type
+  tableOrder: 10
+- id: TPE2
+  name: albumArtist
+  tableOrder: 11
+  maxWidth: 20
+- id: TCON
+  name: genre
+- id: TDRL
+  name: year
+- id: TRCK
+  name: track
+- id: TXXX.PrimaryGenre
+  name: primary
+- id: TXXX.SecondaryGenre
+  name: secondary
+- id: TXXX.CompositionType
+  name: compositionType
+

@@ -1,0 +1,54 @@
+[module/network-wired]
+type = internal/network
+; interface = enp30s0
+interface = enp0se1f6
+interval = 2.0
+
+label-connected = %local_ip%
+format-connected-prefix = " "
+format-connected-prefix-foreground = ${colors.foreground-alt}
+; format-connected-prefix-foreground = ${xrdb:color0}
+format-connected-foreground = ${xrdb:color0}
+format-connected-background = ${xrdb:color5}
+
+; format-disconnected =
+label-disconnected = %ifname% disconnected
+format-disconnected = <label-disconnected>
+format-disconnected-underline = ${self.format-connected-underline}
+label-disconnected-foreground = ${colors.foreground-alt}
+
+; ﳊ 
+;  
+; 
+; 
+;  
+; 
+; 
+;  
+;
+; 直
+; ﰎ ﰏ
+; ﴽ
+; 🖧
+; ⭍
+; ---
+; 
+
+
+; [module/wired]
+; type = internal/network
+; interface = net0
+; interval = 3.0
+;
+; format-connected-prefix = " "
+; format-connected-prefix-foreground = #666
+; label-connected = %local_ip%
+;
+;format-disconnected = <label-disconnected>
+;format-disconnected-prefix = " "
+;format-disconnected-prefix-foreground = #666
+;label-disconnected = not connected
+;label-disconnected-foreground = #999
+
+
+; vim:syn=dosini

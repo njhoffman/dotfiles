@@ -1,0 +1,37 @@
+[module/battery-bottom]
+type = internal/battery
+full-at = 98
+time-format = %H:%M
+
+format-charging = %{T3}<animation-charging>%{T-} <label-charging>
+label-charging = %{T2}%{F#7ba}%time%%{T-}
+
+format-discharging = %{T3}<ramp-capacity>%{T-} <label-discharging>
+label-discharging = %{T2}%{F#b96}%time%%{T-}
+
+label-full= %{T2}%{F#7c9}%percentage%%%{T-}
+format-full = <label-full>
+format-full-prefix = " "
+format-full-prefix-foreground = #2ca
+
+ramp-capacity-0 = "%{F#a00}"
+ramp-capacity-1 = "%{F#c80}"
+ramp-capacity-2 = ""
+ramp-capacity-foreground = #987
+
+;                          
+animation-charging-0 = ""
+animation-charging-1 = ""
+animation-charging-2 = ""
+animation-charging-3 = ""
+animation-charging-foreground = #6f9
+animation-charging-framerate = 750
+
+;[module/battery-multi]
+;type = custom/script
+;exec = "count=$(acpi -b | wc -l); sum=$(acpi -b | egrep -o '[0-9]{1,3}%' | tr -d '%' | xargs -I% echo -n '+%'); echo $(date +%s) Avg capacity: $(( sum / count ))%"
+;exec-if = pgrep -x watch
+;interval = 3
+
+; vim:syntax=dosini
+

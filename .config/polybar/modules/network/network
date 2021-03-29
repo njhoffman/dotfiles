@@ -1,0 +1,8 @@
+include-file = ~/.config/polybar/modules/network/bluetooth
+include-file = ~/.config/polybar/modules/network/vpn
+include-file = ~/.config/polybar/modules/network/wired
+include-file = ~/.config/polybar/modules/network/wireless
+include-file = ~/.config/polybar/modules/network/wireless-wide
+include-file = ~/.config/polybar/modules/network/wireless-bottom
+
+; vim:ft=dosini

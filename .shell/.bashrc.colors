@@ -1,0 +1,27 @@
+#!/bin/bash
+
+# colors for using in the ps1 prompt
+
+_RED='\[\e[0;31m\]'
+_BRIGHTRED='\[\e[1;31m\]'
+_GREEN='\[\e[0;32m\]'
+_GREEN2='\[\e[38;5;41m\]'
+_BRIGHTGREEN='\[\e[1;32m\]'
+_YELLOW='\[\e[0;33m\]'
+_BLUE='\[\e[0;34m\]'
+_BRIGHTBLUE='\[\e[1;34m\]'
+_MAGENTA='\[\e[0;35m\]'
+_CYAN='\[\e[0;36m\]'
+_BRIGHTCYAN='\[\e[1;36m\]'
+_WHITE='\[\e[0;37m\]'
+_BRIGHTWHITE='\[\e[1;37m\]'
+_END='\[\e[0m\]'
+
+_GIT_NAME_COLOR='\[\e[1;34m\]'
+_GIT_ARROW_COLOR='\[\e[0;37m\]'
+_GIT_BRANCH_COLOR='\[\e[0;37m\]'
+_GIT_BRANCH_STAGE_COLOR='\[\e[38;5;122m\]'
+_GIT_BRANCH_MASTER_COLOR='\[\e[38;5;167m\]'
+_GIT_BRANCH_DEVELOPMENT_COLOR='\[\e[38;5;69m\]'
+_GIT_TAG_COLOR='\[\e[38;5;250m\]'
+

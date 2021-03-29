@@ -1,0 +1,27 @@
+{
+    "type": "phrase",
+    "description": "FZF Up 3 Pages",
+    "modes": [3],
+    "usageCount": 23,
+    "prompt": false,
+    "omitTrigger": false,
+    "matchCase": false,
+    "showInTrayMenu": false,
+    "abbreviation": {
+        "abbreviations": [],
+        "backspace": true,
+        "ignoreCase": false,
+        "immediate": false,
+        "triggerInside": false,
+        "wordChars": "[\\w]"
+    },
+    "hotkey": {
+        "modifiers": ["<ctrl>", "<shift>"],
+        "hotKey": "b"
+    },
+    "filter": {
+        "regex": "termite.Termite|Alacritty.Alacritty",
+        "isRecursive": false
+    },
+    "sendMode": "kb"
+}

@@ -1,0 +1,5 @@
+include-file = ~/.config/polybar/modules/windows/i3
+include-file = ~/.config/polybar/modules/windows/xwindow
+include-file = ~/.config/polybar/modules/windows/xwindow-wide
+
+; vim:ft=dosini

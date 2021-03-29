@@ -1,0 +1,23 @@
+#!/bin/bash
+
+suffix=$(date "+%m.%d")
+logx11="$HOME/.local/log/xinit.$suffix.log"
+xinitrc="$HOME/.xinitrc"
+
+if [[ -z "$DESKTOP_SESSION" ]]; then
+  export DESKTOP_SESSION=`wmctrl -m | head -n1 | awk '{print $2}'`
+  echo "setting session: $DESKTOP_SESSION" >> $logx11
+else
+  echo "not setting session: $DESKTOP_SESSION" >> $logx11
+fi
+
+echo -e "$(date) \t (.xessionrc): Trying $xinitrc : $DESKTOP_SESSION" >> $logx11
+
+# if [[ $DESKTOP_SESSION =~ .*i3.* ]]; then
+  if [ -f "$xinitrc" ]; then
+    echo -e "$(date) \t (.xessionrc): Loading $xinitrc" >> $logx11
+    source "$xinitrc"
+  else
+    echo -e "$(date) \t ERROR! xinitrc file not found: $xinitrc" >> $logx11
+  fi
+# fi

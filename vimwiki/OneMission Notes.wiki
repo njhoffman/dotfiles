@@ -1,0 +1,20 @@
+:one-mission::om::project:
+
+Coupon Code: 5e0e5e461e710
+
+{{{sh
+  rsync -zarvh --progress -e 'ssh -p 58824' ~/onemission/public/content/uploads/ \
+    onemission@34.70.95.137:~/onemission/public/content/uploads
+
+  /product/be-brave-unisex-short-sleeve-tee/
+  wp-admin/post.php?post=36912&action=edit&classic-editor
+  ssh -p 28355 onemission@34.70.95.137 # lyZrJHCsq5TGJoa
+
+  scp -P 28355 om.sql onemission@34.70.95.137:~/data
+  woocommerce: john@onemission.fund WP6kidsASJTNJ
+  godaddy:
+  linode:
+
+  nohup mysql --user=onemission --password=9C1p4qSHUUQ6glP onemission  < ./om.sql
+}}}
+

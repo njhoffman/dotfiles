@@ -1,0 +1,19 @@
+# $HOME/.k9s/plugin.yml
+plugin:
+	# Defines a plugin to provide a `ctrl-l` shortcut to tail the logs while in pod view.
+  fred:
+    shortCut: Ctrl-L
+    confirm: false
+    description: Pod logs
+    scopes:
+    - pods
+    command: kubectl
+    background: false
+    args:
+    - logs
+    - -f
+    - $NAME
+    - -n
+    - $NAMESPACE
+    - --context
+    - $CONTEXT

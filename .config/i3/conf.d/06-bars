@@ -1,0 +1,7 @@
+# vim:filetype=config
+
+# ===================================================
+#  (bars) polybar config
+# ===================================================
+
+# just reference source script for now, should config and launch different monitor bars here

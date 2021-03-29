@@ -1,0 +1,30 @@
+{
+    "type": "phrase",
+    "description": "Git Status Files (Ctrl-G already set)",
+    "modes": [],
+    "usageCount": 4,
+    "prompt": false,
+    "omitTrigger": false,
+    "matchCase": false,
+    "showInTrayMenu": false,
+    "abbreviation": {
+        "abbreviations": [],
+        "backspace": true,
+        "ignoreCase": false,
+        "immediate": false,
+        "triggerInside": false,
+        "wordChars": "[\\w]"
+    },
+    "hotkey": {
+        "modifiers": [
+            "<ctrl>",
+            "<shift>"
+        ],
+        "hotKey": "g"
+    },
+    "filter": {
+        "regex": "termite.Termite|Alacritty.Alacritty",
+        "isRecursive": false
+    },
+    "sendMode": "kb"
+}

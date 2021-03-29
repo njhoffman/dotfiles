@@ -1,0 +1,74 @@
+# vim:filetype=config
+
+# ====================================================
+# (autostart) things to run on startup
+# ====================================================
+
+# restore GNOME's settings
+# exec --no-startup-id /usr/libexec/gnome-settings-daemon-localeexec
+
+# run wal to dynamically change window styles based on current background
+# exec_always --no-startup-id wal -i "$(< "${dir_wal}/wal")"
+
+
+# {{{ active wm services
+  # fixes a bug in gnome-settings-daemon: http://feeding.cloud.geek.nz/posts/creating-a-modern-tiling-desktop-environment-using-i3/
+  # exec --no-startup-id dconf write /org/gnome/settings-daemon/plugins/cursor/active false
+
+  # assigns wallpaper to different monitor workspaces
+  exec --no-startup-id "$dir_sys_bin/wallpaper"
+  exec --no-startup-id "nitrogen --restore && while inotifywait -e close_write ~/.config/nitrogen/bg-saved.cfg; do nitrogen --restore; done"
+  # shows basic network information
+  exec --no-startup-id nm-applet
+  # shows clipboard history
+  exec --no-startup-id clipit
+
+  # flashfocus to animate highlight active window
+  exec_always --no-startup-id flashfocus
+
+  # ensure socket open for i3dropdown animation
+  exec --no-startup-id i3 --get-socketpath > /tmp/i3wm-socket-path
+
+  # window blurring/opacity effects
+  # exec --no-startup-id "pkill compton && compton --config $dir_home_config/compton.conf"
+  exec --no-startup-id "compton"
+
+  # TODO: create a service that waits for mpd to be initialized
+  exec --no-startup-id "sleep 10; /usr/local/bin/ntfd"
+
+  # start polybars on multiple monitors
+  exec --no-startup-id "$dir_bin/launch-polybars.sh"
+
+  # sync primary buffer with clipboard
+  # works in conunciton with tmux buffer to xsel --clipboard
+  exec --no-startup-id "xsel -i --primary"
+
+  # load up terminal, chrome and conky to be used as pop-up scratchpads
+  # exec --no-startup-id "google-chrome --app=http://www.google.com"
+  # exec --no-startup-id "google-chrome --app=http://www.windy.com"
+  # exec --no-startup-id "google-chrome --app=http://www.feedly.com"
+  exec --no-startup-id "$dir_bin/launch-shell-scratchpad.sh"
+  # exec --no-startup-id "$dir_bin/launch-conky.sh"
+  exec --no-startup-id guake
+
+  exec --no-startup-id gnome-system-monitor
+
+  # load autokey for enhanced shortcut keys
+  exec --no-startup-id autokey
+# }}}
+
+# {{{ unused wm services
+  # exec --no-startup-id xfce4-power-manager
+  # exec_always --no-startup-id ff-theme-util
+  # exec_always --no-startup-id (nohup compton &)
+  # exec --no-startup-id pamac-tray
+  # exec_always --no-startup-id fix_xcursor
+  # exec --no-startup-id (pkill compton && nohup compton &)
+  # exec_always --no-startup-id (xinput set-prop 12 288 1)
+# }}}
+
+
+# starts and initializes applications that aren't window manager specific
+# TODO: make hostname specific
+# exec_always --no-startup-id "$dir_bin/init.sh"
+

@@ -1,0 +1,21 @@
+taskd.certificate=~/.config/taskwarrior/private.certificate.pem
+taskd.key=~/.config/taskwarrior/private.key.pem
+taskd.ca=~/.config/taskwarrior/ca.cert.pem
+taskd.server=taskwarrior.inthe.am:53589
+taskd.credentials=inthe_am/njhoffman1982/ed19e90f-9bc0-4371-8ab2-43eb077c9356
+taskd.trust=ignore hostname
+
+verbose=blank,footnote,label,new-id,affected,edit,special,project,sync,unwait
+row.padding=1
+
+# solarized-dark-256, dark-256
+# include /usr/local/share/doc/task/rc/dark-256.theme
+include /usr/share/taskwarrior/dark-256.theme
+uda.reviewed.type=date
+uda.reviewed.label=Reviewed
+report._reviewed.description=Tasksh review report.  Adjust the filter to your needs.
+report._reviewed.columns=uuid
+report._reviewed.sort=reviewed+,modified+
+report._reviewed.filter=( reviewed.none: or reviewed.before:now-6days ) and ( +PENDING or +WAITING )
+# context.sambatv=+CISprint1
+# context=sambatv

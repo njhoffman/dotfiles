@@ -1,0 +1,32 @@
+# vim:filetype=config
+
+# ==============================================
+# (launchers) program launchers
+# ==============================================
+
+# {{{ terminal
+  # open a terminal tiled
+  # %%hotkey: Launch termite shell %%
+  bindsym $mod+Return exec "$dir_bin/launch-shell.sh"
+  # open a terminal float
+  # %%hotkey: Launch floating termite shell %%
+  bindsym $mod+Shift+Return exec "$dir_bin/launch-shell-float.sh"
+  # move cursor to center of focused window
+  # %%hotkey: Move cursor to center of active window %%
+  bindsym $mod+m exec "$dir_bin/move-cursor-center.sh"
+  # bindsym $mod+c exec "$dir_bin/move-cursor-center.sh focus left"
+# }}}
+
+# start program launcher
+# --no-spawn (redirect to stdout instead of executing)
+# --checkout=<tag> (checkout submenu <tag> on startup)
+# jgmenu_run <cmd>, defaaults to pmenu
+# bindsym $mod+d exec "$dir_bin/move-cursor-center.sh && jgmenu_run &"
+
+# %%hotkey: Show rofi open app menu %%
+bindsym $mod+o --release exec \
+  $dir_bin/move-cursor-center.sh && rofi -show
+# %%hotkey: Show rofi switch window menu
+bindsym $mod+Tab --release exec \
+  $dir_bin/move-cursor-center.sh && rofi -show window
+

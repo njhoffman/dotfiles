@@ -1,0 +1,44 @@
+[module/memory]
+; <bar-used> <bar-free> <ramp-used> <ramp-free> <bar-swap-used>
+; <bar-swap-free> <ramp-swap-used> <ramp-swap-free>
+; %gb_used% %gb_free% %gb_total% %percentage_free% %percentage_used%
+type = internal/memory
+interval = 1
+label = %percentage_used:2%%
+format = <label> <bar-used>
+format-prefix = "%{T2} MEM %{T-}"
+format-prefix-foreground = #666
+
+; Only applies if <bar-used> is used
+bar-used-indicator =
+bar-used-width = 20
+bar-used-foreground-0 = #557755
+bar-used-foreground-1 = #5a8055
+bar-used-foreground-2 = #5f8855
+bar-used-foreground-3 = #669055
+bar-used-foreground-4 = #6d9955
+bar-used-foreground-5 = #6aa255
+bar-used-foreground-6 = #7daa55
+bar-used-foreground-7 = #87b055
+bar-used-foreground-8 = #aabb55
+bar-used-foreground-9 = #b6990a
+bar-used-foreground-10 = #c08c0a
+bar-used-foreground-11 = #cc880a
+bar-used-foreground-12 = #dd6606
+bar-used-foreground-13 = #ee4400
+bar-used-foreground-14 = #ff0000
+bar-used-fill = ▐
+bar-used-empty = ▐
+bar-used-empty-foreground = #444444
+
+; Only applies if <ramp-used> is used
+ramp-used-0 = ▁
+ramp-used-1 = ▂
+ramp-used-2 = ▃
+ramp-used-3 = ▄
+ramp-used-4 = ▅
+ramp-used-5 = ▆
+ramp-used-6 = ▇
+ramp-used-7 = █
+
+; vim:syn=dosini

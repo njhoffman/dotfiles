@@ -1,0 +1,110 @@
+user:
+#### HP Laptop
+- name: Living Room HP x2
+  monitors:
+  - edid: 00ffffffffffff0009e59b0600000000
+    primary: true
+    polybar: top,bottom
+    termite: config.08
+  - edid: 00ffffffffffff0010acc0a04c333730
+    primary: true
+    scale: 0.75x0.75
+    position: 3840x0
+    polybar: top-wide,bottom-wide
+    termite: config.13
+  env:
+  - POLYBAR_WIRELESS=wlo1
+  xrandr:
+  - eDP-1 --primary --scale 1.15x1.15
+  - HDMI-1 --scale 0.75x0.75 --right-of eDP-1
+
+- name: Living Room HP
+  monitors:
+  - edid: 00ffffffffffff0009e59b0600000000
+    primary: true
+    polybar: top-small,bottom-small
+    termite: config.08
+  env:
+  - POLYBAR_WIRELESS=wlo1
+  - TEST_ENV=WORKING
+  xrandr:
+  - eDP-1 --primary --scale 1.15x1.15
+
+#### Home Office
+
+- name: Home Office 3 landscape monitors
+  monitors:
+  - description: DP-2 left center
+    edid: 00ffffffffffff0010acbea04c333730
+    primary: true
+    polybar: top-wide-large,bottom-wide-large
+    termite: config.large
+  - description: HDMI-0 top right
+    edid: 00ffffffffffff0010acc0a04c343530
+    scale: 0.75x0.75
+    position: 3840x0
+    polybar: top-wide-alt,bottom-wide
+    termite: config
+  - description: DP-4 bottom right
+    edid: 00ffffffffffff0010acbd404c444741
+    scale: 0.75x0.75
+    position: 3840x1620
+    polybar: top-wide
+    termite: config
+  env:
+    - POLYBAR_WIRELESS=wlx00c0ca35dbc6
+  xrandr:
+    - DP-2 --primary --pos 0x0
+    - HDMI-0 --pos 3840x0
+    - HDMI-0 --scale 0.65x0.65 --output DP-4 --scale 0.65x0.65 --pos 3840x1404
+
+#### Lenovo Laptop
+- name: Laptop Lenovo
+  monitors:
+  - edid: 00ffffffffffff0006af3d2300000000
+    polybar: top,bottom
+    termite: config.10
+  env:
+  - POLYBAR_WIRELESS=wlp2s0
+
+- name: Home Office Laptop Lenovo
+  monitors:
+  - edid: 00ffffffffffff0006af3d2300000000
+    primary: true
+    scale: 0.75x0.75
+    polybar: top
+  - edid: 00ffffffffffff0006af3d2312345678
+    relative: --left-of $1
+    polybar: top-wide,bottom
+  env:
+  - POLYBAR_WIRELESS=wlp2s0
+- name: Living Room Lenovo
+  monitors:
+  - edid: 00ffffffffffff0006af3d2300000000
+    primary: true
+    # position: 3840x700
+    position: 3264x595
+    polybar: top
+    termite: config
+  - edid: 00ffffffffffff0010acc0a04c445730
+    scale: 0.85x0.85
+    relative: --left-of $1
+    polybar: top-wide
+    termite: config.large
+  env:
+  - POLYBAR_WIRELESS=wlp2s0
+  xrandr:
+  - eDP-1 --primary
+  - HDMI-1 --left-of eDP-1
+  - eDP-1 --pos 3840x700
+
+defaults:
+- name: small
+  maxWidth: 1920
+  maxHeight: 1080
+  polybar: top,bottom
+- name: large
+  minWidth: 1921
+  minHeight: 1081
+  polybar: top-wide,bottom-wide
+  termite: config.large

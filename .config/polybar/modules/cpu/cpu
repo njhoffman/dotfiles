@@ -1,0 +1,38 @@
+[module/cpu]
+; %percentage% %percentage-sum% %percentage-cores% %percentage-core3%
+; <ramp-load> <ramp-coreload> <bar-load> <label>
+type = internal/cpu
+interval = 1
+label = %percentage:2%%
+;   
+; format-prefix = " "
+format-prefix = "%{T2} CPU %{T-}"
+format-prefix-foreground = #666
+format = <label> <ramp-coreload> <bar-load>
+ramp-coreload-spacing = 0
+ramp-coreload-0 = %{F#00FFcc}▁
+ramp-coreload-1 = %{F#00FFaa}▂
+ramp-coreload-2 = %{F#00FFaa}▃
+ramp-coreload-3 = %{F#99ff99}▄
+ramp-coreload-4 = %{F#99ff99}▅
+ramp-coreload-5 = %{F#ccff44}▆
+ramp-coreload-6 = %{F#ccff44}▇
+ramp-coreload-7 = %{F#cc4422}█
+ramp-coreload-8 = %{F#cc4422}█
+
+bar-load-indicator =
+bar-load-width = 20
+bar-load-foreground-0 = #555577
+bar-load-foreground-1 = #555599
+bar-load-foreground-2 = #5555aa
+bar-load-foreground-3 = #5555bb
+bar-load-foreground-4 = #5555cc
+bar-load-foreground-5 = #774488
+bar-load-foreground-6 = #aa3388
+bar-load-foreground-7 = #cc0022
+bar-load-foreground-8 = #ff0000
+bar-load-fill = ▐
+bar-load-empty = ▐
+bar-load-empty-foreground = #444444
+
+; vim:syn=dosini

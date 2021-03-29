@@ -1,0 +1,154 @@
+==Terminology==
+
+Context - Cluster + Namespace + User
+Namespace - Abstraction to support multiple virtual clusters on same physical cluster
+Cluster - A set of worker machines (nodes) than run containers, each cluster has at least one node
+Node - A worker machine (i.e. minikube)
+Pod - Smallest kubernetes unit, a set of running containers
+
+Deployment - An API object that manages a replicated application, typically by running Pods with no state.
+
+==Nodes==
+
+A Pod always runs on a Node. A Node is a worker machine in Kubernetes and may be either a virtual or a physical machine, depending on the cluster.
+Each Node is managed by the Master. A Node can have multiple pods, and the Kubernetes master automatically handles scheduling the pods across the Nodes in the cluster.
+The Master's automatic scheduling takes into account the available resources on each Node.
+
+Every Kubernetes Node runs at least:
+- Kubelet, a process responsible for communication between the Kubernetes Master and the Node; it manages the Pods and the containers running on a machine.
+- A container runtime (like Docker, rkt) responsible for pulling the container image from a registry, unpacking the container, and running the application.
+Containers should only be sc$eduled together in a single Pod if they are tightly coupled and need to share resources
+
+==Pods==
+A Pod is a group of one or more application containers (such as Docker or rkt) and includes shared storage (volumes), IP address and information about how to run them.
+
+Those resources include:
+- Shared storage, as Volumes
+- Networking, as a unique cluster IP address
+- Information about how to run each container, such as the container image version or specific ports to use
+
+A Pod models an application-specific "logical host" and can contain different application containers which are relatively tightly coupled.
+For example, a Pod might include both the container with your Node.js app as well as a different container that feeds the data to be published by the Node.js webserver.
+The containers in a Pod share an IP Address and port space, are always co-located and co-scheduled, and run in a shared context on the same Node.
+Pods are the atomic unit on the Kubernetes platform. When we create a Deployment on Kubernetes, that Deployment creates Pods with containers inside them (as opposed to creating containers directly).
+Each Pod is tied to the Node where it is scheduled, and remains there until termination (according to restart policy) or deletion.
+In case of a Node failure, identical Pods are scheduled on other available Nodes in the cluster.
+
+==Gooch Meeting==
+**spadash-system**
+**docs/**: read docs and add missing info
+*envs/base*: shouldn't have to modify
+*envs/dev*: ses (email templates), rds, (persistent storage)
+*envs/dev0*: eks files (non-persistent, meant to be rebuilt)
+envs/dev0/infra: initial setup
+env/dev0/kube: helmfile commands
+  - hf diff
+  - hf apply # -i apply to selectively pick
+  - hf -f helmfiles/api-secrets.yaml diff
+  - helm list
+
+{{{sh
+  aws eks update-kubeconfig --name spadash-dev0-eks
+  kubectl get ns
+
+  env/dev0/kube/charts # helm file configuration templates
+  bin/get-eks-kubeconfig
+  export KUBECONFIG=$OUTPUT
+  helm create
+  helm file apply
+  api.server/api.scheduler
+
+  source env/clusters/env
+  $AWS_PROFILE
+  $KUBECONFIG
+  # /Usrs/agooch/.kube/spadash-dev0-eks
+}}}
+
+# gin framework modeled after ruby framework 'martini'
+##
+
+# kubectl get/describe configmap api-database
+
+# EBS volumes are not immediate, ordering significant, mostly no ordering concerns
+# source ~/env/spadash/clusters/dev0.env
+# api namespace: kubectl get namespace
+# deployment creates the ReplicaSet, ReplicaSet manages actively running pods
+# cronjob is responsible for starting the pod resource
+# when the job is created it manages the pod to do it's actually work
+
+# TODO: look more into cronjob resources pipeline
+# templates/cronjob.yml
+# kubectl desrcribe cronjob create-payment-attempts
+# ## EVENTS section is especially useful for debugging
+
+# charts/templates/configmap.yaml : ssl connection, mounts cert into pod on the filesystem
+# mount the root certifications as a volume for convenience
+
+spadash-dev : AWS secrets manager for environment variables
+#helmfiles/values.yaml is non-secret variable information to build charts
+
+kube/helmfile.yaml : root helmfile (sets up multiple chart releases for multiple environments)
+                   : external-sercrets: creates kubernetes secrets from AWS secrets
+                   : traefik: ELB to traefik server to (router handles ingress, single load balancer)
+                   : api-secrets:
+
+{{{sh
+  kube/bin/dash kube # starts proxy
+  kubectl top pod / node # top view of cpu/ram being consumed
+  kubectl edit # runs apply automatically on save
+}}}
+
+- The Master is responsible for managing the cluster. The master coordinates all activities in your cluster, such as scheduling applications, maintaining applications' desired state, scaling applications, and rolling out new updates.
+- A node is a VM or a physical computer that serves as a worker machine in a Kubernetes cluster.
+  - Each node has a Kubelet, which is an agent for managing the node and communicating with the Kubernetes master.
+  - The node should also have tools for handling container operations, such as Docker or rkt.
+  - A Kubernetes cluster that handles production traffic should have a minimum of three nodes.
+- Masters manage the cluster and the nodes that are used to host the running applications.
+- When you deploy applications on Kubernetes, you tell the master to start the application containers.
+  - The master schedules the containers to run on the cluster's nodes.
+  - The nodes communicate with the master using the Kubernetes API, which the master exposes.
+  - End users can also use the Kubernetes API directly to interact with the cluster.
+
+
+==Helm Charts==
+{{{sh
+
+helm lint app-admin
+helm template app-admin
+helm template . | kubeval --strict
+helm install app-admin ./
+helm diff upgrade app-admin ./ --values ./values.yaml
+helm upgrade app-admin ./
+stern app-admin --context minikube
+stern app-admin -o json | jq .
+
+# use config-lint for custom rules for: terraform, kubernetes, yaml, json, csv
+#version: 1
+#description: Rules for Kubernetes spec files
+#type: Kubernetes
+#files:
+#  - "*.yaml"
+#rules:
+#  - id: MY_DEPLOYMENT_IMAGE_TAG
+#    severity: FAILURE
+#    message: Deployment must use a valid image tag
+#    resource: Deployment
+#    assertions:
+#      - every:
+#        key: spec.template.spec.containers
+#        expressions:
+#        - key: image
+#          op: starts-with
+#          value: "my-company.com/"#
+
+# 1. Get your 'admin' user password by running:
+  printf $(printf '\%o' `kubectl get secret --namespace default brawny-frog-jenkins -o jsonpath="{.data.jenkins-admin-password[*]}"`);echo
+# 2. Get the Jenkins URL to visit by running these commands in the same shell:
+#   NOTE: It may take a few minutes for the LoadBalancer IP to be available.
+#   You can watch the status of by running 'kubectl get svc -w brawny-frog-jenkins'
+  export SERVICE\_IP=$(kubectl get svc --namespace default brawny-frog-jenkins -o jsonpath='{.status.loadBalancer.ingress[0].ip}')
+  echo http://$SERVICE\_IP:8080/login
+# 3. Login with password and usernanme: admin
+
+}}}
+

@@ -1,0 +1,153 @@
+{
+    "border": "pixel",
+    "floating": "auto_off",
+    "layout": "splitv",
+    "percent": 0.271752450980392,
+    "type": "con",
+    "nodes": [
+        {
+            "border": "pixel",
+            "floating": "auto_off",
+            "layout": "splith",
+            "percent": 0.15395245992261,
+            "type": "con",
+            "nodes": [
+                {
+                    "border": "pixel",
+                    "current_border_width": 3,
+                    "floating": "auto_off",
+                    "geometry": {
+                       "height": 87,
+                       "width": 240,
+                       "x": 271,
+                       "y": 5
+                    },
+                    "name": "dclock",
+                    "percent": 0.5,
+                    "swallows": [
+                       {
+                        "class": "^Dclock$"
+                       }
+                    ],
+                    "type": "con"
+                },
+                {
+                    "border": "pixel",
+                    "current_border_width": 3,
+                    "floating": "auto_off",
+                    "geometry": {
+                       "height": 600,
+                       "width": 800,
+                       "x": 0,
+                       "y": 0
+                    },
+                    "name": "GLava",
+                    "percent": 0.5,
+                    "swallows": [
+                       {
+                       "class": "^GLava$"
+                       }
+                    ],
+                    "type": "con"
+                }
+            ]
+        },
+        {
+            "border": "pixel",
+            "floating": "auto_off",
+            "layout": "splith",
+            "percent": 0.435046987285793,
+            "type": "con",
+            "nodes": [
+                {
+                    "border": "pixel",
+                    "current_border_width": 3,
+                    "floating": "auto_off",
+                    "geometry": {
+                       "height": 1753,
+                       "width": 790,
+                       "x": 826,
+                       "y": 52
+                    },
+                    "name": "System Monitor",
+                    "percent": null,
+                    "swallows": [
+                       {
+                        "class": "^Gnome\\-system\\-monitor$"
+                       }
+                    ],
+                    "type": "con"
+                }
+            ]
+        },
+        {
+            "border": "pixel",
+            "current_border_width": 3,
+            "floating": "auto_off",
+            "geometry": {
+               "height": 536,
+               "width": 820,
+               "x": 0,
+               "y": 0
+            },
+            "name": "2:0.0 polybar",
+            "percent": 0.411000552791597,
+            "swallows": [
+               {
+                "class": "^Termite$"
+               }
+            ],
+            "type": "con"
+        }
+    ]
+}
+
+{
+    "border": "pixel",
+    "floating": "auto_off",
+    "layout": "splitv",
+    "percent": 0.364123774509804,
+    "type": "con",
+    "nodes": [
+        {
+            "border": "pixel",
+            "current_border_width": 3,
+            "floating": "auto_off",
+            "geometry": {
+               "height": 536,
+               "width": 820,
+               "x": 0,
+               "y": 0
+            },
+            "name": "3:0.0 layouts",
+            "percent": 1,
+            "swallows": [
+               {
+                "class": "^Termite$"
+               }
+            ],
+            "type": "con"
+        }
+    ]
+}
+
+{
+    "border": "pixel",
+    "current_border_width": 3,
+    "floating": "auto_off",
+    "geometry": {
+       "height": 536,
+       "width": 820,
+       "x": 0,
+       "y": 0
+    },
+    "name": "1:0.0 scripts",
+    "percent": 0.364123774509804,
+    "swallows": [
+       {
+        "class": "^Termite$"
+       }
+    ],
+    "type": "con"
+}
+

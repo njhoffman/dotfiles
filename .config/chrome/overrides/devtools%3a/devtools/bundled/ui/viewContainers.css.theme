@@ -1,0 +1,3 @@
+.expandable-view-title{background-color:var(--toolbar-bg-color);background-color: #222;}
+.expandable-view-title.expanded, .expandable-view-title:last-child{border-bottom-color:rgb(53 53 53);}
+.expandable-view-title:focus-visible{background-color:var(--focus-bg-color);}

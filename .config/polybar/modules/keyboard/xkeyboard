@@ -1,0 +1,10 @@
+[module/xkeyboard]
+type = internal/xkeyboard
+blacklist-0 = num lock
+format-prefix = " "
+format-prefix-foreground = #666
+label-layout = %layout%
+label-indicator-padding = 2
+label-indicator-background = ${colors.accent}
+
+; vim:ft=dosini

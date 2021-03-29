@@ -1,0 +1,4 @@
+include-file = ~/.config/polybar/modules/menu/app
+include-file = ~/.config/polybar/modules/menu/power
+
+; vim:ft=dosini

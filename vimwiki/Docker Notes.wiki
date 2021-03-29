@@ -1,0 +1,121 @@
+=Docker & ECS Basics=
+
+- Containers (standardized unit of software development) are created from read-only templates called images
+- Images are built from a Dockerfile that specifies all the components to include in the container.
+- Images are stored in a registry from which they can be downloaded and run on a cluster.
+- Task definitions for ECS is a JSON file that describes up to 10 containers to use, which launch types, ports opened, data volumes used, etc.
+- A task is an instantiation of a task definition within a cluster, a task scheduler is responsible for placing tasks within the cluster.
+- A cluster is a logical grouping of resources:
+  - if using the Fargete launch type ECS manages cluster resources
+  - if using the ec2 launch type, clusters are a group of container instances managed
+  - an ECS container instance is an EC2 instance that is running the ECs container agent which dowhnloads images from specified registry an druns those within a cluster
+
+=Docker Machines=
+
+Allows you to provision Docker machines in a variety of environments, including virtual machines that reside on local system, on cloud providers, or bare metal servers.
+To create a virtual machine, supply name of the driver you want to use to determine where the virtual machine is created (VirtualBox, generic for physical machines, cloud providers).
+  - Base operating system for VBox is boot2docker, cloud provider drivers use Ubuntu 12.04
+
+==Create/Provision a Dockerized AWS EC2 instance==
+
+{{{python
+  # install docker-machine and create ec2 instance "aws-sandbox"
+  base=https://github.com/docker/machine/releases/download/v0.16.0 &&
+    curl -L $base/docker-machine-$(uname -s)-$(uname -m) >/tmp/docker-machine &&
+    sudo install /tmp/docker-machine /usr/local/bin/docker-machine
+
+  docker-machine create --driver amazonec2 --amazonec2-open-port 8000 --amazonec2-region us-west-1 aws-sandbox
+  docker-machine active
+
+  # if not the active host
+  docker-machine env aws-sandbox
+  docker-machine ip <machine>
+  docker-machine inspect <machine>
+
+  # download and run hello-world image, ssh into machine and ls all containers
+  docker-machine ssh aws-sandbox
+  docker run hello-world
+  sudo docker container ls -a
+  exit
+
+  # copy directory
+  docker-machine scp -r -d competitive-insights-server/ aws-sandbox:/home/ubuntu/competitive-insights-server/
+  sudo apt-get install python3-pip
+  curl -sL https://deb.nodesource.com/setup_10.x | sudo -E bash - && sudo apt-get install nodejs -y
+  npm install -g pm2
+
+  # reset aws-sandbox as the active docker machine, remove machine
+  eval $(docker-machine env -u)
+  docker-machine rm
+
+  # do the same with nginx image
+  docker run -d -p 8000:80 --name webserver kitematic/hello-world-nginx
+}}}
+
+
+=Configuring ECS Clusters with ecs-cli=
+{{{python
+  # download and install ecs-cli
+  sudo curl -o /usr/local/bin/ecs-cli https://amazon-ecs-cli.s3.amazonaws.com/ecs-cli-linux-amd64-latest
+  sudo chmod +x /usr/local/bin/ecs-cli
+
+  # configure cluster and create profile
+  ecs-cli configure --cluster <cluster_name> --config-name <cluster_name> --region us-west-2
+  ecs-cli configure profile --default-launch-type <FARGATE/EC2> --access-key <AWS_KEY_ID> --secret-key <AWS_SECRET_KEY> --profile-name <profile_name>
+  ecs-cli configure profile default
+
+  # create cluster
+  ecs-cli up --keypair id_rsa --capability-iam --size 2 --instance-type t2.micro --cluster-config <cluster_name>
+
+  # deploy compose file to a cluster and view running containers
+  ecs-cli compose up --create-log-groupos --cluster-config <cluster_name>
+  ecs-cli ps
+
+}}}
+
+Pushing Images to ECR Registry: Requires ecr:GetAuthorizationToken permission to authenticate and push/pull any images
+{{{python
+
+  # authenticate docker client to the ecr registry, auth tokens are valid for 12 hours
+  aws ecr get-login --region region --no-include-email
+  # copy and paste output, similar to below
+  docker login -u AWS -p password https://aws_account_id.dkr.ecr.us-east-1.amazonaws.com
+
+  # create repository
+  aws ecr create repository --region us-west-2 --repository-name competitive-insights
+
+  # push docker image to aws repository
+  docker tag e9ae3c220b23 aws_account_id.dkr.ecr.region.amazonaws.com/my-web-app
+  #  docker tag competitive-insights 870032080098.dkr.ecr.us-west-2.amazonaws.com/competitive-insights
+  docker push aws_account_id.dkr.ecr.region.amazonaws.com/my-web-app
+}}}
+=Docker Installation on AWS EC2=
+
+{{{python
+  # create ec2 instance and ssh
+
+  sudo yum update -y
+  sudo amazon-linux-extras install docker
+  sudo service docker start
+  sudo usermod -a -G docker ec2-user
+  # log out and back for session to have docker group permissions
+  docker info
+}}}
+
+Amazon ECS task definitions use Docker images to launch containers on the container instances in the clusters.
+Create a docker image, test it locally or on EC2, push image to container registry (ECR or Docker Hub) to use in an ECS task definition.
+{{{python
+  touch Dockerfile
+  docker build -t hello-world .
+  docker images --filter reference=hello-world
+  docker run -t -i -p 80:80 hello-world
+
+  # push to ECR (get repositoryUri from first step)
+  aws ecr create-repository --repository-name hello-repository --region uswest-1
+  docker tag hello-world <repositoryUri> # aws_account_id.dkr.ecr.region.amazonaws.com/hello-repository
+  docker ecr get-login --no-include-email --region uswest-2
+  docker push <repositoryUri>
+  # cleanup
+  aws ecr delete-repository --repository-name hello-repository --region region --force
+}}}
+

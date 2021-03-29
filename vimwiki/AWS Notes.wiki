@@ -1,0 +1,89 @@
+
+ARN: Amazon Resource Name - uniquely identify AWS resources
+  arn:partition:service:region:account-id:resource
+  arn:partition:service:region:account-id:resourcetype/resource[:/]qualifier
+  arn:aws:elasticbeanstalk:us-east-1:123456789012:environment/My App/MyEnvironment
+  arn:aws:iam::123456789012:user/David
+  arn:aws:rds:eu-west-1:123456789012:db:mysql-db
+  arn:aws:s3:::my_corporate_bucket/exampleobject.png
+
+AWS Services Overview:
+  * CloudFront: distribute content to end users with low latency and high transfer speeds
+  * CloudWatch: provides monitoring for resources and applications
+  * CloudWatch Logs: centralize logs from systems, applications, and AWS services
+    * CloudTrail Logs: monitor calls made to cloudwatch logs api
+  * DynamoDB: key-value and document database that delivers single-digit millisecond performance at any scale; fully managed, multiregion, multimaster database with built-in security, backup and restore, and in-memory caching
+  * EC2 (Elastic Compute Cloud): provides resizable compute capacity in the cloud
+  * EB (Elastic Beanstalk): application container for deploying and managing applications
+  * ECS (EC2 Container Service): Run and manage docker containers across cluster of EC2 instances
+  * EFS (Elastic File System): File storage service for EC2 instances
+  * IAM (Identity and Access Management): control access to AWS services and resources
+  * Kinesis:
+    * KDA (Kinesis Data Analytics) -
+    * KDF (Kinesis Data Firehouse) -
+    * KDS (Kinesis Data Streams) -
+    * KVS (Kinesis Video Streams) -
+  * Lambda: service that runs code in response to events and automatically manages resolurces
+  * RDS (Relational Database Service): provides resizable capacity, automates hardware provisioning, database setup, patching, backups,
+    * database engines: Amazon Aurora, PostgreSQL, MySQL, MariaDB, Oracle Database, and SQL Server
+  * Route 53: DNS and Domain Name Registration serice
+  * S3 (Simple Storage Service): store and retrieve data
+  * VPC (Virtual Private Cloud): launch resources in a private, isolated cloud
+  * X-Ray (Distributed Tracing System): service that collects data about traced requests:
+    * SDK provides interceptors, client handlers, and an http client
+    * can also instrument calls to sql databases
+
+AWS CloudFormation:
+  * both sam and serverless use this service to create templates
+  * template defines application resources and manage application as a stack
+  * will provision instances with AMI id ami-<a-z0-9>
+  * common components of a stack:
+    * EC2 Instance -
+    * Auto Scaling group -
+    * Elastic Load Balancer -
+    * RDS instance -
+    * EBS volume
+    * Elastic IP
+
+CloudFormation Designer is a graphical UI for creating templates
+
+
+Updating CloudFormation:
+  * changes to running resources is done by updating stacks using change sets
+  * happens dynamically with needing to create new stack and delete old one
+  * edit template -> save locally/S3 bucket -> create, view, and execute the change set with cloud formation
+
+AWS IAM & Policy Types (in order of frequency)
+  * Access is managed by creating policies and attaching them to IAM identities (users, groups of users, roles) or AWS resources
+  * Identity-based policy: Attach managed and inline policies to IAM identities, grant permissions to an identity.
+    * Managed: Standalone identity-based policies that can be attached to multiple users, groups, and roles.
+      * AWS Managed Policy: Standalone policy (has its own ARN) created and administered by AWS to provide permissions for common use cases
+        * arn:aws:iam::aws:policy/IAMReadOnlyAccess, IAMFullAccess, AmazonEC2PowerUser, AmazonDynamoDBFullAccess
+      * Customer Managed Policy: Provides more precise control than AWS managed.
+    * Inline Policy: Policies that are embedded directly into a single user, group, or role (not recommended).
+  * Resource-based policy: Attach inline policy to resources, grant permissions to a principal entity (attach policy directly to the resource instead of using a role as a proxy).
+    * User copntinues to have access to resources in the trusted account at the same time they have access to the resource in the trusting account.
+    * Commonly used with S3, SNS, SQS,  and IAM role trust policies.
+  * Permissions boundaries: Use a managed policy as the permissions boundary for a non--resource IAM entity.
+    * Defines the maximum permissions that identity-based policies can grant to an entity, but does not grant permissions.
+    * Action must be allowed by both identity based and permissions based policy, an explicit deny in either overrides the allow.
+  * Organization Service Control Policy (SCPs): Define maximum permissions for account members of an organization.
+    * Limits permissions for identity or resource-based policies but does not grant them.
+  * Access Control Lists (ACLs): Control access to a resource from a defined principals. Similar to resource based policies, does not use JSon structure
+    * Cross-account permissions policy, cannot grant permissions to entities within the same account.
+  * Session Policies: To assume role of a federated user, session policies limit permissions that the role/user identity-based policies grant to the session.
+
+
+Common aws-cli commands:
+{{{bash
+  iam list-groups-for-user --user-name nick.hoffman --output table
+  iam list-attached-group-policies --group-name competitive_insights
+  iam get-group-policy --policy-name competitive_insights --group-name competitive_insights
+
+  rds create-db-instance --db-name competitive_insights --engine PostgreSQL \
+  --db-instance-identifier competitive-insights-dev --backup-retention-period 3 \
+  --db-instance-class db.t2.micro --allocated-storage 5 --publicly-accessible \
+  --master-username competitive_insights --master-user-password sambalytics
+}}}
+
+

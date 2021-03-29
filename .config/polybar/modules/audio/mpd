@@ -1,0 +1,147 @@
+[module/mpd]
+type = internal/mpd
+
+; Host where mpd is running (either ip or domain name)
+; Can also be the full path to a unix socket where mpd is running.
+host = 127.0.0.1
+port = 6600
+;password = mysecretpassword
+
+; Seconds to sleep between progressbar/song timer sync
+interval = 1
+
+;format-online = <label-time>  <bar-progress>  <label-song>  <icon-prev> <icon-stop> <toggle> <icon-next>  <icon-repeat> <icon-random>
+format-playing = %{T2}<label-time>%{T-}%{F#4f4}<toggle>%{F-} %{F#8ba}%{T2}<label-song>%{T-}%{F-}
+format-online = %{T2}<label-time>%{T-}<toggle> %{F#666}%{T2}<label-song>%{T-}
+format-online-spacing = 1
+; format-online-background = #ee333333
+format-online-underline = #cc333333
+format-online-padding = 0
+
+format-offline = <label-offline>
+format-offline-foreground = #777
+format-playing-foreground = #4f4
+
+; ♬ ♫ 𝄞 ♫ 🎜
+label-offline = ♫ offline
+label-song = ♫ %artist% - %title%
+label-song-maxlen = 35
+label-song-ellipsis = true
+;
+label-time = %elapsed%
+label-time-foreground = #777
+;
+icon-prev = 
+icon-stop = 
+icon-play = 
+icon-pause = 
+icon-next = 
+icon-random = 
+icon-repeat = 
+
+;icon-play = ⏵
+;icon-pause = ⏸
+;icon-stop = ⏹
+;icon-prev = ⏮
+;icon-next = ⏭
+;icon-seekb = ⏪
+;icon-seekf = ⏩
+;icon-random = 🔀
+;icon-repeat = 🔁
+;icon-repeatone = 🔂
+;icon-single = 🔂
+;icon-consume = ✀
+
+
+;toggle-on-foreground = ${colors.accent}
+;toggle-off-foreground = #777
+
+;bar-progress-width = 30
+;bar-progress-indicator = 
+;bar-progress-indicator-foreground = #bb
+;bar-progress-fill = ─
+;bar-progress-fill-foreground = #bb
+;bar-progress-fill-font = 3
+;bar-progress-empty = ─
+;bar-progress-empty-foreground = #44
+;bar-progress-empty-font = 3
+
+; format-online-overline = ${root.background}
+; format-online-underline = ${root.background}
+; format-offline = <label-offline>
+; label-offline = mpd is off
+;
+; toggle-on-foreground =
+; toggle-off-foreground = #55
+;
+; bar-progress-width = 45
+; bar-progress-format = %{+o +u}%fill%%{-o -u}%indicator%%{+o +u}%empty%%{-u -o}
+; ; bar-progress-indicator = |
+; bar-progress-indicator = █
+; bar-progress-indicator-foreground = #ff
+; bar-progress-indicator-font = 3
+; ; bar-progress-fill = ─
+; bar-progress-fill = █
+; bar-progress-fill-foreground = #bb
+; bar-progress-fill-font = 3
+; ; bar-progress-empty = ─
+; bar-progress-empty = ▒
+; bar-progress-empty-font = 3
+; bar-progress-empty-foreground = #44
+
+; Additional formatting
+; Available tags:
+;   <label-song> (default)
+;   <label-time>
+;   <bar-progress>
+;   <toggle> - gets replaced with <icon-(pause|play)>
+;   <toggle-stop> - gets replaced with <icon-(stop|play)>
+;   <icon-random>
+;   <icon-repeat>
+;   <icon-repeatone> (deprecated)
+;   <icon-single> - Toggle playing only a single song. Replaces <icon-repeatone>
+;   <icon-consume>
+;   <icon-prev>
+;   <icon-stop>
+;   <icon-play>
+;   <icon-pause>
+;   <icon-next>
+;   <icon-seekb>
+;   <icon-seekf>
+;format-online = <icon-prev> <icon-seekb> <icon-stop> <toggle> <icon-seekf> <icon-next>  <icon-repeat> <icon-random>  <bar-progress> <label-time>  <label-song>
+;format-playing = ${self.format-online}
+;format-paused = ${self.format-online}
+;format-stopped = ${self.format-online}
+
+; Available tags:
+;   <label-offline>
+; Default: ""
+;format-offline = <label-offline>
+
+; Available tokens:
+;   %artist%
+;   %album-artist%
+;   %album%
+;   %date%
+;   %title%
+; Default: %artist% - %title%
+
+; Available tokens:
+;   %elapsed%
+;   %total%
+; Default: %elapsed% / %total%
+;label-time = %elapsed% / %total%
+
+
+; Used to display the state of random/repeat/repeatone/single
+; Only applies if <icon-[random|repeat|repeatone|single]> is used
+;toggle-on-foreground = #ff
+;toggle-off-foreground = #55
+
+; Only applies if <bar-progress> is used
+;bar-progress-width = 45
+;bar-progress-indicator = |
+;bar-progress-fill = ─
+;bar-progress-empty = ─
+
+; vim:syn=dosini

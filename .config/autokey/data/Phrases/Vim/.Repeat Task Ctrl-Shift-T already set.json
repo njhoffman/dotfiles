@@ -1,0 +1,30 @@
+{
+    "type": "phrase",
+    "description": "Repeat Task (Ctrl-Shift-T already set)",
+    "modes": [],
+    "usageCount": 25,
+    "prompt": false,
+    "omitTrigger": false,
+    "matchCase": false,
+    "showInTrayMenu": false,
+    "abbreviation": {
+        "abbreviations": [],
+        "backspace": true,
+        "ignoreCase": false,
+        "immediate": false,
+        "triggerInside": false,
+        "wordChars": "[\\w]"
+    },
+    "hotkey": {
+        "modifiers": [
+            "<ctrl>",
+            "<shift>"
+        ],
+        "hotKey": "t"
+    },
+    "filter": {
+        "regex": "termite.Termite|Alacritty.Alacritty",
+        "isRecursive": false
+    },
+    "sendMode": "kb"
+}

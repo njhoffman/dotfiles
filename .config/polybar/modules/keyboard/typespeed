@@ -1,0 +1,10 @@
+[module/keyboard-typespeed]
+; interval = 60
+; KEYBOARD_ID=xinput list --short
+format-foreground = #79a
+type = custom/script
+exec = INTERVAL=20 ICON=" " METRIC=wpm $HOME/.config/polybar/scripts/keyboard-typespeed.sh
+label = %{T1}%output:0:15:%%{T-}
+tail = true
+
+; vim:ft=dosini

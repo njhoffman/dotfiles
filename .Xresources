@@ -1,0 +1,40 @@
+*foreground: #EFDFDB
+*background: #6B7887
+! *foreground = ${xrdb:color7}
+! *background = ${xrdb:color2}
+
+! Xft.dpi: 160
+
+! ------------------------------------------------------------------------------
+! Xft Font Configuration
+! ------------------------------------------------------------------------------
+
+Xft.autohint: 0
+Xft.lcdfilter: lcddefault
+Xft.hintstyle: hintslight
+Xft.hinting: 1
+Xft.antialias: 1
+Xft.rgba: rgb
+
+#include ".Xresources.d/_vars"
+#include ".Xresources.d/dclock"
+#include ".Xresources.d/rofi"
+#include ".Xresources.d/URxvt"
+
+! TODO: get rid of set of definitions
+! *background:            S_base03
+! *foreground:            S_base0
+! *fadeColor:             S_base03
+! *cursorColor:           #66ccff
+! *pointerColorBackground:S_base01
+! *pointerColorForeground:S_base1
+
+! ------------------------------------------------------------------------------
+! Dmenu configs
+! ------------------------------------------------------------------------------
+
+dmenu.selforeground:	    #d8dee9
+dmenu.background:	        #2e3440
+dmenu.selbackground:	    #bf616a
+dmenu.foreground:	        #d8dee9
+

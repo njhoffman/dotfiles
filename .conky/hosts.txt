@@ -1,0 +1,25 @@
+[thanatos] (laptop)
+
+battery (V) => /sys/class/hwmon/hwmon2/in0_input
+pch_skylake temp => /sys/class/hwmon/hwmon3/temp1_input
+iwlifi -> /sys/class/hwmon/hwmon5/temp1_input
+
+temperature near cpu => /sys/class/hwmon/hwmon1/temp1_input
+cpu temps =>
+  overall => /sys/class/hwmon/hwmon6/temp1_input - temp5_input
+  core 0 => /sys/class/hwmon/hwmon6/temp1_input - temp5_input
+  core 1 => /sys/class/hwmon/hwmon6/temp1_input - temp5_input
+  core 2 => /sys/class/hwmon/hwmon6/temp1_input - temp5_input
+  core 3 => /sys/class/hwmon/hwmon6/temp1_input - temp5_input
+
+
+paste <(cat /sys/class/thermal/thermal_zone*/type) <(cat /sys/class/thermal/thermal_zone*/temp) | column -s $'\t' -t
+INT3400 Thermal  20000
+SEN1             53000
+SEN2             51000
+SEN3             54000
+SEN4             57000
+B0D4             49000
+pch_skylake      71500
+x86_pkg_temp     50000
+
