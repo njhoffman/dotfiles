@@ -1,10 +1,10 @@
 #!/bin/bash
-export TERMINAL="termite"
+export TERMINAL="alacritty"
 
 WHEREAMI=$(cat /tmp/whereami)
 
 i3-sensible-terminal \
+  --working-directory="$WHEREAMI" \
   --directory="$WHEREAMI" \
   --title "__scratchpad__" \
-  --exec "$SHELL -ic tmux" \
-  --config="$HOME/.config/termite/config.08"
+  --config-file="$HOME/.config/alacritty/alacritty.cfg"

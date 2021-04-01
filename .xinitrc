@@ -133,9 +133,9 @@ xset s off
 xset -dpms
 # wal -R
 # synchronize clipboards
-# autocutsel -fork -selection CLIPBOARD
-# autocutsel -fork -selection PRIMARY
-#
+autocutsel -fork -selection CLIPBOARD
+autocutsel -fork -selection PRIMARY
+
 # only unlock keyring once per session
 gnome-keyring-daemon
 

@@ -41,7 +41,8 @@
 
   # sync primary buffer with clipboard
   # works in conunciton with tmux buffer to xsel --clipboard
-  exec --no-startup-id "xsel -i --primary"
+  # exec --no-startup-id "xsel -i --clipboard"
+  # exec --no-startup-id "xsel -i --primary"
 
   # load up terminal, chrome and conky to be used as pop-up scratchpads
   # exec --no-startup-id "google-chrome --app=http://www.google.com"

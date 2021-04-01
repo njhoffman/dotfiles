@@ -1,7 +1,12 @@
+# prettier-ignore
+
 shell:
-  program: /usr/bin/zsh
+  program: /usr/local/bin/tmux
   args:
-    - --login
+   - new
+   - -A
+   - -s main
+
 # Font configuration
 font:
   normal:
@@ -40,41 +45,44 @@ colors:
   # COLORSCHEME: horizon-dark.yaml
   # Primary colors
   primary:
-    background: '0x000000'
-    foreground: '0x9898a8'
+    background: '#000000'
+    foreground: '#a9a9b9'
 
   # Normal colors
   normal:
-    # Bright colors
-    black: '0x464646'
-    red: '0xa04658'
-    green: '0x22bb99'
-    yellow: '0xcba397'
-    blue: '0x5192bd'
-    magenta: '0x6a6bcf'
-    cyan: '0x60a1cc'
-    white: '0xd5d8da'
+    black:   '#444444'
+    red:     '#a03638'
+    green:    '#3fd4a7'
+    # green:   '#22bb99'
+    yellow:  '#bba397'
+    blue:    '#3182ad'
+    magenta: '#6a7bef'
+    cyan:    '#60b1cc'
+    white:   '#c5c8ca'
 
   # Bright colors
   bright:
-    black: '0x737475'
-    red: '0xdc6a78'
-    green: '0x22bb99'
-    yellow: '0xdbb397'
-    blue: '0x6192df'
-    magenta: '0x7e7bef'
-    cyan: '0x80d1f3'
-    white: '0xd5d8da'
+    black:   '#666666'
+    red:     '#dc6a78'
+    # green:   '#33ccaa'
+    green:    '#4fcfb7'
+    yellow:  '#dbb397'
+    blue:    '#71a2df'
+    magenta: '#7a8bff'
+    cyan:    '#80d1f3'
+    white:   '#d5d8da'
 
+  # Dim colors
   dim:
-    black: '#000000'
-    red: '#8c4346'
-    green: '#22aa88'
-    yellow: '#97822e'
-    blue: '#41829d'
-    magenta: '#6a6bcf'
-    cyan: '#397eaa'
-    white: '#9a9a9a'
+    black:   '#222222'
+    red:     '#8c4346'
+    # green:   '#22aa88'
+    green:   '#4fd4a7'
+    yellow:  '#97822e'
+    blue:    '#31829d'
+    magenta: '#5e4bdf'
+    cyan:    '#398eba'
+    white:   '#ababab'
 
   # cursor:
   #   text: '0xf1c1c1'

@@ -1,6 +1,6 @@
 #!/bin/bash
 
-export TERMINAL="termite"
+export TERMINAL="alacritty"
 export WHEREAMI=$(cat /tmp/whereami)
 export _TMUX_LAUNCH=1
 
@@ -43,18 +43,25 @@ if [[ -n "$MON_CFG" && -n "$curr_monitor" ]]; then
     port="${monitor#*port=}"
     port="${port%%;*}"
     if [ "$curr_monitor" == "$port" ]; then
-      termite_config="${monitor#*termite=}"
-      termite_config="${termite_config%%;*}"
+      if [[ "$TERMINAL" == "termite" ]]; then
+        config="${monitor#*termite=}"
+        config="${termite_config%%;*}"
+        i3-sensible-terminal \
+          --directory="$WHEREAMI" \
+          --exec "$SHELL -ic tmux" \
+          --config="$config"
+      else
+        # alacritty opens tmux from it's config file setting
+        config="$HOME/.config/alacritty/alacritty.yml"
+        i3-sensible-terminal \
+          --working-directory="$WHEREAMI" \
+          --config-file="$config"
+      fi
       typeset -g POWERLEVEL9K_INSTANT_PROMPT=quiet
-      i3-sensible-terminal \
-        --directory="$WHEREAMI" \
-        --exec "$SHELL -ic tmux" \
-        --config="$HOME/.config/termite/$termite_config"
     fi
   done
   exit 0
 else
-  echo "DOING IT !!"
   i3-sensible-terminal --directory="$WHEREAMI" # --exec="$cmd"
 fi
 

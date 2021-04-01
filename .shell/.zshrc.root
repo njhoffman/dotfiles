@@ -4,15 +4,19 @@
 # zmodload zsh/zprof
 
 START=$(date +%s.%N)
+
+# load password keychain
+keychain id_rsa --agents ssh
+
 #
 # Enable Powerlevel10k instant prompt. Should stay close to the top of ~/.zshrc.
 # Initialization code that may require console input (password prompts, [y/n]
 # confirmations, etc.) must go above this block, everything else may go below.
 if [[ -r "${XDG_CACHE_HOME:-$HOME/.cache}/p10k-instant-prompt-${(%):-%n}.zsh" ]]; then
-  # source "${XDG_CACHE_HOME:-$HOME/.cache}/p10k-instant-prompt-${(%):-%n}.zsh"
+  source "${XDG_CACHE_HOME:-$HOME/.cache}/p10k-instant-prompt-${(%):-%n}.zsh"
 fi
 
-source ~/.shell/.zshrc.highlights
+# source ~/.shell/.zshrc.highlights
 # ~/bin/shellstart
 # echo -ne "\e[5 q"
 
@@ -27,5 +31,3 @@ print -P "%F{247} Loaded scripts in %F{255}${DIFF}s%f"
 
 export _SHELL_INITIALIZED=1
 # zprof > ~/.zshprof
-
-[ -f ~/.fzf.zsh ] && source ~/.fzf.zsh

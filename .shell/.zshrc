@@ -8,48 +8,42 @@ shell_dir="$home_dir/.shell"
 # set -u => kills program right away when there's an unreferenced variable
 source "$shell_dir/.zshrc.init"
 
-# if [[ -z "$TMUX" && -n "$_TMUX_LAUNCH" ]]; then
-#   # TODO: only load minimal what's needed for appropriate tmux load
-#   tmux
-# fi
-
 # export _SHELL_INITIALIZED=1
 # print -P "  $(_clr 247 "Initializing zsh from from $shell_dir")"
 #{{{ load external files
 
-  load_file "$shell_dir/.zshrc.funcs"
 
   # shared exports between bash and zsh'
   load_file "$shell_dir/exports.sh"
-
   # zsh specific exports, options, functions
-  load_file "$shell_dir/.zshrc.exports"
-  load_file "$shell_dir/.zshrc.options"
-
-  load_file "$home_dir/.zshrc.local"
+  load_file "$shell_dir/exports.zsh"
+  load_file "$shell_dir/options.zsh"
+  load_file "$shell_dir/highlights.zsh"
   load_file "$shell_dir/powerlevel10k/p10k.zsh"
 
+  [ -f "$home_dir/local.zsh" ] && load_file "$home_dir/local.zsh"
+
+  # load_file "$shell_dir/zsh-plugins.zsh"
+  load_file "$shell_dir/plugins.zsh"
+
+  load_file "$shell_dir/funcs.zsh"
   # shared aliases between bash and zsh
   load_file "$shell_dir/aliases.sh"
   load_file "$shell_dir/aliases.colorize.sh"
-  # load_file "$shell_dir/zsh-plugins.zsh"
-  load_file "$shell_dir/.zshrc.plugins.zinit"
-  load_file "$shell_dir/.zshrc.binding"
+  load_file "$shell_dir/binding.zsh"
 #}}}
-
-source /home/nicholas/.config/broot/launcher/bash/br
 
 # fasd
 eval "$(fasd --init auto)"
 # TODO: make nvim function that loads exact match, fzf if none found
-# alias a='fasd -a'        # any
-# alias s='fasd -si'       # show / search / select
-# alias d='fasd -d'        # directory
-# alias f='fasd -f'        # file
-# alias sd='fasd -sid'     # interactive directory selection
-# alias sf='fasd -sif'     # interactive file selection
-# alias z='fasd_cd -d'     # cd, same functionality as j in autojump
-# alias zz='fasd_cd -d -i' # cd with interactive selection
+alias a='fasd -a'        # any
+alias s='fasd -si'       # show / search / select
+alias d='fasd -d'        # directory
+alias f='fasd -f'        # file
+alias sd='fasd -sid'     # interactive directory selection
+alias sf='fasd -sif'     # interactive file selection
+alias z='fasd_cd -d'     # cd, same functionality as j in autojump
+alias zz='fasd_cd -d -i' # cd with interactive selection
 
 [ -d "$HOME/bin" ] && export PATH="$HOME/bin:$PATH"
 [ -d "$HOME/bin/colors" ] && export PATH="$HOME/bin/colors:$PATH"

@@ -2,10 +2,11 @@
 
 [ -f ~/.fzf.zsh ] && load_file ~/.fzf.zsh
 
+# customized widgets
 source $HOME/bin/fzf/widgets/fzfp-widgets
 source $HOME/bin/fzf/widgets/fzf-widgets
 # better zsh completion (where is it from)?
-source $HOME/.shell/fzf-zsh-completion.sh
+# source $HOME/.shell/fzf-zsh-completion.sh
 
 
 # export FZF_DEFAULT_COMMAND="command fdfind --hidden --follow --type d --color never ."
@@ -88,8 +89,13 @@ export FZF_ALT_C_COMMAND="$fzf_command --type d $fzf_exclude"
 # ALT_C_OPTS, CTRL_R_OPTS, CTRL_T_OPTS
 export FZF_TMUX=1
 # default -w 50%
-export FZF_TMUX_OPTS="-p"
+export FZF_TMUX_OPTS="-p -w80"
 
-export FZF_COMPLETION_TRIGGER=''
-# export FZF_COMPLETION_TRIGGER='**'
+fzf-direct-completion() {
+  FZF_COMPLETION_TRIGGER= fzf-completion
+}
+zle -N fzf-direct-completion
+# export FZF_COMPLETION_TRIGGER=''
+export FZF_COMPLETION_TRIGGER=' '
 
+alias fzf="fzf-tmux"

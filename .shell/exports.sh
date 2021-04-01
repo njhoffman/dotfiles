@@ -153,6 +153,7 @@ export KUBECONFIG=$KUBECONFIG:~/.kube/minikube:~/.kube/spadash-dev0-eks:~/.kube/
 # export DOTBARE_TREE="$HOME/.myworld"
 export DOTBARE_DIR="$HOME/.cfg"
 export DOTBARE_TREE="$HOME"
+# export DOTBARE_FZF_DEFAULT_OPTS=" -w80 --preview-window=right:50%"
 
 # tmux
 [[ -z "$_CFG_TMUX_MAIL" ]] && export _CFG_TMUX_MAIL=1

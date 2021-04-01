@@ -377,7 +377,8 @@ syn region  zshSubst            matchgroup=zshSubstDelim start='\${' skip='\\}'
                                 \ end='}' contains=@zshSubst,zshBrackets,zshQuoted,zshString fold
 exe 'syn region  zshOldSubst    matchgroup=zshSubstDelim start=/`/ skip=/\\[\\`]/ end=/`/ contains='.s:contained. ',zshOldSubst fold'
 
-syn sync    minlines=50 maxlines=90
+syn sync    minlines=200
+syn sync    maxlines=500
 syn sync    match zshHereDocSync    grouphere   NONE '<<-\=\s*\%(\\\=\S\+\|\(["']\)\S\+\1\)'
 syn sync    match zshHereDocEndSync groupthere  NONE '^\s*EO\a\+\>'
 

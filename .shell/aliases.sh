@@ -4,10 +4,15 @@ filepath=$(readlink -f $0)
 alias refresh_aliases="source $filepath"
 
 alias fuck='sudo $(history -p \!\!)'
+alias _='sudo'
+
+alias dots=dotbare
+alias bindkeys-list="source ~/bin/bindkeys-list"
+alias completions-list="source ~/bin/completions-list"
 
 # directory listing
 alias ls="LC_COLLATE=C ls --color=auto"
-alias l='LC_COLLATE=C colorls --group-directories-first --almost-all -1'
+alias l='LC_COLLATE=C colorls --group-directories-first --almost-all --git-status'
 alias ll='LC_COLLATE=C colorls --group-directories-first --almost-all --long --git-status' # detailed list view
 # alias l='exa --icons -b --git -1'
 # alias ll="exa -a -l -@ -F --icons --color-scale -b -g --extended --git"
@@ -23,8 +28,10 @@ alias lp_containers="loop \"dockerps -a\""
 # alias lp_images="loop \"docker images | xcols docker_images\""
 alias lp_images="loop \"dockerimages\""
 alias lp_images_all="loop \"dockerimages -a\""
-alias lp_netstat="loop \"sudo netstat -4 -tlnp | sort | xcols netstat\""
-alias lp_netstat_all="loop \"sudo netstat -4 -tulnp | sort | xcols netstat\""
+# alias lp_netstat="loop \"sudo netstat -4 -tlnp | sort | xcols netstat\""
+# alias lp_netstat_all="loop \"sudo netstat -4 -tulnp | sort | xcols netstat\""
+alias lp_netstat="loop \"grc -es --colour=on -c conf.netstat netstat -4 -tlnp | sort\""
+alias lp_netstat_all="loop \"grc -es --colour=on -c conf.netstat sudo netstat -4 -tulnp | sort\""
 alias lp_ps="loop \" ps u | xcols ps\""
 alias lp_psx="loop \" ps ux | xcols ps\""
 alias lp_psa="loop \" ps aux | xcols ps\""
@@ -34,12 +41,6 @@ alias scale="scale_func"
 alias backlight="sudo chmod g=rw,o=rw /sys/class/backlight/intel_backlight/brightness"
 
 # directory navigation
-if [[ -x "$HOME/bin/gotcompletion/o" ]]; then
-  alias g=". $HOME/bin/goto"
-  alias gv=". $HOME/bin/goto vim"
-  alias gr=". $HOME/bin/goto run"
-  alias gt=". $HOME/bin/goto tmux"
-fi
 
 alias cd2="cd ../../"
 alias cd3="cd ../../../"

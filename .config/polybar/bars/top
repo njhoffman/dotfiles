@@ -37,11 +37,13 @@ padding-right = 2
 module-margin-left = 2
 module-margin-right = 1
 
-font-0 = "DejaVuSansMono Nerd Font:size=9;2"
-font-1 = "DejaVuSansMono Nerd Font:size=7;2"
-font-2 = "DejaVuSansMono Nerd Font:size=10;2"
-font-3 = "Noto Color Emoji:scale=11;2"
+font-0 = "DejaVuSansMono Nerd Font:size=7;2"
+font-1 = "DejaVuSansMono Nerd Font:size=8;2"
+font-2 = "DejaVuSansMono Nerd Font:size=9;2"
+font-3 = "Noto Color Emoji:scale=10;2"
 font-4 = "PowerlineSymbols:scale=11;2"
+font-5 = "Weather Icons:size=9;2"
+font-6 = "Material Icons:size=9;2"
 
 modules-left = power-menu i3 keyboard pulseaudio mpd
 modules-center = xwindow

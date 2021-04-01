@@ -4,7 +4,7 @@ Plug 'svermeulen/vim-easyclip'
 
 " exchange between clipboard and tmux buffers
 Plug 'roxma/vim-tmux-clipboard'
-
+let g:yankround_dir="~/.vim/yanks"
 Plug 'LeafCage/yankround.vim'
 " Plug 'maxbrunsfeld/vim-yankstack'
 " set <m-p> = ^[p   " rotate yanks forward

@@ -118,7 +118,7 @@ nnoremap <silent> ZZ zR
 nmap <M-CR> i<CR><Esc>O
 
 " source .vimrc
-nnoremap <Leader>r :so $HOME/.config/nvim/init.vim<CR>:echo 'Reloaded $HOME/.vimrc'<CR>
+nnoremap <Leader>r :so $HOME/.config/nvim/init.vim<CR>:echo 'Reloaded $HOME/.nvim/init.vim'<CR>
 
 " remap join lines to ,j (slow for some reason)
 " nnoremap <silent> <Leader>j J

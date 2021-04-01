@@ -20,7 +20,7 @@ set sidescrolloff=10                 " keep at least 5 lines left/right
 set omnifunc=syntaxcomplete#Complete " turn on omni-completion (C-N or C-P to navigate)
 set completeopt=menuone,preview		 	 " omnicomplete inserts longest common text of all matches instead of 1st match
 set previewheight=10                 " max lines for preview height
-set clipboard+=unnamed               " use system clipboard
+set clipboard=unnamedplus           " use system clipboard
 set nofoldenable                     " no folding
 set foldmethod=indent                " speed up syntax highlighting
 set confirm                          " ask to write unsaved changes instead of halting with warning
@@ -43,7 +43,13 @@ set encoding=utf-8                   " vim bad at detecting encoding, if no BOM 
 set path='.,src,node_modules         " paths to look for files when using gf command
 set suffixesadd=.js,.jsx             " suffix to apply to files when using gf command
 set backspace=start,eol,indent       " make backspace work like it should
-                                     " set LANG=en_US.utf-8 env variable as an alternative
+
+set sessionoptions-=buffers
+set sessionoptions-=help
+set sessionoptions-=tabpages
+set sessionoptions-=buffers
+set sessionoptions-=options
+
 set ttyfast                          " we have a fast terminal
 " set autowriteall						     	 " automatically save changes to buffer before hiding
 set autoread   								       " autoload files that changed outside of vim

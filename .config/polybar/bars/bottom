@@ -19,16 +19,16 @@ module-margin-left = 2
 module-margin-right = 1
 
 font-0 = "DejaVuSansMono Nerd Font:size=7;2"
-font-1 = "DejaVuSansMono Nerd Font:size=7;2"
+font-1 = "DejaVuSansMono Nerd Font:size=8;2"
 font-2 = "DejaVuSansMono Nerd Font:size=9;2"
 font-3 = "Noto Color Emoji:scale=10;2"
-font-4 = "PowerlineSymbols:scale=10;2"
-font-5 = "Weather Icons:size=7;2"
+font-4 = "PowerlineSymbols:scale=11;2"
+font-5 = "Weather Icons:size=9;2"
 font-6 = "Material Icons:size=9;2"
 
 modules-left = power-menu i3 xbacklight power-usage network-wireless-bottom weather
 modules-center = keyboard-typespeed processes-counter processes-total
-modules-right = memory cpu battery-bottom date
+modules-right = memory cpu bottom date
 # TODO: smaller date on right
 wm-restack = ${bar/top.wm-restack}
 tray-position = none

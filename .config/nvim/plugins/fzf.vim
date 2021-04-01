@@ -344,6 +344,12 @@ inoremap <expr> <c-x><c-f> fzf#vim#complete#path('rg --files')
 " Word completion with custom spec with popup layout option
 inoremap <expr> <c-x><c-k> fzf#vim#complete#word({'window': { 'width': 0.2, 'height': 0.9, 'xoffset': 1 }})
 
+command! Dots call fzf#run(fzf#wrap({
+  \ 'source': 'dotbare ls-files --full-name --directory "${DOTBARE_TREE}" | awk -v home="${DOTBARE_TREE}/" "{print home \$0}"',
+  \ 'sink': 'e',
+  \ 'options': [ '--multi', '--preview', 'cat {}' ]
+  \ }))
+
 " let g:fzf_command_prefix = 'Fz'
 " let g:fzf_commands_expect = 'alt-enter'
 " let g:fzf_history_dir = '~/.local/share/fzf-history'
