@@ -1,11 +1,11 @@
 # prettier-ignore
 
-shell:
-  program: /usr/local/bin/tmux
-  args:
-   - new
-   - -A
-   - -s main
+# shell:
+#   program: /usr/local/bin/tmux
+#   args:
+#    - new
+#    - -A
+#    - -s main
 
 # Font configuration
 font:
