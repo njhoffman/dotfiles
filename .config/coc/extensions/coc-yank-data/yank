@@ -1,0 +1,3119 @@
+86d2c9bd06e87db31fd16f0b4040928c|file:///home/nicholas/.shell/plugins.zsh|124|1|V|zsh
+	    # Install fzf
+90bf19f5a2377fe4868bb7704fcd6c9f|file:///home/nicholas/.shell/plugins.zsh|150|1|V|zsh
+	    # go install github.com/junegunn/fzf@latest
+fceae62967a72d0da76fc6acc561da96|file:///home/nicholas/.shell/plugins.zsh|150|1|V|zsh
+	    zi0b has'fzf' pick'completion.zsh' src'key-bindings.zsh'
+	    zinit light $HOME/.fzf/shell
+4f986760f06a5823869a4263b73c8ab7|file:///home/nicholas/.shell/plugins.zsh|124|5|V|zsh
+	    # Install fzf or fzfy
+8dced1fe7f0d48b0cb13e6aba63da6c6|file:///home/nicholas/.shell/plugins.zsh|126|1|V|zsh
+	    # zinit ice from"gh-r" as"command"
+2d7b87e0f8e860f4fffc2c10ee9a85f3|file:///home/nicholas/.shell/plugins.zsh|127|5|V|zsh
+	    # zinit load junegunn/fzf-bin#
+df5b679f5bcb5ade2fcff78f904b7a18|file:///home/nicholas/.shell/plugins.zsh|147|17|v|zsh
+	ZoeFiri/fz
+	
+520f525a270c95f9646f49db9a2548fd|file:///home/nicholas/.shell/plugins.zsh|127|3|V|zsh
+	  # Commands {{{
+7890508adb2778c1ea2dca105f1acfad|file:///home/nicholas/.shell/plugins.zsh|177|1|V|zsh
+	  zi_program has'weechat' pick'chattiest-channels'
+	  zinit light $GHQ_ROOT/git.sr.ht/~seirdy/chattiest-channels
+	
+fd4a9faa27f5d1576dd6bef86b6266a6|file:///home/nicholas/.shell/plugins.zsh|185|1|V|zsh
+	
+	  if [ -n "$WAYLAND_DISPLAY" ]; then
+	    zi_program pick'farge'
+	    zinit light 'sdushantha/farge'
+	
+	    zi_program has'imv' pick'kunst'
+	    zinit light $GHQ_ROOT/git.sr.ht/~seirdy/kunst
+	
+	    zi_program has'grim' pick'grimshot'
+	    zinit light $GHQ_ROOT/github.com/swaywm/sway/contrib
+	
+	  fi
+4fa9a93b9e57d5754f3a470c66dabe55|file:///home/nicholas/.shell/plugins.zsh|202|1|V|zsh
+	
+	  zi0a has'nnn'
+	  zinit snippet $GHQ_ROOT/github.com/jarun/nnn/misc/quitcd/quitcd.bash_zsh
+eabf7b037a3b43ed5829b80a6398902e|file:///home/nicholas/.shell/plugins.zsh|185|1|V|zsh
+	
+	  zi_program has'fzf'
+	  zinit light denisidoro/navi
+	
+	  zi_program has'fzf' pick'fzf-tmux'
+	  zinit light $GOPATH/src/github.com/junegunn/fzf/bin
+	
+8622a91751f8e0f06a637a22b5d3c1b1|file:///home/nicholas/.shell/plugins.zsh|185|1|V|zsh
+	
+	  zi_program has'fzf'
+	  zinit light denisidoro/navi
+	
+	  zi_program has'fzf' pick'fzf-tmux'
+	  zinit light $GOPATH/src/github.com/junegunn/fzf/bin
+590dff004975307a86715331c0c5a82d|file:///home/nicholas/.shell/plugins.zsh|174|1|V|zsh
+	  zi_program has'fzf' pick'fzfp'
+	  zinit light Seirdy/stpv
+	
+	  zi_program has'fzf'
+	  zinit light denisidoro/navi
+	
+	  zi_program has'fzf' pick'fzf-tmux'
+	  zinit light $GOPATH/src/github.com/junegunn/fzf/bin
+	
+b444ee7df06ecb213f0e32438f1076fd|file:///home/nicholas/.shell/plugins.zsh|73|1|V|zsh
+	  zi_program has'fzf' pick'fzfp'
+	  zinit light Seirdy/stpv
+	
+	  zi_program has'fzf'
+	  zinit light denisidoro/navi
+	
+	  zi_program has'fzf' pick'fzf-tmux'
+	  zinit light $GOPATH/src/github.com/junegunn/fzf/bin
+290f966bdf5785ee8aa001afb10abdfc|file:///home/nicholas/.shell/plugins.zsh|72|1|V|zsh
+	
+	  zi_program has'fzf' pick'fzfp'
+	  zinit light Seirdy/stpv
+	
+	  zi_program has'fzf'
+	  zinit light denisidoro/navi
+	
+	  zi_program has'fzf' pick'fzf-tmux'
+	  zinit light $GOPATH/src/github.com/junegunn/fzf/bin
+ea25451de5202c1a662500cc41ba1a48|file:///home/nicholas/.shell/plugins.zsh|194|2|V|zsh
+	  # }}}
+833d699f3b664ba86015d87146dc6670|file:///home/nicholas/.shell/plugins.zsh|172|9|V|zsh
+	  zinit snippet 'https://github.com/DanielG/dxld-mullvad/blob/master/am-i-mullvad.sh'
+7d4ccffb06a567a0f4bfef253a7b6ca7|file:///home/nicholas/.shell/plugins.zsh|162|1|V|zsh
+	  # zi_program has'podman' pick'toolbox' src'profile.d/toolbox.sh' atclone"fd -t f -e '.1.md' -x sh -c 'go-md2man -in {} -out $HOME/.local/man/man1/\$(basename {} .md)' && mkdir -p $TOOLBOX_PROFILE_DIR && cp profile.d/toolbox.sh $TOOLBOX_PROFILE_DIR" atpull'%atclone'
+	  # zinit light containers/toolbox
+	
+3b1a4ec65f3ae790f88579af63e4ca17|file:///home/nicholas/.shell/plugins.zsh|265|1|V|zsh
+	  FZF_WIDGET_TMUX=1
+	  FZF_WIDGET_OPTS[fzf-select-widget]='-p 70%'
+	
+	  zinit light ytet5uy4/fzf-widgets
+21f803a7af567a8646056a3bc85678b8|file:///home/nicholas/.shell/plugins.zsh|305|1|V|zsh
+	    # composer
+	    # git
+	    #   Commit-ish (branch, checkout, cherry-pick, diff, log, merge, pull, rebase, reset, revert, show, and switch)
+	    #   Commit messaees (commit)
+	    #   Files (add, checkout, commit, diff, reset, restore, rm, and show)
+	    #   Remotes (pull)
+	    # kubectl
+	    #   Annotations (annotate)
+	    #   Containers (exec, logs and set)
+	    # Files (apply)
+	    # Labels (label)
+	    # Nodes (cordon, drain, and uncordon)
+	    # Ports (port-forward)
+	    # Resources (annotate, autoscale, create, delete, describe, edit, exec, explain, expose, get, label, logs, patch, rollout, set and taint)
+	    # Taints (taint)
+	    # make
+	    # npm
+	    # systemctl
+	    # yarn Scripts (run, workspace, and workspace <workspace>)
+	    # docker
+	    # Containers (attach, commit, cp, diff, exec, export, inspect, kill, logs, pause, ports, rename, restart, rm, start, stats, stop, update, unpause, and wait)
+	    # Files (cp)
+	    # Images (create, history, inspect, rmi, run, save, tag)
+	    # Networks (inspect)
+	    # Repositories (push)
+	    # Volumes (inspect)
+2d229cd2ebf602a4bb8109ae9d147824|file:///home/nicholas/.shell/plugins.zsh|302|1|V|zsh
+	  # composer
+	  # git
+	  #   Commit-ish (branch, checkout, cherry-pick, diff, log, merge, pull, rebase, reset, revert, show, and switch)
+	  #   Commit messaees (commit)
+	  #   Files (add, checkout, commit, diff, reset, restore, rm, and show)
+	  #   Remotes (pull)
+	  # kubectl
+	  #   Annotations (annotate)
+	  #   Containers (exec, logs and set)
+	  # Files (apply)
+	  # Labels (label)
+	  # Nodes (cordon, drain, and uncordon)
+	  # Ports (port-forward)
+	  # Resources (annotate, autoscale, create, delete, describe, edit, exec, explain, expose, get, label, logs, patch, rollout, set and taint)
+	  # Taints (taint)
+	  # make
+	  # npm
+	  # systemctl
+	  # yarn Scripts (run, workspace, and workspace <workspace>)
+	  # docker
+	  # Containers (attach, commit, cp, diff, exec, export, inspect, kill, logs, pause, ports, rename, restart, rm, start, stats, stop, update, unpause, and wait)
+	  # Files (cp)
+	  # Images (create, history, inspect, rmi, run, save, tag)
+	  # Networks (inspect)
+	  # Repositories (push)
+	  # Volumes (inspect)
+d93ec0561b2e2e6bbf97ef161506d721|file:///home/nicholas/.shell/plugins.zsh|244|1|V|zsh
+	  # git interactive with fzf
+	  forgit_log=fglo
+	  forgit_diff=fgd
+	  forgit_add=fga
+	  forgit_reset_head=fgrh
+	  forgit_ignore=fgi
+	  forgit_restore=fgcf
+	  forgit_clean=fgclean
+	  forgit_stash_show=fgss
+	  forgit_cherry_pick=fgcp
+	  # FORGIT_LOG_FZF_OPTS=...
+	  FORGIT_FZF_DEFAULT_OPTS="
+	  --exact
+	  --border
+	  --cycle
+	  --reverse
+	  --height '80%'
+	  "
+	  zi0a
+	  zinit light wfxr/forgit
+	
+	  #   bindkey '^@'  fzf-select-widget
+	  #   bindkey '^@.' fzf-edit-dotfiles
+	  #   bindkey '^@c' fzf-change-directory
+	  #   bindkey '^@n' fzf-change-named-directory
+	  #   bindkey '^@f' fzf-edit-files
+	  #   bindkey '^@k' fzf-kill-processes
+	  #   bindkey '^@s' fzf-exec-ssh
+	  #   bindkey '^\'  fzf-change-recent-directory
+	  #   bindkey '^r'  fzf-insert-history
+	  #   bindkey '^xf' fzf-insert-files
+	  #   bindkey '^xd' fzf-insert-directory
+	  #   bindkey '^xn' fzf-insert-named-directory
+	  #
+	  #   ## Git
+	  #   bindkey '^@g'  fzf-select-git-widget
+	  #   bindkey '^@ga' fzf-git-add-files
+	  #   bindkey '^@gc' fzf-git-change-repository
+	  #
+	  #   # GitHub
+	  #   bindkey '^@h'  fzf-select-github-widget
+	  #   bindkey '^@hs' fzf-github-show-issue
+	  #   bindkey '^@hc' fzf-github-close-issue
+	  #
+	  #   ## Docker
+	  #   bindkey '^@d'  fzf-select-docker-widget
+	  #   bindkey '^@dc' fzf-docker-remove-containers
+	  #   bindkey '^@di' fzf-docker-remove-images
+	  #   bindkey '^@dv' fzf-docker-remove-volumes
+	  #
+	  #   typeset -gA FZF_WIDGET_OPTS
+	  #   # Enable Exact-match by fzf-insert-history
+	  #   FZF_WIDGET_OPTS[insert-history]='--exact'
+	  #   autoload -Uz chpwd_recent_dirs cdr add-zsh-hook
+	  #   add-zsh-hook chpwd chpwd_recent_dirs
+	  FZF_WIDGET_TMUX=1
+	  FZF_WIDGET_OPTS[fzf-select-widget]='-p 70%'
+	
+	  zinit light ytet5uy4/fzf-widgets
+	
+	  zinit light chitoku-k/fzf-zsh-completions
+e6f27af586886e32a1b77585936e1c09|file:///home/nicholas/.shell/plugins.zsh|298|1|V|zsh
+	# }}}
+608c56011112213e53805cdbdc61a004|file:///home/nicholas/.shell/plugins.zsh|219|5|V|zsh
+	    # fzf-tab
+5ce486c1cca747352ed86d3eeb1abf7f|file:///home/nicholas/.shell/plugins.zsh|223|5|V|zsh
+	    zinit light Aloxaf/fzf-tab
+9130315e8a0027e7080850978226268a|file:///home/nicholas/.shell/plugins.zsh|426|26|V|zsh
+	  # zi_completion has'se'
+	  # zinit snippet $PIPX_HOME/venvs/standardebooks/lib/python3.*/site-packages/se/completions/zsh/_se
+b2447764420bd84f4edd538bff99a75a|file:///home/nicholas/.shell/plugins.zsh|317|1|V|zsh
+	  export FORGIT_GI_REPO_LOCAL="$XDG_DATA_HOME/forgit/gi/repos/dvcs/gitignore"
+add3e02cf60588860ca5039fcf145cf9|file:///home/nicholas/.shell/plugins/zsh-autocomplete.zinit.zsh|1|1|V|zsh
+	# async autocomplete
+	zinit light "marlonrichert/zsh-autocomplete"
+	# zstyle ':autocomplete:list-choices:*' min-input 3
+	# zstyle ':autocomplete:*' max-lines 100%
+	zstyle ':autocomplete:*' max-lines 5
+	
+	zstyle ':autocomplete:space:*' magic none
+	# zstyle ':autocomplete:*' recent-dirs off
+	zstyle ':autocomplete:*' key-binding off
+	# zstyle ':autocomplete:*' config off
+	
+	
+	# fzf, widget-style menu-complete, widget-style menu-select
+	zstyle ':autocomplete:tab:*' insert-unambiguous yes
+	zstyle ':autocomplete:tab:*' widget-style fzf
+	zstyle ':autocomplete:tab:*'fzf yes
+	
+	zstyle ':autocomplete:*:no-matches-yet' message '      %F{#446666}...'
+	zstyle ':autocomplete:*:too-many-matches' message '     %F{#446666}...<tab>'
+	zstyle ':autocomplete:*:no-matches-at-all' message '      %F{#446666}...'
+	
+3e9a4701df21f935055e2f18e3f38bc7|file:///home/nicholas/.shell/plugins/zsh-autosuggestions.zinit.zsh|1|1|V|zsh
+	
+	# zinit light "zsh-users/zsh-autosuggestions", at:develop
+	zinit light "zsh-users/zsh-autosuggestions"
+	# ZSH_AUTOSUGGEST_HIGHLIGHT_STYLE="fg=#ff00ff,bg=cyan,bold,underline"
+	# history, match_prev_cmd, completion
+	ZSH_AUTOSUGGEST_STRATEGY=(match_prev_cmd history)
+	ZSH_AUTOSUGGEST_BUFFER_MAX_SIZE=512
+	ZSH_AUTOSUGGEST_USE_ASYNC=1
+	# improves performance, run _zsh_autosuggest_bind_widgets to manually rebind
+	ZSH_AUTOSUGGEST_MANUAL_REBIND=1
+	ZSH_AUTOSUGGEST_IGNORE_WIDGETS+=(expand-or-complete) # CLEAR, ACCEPT, PARTIAL_ACCEPT, EXECUTE
+	
+922a07dbb70b396e9b64b10be8e170bc|file:///home/nicholas/.shell/plugins.zsh|64|1|V|zsh
+	  # zinit light "zsh-users/zsh-autosuggestions", at:develop
+	  zinit light "zsh-users/zsh-autosuggestions"
+2912293e79b3b3f0982d2108e7e61eab|file:///home/nicholas/.shell/plugins/auto-ls.zinit.zsh|1|1|V|zsh
+	
+	zinit light "desyncr/auto-ls"
+	colorls="/usr/local/bin/colorls"
+	#
+	# auto-ls-custom_function () {
+	#   if [[ -z "$_CD_WIDGET" ]]; then
+	#     if [[ -d $PWD/.git ]]; then
+	#       lines=$(stdbuf -i0 -o0 -e0 git lg-oneline -n 5)
+	#       tput rmam
+	#       stdbuf -i0 -o0 -e0 git lg-oneline -n 5 | while read line
+	#       do
+	#         # echo -e "-   $line" | emojify
+	#         echo -e "   $line" | emojify
+	#       done
+	#       tput smam
+	#     fi
+	#     colorls -1 --git-status --all --sort-dirs
+	#   fi
+	# }
+	#
+	# # AUTO_LS_CHPWD=false
+	# AUTO_LS_CHPWD=false
+	# AUTO_LS_COMMANDS=(custom_function)
+	AUTO_LS_COMMANDS=("$colorls -1 --git-status --almost-all --sort-dirs")
+	#
+	# # "colorls -1 --git-status --almost-all --sort-dirs '[[ -d $PWD/.git ]] && /usr/bin/git log|head'" \
+	# # AUTO_LS_COMMANDS=("$colorls -1 --git-status --sort-dirs")
+	# AUTO_LS_NEWLINE=false
+	# # AUTO_LS_COMMANDS: Use this configuration option to define the functions to run on cwd/enter-key.
+	# # AUTO_LS_NEWLINE: Configure ls to put a newline (Default: true).
+	# # AUTO_LS_PATH: Detect command full path to execute (Default: true).
+	# # AUTO_LS_CHPWD: Enable/disable auto-ls on directory change (Default: true)
+	#
+	#
+e14e816bf23a10cdae1632dc2e129290|file:///home/nicholas/.shell/plugins.zsh|112|1|V|zsh
+	  #
+	  #
+892a6cea6d475b7834cd854783525032|file:///home/nicholas/.shell/plugins/enhancd.zinit.zsh|1|1|V|zsh
+	# enhancd: fzf cd enhancer => cd <Enter>, cd - <Enter>, cd .. <Enter>
+	zinit light "b4b4r07/enhancd"
+e72312ee0b9f57e50cf445bef8d8b816|file:///home/nicholas/.shell/plugins/zsh-auto-notify.zinit.zsh|5|1|V|zsh
+	export AUTO_NOTIFY_THRESHOLD=60
+	export AUTO_NOTIFY_EXPIRE_TIME=2000
+	export AUTO_NOTIFY_IGNORE=("docker node tmux vim nvim fzf fzf-tmux man sleep")
+	export AUTO_NOTIFY_TITLE="%command has just finished"
+	export AUTO_NOTIFY_BODY="Completed in %elapsed seconds with exit code %exit_code"
+	
+83b096ce2d4d5401800de98460dcfd6a|file:///home/nicholas/.shell/plugins/zsh-auto-notify.zinit.zsh|1|1|V|zsh
+	# zsh-auto-notify: send notifications when long running tasks completed
+	# disable_auto_notify enable_auto_notify
+	export AUTO_NOTIFY_THRESHOLD=60
+	export AUTO_NOTIFY_EXPIRE_TIME=2000
+	export AUTO_NOTIFY_IGNORE=("docker node tmux vim nvim fzf fzf-tmux man sleep")
+	export AUTO_NOTIFY_TITLE="%command has just finished"
+	export AUTO_NOTIFY_BODY="Completed in %elapsed seconds with exit code %exit_code"
+	
+	zinit light MichaelAquilina/zsh-auto-notify
+	
+	
+e09754a83dbc39ea93117232dce54949|file:///home/nicholas/.shell/plugins/auto-ls.zinit.zsh|1|1|V|zsh
+	
+	zinit light "desyncr/auto-ls"
+	colorls="/usr/local/bin/colorls"
+	#
+	# auto-ls-custom_function () {
+	#   if [[ -z "$_CD_WIDGET" ]]; then
+	#     if [[ -d $PWD/.git ]]; then
+	#       lines=$(stdbuf -i0 -o0 -e0 git lg-oneline -n 5)
+	#       tput rmam
+	#       stdbuf -i0 -o0 -e0 git lg-oneline -n 5 | while read line
+	#       do
+	#         # echo -e "-   $line" | emojify
+	#         echo -e "   $line" | emojify
+	#       done
+	#       tput smam
+	#     fi
+	#     colorls -1 --git-status --all --sort-dirs
+	#   fi
+	# }
+	#
+	# # AUTO_LS_CHPWD=false
+	# AUTO_LS_CHPWD=false
+	# AUTO_LS_COMMANDS=(custom_function)
+	AUTO_LS_COMMANDS=("$colorls -1 --git-status --almost-all --sort-dirs")
+8da12ffb0825e9bdc5c5651a8ff52243|file:///home/nicholas/.shell/plugins.zsh|172|1|V|zsh
+	  zinit light "desyncr/auto-ls"
+a10a692a1671e66446b1602aa2fbf1d9|file:///home/nicholas/.shell/plugins.zsh|173|1|V|zsh
+	  #
+	  # auto-ls-custom_function () {
+	  #   if [[ -z "$_CD_WIDGET" ]]; then
+	  #     if [[ -d $PWD/.git ]]; then
+	  #       lines=$(stdbuf -i0 -o0 -e0 git lg-oneline -n 5)
+	  #       tput rmam
+	  #       stdbuf -i0 -o0 -e0 git lg-oneline -n 5 | while read line
+	  #       do
+	  #         # echo -e "-   $line" | emojify
+	  #         echo -e "   $line" | emojify
+	  #       done
+	  #       tput smam
+	  #     fi
+	  #     colorls -1 --git-status --all --sort-dirs
+	  #   fi
+	  # }
+	  #
+	  # # AUTO_LS_CHPWD=false
+	  # AUTO_LS_CHPWD=false
+	  # AUTO_LS_COMMANDS=(custom_function)
+852097ccb787e788f83d5b18a3732a8f|file:///home/nicholas/.shell/plugins/zsh-completions.zinit.zsh|1|1|V|zsh
+	# zsh-completions: collection of completion scripts not yet added to zsh
+	zinit light "zsh-users/zsh-completions"
+	zstyle ':completion:*' verbose yes
+	zstyle ':completion:*' matcher-list 'r:|=*' 'l:|=* r:|=*'
+	# zstyle ':completion:*:*:*:default' menu yes
+	# zstyle ':completion:*:*:kill:*:*' verbose no
+	# zstyle ':completion:*:*:*:default' menu select
+	# zstyle ':completion:*' fzf-search-display true
+	# zstyle ':completion:*:options:*' list-colors '=(#b) #(--[a-z-]#)=34=36=33'
+	zstyle ':completion:*' list-colors ${(s.:.)LS_COLORS}
+	zstyle ':completion:*:default' list-colors \
+	  "di=36" "ln=35" "so=32" "pi=33" "ex=31" "bd=34;46" "cd=34;43" \
+	  "su=30;41" "sg=30;46" "tw=30;42" "ow=30;43"
+	
+	# zstyle -e ':completion:*:default' list-colors 'reply=("${PREFIX:+=(#bi)($PREFIX:t)(?)*==02=01}:${(s.:.)LS_COLORS}")'
+	zstyle ':completion:*:parameters'  list-colors '=*=0;38;2;66;180;255'
+	zstyle ':completion:*:options' list-colors '=^(-- *)=34'
+	zstyle ':completion:*:commands' list-colors '=*=0;38;2;66;140;140'
+	zstyle ':completion:*:builtins' list-colors '=*=1;38;5;27'
+	zstyle ':completion:*:*:kill:*' list-colors '=(#b) #([0-9]#)*( *[a-z])*=34=31=33'
+	# zstyle -e ':completion:' list-colors 'thingy=${PREFIX##/} reply=( "=(#b)($thingy)(?)*=00=$color[green]=$color[bg-green]" )'
+	
+	# zstyle ':completion:*:parameters'  list-colors '=*=32'
+	# As you can see syntax is '=pattern=format'. Since * matches everything and 32 is ANSI green code, thus all parameters will be green.
+	# Now lets show all commands in bolded red
+	#  -zstyle ':completion:*:commands' list-colors '=*=1;31'
+	# but built-in commands with a little bit more sophisticated color (from 256 palette)
+	#  -zstyle ':completion:*:builtins' list-colors '=*=1;38;5;142'
+	# analogously for aliases
+	#  -zstyle ':completion:*:aliases' list-colors '=*=2;38;5;128'
+	# Now lets go to patterns, and colorize different parts of completion differently, say we want a kill processes in 3 different colors:
+	#  -zstyle ':completion:*:*:kill:*' list-colors '=(#b) #([0-9]#)*( *[a-z])*=34=31=33'
+	# Here syntax is a little bit more complicated, namely '=(#b)(pattern1)(pattern2)=format0=format1=format2' where format0 is used for everything which do not match any patterns. So processes IDs (first pattern) will be in red, processes names (second pattern) in yellow, and the rest in blue:
+	# Lastly lets try something useful with '--' string which you asked for:
+	#  -zstyle ':completion:*:options' list-colors '=^(-- *)=34'
+	# This will present all command options in blue, but description of that options will stay normal.
+	# Notice that some options starts with '--', so we have to use '-- ' (with space) to match only descriptions, and negate pattern with ^ to apply color for options.
+	
+	# AFAIK when using completion menu zsh will always place highlighted completion in the command line. However you can make it less hasty.
+	unsetopt menucomplete
+	setopt automenu
+	# Changes the behaviour so
+	#
+	# first TAB completes the common part
+	# second lists completions without changing command line
+	# third starts the menu and completes command line with highlighted completion
+	# If you prefer no command line changes than fancy menu unset automenu too:
+	# unsetopt menucomplete automenu
+	
+	# autoload -U compinit && compinit
+c44f296e730b348cc292ccc26f655206|file:///home/nicholas/.shell/plugins.zsh|428|1|V|zsh
+	
+	  # zstyle ':completion:*:parameters'  list-colors '=*=32'
+	  # As you can see syntax is '=pattern=format'. Since * matches everything and 32 is ANSI green code, thus all parameters will be green.
+	  # Now lets show all commands in bolded red
+	  #  -zstyle ':completion:*:commands' list-colors '=*=1;31'
+	  # but built-in commands with a little bit more sophisticated color (from 256 palette)
+	  #  -zstyle ':completion:*:builtins' list-colors '=*=1;38;5;142'
+	  # analogously for aliases
+	  #  -zstyle ':completion:*:aliases' list-colors '=*=2;38;5;128'
+	  # Now lets go to patterns, and colorize different parts of completion differently, say we want a kill processes in 3 different colors:
+	  #  -zstyle ':completion:*:*:kill:*' list-colors '=(#b) #([0-9]#)*( *[a-z])*=34=31=33'
+	  # Here syntax is a little bit more complicated, namely '=(#b)(pattern1)(pattern2)=format0=format1=format2' where format0 is used for everything which do not match any patterns. So processes IDs (first pattern) will be in red, processes names (second pattern) in yellow, and the rest in blue:
+	  # Lastly lets try something useful with '--' string which you asked for:
+	  #  -zstyle ':completion:*:options' list-colors '=^(-- *)=34'
+	  # This will present all command options in blue, but description of that options will stay normal.
+	  # Notice that some options starts with '--', so we have to use '-- ' (with space) to match only descriptions, and negate pattern with ^ to apply color for options.
+92d008e250359c902f17c7429be22e07|file:///home/nicholas/.shell/plugins.zsh|429|3|V|zsh
+	  # AFAIK when using completion menu zsh will always place highlighted completion in the command line. However you can make it less hasty.
+d02ab19ca9487abb9ea2bcfc66feb35e|file:///home/nicholas/.shell/plugins.zsh|431|1|V|zsh
+	  # Changes the behaviour so
+	  #
+	  # first TAB completes the common part
+	  # second lists completions without changing command line
+	  # third starts the menu and completes command line with highlighted completion
+	  # If you prefer no command line changes than fancy menu unset automenu too:
+	  # unsetopt menucomplete automenu
+e2baed41fcf91fafb5c87ca088f05cf3|file:///home/nicholas/.shell/plugins.zsh|481|1|V|zsh
+	  # TMUXINATOR
+	  zinit ice as"completion"; zinit snippet ~/.nubem_dot_files/extras/tmuxinator/tmuxinator.zsh
+b5bf9e1f7068fccd99d0067671dac039|file:///home/nicholas/.shell/plugins.zsh|478|1|V|zsh
+	  # TMUX
+	  zinit ice from"gh-r" as"program" mv"tmux* -> tmux" pick"tmux" atload"alias tmux=tmux"
+	  zinit light tmux/tmux
+77b45a404c1eb51301e302f091dec80f|file:///home/nicholas/.shell/plugins.zsh|476|1|V|zsh
+	  # GOOGLE-CLOUD-SDK COMPLETION
+	  zinit ice as"completion"; zinit snippet /opt/google-cloud-sdk/completion.zsh.inc
+1696b94c297a328d0c8fc614bb845329|file:///home/nicholas/.shell/plugins.zsh|458|1|V|zsh
+	  # forgit
+	  zinit ice wait lucid
+	  zinit load 'wfxr/forgit'
+ccb23742361cf0f756375d6f739fcc80|file:///home/nicholas/.shell/plugins.zsh|429|1|V|zsh
+	  unsetopt menucomplete
+	  setopt automenu
+8f9d618214a6acf72f2f612bb748417e|file:///home/nicholas/.shell/.zshrc.binding|80|1|V|zsh
+	bindkey '^ ' fzf_completion
+fdd2d69f7e6b70e2fd532f8fdc65c52e|file:///home/nicholas/.shell/plugins.zsh|596|1|V|zsh
+	# nvm
+	  export NVM_AUTO_USE=true
+	  zinit ice wait"1" lucid
+	  zinit light lukechilds/zsh-nvm
+	  # EXA
+	  zinit ice wait"2" lucid from"gh-r" as"program" mv"exa* -> exa"
+	  zinit light ogham/exa
+	  zinit ice wait blockf atpull'zinit creinstall -q .'
+	  # DELTA
+	  zinit ice lucid wait"0" as"program" from"gh-r" pick"delta*/delta"
+	  zinit light 'dandavison/delta'
+	  # BAT
+	  zinit ice from"gh-r" as"program" mv"bat* -> bat" pick"bat/bat" atload"alias cat=bat"
+	  zinit light sharkdp/bat
+	  # BAT-EXTRAS
+	  zinit ice wait"1" as"program" pick"src/batgrep.sh" lucid
+	  zinit ice wait"1" as"program" pick"src/batdiff.sh" lucid
+	  zinit light eth-p/bat-extras
+	  alias rg=batgrep.sh
+	  alias bd=batdiff.sh
+	  alias man=batman.sh
+	  # ripgrep
+	  zinit ice from"gh-r" as"program" mv"ripgrep* -> ripgrep" pick"ripgrep/rg"
+	  zinit light BurntSushi/ripgrep
+	  # neovim
+	  zinit ice from"gh-r" as"program" bpick"*appimage*" ver"nightly" mv"nvim* -> nvim" pick"nvim"
+	  zinit light neovim/neovim
+	  # lazygit
+	  zinit ice lucid wait"0" as"program" from"gh-r" mv"lazygit* -> lazygit" atload"alias lg='lazygit'"
+	  zinit light 'jesseduffield/lazygit'
+	  # lazydocker
+	  zinit ice lucid wait"0" as"program" from"gh-r" mv"lazydocker* -> lazydocker" atload"alias lg='lazydocker'"
+	  zinit light 'jesseduffield/lazydocker'
+	  # ranger
+	  zinit ice depth'1' as"program" pick"ranger.py"
+	  zinit light ranger/ranger
+	  # fd
+	  zinit ice as"command" from"gh-r" mv"fd* -> fd" pick"fd/fd"
+	  zinit light sharkdp/fd
+	  # gh-cli
+	  zinit ice lucid wait"0" as"program" from"gh-r" pick"usr/bin/gh"
+	  zinit light "cli/cli"
+	  # tmux
+	  zinit ice from"gh-r" as"program" mv"tmux* -> tmux" pick"tmux" atload"alias tmux=tmux"
+	  zinit light tmux/tmux
+	  # TMUXINATOR
+	  zinit ice as"completion"; zinit snippet ~/.nubem_dot_files/extras/tmuxinator/tmuxinator.zsh
+	  # bit
+	  zinit ice lucid wait"0" as"program" from"gh-r" pick"bit"
+	  zinit light "chriswalz/bit"
+	  # zsh manydots magic
+	  zinit autoload'#manydots-magic' for knu/zsh-manydots-magic
+	  # tree-sitter
+	  zinit ice as"program" from"gh-r" mv"tree* -> tree-sitter" pick"tree-sitter"
+	  zinit light tree-sitter/tree-sitter
+	  # xurls
+	  zinit ice as"program" from"gh-r" mv"xurls* -> xurls" pick"xurls"
+	  zinit light mvdan/xurls
+	  # prettyping
+	  zinit ice lucid wait'' as"program" pick"prettyping" atload'alias ping=prettyping'
+	  zinit load "denilsonsa/prettyping"
+	  # ZSH DIFF SO FANCY
+	  # zinit ice wait"2" lucid as"program" pick"bin/git-dsf"
+	  # zinit light zdharma/zsh-diff-so-fancy
+	  # GIT-FLOW
+	  zinit light petervanderdoes/git-flow-completion
+	  # RCLONE
+	  # zinit ice lucid wait"0" as"program" from"gh-r" bpick='*-linux-amd64.deb' pick"usr/bin/rclone"
+	  # zinit light 'rclone/rclone'
+0ebc6ea1a12f671c84db374e8886b7c5|file:///home/nicholas/.shell/plugins.zsh|426|3|V|zsh
+	  # RCLONE
+	  # zinit ice lucid wait"0" as"program" from"gh-r" bpick='*-linux-amd64.deb' pick"usr/bin/rclone"
+	  # zinit light 'rclone/rclone'
+a1fb40450d47e7915c2aef330c7b6b30|file:///home/nicholas/.shell/plugins.zsh|553|2|V|zsh
+	  # zsh diff so fancy
+1ccef23df6d9a6ab31d97fd45dc919ee|file:///home/nicholas/.shell/plugins.zsh|436|1|V|zsh
+	    zi0c has'fzf' pick'forgit.plugin.zsh'
+	    zinit light wfxr/forgit
+0232f187880691ea09925e455a8813e0|file:///home/nicholas/.shell/plugins.zsh|522|53|V|zsh
+	  zinit ice lucid wait"0" as"program" from"gh-r" mv"lazygit* -> lazygit" atload"alias lg='lazygit'"
+9a4b9baca21ff1a29dd5f8ad9480be86|file:///home/nicholas/.shell/plugins.zsh|523|30|V|zsh
+	  zinit light 'jesseduffield/lazygit'
+e4e596018eb076530624b0d7e0ece9f1|file:///home/nicholas/.shell/plugins.zsh|494|1|V|zsh
+	  # nvm
+	  export NVM_AUTO_USE=true
+	  zinit ice wait"1" lucid
+	  zinit light lukechilds/zsh-nvm
+	  # exa
+	  zinit ice wait"2" lucid from"gh-r" as"program" mv"exa* -> exa"
+	  zinit light ogham/exa
+	  zinit ice wait blockf atpull'zinit creinstall -q .'
+	  # delta
+	  zinit ice lucid wait"0" as"program" from"gh-r" pick"delta*/delta"
+	  zinit light 'dandavison/delta'
+	  # bat
+	  zinit ice from"gh-r" as"program" mv"bat* -> bat" pick"bat/bat" atload"alias cat=bat"
+	  zinit light sharkdp/bat
+	  # bat-extras
+	  zinit ice wait"1" as"program" pick"src/batgrep.sh" lucid
+	  zinit ice wait"1" as"program" pick"src/batdiff.sh" lucid
+	  zinit light eth-p/bat-extras
+	  alias rg=batgrep.sh
+	  alias bd=batdiff.sh
+	  alias man=batman.sh
+	  # ripgrep
+	  zinit ice from"gh-r" as"program" mv"ripgrep* -> ripgrep" pick"ripgrep/rg"
+	  zinit light BurntSushi/ripgrep
+	  # neovim
+	  zinit ice from"gh-r" as"program" bpick"*appimage*" ver"nightly" mv"nvim* -> nvim" pick"nvim"
+	  zinit light neovim/neovim
+	  # lazygit
+	  zinit ice lucid wait"0" as"program" from"gh-r" mv"lazygit* -> lazygit" atload"alias lg='lazygit'"
+	  zinit light 'jesseduffield/lazygit'
+	  # lazydocker
+	  zinit ice lucid wait"0" as"program" from"gh-r" mv"lazydocker* -> lazydocker" atload"alias lg='lazydocker'"
+	  zinit light 'jesseduffield/lazydocker'
+	  # ranger
+	  zinit ice depth'1' as"program" pick"ranger.py"
+	  zinit light ranger/ranger
+	  # fd
+	  zinit ice as"command" from"gh-r" mv"fd* -> fd" pick"fd/fd"
+	  zinit light sharkdp/fd
+	  # gh-cli
+	  zinit ice lucid wait"0" as"program" from"gh-r" pick"usr/bin/gh"
+	  zinit light "cli/cli"
+	  # bit
+	  zinit ice lucid wait"0" as"program" from"gh-r" pick"bit"
+	  zinit light "chriswalz/bit"
+	  # zsh manydots magic
+	  zinit autoload'#manydots-magic' for knu/zsh-manydots-magic
+	  # tree-sitter
+	  zinit ice as"program" from"gh-r" mv"tree* -> tree-sitter" pick"tree-sitter"
+	  zinit light tree-sitter/tree-sitter
+	  # xurls
+	  zinit ice as"program" from"gh-r" mv"xurls* -> xurls" pick"xurls"
+	  zinit light mvdan/xurls
+	  # prettyping
+	  zinit ice lucid wait'' as"program" pick"prettyping" atload'alias ping=prettyping'
+	  zinit load "denilsonsa/prettyping"
+	  # zsh diff so fancy
+	  zinit ice wait"2" lucid as"program" pick"bin/git-dsf"
+	  zinit light zdharma/zsh-diff-so-fancy
+	  # git-flow
+	  zinit light petervanderdoes/git-flow-completion
+	  # rclone
+	  # zinit ice lucid wait"0" as"program" from"gh-r" bpick='*-linux-amd64.deb' pick"usr/bin/rclone"
+	  # zinit light 'rclone/rclone'
+	  # autoload -U compinit && compinit
+	  # async autocomplete
+6104aa9fc545698ab76927ef7d74df30|file:///home/nicholas/.shell/plugins.zsh|349|34|V|zsh
+	      FZF_WIDGET_OPTS[fzf-select-widget]='-p 70%'
+b5035234713e5dfad0dd0eb2f8e5abc4|file:///home/nicholas/.shell/plugins.zsh|295|1|V|zsh
+	  # zi_completion has'exa' mv'completions.zsh -> _exa'
+	  # zinit snippet https://github.com/ogham/exa/blob/master/contrib/completions.zsh
+	
+	  # zi_completion has'cht.sh'
+	  # zinit snippet $XDG_CONFIG_HOME/shell_common/zsh/_cht.sh
+	  #
+6110b8b279e48c157be5004b09b0d1cf|file:///home/nicholas/.shell/plugins.zsh|310|3|v|zsh
+	zi_completion has'podman'
+	  zinit snippet $GOPATH/src/github.com/containers/libpod/completions/zsh/_podman
+	
+	
+b41fb9413b7bff3797741f26ae9dab53|file:///home/nicholas/.shell/plugins.zsh|317|1|V|zsh
+	  # zinit snippet $GHQ_ROOT/github.com/alacritty/alacritty/extra/completions/_alacritty
+	
+	  zi_completion has'wl-copy'
+	  zinit snippet $GHQ_ROOT/github.com/bugaevc/wl-clipboard/completions/zsh/_wl-copy
+	
+	  zi_completion has'wl-paste'
+	  zinit snippet $GHQ_ROOT/github.com/bugaevc/wl-clipboard/completions/zsh/_wl-paste
+b7c779a682b1a7a8aa4ba4afd44528ad|file:///home/nicholas/.shell/plugins.zsh|319|1|V|zsh
+	  zi_completion has'wl-copy'
+	  zinit snippet $GHQ_ROOT/github.com/bugaevc/wl-clipboard/completions/zsh/_wl-copy
+	
+	  zi_completion has'wl-paste'
+	  zinit snippet $GHQ_ROOT/github.com/bugaevc/wl-clipboard/completions/zsh/_wl-paste
+cce34920c99b33d5e409ba6ef203fa6a|file:///home/nicholas/.shell/plugins.zsh|319|1|V|zsh
+	  zi_completion has'wl-copy'
+	  zinit snippet $GHQ_ROOT/github.com/bugaevc/wl-clipboard/completions/zsh/_wl-copy
+	
+	  zi_completion has'wl-paste'
+	  zinit snippet $GHQ_ROOT/github.com/bugaevc/wl-clipboard/completions/zsh/_wl-paste
+	
+30e7c9dc1dc5d2b3f54a23dcacab0e33|file:///home/nicholas/.zshrc|35|1|V|zsh
+	### End of Zinit's installer chunk
+2533fea4ec53cc77103eff374243b649|file:///home/nicholas/.zshrc|35|1|V|zsh
+	
+	### Added by Zinit's installer
+	if [[ ! -f $HOME/.zinit/bin/zinit.zsh ]]; then
+	    print -P "%F{33}▓▒░ %F{220}Installing %F{33}DHARMA%F{220} Initiative Plugin Manager (%F{33}zdharma/zinit%F{220})…%f"
+	    command mkdir -p "$HOME/.zinit" && command chmod g-rwX "$HOME/.zinit"
+	    command git clone https://github.com/zdharma/zinit "$HOME/.zinit/bin" && \
+	        print -P "%F{33}▓▒░ %F{34}Installation successful.%f%b" || \
+	        print -P "%F{160}▓▒░ The clone has failed.%f%b"
+	fi
+	
+	source "$HOME/.zinit/bin/zinit.zsh"
+	autoload -Uz _zinit
+	(( ${+_comps} )) && _comps[zinit]=_zinit
+	
+	# Load a few important annexes, without Turbo
+	# (this is currently required for annexes)
+	zinit light-mode for \
+	    zinit-zsh/z-a-rust \
+	    zinit-zsh/z-a-as-monitor \
+	    zinit-zsh/z-a-patch-dl \
+	    zinit-zsh/z-a-bin-gem-node
+	
+	### End of Zinit's installer chunk
+7b5227bddef2c00f12c9e4d86af41e0a|file:///home/nicholas/.shell/plugins.programs.zsh|6|1|V|zsh
+	  zi_program() {
+	    zi0a as'program' "$@"
+	  }
+	
+	  zi_program has'trash' pick'rmtrash'
+	  zinit light PhrozenByte/rmtrash
+	
+	  zi_program has'gpg'
+	  zinit light dylanaraps/pash
+	
+	  zi_program has'jq' pick'reddio' from'gitlab'
+	  zinit light aaronNG/reddio
+	
+	  zi_program pick'hURL'
+	  zinit light 'fnord0/hURL'
+	
+	  # git-open has a manpage that I want in my MANPATH
+	  zi_program has'git' atclone"cp git-open.1.md $HOME/.local/man/man1/git-open.1" atpull'%atclone'
+	  zinit light paulirish/git-open
+	
+	  zi_program atclone"cp hr.1 $HOME/.local/man/man1" atpull'%atclone'
+	  zinit light LuRsT/hr
+	
+	  zi_program pick'prettyping' has'ping'
+	  zinit light denilsonsa/prettyping
+	
+	  zi_program has'bat' pick'src/*'
+	  zinit light eth-p/bat-extras
+	
+	  zi_program has'git' pick'yadm' atclone"cp yadm.1 $HOME/.local/man/man1" atpull'%atclone'
+	  zinit light TheLocehiliosan/yadm
+	
+	  zi_program has'tmux' pick'bin/xpanes'
+	  zinit light greymd/tmux-xpanes
+	
+	  zi_program has'python3' pick'imguralbum.py'
+	  zinit light alexgisby/imgur-album-downloader
+	
+	  zi_program has'signal-cli' pick'scli'
+	  zinit light isamert/scli
+	
+	  zi_program has'jq'
+	  zinit snippet 'https://github.com/DanielG/dxld-mullvad/blob/master/am-i-mullvad.sh'
+	
+	  zi_program has'chromium-browser-privacy' pick'chrome-extension-dl'
+	  zinit light th3lusive/chrome-extension-dl
+	
+	  zi_program has'ueberzug' pick'stpvimg'
+	  zinit light Seirdy/stpv
+	
+	  zi_program pick'stpv'
+	  zinit light Seirdy/stpv
+	
+	  zi_program pick'neofetch' atclone"cp neofetch.1 $HOME/.local/man/man1" atpull'%atclone'
+	  zinit light dylanaraps/neofetch
+	
+	  zi_program has'perl' pick'exiftool'
+	  zinit light exiftool/exiftool
+	
+	  if [ -z "$SSH_CONNECTION" ]; then
+	    zi_program has'perl' pick'inxi'
+	    zinit light smxi/inxi
+	  fi
+	
+	  # fzf-related plugins {{{
+	      zi0b has'fzf' pick'completion.zsh' src'key-bindings.zsh'
+	
+	      zinit light $HOME/.fzf/shell
+	
+	      zinit ice as"command" make"\!PREFIX=$ZPFX install" \
+	          atclone"cp contrib/fzy-* $ZPFX/bin/" \
+	          pick"$ZPFX/bin/fzy*"
+	
+	      zinit load junegunn/fzf-bin
+	
+	      zi_program has'fzf' pick'fzfp'
+	      zinit light Seirdy/stpv
+	
+	      zi_program has'fzf'
+	      zinit light denisidoro/navi
+	
+	      zi_program has'fzf' pick'fzf-tmux'
+	      zinit light $GOPATH/src/github.com/junegunn/fzf/bin
+	
+	      # fzf bynary and tmux helper script
+	      zinit ice lucid wait'0c' as"command" id-as"junegunn/fzf-tmux" pick"bin/fzf-tmux"
+	      zinit light junegunn/fzf
+	
+	      # bind multiple widgets using fzf
+	      zinit ice lucid wait'0c' multisrc"shell/{completion,key-bindings}.zsh" id-as"junegunn/fzf_completions" pick"/dev/null"
+	      zinit light junegunn/fzf
+	
+	      # fzf-based tab-completion. Load after all other completion plugins
+	      z_lucid wait'1'
+	      zinit light Aloxaf/fzf-tab
+	
+	      zinit ice wait"1" lucid
+	      zinit load jhawthorn/fzy
+	
+	      zi0c has'fzf' ''
+	      zinit light ZoeFiri/fz
+	
+	      zi0a has'fzf' pick'fzf-finder.plugin.zsh'
+	      zinit light leophys/zsh-plugin-fzf-finder
+	
+	
+	      zi0c has'fzf' pick'm42e/zsh-histdb-fzf'
+	      bindkey '^U' histdb-fzf-widget
+	
+	      zi0a has'fzf'
+	      zinit light wookayin/fzf-fasd
+	
+	      # git interactive with fzf
+	      forgit_log=fglo
+	      forgit_diff=fgd
+	      forgit_add=fga
+	      forgit_reset_head=fgrh
+	      forgit_ignore=fgi
+	      forgit_restore=fgcf
+	      forgit_clean=fgclean
+	      forgit_stash_show=fgss
+	      forgit_cherry_pick=fgcp
+	      # FORGIT_LOG_FZF_OPTS=...
+	
+	      FORGIT_FZF_DEFAULT_OPTS="
+	        --exact
+	        --border
+	        --cycle
+	        --reverse
+	        --height '80%'
+	      "
+	      zi0a
+	      zinit light wfxr/forgit
+	
+	      #   bindkey '^@'  fzf-select-widget
+	      #   bindkey '^@.' fzf-edit-dotfiles
+	      #   bindkey '^@c' fzf-change-directory
+	      #   bindkey '^@n' fzf-change-named-directory
+	      #   bindkey '^@f' fzf-edit-files
+	      #   bindkey '^@k' fzf-kill-processes
+	      #   bindkey '^@s' fzf-exec-ssh
+	      #   bindkey '^\'  fzf-change-recent-directory
+	      #   bindkey '^r'  fzf-insert-history
+	      #   bindkey '^xf' fzf-insert-files
+	      #   bindkey '^xd' fzf-insert-directory
+	      #   bindkey '^xn' fzf-insert-named-directory
+	      #
+	      #   ## Git
+	      #   bindkey '^@g'  fzf-select-git-widget
+	      #   bindkey '^@ga' fzf-git-add-files
+	      #   bindkey '^@gc' fzf-git-change-repository
+	      #
+	      #   # GitHub
+	      #   bindkey '^@h'  fzf-select-github-widget
+	      #   bindkey '^@hs' fzf-github-show-issue
+	      #   bindkey '^@hc' fzf-github-close-issue
+	      #
+	      #   ## Docker
+	      #   bindkey '^@d'  fzf-select-docker-widget
+	      #   bindkey '^@dc' fzf-docker-remove-containers
+	      #   bindkey '^@di' fzf-docker-remove-images
+	      #   bindkey '^@dv' fzf-docker-remove-volumes
+	      #
+	      #   typeset -gA FZF_WIDGET_OPTS
+	      #   # Enable Exact-match by fzf-insert-history
+	      #   FZF_WIDGET_OPTS[insert-history]='--exact'
+	      #   autoload -Uz chpwd_recent_dirs cdr add-zsh-hook
+	      #   add-zsh-hook chpwd chpwd_recent_dirs
+	      # FZF_WIDGET_OPTS[fzf-select-widget]='-p 70%'
+	      FZF_WIDGET_TMUX=1
+	
+	      zinit light ytet5uy4/fzf-widgets
+	
+	      zinit light chitoku-k/fzf-zsh-completions
+	  #}}}
+	
+	  zi0a lucid atload"_zsh_autosuggest_start"
+	  zinit light zsh-users/zsh-autosuggestions
+	
+	  zinit load zdharma/zinit-configs
+	  # zinit-configs
+	
+	  # nvm
+	  export NVM_AUTO_USE=true
+	  zinit ice wait"1" lucid
+	  zinit light lukechilds/zsh-nvm
+	  # exa
+	  zinit ice wait"2" lucid from"gh-r" as"program" mv"exa* -> exa"
+	  zinit light ogham/exa
+	  zinit ice wait blockf atpull'zinit creinstall -q .'
+	  # delta
+	  zinit ice lucid wait"0" as"program" from"gh-r" pick"delta*/delta"
+	  zinit light 'dandavison/delta'
+	  # bat
+	  zinit ice from"gh-r" as"program" mv"bat* -> bat" pick"bat/bat" atload"alias cat=bat"
+	  zinit light sharkdp/bat
+	  # bat-extras
+	  zinit ice wait"1" as"program" pick"src/batgrep.sh" lucid
+	  zinit ice wait"1" as"program" pick"src/batdiff.sh" lucid
+	  zinit light eth-p/bat-extras
+	  alias rg=batgrep.sh
+	  alias bd=batdiff.sh
+	  alias man=batman.sh
+	  # ripgrep
+	  zinit ice from"gh-r" as"program" mv"ripgrep* -> ripgrep" pick"ripgrep/rg"
+	  zinit light BurntSushi/ripgrep
+	  # neovim
+	  zinit ice from"gh-r" as"program" bpick"*appimage*" ver"nightly" mv"nvim* -> nvim" pick"nvim"
+	  zinit light neovim/neovim
+	  # lazygit
+	  zinit ice lucid wait"0" as"program" from"gh-r" mv"lazygit* -> lazygit" atload"alias lg='lazygit'"
+	  zinit light 'jesseduffield/lazygit'
+	  # lazydocker
+	  zinit ice lucid wait"0" as"program" from"gh-r" mv"lazydocker* -> lazydocker" atload"alias lg='lazydocker'"
+	  zinit light 'jesseduffield/lazydocker'
+	  # ranger
+	  zinit ice depth'1' as"program" pick"ranger.py"
+	  zinit light ranger/ranger
+	  # fd
+	  zinit ice as"command" from"gh-r" mv"fd* -> fd" pick"fd/fd"
+	  zinit light sharkdp/fd
+	  # gh-cli
+	  zinit ice lucid wait"0" as"program" from"gh-r" pick"usr/bin/gh"
+	  zinit light "cli/cli"
+	  # tmux
+	  zinit ice from"gh-r" as"program" mv"tmux* -> tmux" pick"tmux" atload"alias tmux=tmux"
+	  zinit light tmux/tmux
+	  # bit
+	  zinit ice lucid wait"0" as"program" from"gh-r" pick"bit"
+	  zinit light "chriswalz/bit"
+	  # zsh manydots magic
+	  zinit autoload'#manydots-magic' for knu/zsh-manydots-magic
+	  # tree-sitter
+	  zinit ice as"program" from"gh-r" mv"tree* -> tree-sitter" pick"tree-sitter"
+	  zinit light tree-sitter/tree-sitter
+	  # xurls
+	  zinit ice as"program" from"gh-r" mv"xurls* -> xurls" pick"xurls"
+	  zinit light mvdan/xurls
+	  # prettyping
+	  zinit ice lucid wait'' as"program" pick"prettyping" atload'alias ping=prettyping'
+	  zinit load "denilsonsa/prettyping"
+	  # zsh diff so fancy
+	  ZINIT ICE WAIT"2" LUCID AS"PROGRAM" PICK"BIN/GIT-DSF"
+	  ZINIT LIGHT ZDHARMA/ZSH-DIFF-SO-FANCY
+	  # git-flow
+	  zinit light petervanderdoes/git-flow-completion
+	
+	  # Git extensions {{{
+	
+	    # only used in fzf previews because delta's colors get messed up there
+	    zi0a has'perl' as'program' pick'bin/git-dsf'
+	    zinit light zdharma/zsh-diff-so-fancy
+	
+	    zi0a
+	    zinit light wfxr/emoji-cli
+	
+	    zi0a as'program' has'git' pick"$ZPFX/bin/git-*" make"PREFIX=$ZPFX"
+	    zinit light tj/git-extras
+	
+	    zi0b as'completion' has'git-extras' blockf
+	    zinit snippet https://github.com/tj/git-extras/blob/master/etc/git-extras-completion.zsh
+	
+	  # }}}
+91d7da5baeb69f6f012e5179f0428e4b|file:///home/nicholas/.shell/plugins.programs.zsh|1|1|V|zsh
+	
+	############
+	# Programs #
+	###########$
+	
+	  zi_program() {
+	    zi0a as'program' "$@"
+	  }
+	
+	  zi_program has'trash' pick'rmtrash'
+	  zinit light PhrozenByte/rmtrash
+	
+	  zi_program has'gpg'
+	  zinit light dylanaraps/pash
+	
+	  zi_program has'jq' pick'reddio' from'gitlab'
+	  zinit light aaronNG/reddio
+	
+	  zi_program pick'hURL'
+	  zinit light 'fnord0/hURL'
+	
+	  # git-open has a manpage that I want in my MANPATH
+	  zi_program has'git' atclone"cp git-open.1.md $HOME/.local/man/man1/git-open.1" atpull'%atclone'
+	  zinit light paulirish/git-open
+	
+	  zi_program atclone"cp hr.1 $HOME/.local/man/man1" atpull'%atclone'
+	  zinit light LuRsT/hr
+	
+	  zi_program pick'prettyping' has'ping'
+	  zinit light denilsonsa/prettyping
+	
+	  zi_program has'bat' pick'src/*'
+	  zinit light eth-p/bat-extras
+	
+	  zi_program has'git' pick'yadm' atclone"cp yadm.1 $HOME/.local/man/man1" atpull'%atclone'
+	  zinit light TheLocehiliosan/yadm
+	
+	  zi_program has'tmux' pick'bin/xpanes'
+	  zinit light greymd/tmux-xpanes
+	
+	  zi_program has'python3' pick'imguralbum.py'
+	  zinit light alexgisby/imgur-album-downloader
+	
+	  zi_program has'signal-cli' pick'scli'
+	  zinit light isamert/scli
+	
+	  zi_program has'jq'
+	  zinit snippet 'https://github.com/DanielG/dxld-mullvad/blob/master/am-i-mullvad.sh'
+	
+	  zi_program has'chromium-browser-privacy' pick'chrome-extension-dl'
+	  zinit light th3lusive/chrome-extension-dl
+	
+	  zi_program has'ueberzug' pick'stpvimg'
+	  zinit light Seirdy/stpv
+	
+	  zi_program pick'stpv'
+	  zinit light Seirdy/stpv
+	
+	  zi_program pick'neofetch' atclone"cp neofetch.1 $HOME/.local/man/man1" atpull'%atclone'
+	  zinit light dylanaraps/neofetch
+	
+	  zi_program has'perl' pick'exiftool'
+	  zinit light exiftool/exiftool
+	
+	  if [ -z "$SSH_CONNECTION" ]; then
+	    zi_program has'perl' pick'inxi'
+	    zinit light smxi/inxi
+	  fi
+	
+	  # fzf-related plugins {{{
+	      zi0b has'fzf' pick'completion.zsh' src'key-bindings.zsh'
+	
+	      zinit light $HOME/.fzf/shell
+	
+	      zinit ice as"command" make"\!PREFIX=$ZPFX install" \
+	          atclone"cp contrib/fzy-* $ZPFX/bin/" \
+	          pick"$ZPFX/bin/fzy*"
+	
+	      zinit load junegunn/fzf-bin
+	
+	      zi_program has'fzf' pick'fzfp'
+	      zinit light Seirdy/stpv
+	
+	      zi_program has'fzf'
+	      zinit light denisidoro/navi
+	
+	      zi_program has'fzf' pick'fzf-tmux'
+	      zinit light $GOPATH/src/github.com/junegunn/fzf/bin
+	
+	      # fzf bynary and tmux helper script
+	      zinit ice lucid wait'0c' as"command" id-as"junegunn/fzf-tmux" pick"bin/fzf-tmux"
+	      zinit light junegunn/fzf
+	
+	      # bind multiple widgets using fzf
+	      zinit ice lucid wait'0c' multisrc"shell/{completion,key-bindings}.zsh" id-as"junegunn/fzf_completions" pick"/dev/null"
+	      zinit light junegunn/fzf
+	
+	      # fzf-based tab-completion. Load after all other completion plugins
+	      z_lucid wait'1'
+	      zinit light Aloxaf/fzf-tab
+	
+	      zinit ice wait"1" lucid
+	      zinit load jhawthorn/fzy
+	
+	      zi0c has'fzf' ''
+	      zinit light ZoeFiri/fz
+	
+	      zi0a has'fzf' pick'fzf-finder.plugin.zsh'
+	      zinit light leophys/zsh-plugin-fzf-finder
+	
+	
+	      zi0c has'fzf' pick'm42e/zsh-histdb-fzf'
+	      bindkey '^U' histdb-fzf-widget
+	
+	      zi0a has'fzf'
+	      zinit light wookayin/fzf-fasd
+	
+	      # git interactive with fzf
+	      forgit_log=fglo
+	      forgit_diff=fgd
+	      forgit_add=fga
+	      forgit_reset_head=fgrh
+	      forgit_ignore=fgi
+	      forgit_restore=fgcf
+	      forgit_clean=fgclean
+	      forgit_stash_show=fgss
+	      forgit_cherry_pick=fgcp
+	      # FORGIT_LOG_FZF_OPTS=...
+	
+	      FORGIT_FZF_DEFAULT_OPTS="
+	        --exact
+	        --border
+	        --cycle
+	        --reverse
+	        --height '80%'
+	      "
+	      zi0a
+	      zinit light wfxr/forgit
+	
+	      #   bindkey '^@'  fzf-select-widget
+	      #   bindkey '^@.' fzf-edit-dotfiles
+	      #   bindkey '^@c' fzf-change-directory
+	      #   bindkey '^@n' fzf-change-named-directory
+	      #   bindkey '^@f' fzf-edit-files
+	      #   bindkey '^@k' fzf-kill-processes
+	      #   bindkey '^@s' fzf-exec-ssh
+	      #   bindkey '^\'  fzf-change-recent-directory
+	      #   bindkey '^r'  fzf-insert-history
+	      #   bindkey '^xf' fzf-insert-files
+	      #   bindkey '^xd' fzf-insert-directory
+	      #   bindkey '^xn' fzf-insert-named-directory
+	      #
+	      #   ## Git
+	      #   bindkey '^@g'  fzf-select-git-widget
+	      #   bindkey '^@ga' fzf-git-add-files
+	      #   bindkey '^@gc' fzf-git-change-repository
+	      #
+	      #   # GitHub
+	      #   bindkey '^@h'  fzf-select-github-widget
+	      #   bindkey '^@hs' fzf-github-show-issue
+	      #   bindkey '^@hc' fzf-github-close-issue
+	      #
+	      #   ## Docker
+	      #   bindkey '^@d'  fzf-select-docker-widget
+	      #   bindkey '^@dc' fzf-docker-remove-containers
+	      #   bindkey '^@di' fzf-docker-remove-images
+	      #   bindkey '^@dv' fzf-docker-remove-volumes
+	      #
+	      #   typeset -gA FZF_WIDGET_OPTS
+	      #   # Enable Exact-match by fzf-insert-history
+	      #   FZF_WIDGET_OPTS[insert-history]='--exact'
+	      #   autoload -Uz chpwd_recent_dirs cdr add-zsh-hook
+	      #   add-zsh-hook chpwd chpwd_recent_dirs
+	      # FZF_WIDGET_OPTS[fzf-select-widget]='-p 70%'
+	      FZF_WIDGET_TMUX=1
+	
+	      zinit light ytet5uy4/fzf-widgets
+	
+	      zinit light chitoku-k/fzf-zsh-completions
+	  # }}}
+	
+	  zi0a lucid atload"_zsh_autosuggest_start"
+	  zinit light zsh-users/zsh-autosuggestions
+	
+	  zinit load zdharma/zinit-configs
+	  # zinit-configs
+	
+	  # nvm
+	  export NVM_AUTO_USE=true
+	  zinit ice wait"1" lucid
+	  zinit light lukechilds/zsh-nvm
+	  # exa
+	  zinit ice wait"2" lucid from"gh-r" as"program" mv"exa* -> exa"
+	  zinit light ogham/exa
+	  zinit ice wait blockf atpull'zinit creinstall -q .'
+	  # delta
+	  zinit ice lucid wait"0" as"program" from"gh-r" pick"delta*/delta"
+	  zinit light 'dandavison/delta'
+	  # bat
+	  zinit ice from"gh-r" as"program" mv"bat* -> bat" pick"bat/bat" atload"alias cat=bat"
+	  zinit light sharkdp/bat
+	  # bat-extras
+	  zinit ice wait"1" as"program" pick"src/batgrep.sh" lucid
+	  zinit ice wait"1" as"program" pick"src/batdiff.sh" lucid
+	  zinit light eth-p/bat-extras
+	  alias rg=batgrep.sh
+	  alias bd=batdiff.sh
+	  alias man=batman.sh
+	  # ripgrep
+	  zinit ice from"gh-r" as"program" mv"ripgrep* -> ripgrep" pick"ripgrep/rg"
+	  zinit light BurntSushi/ripgrep
+	  # neovim
+	  zinit ice from"gh-r" as"program" bpick"*appimage*" ver"nightly" mv"nvim* -> nvim" pick"nvim"
+	  zinit light neovim/neovim
+	  # lazygit
+	  zinit ice lucid wait"0" as"program" from"gh-r" mv"lazygit* -> lazygit" atload"alias lg='lazygit'"
+	  zinit light 'jesseduffield/lazygit'
+	  # lazydocker
+	  zinit ice lucid wait"0" as"program" from"gh-r" mv"lazydocker* -> lazydocker" atload"alias lg='lazydocker'"
+	  zinit light 'jesseduffield/lazydocker'
+	  # ranger
+	  zinit ice depth'1' as"program" pick"ranger.py"
+	  zinit light ranger/ranger
+	  # fd
+	  zinit ice as"command" from"gh-r" mv"fd* -> fd" pick"fd/fd"
+	  zinit light sharkdp/fd
+	  # gh-cli
+	  zinit ice lucid wait"0" as"program" from"gh-r" pick"usr/bin/gh"
+	  zinit light "cli/cli"
+	  # tmux
+	  zinit ice from"gh-r" as"program" mv"tmux* -> tmux" pick"tmux" atload"alias tmux=tmux"
+	  zinit light tmux/tmux
+	  # bit
+	  zinit ice lucid wait"0" as"program" from"gh-r" pick"bit"
+	  zinit light "chriswalz/bit"
+	  # zsh manydots magic
+	  zinit autoload'#manydots-magic' for knu/zsh-manydots-magic
+	  # tree-sitter
+	  zinit ice as"program" from"gh-r" mv"tree* -> tree-sitter" pick"tree-sitter"
+	  zinit light tree-sitter/tree-sitter
+	  # xurls
+	  zinit ice as"program" from"gh-r" mv"xurls* -> xurls" pick"xurls"
+	  zinit light mvdan/xurls
+	  # prettyping
+	  zinit ice lucid wait'' as"program" pick"prettyping" atload'alias ping=prettyping'
+	  zinit load "denilsonsa/prettyping"
+	  # zsh diff so fancy
+	  ZINIT ICE WAIT"2" LUCID AS"PROGRAM" PICK"BIN/GIT-DSF"
+	  ZINIT LIGHT ZDHARMA/ZSH-DIFF-SO-FANCY
+	  # git-flow
+	  zinit light petervanderdoes/git-flow-completion
+	
+	  # Git extensions {{{
+	
+	    # only used in fzf previews because delta's colors get messed up there
+	    zi0a has'perl' as'program' pick'bin/git-dsf'
+	    zinit light zdharma/zsh-diff-so-fancy
+	
+	    zi0a
+	    zinit light wfxr/emoji-cli
+	
+	    zi0a as'program' has'git' pick"$ZPFX/bin/git-*" make"PREFIX=$ZPFX"
+	    zinit light tj/git-extras
+	
+	    zi0b as'completion' has'git-extras' blockf
+	    zinit snippet https://github.com/tj/git-extras/blob/master/etc/git-extras-completion.zsh
+	
+	  # }}}
+7cda2cc693e0ce587b00ce71eb84882c|file:///home/nicholas/.shell/plugins.zsh|23|1|V|zsh
+	SCRIPT_PATH="${0:A:h}"
+e97c88a76b83d7096634452059c5e7b7|file:///home/nicholas/.shell/plugins.zsh|56|1|V|zsh
+	###########
+	# Plugins #
+	###########
+	
+	  if [ "${TERM##*-}" = '256color' ] || [ "${terminfo[colors]:?}" -gt 255 ]; then
+	      z_lucid depth=1
+	      zinit light romkatv/powerlevel10k
+	  fi
+	
+	  zi0a
+	  zinit light xPMo/zsh-toggle-command-prefix
+	
+	  # ZSH_AUTOSUGGEST_HIGHLIGHT_STYLE="fg=#ff00ff,bg=cyan,bold,underline"
+	  # history, match_prev_cmd, completion
+	  ZSH_AUTOSUGGEST_STRATEGY=(match_prev_cmd history)
+	  ZSH_AUTOSUGGEST_BUFFER_MAX_SIZE=512
+	  ZSH_AUTOSUGGEST_USE_ASYNC=1
+	  # improves performance, run _zsh_autosuggest_bind_widgets to manually rebind
+	  ZSH_AUTOSUGGEST_MANUAL_REBIND=1
+	  ZSH_AUTOSUGGEST_IGNORE_WIDGETS+=(expand-or-complete) # CLEAR, ACCEPT, PARTIAL_ACCEPT, EXECUTE
+	  zi0a blockf atload'_zsh_autosuggest_start'
+	  zinit load zsh-users/zsh-autosuggestions
+	
+	  zi0a pick'autopair.zsh'
+	  zinit light hlissner/zsh-autopair
+	
+	  # insult me if i type a command wrong
+	  zi0a pick'src/bash.command-not-found'
+	  zinit light hkbakke/bash-insulter
+	
+	  zinit light "desyncr/auto-ls"
+	  colorls="/usr/local/bin/colorls"
+	  #
+	  # auto-ls-custom_function () {
+	  #   if [[ -z "$_CD_WIDGET" ]]; then
+	  #     if [[ -d $PWD/.git ]]; then
+	  #       lines=$(stdbuf -i0 -o0 -e0 git lg-oneline -n 5)
+	  #       tput rmam
+	  #       stdbuf -i0 -o0 -e0 git lg-oneline -n 5 | while read line
+	  #       do
+	  #         # echo -e "-   $line" | emojify
+	  #         echo -e "   $line" | emojify
+	  #       done
+	  #       tput smam
+	  #     fi
+	  #     colorls -1 --git-status --all --sort-dirs
+	  #   fi
+	  # }
+	  #
+	  # # AUTO_LS_CHPWD=false
+	  # AUTO_LS_CHPWD=false
+	  # AUTO_LS_COMMANDS=(custom_function)
+	  AUTO_LS_COMMANDS=("$colorls -1 --git-status --almost-all --sort-dirs")
+	  # # "colorls -1 --git-status --almost-all --sort-dirs '[[ -d $PWD/.git ]] && /usr/bin/git log|head'" \
+	  # # AUTO_LS_COMMANDS=("$colorls -1 --git-status --sort-dirs")
+	  # AUTO_LS_NEWLINE=false
+	  # # AUTO_LS_COMMANDS: Use this configuration option to define the functions to run on cwd/enter-key.
+	  # # AUTO_LS_NEWLINE: Configure ls to put a newline (Default: true).
+	  # # AUTO_LS_PATH: Detect command full path to execute (Default: true).
+	  # # AUTO_LS_CHPWD: Enable/disable auto-ls on directory change (Default: true)
+	
+	  zi0a
+	  zinit light kazhala/dotbare
+	
+	  zi0a
+	  zinit light leonjza/history-here
+	
+	  zi0a
+	  zinit light zsh-users/zsh-history-substring-search
+	
+	  zinit light larkery/zsh-histdb
+	
+	  # Query to pull in the most recent command if anything was found similar
+	  # in that directory. Otherwise pull in the most recent command used anywhere
+	  # Give back the command that was used most recently
+	  _zsh_autosuggest_strategy_histdb_top_fallback() {
+	    local query="
+	    select commands.argv from
+	      history left join commands on history.command_id = commands.rowid
+	      left join places on history.place_id = places.rowid
+	      where places.dir LIKE
+	      case when exists(select commands.argv from history
+	        left join commands on history.command_id = commands.rowid
+	        left join places on history.place_id = places.rowid
+	        where places.dir LIKE '$(sql_escape $PWD)%'
+	        AND commands.argv LIKE '$(sql_escape $1)%')
+	      then '$(sql_escape $PWD)%'
+	      else '%'
+	      end
+	      and commands.argv LIKE '$(sql_escape $1)%'
+	      group by commands.argv
+	      order by places.dir LIKE '$(sql_escape $PWD)%' desc,
+	      history.start_time desc
+	      limit 1"
+	      suggestion=$(_histdb_query "$query")
+	    }
+	
+	    MODE_CURSOR_VIINS="#44ccff blinking bar"
+	    MODE_CURSOR_REPLACE="$MODE_CURSOR_VIINS #ff6600"
+	    MODE_CURSOR_VICMD="#00aa66 blinking block"
+	    MODE_CURSOR_SEARCH="#ff00ff steady underline"
+	    MODE_CURSOR_VISUAL="$MODE_CURSOR_VICMD steady bar"
+	    MODE_CURSOR_VLINE="$MODE_CURSOR_VISUAL #9922ff"
+	  zinit light softmoth/zsh-vim-mode
+	
+	    # zsh-autoenv: execute .autoenv.zsh automatically on directory enter
+	    # autoenv-edit: if [[ $autoenv_event == 'enter' ]]; then autostash AWS_PROFILE="east-2"
+	  zinit light Tarrasch/zsh-autoenv
+	
+	  zinit light djui/alias-tips
+	
+	    # zsh-auto-notify: send notifications when long running tasks completed
+	    # disable_auto_notify enable_auto_notify
+	    export AUTO_NOTIFY_THRESHOLD=60
+	    export AUTO_NOTIFY_EXPIRE_TIME=2000
+	    export AUTO_NOTIFY_IGNORE=("docker node tmux vim nvim fzf fzf-tmux man sleep")
+	    export AUTO_NOTIFY_TITLE="%command has just finished"
+	    export AUTO_NOTIFY_BODY="Completed in %elapsed seconds with exit code %exit_code"
+	  zinit light MichaelAquilina/zsh-auto-notify
+	
+	    colorls="/usr/local/bin/colorls"
+	    AUTO_LS_COMMANDS=("$colorls -1 --git-status --almost-all --sort-dirs")
+	  zinit light "desyncr/auto-ls"
+	
+a1e41d6656b7fca8a611f24bc8568c72|file:///home/nicholas/.shell/plugins.zsh|57|3|v|zsh
+	Plugins 
+10b04c820c40b4cfd3a751c22fe54ec3|file:///home/nicholas/.shell/plugins.zsh|56|1|V|zsh
+	###########
+	# Widgets #
+	###########
+	
+	  if [ "${TERM##*-}" = '256color' ] || [ "${terminfo[colors]:?}" -gt 255 ]; then
+	      z_lucid depth=1
+	      zinit light romkatv/powerlevel10k
+	  fi
+	
+	  zi0a
+	  zinit light xPMo/zsh-toggle-command-prefix
+	
+	  # ZSH_AUTOSUGGEST_HIGHLIGHT_STYLE="fg=#ff00ff,bg=cyan,bold,underline"
+	  # history, match_prev_cmd, completion
+	  ZSH_AUTOSUGGEST_STRATEGY=(match_prev_cmd history)
+	  ZSH_AUTOSUGGEST_BUFFER_MAX_SIZE=512
+	  ZSH_AUTOSUGGEST_USE_ASYNC=1
+	  # improves performance, run _zsh_autosuggest_bind_widgets to manually rebind
+	  ZSH_AUTOSUGGEST_MANUAL_REBIND=1
+	  ZSH_AUTOSUGGEST_IGNORE_WIDGETS+=(expand-or-complete) # CLEAR, ACCEPT, PARTIAL_ACCEPT, EXECUTE
+	  zi0a blockf atload'_zsh_autosuggest_start'
+	  zinit load zsh-users/zsh-autosuggestions
+	
+	  zi0a pick'autopair.zsh'
+	  zinit light hlissner/zsh-autopair
+	
+	  # insult me if i type a command wrong
+	  zi0a pick'src/bash.command-not-found'
+	  zinit light hkbakke/bash-insulter
+	
+	  zinit light "desyncr/auto-ls"
+	  colorls="/usr/local/bin/colorls"
+	  #
+	  # auto-ls-custom_function () {
+	  #   if [[ -z "$_CD_WIDGET" ]]; then
+	  #     if [[ -d $PWD/.git ]]; then
+	  #       lines=$(stdbuf -i0 -o0 -e0 git lg-oneline -n 5)
+	  #       tput rmam
+	  #       stdbuf -i0 -o0 -e0 git lg-oneline -n 5 | while read line
+	  #       do
+	  #         # echo -e "-   $line" | emojify
+	  #         echo -e "   $line" | emojify
+	  #       done
+	  #       tput smam
+	  #     fi
+	  #     colorls -1 --git-status --all --sort-dirs
+	  #   fi
+	  # }
+	  #
+	  # # AUTO_LS_CHPWD=false
+	  # AUTO_LS_CHPWD=false
+	  # AUTO_LS_COMMANDS=(custom_function)
+	  AUTO_LS_COMMANDS=("$colorls -1 --git-status --almost-all --sort-dirs")
+	  # # "colorls -1 --git-status --almost-all --sort-dirs '[[ -d $PWD/.git ]] && /usr/bin/git log|head'" \
+	  # # AUTO_LS_COMMANDS=("$colorls -1 --git-status --sort-dirs")
+	  # AUTO_LS_NEWLINE=false
+	  # # AUTO_LS_COMMANDS: Use this configuration option to define the functions to run on cwd/enter-key.
+	  # # AUTO_LS_NEWLINE: Configure ls to put a newline (Default: true).
+	  # # AUTO_LS_PATH: Detect command full path to execute (Default: true).
+	  # # AUTO_LS_CHPWD: Enable/disable auto-ls on directory change (Default: true)
+	
+	  zi0a
+	  zinit light kazhala/dotbare
+	
+	  zi0a
+	  zinit light leonjza/history-here
+	
+	  zi0a
+	  zinit light zsh-users/zsh-history-substring-search
+	
+	  zinit light larkery/zsh-histdb
+	
+	  # Query to pull in the most recent command if anything was found similar
+	  # in that directory. Otherwise pull in the most recent command used anywhere
+	  # Give back the command that was used most recently
+	  _zsh_autosuggest_strategy_histdb_top_fallback() {
+	    local query="
+	    select commands.argv from
+	      history left join commands on history.command_id = commands.rowid
+	      left join places on history.place_id = places.rowid
+	      where places.dir LIKE
+	      case when exists(select commands.argv from history
+	        left join commands on history.command_id = commands.rowid
+	        left join places on history.place_id = places.rowid
+	        where places.dir LIKE '$(sql_escape $PWD)%'
+	        AND commands.argv LIKE '$(sql_escape $1)%')
+	      then '$(sql_escape $PWD)%'
+	      else '%'
+	      end
+	      and commands.argv LIKE '$(sql_escape $1)%'
+	      group by commands.argv
+	      order by places.dir LIKE '$(sql_escape $PWD)%' desc,
+	      history.start_time desc
+	      limit 1"
+	      suggestion=$(_histdb_query "$query")
+	    }
+	
+	    MODE_CURSOR_VIINS="#44ccff blinking bar"
+	    MODE_CURSOR_REPLACE="$MODE_CURSOR_VIINS #ff6600"
+	    MODE_CURSOR_VICMD="#00aa66 blinking block"
+	    MODE_CURSOR_SEARCH="#ff00ff steady underline"
+	    MODE_CURSOR_VISUAL="$MODE_CURSOR_VICMD steady bar"
+	    MODE_CURSOR_VLINE="$MODE_CURSOR_VISUAL #9922ff"
+	  zinit light softmoth/zsh-vim-mode
+	
+	    # zsh-autoenv: execute .autoenv.zsh automatically on directory enter
+	    # autoenv-edit: if [[ $autoenv_event == 'enter' ]]; then autostash AWS_PROFILE="east-2"
+	  zinit light Tarrasch/zsh-autoenv
+	
+	  zinit light djui/alias-tips
+	
+	    # zsh-auto-notify: send notifications when long running tasks completed
+	    # disable_auto_notify enable_auto_notify
+	    export AUTO_NOTIFY_THRESHOLD=60
+	    export AUTO_NOTIFY_EXPIRE_TIME=2000
+	    export AUTO_NOTIFY_IGNORE=("docker node tmux vim nvim fzf fzf-tmux man sleep")
+	    export AUTO_NOTIFY_TITLE="%command has just finished"
+	    export AUTO_NOTIFY_BODY="Completed in %elapsed seconds with exit code %exit_code"
+	  zinit light MichaelAquilina/zsh-auto-notify
+	
+	    colorls="/usr/local/bin/colorls"
+	    AUTO_LS_COMMANDS=("$colorls -1 --git-status --almost-all --sort-dirs")
+	  zinit light "desyncr/auto-ls"
+	
+f26ee63c4dc33384f8ea6dad7e4d9085|file:///home/nicholas/.shell/plugins.zsh|57|1|V|zsh
+	  # ############
+	  # # Programs #
+	  # ###########$
+	  #
+	  #   zi_program() {
+	  #     zi0a as'program' "$@"
+	  #   }
+	  #
+	  #   zi_program has'trash' pick'rmtrash'
+	  #   zinit light PhrozenByte/rmtrash
+	  #
+	  #   zi_program has'gpg'
+	  #   zinit light dylanaraps/pash
+	  #
+	  #   zi_program has'jq' pick'reddio' from'gitlab'
+	  #   zinit light aaronNG/reddio
+	  #
+	  #   zi_program pick'hURL'
+	  #   zinit light 'fnord0/hURL'
+	  #
+	  #   # git-open has a manpage that I want in my MANPATH
+	  #   zi_program has'git' atclone"cp git-open.1.md $HOME/.local/man/man1/git-open.1" atpull'%atclone'
+	  #   zinit light paulirish/git-open
+	  #
+	  #   zi_program atclone"cp hr.1 $HOME/.local/man/man1" atpull'%atclone'
+	  #   zinit light LuRsT/hr
+	  #
+	  #   zi_program pick'prettyping' has'ping'
+	  #   zinit light denilsonsa/prettyping
+	  #
+	  #   zi_program has'bat' pick'src/*'
+	  #   zinit light eth-p/bat-extras
+	  #
+	  #   zi_program has'git' pick'yadm' atclone"cp yadm.1 $HOME/.local/man/man1" atpull'%atclone'
+	  #   zinit light TheLocehiliosan/yadm
+	  #
+	  #   zi_program has'tmux' pick'bin/xpanes'
+	  #   zinit light greymd/tmux-xpanes
+	  #
+	  #   zi_program has'python3' pick'imguralbum.py'
+	  #   zinit light alexgisby/imgur-album-downloader
+	  #
+	  #   zi_program has'signal-cli' pick'scli'
+	  #   zinit light isamert/scli
+	  #
+	  #   zi_program has'jq'
+	  #   zinit snippet 'https://github.com/DanielG/dxld-mullvad/blob/master/am-i-mullvad.sh'
+	  #
+	  #   zi_program has'chromium-browser-privacy' pick'chrome-extension-dl'
+	  #   zinit light th3lusive/chrome-extension-dl
+	  #
+	  #   zi_program has'ueberzug' pick'stpvimg'
+	  #   zinit light Seirdy/stpv
+	  #
+	  #   zi_program pick'stpv'
+	  #   zinit light Seirdy/stpv
+	  #
+	  #   zi_program pick'neofetch' atclone"cp neofetch.1 $HOME/.local/man/man1" atpull'%atclone'
+	  #   zinit light dylanaraps/neofetch
+	  #
+	  #   zi_program has'perl' pick'exiftool'
+	  #   zinit light exiftool/exiftool
+	  #
+	  #   if [ -z "$SSH_CONNECTION" ]; then
+	  #     zi_program has'perl' pick'inxi'
+	  #     zinit light smxi/inxi
+	  #   fi
+	  #
+	  #   # fzf-related plugins {{{
+	  #       zi0b has'fzf' pick'completion.zsh' src'key-bindings.zsh'
+	  #
+	  #       zinit light $HOME/.fzf/shell
+	  #
+	  #       zinit ice as"command" make"\!PREFIX=$ZPFX install" \
+	  #           atclone"cp contrib/fzy-* $ZPFX/bin/" \
+	  #           pick"$ZPFX/bin/fzy*"
+	  #
+	  #       zinit load junegunn/fzf-bin
+	  #
+	  #       zi_program has'fzf' pick'fzfp'
+	  #       zinit light Seirdy/stpv
+	  #
+	  #       zi_program has'fzf'
+	  #       zinit light denisidoro/navi
+	  #
+	  #       zi_program has'fzf' pick'fzf-tmux'
+	  #       zinit light $GOPATH/src/github.com/junegunn/fzf/bin
+	  #
+	  #       # fzf bynary and tmux helper script
+	  #       zinit ice lucid wait'0c' as"command" id-as"junegunn/fzf-tmux" pick"bin/fzf-tmux"
+	  #       zinit light junegunn/fzf
+	  #
+	  #       # bind multiple widgets using fzf
+	  #       zinit ice lucid wait'0c' multisrc"shell/{completion,key-bindings}.zsh" id-as"junegunn/fzf_completions" pick"/dev/null"
+	  #       zinit light junegunn/fzf
+	  #
+	  #       # fzf-based tab-completion. Load after all other completion plugins
+	  #       z_lucid wait'1'
+	  #       zinit light Aloxaf/fzf-tab
+	  #
+	  #       zinit ice wait"1" lucid
+	  #       zinit load jhawthorn/fzy
+	  #
+	  #       zi0c has'fzf' ''
+	  #       zinit light ZoeFiri/fz
+	  #
+	  #       zi0a has'fzf' pick'fzf-finder.plugin.zsh'
+	  #       zinit light leophys/zsh-plugin-fzf-finder
+	  #
+	  #
+	  #       zi0c has'fzf' pick'm42e/zsh-histdb-fzf'
+	  #       bindkey '^U' histdb-fzf-widget
+	  #
+	  #       zi0a has'fzf'
+	  #       zinit light wookayin/fzf-fasd
+	  #
+	  #       # git interactive with fzf
+	  #       forgit_log=fglo
+	  #       forgit_diff=fgd
+	  #       forgit_add=fga
+	  #       forgit_reset_head=fgrh
+	  #       forgit_ignore=fgi
+	  #       forgit_restore=fgcf
+	  #       forgit_clean=fgclean
+	  #       forgit_stash_show=fgss
+	  #       forgit_cherry_pick=fgcp
+	  #       # FORGIT_LOG_FZF_OPTS=...
+	  #
+	  #       FORGIT_FZF_DEFAULT_OPTS="
+	  #         --exact
+	  #         --border
+	  #         --cycle
+	  #         --reverse
+	  #         --height '80%'
+	  #       "
+	  #       zi0a
+	  #       zinit light wfxr/forgit
+	  #
+	  #       #   bindkey '^@'  fzf-select-widget
+	  #       #   bindkey '^@.' fzf-edit-dotfiles
+	  #       #   bindkey '^@c' fzf-change-directory
+	  #       #   bindkey '^@n' fzf-change-named-directory
+	  #       #   bindkey '^@f' fzf-edit-files
+	  #       #   bindkey '^@k' fzf-kill-processes
+	  #       #   bindkey '^@s' fzf-exec-ssh
+	  #       #   bindkey '^\'  fzf-change-recent-directory
+	  #       #   bindkey '^r'  fzf-insert-history
+	  #       #   bindkey '^xf' fzf-insert-files
+	  #       #   bindkey '^xd' fzf-insert-directory
+	  #       #   bindkey '^xn' fzf-insert-named-directory
+	  #       #
+	  #       #   ## Git
+	  #       #   bindkey '^@g'  fzf-select-git-widget
+	  #       #   bindkey '^@ga' fzf-git-add-files
+	  #       #   bindkey '^@gc' fzf-git-change-repository
+	  #       #
+	  #       #   # GitHub
+	  #       #   bindkey '^@h'  fzf-select-github-widget
+	  #       #   bindkey '^@hs' fzf-github-show-issue
+	  #       #   bindkey '^@hc' fzf-github-close-issue
+	  #       #
+	  #       #   ## Docker
+	  #       #   bindkey '^@d'  fzf-select-docker-widget
+	  #       #   bindkey '^@dc' fzf-docker-remove-containers
+	  #       #   bindkey '^@di' fzf-docker-remove-images
+	  #       #   bindkey '^@dv' fzf-docker-remove-volumes
+	  #       #
+	  #       #   typeset -gA FZF_WIDGET_OPTS
+	  #       #   # Enable Exact-match by fzf-insert-history
+	  #       #   FZF_WIDGET_OPTS[insert-history]='--exact'
+	  #       #   autoload -Uz chpwd_recent_dirs cdr add-zsh-hook
+	  #       #   add-zsh-hook chpwd chpwd_recent_dirs
+	  #       # FZF_WIDGET_OPTS[fzf-select-widget]='-p 70%'
+	  #       FZF_WIDGET_TMUX=1
+	  #
+	  #       zinit light ytet5uy4/fzf-widgets
+	  #
+	  #       zinit light chitoku-k/fzf-zsh-completions
+	  #   # }}}
+	  #
+	  #   zi0a lucid atload"_zsh_autosuggest_start"
+	  #   zinit light zsh-users/zsh-autosuggestions
+	  #
+	  #   zinit load zdharma/zinit-configs
+	  #   # zinit-configs
+	  #
+	  #   # nvm
+	  #   export NVM_AUTO_USE=true
+	  #   zinit ice wait"1" lucid
+	  #   zinit light lukechilds/zsh-nvm
+	  #   # exa
+	  #   zinit ice wait"2" lucid from"gh-r" as"program" mv"exa* -> exa"
+	  #   zinit light ogham/exa
+	  #   zinit ice wait blockf atpull'zinit creinstall -q .'
+	  #   # delta
+	  #   zinit ice lucid wait"0" as"program" from"gh-r" pick"delta*/delta"
+	  #   zinit light 'dandavison/delta'
+	  #   # bat
+	  #   zinit ice from"gh-r" as"program" mv"bat* -> bat" pick"bat/bat" atload"alias cat=bat"
+	  #   zinit light sharkdp/bat
+	  #   # bat-extras
+	  #   zinit ice wait"1" as"program" pick"src/batgrep.sh" lucid
+	  #   zinit ice wait"1" as"program" pick"src/batdiff.sh" lucid
+	  #   zinit light eth-p/bat-extras
+	  #   alias rg=batgrep.sh
+	  #   alias bd=batdiff.sh
+	  #   alias man=batman.sh
+	  #   # ripgrep
+	  #   zinit ice from"gh-r" as"program" mv"ripgrep* -> ripgrep" pick"ripgrep/rg"
+	  #   zinit light BurntSushi/ripgrep
+	  #   # neovim
+	  #   zinit ice from"gh-r" as"program" bpick"*appimage*" ver"nightly" mv"nvim* -> nvim" pick"nvim"
+	  #   zinit light neovim/neovim
+	  #   # lazygit
+	  #   zinit ice lucid wait"0" as"program" from"gh-r" mv"lazygit* -> lazygit" atload"alias lg='lazygit'"
+	  #   zinit light 'jesseduffield/lazygit'
+	  #   # lazydocker
+	  #   zinit ice lucid wait"0" as"program" from"gh-r" mv"lazydocker* -> lazydocker" atload"alias lg='lazydocker'"
+	  #   zinit light 'jesseduffield/lazydocker'
+	  #   # ranger
+	  #   zinit ice depth'1' as"program" pick"ranger.py"
+	  #   zinit light ranger/ranger
+	  #   # fd
+	  #   zinit ice as"command" from"gh-r" mv"fd* -> fd" pick"fd/fd"
+	  #   zinit light sharkdp/fd
+	  #   # gh-cli
+	  #   zinit ice lucid wait"0" as"program" from"gh-r" pick"usr/bin/gh"
+	  #   zinit light "cli/cli"
+	  #   # tmux
+	  #   zinit ice from"gh-r" as"program" mv"tmux* -> tmux" pick"tmux" atload"alias tmux=tmux"
+	  #   zinit light tmux/tmux
+	  #   # bit
+	  #   zinit ice lucid wait"0" as"program" from"gh-r" pick"bit"
+	  #   zinit light "chriswalz/bit"
+	  #   # zsh manydots magic
+	  #   zinit autoload'#manydots-magic' for knu/zsh-manydots-magic
+	  #   # tree-sitter
+	  #   zinit ice as"program" from"gh-r" mv"tree* -> tree-sitter" pick"tree-sitter"
+	  #   zinit light tree-sitter/tree-sitter
+	  #   # xurls
+	  #   zinit ice as"program" from"gh-r" mv"xurls* -> xurls" pick"xurls"
+	  #   zinit light mvdan/xurls
+	  #   # prettyping
+	  #   zinit ice lucid wait'' as"program" pick"prettyping" atload'alias ping=prettyping'
+	  #   zinit load "denilsonsa/prettyping"
+	  #   # zsh diff so fancy
+	  #   ZINIT ICE WAIT"2" LUCID AS"PROGRAM" PICK"BIN/GIT-DSF"
+	  #   ZINIT LIGHT ZDHARMA/ZSH-DIFF-SO-FANCY
+	  #   # git-flow
+	  #   zinit light petervanderdoes/git-flow-completion
+	  #
+	  #   # Git extensions {{{
+	  #
+	  #     # only used in fzf previews because delta's colors get messed up there
+	  #     zi0a has'perl' as'program' pick'bin/git-dsf'
+	  #     zinit light zdharma/zsh-diff-so-fancy
+	  #
+	  #     zi0a
+	  #     zinit light wfxr/emoji-cli
+	  #
+	  #     zi0a as'program' has'git' pick"$ZPFX/bin/git-*" make"PREFIX=$ZPFX"
+	  #     zinit light tj/git-extras
+	  #
+	  #     zi0b as'completion' has'git-extras' blockf
+	  #     zinit snippet https://github.com/tj/git-extras/blob/master/etc/git-extras-completion.zsh
+	  #
+	  #   # }}}
+092520d35f904d2165d6832d201ddb92|file:///home/nicholas/.shell/plugins.programs.zsh|10|1|V|zsh
+	# ############
+	# # Programs #
+	# ###########$
+	#
+	#   zi_program() {
+	#     zi0a as'program' "$@"
+	#   }
+	#
+	#   zi_program has'trash' pick'rmtrash'
+	#   zinit light PhrozenByte/rmtrash
+	#
+	#   zi_program has'gpg'
+	#   zinit light dylanaraps/pash
+	#
+	#   zi_program has'jq' pick'reddio' from'gitlab'
+	#   zinit light aaronNG/reddio
+	#
+	#   zi_program pick'hURL'
+	#   zinit light 'fnord0/hURL'
+	#
+	#   # git-open has a manpage that I want in my MANPATH
+	#   zi_program has'git' atclone"cp git-open.1.md $HOME/.local/man/man1/git-open.1" atpull'%atclone'
+	#   zinit light paulirish/git-open
+	#
+	#   zi_program atclone"cp hr.1 $HOME/.local/man/man1" atpull'%atclone'
+	#   zinit light LuRsT/hr
+	#
+	#   zi_program pick'prettyping' has'ping'
+	#   zinit light denilsonsa/prettyping
+	#
+	#   zi_program has'bat' pick'src/*'
+	#   zinit light eth-p/bat-extras
+	#
+	#   zi_program has'git' pick'yadm' atclone"cp yadm.1 $HOME/.local/man/man1" atpull'%atclone'
+	#   zinit light TheLocehiliosan/yadm
+	#
+	#   zi_program has'tmux' pick'bin/xpanes'
+	#   zinit light greymd/tmux-xpanes
+	#
+	#   zi_program has'python3' pick'imguralbum.py'
+	#   zinit light alexgisby/imgur-album-downloader
+	#
+	#   zi_program has'signal-cli' pick'scli'
+	#   zinit light isamert/scli
+	#
+	#   zi_program has'jq'
+	#   zinit snippet 'https://github.com/DanielG/dxld-mullvad/blob/master/am-i-mullvad.sh'
+	#
+	#   zi_program has'chromium-browser-privacy' pick'chrome-extension-dl'
+	#   zinit light th3lusive/chrome-extension-dl
+	#
+	#   zi_program has'ueberzug' pick'stpvimg'
+	#   zinit light Seirdy/stpv
+	#
+	#   zi_program pick'stpv'
+	#   zinit light Seirdy/stpv
+	#
+	#   zi_program pick'neofetch' atclone"cp neofetch.1 $HOME/.local/man/man1" atpull'%atclone'
+	#   zinit light dylanaraps/neofetch
+	#
+	#   zi_program has'perl' pick'exiftool'
+	#   zinit light exiftool/exiftool
+	#
+	#   if [ -z "$SSH_CONNECTION" ]; then
+	#     zi_program has'perl' pick'inxi'
+	#     zinit light smxi/inxi
+	#   fi
+	#
+	#   # fzf-related plugins {{{
+	#       zi0b has'fzf' pick'completion.zsh' src'key-bindings.zsh'
+	#
+	#       zinit light $HOME/.fzf/shell
+	#
+	#       zinit ice as"command" make"\!PREFIX=$ZPFX install" \
+	#           atclone"cp contrib/fzy-* $ZPFX/bin/" \
+	#           pick"$ZPFX/bin/fzy*"
+	#
+	#       zinit load junegunn/fzf-bin
+	#
+	#       zi_program has'fzf' pick'fzfp'
+	#       zinit light Seirdy/stpv
+	#
+	#       zi_program has'fzf'
+	#       zinit light denisidoro/navi
+	#
+	#       zi_program has'fzf' pick'fzf-tmux'
+	#       zinit light $GOPATH/src/github.com/junegunn/fzf/bin
+	#
+	#       # fzf bynary and tmux helper script
+	#       zinit ice lucid wait'0c' as"command" id-as"junegunn/fzf-tmux" pick"bin/fzf-tmux"
+	#       zinit light junegunn/fzf
+	#
+	#       # bind multiple widgets using fzf
+	#       zinit ice lucid wait'0c' multisrc"shell/{completion,key-bindings}.zsh" id-as"junegunn/fzf_completions" pick"/dev/null"
+	#       zinit light junegunn/fzf
+	#
+	#       # fzf-based tab-completion. Load after all other completion plugins
+	#       z_lucid wait'1'
+	#       zinit light Aloxaf/fzf-tab
+	#
+	#       zinit ice wait"1" lucid
+	#       zinit load jhawthorn/fzy
+	#
+	#       zi0c has'fzf' ''
+	#       zinit light ZoeFiri/fz
+	#
+	#       zi0a has'fzf' pick'fzf-finder.plugin.zsh'
+	#       zinit light leophys/zsh-plugin-fzf-finder
+	#
+	#
+	#       zi0c has'fzf' pick'm42e/zsh-histdb-fzf'
+	#       bindkey '^U' histdb-fzf-widget
+	#
+	#       zi0a has'fzf'
+	#       zinit light wookayin/fzf-fasd
+	#
+	#       # git interactive with fzf
+	#       forgit_log=fglo
+	#       forgit_diff=fgd
+	#       forgit_add=fga
+	#       forgit_reset_head=fgrh
+	#       forgit_ignore=fgi
+	#       forgit_restore=fgcf
+	#       forgit_clean=fgclean
+	#       forgit_stash_show=fgss
+	#       forgit_cherry_pick=fgcp
+	#       # FORGIT_LOG_FZF_OPTS=...
+	#
+	#       FORGIT_FZF_DEFAULT_OPTS="
+	#         --exact
+	#         --border
+	#         --cycle
+	#         --reverse
+	#         --height '80%'
+	#       "
+	#       zi0a
+	#       zinit light wfxr/forgit
+	#
+	#       #   bindkey '^@'  fzf-select-widget
+	#       #   bindkey '^@.' fzf-edit-dotfiles
+	#       #   bindkey '^@c' fzf-change-directory
+	#       #   bindkey '^@n' fzf-change-named-directory
+	#       #   bindkey '^@f' fzf-edit-files
+	#       #   bindkey '^@k' fzf-kill-processes
+	#       #   bindkey '^@s' fzf-exec-ssh
+	#       #   bindkey '^\'  fzf-change-recent-directory
+	#       #   bindkey '^r'  fzf-insert-history
+	#       #   bindkey '^xf' fzf-insert-files
+	#       #   bindkey '^xd' fzf-insert-directory
+	#       #   bindkey '^xn' fzf-insert-named-directory
+	#       #
+	#       #   ## Git
+	#       #   bindkey '^@g'  fzf-select-git-widget
+	#       #   bindkey '^@ga' fzf-git-add-files
+	#       #   bindkey '^@gc' fzf-git-change-repository
+	#       #
+	#       #   # GitHub
+	#       #   bindkey '^@h'  fzf-select-github-widget
+	#       #   bindkey '^@hs' fzf-github-show-issue
+	#       #   bindkey '^@hc' fzf-github-close-issue
+	#       #
+	#       #   ## Docker
+	#       #   bindkey '^@d'  fzf-select-docker-widget
+	#       #   bindkey '^@dc' fzf-docker-remove-containers
+	#       #   bindkey '^@di' fzf-docker-remove-images
+	#       #   bindkey '^@dv' fzf-docker-remove-volumes
+	#       #
+	#       #   typeset -gA FZF_WIDGET_OPTS
+	#       #   # Enable Exact-match by fzf-insert-history
+	#       #   FZF_WIDGET_OPTS[insert-history]='--exact'
+	#       #   autoload -Uz chpwd_recent_dirs cdr add-zsh-hook
+	#       #   add-zsh-hook chpwd chpwd_recent_dirs
+	#       # FZF_WIDGET_OPTS[fzf-select-widget]='-p 70%'
+	#       FZF_WIDGET_TMUX=1
+	#
+	#       zinit light ytet5uy4/fzf-widgets
+	#
+	#       zinit light chitoku-k/fzf-zsh-completions
+	#   # }}}
+	#
+	#   zi0a lucid atload"_zsh_autosuggest_start"
+	#   zinit light zsh-users/zsh-autosuggestions
+	#
+	#   zinit load zdharma/zinit-configs
+	#   # zinit-configs
+	#
+	#   # nvm
+	#   export NVM_AUTO_USE=true
+	#   zinit ice wait"1" lucid
+	#   zinit light lukechilds/zsh-nvm
+	#   # exa
+	#   zinit ice wait"2" lucid from"gh-r" as"program" mv"exa* -> exa"
+	#   zinit light ogham/exa
+	#   zinit ice wait blockf atpull'zinit creinstall -q .'
+	#   # delta
+	#   zinit ice lucid wait"0" as"program" from"gh-r" pick"delta*/delta"
+	#   zinit light 'dandavison/delta'
+	#   # bat
+	#   zinit ice from"gh-r" as"program" mv"bat* -> bat" pick"bat/bat" atload"alias cat=bat"
+	#   zinit light sharkdp/bat
+	#   # bat-extras
+	#   zinit ice wait"1" as"program" pick"src/batgrep.sh" lucid
+	#   zinit ice wait"1" as"program" pick"src/batdiff.sh" lucid
+	#   zinit light eth-p/bat-extras
+	#   alias rg=batgrep.sh
+	#   alias bd=batdiff.sh
+	#   alias man=batman.sh
+	#   # ripgrep
+	#   zinit ice from"gh-r" as"program" mv"ripgrep* -> ripgrep" pick"ripgrep/rg"
+	#   zinit light BurntSushi/ripgrep
+	#   # neovim
+	#   zinit ice from"gh-r" as"program" bpick"*appimage*" ver"nightly" mv"nvim* -> nvim" pick"nvim"
+	#   zinit light neovim/neovim
+	#   # lazygit
+	#   zinit ice lucid wait"0" as"program" from"gh-r" mv"lazygit* -> lazygit" atload"alias lg='lazygit'"
+	#   zinit light 'jesseduffield/lazygit'
+	#   # lazydocker
+	#   zinit ice lucid wait"0" as"program" from"gh-r" mv"lazydocker* -> lazydocker" atload"alias lg='lazydocker'"
+	#   zinit light 'jesseduffield/lazydocker'
+	#   # ranger
+	#   zinit ice depth'1' as"program" pick"ranger.py"
+	#   zinit light ranger/ranger
+	#   # fd
+	#   zinit ice as"command" from"gh-r" mv"fd* -> fd" pick"fd/fd"
+	#   zinit light sharkdp/fd
+	#   # gh-cli
+	#   zinit ice lucid wait"0" as"program" from"gh-r" pick"usr/bin/gh"
+	#   zinit light "cli/cli"
+	#   # tmux
+	#   zinit ice from"gh-r" as"program" mv"tmux* -> tmux" pick"tmux" atload"alias tmux=tmux"
+	#   zinit light tmux/tmux
+	#   # bit
+	#   zinit ice lucid wait"0" as"program" from"gh-r" pick"bit"
+	#   zinit light "chriswalz/bit"
+	#   # zsh manydots magic
+	#   zinit autoload'#manydots-magic' for knu/zsh-manydots-magic
+	#   # tree-sitter
+	#   zinit ice as"program" from"gh-r" mv"tree* -> tree-sitter" pick"tree-sitter"
+	#   zinit light tree-sitter/tree-sitter
+	#   # xurls
+	#   zinit ice as"program" from"gh-r" mv"xurls* -> xurls" pick"xurls"
+	#   zinit light mvdan/xurls
+	#   # prettyping
+	#   zinit ice lucid wait'' as"program" pick"prettyping" atload'alias ping=prettyping'
+	#   zinit load "denilsonsa/prettyping"
+	#   # zsh diff so fancy
+	#   ZINIT ICE WAIT"2" LUCID AS"PROGRAM" PICK"BIN/GIT-DSF"
+	#   ZINIT LIGHT ZDHARMA/ZSH-DIFF-SO-FANCY
+	#   # git-flow
+	#   zinit light petervanderdoes/git-flow-completion
+	#
+	#   # Git extensions {{{
+	#
+	#     # only used in fzf previews because delta's colors get messed up there
+	#     zi0a has'perl' as'program' pick'bin/git-dsf'
+	#     zinit light zdharma/zsh-diff-so-fancy
+	#
+	#     zi0a
+	#     zinit light wfxr/emoji-cli
+	#
+	#     zi0a as'program' has'git' pick"$ZPFX/bin/git-*" make"PREFIX=$ZPFX"
+	#     zinit light tj/git-extras
+	#
+	#     zi0b as'completion' has'git-extras' blockf
+59254acaa8c2df2c377a7adf80fad26e|file:///home/nicholas/.shell/plugins.programs.zsh|10|1|V|zsh
+	#     zinit snippet https://github.com/tj/git-extras/blob/master/etc/git-extras-completion.zsh
+	#
+	#   # }}}
+afaa918fd9433f3d6b216dce51a0f08d|file:///home/nicholas/.shell/plugins.widgets.sh|1|1|V|zsh
+	#!/usr/bin/zsh
+3ba9ab517dcdf3031a5f9b28371ad4c0|file:///home/nicholas/.shell/plugins.zsh|30|1|V|zsh
+	
+	# Common ICE modifiers
+	  z_lucid() {
+	    zinit ice lucid ver'master' "$@"
+	  }
+	  zi0a() {
+	    z_lucid wait'0a' "$@"
+	  }
+	
+	  zi0b() {
+	    z_lucid wait'0b' "$@"
+	  }
+	
+	  zi0c() {
+	    z_lucid wait'0c' "$@"
+	  }
+	
+329a8d7f93e409e8d554acc4d451e887|file:///home/nicholas/.shell/plugins.zsh|34|1|V|zsh
+	###############
+	#  Completions #
+	###############
+	  unsetopt menucomplete
+	  setopt automenu
+	
+	  zinit wait lucid for \
+	      OMZ::plugins/aws \
+	      OMZ::plugins/colorize \
+	      OMZ::plugins/command-not-found \
+	      OMZ::plugins/compleat \
+	      OMZ::plugins/cp \
+	      OMZ::plugins/extract \
+	      OMZ::plugins/git \
+	      OMZ::plugins/helm \
+	      OMZ::plugins/kubectl \
+	      if"[[ $+commands[go] ]]" OMZ::plugins/golang \
+	      if"[[ $+commands[npm] ]]" OMZ::plugins/npm \
+	      if"[[ $+commands[sudo] ]]" OMZ::plugins/sudo \
+	      if"[[ $+commands[systemd] ]]" OMZ::plugins/systemd \
+	      OMZ::plugins/node \
+	      OMZ::plugins/nvm \
+	      OMZ::plugins/taskwarrior \
+	      OMZ::plugins/terraform \
+	      OMZ::plugins/vi-mode \
+	      OMZ::plugins/web-search \
+	      OMZ::plugins/zsh_reload
+	
+	  # zsh-completions: collection of completion scripts not yet added to zsh
+	  zinit light "zsh-users/zsh-completions"
+	  zstyle ':completion:*' verbose yes
+	  zstyle ':completion:*' matcher-list 'r:|=*' 'l:|=* r:|=*'
+	  # zstyle ':completion:*:*:*:default' menu yes
+	  # zstyle ':completion:*:*:kill:*:*' verbose no
+	  # zstyle ':completion:*:*:*:default' menu select
+	  # zstyle ':completion:*' fzf-search-display true
+	  # zstyle ':completion:*:options:*' list-colors '=(#b) #(--[a-z-]#)=34=36=33'
+	  zstyle ':completion:*' list-colors ${(s.:.)LS_COLORS}
+	  zstyle ':completion:*:default' list-colors \
+	    "di=36" "ln=35" "so=32" "pi=33" "ex=31" "bd=34;46" "cd=34;43" \
+	    "su=30;41" "sg=30;46" "tw=30;42" "ow=30;43"
+	
+	  # zstyle -e ':completion:*:default' list-colors 'reply=("${PREFIX:+=(#bi)($PREFIX:t)(?)*==02=01}:${(s.:.)LS_COLORS}")'
+	  zstyle ':completion:*:parameters'  list-colors '=*=0;38;2;66;180;255'
+	  zstyle ':completion:*:options' list-colors '=^(-- *)=34'
+	  zstyle ':completion:*:commands' list-colors '=*=0;38;2;66;140;140'
+	  zstyle ':completion:*:builtins' list-colors '=*=1;38;5;27'
+	  zstyle ':completion:*:*:kill:*' list-colors '=(#b) #([0-9]#)*( *[a-z])*=34=31=33'
+	  # zstyle -e ':completion:' list-colors 'thingy=${PREFIX##/} reply=( "=(#b)($thingy)(?)*=00=$color[green]=$color[bg-green]" )'
+	
+	  # zinit light "marlonrichert/zsh-autocomplete"
+	  # # zstyle ':autocomplete:list-choices:*' min-input 3
+	  # # zstyle ':autocomplete:*' max-lines 100%
+	  # zstyle ':autocomplete:*' max-lines 5
+	
+	  # zstyle ':autocomplete:space:*' magic none
+	  # # zstyle ':autocomplete:*' recent-dirs off
+	  # zstyle ':autocomplete:*' key-binding off
+	  # # zstyle ':autocomplete:*' config off
+	  #
+	  # # fzf, widget-style menu-complete, widget-style menu-select
+	  # zstyle ':autocomplete:tab:*' insert-unambiguous yes
+	  # zstyle ':autocomplete:tab:*' widget-style fzf
+	  # zstyle ':autocomplete:tab:*'fzf yes
+	  #
+	  # zstyle ':autocomplete:*:no-matches-yet' message '      %F{#446666}...'
+	  # zstyle ':autocomplete:*:too-many-matches' message '     %F{#446666}...<tab>'
+	  # zstyle ':autocomplete:*:no-matches-at-all' message '      %F{#446666}...'
+	
+	  zinit ice as"completion"
+	  zinit snippet OMZP::docker/_docker
+	
+	  zinit ice as"completion"
+	  zinit snippet OMZP::pass/_pass
+	
+	  zinit snippet OMZP::colored-man-pages
+	  zi0c has'fzf' pick'forgit.plugin.zsh'
+	
+	  zi0a as'program' has'git' pick"$ZPFX/bin/git-*" make"PREFIX=$ZPFX"
+	  zinit light tj/git-extras
+	
+	  zi0b as'completion' has'git-extras' blockf
+	  zinit snippet https://github.com/tj/git-extras/blob/master/etc/git-extras-completion.zsh
+	
+	  zi_completion() {
+	    zi0a as'completion' blockf "$@"
+	  }
+	
+	  zi_completion has'ghq'
+	  zinit snippet https://github.com/x-motemen/ghq/blob/master/misc/zsh/_ghq
+	
+	  zi_completion has'tmux' pick'completion/zsh'
+	  zinit light greymd/tmux-xpanes
+	
+	  zi_completion has'cargo'
+	  zinit snippet https://github.com/rust-lang/cargo/blob/master/src/etc/_cargo
+	
+	  zi_completion has'rustc'
+	  zinit snippet https://github.com/ohmyzsh/ohmyzsh/blob/master/plugins/rust/_rust
+	
+	  zi_completion has'docker'
+	  zinit snippet https://github.com/docker/cli/blob/master/contrib/completion/zsh/_docker
+	
+	  zi_completion has'rg'
+	  zinit snippet https://github.com/BurntSushi/ripgrep/blob/master/complete/_rg
+	
+	  zi_completion has'yadm' mv'yadm.zsh_completion -> _yadm'
+	  zinit snippet https://github.com/TheLocehiliosan/yadm/blob/master/completion/yadm.zsh_completion
+	
+	  zi_completion has'tldr' mv'zsh_tealdeer -> _tldr'
+	  zinit snippet https://github.com/dbrgn/tealdeer/blob/master/zsh_tealdeer
+	
+	  zi_completion has'pandoc'
+	  zinit light srijanshetty/zsh-pandoc-completion
+	
+	  zi_completion has'fd'
+	  zinit snippet https://github.com/ohmyzsh/ohmyzsh/blob/master/plugins/fd/_fd
+	
+	  zi_completion has'buku'
+	  zinit snippet https://github.com/jarun/Buku/blob/master/auto-completion/zsh/_buku
+	
+	  zi_completion has'hub' mv'hub.zsh_completion -> _hub'
+	  zinit snippet $GOPATH/src/github.com/github/hub/etc/hub.zsh_completion
+	
+	  zi_completion has'podman'
+	  zinit snippet $GOPATH/src/github.com/containers/libpod/completions/zsh/_podman
+	
+	  zi_completion has'wl-copy'
+	  zinit snippet $GHQ_ROOT/github.com/bugaevc/wl-clipboard/completions/zsh/_wl-copy
+	
+	  zi_completion has'wl-paste'
+	  zinit snippet $GHQ_ROOT/github.com/bugaevc/wl-clipboard/completions/zsh/_wl-paste
+	
+	  # zi_completion has'exa' mv'completions.zsh -> _exa'
+	  # zinit snippet https://github.com/ogham/exa/blob/master/contrib/completions.zsh
+	
+	  # zi_completion has'cht.sh'
+	  # zinit snippet $XDG_CONFIG_HOME/shell_common/zsh/_cht.sh
+	  #
+	  # zi_completion has'youtube-dl' mv'youtube-dl.zsh -> _youtube-dl'
+	  # zinit snippet $GHQ_ROOT/github.com/ytdl-org/youtube-dl/youtube-dl.zsh
+	
+	  # zi_completion has'mpv'
+	  # zinit snippet $GHQ_ROOT/github.com/mpv-player/mpv-build/mpv/etc/_mpv.zsh
+	
+	  # zi_completion has'alacritty'
+	  # zinit snippet $GHQ_ROOT/github.com/alacritty/alacritty/extra/completions/_alacritty
+	
+	  # load system completions
+	  if [ -f /usr/share/zsh/site-functions/_systemctl ]; then
+	  zi_completion is-snippet for \
+	    /usr/share/zsh/site-functions/_*ctl
+	  fi
+339ec086df872849e7bd4835bf37cf27|file:///home/nicholas/.shell/plugins.completions.zsh|47|1|V|zsh
+	  # zsh-completions: collection of completion scripts not yet added to zsh
+	  zinit light "zsh-users/zsh-completions"
+	  zstyle ':completion:*' verbose yes
+	  zstyle ':completion:*' matcher-list 'r:|=*' 'l:|=* r:|=*'
+	  # zstyle ':completion:*:*:*:default' menu yes
+	  # zstyle ':completion:*:*:kill:*:*' verbose no
+	  # zstyle ':completion:*:*:*:default' menu select
+	  # zstyle ':completion:*' fzf-search-display true
+	  # zstyle ':completion:*:options:*' list-colors '=(#b) #(--[a-z-]#)=34=36=33'
+	  zstyle ':completion:*' list-colors ${(s.:.)LS_COLORS}
+	  zstyle ':completion:*:default' list-colors \
+	    "di=36" "ln=35" "so=32" "pi=33" "ex=31" "bd=34;46" "cd=34;43" \
+	    "su=30;41" "sg=30;46" "tw=30;42" "ow=30;43"
+	
+	  # zstyle -e ':completion:*:default' list-colors 'reply=("${PREFIX:+=(#bi)($PREFIX:t)(?)*==02=01}:${(s.:.)LS_COLORS}")'
+	  zstyle ':completion:*:parameters'  list-colors '=*=0;38;2;66;180;255'
+	  zstyle ':completion:*:options' list-colors '=^(-- *)=34'
+	  zstyle ':completion:*:commands' list-colors '=*=0;38;2;66;140;140'
+	  zstyle ':completion:*:builtins' list-colors '=*=1;38;5;27'
+	  zstyle ':completion:*:*:kill:*' list-colors '=(#b) #([0-9]#)*( *[a-z])*=34=31=33'
+	  # zstyle -e ':completion:' list-colors 'thingy=${PREFIX##/} reply=( "=(#b)($thingy)(?)*=00=$color[green]=$color[bg-green]" )'
+	
+	  # zinit light "marlonrichert/zsh-autocomplete"
+	  # # zstyle ':autocomplete:list-choices:*' min-input 3
+	  # # zstyle ':autocomplete:*' max-lines 100%
+	  # zstyle ':autocomplete:*' max-lines 5
+	
+	  # zstyle ':autocomplete:space:*' magic none
+	  # # zstyle ':autocomplete:*' recent-dirs off
+	  # zstyle ':autocomplete:*' key-binding off
+	  # # zstyle ':autocomplete:*' config off
+	  #
+	  # # fzf, widget-style menu-complete, widget-style menu-select
+	  # zstyle ':autocomplete:tab:*' insert-unambiguous yes
+	  # zstyle ':autocomplete:tab:*' widget-style fzf
+	  # zstyle ':autocomplete:tab:*'fzf yes
+	  #
+	  # zstyle ':autocomplete:*:no-matches-yet' message '      %F{#446666}...'
+	  # zstyle ':autocomplete:*:too-many-matches' message '     %F{#446666}...<tab>'
+	  # zstyle ':autocomplete:*:no-matches-at-all' message '      %F{#446666}...'
+	
+529b1da3d00174fdcd98258833adad80|file:///home/nicholas/.shell/plugins.zsh|63|1|V|zsh
+	local script=${(%):-%x}
+	_file_success $script
+bc5347a120c3593f66c4d36011f96268|file:///home/nicholas/.shell/plugins.completions.zsh|126|1|V|zsh
+	  # load system completions
+	  if [ -f /usr/share/zsh/site-functions/_systemctl ]; then
+	  zi_completion is-snippet for \
+	    /usr/share/zsh/site-functions/_*ctl
+	  fi
+	
+142a0ba7a7030b0d71c3c3caed7470bc|file:///home/nicholas/.shell/plugins.widgets.sh|59|1|V|zsh
+	  # auto-ls-custom_function () {
+	  #   if [[ -z "$_CD_WIDGET" ]]; then
+	  #     if [[ -d $PWD/.git ]]; then
+	  #       lines=$(stdbuf -i0 -o0 -e0 git lg-oneline -n 5)
+	  #       tput rmam
+	  #       stdbuf -i0 -o0 -e0 git lg-oneline -n 5 | while read line
+	  #       do
+	  #         # echo -e "-   $line" | emojify
+	  #         echo -e "   $line" | emojify
+	  #       done
+	  #       tput smam
+	  #     fi
+	  #     colorls -1 --git-status --all --sort-dirs
+	  #   fi
+	  # }
+	  #
+8fb3b7fa0b35b3d2b794d970beb9fd60|file:///home/nicholas/.shell/plugins.widgets.sh|58|1|V|zsh
+	
+	  # # AUTO_LS_CHPWD=false
+	  # AUTO_LS_CHPWD=false
+5110dd3a34a24d3c27ba4e30377c544e|file:///home/nicholas/.shell/plugins.widgets.zsh|121|1|V|zsh
+	    export AUTO_NOTIFY_THRESHOLD=60
+	    export AUTO_NOTIFY_EXPIRE_TIME=2000
+	    export AUTO_NOTIFY_IGNORE=("docker node tmux vim nvim fzf fzf-tmux man sleep")
+	    export AUTO_NOTIFY_TITLE="%command has just finished"
+	    export AUTO_NOTIFY_BODY="Completed in %elapsed seconds with exit code %exit_code"
+a9ca38b4fccbe35ce475c7bd2fca2458|file:///home/nicholas/.shell/plugins.zsh|37|1|V|zsh
+	source "${CWD}/plugins.programs.zsh"
+a5ad12477e0a2b04e33328dded30df74|file:///home/nicholas/.shell/plugins.zsh|38|24|v|zsh
+	programs.
+3e4749d5914b15bf5172fb99a1393de8|file:///home/nicholas/.shell/plugins.zsh|38|1|V|zsh
+	source "${CWD}/plugins.widgets.zsh"
+d5c6f190d07e78f81da2565a38cb2286|file:///home/nicholas/.shell/plugins.zsh|39|24|v|zsh
+	widgets.
+296baa9181e9b5fd21034db4ae0a5ae6|file:///home/nicholas/.shell/plugins.programs.zsh|73|1|V|zsh
+	
+	  zi_program pick'stpv'
+	  zinit light Seirdy/stpv
+d7532eead32301033cd9b1531f6640c3|file:///home/nicholas/.shell/plugins.programs.zsh|257|9|V|zsh
+	  # zsh manydots magic
+	  zinit autoload'#manydots-magic' for knu/zsh-manydots-magic
+5bf263a9c388d28bb87a91b8453e0937|file:///home/nicholas/.shell/plugins.zsh|27|1|V|zsh
+	export HISTFILESIZE=1000000000
+	export HISTSIZE=1000000000
+1f30df790de7a76c59f03274e3356ea3|file:///home/nicholas/.shell/.zshrc.options|16|1|V|zsh
+	SAVEHIST=$HISTSIZE
+cb2ba551acafa5526d9b680cfcc11a66|file:///home/nicholas/.shell/.zshrc.options|15|1|V|zsh
+	HISTSIZE=10000
+6eb98e5de6f79256c4714611ac5b7370|file:///home/nicholas/.shell/plugins.zsh|64|43|V|zsh
+	https://github.com/njhoffman/zsh-histdb-fzf
+5cd82d855794479835d6f79a14b6b345|file:///home/nicholas/.shell/plugins.zsh|61|13|V|zsh
+	  where fzf-history-widget | sed 's/fc -rl/fc -ril/' | source /dev/stdin \
+0e71c8f6dbff0bf9415982fc72e52ce4|file:///home/nicholas/.shell/plugins.widgets.zsh|78|1|V|zsh
+	  zinit light larkery/zsh-histdb
+a82473f09254a8b5e32ce91c72d7249c|file:///home/nicholas/.shell/plugins.widgets.zsh|79|15|v|zsh
+	larkery
+2d7f163fbab8d2b8c9d52c00331a4fa4|file:///home/nicholas/.shell/plugins.programs.zsh|100|1|V|zsh
+	
+	      zinit ice as"command" make"\!PREFIX=$ZPFX install" \
+	        atclone"cp contrib/fzy-* $ZPFX/bin/" \
+	        pick"$ZPFX/bin/fzy*"
+43eb9b76c140e99ba68e812f8fa57c57|file:///home/nicholas/.shell/plugins.programs.zsh|101|1|V|zsh
+	      zinit load junegunn/fzf-bin
+0af05eefe63854d5d2f14fb819fd9a38|file:///home/nicholas/.shell/plugins.programs.zsh|98|1|V|zsh
+	      zi0b has'fzf' pick'completion.zsh' src'key-bindings.zsh'
+	      zinit light $HOME/.fzf/shell
+de78f395391568239e6ed9009ceea958|file:///home/nicholas/.shell/plugins.programs.zsh|92|7|V|zsh
+	      # or fzy
+49508e2cd5cd8deea9092bd2d7d9dd36|file:///home/nicholas/.shell/plugins.programs.zsh|89|1|V|zsh
+	      zinit ice from"gh-r" as"command"
+	      zinit load junegunn/fzf-bin
+2c4848893debcf694d66159eab7df2af|file:///home/nicholas/.shell/plugins.programs.zsh|93|7|V|zsh
+	      zinit ice as"command" make"\!PREFIX=$ZPFX install" \
+	          atclone"cp contrib/fzy-* $ZPFX/bin/" \
+	          pick"$ZPFX/bin/fzy*"
+	      zinit load jhawthorn/fzy
+	
+6e3b38cad398fc5427d4c6f132c0b255|file:///home/nicholas/.shell/plugins.programs.zsh|122|25|V|zsh
+	      zinit ice wait"1" lucid
+c68aa50c0806fdf2c43a278b39106eb7|file:///home/nicholas/.shell/plugins.programs.zsh|123|7|V|zsh
+	      zinit load jhawthorn/fzy
+bb8f73687c75c6a71695dbe8a0105db8|file:///home/nicholas/.shell/plugins.programs.zsh|129|23|V|zsh
+	      zi0c has'fzf' pick'm42e/zsh-histdb-fzf'
+dc3c57e840fe4b2393673af2aa7dd0a0|file:///home/nicholas/.shell/plugins.programs.zsh|129|1|V|zsh
+	      bindkey '^U' histdb-fzf-widget
+7410846f9e7281be8d75b734f5c4ea36|file:///home/nicholas/.shell/plugins.programs.zsh|110|1|V|zsh
+	
+	      # fzf bynary and tmux helper script
+	      zinit ice lucid wait'0c' as"command" id-as"junegunn/fzf-tmux" pick"bin/fzf-tmux"
+	      zinit light junegunn/fzf
+6d4d30ed0dfa1f10fb1088b600438c60|file:///home/nicholas/.shell/plugins.programs.zsh|192|1|V|zsh
+	
+	      zinit light chitoku-k/fzf-zsh-completions
+611174da811070e05654dceeda08c48b|file:///home/nicholas/.shell/plugins.programs.zsh|193|1|V|zsh
+	      zinit light chitoku-k/fzf-zsh-completions
+6919853bf74deed0d68f5e08d7b080e2|file:///home/nicholas/.shell/plugins.completions.zsh|48|3|V|zsh
+	  zinit light chitoku-k/fzf-zsh-completions
+7bcb172ae4f26d61758229df56eb1596|file:///home/nicholas/.shell/plugins.completions.zsh|91|1|V|zsh
+	  zi_completion has'pandoc'
+dc0d4c64e263e031acac0a967bb4b81e|file:///home/nicholas/.shell/plugins.completions.zsh|94|21|v|zsh
+	pandoc
+a84c3efd83a1fad3d8f1974ded83a789|file:///home/nicholas/.shell/.zshrc.root|15|1|V|zsh
+	source ~/.shell/.zshrc.highlights
+bbc955339fb21e7a71103341badce9a1|file:///home/nicholas/.shell/.zshrc|27|4|v|zsh
+	ource 
+c745bcd6911f1b8f119d71cf30717151|file:///home/nicholas/.shell/.zshrc|27|1|V|zsh
+	  load_file "$shell_dir/.zshrc.highlights"
+0e0e2993fe75ec057aeca45cd8896d78|file:///home/nicholas/.shell/.zshrc|15|32|V|zsh
+	  load_file "$shell_dir/.zshrc.funcs"
+39d7faf5b455161e3e931358b87baaad|file:///home/nicholas/.shell/.zshrc|34|25|v|zsh
+	.zshrc.highlights
+91a57834affdd641866b3440ace1d76e|file:///home/nicholas/.shell/.zshrc|21|36|v|zsh
+	rc.options
+6c74d7b1c60c66628a8f54e454fb7714|file:///home/nicholas/.shell/.zshrc|20|36|v|zsh
+	rc.exports
+06128e38a9107f94f1772d52a55b7a61|file:///home/nicholas/.shell/.zshrc|37|36|V|zsh
+	source /home/nicholas/.config/broot/launcher/bash/br
+194bd15c6db12449c94410e4256ce0a5|file:///home/nicholas/.shell/.zshrc|21|36|V|zsh
+	  [ -f "$home_dir/local.zsh" ] && load_file "$home_dir/local.zsh"
+a2b50a85d5d8dc79651ace85ceeefd1c|file:///home/nicholas/.shell/.zshrc|25|36|V|zsh
+	  # shared aliases between bash and zsh
+2c3bac9a94703cd3ebfc42cc2fd2d3b6|file:///home/nicholas/.zshrc|1|1|V|zsh
+	#!/bin/zsh
+	
+	### move to ~/.zshrc, will load files from .shell directory
+	# zmodload zsh/zprof
+	
+	START=$(date +%s.%N)
+	
+	# load password keychain
+	keychain id_rsa --agents ssh
+	
+	#
+	# Enable Powerlevel10k instant prompt. Should stay close to the top of ~/.zshrc.
+	# Initialization code that may require console input (password prompts, [y/n]
+	# confirmations, etc.) must go above this block, everything else may go below.
+	if [[ -r "${XDG_CACHE_HOME:-$HOME/.cache}/p10k-instant-prompt-${(%):-%n}.zsh" ]]; then
+	  source "${XDG_CACHE_HOME:-$HOME/.cache}/p10k-instant-prompt-${(%):-%n}.zsh"
+	fi
+	
+	# source ~/.shell/.zshrc.highlights
+	# ~/bin/shellstart
+	# echo -ne "\e[5 q"
+	
+	home_dir=${(%):-%-2N} # only include two leadining path components
+	[[ -f "$home_dir/.shell/.zshrc" ]] && source "$home_dir/.shell/.zshrc"
+	
+	END=$(date +%s.%N)
+	DIFF=$(printf '%.3g' $(echo "$END - $START" | bc))
+	# print -P "\n %F{247} Loaded zsh shell scripts in %F{255}${DIFF}s%f\n"
+	print -P "%F{247} Loaded scripts in %F{255}${DIFF}s%f"
+	# print -P "%F{247}%F{255}    ${DIFF}s%f\n"
+	
+	export _SHELL_INITIALIZED=1
+	# zprof > ~/.zshprof
+	
+83e4da3b2ed60aaaa68569a7c3862626|file:///home/nicholas/.shell/.zshrc.root|1|1|V|zsh
+	#!/bin/zsh
+	
+	### move to ~/.zshrc, will load files from .shell directory
+	# zmodload zsh/zprof
+	
+	START=$(date +%s.%N)
+	#
+	# Enable Powerlevel10k instant prompt. Should stay close to the top of ~/.zshrc.
+	# Initialization code that may require console input (password prompts, [y/n]
+	# confirmations, etc.) must go above this block, everything else may go below.
+	if [[ -r "${XDG_CACHE_HOME:-$HOME/.cache}/p10k-instant-prompt-${(%):-%n}.zsh" ]]; then
+	  # source "${XDG_CACHE_HOME:-$HOME/.cache}/p10k-instant-prompt-${(%):-%n}.zsh"
+	fi
+	
+	# ~/bin/shellstart
+	# echo -ne "\e[5 q"
+	
+	home_dir=${(%):-%-2N} # only include two leadining path components
+	[[ -f "$home_dir/.shell/.zshrc" ]] && source "$home_dir/.shell/.zshrc"
+	
+	END=$(date +%s.%N)
+	DIFF=$(printf '%.3g' $(echo "$END - $START" | bc))
+	# print -P "\n %F{247} Loaded zsh shell scripts in %F{255}${DIFF}s%f\n"
+	print -P "%F{247} Loaded scripts in %F{255}${DIFF}s%f"
+	# print -P "%F{247}%F{255}    ${DIFF}s%f\n"
+	
+	export _SHELL_INITIALIZED=1
+	# zprof > ~/.zshprof
+	
+	[ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
+59c94e76a6c4636d30fbfd8741a581aa|file:///home/nicholas/.shell/plugins.programs.zsh|94|7|V|zsh
+	      zinit ice as"command" make"\!PREFIX=$ZPFX install" \
+	          atclone"cp contrib/fzy-* $ZPFX/bin/" \
+	          pick"$ZPFX/bin/fzy*"
+2c26322096e9e02545bc34178573d709|file:///home/nicholas/.shell/plugins.programs.zsh|45|1|V|zsh
+	  zinit light LuRsT/hr
+	
+5498c0d43b2e899d0553defc9a30667c|file:///home/nicholas/.shell/plugins.programs.zsh|121|5|V|zsh
+	    …
+732925bd1b9573cb74b1ae0c7bf80b55|file:///home/nicholas/.shell/plugins.programs.zsh|117|1|V|zsh
+	      zinit light junegunn/fzf
+	      zplugin lucid as"program" pick"$ZPFX/bin/fzy*" \
+	        atclone"cp contrib/fzy-* $ZPFX/bin" \
+	        make"PREFIX=$ZPFX install"
+	
+	      # # fzf-based tab-completion. Load after all other completion plugins
+	      # z_lucid wait'1'
+	      # zinit light Aloxaf/fzf-tab
+89f86194fba2ffd746dc41df681fdbf0|file:///home/nicholas/.shell/plugins.programs.zsh|96|13|V|zsh
+	      zinit ice as"command" make"\!PREFIX=$ZPFX install" \
+	          atclone"cp contrib/fzy-* $ZPFX/bin/" \
+	          pick"$ZPFX/bin/fzy*"
+	
+3d65229192d7a5d715a295075cfb6f11|file:///home/nicholas/.shell/plugins.programs.zsh|95|13|v|zsh
+	load 
+6ae73a92f536099df88950b93d8d19f7|file:///home/nicholas/.shell/plugins.programs.zsh|101|59|v|zsh
+	ompletion 
+36d92818cd875e18c0e0c913e9df313c|file:///home/nicholas/.shell/plugins.completions.zsh|57|1|V|zsh
+	  zi0a as'program' has'git' pick"$ZPFX/bin/git-*" make"PREFIX=$ZPFX"
+	  zinit light tj/git-extras
+94e9b305c166d20adf2e4db00237f2fd|file:///home/nicholas/.shell/plugins.completions.zsh|55|1|V|zsh
+	  zi0c has'fzf' pick'forgit.plugin.zsh'
+4734711dbe510f8b80cb954a4bbe6995|file:///home/nicholas/.shell/plugins.programs.zsh|95|14|V|zsh
+	      zinit light jhawthorn/fzy
+76f755f0f855cc769e81d8f1d72f27b2|file:///home/nicholas/.shell/plugins.programs.zsh|99|7|V|zsh
+	      zplugin lucid as"program" pick"$ZPFX/bin/fzy*" \
+36efa86f2805848fadb483a30f8c261e|file:///home/nicholas/.shell/plugins.programs.zsh|109|1|V|zsh
+	      zinit ice from"gh-r" as"command"
+7ae1fd4751e91b0186f32fb131e6ee32|file:///home/nicholas/.shell/binding.zsh|82|1|V|zsh
+	bindkey '^I'   autosuggest-accept # tab          | complete
+ed9a87cc63147b94b3897f414ab20aca|file:///home/nicholas/.shell/binding.zsh|82|16|v|zsh
+	autosuggest-accept # tab          | complete
+c1e86cda46421e8856506738789ffb2c|file:///home/nicholas/.shell/exports.fzf.sh|99|1|V|sh
+	# export FZF_COMPLETION_TRIGGER=''
+4c25523000daeb629327668c6e448787|file:///home/nicholas/.config/tmux/tmux.conf|156|38|v|tmux
+	colour236
+71c591ea49dce2262e6ec39fab27f38b|file:///home/nicholas/.config/tmux/tmux.conf|156|34|v|tmux
+	,bg=black
+b9a61bb22caf58ff0cf6deb0d0d6cbeb|file:///home/nicholas/.config/tmux/tmux.conf|155|1|V|tmux
+	# active window pane styles
+	set -g window-style 'fg=colour244'
+	set -g window-active-style 'fg=colour250'
+	
+	# set the pane border colors
+	set -g pane-border-style 'fg=colour235,bg=colour238'
+	set -g pane-active-border-style 'fg=colour51,bg=colour236'
+	
+	# panes border styles
+	# set -g pane-border-style 'fg=#aa4444,bg=#110000'
+	# set -g pane-active-border-style 'fg=#88ccff,bg=#002233'
+	set -g pane-border-lines single
+	             # single  single lines using ACS or UTF-8 characters
+	             # double  double lines using UTF-8 characters
+	             # heavy   heavy lines using UTF-8 characters
+	             # simple  simple ASCII characters
+	             # number  the pane number
+	
+	
+dd5c07036f2975ff4bce568b6511d3bc|file:///home/nicholas/.config/tmux/tmux.conf|240|26|v|tmux
+	single
+7cfe64ea44dc3bbeb63b29ff3039a481|file:///home/nicholas/.config/tmux/tmux.conf|240|26|v|tmux
+	heavy
+302adfc727b0bc18c8f999b00411a8ed|file:///home/nicholas/.config/tmux/tmux.conf|235|1|V|tmux
+	set -g pane-active-border-style 'fg=colour69,bg=colour232'
+e8cd7da078a86726031ad64f35f5a6c0|file:///home/nicholas/.config/tmux/tmux.conf|241|26|v|tmux
+	double
+2ac6a1a46d8cb1f57edaaa968db591b6|file:///home/nicholas/.shell/.zshrc|33|4|V|zsh
+	  load_file "$shell_dir/highlights.zsh"
+dcafd5d46d04fe7e3eb6112336494a4f|file:///home/nicholas/forks/zsh-histdb-fzf/dotbare-add.sh|3|16|v|sh
+	comm -
+e343915ded99b8328839a3e73ce773a3|file:///home/nicholas/forks/zsh-histdb-fzf/dotbare-add.sh|3|1|V|sh
+	dir=$(pwd)
+3d8424f4cd39a4b409fd6e8a4bef4bfe|file:///home/nicholas/forks/zsh-histdb-fzf/dotbare-add.sh|4|6|v|sh
+	(pwd)
+ee61f3cf856e77c26048dc3029f81fda|file:///home/nicholas/forks/zsh-histdb-fzf/dotbare-add.sh|8|30|v|sh
+	 --max-depth 
+a573ecb521f6c61c7efd747f41148c7f|file:///home/nicholas/forks/zsh-histdb-fzf/dotbare-add.sh|7|3|v|sh
+	max-
+365df3361818c9adfbe2928096c36a30|file:///home/nicholas/forks/zsh-histdb-fzf/dotbare-add.sh|6|1|V|sh
+	max_depth=-1
+710533dd879dd1202e5c73b27705bf02|file:///home/nicholas/forks/zsh-histdb-fzf/dotbare-add.sh|7|30|v|sh
+	HOME
+db5a52ef997135f8f63df2fb60bc8ef3|file:///home/nicholas/forks/zsh-histdb-fzf/dotbare-add.sh|8|19|v|sh
+	fdfind -
+a6070e01d74b1a41e9818a563dc501ec|file:///home/nicholas/forks/zsh-histdb-fzf/dotbare-add.sh|9|36|v|sh
+	ls -a1R $dir
+5d06e2ecdcfb9e4bace1fa2734c7684a|file:///home/nicholas/forks/zsh-histdb-fzf/dotbare-add.sh|11|32|v|sh
+	cho 
+fd5b6b5f0a8e5343f2a48999e03b4a62|file:///home/nicholas/forks/zsh-histdb-fzf/dotbare-add.sh|11|49|v|sh
+	| wc -l
+8ec7738eaa1d0ca90b7129edcde456fd|file:///home/nicholas/forks/zsh-histdb-fzf/dotbare-add.sh|11|43|v|sh
+	filesfiles 
+2f15ee86b2d41b5266fadcc4f668c0ad|file:///home/nicholas/forks/zsh-histdb-fzf/dotbare-add.sh|11|67|v|sh
+	existing 
+686d8cacd82f89aec692cdfe7a9cd7a3|file:///home/nicholas/forks/zsh-histdb-fzf/dotbare-add.sh|10|1|V|sh
+	# 3707792 files
+	# 4486 existing 
+144473024f1c100665b6b882424cec3b|file:///home/nicholas/forks/zsh-histdb-fzf/dotbare-add.sh|9|21|v|sh
+	all_files
+1ef01946205254d331980549a5b37aa3|file:///home/nicholas/forks/zsh-histdb-fzf/dotbare-add.sh|12|1|V|sh
+	all_files=$(fdfind -I -H . "$dir" | wc -l)
+	checkedin_files=$(dotbare ls-files . "$dir" | wc -l)
+f69530b3c7f90e64329350dd71ccc939|file:///home/nicholas/forks/zsh-histdb-fzf/dotbare-add.sh|9|1|v|sh
+	intersected
+6a536ca7d7d500952e5f0e06ce0e2717|file:///home/nicholas/forks/zsh-histdb-fzf/dotbare-add.sh|9|1|V|sh
+	unassigned=`sort <(fdfind -I -H -d $max_depth . "$dir") <(dotbare ls-files "$dir") | uniq -d`
+c2106436e27cca8f3b1af3e7b111462a|file:///home/nicholas/forks/zsh-histdb-fzf/dotbare-add.sh|10|1|V|sh
+	assigned=`sort <(fdfind -I -H -d $max_depth . "$dir") <(dotbare ls-files "$dir") | uniq -d`
+d635982c3803264415e8519836d8d5e3|file:///home/nicholas/forks/zsh-histdb-fzf/fzf-histdb.zsh|41|1|v|zsh
+	  done
+	 
+c99388683f7436fa7882d9314d398e4b|file:///home/nicholas/forks/zsh-histdb-fzf/fzf-histdb.zsh|38|1|V|zsh
+	              everywhere=1
+6ddc7152d583df07020213a86bab3f6f|file:///home/nicholas/forks/zsh-histdb-fzf/fzf-histdb.zsh|38|1|V|zsh
+	              everywhere=1
+	              ;;
+334f9837ccdcd29f59065c1a543770fc|file:///home/nicholas/forks/zsh-histdb-fzf/fzf-histdb.zsh|34|1|V|zsh
+	          -d)
+d8bb622f074d3ce876c6a81e90959fde|file:///home/nicholas/forks/zsh-histdb-fzf/fzf-histdb.zsh|30|1|V|zsh
+	      case $opt in
+	          -s)
+	              where="${where:+$where and} session in (${HISTDB_SESSION})"
+cc98797f7c4737eb3ce1e4aca59ddac6|file:///home/nicholas/.config/i3/conf.d/10-autostart|44|1|V|config
+	  exec --no-startup-id "xsel -i --primary"
+386bba5a5dc4fac215c9cf0b9a29b352|file:///home/nicholas/.config/i3/conf.d/10-autostart|44|35|v|config
+	primary
+430c620d5d860242329cd4e09f301e94|file:///home/nicholas/.config/i3/conf.d/10-autostart|44|1|V|config
+	  exec --no-startup-id "xsel -i --clipboard"
+	  # exec --no-startup-id "xsel -i --primary"
+04493814d76ed99a8edfe22a7a2d2786|file:///home/nicholas/.config/i3/conf.d/10-autostart|40|1|V|config
+	  exec --no-startup-id "$dir_bin/launch-polybars.sh"
+88e4e44701644fa025f94b5f7e3e7ccb|file:///home/nicholas/.config/i3/conf.d/10-autostart|39|3|v|config
+	# start polybars on multiple monitors
+	  exec --no-startup-id "$dir_bin/launch-polybars.sh"
+	
+	
+ee3cf81c113dc17a3d632a856d36526a|file:///home/nicholas/.config/i3/conf.d/10-autostart|39|1|V|config
+	  # start polybars on multiple monitors
+	  exec --no-startup-id "$dir_bin/launch-polybars.sh"
+ceff188b1ac36de3730fe7ff6f724529|file:///home/nicholas/.config/i3/conf.d/10-autostart|34|1|V|config
+	  exec --no-startup-id "compton"
+	
+	  # TODO: create a service that waits for mpd to be initialized
+f6395f2beacd0a6376afb625d760990d|file:///home/nicholas/.config/i3/conf.d/10-autostart|29|1|V|config
+	  # ensure socket open for i3dropdown animation
+	  exec --no-startup-id i3 --get-socketpath > /tmp/i3wm-socket-path
+	
+	  # window blurring/opacity effects
+fd45e746d370cde3bf7dc5dc30ef2d0d|file:///home/nicholas/.config/i3/conf.d/10-autostart|26|1|V|config
+	  # flashfocus to animate highlight active window
+	  exec_always --no-startup-id flashfocus
+	
+	  # ensure socket open for i3dropdown animation
+5b8d20e84ef51051e6298271dad9d86a|file:///home/nicholas/.config/nvim/settings.vim|23|1|V|vim
+	set clipboard+=unnamed               " use system clipboard
+bcc4fd24f9cd417752124edb9a82a77c|file:///home/nicholas/.shell/binding.zsh|37|1|V|zsh
+	pastefromclipboard(){
+	    RBUFFER=$(xsel -o -b </dev/null)$RBUFFER
+da5e94f69e8f8357bcfc880b620873f6|file:///home/nicholas/.shell/binding.zsh|32|1|V|zsh
+	bindkey -M vicmd 'y' vi-yank
+	
+	yanktoclipboard(){
+7a9fe6a61bb32781fc3ab644533cb65a|file:///home/nicholas/.shell/binding.zsh|28|1|V|zsh
+	# # Easier, more vim-like editor opening
+5d3f185c2b3e8967bddb93c39c283b3e|file:///home/nicholas/.shell/binding.zsh|1|1|V|zsh
+	# TODO: figure out where this needs to be placed to override certain keys
+b4427fc646eef283a6390d435403d1a3|file:///home/nicholas/.shell/binding.zsh|2|1|V|zsh
+	# showkey -a, zle -al
+	
+	# treat ":w" like line enter
+f020213f111be323e72095a4991a0e4d|file:///home/nicholas/.shell/binding.zsh|4|1|V|zsh
+	# treat ":w" like line enter
+	bindkey -M vicmd -s ':w^M' '^M'
+fa97db8e16e821711592f64b37cabd80|file:///home/nicholas/.shell/binding.zsh|8|1|V|zsh
+	# # Better searching in command mode
+	bindkey -M vicmd '?' history-incremental-search-backward
+22d70458aa1459f0b50d9f78b553bacc|file:///home/nicholas/.shell/binding.zsh|9|2|v|zsh
+	indkey -M vicmd '?' history-incremental-search-backward
+	bindkey -M vicmd '/' history-incremental-search-forward
+	bindkey -M vicmd 'k' history-substring-search-up
+	bind
+a65bd238721c4a5e9cabfddf1bcc8a19|file:///home/nicholas/.xinitrc|138|1|V|sh
+	autocutsel -fork -selection CLIPBOARD
+	autocutsel -fork -selection PRIMARY
+aebbdd95baf9da747214f18cab08dcfe|file:///home/nicholas/forks/zsh-histdb-fzf/fzf-histdb.zsh|4|22|v|zsh
+	FZF_HISTDB_FILE
+a5a9ae583f4f86d868c299f52c8840f3|file:///home/nicholas/forks/zsh-histdb-fzf/fzf-histdb.zsh|6|34|V|zsh
+	echo "file: ${HISTDB_FZF_LOGFILE}"
+6b56f219645f0d2ca436095cf148036d|file:///home/nicholas/forks/zsh-histdb-fzf/fzf-histdb.zsh|4|59|v|zsh
+	hist.
+3dd05f4c285902494f92cb12d5d3354f|file:///home/nicholas/forks/zsh-histdb-fzf/fzf-histdb.zsh|8|1|V|zsh
+	__histdb-fzf-log() {
+	  if [[ ! -z ${HISTDB_FZF_LOGFILE} ]]; then
+	    if [[ ! -f ${HISTDB_FZF_LOGFILE} ]]; then
+	      touch ${HISTDB_FZF_LOGFILE}
+	    fi
+	    echo $* >> ${HISTDB_FZF_LOGFILE}
+	  fi
+	}
+	
+5fbd9e44529b260cd2bd68ef4394f220|file:///home/nicholas/forks/zsh-histdb-fzf/fzf-histdb.zsh|15|27|V|zsh
+	__histdb-fzf-log "FUCK YOU"
+d640914b3434813dd0240cf7d18fdd5d|file:///home/nicholas/forks/zsh-histdb-fzf/fzf-histdb.zsh|146|21|v|zsh
+	FUCK YOU
+09264b1fbb258f433dd053eef3609d35|file:///home/nicholas/forks/zsh-histdb-fzf/fzf-histdb.zsh|22|1|V|zsh
+	__histdb-fzf-log "FUCK YOU 2"
+ced419bdb5134c95b2651628f1afefb7|file:///home/nicholas/forks/zsh-histdb-fzf/fzf-histdb.zsh|83|1|V|zsh
+	__histdb-fzf-log "FUCK YOU 3"
+f6aec377aa98bdde6f4d3077a0f14fdb|file:///home/nicholas/forks/zsh-histdb-fzf/fzf-histdb.zsh|148|1|V|zsh
+	__histdb-fzf-log "FUCK YOU 4"
+fb2ffaf39fba404178e9fbed7de70561|file:///home/nicholas/forks/zsh-histdb-fzf/fzf-histdb.zsh|252|28|V|zsh
+	__histdb-fzf-log "FUCK YOU 5"
+6228e543b2520d4fa4edf66d593750d2|file:///home/nicholas/forks/zsh-histdb-fzf/fzf-histdb.zsh|149|21|V|zsh
+	  __histdb-fzf-log "ASSHOLE"
+fcec02af10591bf2a59024fbaeabac54|file:///home/nicholas/.config/nvim/syntax/zsh.vim|380|1|V|vim
+	syn sync    minlines=200
+e1fc04865da3f55e0be82323538a885b|file:///home/nicholas/.config/nvim/syntax/zsh.vim|381|13|v|vim
+	minlines
+56f7da346787febfb434a6f28cdf0cab|file:///home/nicholas/forks/zsh-histdb-fzf/fzf-histdb.zsh|5|6|V|zsh
+	set -x
+4dda4508b5b52b8e9e089e27de04607d|file:///home/nicholas/forks/zsh-histdb-fzf/fzf-histdb.zsh|5|21|V|zsh
+	HISTDB_FZF_LOGFILE="$(dirname $(pwd))/test.log"
+78af1f4f849890fe6f09a16635d6021e|file:///home/nicholas/forks/zsh-histdb-fzf/fzf-histdb.zsh|8|17|V|zsh
+	      echo "${HISTDB_FZF_LOGFILE}"
+65523abf250b62b8aec64c683dd66d89|file:///home/nicholas/forks/zsh-histdb-fzf/fzf-histdb.zsh|163|57|V|zsh
+	  while [[ "$exitkey" != "" && "$exitkey" != "esc" ]]; do
+	    __histdb-fzf-log "------------------- TURN -------------------"
+0867b99081f3ba6425f529ab282852b9|file:///home/nicholas/.local/keys/pgpmsg.txt|1|1|V|text
+	-----BEGIN PGP MESSAGE-----
+	
+	hQIMA06DCl3tkMZXARAAsVv5uG4FLA8YjeObcYQ0Fa7ZZXj8I70WPFRvC7GCrRb2
+	x7nJjA+DlzNSgjdPTZeeLADF+hxmf8qF6aJChVLN8tGgLi7WrI7GdAWbBLgoo7vp
+	1lfQrMOsuRhZlr3jsEgQ38BBayLg+wva9ElVT5WMjyRK3ajVTK4AzETipV2GNKQ4
+	OWj7FCqFUuhFOjvWllulBlOFQbe3uvVWv1YiNRvoqbOv/2COjdwxt2hqb8SXoa7I
+	qQWyibV7Hv74j0bKCX/DGafFUSzphBcxSVYbts8k3I87og72+Sbh86VJJqRNnwGE
+	tm8jRqN0aIP/Ho2OF82f9xEMN4aFe+Bw5FdA3ALI5/61FTNGJMWeCZePEp9U0EFS
+	3IFDHZztkh6zmaOMCs7IqrBZP16bK735lBqat5gi2/hgsteIh3X9pyxuQgj7LaJ+
+	Wo5rky8sCKfhL/xI4Tr5vwEbtZeqPFxTmQ+r2Wtr1rX6/508AeF2Mr8JW8AuqYnY
+	Bp/Yz/J1uZYmrC4WEBlwDyNN9hhE6T2OYcVTw/ypKb2BzAlUGzZsK9gtsmXLdfAd
+	ZKYJANJ7v95JdqLChGuFSkCpPjvtL2+RXhZqA/ryF7RS3AH1Xdz5i+C15k/KDS21
+	NLn4jRZLL+oVFNmBkpTROnlWSWgy9IuhMKECglvFn3399Zo0SK4KuHcfD8N1PW3S
+	wMUBbkHWhXnQ28PUPsO+ZCFHcGbTDuov4zjSVNmE0xiKEVv7Lb+Apxt/q6HL7mip
+	npFfUItuVi1apJ/HgbSSAYc8rsWfKfzulmx4Jn53TmH4os6QliM/fr3Ud7lVimhe
+	jh9JVbbPQDvrgvU5pPo+33d7+GpeniPh9+BCNrv24P1hwew27PNvMG/0R0/TVlB6
+	DeQy7k0Pij+zpbfZ8Cjypc7dNV1G4OdpT1p0PaD52CWdLt1BcHrG3+ljfgr0VHEF
+	Nj7IIzeFtsnrwsnQ5393euw6D9feys0XgvA67uOaqingtgTzibuu6E8ILtC0Z6hm
+	Pa+uA6oDFeEkBusWYDKWwG9ekZU7v0a9/Ll208i4lK9lhvcT+QXaOhwKNIm9DtiJ
+	fIyXdsDyKnqNoz/+LNsB5hpdEdo4O7tjdXeQnCOP+Ke2SLl0bF6FyjgteaC87Kwo
+	xRnwsIuZtdci3M7OtFJtr2A1EDF6lwlR3uHS3xKddfJXIvUXkdH+Pf2zwVnIteOG
+	+rUFe+JoUA==
+	=cawl
+	-----END PGP MESSAGE-----
+0221dbff91fafb9f21d5f5c9b95aadd2|file:///home/nicholas/.local/keys/pgpmsg.txt|1|1|V|text
+	-----BEGIN PGP MESSAGE-----
+	
+	hQIMA06DCl3tkMZXARAAtjyViEHZLTQAB9cIBePKZYNI9HIJ58o8JUITjX/GbPhB
+	kWjDE/K39yMukLBka1ofw83/yfiFflM/Zgko8EsZVtxAI+EvQNELzGiCFCjZb22B
+	lRzDazcOYv0WwlJwsAuQnYZ6gTa+6+GQx0zAKh8uYxDMJB3tHi2+eNkIJtYymNHs
+	GfWxISs2dwJld77V9K9lwwNXPr8J+2Lx9GzFGsoHI5hLUllBCFZetm4VHCKTynWb
+	zHairHYIgRveczIXIBj0PblIjsbpQdz/h2QdOmv6LJrmFLVf93eQS5sD+GrWcBdo
+	bnt6E+ptCqleMPS76ljZNL+ZhpYRX4JZ7wJkuX/wSEkRzkdf3gVRZzpxThk4clHA
+	Dy80MPRSr/pXo9X8RVpDiL+c/ajNgZZ1gULM6xrnZFXr7qehj2SdsB7kuuL/+Wy6
+	5qFohnJgP3FXPbmFq/ldd84sRsb5Lcor2MT3b9IsAPOXgaT8RoxlA/it6NHByYCy
+	40s703BqE1DBh0zOFkBa40bERQir+YKiRBMxQjRV44aqkjDfYtMC6Xh+FCn/1Put
+	ymjkgDLHgFkJkJWoIfgIWsubsl84AfKi1drB2T8l5w2LxrzNsuEH9zRVqdn4hg32
+	hve/Cb1fsCdhWiad4OeiLy5p1D3ebVNHu8GR/R98XtdpLvZs+qZ4sTZMnDA15PzS
+	wMYBcx9PsRYUb5bSbv7x1tldF7mEkA/+5pzxsxOJerw2gCWXRne8K0NA46nRvNHC
+	2KQMXRblxhDHs7sH6ChTUzwRQlu4tg+kpwu+j+lyuM4/wQysiFXiZXPFooEIXHG6
+	ZmoY6Y2sj9hPHIoCqUghIshHsrv7kdmH7nl32ANIKv6bF6zTa7pIIJjw5G4DlFny
+	OVayI5yfzv8tUXMXoJ+PPSQn1XTFKV4tt4tCnwIvkjvG4eIsoXX6pVInjPbMSJNn
+	t+bYJP/dnk/ZVC22l4MmRxYnAJtydQsD1f31iRsrUxAyo5NsavpN/bEPplxNlcX2
+	uSvQmUr3OGCIB7AO8RmVQhh3iYcj052ygLHVM/PytqPM5tJ+A28nUCcsLdvRz+Od
+	+tTVUbGwz2YIsGz9hTRpq9vo9zdugVamruT+WI+4RoWAOkuwUsROLP6ucCrgTSD0
+	5u3zxfoNB5ilTykLUDVP/L2gZkz3X2NEGG7rx7O+IFeTu3er3qhrAKFkSwqz4RwG
+	v9n+zSZr0NE=
+	=LNEU
+	-----END PGP MESSAGE-----
+c2f6f188991d858bf43ce524f76ba1ec|file:///home/nicholas/.shell/plugins.widgets.zsh|80|15|v|zsh
+	njhoffman
+166df3ea8695d89fe5ece24e37e50640|file:///home/nicholas/.shell/exports.sh|151|1|V|sh
+	# e.g. I have all my dotfiles stored in folder $HOME/.myworld and symlinks all of them to appropriate location.
+	# export DOTBARE_DIR="$HOME/.myworld/.git"
+	# export DOTBARE_TREE="$HOME/.myworld"
+	export DOTBARE_DIR="$HOME/.cfg"
+	export DOTBARE_TREE="$HOME"
+	# export DOTBARE_FZF_DEFAULT_OPTS=" -w80 --preview-window=right:50%"
+	
+ee7205d89ec7c14fda4cf81ef6391e6a|file:///home/nicholas/.shell/plugins.zsh|35|1|V|zsh
+	# export DOTBARE_DIR="$HOME/.myworld/.git"
+	# export DOTBARE_TREE="$HOME/.myworld"
+8b7e1d79e2eb53933898941fc1b3761d|file:///home/nicholas/.shell/plugins/oh-my-zsh.zinit.zsh|5|1|V|zsh
+	  colored-man-pages
+b431a8f2dcad8ed04d1517bf484e81ff|file:///home/nicholas/.gitignore|6|4|V|gitignore
+	./**/.node_modules
+448725115a83c589b33de77889e1e2f3|file:///home/nicholas/.gitignore|14|5|V|gitignore
+	forks
+6971f3d8fe1678b6555b4ffe6a6f8467|file:///home/nicholas/.gitignore|8|8|V|gitignore
+	.neomutt
+1837f874491b60240ff24eeb395e4673|file:///home/nicholas/.gitignore|29|9|V|gitignore
+	**/pkg/**
+2581e7f8e2f17a579b7e07da0d16b9a8|file:///home/nicholas/.gitignore|5|1|V|gitignore
+	.config/Slack/Service Worker
+17145319aba079a26c6d3bb2b1d58894|file:///home/nicholas/.gitignore|6|15|v|gitignore
+	Service Worker
+18ba83099740c3ade039e29988ce6136|file:///home/nicholas/.gitignore|6|1|V|gitignore
+	.config/Slack/Code Cache
+b1380510a4fcc893f2484027925e92d1|file:///home/nicholas/.gitignore|7|15|v|gitignore
+	Code Cache
+5c1d96104aec0026e5bbd22fbab210a2|file:///home/nicholas/.gitignore|7|1|V|gitignore
+	.config/Slack/IndexedDB
+4408c27119711078f44a7b226f47ef14|file:///home/nicholas/.gitignore|5|22|v|gitignore
+	/Service Worker
+ccd5e59b2dca502f21d6ce923e7fcb06|file:///home/nicholas/.gitignore|7|1|V|gitignore
+	.config/Slack/Cache
+	.config/Slack/Code Cache
+	.config/Slack/IndexedDB
+8a558e5a702bf77e389f8889aa5c4680|file:///home/nicholas/.shell/plugins.completions.zsh|45|2|V|zsh
+	      htlsne/zplugin-rbenv \     OMZ::plugins/terraform \
+16e980c0e5ba507da505f8419134ef97|file:///home/nicholas/.shell/plugins.completions.zsh|55|29|V|zsh
+	  zinit snippet OMZP::colored-man-pages
+c2ce9fd1dc91a9383243aa8176ab81a2|file:///home/nicholas/.shell/plugins.completions.zsh|26|1|V|zsh
+	  zinit wait lucid for \
+	      OMZ::plugins/aws \
+	      OMZ::plugins/colorize \
+	      OMZ::plugins/colored-man-pages/colored-man-pages.plugin.zsh \
+	      OMZ::plugins/command-not-found/command-not-found.plugin.zsh \
+	      OMZ::plugins/compleat \
+	      OMZ::plugins/cp \
+	      OMZ::plugins/extract \
+	      OMZ::plugins/git \
+	      OMZ::plugins/helm \
+	      OMZ::plugins/kubectl \
+	      if"[[ $+commands[go] ]]" OMZ::plugins/golang \
+	      if"[[ $+commands[npm] ]]" OMZ::plugins/npm \
+	      if"[[ $+commands[sudo] ]]" OMZ::plugins/sudo \
+	      if"[[ $+commands[systemd] ]]" OMZ::plugins/systemd \
+	      OMZ::plugins/node \
+	      OMZ::plugins/nvm \
+	      OMZ::plugins/taskwarrior \
+	      OMZ::plugins/thefuck/thefuck.plugin.zsh \
+	      OMZ::plugins/vi-mode \
+	      OMZ::plugins/web-search \
+	      OMZ::plugins/zsh_reload
+9c0214f81dde56bc9711df691ba4dc85|file:///home/nicholas/.shell/plugins.widgets.zsh|174|1|V|zsh
+	    zinit wait lucid light-mode for \
+	        OMZ::plugins/aws \
+	        OMZ::plugins/colorize \
+	        OMZ::plugins/colored-man-pages/colored-man-pages.plugin.zsh \
+	        OMZ::plugins/command-not-found/command-not-found.plugin.zsh \
+	        OMZ::plugins/compleat \
+	        OMZ::plugins/cp \
+	        OMZ::plugins/extract \
+	        OMZ::plugins/git \
+	        OMZ::plugins/helm \
+	        OMZ::plugins/kubectl \
+	        if"[[ $+commands[go] ]]" OMZ::plugins/golang \
+	        if"[[ $+commands[npm] ]]" OMZ::plugins/npm \
+	        if"[[ $+commands[sudo] ]]" OMZ::plugins/sudo \
+	        if"[[ $+commands[systemd] ]]" OMZ::plugins/systemd \
+	        OMZ::plugins/node \
+	        OMZ::plugins/nvm \
+	        OMZ::plugins/taskwarrior \
+	        OMZ::plugins/thefuck/thefuck.plugin.zsh \
+	        OMZ::plugins/vi-mode \
+	        OMZ::plugins/web-search \
+	        OMZ::plugins/zsh_reload
+ffa5408aa90d1102e1b8b480571f8236|file:///home/nicholas/.shell/plugins.completions.zsh|27|1|V|zsh
+	      OMZ::plugins/aws \
+	      OMZ::plugins/colorize \
+	      OMZ::plugins/colored-man-pages/colored-man-pages.plugin.zsh \
+	      OMZ::plugins/command-not-found/command-not-found.plugin.zsh \
+	      OMZ::plugins/compleat \
+	      OMZ::plugins/cp \
+	      OMZ::plugins/extract \
+	      OMZ::plugins/git \
+	      OMZ::plugins/helm \
+	      OMZ::plugins/kubectl \
+b3d8c8d248a501711662fac5db7c397c|file:///home/nicholas/.shell/plugins.completions.zsh|31|1|V|zsh
+	      OMZ::plugins/node \
+	      OMZ::plugins/nvm \
+	      OMZ::plugins/taskwarrior \
+	      OMZ::plugins/thefuck/thefuck.plugin.zsh \
+	      OMZ::plugins/vi-mode \
+	      OMZ::plugins/web-search \
+	      OMZ::plugins/zsh_reload
+	
+089560bacb9fa3cbe31370011dd9e08c|file:///home/nicholas/.shell/plugins.widgets.zsh|185|1|V|zsh
+	        if"[[ $+commands[go] ]]" OMZ::plugins/golang \
+	        if"[[ $+commands[npm] ]]" OMZ::plugins/npm \
+	        if"[[ $+commands[sudo] ]]" OMZ::plugins/sudo \
+	        if"[[ $+commands[systemd] ]]" OMZ::plugins/systemd \
+d9100f623f14ad62e318b6ab436f0d6e|file:///home/nicholas/.shell/plugins.widgets.zsh|177|39|v|zsh
+	/colored-man-pages.plugin.zsh 
+818474add0e41464a49cafa5c3371820|file:///home/nicholas/.shell/plugins.widgets.zsh|178|39|v|zsh
+	/command-not-found.plugin.zsh 
+93788abf2e5e5b846b02ca6f31a61cfc|file:///home/nicholas/.shell/plugins.widgets.zsh|188|29|v|zsh
+	/thefuck.plugin.zsh 
+2e309f5a6c935d25a5efd6cbe6d7615d|file:///home/nicholas/.shell/plugins.zsh|24|8|V|zsh
+	export PAGER=bat
+c01115eb35e8fd8c46fb4c8b7df0ced1|file:///home/nicholas/.shell/plugins.widgets.zsh|175|1|V|zsh
+	        OMZ::plugins/aws \
+	        OMZ::plugins/colorize \
+	        OMZ::plugins/colored-man-pages \
+	        OMZ::plugins/command-not-found \
+	        OMZ::plugins/compleat \
+	        OMZ::plugins/cp \
+	        OMZ::plugins/extract \
+	        OMZ::plugins/git \
+	        OMZ::plugins/helm \
+	        OMZ::plugins/kubectl \
+	        OMZ::plugins/node \
+	        OMZ::plugins/nvm \
+	        OMZ::plugins/taskwarrior \
+	        OMZ::plugins/thefuck \
+	        OMZ::plugins/vi-mode \
+	        OMZ::plugins/web-search \
+	        OMZ::plugins/zsh_reload
+5faf10fa7c4a659db8f5667bd1b73fe8|file:///home/nicholas/.shell/plugins.completions.zsh|27|1|V|zsh
+	      if"[[ $+commands[go] ]]" OMZ::plugins/golang \
+	      if"[[ $+commands[npm] ]]" OMZ::plugins/npm \
+	      if"[[ $+commands[sudo] ]]" OMZ::plugins/sudo \
+	      if"[[ $+commands[systemd] ]]" OMZ::plugins/systemd \
+0bcacd09ba360561fcb370f8db3c6bb5|file:///home/nicholas/.shell/plugins.completions.zsh|26|1|V|zsh
+	  zinit wait lucid for \
+5ffac2015c65ef38743a1fba46574dec|file:///home/nicholas/.shell/plugins.completions.zsh|32|1|V|zsh
+	  # zinit snippet OMZP::colored-man-pages
+6f2d02a264c4ffd6a3210ff422821592|file:///home/nicholas/.shell/plugins.widgets.zsh|175|1|V|zsh
+	        OMZP::systemd/systemd.plugin.zsh \
+24fe7345da88306d40ed593b41010507|file:///home/nicholas/.shell/plugins.widgets.zsh|197|13|V|zsh
+	        OMZ::systemd/systemd.plugin.zsh \
+bf05f4e16b9f57fa2fff919149412476|file:///home/nicholas/.shell/plugins.widgets.zsh|174|1|V|zsh
+	        OMZL::history.zsh \
+	        OMZP::systemd/systemd.plugin.zsh \
+	        OMZP::sudo/sudo.plugin.zsh \
+	    atload'zstyle ":completion:*" special-dirs false' \
+	        OMZL::completion.zsh \
+	    as'completion' atpull'zinit cclear' blockf \
+	        zsh-users/zsh-completions \
+	    as'completion' nocompile mv'*.zsh -> _git' patch"${pchf}/%PLUGIN%.patch" reset \
+	        felipec/git-completion \
+	    ver'develop' atload'_zsh_autosuggest_start' \
+	        zsh-users/zsh-autosuggestions
+82eddb26751a72daec328b12bd7a536e|file:///home/nicholas/.shell/plugins.widgets.zsh|173|1|V|zsh
+	zt 0a light-mode for \
+	        OMZL::history.zsh \
+	        OMZP::systemd/systemd.plugin.zsh \
+	        OMZP::sudo/sudo.plugin.zsh \
+	    atload'zstyle ":completion:*" special-dirs false' \
+	        OMZL::completion.zsh \
+	    as'completion' atpull'zinit cclear' blockf \
+	        zsh-users/zsh-completions \
+	    as'completion' nocompile mv'*.zsh -> _git' patch"${pchf}/%PLUGIN%.patch" reset \
+	        felipec/git-completion \
+	    ver'develop' atload'_zsh_autosuggest_start' \
+dad222b315877a9501e82746b45abae2|file:///home/nicholas/.shell/plugins.widgets.zsh|173|1|V|zsh
+	zt 0a light-mode for \
+	        OMZL::history.zsh \
+	        OMZP::systemd/systemd.plugin.zsh \
+	        OMZP::sudo/sudo.plugin.zsh \
+	    atload'zstyle ":completion:*" special-dirs false' \
+	        OMZL::completion.zsh \
+	    as'completion' atpull'zinit cclear' blockf \
+	        zsh-users/zsh-completions \
+	    as'completion' nocompile mv'*.zsh -> _git' patch"${pchf}/%PLUGIN%.patch" reset \
+	        felipec/git-completion \
+	    ver'develop' atload'_zsh_autosuggest_start' \
+	        zsh-users/zsh-autosuggestions
+2977fdb79ff2e64201e53ba5ac5bda64|file:///home/nicholas/.shell/plugins.widgets.zsh|203|25|V|zsh
+	      as'completion' atpull'zinit cclear' blockf \
+	          zsh-users/zsh-completions \
+43f4089a345473afaf0a83f76188b6e0|file:///home/nicholas/.shell/plugins.programs.zsh|226|1|V|zsh
+	  # neovim
+	  zinit ice from"gh-r" as"program" bpick"*appimage*" ver"nightly" mv"nvim* -> nvim" pick"nvim"
+	  zinit light neovim/neovim
+34b99a882f143de50ea36ed32ce14b79|file:///home/nicholas/.shell/plugins.programs.zsh|226|5|v|zsh
+	neovim
+7446b461e0e871af7a0de11128adb720|file:///home/nicholas/.shell/plugins.programs.zsh|227|18|v|zsh
+	lbin 
+6377dde69856658c3a9a8ab6ffe0e900|file:///home/nicholas/.shell/plugins.programs.zsh|229|43|V|zsh
+	  zinit ice from"gh-r" as"program" bpick"*appimage*" ver"nightly" mv"nvim* -> nvim" pick"nvim"
+4f8242322e435d675b4f34bc1f9afc9a|file:///home/nicholas/.shell/plugins.programs.zsh|229|27|V|zsh
+	  zinit light neovim/neovim
+7bb0edd98f22430a03b67f853e83c2ca|file:///home/nicholas/.shell/plugins.widgets.zsh|133|15|v|zsh
+	        
+dbb4562c5627e07626654cd8cd97e80c|file:///home/nicholas/.shell/plugins.programs.zsh|130|1|V|zsh
+	      zi0a has'fzf'
+	      zinit light wookayin/fzf-fasd
+64d936a9251c9a4d5c5625ba75ee2c04|file:///home/nicholas/projects/fzf-fasd.zsh|13|3|V|zsh
+	  echo "HELLO"
+7cb165222dc698a1df396d6fa5b3487f|file:///home/nicholas/.shell/plugins.widgets.zsh|76|1|V|zsh
+	  zi0a
+1e4bf9dcaf08ef24b1d354801e3312c9|file:///home/nicholas/.shell/plugins.widgets.zsh|79|1|V|zsh
+	  zi0a
+	  zinit light larkery/zsh-histdb
+	
+593e27893e32401ab10d53a2f66118e4|file:///home/nicholas/projects/fzf-fasd.zsh|14|14|V|zsh
+	  echo "hellO"
+e488cae3fcf48bcb66fbe99dbe28863a|file:///home/nicholas/projects/fzf-fasd.zsh|14|1|V|zsh
+	  echo "hellO"
+	
+d9d339f439dc99e375d51092867f1f21|file:///home/nicholas/.shell/.zshrc|38|1|V|zsh
+	# TODO: make nvim function that loads exact match, fzf if none found
+	alias a='fasd -a'        # any
+	alias s='fasd -si'       # show / search / select
+	alias d='fasd -d'        # directory
+	alias f='fasd -f'        # file
+	alias sd='fasd -sid'     # interactive directory selection
+	alias sf='fasd -sif'     # interactive file selection
+	# alias z='fasd_cd -d'     # cd, same functionality as j in autojump
+	# alias zz='fasd_cd -d -i' # cd with interactive selection
+52598efd928e0701c98cbf89d428a829|file:///home/nicholas/.shell/aliases.colorize.sh|154|135|v|sh
+	echo 
+b29ef6f611982d23b890831920e3fbac|file:///home/nicholas/.shell/aliases.colorize.sh|154|135|v|sh
+	sudo 
+0eb54f36efa3f77e06c4ed2d4d2f8c19|file:///home/nicholas/.shell/aliases.colorize.sh|154|16|v|sh
+	grc --colour=on -es -c conf.ps ps axww -o pid,user,%cpu,%mem,time,fname,command | fzf-tmux --header-lines=1 --preview='strace -p {1}' | sed 's/^ *//' | cut -f1 -d' '
+3d55932e60384a08e11e519b530751d6|file:///home/nicholas/.shell/aliases.colorize.sh|154|135|v|sh
+	strace -
+1813e7a120c3d0b3627e86bbcbec7648|file:///home/nicholas/.shell/aliases.colorize.sh|154|218|v|sh
+	status 
+71f262d796bed1ab30e8a2d5a8ddee6f|file:///home/nicholas/.shell/exports.fzf.sh|71|19|v|sh
+	bottom
+08bac006ca5b3bac9c5c0b62b34ee90c|file:///home/nicholas/.shell/exports.fzf.sh|32|29|v|sh
+	:hidden
+e8f1ea092fbc5f56188364f7369c356a|file:///home/nicholas/.shell/binding.zsh|90|1|V|zsh
+	bindkey '^ ' fzf-direct-completion
+fa6835d7c83648f48679c4139dc7f605|file:///home/nicholas/.shell/binding.zsh|89|13|v|zsh
+	 fzf-direct-completion
+b69600e0ebe1ece7b653aa2eb7e7c243|file:///home/nicholas/.shell/binding.zsh|90|1|V|zsh
+	# bindkey '^ ' fzf-direct-completion
+fcd395282925f17762cfea00b2c6cf6d|file:///home/nicholas/.shell/binding.zsh|89|1|V|zsh
+	bindkey '^ ' __fz_zsh_completion
+03b8033c4eb89c1412b685faa0ec322f|file:///home/nicholas/.shell/binding.zsh|77|1|V|zsh
+	# bindkey '^N' expand-or-complete
+372bd7c3c696009c24d97f93eaa42f15|file:///home/nicholas/.shell/binding.zsh|78|14|v|zsh
+	expand-or-complete
+e63fba1ad6c3c26b38a153c4eea2f884|file:///home/nicholas/.shell/binding.zsh|78|24|V|zsh
+	bindkey '^N' accept-and-menu-complete
+6039aff928f8ddfd5dae2556c0a97207|file:///home/nicholas/.shell/plugins.widgets.zsh|3|1|V|zsh
+	ZSH_AUTOSUGGEST_MANUAL_REBIND=1
+	DISABLE_MAGIC_FUNCTIONS=true
+	ZSH_TMUX_AUTOCONNECT=true
+	ZSH_AUTOSUGGEST_BUFFER_MAX_SIZE=20
+	ZSH_AUTOSUGGEST_STRATEGY=histdb_top_fallback
+005a6577e7470c1aee3ef1ede1549f0e|file:///home/nicholas/.shell/binding.zsh|90|14|v|zsh
+	__fz_zsh_completion
+294e2acc017453120c16ad5f69892164|file:///home/nicholas/.shell/exports.fzf.sh|9|32|V|sh
+	source $HOME/.shell/fzf-zsh-completion.sh
+	
+c533626d3aa0061757bee95c1af705ad|file:///home/nicholas/.shell/binding.zsh|1|1|V|zsh
+	# TODO: figure out where this needs to be placed to override certain keys
+	# showkey -a, zle -al
+cd78eb6525f529ad77b56f42e404e2c8|file:///home/nicholas/resources/bin/docker/dockerps|9|14|V|sh
+	stdbuf -i0 -o0 -e0 \
+24232f5cd80a368de89d7b0b2b2e433d|file:///home/nicholas/resources/bin/docker/dockerps|12|13|V|sh
+	  | less -F -e -S
+b9d7a6089e5de54ef0cb053c9be638e0|file:///home/nicholas/.shell/exports.fzf.sh|71|1|V|sh
+	--preview-window=:bottom:70%:noborder
+189cdf218e284a127eb72f5af79cd2e5|file:///home/nicholas/.shell/plugins.programs.zsh|147|9|V|zsh
+	        --preview='bottom:70%'
+07b4caa994f5fd6b0157b50469a7de44|file:///home/nicholas/.shell/exports.fzf.sh|68|1|V|sh
+	FORGIT_FZF_DEFAULT_OPTS="
+	--exact
+	--reverse
+	"
+9f7f48c9cf5fd8accfa7c42215370aea|file:///home/nicholas/.shell/plugins.programs.zsh|147|37|v|zsh
+	:noborder
+dd5d9c6ea3eb4bb793d2edf6eccbdbbb|file:///home/nicholas/.shell/binding.zsh|81|1|V|zsh
+	# bindkey '^ ' autosuggest-accept
+514af685e15600bb34dc0cd3c14136ab|file:///home/nicholas/.shell/binding.zsh|82|14|v|zsh
+	autosuggest-accept
+104a90476d54e6720bc5442f2aacd4a5|file:///home/nicholas/.local/keys/pgpmsg.txt|1|1|V|text
+	-----BEGIN PGP MESSAGE-----
+	
+	hQIMA06DCl3tkMZXAQ/9G/ZHWIqud1PrevzbcDTUYYEA9SCESL3pAIT8e8uXMlc5
+	8nrsZZBh92nNguE/yfktIqqcnmNCipiGYWybdk1c1onJxJRFkd53qOA45LNfHFnO
+	A07mm6F0K+3qi/26pgDyoJgMxzAnwOeM5s0ZqLoASuUB8/JapGii7zt+ZShIHB9h
+	FdSJKjlghJy4MtTSe2BBGzlL7h0XDhGvc8sW7mJ/i3AWLczpqIyGrT2xqMXw/q0L
+	kSFJhqsxHm6Csy7J0ALN1bQaDaE7um43UKi08o3TUIyK6J0PZkx6kRzkLlkXihXe
+	RZnKLq3WjdJB6AMsU15elKfkGNcLZCOFY4oyY1ezrLUIxzmWw+4Jv2ywOnGS4rFz
+	vf8zNnYExm07T+kNXp8XxSwilDc6rQeU064fEEuaaicSW//HFFuaOT6UhnGfgXzd
+	YwINYSIqjXZ4q8fqj/T+Tm7r3qBkRHo+0LazMPfXJUJE719eewbwUOAcwqMU3Yt3
+	PYJNROXwCOnsKfU0LDO1y/6bFPk/XSWUeX6P0SV9W70QoxndxX7+StR4O2I2J7DM
+	c6eQM4/JTIDoRg9Yb7jpsoXJrCGhdMlV0xtl41+n7OdijrC9zKtwjgpy+ur+o4SE
+	bvPq0Z3jrDuFapUrcZKfNP3DjyWCbxuUUp6yWMfwSEcOxfyvYSvYdGYS0CE6f2zS
+	6QEdzRRBhxYyKx1gFN7rBcuVfsO4Jfg2A2MLtC9E5N77IRvhUJ7VFcfZ+mWyCqJH
+	kkNltg/U3FYxm+971GwNjOperRcnuw/jLOo7LIIMJqOD0ukfSFof7fAV0S2y9PEr
+	x9+6NjWyyO9dHhx391iR6++USnKMqWrvY9nB3OROFb4akmuB/Y+p1gsJkOB8gmrn
+	X3jNjNIbVsbGcGojjEu5GZYh1mNWKAcfL19u0aaxAf0oWPPdhD1TdlxolNf35eFa
+	4h9bD2Yp2CBYZnWE1/mgNaXNf/yhq3DlFy2WewtRSW9okkZoIqh9I6w2vO1ptsj2
+	+fBWsOy3d9RwrHb5WcIgc0aQovvl8cGXunpLDns/8i+H4k1t9zq8gGlrNn/h117M
+	jzIMQmkNwFYsDSPWE9BuFyPwbQfUd0z4kDIYIDxY2bPVIiKnTJz8iUOzNuW5TniR
+	ULZAsSLH9XYhX2NErxkTHazO3AVMFiNmI+rTS3wgsZvk9hQYwfRxP0SOXCIL4xR2
+	78sTfY0uib4Tdkk0PyGKV1zoa+uhNnzvSEt1nQ6ka8k0CXmpTyTpk7EroIOT++Gw
+	Z/ap9SF3iTA3zyIHt8yoBep/inHaKwLRb/2OfHerwy5L0ck3BbUT+8+zWVcMx1PU
+	3TQG6ykBCKVNUZ2V1h8Kihc5srsN+/cnt/+alXveQEMvwLACoHtCSJIDjWTxJG5Z
+	IOdKSa/Ijwhtd4FRVcX+wlhwKnrnAIhkV4zO4GRvV/Csa+3FZnb5ZSkByU0EzRgM
+	VvkiBvEKf2T9NxS0qYcIul+Fe2UO67sEOLPJP7C9FReYRMOwQ5tP07Lc6JSBlN/z
+	oS8XG6x2GrJq/SHLf0wpFA6SWXtwpNsH5gXGODLHZiZTn1eA//qv8E+dknf5Fo/h
+	J8pm4xsEEc44TxQZJVQRdZieRSGXOGmnHETMw/2KgZJfSoW1aLRkiEhJP1ZgmJqY
+	IGXdYwqBAlPmx7glRx853c42LQy8i0OoGu6NUzFaF7k3ZTgWj0SI5QItnYrz0U0D
+	NnlIsp7h8wLQ8NEo0BT6V08ZS4rzvnngHNLLz8Q6i7rsHLjgcAauOKbxp/Snulyt
+	NvhnCOiCWLRkngUpLCAFeYiANioQrhGCzwrcDQ/c4KlqFhuDxdLvsOxU0elIrCf/
+	nm3BtEFu2En0yWsOpizaR+zhRA==
+	=v9Sz
+	-----END PGP MESSAGE-----
+7a91a2b7763ebdcb2c51c7ab3597cc72|untitled:3|2|1|V|
+	WHITEHOUSE_LOGIN_c797c9040f4734b320ecbcae85170289f3a59533a2e1450d1586d6dec0beb5c5
+ca5e55dd2d520cc2ad08f284cc18e7bb|file:///home/nicholas/.local/keys/msgout.txt.asc|1|1|V|asciidoc
+	-----BEGIN PGP MESSAGE-----
+	
+	hQEMA1bviRF8aJSpAQgAkoI7xWd09Kves8tUxvrZ668jK7GeRboj2fO13VPIcIls
+	JwXZ+9RQdF26b8u2UnCX5UrnNwFInqLJL2vmlJxRNFLbsj40L8z/rCo9RvJiammI
+	E+cOWjzrpcOdVU3Zn0MkG0QUaT9Vz09MF9qAk7ionQAvOgQckoePYfWSYTBduC5u
+	kzIdsZlwIoDtLboAdFgOrHcxsuyx4Ms2ZOZw+PJeJWcv4yvWtVkoTVqtXSNju0YH
+	D0BWGBeZmjC+s27pj52OkRV65P04D1YSViJKXH2MLh1pdLS8wAisIzblzEM/bkXa
+	mToD7Fb1T3/YsrsmBd0EMdZJshXex3nR+G1C0dKY3dK3AezKSFe7+Qd9/HSqddVF
+	LZh8KROc1F2xXNtlGIoT1oxvfpbulWVi0Qr4PbYqHdLsfPRR0CGN4+BjZ6opzxYX
+	PUowZM1SSEAlFTrw8yTf8p+Ngj/PXE1t0u2E0XD+Y74zJLvVAu3Jh5Z2KG6PeW5T
+	ipAR6DeANC7gqKLUZcOLNzEsELUOnua/g1T5kNKo/kOMLnKYp4B5mU/2ploV3yC7
+	yAShe4+sC3iX9pOZ/Zy2yxSgraGkZIHT
+	=QWeP
+	-----END PGP MESSAGE-----
+9d6fbbe87a2e7e21d2eff91f826cf3b6|file:///home/nicholas/.local/keys/address.txt.asc|1|1|V|asciidoc
+	-----BEGIN PGP MESSAGE-----
+	
+	hQIMA/5TK3fk089lAQ/7B/wJOHWYxdS00Dy2kQUmq1rkc4fqbRRl7o+ZdZ8FiqEV
+	wPmzf3P3BY+vDjqSSsV8szV/k2g7nP5eyTubNYnexUoSyq+wXOZgJMEJrDr1opiW
+	1Y3HHFyUgBorg+0Vqfq7x9GrqLYFUHooID2Awhnsib+vFsLVPNNoLPrC4Yb1fzDy
+	G0t2OWcwjA2SqYPX374WWxwkFFkT564BqzfNq/v3W3DerMFRbEebF94Mb5hZsYoX
+	JDd/fiNsOsZ/uy9Pl5PZ93hLtOsnN8NaTpcPcBfpH1dHhu3ttzqCU1QKHJAjRGUq
+	OJQ0DzUi3L9i8LaSC5KaHtfwyM4ths+QV1MxZmd4cJVOgKQuSa0nAR7dXw+0YMft
+	UuK1ZX+4pXrfctzb99/4dNR1m0LRmwBeHm00BhTFPvf1LHTh+zVSYRIdpKa2YVd/
+	3Joq4xFqRpgK9PbYxhwx9yHi9Gio1VRByOLf6KOvYrc1TiQhUKdUAgTpvlStmjSf
+	KANzLb7yWwOdRYLGTub/mTH7dJ1HyUuL9fFyyYdWGbhmXz41c55pGaBzOf5iNMB3
+	Vj3aT92rqHvppI+S7nVWWkFk29YdwuX4QnFecbqXtsN+/61SYaDMB7IV62XfwWsC
+	XgvsJVY77mVKio63a0tIM8luLF3QEZjV/2O/TaQXmOtNnoSwkxHBM5C739srKhHS
+	iwEndATi7lVgnaEpGHx5BrJhFGQMeFK9mpTax7pUFkOIJLG9tUfbGCsvQJpxiD/l
+	A8MxQ6/cxZgF0+bD+nzH6saKvMMgLbm6+X7UpK4E/iHo4ld6c+fmb0EJeBN3ri52
+	tYh6HBFh8so30widk498N5QtZjod0hMN6cXiC8PurcvXHLHdjICD8zO+yIY=
+	=HCTg
+	-----END PGP MESSAGE-----
+5a6b330a945c4c8b3684bb02f80e2db4|file:///home/nicholas/.local/keys/pgpmsg.txt|1|1|V|text
+	-----BEGIN PGP MESSAGE-----
+	
+	hQIMA06DCl3tkMZXARAAo0czbu2TmyqbToPH6LHeR12OYRjwadyq4KP4Mvag1n71
+	jPEtUE6JoDtYbX50AVBH14ECXlSWhgP4r1B758ClDlYEIhazZmNf/ly7TLST7DdQ
+	+hFyyel8T32U6Cw6cFZUzq2vLqhefFP8B+fyT1+cKBytKUSJSJ4HN3eCiTjaBTun
+	l4HK6ReSszCCn7gJklMvCUuXMRFJ3ze4OAvYKl77p12FELh8IEqPcCBa3SPR82II
+	EzY05MWidTS7psGkHGOFXrmMk0/0DJVqM/b0UCX3VfH+VlUkKk+YCvKZ91OIO5jh
+	QpgAtOIBCYDgHRaut5auvbssep+L56BBIdHnmOI8xBwwA9uw0/pAyrdLg04U9G7k
+	bjl4daj6IARMzD8eY+TXveZyobTnfrbt/qzr/O5d3jMd0aX0JpGQZDToKH07iQoB
+	BGi/Hcn3gO1C6w4EIn17M35jjdseizM7QjNoGDeBKmRFqVCXveAaZjUYqI4byy92
+	p/OmaHirXi1FGhpF4x9GOFPDmX7zgwVJqAAR9MBT4fC0Gj0KEFvdVJHOPn1BXvmN
+	VDhkcZKGaP/FaBBJAZ3Vue2AZ5ncW55d+uCZdqK5rr1P8gnXlGV7vag5buuWNaq0
+	yLHjwflxwlhiSwJw2RzrS3gytRQt9B6BgMM9iBbE6Bo8CGZ1RDhtKKgEC3Z2Fw/S
+	wMcBiHOuxC8Qs5Ycp6yo5GakTaafaVI+3eEi0uDQgMmQ4mw7+V92PXIY2qj0TnXf
+	K2aOqYFSpuUxWENEpo2VKrZj1YndYjltLu8UFvqagIqbxOteYH5Ruh0/w5roFDU7
+	eVvPfDMqYAeUDOgLkr1nLyns/nBG3LYC9Ta6M8eEHN8rZb0qX1CBM3YMIn8fZFax
+	X3MQ+c9BmmOd5GgsBrPAf/esOF/RNekeFhwuhA0g4glRjZIZUhchD/vdnYM7TaKm
+	uoqeQWLNjIJL3JoqeK2vMizpTaXjFPeAQmV/aiyCY/KFCMEP1Xf1PokfSPtEu8oS
+	zneA+v5JpbyLOVQyv3PMpSohjlghcX8dNNsXlwerZI0Nt3a1SgzZ1n4Oe+92SxfB
+	ZyGN5d1hdUdsBIVBFGPv5etFnmCEXjjFbvmPuGClgqHX2zJGJWRoSL1fA7EcJ59e
+	kYPmNr4KK0VPucvf6mP+SzyZMRMVHGp+Vimun+z+w37a37Kfw+eVqMvQTkzQrYGo
+	IYZBwa4UDOT7
+	=AvKN
+	-----END PGP MESSAGE-----
+bb0fb66a7f94f5ac97726c3f210972fc|untitled:3|1|1|V|
+	86E3THd4xYaYF2wJUq2yHL7ZEFuNHrWBR14xY5PATtFZ84RLxKDXWU3gj1vh55MikUN1gCBsASPcsfYPzJ82wqhKKJh4k91
+9dc948ae5e195d902d67ca8624799c4a|file:///home/nicholas/.config/tmux/tmux.conf|248|29|V|tmux
+	run '~/.tmux/plugins/tpm/tpm'
+2245023265ae4cf87d02c8b6ba991139|file:///home/nicholas/.config/tmux/tmux.plugins.conf|134|12|v|tmux
+	config
+be116d8c6b373511ebbb821508e52b5d|file:///home/nicholas/.config/tmux/tmux.plugins.conf|133|1|V|tmux
+	# Initialize TMUX plugin manager (keep this line at the very bottom of tmux.conf)
+	run -b '~/./tmux/plugins/tpm/tpm'
+f8ab10d9b6932ea2b0786c53d13a1c46|file:///home/nicholas/wiki/index.md|5|1|V|vimwiki
+	bindkey '^I' expand-or-complete
+5cecbc663ba1f6fee0db4ab169edef1e|file:///home/nicholas/.shell/binding.zsh|91|18|v|zsh
+	direct-completion
+eae2b75ac32dfd82169b3641dcaf2398|file:///home/nicholas/.shell/binding.zsh|91|1|V|zsh
+	bindkey '^ ' fzf-completion
+d499cce847687a31e9c6f0e832a1814b|file:///home/nicholas/.shell/binding.zsh|83|11|V|zsh
+	bindkey '^I' fzf-completion
+9f62f48f1f2923d1b18893e53a7abec3|file:///home/nicholas/.shell/binding.zsh|90|1|V|zsh
+	bindkey -r '^ '
+aafd3ed399133c70682b6457a19676bd|file:///home/nicholas/.shell/binding.zsh|93|14|V|zsh
+	bindkey -r '^I'
+a561567516804cc136e042f9c3e36467|file:///home/nicholas/.shell/binding.zsh|77|1|V|zsh
+	bindkey '^N' expand-or-complete
+d6c727154b9513b85d3cfe6a9f819b6f|file:///home/nicholas/.shell/binding.zsh|75|1|V|zsh
+	
+	# open menu-completion with ^N
+	bindkey '^N' expand-or-complete

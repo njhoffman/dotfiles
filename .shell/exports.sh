@@ -148,13 +148,6 @@ export PATH="$PATH:/home/nicholas/ACLI"
 
 export KUBECONFIG=$KUBECONFIG:~/.kube/minikube:~/.kube/spadash-dev0-eks:~/.kube/spadash-prod0-eks
 
-# e.g. I have all my dotfiles stored in folder $HOME/.myworld and symlinks all of them to appropriate location.
-# export DOTBARE_DIR="$HOME/.myworld/.git"
-# export DOTBARE_TREE="$HOME/.myworld"
-export DOTBARE_DIR="$HOME/.cfg"
-export DOTBARE_TREE="$HOME"
-# export DOTBARE_FZF_DEFAULT_OPTS=" -w80 --preview-window=right:50%"
-
 # tmux
 [[ -z "$_CFG_TMUX_MAIL" ]] && export _CFG_TMUX_MAIL=1
 [[ -z "$_CFG_TMUX_CPU" ]] && export _CFG_TMUX_CPU=1

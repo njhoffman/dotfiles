@@ -1,0 +1,176 @@
+#
+#-------------------snip-----------------------
+# set allow_ansi=yes
+#
+# color normal        color250    black
+# color quoted        color236    black
+# color quoted1       color242    black
+# color quoted2       color246    black
+# color quoted3       color252    black
+# #color quoted4       cyan        black
+# #color quoted5       cyan        black
+#
+# color indicator     color117		black
+# color message       color28		black
+# color status        color109		color234
+# color error         color58     black
+# color attachment    color255    black
+# color signature     color252    black
+# color markers       color104	black
+# color tilde         color69		black
+# color search        color255     color153
+# color tree          color108		black
+# color bold          brightblack       black
+#
+# color hdrdefault    color255     black
+# color header        color255     black '^From:'
+# color header        color255     black '^Subject:'
+# color header        color255     black '^To:'
+#
+# # INDEX
+# # # For new mail:
+# # color index brightyellow black "~N"
+# # color index_author brightred black "~N"
+# # color index_subject brightcyan black "~N"
+# color index     color38		black ~N
+# color index     color100    black ~F
+# color index     color55     black ~T
+# color index     color18     black ~D
+#
+# color body      color18     black "(http|https|ftp|news|telnet|finger)://[^ \">\t\r\n]*"
+# color body      color66		black "mailto:[-a-z_0-9.]+ <at> [-a-z_0-9.]+"
+# color body      color18     black "news:[^ \">\t\r\n]*"
+# color body      color112	black "[-a-z_0-9.%$]+ <at> [-a-z_0-9.]+\\.[-a-z][-a-z]+"
+# color body      color112	black "^.*Autoview.*$"
+#
+#eof
+
+# vim: filetype=neomuttrc
+# Default index colors:
+# color index yellow default '.*'
+# color index_author red default '.*'
+# color index_number blue default
+# color index_subject cyan default '.*'
+#
+# # For new mail:
+# color index brightyellow black "~N"
+# color index_author brightred black "~N"
+# color index_subject brightcyan black "~N"
+#
+# # Header colors:
+# color header blue default ".*"
+# color header brightmagenta default "^(From)"
+# color header brightcyan default "^(Subject)"
+# color header brightwhite default "^(CC|BCC)"
+#
+# mono bold bold
+# mono underline underline
+# mono indicator reverse
+# mono error bold
+# color normal default default
+# color indicator brightblack white
+# color sidebar_highlight red default
+# color sidebar_divider brightblack black
+# color sidebar_flagged red black
+# color sidebar_new green black
+# color normal brightyellow default
+# color error red default
+# color tilde black default
+# color message cyan default
+# color markers red white
+# color attachment white default
+# color search brightmagenta default
+# color status brightyellow black
+# color hdrdefault brightgreen default
+# color quoted green default
+# color quoted1 blue default
+# color quoted2 cyan default
+# color quoted3 yellow default
+# color quoted4 red default
+# color quoted5 brightred default
+# color signature brightgreen default
+# color bold black default
+# color underline black default
+# color normal default default
+#
+# color body brightred default "[\-\.+_a-zA-Z0-9]+@[\-\.a-zA-Z0-9]+" # Email addresses
+# color body brightblue default "(https?|ftp)://[\-\.,/%~_:?&=\#a-zA-Z0-9]+" # URL
+# color body green default "\`[^\`]*\`" # Green text between ` and `
+# color body brightblue default "^# \.*" # Headings as bold blue
+# color body brightcyan default "^## \.*" # Subheadings as bold cyan
+# color body brightgreen default "^### \.*" # Subsubheadings as bold green
+# color body yellow default "^(\t| )*(-|\\*) \.*" # List items as yellow
+# color body brightcyan default "[;:][-o][)/(|]" # emoticons
+# color body brightcyan default "[;:][)(|]" # emoticons
+# color body brightcyan default "[ ][*][^*]*[*][ ]?" # more emoticon?
+# color body brightcyan default "[ ]?[*][^*]*[*][ ]" # more emoticon?
+# color body red default "(BAD signature)"
+# color body cyan default "(Good signature)"
+# color body brightblack default "^gpg: Good signature .*"
+# color body brightyellow default "^gpg: "
+# color body brightyellow red "^gpg: BAD signature from.*"
+# mono body bold "^gpg: Good signature"
+# mono body bold "^gpg: BAD signature from.*"
+# color body red default "([a-z][a-z0-9+-]*://(((([a-z0-9_.!~*'();:&=+$,-]|%[0-9a-f][0-9a-f])*@)?((([a-z0-9]([a-z0-9-]*[a-z0-9])?)\\.)*([a-z]([a-z0-9-]*[a-z0-9])?)\\.?|[0-9]+\\.[0-9]+\\.[0-9]+\\.[0-9]+)(:[0-9]+)?)|([a-z0-9_.!~*'()$,;:@&=+-]|%[0-9a-f][0-9a-f])+)(/([a-z0-9_.!~*'():@&=+$,-]|%[0-9a-f][0-9a-f])*(;([a-z0-9_.!~*'():@&=+$,-]|%[0-9a-f][0-9a-f])*)*(/([a-z0-9_.!~*'():@&=+$,-]|%[0-9a-f][0-9a-f])*(;([a-z0-9_.!~*'():@&=+$,-]|%[0-9a-f][0-9a-f])*)*)*)?(\\?([a-z0-9_.!~*'();/?:@&=+$,-]|%[0-9a-f][0-9a-f])*)?(#([a-z0-9_.!~*'();/?:@&=+$,-]|%[0-9a-f][0-9a-f])*)?|(www|ftp)\\.(([a-z0-9]([a-z0-9-]*[a-z0-9])?)\\.)*([a-z]([a-z0-9-]*[a-z0-9])?)\\.?(:[0-9]+)?(/([-a-z0-9_.!~*'():@&=+$,]|%[0-9a-f][0-9a-f])*(;([-a-z0-9_.!~*'():@&=+$,]|%[0-9a-f][0-9a-f])*)*(/([-a-z0-9_.!~*'():@&=+$,]|%[0-9a-f][0-9a-f])*(;([-a-z0-9_.!~*'():@&=+$,]|%[0-9a-f][0-9a-f])*)*)*)?(\\?([-a-z0-9_.!~*'();/?:@&=+$,]|%[0-9a-f][0-9a-f])*)?(#([-a-z0-9_.!~*'();/?:@&=+$,]|%[0-9a-f][0-9a-f])*)?)[^].,:;!)? \t\r\n<>\"]"
+#
+# Default colour definitions
+# color hdrdefault black        cyan
+# color quoted     red          white
+# color signature  brightblack  white
+# color indicator  brightwhite  red
+# color attachment black        green
+# color error      red          white
+# color message    blue         white
+# color search     brightwhite  magenta
+# color status     brightyellow blue
+# color tree       red          white
+# color normal     blue         white
+# color tilde      green        white
+# color bold       brightyellow white
+# color markers    red          white
+#
+# # Colour definitions when on a mono screen
+# mono bold      bold
+# mono underline underline
+# mono indicator reverse
+#
+# # Colours for items in the reader
+# color header brightwhite cyan "^(From|Subject):"
+# color header red         cyan "^X-Junked-Because: "
+# color header red         cyan "^X-Virus-hagbard: .* FOUND"
+# mono  header bold             "^(From|Subject|X-Junked-Because|X-Virus-hagbard):"
+#
+# # Colours for items in the index
+# color index brightblue  white ~N
+# color index brightgreen white "~N (~x hagbard\.davep\.org | ~h \"^In-[Rr]eply-[Tt]o: .*hagbard\.davep\.org\")"
+# color index red         white ~F
+# color index black       green ~T
+# color index brightwhite black ~D
+# mono  index bold              ~N
+# mono  index bold              ~F
+# mono  index bold              ~T
+# mono  index bold              ~D
+#
+# # Highlights inside the body of a message.
+#
+# # URLs
+# color body brightblue  white "(http|https|ftp|news|telnet|finger)://[^ \">\t\r\n]*"
+# color body brightblue  white "mailto:[-a-z_0-9.]+@[-a-z_0-9.]+"
+# color body brightblue  white "news:[^ \">\t\r\n]*"
+# mono  body bold              "(http|https|ftp|news|telnet|finger)://[^ \">\t\r\n]*"
+# mono  body bold              "mailto:[-a-z_0-9.]+@[-a-z_0-9.]+"
+# mono  body bold              "news:[^ \">\t\r\n]*"
+#
+# # email addresses
+# color body brightblue  white "[-a-z_0-9.%$]+@[-a-z_0-9.]+\\.[-a-z][-a-z]+"
+# mono  body bold              "[-a-z_0-9.%$]+@[-a-z_0-9.]+\\.[-a-z][-a-z]+"
+#
+# # Various smilies and the like
+# color body brightgreen white "<[Gg]>"                                            # <g>
+# color body brightgreen white "<[Bb][Gg]>"                                        # <bg>
+# color body brightgreen white " [;:]-*[)>(<|]"                                    # :-) etc...
+# color body brightblue  white "(^|[[:space:]])\\*[^[:space:]]+\\*([[:space:]]|$)" # *Bold* text.
+# color body brightblue  white "(^|[[:space:]])_[^[:space:]]+_([[:space:]]|$)"     # _Underlined_ text.
+# color body brightblue  white "(^|[[:space:]])/[^[:space:]]+/([[:space:]]|$)"     # /Italic/ text.
+
+# vim:syn=neomuttrc

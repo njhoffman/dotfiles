@@ -6,7 +6,7 @@
 source $HOME/bin/fzf/widgets/fzfp-widgets
 source $HOME/bin/fzf/widgets/fzf-widgets
 # better zsh completion (where is it from)?
-# source $HOME/.shell/fzf-zsh-completion.sh
+source $HOME/.shell/fzf-zsh-completion.sh
 
 
 # export FZF_DEFAULT_COMMAND="command fdfind --hidden --follow --type d --color never ."
@@ -29,7 +29,7 @@ export FZF_DEFAULT_OPTS="
   --ansi
   --multi
   --border
-  --preview-window=bottom:60%:hidden
+  --preview-window=right:50%
   --preview '$bat_preview'
   --color='dark,bg+:235,hl+:5,pointer:5'
   --color='$fzf_colors'
@@ -65,12 +65,6 @@ export FZF_DEFAULT_OPTS="
 "
 # --bind '?:toggle-preview'
 
-FORGIT_FZF_DEFAULT_OPTS="
---exact
---reverse
---preview-window=:bottom:70%:noborder
-"
-
 export FZF_POPUP_OPTS=" --layout=reverse --info=inline --ansi --height=100% --multi --border --preview-window=:hidden --preview '([[ -f {} ]] && (bat --style=plain --color=always --line-range :100 {} || cat {})) || ([[ -d {} ]] && (colorls --tree --color=always {} | less)) || echo {} 2> /dev/null | head -200' --color='dark,bg+:235,hl+:5,pointer:5' --prompt='∼ ' --pointer='▶' --marker='✓ ' --bind 'Ctrl-/:toggle-preview' --bind 'ctrl-p:up' --bind 'ctrl-n:down' --bind 'ctrl-b:page-up' --bind 'ctrl-f:page-down' --bind 'ctrl-alt-a:toggle-all' --bind 'ctrl-y:execute-silent(echo {+} | pbcopy)' --bind 'ctrl-e:execute(nvim {+} < /dev/tty > /dev/tty 2>&1)' --bind 'ctrl-v:execute(code {+})' "
 fzf_exclude="\
   --exclude \".git\" \
@@ -89,13 +83,13 @@ export FZF_ALT_C_COMMAND="$fzf_command --type d $fzf_exclude"
 # ALT_C_OPTS, CTRL_R_OPTS, CTRL_T_OPTS
 export FZF_TMUX=1
 # default -w 50%
-export FZF_TMUX_OPTS="-p -w80"
+export FZF_TMUX_OPTS="-p 80%"
 
 fzf-direct-completion() {
   FZF_COMPLETION_TRIGGER= fzf-completion
 }
 zle -N fzf-direct-completion
 # export FZF_COMPLETION_TRIGGER=''
-export FZF_COMPLETION_TRIGGER=' '
+export FZF_COMPLETION_TRIGGER='**'
 
 alias fzf="fzf-tmux"

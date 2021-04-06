@@ -3,7 +3,7 @@
 filepath=$(readlink -f $0)
 alias refresh_aliases="source $filepath"
 
-alias fuck='sudo $(history -p \!\!)'
+# alias fuck='sudo $(history -p \!\!)'
 alias _='sudo'
 
 alias dots=dotbare
@@ -219,6 +219,16 @@ alias reset_completion="rm ~/.zcompdump && autoload -U compinit && compinit && a
 
 alias pip-outdated="pip-review && apt-get list --upgradable" # pip-review --local
 alias pip-upgrade-all="pip list --outdated --format=freeze | grep -v '^\-e' | cut -d = -f 1  | xargs -n1 pip install -U"
+
+# TODO: make nvim function that loads exact match, fzf if none found
+alias a='fasd -a'        # any
+alias s='fasd -si'       # show / search / select
+alias d='fasd -d'        # directory
+alias f='fasd -f'        # file
+alias sd='fasd -sid'     # interactive directory selection
+alias sf='fasd -sif'     # interactive file selection
+alias z='fasd_cd -d'     # cd, same functionality as j in autojump
+alias zz='fasd_cd -d -i' # cd with interactive selection
 
 alias weather="curl -s http://wttr.in/"
 alias sqlformat="sqlformat --reindent_aligned --keywords upper --identifiers lower"

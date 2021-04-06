@@ -1,0 +1,41 @@
+q
+config
+commands
+help
+config
+config keymap_def_scroll_horiz
+save-config
+config /ui/keymap
+save-config /ui/keymap
+config /ui/keymap-defs/default/x4e/command
+config /ui/theme
+config ui/theme solarized-dark
+config /ui/theme solarized-dark
+config /ui/theme night-owl
+config /ui/theme solarized-dark
+config /ui/theme night-owl
+save-config
+config /ui/keymap-defs/default/x33
+config /ui/keymap-defs/default/x33/command
+config /ui/keymap-defs/default/x34/command
+config /ui/keymap-defs/default/x35/command
+config /ui/keymap-defs/default/x36/command
+config /ui/keymap-defs/default/x37/command
+config /ui/keymap-defs/default
+config /ui
+history
+log
+save-config 
+config /ui/keymap-defs/default/x09/command
+preview
+config /ui/keymap-defs/default/x06/command
+config /ui/keymap-defs/default/x63/command
+config /global/keymap_def_next_location 
+config /ui/keymap-defs/default/x21/command
+config /ui/keymap-defs/default/x21/alt-msg
+move 
+config /ui/keymap-defs/default/x23/command
+relative-goto +22
+config /ui/keymap-defs/default/x06/command :relative-goto +50
+config /ui/keymap-defs/default/x02/command :relative-goto -50
+save-config

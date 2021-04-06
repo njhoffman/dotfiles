@@ -1,0 +1,129 @@
+# You can edit this file by hand, but it's recommended not to do that.
+
+# Marks:
+'H
+	/home/nicholas/
+	..
+1599286867
+'b
+	/home/nicholas/bin/
+	..
+1599286867
+'h
+	/home/nicholas/
+	..
+1599286867
+'z
+	/home/nicholas/.config/vifm
+	..
+1599286867
+
+# Bookmarks:
+
+# TUI:
+al
+q0
+v2
+ov
+m-1
+l2
+r2
+
+# Left window history (oldest to newest):
+d/home/nicholas/projects/movieman/lib/commands
+	scraper.js
+4
+d/home/nicholas/projects/movieman/lib
+	commands
+1
+d/home/nicholas/projects/movieman
+	config
+1
+d/home/nicholas/projects/movieman/config
+	..
+0
+d/home/nicholas/projects/movieman
+	config
+1
+d/home/nicholas/projects/movieman/config
+	..
+0
+d/home/nicholas/projects/movieman
+	config
+1
+d/home/nicholas/projects
+	movieman
+10
+d/home/nicholas
+	projects
+16
+d/home
+	nicholas
+2
+d/
+	home
+5
+d/home
+	nicholas
+2
+d/home/nicholas
+	projects
+16
+d/home/nicholas/projects
+	movieman
+8
+d/home/nicholas/projects/movieman
+	config
+1
+d/home/nicholas/projects/movieman/config
+	..
+0
+d/home/nicholas/projects/movieman
+	config
+1
+d/home/nicholas/projects/movieman/config
+	..
+0
+d/home/nicholas/resources/config/.config/vim/plugins/interface
+	..
+0
+d/home/nicholas/resources/config/.config/vim/plugins
+	interface
+2
+d/home/nicholas/spadash/admin-app/client/src/app/routes/invoices/graphql
+	..
+0
+d
+
+# Right window history (oldest to newest):
+D/home/nicholas
+	..
+0
+D
+
+# Command line history (oldest to newest):
+:quit
+:q
+
+# Search history (oldest to newest):
+
+# Prompt history (oldest to newest):
+
+# Local filter history (oldest to newest):
+
+# Registers:
+
+# Directory stack (oldest to newest):
+
+# Trash content:
+
+# State:
+f
+i1
+[.1
+[F
+F
+I1
+].1
+]F
+s0

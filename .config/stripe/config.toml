@@ -1,0 +1,9 @@
+color = ""
+
+[default]
+  device_name = "thanatos"
+  display_name = "Spadash"
+  live_mode_api_key = "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"
+  live_mode_publishable_key = "pk_live_w93lVg32lkgE8rfoQyih5T1A007jbC1FHb"
+  test_mode_api_key = "rk_test_51Epq30D5gVlzpTEF8tWlZewzyreK2iThLekeyvpWBV76mXiI0G4DEB2sqyRQ9xbcRkauiHcNhzuS1rpVMlysNGkE00fNw5z28x"
+  test_mode_publishable_key = "pk_test_WfnAVIYX17eS1PVncHe4S0OZ00NrzmQx9p"

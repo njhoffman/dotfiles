@@ -1,0 +1,129 @@
+
+# Folder hooks
+folder-hook 'account.com.gmail.njhoffman1982' 'source ~/.neomutt/account.com.gmail.njhoffman1982'
+folder-hook 'account.com.spadash.vendor' 'source ~/.neomutt/account.com.spadash.vendor'
+
+# colors
+# source ~/.config/neomutt/colors
+# source ~/.config/neomutt/colors.gruvbox
+source ~/.config/neomutt/colors.solarized
+
+# sidebar
+source ~/.config/neomutt/sidebar
+# set sidebar_visible
+set mail_check_stats
+set sidebar_format        = "%B%?F? [%F]?%* %?N?%N/?%S"
+set sidebar_width         = 40
+set allow_ansi            = yes
+set imap_check_subscribed = yes
+
+# Default account
+source ~/.config/neomutt/account.com.gmail.njhoffman1982
+# source ~/.config/neomutt/account.com.spadash.vendor
+
+# Macros for switching accounts
+macro index <f2> '<sync-mailbox><enter-command>source ~/.config/neomutt/account.com.gmail.njhoffman1982<enter><change-folder>!<enter>'
+macro index <f3> '<sync-mailbox><enter-command>source ~/.config/neomutt/account.com.spadash.vendor<enter><change-folder>!<enter>'
+# mark as read move to an archive folder
+# macro index,pager a ":set confirmappend=no delete=yes resolve=no\n<clear-flag>N<tag-prefix><save-message>=archive\n:set confirmappend=yes delete=ask-yes resolve=yes\n<next-undeleted>"
+
+#set editor='vim + -c "set textwidth=72" -c "set wrap" -c "set nocp" -c "?^$"'
+auto_view text/html
+set editor           = "vim"
+set pager_stop       = "yes"
+set smart_wrap       = "yes"
+set sleep_time       = 0 # be faster
+set beep             = no # no beep soundalternative_order text/plain
+set delete           = no
+set reverse_name     = yes
+set reverse_realname = yes
+set mail_check       = 30
+set move             = no
+set imap_keepalive   = 900
+set sort             = reverse-date   # default sorting by date
+set sort_aux         = last-date-received
+# Index page format. Default "%4C %Z %{%b %d} %-15.15L (%?l?%4l&%4c?) %s"
+set index_format="%4C %Z %{%b %d %R} %-15.15L (%?l?%4l&%4c?) %s"
+
+# For better looks
+set markers           = no # don't put '+' at the beginning of wrapped lines
+set pager_index_lines = 15 # how large is the index window?
+
+#Key bindings
+# # Index
+bind    index   <up>        previous-entry
+bind    index   <down>      next-entry
+bind    index   <delete>    delete-message
+bind    index   N           toggle-new
+bind    index   ~           toggle-read
+# bind    index   n           next-entry
+# bind    index   p           previous-entry
+bind    index   l           display-message
+macro   index   Q           ":set quit=yes\nq" "Quit mutt without asking"
+# bind    index   C           noop
+bind    index   -           collapse-thread
+bind    index   _           collapse-all
+bind    index   h           sidebar-toggle-visible
+
+# # Pager
+bind pager   <up>        previous-line
+bind pager   <down>      next-line
+bind pager   <left>      previous-entry
+bind pager   <right>     next-entry
+bind pager   <delete>    delete-message
+bind pager   <backspace> exit
+bind pager   h           exit
+bind pager   n           next-entry
+bind pager   p           previous-entry
+bind pager   w           previous-page
+bind pager                      g  noop
+bind pager                      gg  top
+bind pager                      G   bottom
+bind pager                      k   previous-line
+bind pager                      j   next-line
+
+# Moving around
+bind attach,browser             g   noop
+bind attach,browser,index       gg  first-entry
+bind attach,browser,index       G   last-entry
+
+# Scrolling
+bind attach,browser,pager,index \CF next-page
+bind attach,browser,pager,index \CB previous-page
+bind attach,browser,pager,index \Cu half-up
+bind attach,browser,pager,index \Cd half-down
+bind browser,pager              \Ce next-line
+bind browser,pager              \Cy previous-line
+bind index                      \Ce next-line
+bind index                      \Cy previous-line
+
+bind pager,index                d   noop
+bind pager,index                dd  delete-message
+bind index                      D   purge-message
+
+bind pager,index                \Cr refresh
+# Mail & Reply
+# bind index                      \Cm list-reply # Doesn't work currently
+
+# Mailboxes
+# bind    index   G  imap-fetch-mail
+macro index,pager \cu <pipe-entry>'urlscan'<enter> 'Follow links with urlview'^i
+macro index,pager \ck ": unset wait_key; set pipe_decode\n|w3m\n: set wait_key; unset pipe_decode\n" "call w3m to extract URLs out of a message"
+bind index,pager,attach,compose   w   display-toggle-weed
+# ERROR:nacl_helper_linux.cc(308)] NaCl helper process running without a sandbox!
+# ...implies that the setuid of the sandbox in your system is not configured, hence the program was unable to initiate/spawn a new Browsing Context i.e. Chrome Browser session.
+# A quick solution will be, if you want to run Chrome and only use the namespace sandbox, you can set the flag:
+# --disable-setuid-sandbox
+# This flag will disable the setuid sandbox (Linux only). But if you do so on a host without appropriate kernel support for the namespace sandbox, Chrome will not spin up. As an alternative you can also use the flag:
+# --no-sandbox
+
+# Threads
+# bind browser,pager,index        N   search-opposite
+# bind pager,index                dT  delete-thread
+# bind pager,index                dt  delete-subthread
+# bind pager,index                gt  next-thread
+# bind pager,index                gT  previous-thread
+bind index                      za  collapse-thread
+bind index                      zA  collapse-all # Missing :folddisable/foldenable
+
+# vim: syntax=neomuttrc

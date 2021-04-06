@@ -124,3 +124,5 @@ eval "$(rbenv init -)"
 export PATH="$HOME/.rbenv/bin:$PATH"
 eval "$(rbenv init -)"
 
+
+[ -f ~/.fzf.bash ] && source ~/.fzf.bash

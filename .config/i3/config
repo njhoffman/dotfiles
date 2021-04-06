@@ -595,14 +595,14 @@ bindsym $mod+Tab --release exec \
   exec --no-startup-id "compton"
 
   # TODO: create a service that waits for mpd to be initialized
-  exec --no-startup-id "sleep 10; /usr/local/bin/ntfd"
+  exec --no-startup-id "sleep 3; /usr/local/bin/ntfd"
 
   # start polybars on multiple monitors
   exec --no-startup-id "$dir_bin/launch-polybars.sh"
 
   # sync primary buffer with clipboard
   # works in conunciton with tmux buffer to xsel --clipboard
-  exec --no-startup-id "xsel -i --clipboard"
+  # exec --no-startup-id "xsel -i --clipboard"
   # exec --no-startup-id "xsel -i --primary"
 
   # load up terminal, chrome and conky to be used as pop-up scratchpads

@@ -51,8 +51,8 @@ colors:
   # Normal colors
   normal:
     black:   '#444444'
-    red:     '#a03638'
-    green:    '#3fd4a7'
+    red:     '#b03638'
+    green:    '#3fd4b7'
     # green:   '#22bb99'
     yellow:  '#bba397'
     blue:    '#3182ad'
@@ -65,22 +65,22 @@ colors:
     black:   '#666666'
     red:     '#dc6a78'
     # green:   '#33ccaa'
-    green:    '#4fcfb7'
+    green:    '#4fffd7'
     yellow:  '#dbb397'
-    blue:    '#71a2df'
-    magenta: '#7a8bff'
+    blue:    '#71a2ff'
+    magenta: '#8aabff'
     cyan:    '#80d1f3'
-    white:   '#d5d8da'
+    white:   '#e5e8ea'
 
   # Dim colors
   dim:
     black:   '#222222'
-    red:     '#8c4346'
+    red:     '#9c2326'
     # green:   '#22aa88'
     green:   '#4fd4a7'
     yellow:  '#97822e'
     blue:    '#31829d'
-    magenta: '#5e4bdf'
+    magenta: '#5e4bcf'
     cyan:    '#398eba'
     white:   '#ababab'
 

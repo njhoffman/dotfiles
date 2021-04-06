@@ -151,7 +151,7 @@ alias journalctl="$GRC -c conf.log journalctl"
 alias pv="grc -s --colour=on -c conf.log pv"
 
 # alias findpid="grc -es --colour=on ps axww -o pid,user,%cpu,%mem,start,time,fname,command | fzfp | sed 's/^ *//' | cut -f1 -d' '"
-alias findpid="grc --colour=on -es -c conf.ps ps axww -o pid,user,%cpu,%mem,time,fname,command | fzfp | sed 's/^ *//' | cut -f1 -d' '"
+alias findpid="grc --colour=on -es -c conf.ps ps axww -o pid,user,%cpu,%mem,time,fname,command | fzf-tmux $FZF_TMUX_OPTS --ansi --header-lines=1 --preview='S_COLORS=always pidstat -du --human -p {1}' | sed 's/^ *//' | cut -f1 -d' '"
 alias progress="ccze -A < <(progress)"
 
 function gl_no_graph {

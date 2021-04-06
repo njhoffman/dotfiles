@@ -1,0 +1,25 @@
+{
+    "schema_version": 2,
+    "timestamp": 1617681119,
+    "workspace": {
+        "0": [
+            [
+                {
+                    "panes": [
+                        {
+                            "type": "term",
+                            "directory": "/home/nicholas",
+                            "custom_colors": {
+                                "fg_color": null,
+                                "bg_color": null,
+                                "palette": null
+                            }
+                        }
+                    ],
+                    "label": "BpyTOP",
+                    "custom_label_set": false
+                }
+            ]
+        ]
+    }
+}
