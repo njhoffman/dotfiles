@@ -20,6 +20,35 @@ zstyle ':completion:*:builtins' list-colors '=*=1;38;5;27'
 zstyle ':completion:*:*:kill:*' list-colors '=(#b) #([0-9]#)*( *[a-z])*=34=31=33'
 # zstyle -e ':completion:' list-colors 'thingy=${PREFIX##/} reply=( "=(#b)($thingy)(?)*=00=$color[green]=$color[bg-green]" )'
 
+autoload up-line-or-beginning-search down-line-or-beginning-search
+zle -N up-line-or-beginning-search
+zle -N down-line-or-beginning-search
+
+# Fuzzy matching of completions
+# https://grml.org/zsh/zsh-lovers.html
+zstyle ':completion:*' completer _complete _match _approximate
+zstyle ':completion:*:match:*' original only
+zstyle -e ':completion:*:approximate:*' \
+  max-errors 'reply=($((($#PREFIX+$#SUFFIX)/3))numeric)'
+
+# Have the completion system announce what it is completing
+zstyle ':completion:*' format 'Completing %d'
+
+# In menu-style completion, give a status bar
+zstyle ':completion:*' select-prompt '%SScrolling active: current selection at %p%s'
+
+# In the line editor, number of matches to show before asking permission
+LISTMAX=9999
+
+# Menu-style completion
+zstyle ':completion:*' menu select
+
+# use the vi navigation keys (hjkl) besides cursor keys in menu completion
+zmodload zsh/complist
+bindkey -M menuselect 'h' vi-backward-char        # left
+bindkey -M menuselect 'k' vi-up-line-or-history   # up
+bindkey -M menuselect 'l' vi-forward-char         # right
+bindkey -M menuselect 'j' vi-down-line-or-history # bottom
 # zstyle ':completion:*:parameters'  list-colors '=*=32'
 # As you can see syntax is '=pattern=format'. Since * matches everything and 32 is ANSI green code, thus all parameters will be green.
 # Now lets show all commands in bolded red
@@ -37,8 +66,8 @@ zstyle ':completion:*:*:kill:*' list-colors '=(#b) #([0-9]#)*( *[a-z])*=34=31=33
 # Notice that some options starts with '--', so we have to use '-- ' (with space) to match only descriptions, and negate pattern with ^ to apply color for options.
 
 # AFAIK when using completion menu zsh will always place highlighted completion in the command line. However you can make it less hasty.
-unsetopt menucomplete
-setopt automenu
+# unsetopt menucomplete
+# setopt automenu
 # Changes the behaviour so
 #
 # first TAB completes the common part

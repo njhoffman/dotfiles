@@ -15,6 +15,7 @@
 #####################################
 .AndroidStudio4.0/
 .cache/
+.jekyll-cache/
 .cargo/
 .config/Slack
 .config/google-chrome/
@@ -48,6 +49,7 @@ tmp/
 tmp/
 vendor/
 yarn/
+go/src/github.com/
 
 .local/src/**/*
 !.local/src/*
@@ -72,6 +74,8 @@ Downloads/**/*
 *.tmp*
 *.old
 *.plist
+*.min.js
+*.js.map
 
 package-lock.json
 yarn.lock

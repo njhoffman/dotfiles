@@ -28,8 +28,13 @@ DIFF=$(printf '%.3g' $(echo "$END - $START" | bc))
 print -P "%F{247} Loaded scripts in %F{255}${DIFF}s%f"
 # print -P "%F{247}%F{255}    ${DIFF}s%f\n"
 
+# open menu-completion with ^N
+bindkey -r '^N'
+bindkey '^N' menu-complete
+
+export rvmsudo_secure_path=1
+PATH="$GEM_HOME/bin:$HOME/.rvm/bin:$PATH" # Add RVM to PATH for scripting
 export _SHELL_INITIALIZED=1
 # zprof > ~/.zshprof
-
 
 # [ -f ~/.fzf.zsh ] && source ~/.fzf.zsh

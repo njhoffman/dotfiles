@@ -1,11 +1,12 @@
 # prettier-ignore
 
-# shell:
-#   program: /usr/local/bin/tmux
-#   args:
-#    - new
-#    - -A
-#    - -s main
+shell:
+  program: /usr/local/bin/tmux
+  args:
+   - new
+   - -A
+   - -s
+   - main
 
 # Font configuration
 font:
@@ -46,7 +47,7 @@ colors:
   # Primary colors
   primary:
     background: '#000000'
-    foreground: '#a9a9b9'
+    foreground: '#839496'
 
   # Normal colors
   normal:
@@ -58,7 +59,7 @@ colors:
     blue:    '#3182ad'
     magenta: '#6a7bef'
     cyan:    '#60b1cc'
-    white:   '#c5c8ca'
+    white:   '#eee8d5'
 
   # Bright colors
   bright:
@@ -70,7 +71,7 @@ colors:
     blue:    '#71a2ff'
     magenta: '#8aabff'
     cyan:    '#80d1f3'
-    white:   '#e5e8ea'
+    white:   '#b5b8ba'
 
   # Dim colors
   dim:
@@ -82,7 +83,7 @@ colors:
     blue:    '#31829d'
     magenta: '#5e4bcf'
     cyan:    '#398eba'
-    white:   '#ababab'
+    white:   '#787889'
 
   # cursor:
   #   text: '0xf1c1c1'
@@ -107,3 +108,6 @@ live_config_reload: true
 key_bindings:
   - { key: L, mods: Control, action: ReceiveChar }
   - { key: U, mods: Control, action: ReceiveChar }
+
+env:
+  TERM: xterm-256color

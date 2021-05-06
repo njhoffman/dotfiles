@@ -1,6 +1,6 @@
 
 zinit light "desyncr/auto-ls"
-colorls="/usr/local/bin/colorls"
+# colorls="/usr/local/bin/colorls"
 #
 # auto-ls-custom_function () {
 #   if [[ -z "$_CD_WIDGET" ]]; then
@@ -21,7 +21,7 @@ colorls="/usr/local/bin/colorls"
 # # AUTO_LS_CHPWD=false
 # AUTO_LS_CHPWD=false
 # AUTO_LS_COMMANDS=(custom_function)
-AUTO_LS_COMMANDS=("$colorls -1 --git-status --almost-all --sort-dirs")
+# AUTO_LS_COMMANDS=("colorls -1 --git-status --almost-all --sort-dirs")
 #
 # # "colorls -1 --git-status --almost-all --sort-dirs '[[ -d $PWD/.git ]] && /usr/bin/git log|head'" \
 # # AUTO_LS_COMMANDS=("$colorls -1 --git-status --sort-dirs")

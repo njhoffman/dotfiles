@@ -1,15 +1,14 @@
 " ********** Global Settings **********
 
-set tabstop=2                        " a tab is four spaces
-set expandtab                        " don't use actual tab character
-set shiftwidth=2                     " 4 spaces for autoindenting
+set expandtab                        " use space instead of acutal tab character
+set tabstop=2                        " a tab is 2 spaces
+set shiftwidth=2                     " 2 spaces for autoindenting
 set shiftround                       " use multiple of shiftwidth when indenting with '<' and '>'
 set ignorecase                       " ignore case by default
 set smartcase                        " ignore case if search pattern is all lowercase, case-sensitive otherwise
-set smartindent                      " does the right thing (mostly) in programs
 set smarttab                         " insert tabs on the start of a line according to shiftwidth
 set autoindent                       " always autoindent
-                                     " set copyindent								" copy previous indentation on autoindenting
+set copyindent		 			        		" copy previous indentation on autoindenting
 set norelativenumber                 " this might speed things up
 set nowrap                           " no line wrapping
 set number                           " turn line numbers on
@@ -43,6 +42,7 @@ set encoding=utf-8                   " vim bad at detecting encoding, if no BOM 
 set path='.,src,node_modules         " paths to look for files when using gf command
 set suffixesadd=.js,.jsx             " suffix to apply to files when using gf command
 set backspace=start,eol,indent       " make backspace work like it should
+set wildmode^=lastused               " autocomplete buffers by last visited, :b <Tsb>
 
 set sessionoptions-=buffers
 set sessionoptions-=help
@@ -53,7 +53,6 @@ set sessionoptions-=options
 set ttyfast                          " we have a fast terminal
 " set autowriteall						     	 " automatically save changes to buffer before hiding
 set autoread   								       " autoload files that changed outside of vim
-syntax on                            " syntax highlighting on
 set redrawtime=10000                 " timeout before vim quits trying to apply syntax highlighting
 set switchbuf=useopen                " if buffer already open in window, switch don't open new window
 set nocompatible                     " be iMproved, required
@@ -97,9 +96,7 @@ set shada='2000,<2000,s300,:3000,h,n~/.vim/.shada
 " zsh: # KEYTIMEOUT=1 # 10ms for key sequences
 
 set pumheight=20                     " menu hegiht
-filetype off                         " required
-filetype indent on                   " filetype specific indenting
-filetype plugin on
+" filetype plugin indent on
 
 " Set a variable on the buffer that tells the sh syntax highlighter
 " that this is bash:

@@ -50,8 +50,8 @@
   zi_program has'bat' pick'src/*'
   zinit light eth-p/bat-extras
 
-  zi_program has'git' pick'yadm' atclone"cp yadm.1 $HOME/.local/man/man1" atpull'%atclone'
-  zinit light TheLocehiliosan/yadm
+  # zi_program has'git' pick'yadm' atclone"cp yadm.1 $HOME/.local/man/man1" atpull'%atclone'
+  # zinit light TheLocehiliosan/yadm
 
   zi_program has'tmux' pick'bin/xpanes'
   zinit light greymd/tmux-xpanes

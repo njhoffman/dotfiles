@@ -20,6 +20,10 @@
   "diagnostic.level": "warning",
   "diagnostic.virtualTextLineSeparator": " \\ ",
 
+  "prettier.disableSuccessMessage": true,
+  "prettier.singleQuote": true,
+  "prettier.eslintIntegration": true,
+
   "suggest.completionItemKindLabels": {
     "keyword": "\uf1de",
     "variable": "\ue79b",
@@ -94,11 +98,11 @@
   "git.blameUseRealTime": true,
 
   "tsserver.enable": true,
-  "tsserver.reportStyleChecksAsWarnings": false,
+  "tsserver.reportStyleChecksAsWarnings": true,
   "tsserver.implicitProjectConfig.checkJs": true,
 
   "eslint.quiet": false,
-  "eslint.codeAction.showDocumentation": { "enable": true },
+  "eslint.codeAction.showDocumentation": {"enable": true},
 
   "javascript.validate.enable": false,
   "javascript.format.enabled": false,
@@ -157,8 +161,16 @@
   "coc.preferences.rootPatterns": [".git", "package.json"],
   "coc.preferences.enableMarkdown": true,
   "coc.preferences.bracketEnterImprove": true,
-  "coc.preferences.formatOnType": false,
-  "coc.preferences.hoverTarget": "float",
+  "coc.preferences.formatOnType": true,
+  "coc.preferences.formatOnSaveFiletypes": [
+    "css",
+    "markdown",
+    "js",
+    "jsx",
+    "json",
+    "javascript",
+    "javascriptreact"
+  ],
 
   "tsserver.enableJavascript": true,
 
@@ -214,7 +226,14 @@
     "ccls": {
       "command": "ccls",
       "filetypes": ["c", "cpp", "objc", "objcpp"],
-      "rootPatterns": [".ccls", ".ccls-root", "compile_commands.json", ".vim/", ".git/", ".hg/"],
+      "rootPatterns": [
+        ".ccls",
+        ".ccls-root",
+        "compile_commands.json",
+        ".vim/",
+        ".git/",
+        ".hg/"
+      ],
       "initializationOptions": {
         "cache": {
           "directory": ".ccls-cache"

@@ -87,14 +87,12 @@ function! s:ExecuteInShell(command, bang)
     silent! 2d | resize 1 | redraw
     silent! execute 'silent! %!'. _
     silent! execute 'resize ' . line('$')
-    silent! execute 'syntax on'
     silent! execute 'autocmd BufUnload <buffer> execute bufwinnr(' . bufnr . ') . ''wincmd w'''
     silent! execute 'autocmd BufEnter <buffer> execute ''resize '' .  line(''$'')'
     silent! execute 'nnoremap <silent> <buffer> <CR> :call <SID>ExecuteInShell(''' . _ . ''', '''')<CR>'
     silent! execute 'nnoremap <silent> <buffer> <LocalLeader>r :call <SID>ExecuteInShell(''' . _ . ''', '''')<CR>'
     silent! execute 'nnoremap <silent> <buffer> <LocalLeader>g :execute bufwinnr(' . bufnr . ') . ''wincmd w''<CR>'
     nnoremap <silent> <buffer> <C-W>_ :execute 'resize ' . line('$')<CR>
-    silent! syntax on
   endif
 endfunction
 
@@ -132,6 +130,7 @@ function! GotoJump()
     endif
   endif
 endfunction
+
 function! s:Pulse() "{{{
   " Pulse - An awesome function by Steve Losh
   let current_window = winnr()
@@ -261,5 +260,102 @@ function! AltCommand(path, vim_command)
   endif
 endfunction
 
+function! Try_edit(the_file) abort
+  if filereadable(a:the_file)
+    execute 'edit ' . a:the_file
+  else
+    echom 'file wasn''t readable'
+  endif
+endfunction
+
+function! Cool_gf() abort
+  let regex = '[/.]'
+
+  if search(regex,'z',line('.'))
+    " search forwards
+    let the_file = expand('<cWORD>')
+    call Try_edit(the_file)
+  elseif search(regex,'b',line('.'))
+    " search backwards
+    let the_file = expand('<cWORD>')
+    call Try_edit(the_file)
+  else
+    echom 'didn''t find a file'
+  endif
+endfunction
+
+nnoremap <leader>gf :call Cool_gf()<cr>
+
+" Function to quickly open/hide terminal window inside vim
+" Terminal operation  when
+" 1. terminal is open in split window, it closes the window (terminal still
+"    running)
+" 2. terminal open in buffer, it moves window into split window
+" 3. no termial instance running then it opens new terminal instance in split
+"    window
+function Term() abort
+  let bufNum = bufnr('term://')
+  let termNum = bufwinnr('term://')
+  if termNum > 0 && winnr('$') > 1
+    execute termNum . 'wincmd c'
+  elseif bufNum > 0 && bufNum != bufnr(@%)
+    execute 'sb ' . bufNum . ' | wincmd p'
+  elseif bufNum == bufnr(@%)
+    execute 'bprevious | sb ' . bufNum . ' | wincmd p'
+  else
+    execute 'sp term://zsh'
+  endif
+endfunction
+command! -bang -nargs=* Term call Term()
+nmap <leader><space> :Term<CR>
+
+" Maps Escape button in terminal window
+autocmd BufEnter * if !empty(matchstr(@%, "term",0)) | tnoremap <buffer> <Esc> <C-\><C-n> | endif
+
+" Repeat <C-o> or <C-i> jump commands until the current buffer changes
+" or no other jumps are available
+function FileCO(up)
+    let current_buffer = bufnr()
+
+    " Get the jump list and parse the position of the first jump in the list
+    " if the number is zero then we reached the top
+    redir => jumps_output
+    silent jumps
+    redir END
+    let lastjump = split(jumps_output, '\n')[1]
+    let lastjumppos = str2nr(matchstr(lastjump, '\d\+'))
+
+    " Execute the jump command until the buffer changes or there are no more jumps
+    while bufnr() == current_buffer && lastjumppos > 0
+        if a:up == v:true
+            execute "normal! \<c-o>"
+        else
+            " \<CR> is an ugly hack to do nothing but let the normal command
+            " see that it has an argument
+            execute "normal! \<CR>\<c-i>"
+        endif
+        let lastjumppos = lastjumppos - 1
+    endwhile
+endfunction
+
+" Overriding <C-o> and <C-i> is a bad idea let's prefix them with <leader> instead
+nnoremap <silent> <leader><C-o> :call FileCO(v:true)<CR>
+nnoremap <silent> <leader><C-i> :call FileCO(v:false)<CR>
+
+
+" I prefer a more automatic behavior where when cursoring over a word, I see either the diagnostic if it exists, otherwise the documentation. I wrote a snippet to accomplish this:
+" function! ShowDocIfNoDiagnostic(timer_id)
+"   if (coc#util#has_float() == 0)
+"     silent call CocActionAsync('doHover')
+"   endif
+" endfunction
+"
+" function! s:show_hover_doc()
+"   call timer_start(500, 'ShowDocIfNoDiagnostic')
+" endfunction
+"
+" autocmd CursorHoldI * :call <SID>show_hover_doc()
+" autocmd CursorHold * :call <SID>show_hover_doc()
+"
 " Find the alternate file for the current path and open it
 nnoremap <leader>. :w<cr>:call AltCommand(expand('%'), ':e')<cr>

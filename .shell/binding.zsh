@@ -58,6 +58,18 @@ function asynctask-auto {
   fi
 }
 
+function .fasd-file () {
+  local selected
+  if selected=$(find . -type f | grep -v .git | grep -v node_modules | fzf-tmux -q "$LBUFFER"); then
+    LBUFFER=$selected
+  fi
+  zle redisplay
+}
+
+# option-g to find files and put the result in command
+zle -N .fasd-file
+bindkey '^T' .fasd-file
+
 bindkey "^[u" histdb-fzf-widget
 # bindkey "^[u" fzfp-history-widget
 bindkey "^U" kill-whole-line
@@ -66,9 +78,9 @@ bindkey '^P' fzf-completion
 bindkey '^o' fzf-cd-widget
 bindkey '^[o' fzf-home-cd-widget
 # bindkey '^[R' fzfp-root-cd-widget
-bindkey -s '^T' 'asynctask -f \n'
-bindkey -s '^[T' 'asynctask-auto \n'
-bindkey -s '^[r' 'asynctask-reset \n'
+bindkey -s '^_' 'asynctask -f \n'
+# bindkey -s '^[T' 'asynctask-auto \n'
+# bindkey -s '^[r' 'asynctask-reset \n'
 # bindkey '^E' fzfp-home-file-widget
 bindkey '^V' fzfp-vim-widget
 bindkey '^[V' fzfp-home-vim-widget
@@ -81,7 +93,7 @@ bindkey '^[V' fzfp-home-vim-widget
 # bindkey -M menuselect '^P' reverse-menu-complete
 bindkey -s '^\' 'll\n'
 bindkey -s '^]' 'cd ~\n'
-# bindkey '\CI' expand-or-complete-prefix
+bindkey '\CI' expand-or-complete-prefix
 # bindkey '\CI' expand-or-complete
 # bindkey '^@' fzf-completion
 bindkey '^ ' fzf-completion
@@ -94,10 +106,24 @@ bindkey '^I'   expand-or-complete # tab          | complete
 # bindkey -r '^[[A'
 
 # open menu-completion with ^N
-bindkey '^N' expand-or-complete
+# bindkey -r '^N'
+# bindkey '^N' expand-or-complete
 
 #  edit dotfiles
 bindkey -s '^Q' "dotbare fedit\n"
+
+# swap caps lock for esscape, caps:escape, caps:super
+setxkbmap -option caps:escape
+# gsettings set org.gnome.desktop.input-sources xkb-options "['caps:swapescape']"
+# xmodmap -e "remove Lock = Caps_Lock"
+# xmodmap -e "keycode 9 = Caps_Lock NoSymbol Caps_Lock"
+# xmodmap -e "keycode 66 = Escape NoSymbol Escape"
+# xmodmap -pke > ~/.xmodmap
+
+# xmodmap -e "remove Lock = Caps_Lock"
+# with:
+# xmodmap -e "clear Lock"0
+
 
 # ###########################
 # REFERENCE

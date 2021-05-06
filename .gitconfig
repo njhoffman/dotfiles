@@ -10,7 +10,7 @@
 	lg1-specific = log --graph --abbrev-commit --decorate --format=format:'%C(bold blue)%h%C(reset) - %C(bold green)(%ar)%C(reset) %C(white)%s%C(reset) %C(dim white)- %an%C(reset)%C(auto)%d%C(reset)'
 	lg2-specific = log --graph --abbrev-commit --decorate --format=format:'%C(bold blue)%h%C(reset) - %C(bold cyan)%aD%C(reset) %C(bold green)(%ar)%C(reset)%C(auto)%d%C(reset)%n''          %C(white)%s%C(reset) %C(dim white)- %an%C(reset)'
 	lg3-specific = log --graph --abbrev-commit --decorate --format=format:'%C(bold blue)%h%C(reset) - %C(bold cyan)%aD%C(reset) %C(bold green)(%ar)%C(reset) %C(bold cyan)(committed: %cD)%C(reset) %C(auto)%d%C(reset)%n''          %C(white)%s%C(reset)%n''          %C(dim white)- %an <%ae> %C(reset) %C(dim white)(committer: %cn <%ce>)%C(reset)
-
+  lg-large-files = rev-list --objects --all | cat-file --batch-check='%(objecttype) %(objectname) %(objectsize) %(rest)'  | sed -n 's/^blob //p'  | sort --numeric-sort --key=2  | tail -n 10  | cut -c 1-12,41-  | $(command -v gnumfmt || echo numfmt) --field=2 --to=iec-i --suffix=B --padding=7 --round=nearest
 [pull]
 	rebase = false
 [secrets]
@@ -28,3 +28,6 @@
 	prompt = false
 [merge]
 	tool = vimdiff
+[credential "https://github.com"]
+	helper =
+	helper = !/home/nicholas/.zinit/plugins/cli---cli/usr/bin/gh auth git-credential

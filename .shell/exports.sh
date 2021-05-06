@@ -21,6 +21,7 @@ export EXA_COLORS="da=1;34"
 if [[ -z "$PKG_CONFIG_PATH" ]]; then
   export PKG_CONFIG_PATH=$(pkg-config --variable pc_path pkg-config)
 fi
+# export PKG_CONFIG_PATH="$PKG_CONFIG_PATH:/usr/lib/x86_64-linux-gnu/pkgconfig"
 
 # fi Normal file
 # di Directory
@@ -106,10 +107,19 @@ export PATH=$PATH:$ANDROID_HOME/tools
 export PATH=$PATH:$ANDROID_HOME/tools/bin
 export PATH=$PATH:$ANDROID_HOME/platform-tools
 
+# Ruby exports
 # export PATH="$HOME/.rbenv/bin:$PATH"
-# export PATH="$HOME/.rbenv/plugins/ruby-build/bin:$PATH"
 # eval "$(rbenv init -)"
 # export PATH=$PATH:~/.rbenv/bin:~/.rbenv/plugins/ruby-build/bin
+# export RB_USER_INSTALL='true'
+# export GEM_HOME=$HOME/.rvm/gems
+# export GEM_PATH=~/.rvm/gems/2.7.0:/usr/lib/ruby/gems/2.7.0
+
+# export PATH=$HOME/.rvm/gems/default/bin:$PATH
+# [[ -z "$GEM_HOME" ]] && \
+#   export PATH="$GEM_HOME/bin:$PATH"
+
+# export rvmsudo_secure_path=1
 
 export PATH="/usr/lib/postgresql/10/bin:$PATH"
 export PATH="/usr/local/go/bin:$PATH"
@@ -118,6 +128,9 @@ export PATH="/usr/sbin:$PATH"
 export GOPATH=$HOME/go
 export GOROOT=/home/linuxbrew/.linuxbrew/opt/go/libexec
 export PATH=$GOPATH/bin:$GOROOT/bin:$PATH
+
+export PATH="/usr/local/opt/icu4c/sbin:/usr/local/opt/icu4c/bin:$PATH"
+
 
 export KREW_ROOT=~/.krew
 export PATH="${KREW_ROOT:-$HOME/.krew}/bin:$PATH"
@@ -147,6 +160,21 @@ export COLUMNS="120"
 export PATH="$PATH:/home/nicholas/ACLI"
 
 export KUBECONFIG=$KUBECONFIG:~/.kube/minikube:~/.kube/spadash-dev0-eks:~/.kube/spadash-prod0-eks
+
+# if [[ -S ~/.mpd/socket ]] ; then
+#   export MPD_HOST="${HOME}/.mpd/socket"
+# else
+#   unset MPD_HOST
+# fi
+#
+# if whence -p systemctl &> /dev/null ; then
+#   systemctl --user import-environment PATH EDITOR LANG
+# fi
+#
+# export GPG_TTY=$(tty)
+# if whence -p gpg-connect-agent &> /dev/null ; then
+#   gpg-connect-agent -q updatestartuptty /bye > /dev/null
+# fi
 
 # tmux
 [[ -z "$_CFG_TMUX_MAIL" ]] && export _CFG_TMUX_MAIL=1

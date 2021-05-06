@@ -40,64 +40,6 @@ inoremap <silent><expr> <c-space> coc#refresh()
   else
     set signcolumn=yes
   endif
-
-  " easily exit floating window
-  nmap <esc> <esc><Plug>(coc-float-hide).
-
-  " traverses within location window
-  try
-      nmap <silent> [c :call CocAction('diagnosticNext')<cr>
-      nmap <silent> ]c :call CocAction('diagnosticPrevious')<cr>
-  endtry
-
-  " Use `[g` and `]g` to navigate diagnostics outside of window
-  nmap <silent> [g <Plug>(coc-diagnostic-prev)
-  nmap <silent> ]g <Plug>(coc-diagnostic-next)
-  "
-  " " Remap keys for gotos
-  nmap <silent> gf <Plug>(coc-definition)
-  nmap <silent> gd <Plug>(coc-definition)
-  nmap <silent> gs <Plug>(coc-git-chunkinfo)
-  nmap <silent> gS <Plug>(coc-git-commit)
-  nmap <silent> gy <Plug>(coc-type-definition)
-  nmap <silent> gi <Plug>(coc-implementation)
-  nmap <silent> gr <Plug>(coc-references)
-  " " navigate chunks of current buffer
-  " nmap [g <Plug>(coc-git-prevchunk)
-  " nmap ]g <Plug>(coc-git-nextchunk)
-  " " navigate conflicts of current buffer
-  " nmap [c <Plug>(coc-git-prevconflict)
-  " nmap ]c <Plug>(coc-git-nextconflict)
-  " " show chunk diff at current position
-  " nmap gs <Plug>(coc-git-chunkinfo)
-  " " show commit contains current position
-  " nmap gc <Plug>(coc-git-commit)
-  " " create text object for git chunks
-  omap ig <Plug>(coc-git-chunk-inner)
-  xmap ig <Plug>(coc-git-chunk-inner)
-  omap ag <Plug>(coc-git-chunk-outer)
-  xmap ag <Plug>(coc-git-chunk-outer)
-  "
-  " Use gk to show documentation in preview window
-  nmap <silent> gk :call <SID>show_documentation()<CR>
-
-  function! s:show_documentation()
-    if (index(['vim','help'], &filetype) >= 0)
-      execute 'h '.expand('<cword>')
-    else
-      call CocAction('doHover')
-    endif
-  endfunction
-
-  " Highlight symbol under cursor on CursorHold
-  autocmd CursorHold * silent call CocActionAsync('highlight')
-  "
-  " " Remap for rename current word
-  " nmap <leader>rn <Plug>(coc-rename)
-  "
-  " " Remap for format selected region
-  xmap <leader>f  <Plug>(coc-format-selected)
-  "
   " augroup mygroup
   "   autocmd!
   "   " Setup formatexpr specified filetype(s).

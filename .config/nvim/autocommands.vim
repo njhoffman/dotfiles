@@ -36,13 +36,14 @@ if has("autocmd")
   " autocmd QuitPre * call WarnDbg()
 
   " start at beginning of file for syntax highlighting
-  autocmd BufEnter * :syntax sync fromstart
-
-  augroup BgHighlight
-    autocmd!
-    autocmd WinEnter * set cul
-    autocmd WinLeave * set nocul
-  augroup END
+  " autocmd BufEnter * :syntax sync fromstart
+  autocmd BufEnter *.{js,jsx,ts,tsx} :syntax sync fromstart
+  autocmd BufLeave *.{js,jsx,ts,tsx} :syntax sync clear
+  " augroup BgHighlight
+  "   autocmd!
+  "   autocmd WinEnter * set cul
+  "   autocmd WinLeave * set nocul
+  " augroup END
 
   autocmd VimLeave * set guicursor=a:ver25-blinkon1
 
@@ -59,7 +60,7 @@ if has("autocmd")
 
   " custom syntax extension assignments
   augroup filetypedetect
-    au BufRead,BufNewFile *.module set filetype=php
+    au BufNewFile,BufRead *.module set filetype=php
     au BufNewFile,BufRead *.md  set ft=vimwiki syn=vimwiki
     au BufNewFile,BufRead .pa set ft=config
     au BufNewFile,BufRead .env.* set ft=config
@@ -84,13 +85,12 @@ if has("autocmd")
     au BufNewFile,BufRead *.atj setlocal ft=javascript
     au BufNewFile,BufRead *.rjs setlocal ft=javascript
     au BufNewFile,BufRead *.xml setlocal ft=javascript
-    au BufEnter * if &bufhidden =~ 'wipe' && &buftype =~ 'nofile' | setf preview | endif
+    " au BufEnter * if &bufhidden =~ 'wipe' && &buftype =~ 'nofile' | setf preview | endif
     au BufNewFile,BufRead *.tcf setlocal ft=tcf
     au BufNewFile,BufRead *.tca setlocal ft=tcf
     au BufNewFile,BufRead *.tso setlocal ft=tcf
     au BufNewFile,BufRead .tern-project setf json
     au BufNewFile,BufRead .tern-config setf json
-    "
   augroup END
 
   " Syntax highlight Vagrantfile as ruby
@@ -98,5 +98,19 @@ if has("autocmd")
     au!
     au BufRead,BufNewFile Vagrantfile set filetype=ruby
   augroup END
+
+  " fasd integration
+  function! s:fasd_update() abort
+    if empty(&buftype) || &filetype ==# 'dirvish'
+      call jobstart(['fasd', '-A', expand('%:p')])
+    endif
+  endfunction
+
+  augroup fasd
+    autocmd!
+    autocmd BufWinEnter,BufFilePost * call s:fasd_update()
+  augroup END
+  command! FASD call fzf#run(fzf#wrap({'source': 'fasd -al', 'options': '--no-sort --tac --tiebreak=index'}))
+  nnoremap <silent> <Leader>e :FASD<CR>
 
 endif

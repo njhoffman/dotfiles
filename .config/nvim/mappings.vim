@@ -76,6 +76,8 @@ command! -range Columnify
 
 " map close exit vim
 nnoremap <silent> <Leader>x :q<CR>
+nnoremap <silent> <C-q> :q<CR>
+nnoremap <silent> <C-x> :x<CR>
 
 " map switch window focus to next window
 " nnoremap <silent> <Leader>; <C-W>w
@@ -238,6 +240,69 @@ command! -bang OMaps call fzf#vim#maps('o')
 " c	Command-line
 " t	Terminal-Job
 
+" easily exit floating window
+nmap <esc> <esc><Plug>(coc-float-hide).
+
+" traverses within location window
+try
+    nmap <silent> [c :call CocAction('diagnosticNext')<cr>
+    nmap <silent> ]c :call CocAction('diagnosticPrevious')<cr>
+endtry
+
+" vim-fugitive
+nmap <silent> gD :Gdiffsplit<cr>
+
+" Use `[g` and `]g` to navigate diagnostics outside of window
+nmap <silent> [g <Plug>(coc-diagnostic-prev)
+nmap <silent> ]g <Plug>(coc-diagnostic-next)
+"
+" " Remap keys for gotos
+" nmap <silent> gf <Plug>(coc-definition)
+nmap <silent> gd <Plug>(coc-definition)
+nmap <silent> <Leader>gs <Plug>(coc-git-chunkinfo)
+nmap <silent> <Leader>gS <Plug>(coc-git-commit)
+nmap <silent> gy <Plug>(coc-type-definition)
+nmap <silent> gi <Plug>(coc-implementation)
+nmap <silent> gr <Plug>(coc-references)
+" " navigate chunks of current buffer
+" nmap [g <Plug>(coc-git-prevchunk)
+" nmap ]g <Plug>(coc-git-nextchunk)
+" " navigate conflicts of current buffer
+" nmap [c <Plug>(coc-git-prevconflict)
+" nmap ]c <Plug>(coc-git-nextconflict)
+" " show chunk diff at current position
+" nmap gs <Plug>(coc-git-chunkinfo)
+" " show commit contains current position
+" nmap gc <Plug>(coc-git-commit)
+" " create text object for git chunks
+omap ig <Plug>(coc-git-chunk-inner)
+xmap ig <Plug>(coc-git-chunk-inner)
+omap ag <Plug>(coc-git-chunk-outer)
+xmap ag <Plug>(coc-git-chunk-outer)
+"
+" Use gk to show documentation in preview window
+nmap <silent> gk :call <SID>show_documentation()<CR>
+
+" goto file from anywhere on line
+nnoremap gf ^f/gf
+
+function! s:show_documentation()
+  if (index(['vim','help'], &filetype) >= 0)
+    execute 'h '.expand('<cword>')
+  else
+    call CocAction('doHover')
+  endif
+endfunction
+
+" Highlight symbol under cursor on CursorHold
+autocmd CursorHold * silent call CocActionAsync('highlight')
+"
+" " Remap for rename current word
+" nmap <leader>rn <Plug>(coc-rename)
+"
+" " Remap for format selected region
+xmap <leader>f  <Plug>(coc-format-selected)
+"
 " Maps, Highlights, Locate <str>, fzf-preview.CocCurrentDiagnostics, Lets, Lists, Maps
 
 nnoremap <Leader>gl :BCommits<CR>
@@ -252,9 +317,9 @@ cmap <silent> <A-O> :History:<CR>
 " map <C-\> to exit terminal-mode
 tnoremap <C-\> <C-\><C-n>
 
-let loaded_netrwPlugin = 1
-let g:netrw_banner = 0
-let g:netrw_altfile = 1
+" let loaded_netrwPlugin = 1
+" let g:netrw_banner = 0
+" let g:netrw_altfile = 1
 " open files from netrw in a previous window, unless we're opening the current dir
 let g:netrw_browse_split = 4
 
@@ -288,6 +353,14 @@ function! PreviewExists() abort
   return 0
 endfunction
 
+" Avoid adding to jumping list
+nnoremap } :keepjumps normal! }<CR>
+nnoremap { :keepjumps normal! {<CR>
+nnoremap n :keepjumps normal! n<CR>
+nnoremap N :keepjumps normal! N<CR>
+
+" Avoid * jumping to next ocurrence
+nnoremap * m' :keepjumps normal! *N<CR>
 
 " ***** visual mode mappings to test out
 "

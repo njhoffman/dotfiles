@@ -54,11 +54,17 @@ ZSH_AUTOSUGGEST_STRATEGY=histdb_top_fallback
   zi0a pick'src/bash.command-not-found'
   zinit light hkbakke/bash-insulter
 
-  zinit light desyncr/auto-ls
-  colorls="/usr/local/bin/colorls"
+  auto-color-ls() {
+    emulate -L zsh
+    # echo
+    colorls -A --group-directories-first
+  }
+  chpwd_functions=(auto-color-ls $chpwd_functions)
+  # zinit light desyncr/auto-ls
+  # colorls="/usr/local/bin/colorls"
 
   # AUTO_LS_COMMANDS=(custom_function)
-  AUTO_LS_COMMANDS=("$colorls -1 --git-status --almost-all --sort-dirs")
+  # AUTO_LS_COMMANDS=(colorls "-1 --git-status --almost-all --sort-dirs")
   # "colorls -1 --git-status --almost-all --sort-dirs '[[ -d $PWD/.git ]] && /usr/bin/git log|head'" \
   # AUTO_LS_COMMANDS=("$colorls -1 --git-status --sort-dirs")
   # AUTO_LS_NEWLINE=false
@@ -127,12 +133,21 @@ ZSH_AUTOSUGGEST_STRATEGY=histdb_top_fallback
     # disable_auto_notify enable_auto_notify
   zinit light MichaelAquilina/zsh-auto-notify
 
-    colorls="/usr/local/bin/colorls"
-    AUTO_LS_COMMANDS=("$colorls -1 --git-status --almost-all --sort-dirs")
+  zplugin ice wait"0"
+  zplugin light zdharma/zconvey
+  zplugin ice wait"0" as"command" pick"cmds/zc-bg-notify" silent
+  zplugin light zdharma/zconvey
+  # zc – sends to other session; use "-a" option to be asked for target and a command to send
+  # zc-all – the same as zc, but targets are all other active sessions (with -f also busy sessions)
+  # zc-rename – assigns name to current or selected session; won't rename if there's a session with the same name
+  # zc-take – takes a name for current or selected sessions, schematically renames any conflicting sessions
+  # zc-ls – lists all active and named sessions
+  # zc-id – shows ID and NAME of current session
+  # zc-logo – the same as zc-id, but in a form of an on-screen logo; bound to Ctrl-O Ctrl-I
+  # zc-bg-notify – in subdirectory cmds, link it to /usr/local/bin, etc. or load
 
-  zinit light desyncr/auto-ls
-
-  zinit light  michaelxmcbride/zsh-dircycle
+    zinit light  michaelxmcbride/zsh-dircycle
+    # zinit light desyncr/auto-ls
     # Press the Control + Shift + Left key combination to cycle backward through the directory stack.
     # Press the Control + Shift + Right key combination to cycle forward through the directory stack.
 

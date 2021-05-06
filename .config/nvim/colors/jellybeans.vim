@@ -823,6 +823,7 @@ call s:X("javascriptBraces","FFFFFF","","","Magenta","")
 call s:X("javaScript", "CCCCCC","","","White","")
 call s:X("jsxTag", "FF6600","","","Orange","")
 call s:X("jsxTagName", "FF6600","","","Orange","")
+call s:X("jsxCloseTag", "7F90AA", "", "", "Blue", "")
 call s:X("jsxAttrib", "88bbdd","","","Orange","")
 call s:X("jsxEqual", "6699bb","","","Orange","")
 " call s:X("jsObjectKey", "cccccc", "", "", "Cyan", "")
@@ -849,11 +850,26 @@ hi! link jsTemplateVar javaScriptTemplateVar
 hi! link jsTemplateDelim javaScriptTemplateDelim
 hi! link jsTemplateString javascriptTemplateString
 hi! link jsxComponentName jsxTag
-call s:X("jsxCloseTag", "7F90AA", "", "", "Blue", "")
+hi! link jsStorageClass StorageClass
+hi! link jsReturn Statement
+hi! link jsConditional Conditional
+hi! link jsExportDefault StorageClass
+hi! link jsExportDefaultGroup jsExportDefault
+hi! link jsLabel Label
 
 "**************
 " PLUGINS
 "**************
+
+" jsx-pretty
+hi! link jsVariableType jsStorageClass
+hi! link jsFunctionCall jsFuncCall
+hi! link jsIf jsConditional
+hi! link jsIdentifier jsDestructuringBlock
+hi! link jsModuleDefault jsExportDefault
+hi! link jsSwitch jsConditional
+hi! link jsSwitchCase jsLabel
+call s:X("jsSwitch","8888dd","","","Purple","")
 
 call s:X("VimWikiLink","00ccff","","","Green","")
 " VimWikiHeader1, 2, 3

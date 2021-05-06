@@ -3,6 +3,8 @@
 ##########################################
 assets/
 images/
+node_modules/
+reports/
 
 ##########################################
 # files we never care to search through

@@ -25,3 +25,8 @@ tunnels:
     bind_tls: true
     subdomain: spadash-admin
     addr: 8080
+  www-site:
+    proto: http
+    bind_tls: true
+    subdomain: spadash-www
+    addr: 8080

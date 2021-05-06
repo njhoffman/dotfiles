@@ -1,17 +1,53 @@
 # make sure to run lesskey after save
+#
+#  DOWN and j will move over EOF
+# Q and :cq will exit with return value 1
+#   for f in *; do less $f || rm $f; done
+# [ and ] move between files
+# D moves to the next line starting with "diff" or "comm
+# C moves to the next line starting with "commit"
+#   Type: '' to jump back to point before search
+#command
+
+#line-edit
 
 #command
 h left-scroll
 l right-scroll
+\kd forw-line-force
+j forw-line-force
+[ prev-file
+] next-file
+Q quit \1
+:cq quit \1
+# D noaction j/\^(diff|commit|From|[a-z0-9][a-z0-9][a-z0-9][a-z0-9][a-z0-9][a-z0-9][a-z0-9][a-z0-9][a-z0-9][a-z0-9]) \n\eu
+# C noaction j/\^(commit|[a-z0-9][a-z0-9][a-z0-9][a-z0-9][a-z0-9][a-z0-9][a-z0-9][a-z0-9][a-z0-9][a-z0-9]) \n\eu
+# Make spacebar, f-key, and Page Down scroll a full screenful, even if it reaches end-of-file in the process.
+# PageDown
+f           forw-screen-force
+# Spacebar (40 in octal)
+\40         forw-screen-force
+# PageDown
+\kD         forw-screen-force
 
 #line-edit
+\e abort
+^P up
+^N down
+\ed     word-delete
+\eD     word-delete
+^W      word-backspace
+^U      kill-line
 
 #env
 # -d: Don't cry if the terminal sucks
 # -i: Case-insensitive search for all-lowercase terms
 # -Q: Never ring a bell
+# -S: disable line wrapping
+# -J: status olumn on the left
+# -M: verbose status line
 # -R: Read ANSI colours
-LESS = -diQR
+LESS = -diQRJSM
 # Don't keep history
 LESSHISTFILE = -
 

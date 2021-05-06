@@ -1,6 +1,7 @@
 # Main Colors
-unrecognized_file: gold
+unrecognized_file: steelblue
 recognized_file:   skyblue
+executable_file:  indianred
 dir:               dodgerblue
 
 # Link
@@ -8,15 +9,15 @@ dead_link: red
 link:      cyan
 
 # special files
-socket:    darkcyan
-blockdev:  midnightblue
-chardev:   dodgerblue
+socket:   darkcyan
+blockdev: midnightblue
+chardev:  dodgerblue
 
 # Access Modes
-write:     darkkhaki
-read:      lime
-exec:      red
-no_access: indianred
+read:      lightseagreen
+write:     dodgerblue
+exec:      maroon
+no_access: dimgray
 
 # Age
 # hour_old:   deepskyblue
@@ -25,8 +26,8 @@ no_access: indianred
 # day_old:     lightslategray
 # hour_old:    darkseagreen
 # no_modifier: slategray
-hour_old:  slategray
-day_old:   dimgray
+hour_old:    slategray
+day_old:     dimgray
 no_modifier: darkgray
 
 # File Size
@@ -36,11 +37,11 @@ file_small:  peachpuff
 
 # Random
 report: white
-user: rosybrown
+user:   rosybrown
+normal: darksalmon
 tree:   cyan
 empty:  yellow
 error:  red
-normal: darksalmon
 
 # Git
 addition:     chartreuse
@@ -57,7 +58,7 @@ unchanged:    forestgreen
 # beige
 # bisque
 # blanchedalmond
-# blueviolet
+# royalblueblueviolet
 # brown
 # burlywood,
 # cadetblue

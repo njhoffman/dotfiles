@@ -80,6 +80,8 @@ function shellwatch {
   done
 }
 
+function mkdircd () { mkdir -p "$@" && eval cd "\"\$$#\""; }
+
 # source "${0%/*}/functions/cd.zsh"
 source "${0%/*}/functions/xcols.sh"
 source "${0%/*}/functions/aws_profile.sh"

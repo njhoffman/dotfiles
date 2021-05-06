@@ -4,7 +4,7 @@
 #WATCHFMT="%n %a %l from %m at %t."
 watch=(notme)         # Report login/logout events for everybody except ourself.
 LOGCHECK=60           # Time (seconds) between checks for login/logout activity.
-REPORTTIME=5          # Display usage statistics for commands running > 5 sec.
+REPORTTIME=60         # Display usage statistics for commands running > 60 sec.
 
 # Key timeout and character sequences
 KEYTIMEOUT=1
@@ -37,10 +37,11 @@ setopt pushd_minus              # Reference stack entries with "-".
 setopt extended_glob
 
 unsetopt menucomplete
-setopt automenu
+setopt noautomenu
+setopt complete_in_word
 
 # bash-like completion, only common part is completed, rest is listed
-# unsetopt automenu menucomplete
+unsetopt automenu menucomplete
 
 # Set list of themes to pick from when loading at random
 # Setting this variable when ZSH_THEME=random will cause zsh to load
@@ -71,7 +72,7 @@ setopt automenu
 # ENABLE_CORRECTION="true"
 
 # Uncomment the following line to display red dots whilst waiting for completion.
-# COMPLETION_WAITING_DOTS="true"
+COMPLETION_WAITING_DOTS="true"
 
 # Uncomment the following line if you want to disable marking untracked files
 # under VCS as dirty. This makes repository status check for large repositories
@@ -91,5 +92,28 @@ setopt automenu
 
 # skip verification of insecure directories
 # compaudit | xargs chmod g-w,o-w
-ZSH_DISABLE_COMPFIX=true
+ZSH_DISABLE_COMPFIX=false
+setopt complete_in_word
+#
+# Modules
+#
+
+zmodload -i zsh/complist
+
+#
+# Autoloads
+#
+
+autoload -Uz allopt zed zmv zcalc colors
+colors
+
+autoload -Uz edit-command-line
+zle -N edit-command-line
+#bindkey -M vicmd v edit-command-line
+
+autoload -Uz select-word-style
+select-word-style shell
+
+autoload -Uz url-quote-magic
+zle -N self-insert url-quote-magic
 # }}}

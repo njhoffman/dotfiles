@@ -37,6 +37,7 @@ export DOTBARE_TREE="$HOME"
 # export DOTBARE_FZF_DEFAULT_OPTS=" -w80 --preview-window=right:50%"
 
 
+source "${CWD}/highlights.zsh"
 source "${CWD}/plugins.programs.zsh"
 source "${CWD}/plugins.widgets.zsh"
 source "${CWD}/plugins.completions.zsh"
@@ -57,7 +58,6 @@ finish_setup() {
   where forgit::diff | sed -e 's/git /yadm /g' -e 's/forgit::diff/yd/' | source /dev/stdin
 
   command -v thefuck >/dev/null && . <(thefuck --alias)
-  command -v kitty >/dev/null && . <(kitty + complete setup zsh 2>/dev/null)
   command -v pip >/dev/null && . <(pip completion --zsh)
   command -v poetry >/dev/null && . <(poetry completions zsh) 2>/dev/null
 

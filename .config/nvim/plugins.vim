@@ -95,7 +95,9 @@ Plug 'mvolkmann/vim-js-arrow-function'
 " source $plugins/pear-tree.vim    " auto-pairing start/end text objects
 Plug 'tpope/vim-endwise'
 source $plugins/editorconfig.vim " load project .editorconfig settings
-source $plugins/prettier.vim     " prettier automatic formatting
+
+" coc-prettier handles this now
+" source $plugins/prettier.vim     " prettier automatic formatting
 
 " auto formatting for most file types
 Plug 'sbdchd/neoformat'
@@ -264,10 +266,10 @@ source $plugins/airline.vim             " airline status bar enhancement
 source $plugins/fugitive.vim            " branch indicator for vim-airline
 " source $plugins/barbar.vim              " barbar bufferline
 " source $plugins/bufferline.vim          " akinsho bufferline, needs bufferline-post
-
 " Plug 'glepnir/galaxyline.nvim' , {'branch': 'main'}
 " If you want to display icons, then use one of these plugins:
 Plug 'kyazdani42/nvim-web-devicons' " lua
+" Plug 'famiu/feline.nvim'
 
 " ---------- Key Mapping ----------
 "
@@ -424,6 +426,7 @@ source $plugins/treesitter-post.vim
 source $plugins/shortcuts-post.vim
 source $plugins/telescope-post.vim
 source $plugins/dap-post.vim
+" source $plugins/feline-post.vim
 " source $plugins/galaxyline-post-1.vim
 
 " call yankstack#setup()

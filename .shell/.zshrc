@@ -30,6 +30,7 @@ source "$shell_dir/.zshrc.init"
   # shared aliases between bash and zsh
   load_file "$shell_dir/aliases.sh"
   load_file "$shell_dir/aliases.colorize.sh"
+  load_file "$shell_dir/aliases.colorize.zsh"
   load_file "$shell_dir/binding.zsh"
 #}}}
 

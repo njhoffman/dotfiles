@@ -85,11 +85,11 @@ export FZF_TMUX=1
 # default -w 50%
 export FZF_TMUX_OPTS="-p 80%"
 
-fzf-direct-completion() {
-  FZF_COMPLETION_TRIGGER= fzf-completion
-}
-zle -N fzf-direct-completion
+# fzf-direct-completion() {
+#   FZF_COMPLETION_TRIGGER= fzf-completion
+# }
+# zle -N fzf-direct-completion
 # export FZF_COMPLETION_TRIGGER=''
-export FZF_COMPLETION_TRIGGER='**'
+# export FZF_COMPLETION_TRIGGER='**'
 
 alias fzf="fzf-tmux"

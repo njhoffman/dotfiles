@@ -36,6 +36,10 @@ alias lp_ps="loop \" ps u | xcols ps\""
 alias lp_psx="loop \" ps ux | xcols ps\""
 alias lp_psa="loop \" ps aux | xcols ps\""
 
+alias sysl="sudo systemctl list-unit-files"
+alias sysr="sudo systemctl restart"
+alias syss="sudo systemctl status"
+
 alias scale="scale_func"
 
 alias backlight="sudo chmod g=rw,o=rw /sys/class/backlight/intel_backlight/brightness"
@@ -52,24 +56,62 @@ alias ..3="cd ../../.."
 alias ..4="cd ../../../.."
 alias ..5="cd ../../../../.."
 
-[[ -d "$HOME/projects/movieman"  && -n "$NODE_PATH" ]] && \
-  alias mm="node ~/projects/movieman/lib/index.js"
+alias ..='cd ..'
+alias ...='cd ../../../'
+alias ....='cd ../../../../'
+alias .....='cd ../../../../'
+alias .4='cd ../../../../'
+alias .5='cd ../../../../..'
 
-if [[ -d "$HOME/projects/wikiscan"  && -n "$NODE_PATH" ]]; then
-  alias wikiscan="$HOME/projects/wikiscan/bin/wikiscan.sh"
-  alias ws="$HOME/projects/wikiscan/bin/wikiscan.sh"
+alias path='echo -e ${PATH//:/\\n}'
+alias now='date +"%T"'
+alias nowtime=now
+alias nowdate='date +"%d-%m-%Y"'
+
+## shortcut  for iptables and pass it via sudo#
+alias ipt='sudo /sbin/iptables'
+
+# display all rules #
+alias iptlist='sudo /sbin/iptables -L -n -v --line-numbers'
+alias iptlistin='sudo /sbin/iptables -L INPUT -n -v --line-numbers'
+alias iptlistout='sudo /sbin/iptables -L OUTPUT -n -v --line-numbers'
+alias iptlistfw='sudo /sbin/iptables -L FORWARD -n -v --line-numbers'
+alias firewall=iptlist
+
+
+## safety nets ##
+# do not delete / or prompt if deleting more than 3 files at a time #
+alias rm='rm -I --preserve-root'
+
+# confirmation #
+alias mv='mv -i'
+alias cp='cp -i'
+alias ln='ln -i'
+
+# Parenting changing perms on / #
+alias chown='chown --preserve-root'
+alias chmod='chmod --preserve-root'
+alias chgrp='chgrp --preserve-root'
+
+[[ -d "$HOME/projects/personal/movieman"  && -n "$NODE_PATH" ]] && \
+  alias mm="node ~/projects/personal/movieman/lib/index.js"
+
+if [[ -d "$HOME/projects/personal/wikiscan"  && -n "$NODE_PATH" ]]; then
+  alias wikiscan="$HOME/projects/personal/wikiscan/bin/wikiscan.sh"
+  alias ws="$HOME/projects/personal/wikiscan/bin/wikiscan.sh"
 fi
 
-if [[ -d "$HOME/projects/musicman"  && -n "$NODE_PATH" ]]; then
-  alias mr="node ~/projects/musicman/cli/lib/cli.js"
-  alias mre="node ~/projects/musicman/cli/lib/cli.js edit"
-  alias mrp="mpc clear && node ~/projects/musicman/cli/lib/cli.js playlist rating: ./ && mpc load current && mpc play"
-  alias mn="mpc n && node ~/projects/musicman/cli/lib/cli.js"
+if [[ -d "$HOME/projects/personal/musicman"  && -n "$NODE_PATH" ]]; then
+  alias mr="node ~/projects/personal/musicman/cli/lib/cli.js"
+  alias mre="node ~/projects/personal/musicman/cli/lib/cli.js edit"
+  alias mrp="mpc clear && node ~/projects/personal/musicman/cli/lib/cli.js playlist rating: ./ && mpc load current && mpc play"
+  alias mn="mpc n && node ~/projects/personal/musicman/cli/lib/cli.js"
   function mpcf {
     mpc searchadd any "$1" && mpc searchplay "$1"
   }
 fi
 
+alias open_command="xdg-open"
 alias googler="googler --colors GKmgxy"
 alias g="googler --colors GKmgxy -j --first --lucky"
 alias fakercli="node $HOME/projects/fakercli/lib/index.js"
@@ -117,15 +159,31 @@ alias kube-score-existing='kubectl api-resources --verbs=list --namespaced -o na
     | xargs -n1 -I{} bash -c "kubectl get {} --all-namespaces -oyaml && echo ---" \
     | kube-score score -'
 
-alias v="nvim"
 alias vim="nvim"
 alias vimdiff="nvim -d"
 alias vc="nvimpager -c"
 alias vcat="nvimpager -c"
 alias vimcat="nvimpager -c"
 
+alias tldr="tldr --theme ocean"
+
 # go shortcuts
 alias yaegi="rlwrap yaegi"
+
+# if cron fails or if you want backup on demand just run these commands #
+# again pass it via sudo so whoever is in admin group can start the job #
+# Backup scripts #
+# alias backup='sudo /home/scripts/admin/scripts/backup/wrapper.backup.sh --type local --taget /raid1/backups'
+# alias nasbackup='sudo /home/scripts/admin/scripts/backup/wrapper.backup.sh --type nas --target nas01'
+# alias s3backup='sudo /home/scripts/admin/scripts/backup/wrapper.backup.sh --type nas --target nas01 --auth /home/scripts/admin/.authdata/amazon.keys'
+# alias rsnapshothourly='sudo /home/scripts/admin/scripts/backup/wrapper.rsnapshot.sh --type remote --target nas03 --auth /home/scripts/admin/.authdata/ssh.keys --config /home/scripts/admin/scripts/backup/config/adsl.conf'
+# alias rsnapshotdaily='sudo  /home/scripts/admin/scripts/backup/wrapper.rsnapshot.sh --type remote --target nas03 --auth /home/scripts/admin/.authdata/ssh.keys  --config /home/scripts/admin/scripts/backup/config/adsl.conf'
+# alias rsnapshotweekly='sudo /home/scripts/admin/scripts/backup/wrapper.rsnapshot.sh --type remote --target nas03 --auth /home/scripts/admin/.authdata/ssh.keys  --config /home/scripts/admin/scripts/backup/config/adsl.conf'
+# alias rsnapshotmonthly='sudo /home/scripts/admin/scripts/backup/wrapper.rsnapshot.sh --type remote --target nas03 --auth /home/scripts/admin/.authdata/ssh.keys  --config /home/scripts/admin/scripts/backup/config/adsl.conf'
+# alias amazonbackup=s3backup
+
+# calculator
+alias bc="bc -l"
 
 # view versions
 alias npm-versions="npm view versions"
@@ -149,6 +207,27 @@ alias cb="tee /dev/tty | xsel"
 
 # average num of lines for glob, i.e. lines *.js
 alias lineavg="awk 'END{FNUM=ARGC-1; print (NR-FNUM)/FNUM}'"
+
+## sysadmin defaults
+## All of our servers eth1 is connected to the Internets via vlan / router etc  ##
+alias dnstop='dnstop -l 5  eth1'
+alias vnstat='vnstat -i eth1'
+alias iftop='iftop -i eth1'
+alias tcpdump='tcpdump -i eth1'
+alias ethtool='ethtool eth1'
+
+# # Reboot my home Linksys WAG160N / WAG54 / WAG320 / WAG120N Router / Gateway from *nix.
+# alias rebootlinksys="curl -u 'admin:my-super-password' 'http://192.168.1.2/setup.cgi?todo=reboot'"
+#
+# # Reboot tomato based Asus NT16 wireless bridge
+# alias reboottomato="ssh admin@192.168.1.1 /sbin/reboot"
+#
+# # work on wlan0 by default #
+# # Only useful for laptop as all servers are without wireless interface
+# alias iwconfig='iwconfig wlan0'
+
+alias myps='ps -fHu $USER'     # if not $USER, try $LOGIN
+alias myports="netstat -lntp 2>/dev/null | grep -v ' - *$'"  # Linux only?
 
 # spadash
 alias sdmigrate="migrate up -path=migrations -database=postgres://spadash:spadash@localhost:5432/"
@@ -220,15 +299,60 @@ alias reset_completion="rm ~/.zcompdump && autoload -U compinit && compinit && a
 alias pip-outdated="pip-review && apt-get list --upgradable" # pip-review --local
 alias pip-upgrade-all="pip list --outdated --format=freeze | grep -v '^\-e' | cut -d = -f 1  | xargs -n1 pip install -U"
 
+# GO111MODULE=on go get mvdan.cc/sh/v3/cmd/shfmt
 # TODO: make nvim function that loads exact match, fzf if none found
-alias a='fasd -a'        # any
-alias s='fasd -si'       # show / search / select
-alias d='fasd -d'        # directory
-alias f='fasd -f'        # file
-alias sd='fasd -sid'     # interactive directory selection
-alias sf='fasd -sif'     # interactive file selection
-alias z='fasd_cd -d'     # cd, same functionality as j in autojump
-alias zz='fasd_cd -d -i' # cd with interactive selection
+if which fasd >/dev/null; then
+  # install fasd hooks and basic aliases in the shell
+  eval "$(fasd --init auto)"
+
+  # if there is fzf available use it to search fasd results
+  if which fzf >/dev/null; then
+
+    alias v >/dev/null && unalias v
+    alias vd >/dev/null && unalias vd
+    alias z >/dev/null && unalias z
+
+    # alias v='fasd -e nvim'
+    alias a='fasd -a'    # any
+    alias s='fasd -si'   # show / search / select
+    alias d='fasd -d'    # directory
+    alias f='fasd -f'    # file
+    alias dd='fasd -sid' # interactive directory selection
+    alias ff='fasd -sif' # interactive file selection
+    # alias z='fasd_cd -d'     # cd, same functionality as j in autojump
+    alias zz='fasd_cd -d -i' # cd with interactive selection
+
+    # edit given file or search in recently used files
+    function v {
+      local file
+      test -e "$1" && $EDITOR "$@" && return
+      file="$(fasd -Rfl "$*")"
+      [[ -z "$file" ]] && file=$(fd --type f . $HOME | fzf-tmux -p 80%)
+      $EDITOR "${file}" || $EDITOR "$@"
+      # file="$(fasd -Rfl "$*" | fzf -1 -0 --no-sort +m)" && $EDITOR "${file}" || $EDITOR "$@"
+    }
+
+    # cd into the directory containing a recently used file
+    function vd {
+      local dir
+      local file
+      file="$(fasd -Rfl "$*" | fzf -1 -0 --no-sort +m)" && dir=$(dirname "$file") && cd "$dir"
+    }
+
+    # cd into given dir or search in recently used dirs
+    function z {
+      [ $# -eq 1 ] && test -d "$1" && cd "$1" && return
+      local dir
+      dir="$(fasd -Rdl "$*" | head -n1)"
+      if [[ -n "$dir" ]]
+        then cd "${dir}" || return 1
+      else
+        dir=$(fd --type d . $HOME | fzf-tmux -p 80%)
+        cd "${dir}" || return 1
+      fi
+    }
+  fi
+fi
 
 alias weather="curl -s http://wttr.in/"
 alias sqlformat="sqlformat --reindent_aligned --keywords upper --identifiers lower"

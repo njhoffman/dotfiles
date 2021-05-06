@@ -1,21 +1,60 @@
 #!/bin/zsh
 #
-typeset -A ZSH_HIGHLIGHT_STYLES
-ZSH_HIGHLIGHT_HIGHLIGHTERS=(main brackets pattern cursor root line)
-ZSH_HIGHLIGHT_STYLES[globbing]='fg=cyan'
-ZSH_HIGHLIGHT_STYLES[alias]='fg=#77aaff'
-ZSH_HIGHLIGHT_STYLES[path]='fg=cyan'
-ZSH_HIGHLIGHT_STYLES[path_prefix]=none
-ZSH_HIGHLIGHT_STYLES[cursor]='bg=#000000'
-ZSH_HIGHLIGHT_STYLES[double-quoted-argument]='fg=#44ccaa'
-ZSH_HIGHLIGHT_STYLES[single-quoted-argument]='fg=#44aaaa'
+if [[ ${ZSH_HIGHLIGHT_VERSION:+set} = set ]] ; then
+  typeset -A ZSH_HIGHLIGHT_STYLES
+  ZSH_HIGHLIGHT_HIGHLIGHTERS=(main brackets pattern cursor root line)
+  ZSH_HIGHLIGHT_STYLES[globbing]='fg=cyan'
+  ZSH_HIGHLIGHT_STYLES[alias]='fg=#77aaff'
+  ZSH_HIGHLIGHT_STYLES[path]='fg=cyan'
+  ZSH_HIGHLIGHT_STYLES[path_prefix]=none
+  ZSH_HIGHLIGHT_STYLES[cursor]='bg=#000000'
+  ZSH_HIGHLIGHT_STYLES[double-quoted-argument]='fg=#44ccaa'
+  ZSH_HIGHLIGHT_STYLES[single-quoted-argument]='fg=#44aaaa'
 
-typeset -A ZSH_HIGHLIGHT_REGEXP
-ZSH_HIGHLIGHT_REGEXP+=('\bsudo\b' fg=123,bold)
+  typeset -A ZSH_HIGHLIGHT_REGEXP
+  ZSH_HIGHLIGHT_REGEXP+=('\bsudo\b' fg=123,bold)
+  # ZSH_HIGHLIGHT_PATTERNS+=('sudo' 'fg=white,bold,bg=red')
 
+  typeset -A ZSH_HIGHLIGHT_PATTERNS
+  ZSH_HIGHLIGHT_PATTERNS+=('rm -rf *' 'fg=white,bold,bg=red')
+fi
 
-typeset -A ZSH_HIGHLIGHT_PATTERNS
-ZSH_HIGHLIGHT_PATTERNS+=('rm -rf *' 'fg=white,bold,bg=red')
+if [[ ${FAST_HIGHLIGHT:+set} = set ]] ; then
+  typeset -gA FAST_HIGHLIGHT_STYLES
+  FAST_HIGHLIGHT_STYLES[unknown-token]="fg=red"
+  FAST_HIGHLIGHT_STYLES[alias]="fg=012"
+  FAST_HIGHLIGHT_STYLES[path]="fg=blue"
+  FAST_HIGHLIGHT_STYLES[path-to-dir]="fg=blue,underline"
+  FAST_HIGHLIGHT_STYLES[suffix-alias]="fg=012"
+  FAST_HIGHLIGHT_STYLES[builtin]="fg=012"
+  FAST_HIGHLIGHT_STYLES[function]="fg=012"
+  FAST_HIGHLIGHT_STYLES[precommand]="fg=red,underline,bold"
+  FAST_HIGHLIGHT_STYLES[command]="fg=012"
+  FAST_HIGHLIGHT_STYLES[commandseparator]="fg=012"
+  FAST_HIGHLIGHT_STYLES[comment]="fg=011,bold,italic"
+  FAST_HIGHLIGHT_STYLES[single-quoted-argument]="fg=011"
+  FAST_HIGHLIGHT_STYLES[double-quoted-argument]="fg=011"
+  FAST_HIGHLIGHT_STYLES[dollar-quoted-argument]="fg=011"
+  FAST_HIGHLIGHT_STYLES[single-hyphen-option]="fg=yellow"
+  FAST_HIGHLIGHT_STYLES[double-hyphen-option]="fg=215"
+# FAST_HIGHLIGHT_STYLES[dollar-double-quoted-argument]='fg=magenta,bold'
+# FAST_HIGHLIGHT_STYLES[double-quoted-argument]='fg=magenta,bold'
+# FAST_HIGHLIGHT_STYLES[single-quoted-argument]='fg=magenta,bold'
+# FAST_HIGHLIGHT_STYLES[single-hyphen-option]='fg=cyan'
+# FAST_HIGHLIGHT_STYLES[double-hyphen-option]='fg=cyan'
+# FAST_HIGHLIGHT_STYLES[back-quoted-argument]='fg=magenta'
+# FAST_HIGHLIGHT_STYLES[commandseparator]='fg=red,bold'
+# FAST_HIGHLIGHT_STYLES[hashed-command]='fg=yellow,bold'
+# FAST_HIGHLIGHT_STYLES[reserved-word]='fg=bold'
+# FAST_HIGHLIGHT_STYLES[unknown-token]='bg=brown'
+# FAST_HIGHLIGHT_STYLES[precommand]='fg=yellow,bold,underline'
+# FAST_HIGHLIGHT_STYLES[function]='fg=yellow,bold'
+# FAST_HIGHLIGHT_STYLES[globbing]='fg=cyan,bold'
+# FAST_HIGHLIGHT_STYLES[command]='fg=yellow,bold'
+# FAST_HIGHLIGHT_STYLES[builtin]='fg=yellow,bold'
+# FAST_HIGHLIGHT_STYLES[alias]='fg=yellow,bold'
+# FAST_HIGHLIGHT_STYLES[path]='fg=underline'
+fi
 
 # unknown-token - unknown tokens / errors
 # reserved-word - shell reserved words (if, for)
