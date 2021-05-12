@@ -3,13 +3,15 @@ if [[ -z "$(command -v zplug)" ]]; then
   # curl -sL --proto-redir -all,https \
   #   https://raw.githubusercontent.com/zplug/installer/master/installer.zsh | zsh
   export ZPLUG_HOME="$HOME/.zplug"
-  [[ ! -d ~/.zplug ]] &&
-    git clone https://github.com/zplug/zplug $ZPLUG_HOME
+  [[ ! -d ~/.zplug ]] && git clone https://github.com/zplug/zplug $ZPLUG_HOME
+  alias zplug="$ZPLUG_HOME/bin/zplug"
 fi
 
 dir=${0:a:h}
 
-source ~/.zplug/init.zsh
+source "$ZPLUG_HOME/init.zsh"
+
+zplug zplug/zplug, hook-build:'zplug --self-manage'
 
 source "${dir}/plugins/alias-tips.zsh"
 source "${dir}/plugins/anyframe.zsh"
@@ -26,6 +28,11 @@ source "${dir}/plugins/zsh-autosuggestions.zsh"
 # source "${dir}/plugins/zsh-syntax-highlighting.zsh"
 source "${dir}/plugins/zsh-vim-mode.zsh"
 
+# zplug kyanagi/faster-vcs-info, as:command, use:'VCS_INFO_*', lazy:true
+# zplug jreese/zsh-titles
+# zplug RobSis/zsh-completion-generator
+# zplug RobSis/zsh-reentry-hook
+#
 # zinit light xPMo/zsh-toggle-command-prefix
 # zinit light hlissner/zsh-autopair
 # zinit light m42e/zsh-histdb-fzf
@@ -35,7 +42,7 @@ source "${dir}/plugins/zsh-vim-mode.zsh"
 # zinit light hkbakke/bash-insulter
 zplug "kazhala/dotbare"
 zplug "b4b4r07/emoji-cli", on:"stedolan/jq"
-zplug "zdharma/fast-syntax-highlighting"
+zplug "zdharma/fast-syntax-highlighting", from:github, defer:2
 
 # Oh my zsh plugins
 zplug "plugins/aws",               from:oh-my-zsh
@@ -43,19 +50,23 @@ zplug "plugins/colorize",          from:oh-my-zsh
 zplug "plugins/colored-man-pages", from:oh-my-zsh
 zplug "plugins/command-not-found", from:oh-my-zsh
 zplug "plugins/cp",                from:oh-my-zsh
+zplug "plugins/copydir"            from:oh-my-zsh
 zplug "plugins/docker",            from:oh-my-zsh
 zplug "plugins/extract",           from:oh-my-zsh
 zplug "plugins/git",               from:oh-my-zsh
 zplug "plugins/helm",              from:oh-my-zsh
 zplug "plugins/kubectl",           from:oh-my-zsh
 zplug "plugins/node",              from:oh-my-zsh
-zplug "plugins/npm",               from:oh-my-zsh
+zplug "plugins/golang",            from:oh-my-zsh, if:"(( $+commands[go] ))"
+zplug "plugins/npm",               from:oh-my-zsh, if:"(( $+commands[npm] ))"
+zplug "plugins/sudo",              from:oh-my-zsh, if:"(( $+commands[sudo] ))"
+zplug "plugins/systemd",           from:oh-my-zsh, if:"(( $+commands[systemctl] ))"
 zplug "plugins/pass",              from:oh-my-zsh
-zplug "plugins/sudo",              from:oh-my-zsh
 zplug "plugins/systemadmin",       from:oh-my-zsh
 zplug "plugins/terraform",         from:oh-my-zsh
 zplug "plugins/taskwarrior",       from:oh-my-zsh
 zplug "plugins/vi-mode",           from:oh-my-zsh
+zplug "plugins/urltools",          from:oh-my-zsh
 zplug "plugins/web-search",        from:oh-my-zsh
 zplug "plugins/zsh_reload",        from:oh-my-zsh
 

@@ -12,7 +12,8 @@ export TZ='America/Chicago'
 
 TTY=$(tty)
 export GPG_TTY=$(tty)
-if whence -p gpg-connect-agent 2&> /dev/null ; then
+if whence -p gpg-connect-agent &> /dev/null ; then
+  [[ ! -d "$HOME/.gnupg" ]] && mkdir "$HOME/.gnupg"
   gpg-connect-agent -q updatestartuptty /bye > /dev/null
 fi
 
