@@ -95,3 +95,7 @@ done
 
 # Clean up variables
 unset cmds cmd
+
+function _cz {
+  "$@" | ccze -A
+}

@@ -1,12 +1,9 @@
-#!/bin/bash
-
-[ -f ~/.fzf.zsh ] && load_file ~/.fzf.zsh
-
+### fzf
 # customized widgets
-source $HOME/bin/fzf/widgets/fzfp-widgets
-source $HOME/bin/fzf/widgets/fzf-widgets
+# source $HOME/bin/fzf/widgets/fzfp-widgets
+# source $HOME/bin/fzf/widgets/fzf-widgets
 # better zsh completion (where is it from)?
-source $HOME/.shell/fzf-zsh-completion.sh
+# source $HOME/.shell/fzf-zsh-completion.sh
 
 # export FZF_DEFAULT_COMMAND="command fdfind --hidden --follow --type d --color never ."
 # export FZF_CTRL_T_OPTS="--bind 'enter:execute(nvim {1} < /dev/tty);"
@@ -91,4 +88,3 @@ export FZF_TMUX_OPTS="-p 80%"
 # export FZF_COMPLETION_TRIGGER=''
 # export FZF_COMPLETION_TRIGGER='**'
 
-alias fzf="fzf-tmux"

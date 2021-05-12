@@ -354,6 +354,11 @@ if which fasd >/dev/null; then
   fi
 fi
 
+alias fzp="fzf-tmux -p 80%"
+alias adoc-list="grc -es -c conf.dockersearch --colour=auto ansible-doc -l | grep '^\w\+\s'"
+alias adoc-list-all="grc -es -c conf.dockersearch --colour=auto ansible-doc -l"
+alias adoc="grc -es -c conf.log --colour=auto ansible-doc"
+
 alias weather="curl -s http://wttr.in/"
 alias sqlformat="sqlformat --reindent_aligned --keywords upper --identifiers lower"
 _script="${BASH_SOURCE:-$0}"
