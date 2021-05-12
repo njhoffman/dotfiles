@@ -1,5 +1,7 @@
 #!/bin/zsh
 
+dir=$0:A
+
 export TERM="xterm-256color"
 # export TERM="xterm-color"
 # export TERM="vte-256color"
@@ -19,12 +21,12 @@ export TASKRC="$home_dir/.config/taskwarrior/.taskrc"
 export AWS_PROFILE=$P9K_AWS_DEFAULT_PROFILE
 
 # zsh-autoenv
-if [ -f ~/.oh-my-zsh/custom/plugins/zsh-autoenv/autoenv.zsh ]; then
-  source ~/.oh-my-zsh/custom/plugins/zsh-autoenv/autoenv.zsh
-  export AUTOENV_FILE_ENTER=".autoenv.zsh"
-  export AUTOENV_DISABLED=0
-  export AUTOENV_DEBUG=0 # 1: generic, 2: verbose, 3: everything (set -x while sourcing env files)
-fi
+# if [ -f ~/.oh-my-zsh/custom/plugins/zsh-autoenv/autoenv.zsh ]; then
+#   source ~/.oh-my-zsh/custom/plugins/zsh-autoenv/autoenv.zsh
+#   export AUTOENV_FILE_ENTER=".autoenv.zsh"
+#   export AUTOENV_DISABLED=0
+#   export AUTOENV_DEBUG=0 # 1: generic, 2: verbose, 3: everything (set -x while sourcing env files)
+# fi
 
 export SSH_KEY_PATH="$home_dir/.ssh/id_rsa"
 # export MANPATH="/usr/local/man:$MANPATH"
@@ -48,7 +50,7 @@ export LS_COLORS
 export EXA_COLORS="da=1;34"
 
 
-if [[ -z "$PKG_CONFIG_PATH" ]]; then
+if [[ -z "$PKG_CONFIG_PATH" && -n "$(command -v pkg-config)" ]]; then
   export PKG_CONFIG_PATH=$(pkg-config --variable pc_path pkg-config)
 fi
 # export PKG_CONFIG_PATH="$PKG_CONFIG_PATH:/usr/lib/x86_64-linux-gnu/pkgconfig"
@@ -124,8 +126,6 @@ export PATH="$PATH:/usr/local/aws-cli/v2/current/bin"
 USER_BASE_PATH=$(python3 -m site --user-base)
 export PATH=$PATH:$USER_BASE_PATH/bin
 export PATH=$PATH:/home/linuxbrew/.linxbrew/sbin
-
-[ -f ~/.shell/exports.fzf.sh ] && load_file ~/.shell/exports.fzf.sh
 
 export CHEAT_USE_FZF=true
 

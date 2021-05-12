@@ -61,6 +61,8 @@ set wildignore+=*.swp,*.bak,*.pyc,*.class
 set cmdheight=1
 " short, abbreviated messages
 set shortmess+=a
+" turn off messages during file operations
+set shortmess-=F
 " writes to swap file periodically, too slow causes noticeable lag
 set updatetime=500
 

@@ -1,6 +1,6 @@
 #!/bin/bash
 
-dir=${%}
+dir=$0:A
 
 # alias fuck='sudo $(history -p \!\!)'
 alias _='sudo'
