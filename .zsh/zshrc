@@ -76,9 +76,15 @@ fi
 # use .localrc for things not wanted in repo
 # shellcheck disable=SC1090
 [ -f ~/.localrc ] && . ~/.localrc
+
 load_end=$(date +%s.%N)
 load_diff=$(printf '%.3g' $(echo "$load_end - $_ZSH_LOAD_START" | bc))
-_log 0 "7: finished loading in %F{67} ${load_diff}s%f"
+func_n=$(functions | grep '()' | wc -l)
+alias_n=$(alias | wc -l)
+export_n=$(export | wc -l)
+complete_n=$(for com compl in ${(kv)_comps:#-*(-|-,*)}; do printf "%s %s\n" $com $compl; done | wc -l)
+_log 0 "finished loading in %F{67} ${load_diff}s%f"
+_log 0 "($export_n exports, $alias_n aliases, $func_n functions, $complete_n completions)"
 
 export _ZSH_LOAD_START=""
 

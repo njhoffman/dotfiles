@@ -7,7 +7,7 @@ if [[ -z "$(command -v zplug)" ]]; then
   git clone https://github.com/zplug/zplug $ZPLUG_HOME
 fi
 
-dir=$0:A
+dir=${0:a:h}
 
 source ~/.zplug/init.zsh
 
