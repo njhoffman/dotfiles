@@ -1,28 +1,28 @@
 # install zplug if not exists
 # [[ ! -d ~/.zplug ]] &&
-if [[ -n "$(command -v plug)" ]]; then
+if [[ -z "$(command -v zplug)" ]]; then
   # curl -sL --proto-redir -all,https \
   #   https://raw.githubusercontent.com/zplug/installer/master/installer.zsh | zsh
   export ZPLUG_HOME="$HOME/.zplug"
   git clone https://github.com/zplug/zplug $ZPLUG_HOME
 fi
 
-CWD="${0:A:h}"
+dir=$0:A
 
 source ~/.zplug/init.zsh
 
-source "${CWD}/plugins/alias-tips.zsh"
-source "${CWD}/plugins/anyframe.zsh"
-source "${CWD}/plugins/asdf.zsh"
-source "${CWD}/plugins/auto-ls.zsh"
-source "${CWD}/plugins/enhancd.zsh"
-source "${CWD}/plugins/zsh-auto-notify.zsh"
-source "${CWD}/plugins/zsh-autocomplete.zsh"
-source "${CWD}/plugins/zsh-autoenv.zsh"
-source "${CWD}/plugins/zsh-better-npm-completion.zsh"
-source "${CWD}/plugins/zsh-histdb.zsh"
-source "${CWD}/plugins/zsh-syntax-highlighting.zsh"
-source "${CWD}/plugins/zsh-vim-mode.zsh"
+source "${dir}/plugins/alias-tips.zsh"
+source "${dir}/plugins/anyframe.zsh"
+source "${dir}/plugins/asdf.zsh"
+source "${dir}/plugins/auto-ls.zsh"
+source "${dir}/plugins/enhancd.zsh"
+source "${dir}/plugins/zsh-auto-notify.zsh"
+source "${dir}/plugins/zsh-autocomplete.zsh"
+source "${dir}/plugins/zsh-autoenv.zsh"
+source "${dir}/plugins/zsh-better-npm-completion.zsh"
+source "${dir}/plugins/zsh-histdb.zsh"
+source "${dir}/plugins/zsh-syntax-highlighting.zsh"
+source "${dir}/plugins/zsh-vim-mode.zsh"
 zplug "kazhala/dotbare"
 zplug "b4b4r07/emoji-cli", on:"stedolan/jq"
 
