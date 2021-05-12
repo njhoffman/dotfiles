@@ -1,0 +1,13 @@
+#!/bin/zsh
+
+##################################################
+# bootstrap zshrc from ZSH_DIR directory
+##################################################
+
+if [[ -h "${ZSH_DIR}/zshrc" ]]; then
+  echo "ERROR: missing zshrc entry point file: ${ZSH_DIR}/zshrc"
+  ls -alhR "${ZSH_DIR}"
+  exit 1
+fi
+
+source "${ZSH_DIR}/zshrc"

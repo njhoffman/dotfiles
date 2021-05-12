@@ -1,0 +1,84 @@
+#!/bin/zsh
+
+##################################################
+# common zshrc functionality between profiles
+##################################################
+
+load_end=$(date +%s.%N)
+[[ -z "$_ZSH_LOAD_START" ]] && _ZSH_LOAD_START=$(date +%s.%N)
+
+typeset -U config_files
+config_files=($ZSH_DIR/common/*.zsh)
+# config_files=($DOTFILES/*/*.zsh)
+
+# track directories for termite spawning
+touch /tmp/whereami
+
+# load the path files
+files_n=0
+_log 1 "1: beginning zshrc, load path files"
+for file in ${(M)config_files:#*/path.zsh}; do
+  files_n=$((files_n+1))
+  _log 2 "1: sourcing path file: $file"
+  source "$file"
+done
+_log 1 "1: sourced ${files_n} path files"
+
+files_n=0
+_log 1 "2: loading config files that aren't path or completion"
+for file in ${${config_files:#*/path.zsh}:#*/completion.zsh}; do
+  files_n=$((files_n+1))
+  _log 2 "2: sourcing: $file"
+  source "$file"
+done
+_log 1 "2: sourced ${files_n} config files"
+#
+# _log 1 "3: initializing autocomplete with 24-hour expiration"
+# autoload -Uz compinit
+# for dump in ~/.zcompdump(N.mh+24); do
+#   compinit
+# done
+# compinit -C
+#
+# _log 1 "4: loading all completion files"
+# files_n=0
+# for file in ${(M)config_files:#*/completion.zsh}; do
+#   _log 2 "4: loading completion: $file"
+#   files_n=$((files_n+1))
+#   source "$file"
+# done
+# _log 1 "4: loaded ${files_n} completion files"
+#
+# # TODO: perform a check beore reloading
+# if command -v antibody &>/dev/null; then
+#   source "$DOTFILES/antibody/load.sh"
+#   _log 1 "5: loading $(cat ~/.zsh_plugins.sh | wc -l) antibody plugins ..."
+#   source ~/.zsh_plugins.sh
+# else
+#   _log 0 "error: antibody plugin manager not found in path"
+# fi
+#
+# unset config_files updated_at
+
+_log 1 "6: looking for profile specific zshrc files"
+if [[ -e "${ZSH_DIR}/profiles/${ZSH_PROFILE}.zshrc" ]]; then
+  _log 2 "6: loading rc file: ${ZSH_PROFILE}.zshrc"
+  source "${ZSH_DIR}/profiles/${ZSH_PROFILE}.zshrc"
+fi
+
+if [[ "$_ZSH_PROFILE_INT" == true ]]; then
+  _log 0 "ending profile in interactive mode"
+  zprof | tee -a ~/.zprof
+  unsetopt xtrace
+  exec 2>&3 3>&-
+fi
+
+# use .localrc for things not wanted in repo
+# shellcheck disable=SC1090
+[ -f ~/.localrc ] && . ~/.localrc
+load_end=$(date +%s.%N)
+load_diff=$(printf '%.3g' $(echo "$load_end - $_ZSH_LOAD_START" | bc))
+_log 0 "7: finished loading in %F{67} ${load_diff}s%f"
+
+export _ZSH_LOAD_START=""
+
