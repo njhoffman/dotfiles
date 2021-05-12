@@ -1,7 +1,11 @@
 # install zplug if not exists
-[[ ! -d ~/.zplug ]] &&
-  curl -sL --proto-redir -all,https \
-  https://raw.githubusercontent.com/zplug/installer/master/installer.zsh | zsh
+# [[ ! -d ~/.zplug ]] &&
+if [[ -n "$(command -v plug)" ]]; then
+  # curl -sL --proto-redir -all,https \
+  #   https://raw.githubusercontent.com/zplug/installer/master/installer.zsh | zsh
+  export ZPLUG_HOME="$HOME/.zplug"
+  git clone https://github.com/zplug/zplug $ZPLUG_HOME
+fi
 
 CWD="${0:A:h}"
 

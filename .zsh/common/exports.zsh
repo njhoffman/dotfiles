@@ -117,13 +117,16 @@ export PATH="${KREW_ROOT:-$HOME/.krew}/bin:$PATH"
 # export XDG_CONFIG_HOME=/usr/local/lib/python2.7/dist-packages/powerline:~/.config/powerline:~/.config
 export POWERLINE_CONFIG_COMMAND=/usr/local/bin/powerline-config
 export POWERLINE_CONFIG_PATHS=/home/$USER/.shell/powerline:/home/$USER/.shell/.powerline:/home/$USER/.config/powerline
-export NODE_PATH=$(npm root -g)
+
+[[ -n "$(command -v npm)" ]] &&
+  export NODE_PATH=$(npm root -g)
 
 export PATH=$PATH:~/.bin:~/bin:~/bin/aws:~/bin/docker:/usr/local/bin:~/.local/bin
 export PATH="$PATH:/usr/local/aws-cli/v2/current/bin"
 
 # Find your Python User Base path (where Python --user will install packages/scripts)
-USER_BASE_PATH=$(python3 -m site --user-base)
+[[ -n "$(command -v python3)" ]] &&
+  USER_BASE_PATH=$(python3 -m site --user-base)
 export PATH=$PATH:$USER_BASE_PATH/bin
 export PATH=$PATH:/home/linuxbrew/.linxbrew/sbin
 
