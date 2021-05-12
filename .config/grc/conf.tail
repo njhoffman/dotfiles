@@ -1,0 +1,18 @@
+regexp=.*(select .*)$
+colours=unchanged,cyan
+=====
+regexp=.*(update .*)$
+colours=unchanged,bold yellow
+=====
+regexp=.*(insert .*)$
+colours=unchanged,bold yellow
+=====
+regexp=.*(emp=\d+).*
+colours=unchanged,reverse green
+=====
+regexp=.*http.*/rest/contahub.cmds.(.*?)/(\w*).*$
+colours=unchanged,green,magenta
+=====
+regexp=.*http.*/M/.*\.(.*?Facade)/(\w*).*$
+colours=unchanged,underline green,underline magenta
+# vim:ft=conf

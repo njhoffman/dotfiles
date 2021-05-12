@@ -32,9 +32,18 @@ print -P "%F{247} Loaded scripts in %F{255}${DIFF}s%f"
 bindkey -r '^N'
 bindkey '^N' menu-complete
 
+source ~/default-env/bin/activate
+
+. $HOME/.asdf/asdf.sh
+
 export rvmsudo_secure_path=1
 PATH="$GEM_HOME/bin:$HOME/.rvm/bin:$PATH" # Add RVM to PATH for scripting
+PATH="$PATH:/usr/share/rvm/bin" # Add RVM to PATH for scripting
+source /etc/profile.d/rvm.sh
+# eval (/usr/share/rvm/bin/rvm env)
 export _SHELL_INITIALIZED=1
+
+#
 # zprof > ~/.zshprof
 
 # [ -f ~/.fzf.zsh ] && source ~/.fzf.zsh

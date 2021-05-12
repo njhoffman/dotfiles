@@ -240,7 +240,7 @@ let $BAT_THEME = 'base16'
 nmap <Leader>f [fzf-p]
 xmap <Leader>f [fzf-p]
 
-nnoremap <silent> [fzf-p]p     :<C-u>CocCommand fzf-preview.FromResources project_mru git<CR>
+nnoremap <silent> [fzf-p]p     :<C-u>CocCommand fzf-preview.ProjectFiles<CR>
 nnoremap <silent> [fzf-p]gs    :<C-u>CocCommand fzf-preview.GitStatus<CR>
 nnoremap <silent> [fzf-p]ga    :<C-u>CocCommand fzf-preview.GitActions<CR>
 nnoremap <silent> [fzf-p]b     :<C-u>CocCommand fzf-preview.Buffers<CR>

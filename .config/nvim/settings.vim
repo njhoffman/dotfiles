@@ -100,9 +100,9 @@ set pumheight=20                     " menu hegiht
 
 " Set a variable on the buffer that tells the sh syntax highlighter
 " that this is bash:
-let b:is_bash = 1
+" let b:is_bash = 1
 " Set the filetype to sh
-set ft=sh
+" set ft=sh
 
 " set tags=./tags;$HOME				     		 " load tags from current directoyr all the way to home
 " set nocursorline                     " cursor line highlighting slows things down a lot, turn off if sluggish performance

@@ -133,10 +133,10 @@ ZSH_AUTOSUGGEST_STRATEGY=histdb_top_fallback
     # disable_auto_notify enable_auto_notify
   zinit light MichaelAquilina/zsh-auto-notify
 
-  zplugin ice wait"0"
-  zplugin light zdharma/zconvey
-  zplugin ice wait"0" as"command" pick"cmds/zc-bg-notify" silent
-  zplugin light zdharma/zconvey
+  # zplugin ice wait"0"
+  # zplugin light zdharma/zconvey
+  # zplugin ice wait"0" as"command" pick"cmds/zc-bg-notify" silent
+  # zplugin light zdharma/zconvey
   # zc – sends to other session; use "-a" option to be asked for target and a command to send
   # zc-all – the same as zc, but targets are all other active sessions (with -f also busy sessions)
   # zc-rename – assigns name to current or selected session; won't rename if there's a session with the same name

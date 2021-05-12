@@ -55,7 +55,10 @@ autocmd User Node
   \ endif
 
 " jump to nodejs file from anywhere on line
-nnoremap gl ^f'gf
+nnoremap gF ^f'gf
+" Plugin "zoubin/vim-gotofile"
+
+Plug 'meain/vim-package-json'
 
 Plug 'metakirby5/codi.vim'
 " available repl
@@ -77,7 +80,6 @@ Plug 'metakirby5/codi.vim'
 " CodiEnterPre, CodiEnterPost: When a Codi pane enters.
 " CodiUpdatePre, CodiUpdatePost: When a Codi pane updates.
 " CodiLeavePre, CodiLeavePost: When a Codi pane leaves.
-
 " convert numbers
 Plug 'glts/vim-radical'
 " crd, crx, cro, crb, gA
@@ -180,7 +182,7 @@ nnoremap <silent> <Leader>d :Sayonara<CR>
 
 Plug 'kyazdani42/nvim-web-devicons'
 
-source $plugins/clap.vim           " custom popup ui interface
+" source $plugins/clap.vim           " custom popup ui interface
 source $plugins/coc-extensions.vim " full featured intellisense code completion
 source $plugins/coc.vim            " full featured intellisense code completion
 source $plugins/floaterm.vim       " floating window interface
