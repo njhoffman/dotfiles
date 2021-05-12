@@ -1,0 +1,1351 @@
+0dd27efe17d0f1ce8b70d80ec0e6c548|file:///home/nicholas/projects/infra/ansible-scratch/mol-test2/meta/main.yml|6|1|V|yaml.ansible
+	  platforms:
+	    - name: Fedora
+	      versions:
+	        - all
+	    - name: Debian
+	      versions:
+	        - all
+	    - name: Ubuntu
+	      versions:
+	        - all
+efbf44a8e0da34f951aedf4fc448fbca|file:///home/nicholas/projects/infra/ansible-scratch/mol-temp/meta/main.yml|2|1|V|yaml.ansible
+	  author: Nicholas Hoffman
+	  description: Molecule Role Template
+	  license: MIT
+	  min_ansible_version: 2.9
+	
+	  platforms:
+	    - name: Fedora
+	      versions:
+	        - all
+	    - name: Debian
+	      versions:
+	        - all
+	    - name: Ubuntu
+	      versions:
+	        - all
+	
+	  galaxy_tags: []
+	
+e8418d1d706cd73548f9f16f1d55ad6e|file:///home/nicholas/projects/infra/ansible-scratch/role_template/molecule/default/molecule.yml|36|5|v|yaml
+	verify
+cf2850499daa68ae5e617c600fcfd2af|file:///home/nicholas/projects/infra/ansible-scratch/role_template/molecule/default/molecule.yml|36|13|v|yaml
+	verify.
+09cb2f667928946057f8f1b05af9258c|file:///home/nicholas/projects/infra/ansible-scratch/role_template/molecule/default/molecule.yml|17|1|V|yaml
+	    # image: debian:stretch
+e18de7e810f3cc701493fb810d879f61|file:///home/nicholas/projects/infra/ansible-scratch/main.yml|7|13|v|yaml.ansible
+	mol-test
+f5cf27477777e4be19081f052d7bd07a|file:///home/nicholas/projects/infra/ansible-scratch/role_template/tasks/main.yml|2|1|V|yaml.ansible
+	# tasks file for role_template
+522f29cad18228671c20e25073e4f142|file:///home/nicholas/projects/infra/ansible-scratch/role_template/tasks/main.yml|5|1|V|yaml.ansible
+	- name: Create apps dir
+	  file:
+	    path: /opt/examples
+	    owner: ansible
+	    group: deployer
+	    mode: 0775
+	    state: directory
+	
+	
+a8f98fa7d9969f58f1f18e557691275a|file:///home/nicholas/projects/infra/ansible-scratch/role_template/tasks/main.yml|5|16|v|yaml.ansible
+	apps 
+c8f5cb8074e1cd1b0edd64426c762cff|file:///home/nicholas/projects/infra/ansible-scratch/role_template/tasks/main.yml|7|11|v|yaml.ansible
+	/opt/examples
+65ad1eb4f58b9713645ec8c8ca364916|file:///home/nicholas/projects/infra/ansible-scratch/main.yml|4|3|V|yaml.ansible
+	  connection: docker
+9c5509a35819d69f41a126ddcb736e56|file:///home/nicholas/projects/infra/ansible-scratch/docker/Dockerfile|28|1|V|Dockerfile
+	##########################################
+	# 1.14 GB
+	FROM base AS ansible-base
+	COPY ./ /root/.dotfiles/
+	RUN apt-get install -y \
+	    ansible git python3-apt apt-utils
+	
+	WORKDIR /root/.dotfiles/scripts
+	RUN ./bootstrap
+	
+	RUN apt-get autoremove && apt-get clean
+	
+	##########################################
+	# 3.59 GB
+	FROM ansible-base AS ansible-shell
+	
+	WORKDIR /root/.dotfiles/.provision
+	RUN ./start-ansible.sh zsh && \
+	    ./start-ansible.sh fonts && \
+	    ./start-ansible.sh termite && \
+	    ./start-ansible.sh tmux && \
+	    ./start-ansible.sh cleanup
+	
+	EXPOSE 22
+	CMD ["/usr/sbin/sshd", "-D"]
+	
+	##########################################
+	# 9.57 GB
+	FROM ansible-base AS ansible-devtools
+	WORKDIR /root/.dotfiles/.provision
+	RUN ./start-ansible.sh aws && \
+	    ./start-ansible.sh docker && \
+	    ./start-ansible.sh kubernetes && \
+	    ./start-ansible.sh misc-dev && \
+	    ./start-ansible.sh neovim && \
+	    ./start-ansible.sh terraform && \
+	    ./start-ansible.sh twilio && \
+	    ./start-ansible.sh cleanup
+	
+	EXPOSE 22
+	CMD ["/usr/sbin/sshd", "-D"]
+	
+	##########################################
+	# 5.88 GB
+	FROM ansible-base AS ansible-systemtools
+	
+	WORKDIR /root/.dotfiles/.provision
+	RUN ./start-ansible.sh audio && \
+	    ./start-ansible.sh video && \
+	    ./start-ansible.sh files && \
+	    ./start-ansible.sh network && \
+	    ./start-ansible.sh system-monitors && \
+	    ./start-ansible.sh virtualization && \
+	    ./start-ansible.sh cleanup
+	
+	EXPOSE 22
+	CMD ["/usr/sbin/sshd", "-D"]
+	
+	##########################################
+	# 1.14 GB
+	FROM ansible-base AS ansible-services
+	
+	WORKDIR /root/.dotfiles/.provision
+	RUN ./start-ansible.sh influxdb && \
+	    ./start-ansible.sh telegraf && \
+	    ./start-ansible.sh grafana && \
+	    ./start-ansible.sh kibana && \
+	    ./start-ansible.sh elasticsearch && \
+	    ./start-ansible.sh logstash && \
+	    ./start-ansible.sh postgres && \
+	    ./start-ansible.sh cleanup
+	
+	EXPOSE 22
+	CMD ["/usr/sbin/sshd", "-D"]
+	
+	##########################################
+	# 2.53 GB
+	FROM ansible-base AS ansible-window-management
+	
+	WORKDIR /root/.dotfiles/.provision
+	RUN ./start-ansible.sh conky && \
+	    ./start-ansible.sh compton && \
+	    ./start-ansible.sh i3 && \
+	    ./start-ansible.sh polybar && \
+	    ./start-ansible.sh rofi && \
+	    ./start-ansible.sh cleanup
+	
+	EXPOSE 22
+	CMD ["/usr/sbin/sshd", "-D"]
+	
+	##########################################
+	FROM ansible-base AS ansible-all
+	
+	WORKDIR /root/.dotfiles/.provision
+	RUN ./start-ansible.sh
+4cccfb2edef6f401b40709c5c29a03e0|file:///home/nicholas/projects/infra/ansible-scratch/start-test.sh|5|30|v|sh
+	myubuntu .
+8c55ec2f5de72528ea601e601d5f0197|file:///home/nicholas/projects/infra/ansible-scratch/start-test.sh|9|55|v|sh
+	myplaybook.
+a9f98d0a7de5c5facf3ff93ff3cd1bd8|file:///home/nicholas/projects/infra/ansible-scratch/start-test.sh|9|7|v|sh
+	ansible 
+a0c122079cccbfb077cc7fd486dcb500|file:///home/nicholas/projects/infra/ansible-scratch/start-test.sh|7|1|V|sh
+	docker run -ti --privileged --name $DOCKER_CONTAINER_NAME -d -p 5000:22 myubuntu
+22df0e059cf3cec9be9ad097dce3a47c|file:///home/nicholas/projects/infra/ansible-scratch/start-test.sh|7|14|V|sh
+	docker build -run -ti --privileged --name $DOCKER_CONTAINER_NAME -d -p 5000:22 myubuntu
+aedf24fd663664fdb33e762a75e1ac66|file:///home/nicholas/projects/infra/ansible-scratch/start-test.sh|6|1|V|sh
+	
+	docker run -ti --privileged --name $DOCKER_CONTAINER_NAME -d -p 5000:22 myubuntu
+1dc642b3ddb1b65228a00f4457e74c32|file:///home/nicholas/projects/infra/ansible-scratch/main.yml|3|14|V|yaml.ansible
+	  hosts: docker
+b58c0ee9aeef37ef334c80b60e592346|file:///home/nicholas/projects/infra/ansible-scratch/start-test.sh|7|73|v|sh
+	myubuntu
+26705249771365608573be669ad05680|file:///home/nicholas/projects/infra/ansible-scratch/docker/Dockerfile.deb|17|1|V|Dockerfile
+	RUN apt-get install -y curl git zsh bc python3 python unzip
+90edeae430aa17d5760d5a1f160f1dfa|file:///home/nicholas/projects/infra/ansible-scratch/docker/Dockerfile.deb|32|1|V|Dockerfile
+	# ------- Ansible -------
+	FROM bootstrap AS ansible
+	RUN apt-get install -y ansible
+30c1ece990a4619cd2451832f572a74d|file:///home/nicholas/projects/infra/ansible-scratch/docker/Dockerfile.deb|42|1|V|Dockerfile
+	# ------- launcher -------
+851b26ce5e8bf552c59a5ba5369e9a8e|file:///home/nicholas/projects/infra/ansible-scratch/docker/Dockerfile|29|1|V|Dockerfile
+	EXPOSE 22
+	CMD ["/usr/sbin/sshd", "-D"]
+e942a5f80992ee93b462ea2482b2afc5|file:///home/nicholas/projects/infra/ansible-scratch/docker/Dockerfile|31|6|v|Dockerfile
+	bootstrap 
+e3be5ec543c87e8f3a44b338810bb757|file:///home/nicholas/projects/infra/ansible-scratch/start-test.sh|7|87|v|sh
+	:launcher
+23eeeb4347bdd26bfc6b7ee9a3b755dd|file:///home/nicholas/projects/infra/ansible-scratch/docker/Dockerfile|6|3|v|Dockerfile
+	python
+28cb95fab5307ba4ae98b05e6776e3b1|file:///home/nicholas/projects/infra/ansible-scratch/docker/Dockerfile|14|130|V|Dockerfile
+	docker run -ti --privileged --name $DOCKER_CONTAINER_NAME -d -p 5000:22 -e AUTHORIZED_KEYS="$SSH_PUBLIC_KEY" local/centos7-systemd
+82956decc2c072d76463b055d2a14c3d|file:///home/nicholas/projects/infra/ansible-scratch/start-test.sh|6|48|v|sh
+	ubuntu .
+93df43afeffbc75e172c5f48292d0315|file:///home/nicholas/projects/infra/ansible-scratch/start-test.sh|8|91|v|sh
+	ansible_ubuntu
+3254677a7917c6c01f55212f86c57fbf|file:///home/nicholas/projects/infra/ansible-scratch/start-test.sh|6|48|v|sh
+	Dockerfile
+7bdb47cb903dfe7557b4925ad565c4a7|file:///home/nicholas/projects/infra/ansible-scratch/main.yml|4|14|V|yaml.ansible
+	  # become: true
+1358be48f262e309d182c0a4044e843b|file:///home/nicholas/projects/infra/ansible-scratch/roles/role_template/tasks/main.yml|2|17|V|yaml.ansible
+	- name: "just execute a ls -lrt command"
+	  shell: "ls -lrt"
+	  register: "output"
+	
+	- debug: var=output.stdout_lines
+3bc51475291164a09f1db8aef072bf53|file:///home/nicholas/projects/infra/ansible-scratch/roles/role_template/tasks/main.yml|30|1|V|yaml.ansible
+	#     state: directory
+61a486812bee16cf8a9f12583dabbaca|file:///home/nicholas/projects/infra/ansible-scratch/Vagrantfile|2|7|v|ruby
+	set 
+0891126936cce06fbf4f41cc9e5e9e15|file:///home/nicholas/projects/infra/ansible-scratch/Vagrantfile|10|25|v|ruby
+	playbook.
+9bd56c20dc54262c05273b92dedf4930|file:///home/nicholas/projects/infra/ansible-scratch/Vagrantfile|6|28|v|ruby
+	trusty64
+f322c031ff68adb2e8af83f7d29383de|file:///home/nicholas/projects/infra/ansible-scratch/Vagrantfile|7|10|v|ruby
+	 -> 
+01b6a3196bb0dda79f2e7453a2db10bf|file:///home/nicholas/projects/infra/ansible-scratch/Vagrantfile|6|26|V|ruby
+	  config.vm.box = "ubuntu/focal64"
+0d400bea8ae3bfed9ab4b6eff7f9d8ca|file:///home/nicholas/projects/infra/ansible-scratch/Vagrantfile|14|3|V|ruby
+	  # Run Ansible from the Vagrant VM
+57666c1c5939095036999f98a6ece7e1|file:///home/nicholas/projects/infra/ansible-scratch/Vagrantfile|6|3|V|ruby
+	  # 14.04: trusty, 16.04: xenial, 18.04: bionic, 20.04: focal
+b40000d0c4258656655aa78a93684403|file:///home/nicholas/projects/infra/ansible-scratch/Vagrantfile|6|1|V|ruby
+	  # config.vm.network :forwarded_port, guest: 9000, host: 9200
+	  # config.vm.network :forwarded_port, guest: 9001, host: 9201
+044a7eab4ebe5e69085c0ac8d3adad5e|file:///home/nicholas/projects/infra/ansible-scratch/env/local_vagrant|4|2|V|
+	[web]
+5b8a67c9a0b6e84e52daa1956cff3593|file:///home/nicholas/projects/infra/ansible-scratch/Vagrantfile|7|3|V|ruby
+	  config.vm.define "web01" do |web01|
+d9828cb23e037228eb00d2d1641dc563|file:///home/nicholas/projects/infra/ansible-scratch/Vagrantfile|6|31|v|ruby
+	|web01
+bb31a0c76118997faa7c6c50bc38a913|file:///home/nicholas/projects/infra/ansible-scratch/Vagrantfile|7|5|v|ruby
+	config.
+d6a71ad5c42b1515bd28f437b1a23684|file:///home/nicholas/projects/infra/ansible-scratch/Vagrantfile|1|1|V|ruby
+	#-*- mode: ruby -*-
+	# vim:ft=ruby :
+e71aa1f1ea5070188f286df325890a3c|file:///home/nicholas/projects/infra/ansible-scratch/main.yml|13|1|V|yaml.ansible
+	  #   zsh_dir: "{{ lookup('env', 'ZSHDIR') }}"
+	  #   dotfiles_dir: '{{ playbook_dir }}/..'
+	  #   localsrc_dir: "{{ lookup('env', 'HOME') }}/.local/src"
+	  #   global_tasks: '{{ playbook_dir }}/tasks'
+	  #   versions_dir: '{{ playbook_dir }}/versions'
+	  #   nvm_dir: $HOME/.nvm
+ac0d56d86fbbee12a7bc4a3b318f4d4e|file:///home/nicholas/projects/infra/ansible-scratch/main.yml|13|1|V|yaml.ansible
+	  # roles:
+	  #   - role: shell
+	  #     tags: [shell]
+	  #     vars:
+	  #       termite_version: master
+	  #       tmux_version: 3.2-rc
+	  #       zsh_version: master
+	  #   - role: dev-tools
+	  #     tags: [dev-tools]
+	  #     vars:
+	  #       docker_compose_version: 1.27.4
+	  #       docker_machine_version: 0.16.2
+	  #       helm_version: 3.3.0-rc.1
+	  #       helmfile_version: 0.125.0
+	  #       krew_version: 0.3.3
+	  #       neovim_version: master
+	  #       nvm_version: 0.35.3
+	  #       terraform_version: 0.12.15
+	  #   - role: system-tools
+	  #     tags: [system-tools]
+	  #     vars:
+	  #       atop_version: 2.5.0
+	  #       netatop_version: 3.1
+	  #       expressvpn_version: 3.2.0.8-1
+	  #       mpd_version: 0.22.3
+	  #       youtubedl_version: 2020.11.21.1
+	  #   - role: cleanup
+	  #     tags: [cleanup]
+	  # handlers:
+	  #   - name: install neovim plugins
+	  #     command: nvim --headless +PluginInstall +qall
+	
+	
+	# https://github.com/sherlock-project/sherlock
+	# https://github.com/antonmedv/fx
+	# sudo apt-get install lsscsi procinfo hwinfo
+	#
+	#
+	# sudo add-apt-repository ppa:appimagelauncher-team/stable
+	# sudo apt update
+	# sudo apt install appimagelauncher
+	# - make git notify handler that saves into .version file
+	#   https://github.com/neovim/neovim#master
+	#   v0.6.4-13-geff0894
+	#   ee77d8665ffe327a2158354021bbbcb772b3521a
+	# - write script that lists overview of version differences
+	#
+	# gore : repl for golang
+	# go get github.com/motemen/gore/cmd/gore
+	# go get github.com/mdempsky/gocode   # for code completion
+	#
+	# # succint code counter
+	# go get -u github.com/boyter/scc/
+	#
+	#
+	# pretty-repl
+	#
+	# pip install alive-progress
+	# from alive_progress import show_bars, show_spinners
+	# call them and enjoy the show ;)
+	# from alive_progress import showtime
+	# showtime()
+	#
+	# https://github.com/adi1090x/termite-style
+	#
+	# npm install mathjs
+	#
+	# with alive_bar(3) as bar:
+	#     corpus = read_big_file(file)
+	#     bar()  # file read, tokenizing
+	#     tokens = tokenize(corpus)
+	#     bar()  # tokens ok, processing
+	#     process(tokens)
+	#     bar()  # we're done! 3 calls with total=3
+4a8d188379cad26e43be4abcb2e49f9b|file:///home/nicholas/projects/infra/ansible-scratch/env/local_vagrant|12|1|V|dosini
+	; vim:ft=dosini
+617fb2db3ae364ee0971152c1e5397f2|file:///home/nicholas/.local/keys/address.txt.asc|1|1|V|
+	-----BEGIN PGP MESSAGE-----
+	
+	hQIMA64JUMcWOsbQARAApuixj2Bl25ApZ7YLVK0y5R4RFj6muW2qSsCHlSvJzH0u
+	V5mV2x8EhrYPN3qhwE8c02hv1v8YwXlDWrXZEoRV/sZCj2IKBRZFpLNIAGCTQ1UM
+	jsCD4oNisVMzNTHI2Gag9TQraqnrDdiRp1dEEj3q+uEkbJUwaujMxZjrSppOrbWM
+	YxTzQg7z7aAstvSTAx4zOJoMuGWGrvQLrcancgjMWOPRvuak5+NYOA+UMYVzm65r
+	kVosYTq7zJVrJnY8t0+rH7RfMuiBeQpdWV146NcrYLkKUznzqxpZ+K0pmhOJWSrw
+	JmaES6mJLhlliaT99QU0T8BUhAkIsOYwkdvELCCmwrUzejUXPnmYFenWc0S6syPS
+	q834xpTLOOAZVi1e4H/F2bvFrKX8dshN4u5YvQ2urFk/lEeBMEIFT0oNVf/sghSo
+	9sTlOehgO9cSDUF+FgbfxNJkJ4k1VYbXlEaX2k1cIr6MhpnjYQANz6/r7RGm6fcM
+	WAUPoI7EO77ZS2RejzHkE8mWTlc3LCYUigEgfYOvv0n/OjMWHDhH8JlH0hm0xhZC
+	wOLRS/J15qho98C8McMXkoSHsaEqyqNIn1gR6RHLSxi5aaCECV0C8klDvu+pB3T6
+	22OJLrIwRxAhk+abuxpxBVfYekRqwF7PtFnIm6SoKq5592PvIvxehV0YS5IRVeXS
+	iwHmoGKtXULuLrZy57o8aFhghspe/6HlGmhuk2OqW2K7DKKS9UGlIIaV7/HbcxPp
+	iUbOo9ynXC+rnZORP8ikgC50GEPCeRNPRIKJ9/OaPkrOj7Ci8HeUNZQ6ZfOnnRT7
+	6AnoM/LcEXiXyRFx1IWZK+usCGjNRuGbWwDPPTfFBSr9RbYKX1RgWA5xAmA=
+	=eSoa
+	-----END PGP MESSAGE-----
+c2e162aa5066b2a06f9627d68ddd59d3|file:///home/nicholas/.local/keys/address.txt.asc|1|1|V|
+	-----BEGIN PGP MESSAGE-----
+	
+	hQIMAzbfiwxeyZwOAQ//WNrPz7dp7vQ16PnInFhYPJjXx+qZexxJKcet0b41kH98
+	fJzaWcT6p9Om6/TUPaJ3kMU75ltCRFnMOXSOXcFiH9sVgjDZ64tAuoeUZiHR5/GA
+	P4HQAa1Y84WF2SppLm+ZH/wH3ZUaQs1UZe5HDiB9jhTMBGKPv3TUzj1l+vNQzFny
+	NOo38nbqcnLL9kUKJK0f30zDz0tJdXIjCSMBgY84AfaiZmn3Fu/o8Tx1SOgsD+Yr
+	wbX2LBEEbhFQWvacjj/zrL7qO7mghgWNLIx6sSe4QKz2YjxKyGPDHD/pUBIOWmDl
+	AmdDfMuzuOmhKV1kSF50AF4y+OeYXcSF1NvbgmB4FDaFr9N5FCd2Msxq4ouo6R+n
+	cGH5OU6n2bj3Resz9yzHtmdYqVeTp9zzwNySkSNo/6Bi/81BddP9zRgu4Unbwr3B
+	SSYp08hx8TEXLlyrMd1k03K8jTOfgCCO1h2on+yIEcEnKaFnp5eDpr9WL8fYLhsE
+	GcHPErgGdLv/OoUB9G4zV7SR7SX0Q6dosjujAZDc1hR4aZpuWoIsmowKq1SXKOr9
+	uYcYg61ZtBcwuEsBZ/INiJM5jd5D/xuLxDKCIiNRVARe7Q68AZ9sOnDXusgGaE9T
+	m70py+5tdDrwOa+YLwDRBa+MS2jovyj7uiBiphFCc9CSLHXZ2GX3RNfXmZZDdsnS
+	iwE+4SY/D12GfsKc6RDwpMDLphhb04myUU/spyB29uu+9I1m+TgTkrTwg7yo0Zb3
+	kCQAlc5s+fzbpJr1jnp9TnODmuYKojKKDJrIUen4zWKEoce24WKBsuMwcfdmaPA+
+	TQrmPFjB+ilX+6n5OHzHO7Jmxauvlx10tCSpsCfE+6RkUccaPLpSQmZUUM8=
+	=3G3w
+	-----END PGP MESSAGE-----
+8aabea956b9ae640a0fa558e05e6c788|file:///home/nicholas/.config/ansible/example.cfg|67|1|V|cfg
+	#roles_path = ~/.ansible/roles:/usr/share/ansible/roles:/etc/ansible/roles
+29a7e96467b69a9f5a93332e29e9b0de|file:///home/nicholas/projects/infra/ansible-scratch/main.yml|10|7|v|yaml.ansible
+	role
+0eac301369445b54aefb2f0c03a4b045|file:///home/nicholas/projects/infra/ansible-scratch/main.yml|10|1|V|yaml.ansible
+	    - manala.zsh
+f57c4e385a9dfe278204e6918a890b4a|file:///home/nicholas/projects/infra/ansible-scratch/Vagrantfile|22|21|v|ruby
+	provisioning
+88b2e83a20336ca2259434a6481d3188|file:///home/nicholas/projects/infra/ansible-scratch/Vagrantfile|15|1|V|ruby
+	      ansible.galaxy_role_file = 'requirements.yml'
+	      ansible.galaxy_roles_path = '/etc/ansible/roles'
+9798e5137434e7f8a8008ec2b685e422|file:///home/nicholas/projects/infra/ansible-scratch/Vagrantfile|22|64|v|ruby
+	, nil
+01c4b0863c180ffc2dfbb9fb2113ccb4|file:///home/nicholas/projects/infra/ansible-scratch/main.yml|10|12|V|yaml.ansible
+	    - role: manala.zsh
+178063f4b6db5367a373e81553397909|file:///home/nicholas/projects/infra/ansible-scratch/main.yml|10|13|v|yaml.ansible
+	manala.zsh
+47683ac4e7bc63b78f47480c276e38b3|file:///home/nicholas/projects/infra/ansible-scratch/requirements.yml|6|21|V|yaml.ansible
+	- src: manala.ohmyzsh
+888093142be368ec00994403d115a1d7|file:///home/nicholas/projects/infra/ansible-scratch/main.yml|10|13|v|yaml.ansible
+	viasite-ansible.zsh
+dc5853da9b147d6755fdfcb89a7e67dc|file:///home/nicholas/projects/infra/ansible-scratch/main.yml|10|1|V|yaml.ansible
+	    - role: manala.zsh 
+	      become: true
+3419e8869f9ed9be85e35224a4468970|file:///home/nicholas/projects/infra/ansible-scratch/main.yml|12|20|v|yaml.ansible
+	zsh 
+4c9f9f1d499100a318a7224d9afa32d7|file:///home/nicholas/projects/infra/ansible-scratch/main.yml|13|5|V|yaml.ansible
+	      become: true
+b326b5062b2f0e69046810717534cb09|file:///home/nicholas/projects/infra/ansible-scratch/Vagrantfile|16|26|v|ruby
+	true
+eab885c8f3d508bcb5de56904014cfd4|file:///home/nicholas/projects/infra/ansible-scratch/Vagrantfile|17|7|V|ruby
+	      # ansible.become   = false
+ce05dfc621be9e9e4dde48870a15b890|file:///home/nicholas/projects/personal/dotfiles-bup/zsh/zshenv.symlink|1|1|V|zsh
+	# This file is sourced on all invocations of the shell.
+	# If the -f flag is present or if the NO_RCS option is
+	# set within this file, all other initialization files
+	# are skipped.
+	#
+	# This file should contain commands to set the command
+	# search path, plus other important environment variables.
+	# This file should not contain commands that produce
+	# output or assume the shell is attached to a tty.
+	#
+	# Global Order: zshenv, zprofile, zshrc, zlogin
+	
+	# local to load process, gets unset at the end
+	
+	export _ZSH_VERBOSITY=${_ZSH_VERBOSITY:-2}
+	export _ZSH_LOAD_START=$(date +%s.%N)
+	
+	# default exports shared between non-interactive and interactive shells
+	export ZSH_DIR="$HOME/.zsh"
+	export ZSH_PROFILE=${ZSH_PROFILE:-default}
+	
+	export DOTFILES="$HOME/.dotfiles"
+	export PROJECTS="$HOME/projects"
+	export EDITOR='vim'
+	export VEDITOR='vim'
+	
+	# load helper utility functions
+	source "${ZSH_DIR}/zsh.funcs"
+	
+	if [[ "$ZSH_PERCHECK" > 0  ]]; then
+		_log 0 "starting profile"
+		zmodload zsh/zprof # Output load-time statistics
+		# http://zsh.sourceforge.net/Doc/Release/Prompt-Expansion.html
+		PS4=$'%D{%M%S%.} %N:%i> '
+		exec 3>&2 2>"${XDG_CACHE_HOME:-$HOME/tmp}/zsh_startup.$$"
+		setopt xtrace prompt_subst
+	fi
+	
+	export HISTSIZE=2000
+	export DIRSTACKSIZE=20
+	export SAVEHIST=2000
+	export KEYTIMEOUT=1
+	export HISTFILE=~/.zsh_history
+	export LESS="-c -M -S -i -f -R"
+	#export LESSCHARSET="utf-8"
+	export VISUAL='vim'
+	export EDITOR='vim'
+	export BROWSER='chromium'
+	export TEXDOCVIEW_html="chromium %s"
+	export TEXDOCVIEW_dvi="kdvi %s"
+	export TEXDOCVIEW_pdf="kpdf %s"
+	export OOO_FORCE_DESKTOP=gnome
+	
+	type -p dircolors &>/dev/null && eval `dircolors -b`
+	
+	zmodload -ab zsh/pcre pcre_compile
+	
+	# tie LD_LIBRARY_PATH to the array ldpath
+	export -U path
+	case $(uname -s) in
+		Linux)  export -TU LD_LIBRARY_PATH ldpath;;
+		Darwin) export -TU DYLD_FALLBACK_LIBRARY_PATH ldpath;;
+		*) echo "Don't know how to setup ldpath for $(uname -s)";;
+	esac
+	
+	export -TU PKG_CONFIG_PATH pkg_path
+	export -TU PERL5LIB perl_path
+	
+	export SHELL=/bin/zsh
+	
+	setopt extended_glob
+	
+	if [[ -e "${ZSH_DIR}/profiles/${ZSH_PROFILE}.env.zsh" ]]; then
+		_log 1 "loading env profile: ${ZSH_PROFILE}.env.zsh"
+		source "${ZSH_DIR}/profiles/${ZSH_PROFILE}.env.zsh"
+	fi
+	
+	[[ -r $HOME/.zshenv.local ]] && source $HOME/.zshenv.local
+	
+	if [[ "$ZSH_PEFCHECK" == 1 && ! -o interactive ]]; then
+		_log 0 "ending profile in noninteractive mode"
+		zprof
+		unsetopt xtrace
+		exec 2>&3 3>&-
+	fi
+c28ffe038c0b658915c7cd884b2466b7|file:///home/nicholas/projects/infra/ansible-template/.gitignore|1|1|V|gitignore
+	.vagrant
+d556d0837e28acdc9a33cc64a866f8ff|file:///home/nicholas/projects/infra/ansible-scratch/main.yml|15|1|V|yaml.ansible
+	    - role: viasite.ansible.zsh
+	    - role: role_template
+9681764d6d38364aec65c4f35b5acc22|file:///home/nicholas/projects/infra/provision-scratch/requirements.yml|4|18|V|yaml.ansible
+	  - role: role_template
+c5c6a6e908aefae24f1edc3956ad188d|file:///home/nicholas/projects/infra/provision-scratch/.zshenv|22|8|v|zsh
+	DOTFILES
+c3ae06f70363066574dc6f52338df7f5|file:///home/nicholas/projects/infra/provision-scratch/.zshenv|22|25|v|zsh
+	dotfiles
+e314ebeeb328c015e317857b85c9804b|file:///home/nicholas/projects/personal/dotfiles-bup/zsh/zsh.symlink/zshrc|1|1|V|zsh
+	#!/bin/zsh
+	
+	##################################################
+	# common zshrc functionality between profiles
+	##################################################
+	
+	load_end=$(date +%s.%N)
+	[[ -z "$_ZSH_LOAD_START" ]] && _ZSH_LOAD_START=$(date +%s.%N)
+	
+	typeset -U config_files
+	config_files=($DOTFILES/*/*.zsh)
+	
+	# track directories for termite spawning
+	touch /tmp/whereami
+	
+	# load the path files
+	files_n=0
+	_log 1 "1: beginning zshrc, load path files"
+	for file in ${(M)config_files:#*/path.zsh}; do
+	  files_n=$((files_n+1))
+	  _log 2 "1: sourcing path file: $file"
+	  source "$file"
+	done
+	_log 1 "1: sourced ${files_n} path files"
+	
+	files_n=0
+	_log 1 "2: loading config files that aren't path or completion"
+	for file in ${${config_files:#*/path.zsh}:#*/completion.zsh}; do
+	  files_n=$((files_n+1))
+	  _log 2 "2: sourcing: $file"
+	  source "$file"
+	done
+	_log 1 "2: sourced ${files_n} config files"
+	
+	_log 1 "3: initializing autocomplete with 24-hour expiration"
+	autoload -Uz compinit
+	for dump in ~/.zcompdump(N.mh+24); do
+	  compinit
+	done
+	compinit -C
+	
+	_log 1 "4: loading all completion files"
+	files_n=0
+	for file in ${(M)config_files:#*/completion.zsh}; do
+	  _log 2 "4: loading completion: $file"
+	  files_n=$((files_n+1))
+	  source "$file"
+	done
+	_log 1 "4: loaded ${files_n} completion files"
+	
+	# TODO: perform a check beore reloading
+	if command -v antibody &>/dev/null; then
+	  source "$DOTFILES/antibody/load.sh"
+	  _log 1 "5: loading $(cat ~/.zsh_plugins.sh | wc -l) antibody plugins ..."
+	  source ~/.zsh_plugins.sh
+	else
+	  _log 0 "error: antibody plugin manager not found in path"
+	fi
+	
+	unset config_files updated_at
+	
+	_log 1 "6: looking for profile specific zshrc files"
+	if [[ -e "${ZSH_DIR}/profiles/${ZSH_PROFILE}.zshrc" ]]; then
+	  _log 2 "6: loading rc file: ${ZSH_PROFILE}.zshrc"
+	  source "${ZSH_DIR}/profiles/${ZSH_PROFILE}.zshrc"
+	fi
+	
+	if [[ "$_ZSH_PROFILE_INT" == true ]]; then
+	  _log 0 "ending profile in interactive mode"
+	  zprof | tee -a ~/.zprof
+	  unsetopt xtrace
+	  exec 2>&3 3>&-
+	fi
+	
+	# use .localrc for things not wanted in repo
+	# shellcheck disable=SC1090
+	[ -f ~/.localrc ] && . ~/.localrc
+	load_end=$(date +%s.%N)
+	load_diff=$(printf '%.3g' $(echo "$load_end - $_ZSH_LOAD_START" | bc))
+	_log 0 "7: finished loading in %F{67} ${load_diff}s%f"
+	
+	export _ZSH_LOAD_START=""
+	
+9c9b63077794a580d65cf1d983220008|file:///home/nicholas/projects/personal/dotfiles-bup/zsh/zshrc.symlink|1|1|V|zsh
+	#!/bin/zsh
+	
+	##################################################
+	# bootstrap zshrc from ZSH_DIR directory
+	##################################################
+	
+	if [[ -h "${ZSH_DIR}/zshrc" ]]; then
+	  echo "ERROR: missing zshrc entry point file: ${ZSH_DIR}/zshrc"
+	  ls -alhR "${ZSH_DIR}"
+	  exit 1
+	fi
+	
+	source "${ZSH_DIR}/zshrc"
+4586d651617c4cc407b87f61d91574f6|file:///home/nicholas/projects/infra/provision-scratch/.zsh/zshrc|11|1|V|zsh
+	config_files=($DOTFILES/*/*.zsh)
+759488e2aac337d34c2f9ed09cdef743|file:///home/nicholas/projects/infra/provision-scratch/.zshrc-antigen|19|1|v|zsh
+	curl -sL --proto-redir -all,https https://raw.githubusercontent.com/zplug/installer/master/installer.zsh | zsh
+	
+d147fd8ae284a34255bbd8575425ae0c|file:///home/nicholas/projects/infra/provision-scratch/.zsh/plugins.zsh|27|1|V|zsh
+	# Also prezto
+	zplug "modules/prompt", from:prezto
+f2351215a69ffc043ccb7784b76818f7|file:///home/nicholas/projects/infra/provision-scratch/.zsh/plugins.zsh|48|1|V|zsh
+	# Support bitbucket
+	zplug "b4b4r07/hello_bitbucket", \
+	    from:bitbucket, \
+	    as:command, \
+	    use:"*.sh"
+	
+9f1128b06d291a2a9c3cb4515078a60b|file:///home/nicholas/projects/infra/provision-scratch/.zsh/plugins.zsh|42|33|V|zsh
+	# Can manage gist file just like other packages
+	zplug "b4b4r07/79ee61f7c140c63d2786", \
+	    from:gist, \
+	    as:command, \
+	    use:get_last_pane_path.sh
+1ce8585eff21b2b3313ae0b0352330a7|file:///home/nicholas/projects/infra/provision-scratch/.zsh/plugins.zsh|14|36|v|zsh
+	, frozen:1
+6863c1ef109d5ad80c8c1659c310bc44|file:///home/nicholas/projects/infra/provision-scratch/.zsh/plugins.zsh|16|35|V|zsh
+	# Grab binaries from GitHub Releases
+	# and rename with the "rename-to:" tag
+31473b53478859e43d04588fdb95c71d|file:///home/nicholas/projects/infra/provision-scratch/.zsh/plugins.zsh|13|27|V|zsh
+	# Disable updates using the "frozen" tag
+37b17cf3a3627c42552cb34f03345f2b|file:///home/nicholas/projects/infra/provision-scratch/.zsh/plugins.zsh|10|27|V|zsh
+	# Can manage everything e.g., other person's zshrc
+e23db48bf719e2f54d2e8a275340f391|file:///home/nicholas/projects/infra/provision-scratch/.zsh/plugins.zsh|10|28|v|zsh
+	, use:zshrc
+6e93187ac59ad9a57ffa457f76bc6ab4|file:///home/nicholas/projects/infra/provision-scratch/.zsh/plugins.zsh|6|27|V|zsh
+	# Use the package as a command
+	# And accept glob patterns (e.g., brace, wildcard, ...)
+	zplug "Jxck/dotfiles", as:command, use:"bin/{histuniq,color}"
+a13241eac4155d3facabf75cb785bb91|file:///home/nicholas/projects/infra/provision-scratch/.zsh/plugins.zsh|19|13|V|zsh
+	# Load if "if" tag returns true
+6638e54f9277d5c1a360f5a4e0e47cd8|file:///home/nicholas/projects/infra/provision-scratch/.zsh/plugins.zsh|16|13|V|zsh
+	# Supports oh-my-zsh plugins and the like
+d0d1c950647a07d8e6a6f5b0d893bd65|file:///home/nicholas/projects/infra/provision-scratch/.zsh/plugins.zsh|20|1|V|zsh
+	# Run a command after a plugin is installed/updated
+	# Provided, it requires to set the variable like the following:
+	# ZPLUG_SUDO_PASSWORD="********"
+b00992e2688803a4329c16efc448fb09|file:///home/nicholas/projects/infra/provision-scratch/.zsh/plugins.zsh|25|13|V|zsh
+	# Supports checking out a specific branch/tag/commit
+481346cd5a6077340a8b6d89720ca5ad|file:///home/nicholas/projects/infra/provision-scratch/.zsh/plugins.zsh|25|24|v|zsh
+	, at:v1
+475fa4cbbd38fb889677fcc90b02d1c5|file:///home/nicholas/projects/infra/provision-scratch/.zsh/plugins.zsh|26|27|v|zsh
+	, at:4c23cb60
+844c81738c69a7a435d6bbf11635d473|file:///home/nicholas/projects/infra/provision-scratch/.zsh/plugins.zsh|28|1|V|zsh
+	# Rename a command with the string captured with `use` tag
+36bf8d662cba676b6df24e321e2253d1|file:///home/nicholas/projects/infra/provision-scratch/.zsh/plugins.zsh|33|1|V|zsh
+	# Group dependencies
+	# Load "emoji-cli" if "jq" is installed in this example
+4ce6dcd9a6b4372fad979273598dede1|file:///home/nicholas/projects/infra/provision-scratch/.zsh/plugins.zsh|39|1|V|zsh
+	# Note: To specify the order in which packages should be loaded, use the defer
+	#       tag described in the next section
+	
+	# Set the priority when loading
+	# e.g., zsh-syntax-highlighting must be loaded
+	# after executing compinit command and sourcing other plugins
+	# (If the defer tag is given 2 or above, run after compinit command)
+bc63aac57bb170a87db7e60fa9e594a5|file:///home/nicholas/projects/infra/provision-scratch/.zsh/plugins.zsh|42|1|V|zsh
+	# Can manage local plugins
+	zplug "~/.zsh", from:local
+	
+160cca821ac83f3582410d70a6f1fc8e|file:///home/nicholas/projects/infra/provision-scratch/.zsh/plugins.zsh|23|1|V|zsh
+	zplug "jhawthorn/fzy", \
+	    as:command, \
+	    rename-to:fzy, \
+	    hook-build:"make && sudo make install"
+	
+2bb63d5dee489083eff477eb10e1f41f|file:///home/nicholas/projects/infra/provision-scratch/.zsh/plugins.zsh|21|18|V|zsh
+	zplug "lib/clipboard", from:oh-my-zsh, if:"[[ $OSTYPE == *darwin* ]]"
+d72827b112e29cb1848e463694a0c3f9|file:///home/nicholas/projects/infra/provision-scratch/.zsh/plugins.zsh|19|1|V|zsh
+	zplug "plugins/git",   from:oh-my-zsh
+0b7c713cdfd037d374f6d368752be85c|file:///home/nicholas/projects/infra/provision-scratch/.zsh/plugins.zsh|19|1|V|zsh
+	# git clone https://github.com/asdf-vm/asdf.git ~/.asdf
+	# cd ~/.asdf
+	# git checkout "$(git describe --abbrev=0 --tags)"
+df486ec2bcd95e2668ed38f1f12ce1f8|file:///home/nicholas/projects/infra/provision-scratch/.zsh/plugins.zsh|28|1|V|zsh
+	zplug "plugins/asdf",  from:oh-my-zsh
+dcaec66789018b09e95b1a80a27add9a|file:///home/nicholas/projects/infra/provision-scratch/.zsh/plugins.zsh|55|13|V|zsh
+	    printf "Install? [y/N]: "
+cbb11ed87dc8a95d81400c7f33c7c171|file:///home/nicholas/projects/infra/provision-scratch/.zsh/plugins.zsh|56|5|v|zsh
+	echo
+36ea249dca4f799d162d07e93035e15f|file:///home/nicholas/projects/infra/provision-scratch/.zsh/plugins.zsh|55|5|V|zsh
+	  if read -q; then
+c63b2c277a32379bc5a6f064e4e24dc3|file:///home/nicholas/projects/infra/provision-scratch/.zsh/plugins.zsh|56|4|V|zsh
+	  fi
+9fb3146237200f24549666992f2246eb|file:///home/nicholas/projects/infra/provision-scratch/.zsh/plugins.zsh|17|1|V|zsh
+	zplug "junegunn/fzf-bin", \
+	    from:gh-r, \
+	    as:command, \
+	    rename-to:fzf, \
+	    use:"*darwin*amd64*"
+0d9069d649b43dc10469646b85768104|file:///home/nicholas/projects/infra/provision-scratch/.zsh/plugins.zsh|17|1|V|zsh
+	# git clone https://github.com/asdf-vm/asdf.git ~/.asdf
+	# cd ~/.asdf
+	# git checkout "$(git describe --abbrev=0 --tags)"
+	
+269b9eccc16bc26ae81883946d236b02|file:///home/nicholas/projects/infra/provision-scratch/.zsh/plugins.zsh|15|1|V|zsh
+	zplug "k4rthik/git-cal", as:command
+af7bcee7ab6c2409d703f9ad73f90bc4|file:///home/nicholas/projects/infra/provision-scratch/.zsh/common/plugins/anyframe|2|1|V|zsh
+	zstyle ":anyframe:selector:" use peco
+	# expressly specify to use percol
+	zstyle ":anyframe:selector:" use percol
+4a75d154e69503b6fb8247517bcc2006|file:///home/nicholas/projects/infra/provision-scratch/.zsh/common/plugins.zsh|20|1|V|zsh
+	zplug "mollifier/anyframe"
+fb42c010d26b3b099e43b5c0e9e39155|file:///home/nicholas/projects/infra/provision-scratch/.zsh/common/plugins.zsh|11|1|V|zsh
+	zplug "zsh-users/zsh-history-substring-search"
+e86724963116071f38e68168aaa0fdea|file:///home/nicholas/projects/infra/provision-scratch/.zsh/common/plugins.zsh|20|1|V|zsh
+	zplug "b4b4r07/emoji-cli", on:"stedolan/jq"
+57e8262adbf4d04bab94d45770c51b89|file:///home/nicholas/projects/infra/provision-scratch/.zsh/common/plugins.zsh|22|1|V|zsh
+	zplug "zsh-users/zsh-syntax-highlighting", defer:2
+8466468abef69a2126a38bc8bf2cf2f0|file:///home/nicholas/.shell/plugins.zsh|6|1|V|zsh
+	CWD="${0:A:h}"
+8e8f35fe2b34af7e27e9b1de99ac4acc|file:///home/nicholas/projects/infra/provision-scratch/.zsh/common/plugins.zsh|17|1|V|zsh
+	source "${CWD}/plugins/anyframe.zsh"
+a81456717079a82972a9b91eab62b34d|file:///home/nicholas/projects/infra/provision-scratch/.zsh/common/plugins.zsh|17|24|v|zsh
+	anyframe.
+7f881fa3901cd79e88f3a6a8df675f55|file:///home/nicholas/projects/infra/provision-scratch/.zsh/common/plugins.zsh|16|23|V|zsh
+	zplug "b4b4r07/enhancd"
+a553a58ab4831d9b05e6e019715f9ac3|file:///home/nicholas/projects/infra/provision-scratch/.zsh/common/plugins.zsh|14|31|V|zsh
+	zplug "kiurchv/asdf.plugin.zsh", defer:2
+b68c9bcefda11592f656f18e70f8f614|file:///home/nicholas/projects/infra/provision-scratch/.zsh/common/plugins.zsh|4|1|V|zsh
+	[[ ! -d ~/.asdf ]] &&
+	  git clone https://github.com/asdf-vm/asdf.git ~/.asdf && cd ~/.asdf && \
+	  git checkout "$(git describe --abbrev=0 --tags)"
+	
+7c3e8c566de8d3e111ce915e093ef0e6|file:///home/nicholas/projects/infra/provision-scratch/.zsh/common/plugins.zsh|11|1|V|zsh
+	source "${CWD}/plugins/enhancd.zsh"
+81294018f4c075d9561abc9d4885e887|file:///home/nicholas/projects/infra/provision-scratch/.zsh/common/plugins.zsh|11|24|v|zsh
+	enhancd.
+47449427c568b206c0545c68ea2cc480|file:///home/nicholas/projects/infra/provision-scratch/.zsh/common/plugins.zsh|11|1|V|zsh
+	source "${CWD}/plugins/asdf.zsh"
+3eb3ff419058c2130090a4bacbaf8e36|file:///home/nicholas/projects/infra/provision-scratch/.zsh/common/plugins.zsh|11|24|v|zsh
+	asdf.
+24a2a75753085195818715e953edf4aa|file:///home/nicholas/projects/infra/provision-scratch/.zsh/common/plugins.zsh|11|1|V|zsh
+	source "${CWD}/plugins/alias-tips.zsh"
+222f961f3dffd37640f8a05ee32d4aea|file:///home/nicholas/projects/infra/provision-scratch/.zsh/common/plugins.zsh|12|24|v|zsh
+	alias-
+ecc5888b33dcc6042718b9a65663a886|file:///home/nicholas/projects/infra/provision-scratch/.zsh/common/plugins.zsh|12|31|v|zsh
+	tips.
+05bc684cf979f2dd8e28814d621e8b2a|file:///home/nicholas/projects/infra/provision-scratch/.zsh/common/plugins.zsh|12|1|V|zsh
+	source "${CWD}/plugins/auto-ls.zsh"
+ff3eb6c88b80c190bf61b82a49672cdc|file:///home/nicholas/projects/infra/provision-scratch/.zsh/common/plugins.zsh|13|24|v|zsh
+	auto-
+7c4821f49c7971621be9b1af6552780a|file:///home/nicholas/projects/infra/provision-scratch/.zsh/common/plugins.zsh|13|1|V|zsh
+	source "${CWD}/plugins/zsh-vim-mode.zsh"
+9bd907030b9fca12dd5f68e694638452|file:///home/nicholas/projects/infra/provision-scratch/.zsh/common/plugins.zsh|14|28|v|zsh
+	vim-
+28d34af7dd4cb1d58b838e587d5d22b5|file:///home/nicholas/projects/infra/provision-scratch/.zsh/common/plugins.zsh|14|28|v|zsh
+	mode.
+5ebca3fef170079fcf35c78fd56968e6|file:///home/nicholas/projects/infra/provision-scratch/.zsh/common/plugins.zsh|14|1|V|zsh
+	source "${CWD}/plugins/zsh-autoenv.zsh"
+fa065f65ca37bc56e12abef9c883acb7|file:///home/nicholas/projects/infra/provision-scratch/.zsh/common/plugins.zsh|14|28|v|zsh
+	autoenv.
+9cf14979bb5f7eb44323dc61a5a80485|file:///home/nicholas/projects/infra/provision-scratch/.zsh/common/plugins.zsh|9|27|V|zsh
+	zplug "tcnksm/docker-alias"
+d4e29850edf2e14c0a43180f16f2a8db|file:///home/nicholas/projects/infra/provision-scratch/.zsh/common/plugins.zsh|12|41|V|zsh
+	source "${CWD}/plugins/zsh-vim-mode.zsh"
+	source "${CWD}/plugins/zsh-notify.zsh"
+	source "${CWD}/plugins/zsh-autoenv.zsh"
+2e0b554e623ce9c3bc3ff3eb5cf39ac1|file:///home/nicholas/projects/infra/provision-scratch/.zsh/common/plugins/oh-my-zsh.zsh|3|1|V|zsh
+	  aws
+	  colorize
+	  colored-man-pages
+	  command-not-found
+	  compleat
+	  cp
+	  docker
+	  # dotenv (want to specifically load with autoenv)
+	  extract
+	  git
+	  helm
+	  # jira
+	  kubectl
+	  node
+	  npm
+	  nvm
+	  pass
+	  sudo
+	  systemadmin
+	  taskwarrior
+	  terraform
+	  vi-mode
+	  web-search
+	  zsh_reload
+63dc9087c660611bdf3fcb1a1257247a|file:///home/nicholas/projects/infra/provision-scratch/.zsh/profiles/default.zshrc|7|21|v|zsh
+	plugins
+8a8f56d2190c37dd0a583c7ec84d1bb5|file:///home/nicholas/projects/infra/provision-scratch/.zsh/profiles/default.zshrc|7|50|v|zsh
+	theme-
+32909ac538d6ff015e7c55319ea5610b|file:///home/nicholas/projects/infra/provision-scratch/.zsh/profiles/default.zshrc|7|50|v|zsh
+	pure.
+b03e714a0d65c9d6d21d69831f4f1d9b|file:///home/nicholas/projects/infra/provision-scratch/.zsh/profiles/default.zshrc|8|8|v|zsh
+	$ZPLUG_REPOS/romkatv/powerlevel10k/config/p10k-pure.zsh
+8c7dd922ad47494fc02c388e12c00eac|file:///home/nicholas/projects/infra/provision-scratch/.zsh/profiles/default.zshrc|7|11|v|zsh
+	file
+1b2186a062ee5489d7ffe82c6aaab5ea|file:///home/nicholas/projects/infra/provision-scratch/.zsh/profiles/default.zshrc|9|11|v|zsh
+	$ZSH_DIR/plugins/powerlevel10k/theme-pure.zsh
+45b963397aa40d4a0063e0d85e4fe7a1|file:///home/nicholas/projects/infra/provision-scratch/.zsh/common/plugins.zsh|9|19|v|zsh
+	files
+fa05db3d6b1c10f52a53067907fdc8c3|file:///home/nicholas/projects/infra/provision-scratch/start-ansible.sh|15|1|V|sh
+	# print *task/task.args/task_vars/host/result*
+	# task.args[*key*] = *value*
+	# task_vars[*key*] = *value*
+	# update_task
+	# redo
+385eb6dcd176025d41b416779f9d4ab3|file:///home/nicholas/projects/infra/provision-scratch/start-prebuild.sh|8|1|V|sh
+	export ANSIBLE_FORCE_COLOR=1
+8675f313316da36638328eda35c2c625|file:///home/nicholas/projects/infra/provision-scratch/start-prebuild.sh|9|1|V|sh
+	export PY_COLORS=1
+7d796a36501417595db3b98d49bda321|file:///home/nicholas/projects/infra/provision-scratch/start-ansible.sh|7|24|V|sh
+	# verbosity levels 0 - 4
+91a627e6d6bfcca1f5e072ca622da9ef|file:///home/nicholas/projects/infra/provision-scratch/start-ansible.sh|7|1|V|sh
+	export PY_COLORS=1
+	export ANSIBLE_FORCE_COLOR=1
+	export ANSIBLE_VERBOSITY=1
+	#  best output plugings: debug, unixy, yaml, json, minimal, default, actionable, profile_tasks
+	export ANSIBLE_STDOUT_CALLBACK=yaml
+d46d0fc6af0e049c59fcdc5895dacb40|file:///home/nicholas/projects/infra/provision-scratch/start-docker.sh|5|1|V|sh
+	#  best output plugings: debug, unixy, yaml, json, minimal, default, actionable, profile_tasks
+f1585db8f2a1f0875ea53a1177410f0e|file:///home/nicholas/projects/infra/provision-scratch/roles/dotfiles/tasks/main.yml|2|1|V|yaml.ansible
+	# tasks file for dotfiles
+6bb6287433d5a0a0e940990b159fa4fe|file:///home/nicholas/projects/infra/provision/roles/dotfiles/tasks/main.yml|3|1|V|yaml.ansible
+	  include_tasks: "initialize-key.yml"
+701b5e353c8162fdb30c317d8c7afc65|file:///home/nicholas/projects/infra/provision-scratch/roles/dotfiles/tasks/main.yml|3|19|v|yaml.ansible
+	initialize-key.yml
+4c06cfc2706b443d4ffa90b3723ad9bf|file:///home/nicholas/projects/infra/provision-scratch/roles/dotfiles/tasks/main.yml|2|1|V|yaml.ansible
+	- name: Install dotbare
+	  include_tasks: "install-dotbare.yml"
+58ef5ff43dd29035bd3dac032342bf4f|file:///home/nicholas/projects/infra/provision-scratch/roles/dotfiles/tasks/main.yml|2|17|v|yaml.ansible
+	dotbare
+0397e5a5649404dd668ef7f413aa1048|file:///home/nicholas/projects/infra/provision-scratch/roles/dotfiles/tasks/main.yml|2|19|v|yaml.ansible
+	df package manager
+	  include_tasks: "i
+eb9cdda5bf04591d3a2ba5b064d3711e|file:///home/nicholas/projects/infra/provision-scratch/roles/dotfiles/tasks/main.yml|2|1|V|yaml.ansible
+	- name: Install asdf package manager
+	  include_tasks: "install-dotbare.yml"
+216c30ba91b22cc87c68ccc93ffbb1e5|file:///home/nicholas/projects/infra/provision-scratch/roles/dotfiles/tasks/main.yml|5|22|v|yaml.ansible
+	package manager
+09d3bb24dd1a59410e877fd44bb442e6|file:///home/nicholas/projects/infra/provision-scratch/roles/dotfiles/tasks/main.yml|3|27|v|yaml.ansible
+	dotbare.
+f8f5cc86c0e182e5f5bce7498842824e|file:///home/nicholas/projects/infra/provision-scratch/roles/dotfiles/tasks/main.yml|6|32|v|yaml.ansible
+	base-
+f737f2f72245c435cacd8eb2c45b55fe|file:///home/nicholas/projects/infra/provision-scratch/roles/dotfiles/tasks/main.yml|6|32|v|yaml.ansible
+	plugins.
+770702bea683766561d30242d5074964|file:///home/nicholas/projects/infra/provision-scratch/roles/dotfiles/tasks/main.yml|6|32|v|yaml.ansible
+	packages.
+9d744d49abffd90e9d1f39c3eff45a3c|file:///home/nicholas/projects/infra/provision-scratch/roles/dotfiles/tasks/main.yml|8|1|V|yaml.ansible
+	- name: install asdf package manager
+	  include_tasks: "install-dotbare.yml"
+f7fe9848613d1037533b15e4dd8149d8|file:///home/nicholas/projects/infra/provision-scratch/roles/dotfiles/tasks/install-asdf-base.yml|2|3|v|yaml.ansible
+	install 
+7640a55307ec3bbeec429c6246675b1f|file:///home/nicholas/projects/personal/dotfiles-bup/.provision/roles/dev-tools/tasks/misc.yml|8|1|V|yaml.ansible
+	- name: install dependencies
+	  become: true
+	  package:
+	    name:
+	      - bsdmainutils   # github utility
+	      - cargo          # git-delta installation
+	      - groff          # github utility
+	      - git
+2dc9bca1a0d93c5d97cee4b59be51c09|file:///home/nicholas/projects/infra/provision-scratch/roles/dotfiles/tasks/install-asdf-base.yml|2|9|v|yaml.ansible
+	install dependencies
+6ec678e6d882e5a5b59b73e2ffbc8472|file:///home/nicholas/projects/personal/dotfiles-bup/tmux/tasks/tmux.yml|24|1|V|yaml.ansible
+	  with_items:
+	    - ~/.tmux
+	    - ~/.tmux/plugins
+efe90a8e604a7c840e88d03a67f6b7d8|file:///home/nicholas/projects/infra/provision-scratch/roles/dotfiles/tasks/install-asdf-base.yml|4|3|v|yaml.ansible
+	package
+3e668625666f7a037f56d3b03dddecc6|file:///home/nicholas/projects/infra/provision-scratch/roles/dotfiles/tasks/install-asdf-base.yml|5|1|V|yaml.ansible
+	    name:
+21c71e821092ffd2666bcecfa195d261|file:///home/nicholas/projects/personal/dotfiles-bup/tmux/tasks/tmux.yml|40|1|V|yaml.ansible
+	  shell: "{{ item }}"
+8d880ef02340062d670e634e85bda162|file:///home/nicholas/projects/infra/provision-scratch/roles/dotfiles/tasks/install-asdf-base.yml|6|1|V|yaml.ansible
+	      - bsdmainutils   # github utility
+	      - cargo          # git-delta installation
+	      - groff          # github utility
+	      - git
+2dafc9e81a9832a27f0f2e121ddb8378|file:///home/nicholas/projects/infra/provision-scratch/roles/dotfiles/tasks/install-asdf-base.yml|10|1|V|yaml.ansible
+	- asdf plugin add
+	- asdf-fzf asdf-jq asdf-bat asdf-fzf asdf-ripgrep
+a6e647ab9ed78d8cac3bf3e41e63a6ea|file:///home/nicholas/projects/infra/provision-scratch/roles/dotfiles/tasks/install-asdf-base.yml|2|30|v|yaml.ansible
+	 and packages
+84a3c4e339b953da20cec68f6e6ac215|file:///home/nicholas/projects/infra/provision-scratch/roles/dotfiles/tasks/install-asdf-base.yml|2|1|V|yaml.ansible
+	- name: add asdf base plugins
+	  shell: asdf plugin add "{{ item }}"
+	  shell:
+	  with_items:
+	    - asdf-fzf
+	    - asdf-jq
+	    - asdf-bat
+	    - asdf-ripgrep
+88e9d932f0f77454eb3425c4be07d7ae|file:///home/nicholas/projects/infra/provision-scratch/roles/dotfiles/tasks/install-asdf-base.yml|19|1|V|yaml.ansible
+	    - asdf-tmux
+031a8eccdc971e44d2559dc0d00ae94a|file:///home/nicholas/projects/infra/provision-scratch/roles/dotfiles/tasks/install-asdf-base.yml|12|18|v|yaml.ansible
+	base 
+48d8c9195485afb72331775791c08d66|file:///home/nicholas/projects/infra/provision-scratch/roles/dotfiles/tasks/install-asdf-base.yml|13|15|v|yaml.ansible
+	plugin 
+34ecf7b5f505b34af74c7f7223738868|file:///home/nicholas/projects/infra/provision-scratch/roles/dotfiles/tasks/install-asdf-base.yml|13|15|v|yaml.ansible
+	add 
+3dd4ab81ab88a13255223729f40be6a2|file:///home/nicholas/projects/infra/provision-scratch/roles/dotfiles/tasks/install-asdf-base.yml|16|7|v|yaml.ansible
+	asdf-
+fa1e665a39956978d7fb32bc3b1845e6|file:///home/nicholas/projects/infra/provision-scratch/roles/dotfiles/tasks/install_dotbare.yml|1|1|V|yaml.ansible
+	---
+	
+	git clone https://github.com/kazhala/dotbare.git ~/.dotbare
+f5035326bee65527906b1876d3202571|file:///home/nicholas/projects/personal/dotfiles-bup/.provision/tasks/save-version.yml|4|1|V|yaml.ansible
+	- name: clone repository
+	  git:
+	    repo: "{{ git_repo }}"
+	    dest: "{{ git_dest }}"
+	    version: "{{ git_version | default('HEAD') }}"
+	    update: "{{ git_update | default('false') }}"
+	    recursive: "{{ git_recursive | default('false') }}"
+1255cd57b7a8947a52ec998e47adc8c2|file:///home/nicholas/projects/infra/provision-scratch/roles/dotfiles/tasks/install-dotbare.yml|9|11|v|yaml.ansible
+	https://github.com/kazhala/dotbare.git
+aac5575fe644e27bb9e9be766ba35faa|file:///home/nicholas/projects/infra/provision-scratch/roles/dotfiles/tasks/install-dotbare.yml|4|11|v|yaml.ansible
+	"{{ git_repo }}"
+	
+d36af53fe5b06a220758f65dc8748399|file:///home/nicholas/projects/infra/provision-scratch/roles/dotfiles/tasks/install-dotbare.yml|5|11|v|yaml.ansible
+	"{{ git_dest }}"
+51caeca9c68579f9cc85a30c5f7ca73c|file:///home/nicholas/projects/infra/provision-scratch/roles/dotfiles/tasks/install-dotbare.yml|6|13|v|yaml.ansible
+	 "{{ git_version | default('HEAD') }}"
+8dbad4853e794acb0b675beeda24f96a|file:///home/nicholas/projects/infra/provision-scratch/roles/dotfiles/tasks/install-dotbare.yml|7|1|V|yaml.ansible
+	    update: "{{ git_update | default('false') }}"
+	    recursive: "{{ git_recursive | default('false') }}"
+7de1160db9a84167f6908a17d64ea98a|file:///home/nicholas/projects/infra/provision-scratch/roles/dotfiles/tasks/install-dotbare.yml|7|19|V|yaml.ansible
+	git clone  ~/.dotbare
+eb79066fb3d9c96939977a9384fc3c16|file:///home/nicholas/projects/infra/provision-scratch/roles/dotfiles/tasks/install-dotbare.yml|9|46|v|yaml.ansible
+	git clone https://github.com/kazhala/dotbare.git ~/.dotbare
+e84db63eda0590e681ba5365c4c1f9b2|file:///home/nicholas/projects/infra/provision-scratch/roles/dotfiles/tasks/install-asdf-base.yml|15|1|V|yaml.ansible
+	  with_items:
+	    - fzf
+	    - jq
+	    - bat
+	    - ripgrep
+	    - tmux
+92d3978a7ceeaa0365361bcc3c97d4b1|file:///home/nicholas/projects/infra/provision-scratch/roles/dotfiles/tasks/install-asdf-base.yml|14|3|V|yaml.ansible
+	  shell:
+2591c98b70119fe624898b1e424b5e91|file:///home/nicholas/projects/infra/provision-scratch/roles/dotfiles/tasks/install-asdf-base.yml|22|3|v|yaml.ansible
+	shell
+6cdc7af66814d2af1d3b67c986bb4a4b|file:///home/nicholas/projects/infra/provision-scratch/roles/dotfiles/tasks/install-dotbare.yml|3|1|V|yaml.ansible
+	  git:
+	    repo: https://github.com/kazhala/dotbare.git
+	    dest: ~/.dotbare
+	    version: master
+06b5c117c8ce875b7e6df201cd17cb63|file:///home/nicholas/projects/infra/provision-scratch/roles/dotfiles/tasks/install-dotbare.yml|12|47|v|yaml.ansible
+	azhala/dotfiles.git
+a7331a2515000c856cd7465582c0b633|file:///home/nicholas/projects/infra/provision-scratch/roles/dotfiles/tasks/install-dotbare.yml|2|1|V|yaml.ansible
+	- name: clone dotbare dotfiles manager
+	  git:
+	    repo: https://github.com/kazhala/dotbare.git
+	    dest: ~/.dotbare
+	    version: master
+3045e02d80d1605f69f8ccfa74804d33|file:///home/nicholas/projects/infra/provision-scratch/roles/dotfiles/tasks/install-asdf.yml|2|15|v|yaml.ansible
+	dotbare dotfiles manager
+4f6f8f62a0dfd0f96edc3fc6b2cae4dc|file:///home/nicholas/projects/infra/provision-scratch/roles/dotfiles/tasks/install-asdf.yml|4|31|v|yaml.ansible
+	azhala/dotbare.git
+eb0a191797624dd3a48fa681d3061212|file:///home/nicholas/projects/infra/provision-scratch/roles/dotfiles/tasks/install-asdf.yml|6|14|v|yaml.ansible
+	master
+812c6ac5f34d88dae31b820e7a120244|file:///home/nicholas/projects/infra/provision-scratch/roles/dotfiles/tasks/install-asdf.yml|10|31|V|yaml.ansible
+	git clone https://github.com/asdf-vm/asdf.git ~/.asdf --branch v0.8.0
+2e07b80b232c2cc543c6ca4eaa241f26|file:///home/nicholas/projects/infra/ansible-template/roles/role_template/molecule/default/molecule.yml|1|1|V|yaml.ansible
+	---
+	dependency:
+	  name: galaxy
+	driver:
+	  name: docker
+	lint: |
+	  set -e
+	  yamllint .
+	  ansible-lint
+	  flake8
+	platforms:
+	  - name: instance
+	    pre_build_image: true
+	    image: docker.io/pycontribs/ubuntu:latest
+	    # image: docker.io/pycontribs/centos:8
+	    # image: docker.io/pycontribs/debian:latest
+	    # image: "geerlingguy/docker-${MOLECULE_DISTRO:-centos8}-ansible:latest"
+	    # image: debian:stretch
+	    # privileged: true
+	    # volumes:
+	    #   - /sys/fs/cgroup:/sys/fs/cgroup:ro
+	    #   - /var/lib/docker
+	provisioner:
+	  name: ansible
+	  log: true
+	  # connection_options:
+	  #   ansible_connection: docker
+	  #   ansible_password: ansible
+	  #   ansible_ssh_user: ansible
+	  inventory:
+	    group_vars:
+	      all:
+	        docker_molecule_test: true
+	  playbooks:
+	    converge: ${MOLECULE_PLAYBOOK:-converge.yml}
+	    # create: create.yml
+	    # destroy: destroy.yml
+	verifier:
+	  name: ansible
+	scenario:
+	  name: default
+	  test_sequence:
+	    - lint
+	    - destroy
+	    # - dependency
+	    - syntax
+	    - create
+	    # - prepare
+	    - converge
+	    - idempotence
+	    # - side_effect
+	    - verify
+	    - destroy
+	  check_sequence:
+	    - dependency
+	    - cleanup
+	    - destroy
+	    - create
+	    # - prepare
+	    - converge
+	    - check
+	    - destroy
+8c515f4511fa4a8efa8d3889ff88375c|file:///home/nicholas/projects/infra/provision-scratch/roles/dotfiles/tasks/install-asdf.yml|10|1|V|yaml.ansible
+	  args:
+51f9ae2228e68985d58f3375c6dc613f|file:///home/nicholas/projects/infra/provision-scratch/roles/dotfiles/tasks/install-asdf-base.yml|3|10|v|yaml.ansible
+	~/.asdf/bin/asdf
+16fb0e7457c86c331f3e4dc23569215f|file:///home/nicholas/projects/infra/provision-scratch/roles/dotfiles/tasks/install-asdf-base.yml|12|10|v|yaml.ansible
+	asdf 
+39a72eee1b38982d4908596669dcd99c|file:///home/nicholas/projects/infra/provision-scratch/roles/dotfiles/tasks/install-asdf-base.yml|14|10|v|yaml.ansible
+	 latest
+c95b509d9e61b7272612272d76904370|file:///home/nicholas/projects/infra/provision-scratch/roles/dotfiles/tasks/install-asdf-base.yml|2|1|V|yaml.ansible
+	- name: add asdf base plugins
+4996c3c58c63f4e8d7f4a1a9b7928edb|file:///home/nicholas/projects/infra/provision-scratch/roles/dotfiles/tasks/install-asdf-base.yml|2|1|V|yaml.ansible
+	- name: add asdf base plugins
+	  shell: ~/.asdf/bin/asdf plugin add "{{ item }}"
+7c37ce53b604d8289b0cd964a36964a1|file:///home/nicholas/projects/infra/provision-scratch/roles/dotfiles/tasks/install-asdf-base.yml|11|9|v|yaml.ansible
+	add asdf base plugins
+7cea750a521218bfa9a9fac2ff3cefdd|file:///home/nicholas/projects/infra/provision-scratch/roles/dotfiles/tasks/install-asdf-base.yml|12|27|v|yaml.ansible
+	plugin add "{{ item }}"
+3eef6bdbef1e69c3fda7c50baa1cf693|file:///home/nicholas/projects/personal/dotfiles-bup/tmux/tasks/plugins.yml|2|1|V|yaml.ansible
+	- name: install plugin dependencies
+	  become: true
+	  package:
+	    state: present
+	    name:
+	      - git
+	      - powerline  # powerline-daemon bindings
+	      - autocutsel # sync between primary and x11 clipboards TODO: install service
+	      - xsel       # tmux-yank
+	      - urlview    # tmux-urlview
+	
+6f8d1e270ccf8adee21f6300d7118e41|file:///home/nicholas/projects/infra/provision-scratch/roles/dotfiles/tasks/install-asdf-base.yml|2|17|v|yaml.ansible
+	plugin dependencies
+622b9310686f7e2d81a5d877f3106768|file:///home/nicholas/projects/infra/provision-scratch/roles/dotfiles/tasks/install-asdf-base.yml|6|1|V|yaml.ansible
+	      - git
+	      - powerline  # powerline-daemon bindings
+	      - autocutsel # sync between primary and x11 clipboards TODO: install service
+	      - xsel       # tmux-yank
+	      - urlview    # tmux-urlview
+	
+34325a46f5a6c5bb285a0131eaceabe4|file:///home/nicholas/projects/infra/provision-scratch/roles/dotfiles/tasks/install-asdf-base.yml|4|5|V|yaml.ansible
+	    state: present
+b068931cc450442b63f5b3d276ea4297|file:///home/nicholas/projects/infra/provision-scratch/roles/dotfiles/tasks/install-asdf-base.yml|4|5|v|yaml.ansible
+	name
+f630ea975d5814c48ab39c7b9446f2ce|file:///home/nicholas/projects/personal/dotfiles-bup/tmux/tasks/plugins.yml|2|1|V|yaml.ansible
+	- name: install plugin dependencies
+	  become: true
+8c4618e2f0514da75e5016426f00485a|file:///home/nicholas/projects/infra/provision-scratch/roles/dotfiles/tasks/install-asdf-base.yml|36|9|v|yaml.ansible
+	verify programs installed
+27f783aa485a90c61c0334e5e79e7020|file:///home/nicholas/projects/infra/provision-scratch/roles/dotfiles/tasks/install-asdf-base.yml|37|35|v|yaml.ansible
+	 --version
+85e932eb8c1db4654a6b231495ff9194|file:///home/nicholas/projects/infra/provision-scratch/roles/dotfiles/tasks/install-asdf-base.yml|6|1|V|yaml.ansible
+	https://github.com/focused-labs/asdf-jq/pull/9
+	AZMCode:master
+208baeef061258cc090494926ee9a7c6|file:///home/nicholas/projects/infra/provision-scratch/roles/dotfiles/tasks/install-asdf-base.yml|28|1|V|yaml.ansible
+	  shell: ~/.asdf/bin/asdf install "{{ item }}" $(asdf list all "{{ item }}" | sort -rn | head -n1)
+0ae15ca05ed1abb445f6f74c6e44ebe4|file:///home/nicholas/projects/infra/provision-scratch/roles/dotfiles/tasks/install-asdf-base.yml|38|3|V|yaml.ansible
+	  shell: asdf install "{{ item }}" $(asdf list all "{{ item }}" | sort -r | head -n 1)
+44ff077f6ed50c6d8aed12fc8cd001e4|file:///home/nicholas/projects/infra/provision-scratch/roles/dotfiles/tasks/install-asdf-base.yml|19|37|V|yaml.ansible
+	    - jq https://github.com/AZMCode/asdf-jq
+c8f2e4d8c8e73109ffb3f3ff9adcb965|file:///home/nicholas/projects/infra/provision-scratch/roles/dotfiles/tasks/install-asdf-base.yml|26|1|V|yaml.ansible
+	- name: update plugins
+	  shell: ~/.asdf/bin/asdf plugin update --all
+	
+65c5f9ff58db9261bfa0148836ec93df|file:///home/nicholas/projects/infra/provision-scratch/roles/dotfiles/tasks/install-asdf.yml|12|1|V|yaml.ansible
+	# - name:
+e938e80b413c85d1b76c0baa1a1a928a|file:///home/nicholas/projects/infra/provision-scratch/roles/dotfiles/tasks/install-asdf-base.yml|23|1|V|yaml.ansible
+	    - yq
+fbc129cb2d6ea5a910ef555105b1c068|file:///home/nicholas/projects/infra/provision-scratch/roles/dotfiles/tasks/install-asdf.yml|10|8|V|yaml.ansible
+	  args:
+	      executable: /bin/bash
+eb9d5fc66fd612766bf16d67328aaaec|file:///home/nicholas/projects/infra/provision-scratch/roles/dotfiles/tasks/install-asdf.yml|8|1|V|yaml.ansible
+	- name: load asdf plugin
+	  shell: source ~/.asdf/asdf.sh
+ee7004c7949d83f130592f15d98ca343|file:///home/nicholas/projects/infra/provision-scratch/roles/dotfiles/tasks/install-asdf.yml|16|7|v|yaml.ansible
+	executable
+e8e1ff4f81f87100b488f2905d510cae|file:///home/nicholas/projects/infra/provision-scratch/roles/dotfiles/tasks/install-asdf.yml|16|12|v|yaml.ansible
+	/bin/bash
+24da7c98f242774c49bce40d82acf9cd|file:///home/nicholas/projects/infra/provision-scratch/roles/dotfiles/tasks/install-asdf.yml|15|8|V|yaml.ansible
+	  args:
+	    chdir: ~/.asdf/bin
+ef8f5f563ab3e8afcf78e466c983f609|file:///home/nicholas/projects/infra/provision-scratch/roles/dotfiles/tasks/install-asdf-base.yml|2|1|V|yaml.ansible
+	- name: Update all packages to their latest version
+	  apt:
+	    name: "*"
+	    state: latest
+	
+	- name: install dependencies
+	  apt:
+	    update_cache: yes
+	    pkg:
+	      - curl
+	      - extract
+	      - unzip
+c01a541c32b1b71806785532cc983b51|file:///home/nicholas/projects/infra/provision-scratch/roles/dotfiles/tasks/install-asdf-base.yml|2|1|V|yaml.ansible
+	
+	- name: add asdf base plugins
+	  shell: ~/.asdf/bin/asdf plugin add "{{ item }}"
+	  with_items:
+	    - bat
+	    - fd
+	    - fzf
+	    - ripgrep
+	    - tmux
+	    - yq
+	
+	- name: add jq plugin
+282b2c39f4465e3c8a4b5165905f2bac|file:///home/nicholas/projects/infra/provision-scratch/roles/dotfiles/tasks/main.yml|12|1|V|yaml.ansible
+	- name: add jq plugin
+bba33457bea270ec76af9fc49f4d22cf|file:///home/nicholas/projects/infra/provision-scratch/roles/dotfiles/tasks/install-asdf-base.yml|2|1|V|yaml.ansible
+	- name: Update all packages to their latest version
+	  apt:
+	    name: "*"
+	    state: latest
+	
+	- name: install dependencies
+	  apt:
+	    update_cache: yes
+	    pkg:
+	      - curl
+	      - extract
+	      - unzip
+	
+4ab44808f92bbd0bfae440a5cad92612|file:///home/nicholas/projects/infra/provision-scratch/roles/dotfiles/molecule/default/molecule.yml|17|1|V|yaml.ansible
+	    # image: "geerlingguy/docker-${MOLECULE_DISTRO:-centos8}-ansible:latest"
+	    # image: debian:stretch
+2af4587151800870a974e2000491381b|file:///home/nicholas/projects/infra/provision-scratch/roles/dotfiles/molecule/default/molecule.yml|40|1|V|yaml.ansible
+	  converge_sequence:
+	     # - dependency
+	     - create
+	     # - prepare
+	     - converge
+	  test_sequence:
+	    - lint
+	    - destroy
+	    # - dependency
+	    - syntax
+	    - create
+	    # - prepare
+	    - converge
+	    - idempotence
+	    # - side_effect
+	    - verify
+	    - destroy
+	  check_sequence:
+	    # - dependency
+	    - cleanup
+	    - destroy
+	    - create
+	    # - prepare
+	    - converge
+	    - check
+	    - destroy
+32f21d8b86f7eb9081b2786d0bb4261e|file:///home/nicholas/projects/infra/provision-scratch/roles/dotfiles/tasks/install-asdf-base.yml|6|1|V|yaml.ansible
+	    - fd
+01ebf5abb106800911c8e44039e3056e|file:///home/nicholas/projects/infra/provision-scratch/roles/dotfiles/tasks/install-asdf-base.yml|29|1|V|yaml.ansible
+	- name: save latest version config
+	  shell: ~/.asdf/bin/asdf local "{{ item }}" $(~/.asdf/bin/asdf list all "{{ item }}" | sort -rn | head -n1)
+	  with_items:
+	    - bat
+	    - fd
+	    - fzf
+	    - jq
+	    - ripgrep
+	    - tmux
+	    - yq
+	
+929586be06b3d8b9b379f79eca6a5ce4|file:///home/nicholas/projects/infra/ansible-template/roles/role_template/molecule/default/molecule.yml|61|3|v|yaml.ansible
+	  - destroy
+055d6a78e273016953a034f0493489f8|file:///home/nicholas/projects/infra/provision-scratch/roles/dotfiles/tasks/install-asdf-base.yml|40|9|v|yaml.ansible
+	save latest version config
+7082cbdbfa1f41143b28ca50833573ff|file:///home/nicholas/projects/infra/provision-scratch/roles/dotfiles/tasks/install-asdf-base.yml|41|27|v|yaml.ansible
+	local 
+fe6f4218590739566b5c01ba9c812be7|file:///home/nicholas/projects/infra/provision-scratch/roles/dotfiles/tasks/install-asdf-base.yml|19|14|V|yaml.ansible
+	  error: false
+6d8454fe84b3e25c037eb18bb0d28075|file:///home/nicholas/projects/infra/provision-scratch/roles/dotfiles/tasks/install-asdf-base.yml|19|1|V|yaml.ansible
+	  ignore_errors: true
+0d6087921eb0487d51c513d0f9fc7467|file:///home/nicholas/projects/infra/provision-scratch/roles/dotfiles/molecule/default/molecule.yml|41|1|V|yaml.ansible
+	     # - dependency
+3e8ccc54abb6ecb73385d9e265b2ba9a|file:///home/nicholas/projects/infra/provision-scratch/roles/dotfiles/molecule/default/molecule.yml|42|1|V|yaml.ansible
+	     # - prepare
+0c2f411f982fbdc78d3d7f1e231deaec|file:///home/nicholas/projects/infra/provision-scratch/roles/dotfiles/molecule/default/molecule.yml|46|1|V|yaml.ansible
+	    # - dependency
+a065d6cbc5c2b220d751b649e6559f6d|file:///home/nicholas/projects/infra/provision-scratch/roles/dotfiles/molecule/default/molecule.yml|48|1|V|yaml.ansible
+	    # - prepare
+2bb64c5cf02105011908e1b640b2e572|file:///home/nicholas/projects/infra/provision-scratch/roles/dotfiles/molecule/default/molecule.yml|50|1|V|yaml.ansible
+	    # - side_effect
+de84b508c4f2e70f7bd987116fd39724|file:///home/nicholas/projects/infra/provision-scratch/roles/dotfiles/molecule/default/molecule.yml|53|1|V|yaml.ansible
+	    # - cleanup
+a9194187583975ad144cc691f5e02d28|file:///home/nicholas/projects/infra/provision-scratch/roles/dotfiles/tasks/install-asdf.yml|2|1|V|yaml.ansible
+	- name: clone asdf
+	  git:
+	    repo: https://github.com/asdf-vm/asdf.git
+	    dest: ~/.asdf
+	    version: v0.8.0
+	
+ea21020fdcf5f0b87a0ca206462ee354|file:///home/nicholas/projects/infra/provision-scratch/roles/dotfiles/tasks/install-asdf.yml|13|1|V|yaml.ansible
+	- name: update plugins
+	  shell: ~/.asdf/bin/asdf plugin update --all
+e9aabfaa84b09782ef73cb82e6d373b9|file:///home/nicholas/projects/infra/provision-scratch/roles/dotfiles/tasks/install-asdf.yml|9|27|v|yaml.ansible
+	plugin update --all
+c7d6561f2964332553d482cdb77ee971|file:///home/nicholas/projects/infra/provision-scratch/roles/dotfiles/tasks/install-asdf.yml|10|1|V|yaml.ansible
+	# - name: load asdf plugin
+	#   shell: source ~/.asdf/asdf.sh
+	#   args:
+	#       executable: /bin/bash
+	#
+b57e09684b31050d841aa3e1a4ceda9a|file:///home/nicholas/projects/infra/provision-scratch/roles/dotfiles/tasks/install-asdf.yml|8|1|V|yaml.ansible
+	- name: update asdf
+	  shell: ~/.asdf/bin/asdf update
+f6e5dce60dd5abe3a8aef3e749c951d0|file:///home/nicholas/projects/infra/provision-scratch/roles/dotfiles/molecule/default/molecule.yml|34|1|V|yaml.ansible
+	    # create: create.yml
+	    # destroy: destroy.yml
+baf3cab3904bd9e934f252205916f27f|file:///home/nicholas/projects/infra/provision-scratch/roles/dotfiles/molecule/default/molecule.yml|24|1|V|yaml.ansible
+	  # connection_options:
+	  #   ansible_connection: docker
+	  #   ansible_password: ansible
+	  #   ansible_ssh_user: ansible
+dae24f1760a3638ae5f737b3e56e2fc8|file:///home/nicholas/projects/infra/provision-scratch/roles/dotfiles/molecule/default/molecule.yml|18|1|V|yaml.ansible
+	    # volumes:
+	    #   - /sys/fs/cgroup:/sys/fs/cgroup:ro
+	    #   - /var/lib/docker
+4ba73c858a0f152eb5dac9e0675d48d4|file:///home/nicholas/projects/infra/provision-scratch/roles/dotfiles/tasks/install-asdf-base.yml|7|1|V|yaml.ansible
+	    - delta
+0a1737b3844ac4cc076f31b728785635|file:///home/nicholas/projects/infra/provision-scratch/roles/dotfiles/tasks/install-dotbare.yml|8|1|V|yaml.ansible
+	# - name: load dotbare plugin
+	#   shell: source ~/.dotbare/dotbare.plugin.zsh
+	#   args:
+	#       executable: /bin/bash
+b151814faf94e456ce763ac97e1fae52|file:///home/nicholas/projects/infra/provision-scratch/roles/dotfiles/tasks/main.yml|27|61|v|yaml.ansible
+	terraform-lsp
+37f829f4291281c2ac8a86a4d243f90c|file:///home/nicholas/.zsh/common/plugins.zsh|31|1|V|zsh
+	zplug "plugins/kubectl",   from:oh-my-zsh
+0f12ee5c9f1dd90158580f1c292b0d37|file:///home/nicholas/.zsh/common/plugins.zsh|32|16|v|zsh
+	kubectl
+99955fad12fa32da616751b66c3f48a3|file:///home/nicholas/.zsh/common/plugins.zsh|32|1|V|zsh
+	zplug "plugins/node",   from:oh-my-zsh
+36c4536996ca5615dcf9911f068786dc|file:///home/nicholas/.zsh/common/plugins.zsh|33|16|v|zsh
+	node
+7c957bd2948653be6ec4ef2a88e6d9a9|file:///home/nicholas/.zsh/common/plugins.zsh|34|1|V|zsh
+	zplug "plugins/nvm",   from:oh-my-zsh
+31babb1f8ce81791f34009862e3f8018|file:///home/nicholas/.zsh/common/plugins.zsh|35|1|V|zsh
+	zplug "plugins/pass",   from:oh-my-zsh
+1a1dc91c907325c69271ddf0c944bc72|file:///home/nicholas/.zsh/common/plugins.zsh|36|16|v|zsh
+	pass
+9ea7c3f6948671e8441c48a19eaecc4b|file:///home/nicholas/.zsh/common/plugins.zsh|37|1|V|zsh
+	zplug "plugins/systemadmin",   from:oh-my-zsh
+f19826e36a24ce639a7036c19b33f97d|file:///home/nicholas/.zsh/common/plugins.zsh|38|16|v|zsh
+	systemadmin
+08b94712311974e08597682258a5b79b|file:///home/nicholas/.zsh/common/plugins.zsh|38|1|V|zsh
+	zplug "plugins/terraform",   from:oh-my-zsh
+1b1ed905d54c18e3dd8828986c14be17|file:///home/nicholas/.zsh/common/plugins.zsh|39|16|v|zsh
+	terraform
+66f58416f3a78c0be3a567a4f101706d|file:///home/nicholas/.zsh/common/plugins.zsh|39|1|V|zsh
+	zplug "plugins/vi-mode",   from:oh-my-zsh
+15d61712450a686a7f365adf4fef581f|file:///home/nicholas/.zsh/common/plugins.zsh|40|20|v|zsh
+	mode
+dfd622eb7eaa1c8456f927c6260c0a2e|file:///home/nicholas/.zsh/common/plugins.zsh|40|1|V|zsh
+	zplug "plugins/web-search",   from:oh-my-zsh
+0a3069cfc46aeb89559a49e9dadbe751|file:///home/nicholas/.zsh/common/plugins.zsh|41|16|v|zsh
+	web-
+06a943c59f33a34bb5924aaf72cd2995|file:///home/nicholas/.zsh/common/plugins.zsh|41|20|v|zsh
+	search
+e422b3fe9e902714707fce4460183c76|file:///home/nicholas/.zsh/common/plugins.zsh|39|16|v|zsh
+	vi-mode
+5f5686131bbaeb62d0ed5bdc57f838d1|file:///home/nicholas/.zsh/common/plugins.zsh|46|1|V|zsh
+	# aws
+	# colorize
+	# colored-man-pages
+	# command-not-found
+	# compleat
+	# cp
+	# docker
+	# # dotenv (want to specifically load with autoenv)
+	# extract
+	# git
+	# helm
+	# # jira
+	# kubectl
+	# node
+	# npm
+	# nvm
+	# pass
+	# sudo
+	# systemadmin
+	# taskwarrior
+	# terraform
+	# vi-mode
+	# web-search
+	# zsh_reload
+	
+30390acad85d12860979c485b91b631e|file:///home/nicholas/.zsh/common/plugins.zsh|49|3|v|zsh
+	Load theme file
+6a6c35e7135c05262357b0d2940c48dc|file:///home/nicholas/.zsh/common/plugins.zsh|10|1|V|zsh
+	# Make sure to use double quotes
+de5986d4a51c8c17882f0bfef53deeb0|file:///home/nicholas/resources/bin/completions-list|5|5|V|zsh
+	    printf "\t%-32s %s\n" "Command" "Completion"
+0a712d3f50769d02c45ab1caec527f5a|file:///home/nicholas/resources/bin/completions-list|4|3|V|zsh
+	  printf "\t%-32s %s\n" "Command" "Completion"
+1d7501701c6b0a7b5036b95b08e2892c|file:///home/nicholas/bin/fb|28|17|v|javascript
+	\033[1;33m
+10faca24e3bd57677fbcadbb3bc5e75a|file:///home/nicholas/resources/bin/completions-list|3|46|v|zsh
+	\e[1;33m
+25236bea816cd7d2e770b9a8f3957b77|file:///home/nicholas/resources/bin/completions-list|6|5|v|zsh
+	=(( n + 1 ))
+83aa6630671b808a40efa61837f0adec|file:///home/nicholas/resources/bin/completions-list|12|13|v|zsh
+	\e[1;36m;%d \e[0mCompletion Commands" $n
+a866421bef11898ca2bd2de8434814a1|file:///home/nicholas/resources/bin/completions-list|8|4|V|zsh
+	  n=1
+64d936a9251c9a4d5c5625ba75ee2c04|file:///home/nicholas/resources/bin/completions-list|8|14|V|zsh
+	  echo "HELLO"
+fe7e54e044c976035f5b6e137a454a2e|file:///home/nicholas/resources/bin/completions-list|8|5|v|zsh
+	$(( n + 1 ))
+fcd2487e4a647696d8e24ad0174ebde1|file:///home/nicholas/resources/bin/completions-list|8|5|v|zsh
+	(($n++))
+1c1d74460d23ea6fd66d9c124e52ce61|file:///home/nicholas/resources/bin/completions-list|8|7|v|zsh
+	$n++
+736e9682b6d4fa4c36fb63be8fdbe59a|file:///home/nicholas/resources/bin/completions-list|9|11|V|zsh
+	  echo "$n"
+f83089e3a48526832167c40e4c672ee5|file:///home/nicholas/resources/bin/completions-list|8|16|v|zsh
+	(( n+=1 ))
+2cd2c273eccee3ff1c9506ba7058fcdd|file:///home/nicholas/resources/bin/completions-list|5|1|v|zsh
+	global 
+ad322a445a571c1e1ac9423b0b9f1577|file:///home/nicholas/resources/bin/completions-list|8|15|V|zsh
+	  n=$(($n + 1))
+5971ad71b18ebf329b0ed8ddc21ffa2e|file:///home/nicholas/resources/bin/completions-list|10|9|V|zsh
+	echo "$n"
+26592204b2431852c94375d4bfc36dcd|file:///home/nicholas/resources/bin/completions-list|10|17|V|zsh
+	printf "\n %s" $n
+c79a103c254bd72c97417267585c7327|file:///home/nicholas/.zsh/common/plugins.zsh|19|1|V|zsh
+	source "${CWD}/plugins/zsh-syntax-highlighting.zsh"
+0d4529a933e505e9d19a48b573ba2e08|file:///home/nicholas/.zsh/common/plugins.zsh|19|28|v|zsh
+	syntax-highlighting
+263aadcc3b5746bd097701404bde0620|file:///home/nicholas/.zsh/common/plugins.zsh|16|1|V|zsh
+	source "${CWD}/plugins/zsh-auto-notify.zsh"
+1a7f15a0b8e200488d900422b537b4e1|file:///home/nicholas/.zsh/common/plugins.zsh|16|28|v|zsh
+	auto-notify.zsh
+666a295bb095bf0136a07232023d9b33|file:///home/nicholas/.zsh/common/plugins.zsh|16|1|V|zsh
+	source "${CWD}/plugins/zsh-autocomplete.zsh"
+a0c0bf2d168429026f3dcfe977a0a8b8|file:///home/nicholas/.zsh/common/plugins.zsh|16|28|v|zsh
+	autocomplete.
+a376717ba9041c0adf9c344a92bb6f20|file:///home/nicholas/.zsh/common/plugins.zsh|10|1|V|zsh
+	zplug "kazhala/dotbare"

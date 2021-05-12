@@ -1,6 +1,6 @@
 {
     "schema_version": 2,
-    "timestamp": 1620697906,
+    "timestamp": 1620806181,
     "workspace": {
         "0": [
             [
@@ -16,7 +16,7 @@
                             }
                         }
                     ],
-                    "label": "BpyTOP",
+                    "label": "Terminal",
                     "custom_label_set": false
                 }
             ]
