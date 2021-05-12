@@ -4,7 +4,6 @@ if [[ -z "$(command -v zplug)" ]]; then
   #   https://raw.githubusercontent.com/zplug/installer/master/installer.zsh | zsh
   export ZPLUG_HOME="$HOME/.zplug"
   [[ ! -d ~/.zplug ]] && git clone https://github.com/zplug/zplug $ZPLUG_HOME
-  alias zplug="$ZPLUG_HOME/bin/zplug"
 fi
 
 dir=${0:a:h}
@@ -32,6 +31,28 @@ source "${dir}/plugins/zsh-vim-mode.zsh"
 # zplug jreese/zsh-titles
 # zplug RobSis/zsh-completion-generator
 # zplug RobSis/zsh-reentry-hook
+#
+# if [[ -d ~/devel/virtualz ]] ; then
+#   zplug "~/devel/virtualz", from:local
+# else
+#   zplug 'aperezdc/virtualz'
+# fi
+# if [[ -d ~/devel/rockz ]] ; then
+#   zplug "~/devel/rockz", from:local
+# else
+#   zplug 'aperezdc/rockz'
+# fi
+# if [[ -d ~/devel/zsh-notes ]] ; then
+#   zplug "~/devel/zsh-notes", from:local
+# else
+#   zplug 'aperezdc/zsh-notes'
+# fi
+#
+# # if [[ -d ~/devel/zsh-fzy ]] ; then
+# # 	zplug "~/devel/zsh-fzy", from:local
+# # else
+# # 	zplug 'aperezdc/zsh-fzy'
+# # fi
 #
 # zinit light xPMo/zsh-toggle-command-prefix
 # zinit light hlissner/zsh-autopair

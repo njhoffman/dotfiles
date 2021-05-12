@@ -17,7 +17,7 @@ touch /tmp/whereami
 # load the path files
 files_n=0
 _log 1 "1: beginning zshrc, load path files"
-for file in "${(M)config_files:#*/path.zsh}"; do
+for file in ${config_files:#*/path.zsh}; do
   files_n=$((files_n+1))
   _log 2 "1: sourcing path file: $file"
   source "$file"
@@ -26,7 +26,7 @@ _log 1 "1: sourced ${files_n} path files"
 
 files_n=0
 _log 1 "2: loading config files that aren't path or completion"
-for file in "${${config_files:#*/path.zsh}:#*/completion.zsh}"; do
+for file in ${${config_files:#*/path.zsh}:#*/completion.zsh}; do
   files_n=$((files_n+1))
   _log 2 "2: sourcing: $file"
   source "$file"
