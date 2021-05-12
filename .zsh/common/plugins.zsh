@@ -1,10 +1,10 @@
 # install zplug if not exists
-# [[ ! -d ~/.zplug ]] &&
 if [[ -z "$(command -v zplug)" ]]; then
   # curl -sL --proto-redir -all,https \
   #   https://raw.githubusercontent.com/zplug/installer/master/installer.zsh | zsh
   export ZPLUG_HOME="$HOME/.zplug"
-  git clone https://github.com/zplug/zplug $ZPLUG_HOME
+  [[ ! -d ~/.zplug ]] &&
+    git clone https://github.com/zplug/zplug $ZPLUG_HOME
 fi
 
 dir=${0:a:h}
@@ -20,11 +20,22 @@ source "${dir}/plugins/zsh-auto-notify.zsh"
 source "${dir}/plugins/zsh-autocomplete.zsh"
 source "${dir}/plugins/zsh-autoenv.zsh"
 source "${dir}/plugins/zsh-better-npm-completion.zsh"
-source "${dir}/plugins/zsh-histdb.zsh"
-source "${dir}/plugins/zsh-syntax-highlighting.zsh"
+source "${dir}/plugins/zsh-completions.zsh"
+source "${dir}/plugins/zsh-autosuggestions.zsh"
+# source "${dir}/plugins/zsh-histdb.zsh"
+# source "${dir}/plugins/zsh-syntax-highlighting.zsh"
 source "${dir}/plugins/zsh-vim-mode.zsh"
+
+# zinit light xPMo/zsh-toggle-command-prefix
+# zinit light hlissner/zsh-autopair
+# zinit light m42e/zsh-histdb-fzf
+# zinit light zsh-users/zsh-history-substring-search
+# zinit light  michaelxmcbride/zsh-dircycle
+# zinit light leonjza/history-here
+# zinit light hkbakke/bash-insulter
 zplug "kazhala/dotbare"
 zplug "b4b4r07/emoji-cli", on:"stedolan/jq"
+zplug "zdharma/fast-syntax-highlighting"
 
 # Oh my zsh plugins
 zplug "plugins/aws",               from:oh-my-zsh
@@ -39,7 +50,6 @@ zplug "plugins/helm",              from:oh-my-zsh
 zplug "plugins/kubectl",           from:oh-my-zsh
 zplug "plugins/node",              from:oh-my-zsh
 zplug "plugins/npm",               from:oh-my-zsh
-zplug "plugins/nvm",               from:oh-my-zsh
 zplug "plugins/pass",              from:oh-my-zsh
 zplug "plugins/sudo",              from:oh-my-zsh
 zplug "plugins/systemadmin",       from:oh-my-zsh
