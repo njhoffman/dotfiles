@@ -39,9 +39,6 @@ export BAT_THEME=ansi-dark
 
 # export VIMPAGER_RC='~/.vimrc'
 
-export SELENIUM_SERVER_JAR=/usr/local/bin/selenium-server-standalone-2.43.1.jar
-export NO_AT_BRIDGE=1 # turn off warning of connection to dbus for a11y features
-
 # no=00;38;5;244:rs=0:di=00;38;5;33:
 LS_COLORS=$LS_COLORS'ow=1;96:'
 export LS_COLORS
@@ -51,21 +48,27 @@ if [[ -z "$PKG_CONFIG_PATH" && -n "$(command -v pkg-config)" ]]; then
   export PKG_CONFIG_PATH=$(pkg-config --variable pc_path pkg-config)
 fi
 
-export ANSIBLE_CONFIG="$HOME/.config/ansible/ansible.cfg"
-export ANSIBLE_LOAD_CALLBACK_PUGINS=1
+if [[ -n "$(command -v ansible)" ]]; then
+  export ANSIBLE_CONFIG="$HOME/.config/ansible/ansible.cfg"
+  export ANSIBLE_LOAD_CALLBACK_PUGINS=1
+fi
 
-export NVM_DIR="$HOME/.nvm"
-[ -s "$NVM_DIR/nvm.sh" ] && . "$NVM_DIR/nvm.sh"
+if [[ -d "$HOME/.nvm" ]]; then
+  export NVM_DIR="$HOME/.nvm"
+  [ -s "$NVM_DIR/nvm.sh" ] && . "$NVM_DIR/nvm.sh"
+fi
 
 export JAVA_HOME=$(readlink -f /usr/bin/javac | sed "s:/bin/javac::")
 export ANDROID_HOME=$HOME/Android/Sdk
 export DEFAULT_JVM_OPTS='"-Dcom.android.sdklib.toolsdir=$APP_HOME" -XX:+IgnoreUnrecognizedVMOptions'
 
 # android sdk tools
-export PATH=$PATH:$ANDROID_HOME/emulator
-export PATH=$PATH:$ANDROID_HOME/tools
-export PATH=$PATH:$ANDROID_HOME/tools/bin
-export PATH=$PATH:$ANDROID_HOME/platform-tools
+if [[ -n "$ANDROID_HOME" ]]; then
+  export PATH=$PATH:$ANDROID_HOME/emulator
+  export PATH=$PATH:$ANDROID_HOME/tools
+  export PATH=$PATH:$ANDROID_HOME/tools/bin
+  export PATH=$PATH:$ANDROID_HOME/platform-tools
+fi
 
 # Ruby exports
 # export PATH="$HOME/.rbenv/bin:$PATH"
@@ -132,56 +135,4 @@ export KUBECONFIG=$KUBECONFIG:~/.kube/minikube:~/.kube/spadash-dev0-eks:~/.kube/
 # fi
 #
 
-# fi Normal file
-# di Directory
-# ex Executable file
-# pi Named pipe
-# so Socket
-# bd Block device
-# cd Character device
-# ln Symlink
-# or Broken symlink
-# PERMISSIONS
-# ur User +r bit
-# uw User +w bit
-# ux User +x bit (files)
-# ue User +x bit (file types)
-# gr Group +r bit
-# gw Group +w bit
-# gx Group +x bit
-# tr Others +r bit
-# tw Others +w bit
-# tx Others +x bit
-# su Higher bits (files)
-# sf Higher bits (other types)
-# xa Extended attribute marker
-# FILE SIZES
-# sn Size numbers
-# sb Size unit
-# df Major device ID
-# ds Minor device ID
-# OWNERS AND GROUPS
-# uu A user that’s you
-# un A user that’s not
-# gu A group with you in it
-# gn A group without you
-# HARD LINKS
-# lc Number of links
-# lm A multi-link file
-# GIT
-# ga New
-# gm Modified
-# gd Deleted
-# gv Renamed
-# gt Type change
-# DETAILS AND METADATA
-# xx Punctuation
-# da Timestamp
-# in File inode
-# bl Number of blocks
-# hd Table header row
-# lp Symlink path
-# cc Control character
-# OVERLAYS
-# bO Broken link path
 

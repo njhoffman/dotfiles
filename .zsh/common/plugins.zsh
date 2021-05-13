@@ -2,7 +2,7 @@ dir=${0:a:h}
 
 export ZSH_LOADER="zplug" # zinit, antigen
 
-source "${dir}/plugins.init.zsh"
+source "${dir}/plugins/.init-plugins.zsh"
 
 source "${dir}/plugins/alias-tips.zsh"
 source "${dir}/plugins/anyframe.zsh"
