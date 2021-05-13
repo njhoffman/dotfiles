@@ -37,6 +37,7 @@ alias syss="sudo systemctl status"
 alias backlight="sudo chmod g=rw,o=rw /sys/class/backlight/intel_backlight/brightness"
 
 alias profile-startup='for i in $(seq 1 10); do /usr/bin/time --verbose zsh -i -c exit; done'
+alias profile-theme="time (repeat 1000 zsh -dfis <<< 'source ~/powerlevel10k/powerlevel10k.zsh-theme')"
 
 # display all rules #
 alias iptlist='sudo /sbin/iptables -L -n -v --line-numbers'

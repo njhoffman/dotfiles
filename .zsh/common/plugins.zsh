@@ -20,6 +20,8 @@ source "${dir}/plugins/zsh-completions.zsh"
 # source "${dir}/plugins/zsh-syntax-highlighting.zsh"
 source "${dir}/plugins/zsh-vim-mode.zsh"
 
+zplug "kazhala/dotbare"
+
 # zplug kyanagi/faster-vcs-info, as:command, use:'VCS_INFO_*', lazy:true
 # zplug zplug/zplug, hook-build:'zplug --self-manage'
 # zplug jreese/zsh-titles
@@ -55,47 +57,59 @@ source "${dir}/plugins/zsh-vim-mode.zsh"
 # zinit light michaelxmcbride/zsh-dircycle
 # zinit light leonjza/history-here
 # zinit light hkbakke/bash-insulter
-zplug "kazhala/dotbare"
-zplug "b4b4r07/emoji-cli", on:"stedolan/jq"
+#
+# programs
+# httpstat
+# zinit light Aloxaf/fzf-tab
+# zinit light LuRsT/hr
+# zinit light PhrozenByte/rmtrash
+# zinit light Seirdy/stpv
+# zinit light TheLocehiliosan/yadm
+# zinit light ZoeFiri/fz
+# zinit light aaronNG/reddio
+# zinit light alexgisby/imgur-album-downloader
+# zinit light charmbracelet/glow
+# zinit light chriswalz/bit
+# zinit light denilsonsa/prettyping
+# zinit light denisidoro/navi
+# zinit light dylanaraps/neofetch
+# zinit light dylanaraps/pash
+# zinit light eth-p/bat-extras
+# zinit light exiftool/exiftool
+# zinit light fnord0/hURL
+# zinit light greymd/tmux-xpanes
+# zinit light isamert/scli
+# zinit light jesseduffield/lazydocker
+# zinit light jesseduffield/lazygit
+# zinit light jhawthorn/fzy
+# zinit light leophys/zsh-plugin-fzf-finder
+# zinit light lukechilds/zsh-nvm
+# zinit light mvdan/xurls
+# zinit light ogham/exa
+# zinit light paulirish/git-open
+# zinit light petervanderdoes/git-flow-completion
+# zinit light ranger/ranger
+# zinit light smxi/inxi
+# zinit light th3lusive/chrome-extension-dl
+# zinit light tj/git-extras
+# zinit light tree-sitter/tree-sitter
+# zinit light wfxr/emoji-cli
+# zinit light wfxr/forgit
+# zinit light ytet5uy4/fzf-widgets
+# zinit light zdharma/zsh-diff-so-fancy
 
-# Oh my zsh plugins
-zplug "plugins/aws",               from:oh-my-zsh, if:"(( $+commands[aws] ))"
-zplug "plugins/colorize",          from:oh-my-zsh
-zplug "plugins/colored-man-pages", from:oh-my-zsh
-zplug "plugins/command-not-found", from:oh-my-zsh
-zplug "plugins/cp",                from:oh-my-zsh
-zplug "plugins/docker",            from:oh-my-zsh, if:"(( $+commands[docker] ))"
-zplug "plugins/extract",           from:oh-my-zsh, if:"(( $+commands[extract] ))"
-zplug "plugins/git",               from:oh-my-zsh, if:"(( $+commands[git] ))"
-zplug "plugins/helm",              from:oh-my-zsh, if:"(( $+commands[helm] ))"
-zplug "plugins/kubectl",           from:oh-my-zsh, if:"(( $+commands[kubectl] ))"
-zplug "plugins/node",              from:oh-my-zsh, if:"(( $+commands[node] ))"
-zplug "plugins/grc",               from:oh-my-zsh, if:"(( $+commands[grc] ))"
-zplug "plugins/golang",            from:oh-my-zsh, if:"(( $+commands[go] ))"
-zplug "plugins/npm",               from:oh-my-zsh, if:"(( $+commands[npm] ))"
-zplug "plugins/sudo",              from:oh-my-zsh, if:"(( $+commands[sudo] ))"
-zplug "plugins/systemd",           from:oh-my-zsh, if:"(( $+commands[systemctl] ))"
-zplug "plugins/pass",              from:oh-my-zsh, if:"(( $+commands[pass] ))"
-zplug "plugins/systemadmin",       from:oh-my-zsh
-zplug "plugins/terraform",         from:oh-my-zsh, if:"(( $+commands[terraform] ))"
-zplug "plugins/taskwarrior",       from:oh-my-zsh, if:"(( $+commands[task] ))"
-zplug "plugins/vi-mode",           from:oh-my-zsh
-zplug "plugins/urltools",          from:oh-my-zsh
-zplug "plugins/web-search",        from:oh-my-zsh
-zplug "plugins/zsh_reload",        from:oh-my-zsh
-
-# zplug "b4b4r07/httpstat", as:command, use:'(*).sh', rename-to:'$1'
-# zplug "stedolan/jq", from:gh-r,  as:command, rename-to:jq
-
+source "${dir}/plugins/oh-my-zsh.zsh"
+source "${dir}/plugins/.completions.zsh"
 source "${dir}/plugins/.theme.zsh"
+# source "${dir}/plugins/.programs.zsh"
 
 if [[ "$ZSH_LOADER" == "zplug" ]]; then
   if ! zplug check --verbose; then
     zplug install
   fi
   zplug load --verbose
-else if [[ "$ZSH_LOADER" == "zinit" ]]; then
+elif [[ "$ZSH_LOADER" == "zinit" ]]; then
   echo "zinit"
-else if [[ "$ZSH_LOADER" == "antigen" ]]; then
+elif [[ "$ZSH_LOADER" == "antigen" ]]; then
   echo "antigen"
 fi

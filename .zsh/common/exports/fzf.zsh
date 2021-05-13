@@ -75,6 +75,7 @@ fzf_command="fdfind \
 export FZF_DEFAULT_COMMAND="$fzf_command $fzf_exclude"
 export FZF_CTRL_T_COMMAND="$fzf_command --type f $fzf_exclude"
 export FZF_ALT_C_COMMAND="$fzf_command --type d $fzf_exclude"
+export FZF_CTRL_R_OPTS="--preview 'echo {1..3}; echo {4..} | bat --style=plain --language=zsh' --preview-window down:3:wrap --bind '?:toggle-preview'"
 
 # ALT_C_OPTS, CTRL_R_OPTS, CTRL_T_OPTS
 export FZF_TMUX=1
