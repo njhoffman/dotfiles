@@ -15,7 +15,7 @@ source "${dir}/plugins/zsh-autocomplete.zsh"
 source "${dir}/plugins/zsh-autoenv.zsh"
 source "${dir}/plugins/zsh-better-npm-completion.zsh"
 source "${dir}/plugins/zsh-completions.zsh"
-source "${dir}/plugins/zsh-autosuggestions.zsh"
+# source "${dir}/plugins/zsh-autosuggestions.zsh"
 # source "${dir}/plugins/zsh-histdb.zsh"
 # source "${dir}/plugins/zsh-syntax-highlighting.zsh"
 source "${dir}/plugins/zsh-vim-mode.zsh"
@@ -87,17 +87,12 @@ zplug "plugins/zsh_reload",        from:oh-my-zsh
 # zplug "b4b4r07/httpstat", as:command, use:'(*).sh', rename-to:'$1'
 # zplug "stedolan/jq", from:gh-r,  as:command, rename-to:jq
 
-# Theme file
-# zplug 'dracula/zsh', as:theme
-# zplug "denysdovhan/spaceship-prompt", use:spaceship.zsh, from:github, as:theme
-zplug "romkatv/powerlevel10k", as:theme, depth:1
-# time (repeat 1000 zsh -dfis <<< 'source ~/powerlevel10k/powerlevel10k.zsh-theme')
-# zplug "eendroroy/alien-minimal"
-# zplug mafredri/zsh-async, from:github
-# zplug sindresorhus/pure, use:pure.zsh, from:github, as:theme
+source "${dir}/plugins/.theme.zsh"
 
 if [[ "$ZSH_LOADER" == "zplug" ]]; then
-  if ! zplug check --verbose; then zplug install; fi
+  if ! zplug check --verbose; then
+    zplug install
+  fi
   zplug load --verbose
 else if [[ "$ZSH_LOADER" == "zinit" ]]; then
   echo "zinit"
