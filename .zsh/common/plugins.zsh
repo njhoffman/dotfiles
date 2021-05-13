@@ -97,11 +97,7 @@ zplug "romkatv/powerlevel10k", as:theme, depth:1
 # zplug sindresorhus/pure, use:pure.zsh, from:github, as:theme
 
 if [[ "$ZSH_LOADER" == "zplug" ]]; then
-  if ! zplug check --verbose; then
-    zplug install
-  fi
-
-  # Then, source plugins and add commands to $PATH
+  if ! zplug check --verbose; then zplug install; fi
   zplug load --verbose
 else if [[ "$ZSH_LOADER" == "zinit" ]]; then
   echo "zinit"

@@ -92,15 +92,12 @@ COMPLETION_WAITING_DOTS="true"
 # compaudit | xargs chmod g-w,o-w
 ZSH_DISABLE_COMPFIX=false
 setopt complete_in_word
-#
-# Modules
-#
+
+## Modules
 
 zmodload -i zsh/complist
 
-#
-# Autoloads
-#
+## Autoloads
 
 autoload -Uz allopt zed zmv zcalc colors
 colors
