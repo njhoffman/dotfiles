@@ -44,6 +44,6 @@ source /etc/profile.d/rvm.sh
 export _SHELL_INITIALIZED=1
 
 #
-# zprof > ~/.zshprof
+# zprof > "$HOME/.zshprof.$START"
 
 # [ -f ~/.fzf.zsh ] && source ~/.fzf.zsh

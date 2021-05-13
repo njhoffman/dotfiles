@@ -6,9 +6,8 @@ alias refresh_aliases="source $filepath"
 # alias fuck='sudo $(history -p \!\!)'
 alias _='sudo'
 
+alias db=dotbare
 alias dots=dotbare
-alias bindkeys-list="source ~/bin/bindkeys-list"
-alias completions-list="source ~/bin/completions-list"
 
 # directory listing
 alias ls="LC_COLLATE=C ls --color=auto"
