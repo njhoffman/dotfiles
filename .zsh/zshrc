@@ -59,17 +59,19 @@ _log 1 "sourced ${files_n} config files"
 #
 # unset config_files updated_at
 
-if [[ -e "${ZSH_DIR}/profiles/${ZSH_PROFILE}.zshrc" ]]; then
-  _log 1 "loading rc file: ${ZSH_PROFILE}.zshrc"
-  source "${ZSH_DIR}/profiles/${ZSH_PROFILE}.zshrc"
-fi
+function _stop_profiler {
+  if [[ -e "${ZSH_DIR}/profiles/${ZSH_PROFILE}.zshrc" ]]; then
+    _log 1 "loading rc file: ${ZSH_PROFILE}.zshrc"
+    source "${ZSH_DIR}/profiles/${ZSH_PROFILE}.zshrc"
+  fi
 
-if [[ "$_ZSH_PROFILE_INT" == true ]]; then
-  _log 0 "ending profile in interactive mode"
-  zprof | tee -a ~/.zprof
-  unsetopt xtrace
-  exec 2>&3 3>&-
-fi
+  if [[ "$_ZSH_PROFILE_INT" == true ]]; then
+    _log 0 "ending profile in interactive mode"
+    zprof | tee -a ~/.zprof
+    unsetopt xtrace
+    exec 2>&3 3>&-
+  fi
+}
 
 function _finish_load {
   # use .localrc for things not wanted in repo
@@ -82,10 +84,12 @@ function _finish_load {
   alias_n=$(alias | wc -l)
   export_n=$(export | wc -l)
   complete_n=$(for com compl in ${(kv)_comps:#-*(-|-,*)}; do printf "%s %s\n" $com $compl; done | wc -l)
+  plugins_n=$(zplug list | wc -l)
   _log 0 "finished loading in %F{67}${load_diff}s%f"
-  _log 1 "($export_n exports, $alias_n aliases, $func_n functions, $complete_n completions)"
+  _log 1 "($plugins_n plugins, $export_n exports, $alias_n aliases, $func_n functions, $complete_n completions)"
 
   export _ZSH_LOAD_START=""
 }
 
+_stop_profiler
 _finish_load
