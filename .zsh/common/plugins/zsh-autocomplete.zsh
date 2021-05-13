@@ -1,5 +1,11 @@
 # async autocomplete
-zplug "marlonrichert/zsh-autocomplete"
+if [[ "$ZSH_LOADER" == "zplug" ]]; then
+  zplug "marlonrichert/zsh-autocomplete"
+elif [[ "$ZSH_LOADER" == "zinit" ]]; then
+  zinit light marlonrichert/zsh-autocomplete
+elif [[ "$ZSH_LOADER" == "antigen" ]]; then
+  echo "antigen"
+fi
 # zstyle ':autocomplete:list-choices:*' min-input 3
 # zstyle ':autocomplete:*' max-lines 100%
 zstyle ':autocomplete:*' max-lines 5

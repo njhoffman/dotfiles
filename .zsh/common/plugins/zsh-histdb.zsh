@@ -1,8 +1,14 @@
 # save history in a sqlite3 database
-zplug "larkery/zsh-histdb"
-
 # histdb make
 # histdb-top
+
+if [[ "$ZSH_LOADER" == "zplug" ]]; then
+  zplug "larkery/zsh-histdb"
+elif [[ "$ZSH_LOADER" == "zinit" ]]; then
+  zinit light larkery/zsh-histdb
+elif [[ "$ZSH_LOADER" == "antigen" ]]; then
+  echo "antigen"
+fi
 
 # Query to pull in the most recent command if anything was found similar
 # in that directory. Otherwise pull in the most recent command used anywhere

@@ -1,5 +1,12 @@
 
-zplug "desyncr/auto-ls"
+if [[ "$ZSH_LOADER" == "zplug" ]]; then
+  zplug "desyncr/auto-ls"
+elif [[ "$ZSH_LOADER" == "zinit" ]]; then
+  zinit light desyncr/auto-ls
+elif [[ "$ZSH_LOADER" == "antigen" ]]; then
+  echo "antigen"
+fi
+
 # colorls="/usr/local/bin/colorls"
 #
 # auto-ls-custom_function () {

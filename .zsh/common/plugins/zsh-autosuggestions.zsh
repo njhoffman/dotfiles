@@ -1,5 +1,11 @@
+if [[ "$ZSH_LOADER" == "zplug" ]]; then
+  zplug "zsh-users/zsh-autosuggestions", at:develop
+elif [[ "$ZSH_LOADER" == "zinit" ]]; then
+  zinit light zsh-users/zsh-autosuggestions
+elif [[ "$ZSH_LOADER" == "antigen" ]]; then
+  echo "antigen"
+fi
 
-zplug "zsh-users/zsh-autosuggestions", at:develop
 # ZSH_AUTOSUGGEST_HIGHLIGHT_STYLE="fg=#ff00ff,bg=cyan,bold,underline"
 # history, match_prev_cmd, completion
 ZSH_AUTOSUGGEST_STRATEGY=(match_prev_cmd history)

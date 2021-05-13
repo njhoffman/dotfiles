@@ -1,5 +1,12 @@
 # zsh-completions: collection of completion scripts not yet added to zsh
-zplug "zsh-users/zsh-completions"
+if [[ "$ZSH_LOADER" == "zplug" ]]; then
+  zplug "zsh-users/zsh-completions"
+elif [[ "$ZSH_LOADER" == "zinit" ]]; then
+  zinit light zsh-users/zsh-completions
+elif [[ "$ZSH_LOADER" == "antigen" ]]; then
+  echo "antigen"
+fi
+
 zstyle ':completion:*' verbose yes
 zstyle ':completion:*' matcher-list 'r:|=*' 'l:|=* r:|=*'
 # zstyle ':completion:*:*:*:default' menu yes

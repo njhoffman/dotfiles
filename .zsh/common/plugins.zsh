@@ -9,6 +9,7 @@ source "${dir}/plugins/anyframe.zsh"
 source "${dir}/plugins/asdf.zsh"
 source "${dir}/plugins/auto-ls.zsh"
 source "${dir}/plugins/enhancd.zsh"
+source "${dir}/plugins/fast-syntax-highlighting.zsh"
 source "${dir}/plugins/zsh-auto-notify.zsh"
 source "${dir}/plugins/zsh-autocomplete.zsh"
 source "${dir}/plugins/zsh-autoenv.zsh"
@@ -51,33 +52,33 @@ source "${dir}/plugins/zsh-vim-mode.zsh"
 # zinit light hlissner/zsh-autopair
 # zinit light m42e/zsh-histdb-fzf
 # zinit light zsh-users/zsh-history-substring-search
-# zinit light  michaelxmcbride/zsh-dircycle
+# zinit light michaelxmcbride/zsh-dircycle
 # zinit light leonjza/history-here
 # zinit light hkbakke/bash-insulter
 zplug "kazhala/dotbare"
 zplug "b4b4r07/emoji-cli", on:"stedolan/jq"
-zplug "zdharma/fast-syntax-highlighting", from:github, defer:2
 
 # Oh my zsh plugins
-zplug "plugins/aws",               from:oh-my-zsh
+zplug "plugins/aws",               from:oh-my-zsh, if:"(( $+commands[aws] ))"
 zplug "plugins/colorize",          from:oh-my-zsh
 zplug "plugins/colored-man-pages", from:oh-my-zsh
 zplug "plugins/command-not-found", from:oh-my-zsh
 zplug "plugins/cp",                from:oh-my-zsh
-zplug "plugins/docker",            from:oh-my-zsh
-zplug "plugins/extract",           from:oh-my-zsh
-zplug "plugins/git",               from:oh-my-zsh
-zplug "plugins/helm",              from:oh-my-zsh
-zplug "plugins/kubectl",           from:oh-my-zsh
-zplug "plugins/node",              from:oh-my-zsh
+zplug "plugins/docker",            from:oh-my-zsh, if:"(( $+commands[docker] ))"
+zplug "plugins/extract",           from:oh-my-zsh, if:"(( $+commands[extract] ))"
+zplug "plugins/git",               from:oh-my-zsh, if:"(( $+commands[git] ))"
+zplug "plugins/helm",              from:oh-my-zsh, if:"(( $+commands[helm] ))"
+zplug "plugins/kubectl",           from:oh-my-zsh, if:"(( $+commands[kubectl] ))"
+zplug "plugins/node",              from:oh-my-zsh, if:"(( $+commands[node] ))"
+zplug "plugins/grc",               from:oh-my-zsh, if:"(( $+commands[grc] ))"
 zplug "plugins/golang",            from:oh-my-zsh, if:"(( $+commands[go] ))"
 zplug "plugins/npm",               from:oh-my-zsh, if:"(( $+commands[npm] ))"
 zplug "plugins/sudo",              from:oh-my-zsh, if:"(( $+commands[sudo] ))"
 zplug "plugins/systemd",           from:oh-my-zsh, if:"(( $+commands[systemctl] ))"
-zplug "plugins/pass",              from:oh-my-zsh
+zplug "plugins/pass",              from:oh-my-zsh, if:"(( $+commands[pass] ))"
 zplug "plugins/systemadmin",       from:oh-my-zsh
-zplug "plugins/terraform",         from:oh-my-zsh
-zplug "plugins/taskwarrior",       from:oh-my-zsh
+zplug "plugins/terraform",         from:oh-my-zsh, if:"(( $+commands[terraform] ))"
+zplug "plugins/taskwarrior",       from:oh-my-zsh, if:"(( $+commands[task] ))"
 zplug "plugins/vi-mode",           from:oh-my-zsh
 zplug "plugins/urltools",          from:oh-my-zsh
 zplug "plugins/web-search",        from:oh-my-zsh
@@ -95,10 +96,15 @@ zplug "romkatv/powerlevel10k", as:theme, depth:1
 # zplug mafredri/zsh-async, from:github
 # zplug sindresorhus/pure, use:pure.zsh, from:github, as:theme
 
-# Install plugins if there are plugins that have not been installed
-if ! zplug check --verbose; then
-  zplug install
-fi
+if [[ "$ZSH_LOADER" == "zplug" ]]; then
+  if ! zplug check --verbose; then
+    zplug install
+  fi
 
-# Then, source plugins and add commands to $PATH
-zplug load --verbose
+  # Then, source plugins and add commands to $PATH
+  zplug load --verbose
+else if [[ "$ZSH_LOADER" == "zinit" ]]; then
+  echo "zinit"
+else if [[ "$ZSH_LOADER" == "antigen" ]]; then
+  echo "antigen"
+fi
