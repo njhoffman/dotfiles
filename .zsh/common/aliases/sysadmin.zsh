@@ -36,6 +36,8 @@ alias sysr="sudo systemctl restart"
 alias syss="sudo systemctl status"
 alias backlight="sudo chmod g=rw,o=rw /sys/class/backlight/intel_backlight/brightness"
 
+alias profile-startup='for i in $(seq 1 10); do /usr/bin/time --verbose zsh -i -c exit; done'
+
 # display all rules #
 alias iptlist='sudo /sbin/iptables -L -n -v --line-numbers'
 alias iptlistin='sudo /sbin/iptables -L INPUT -n -v --line-numbers'

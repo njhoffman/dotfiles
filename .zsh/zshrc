@@ -9,45 +9,44 @@ load_end=$(date +%s.%N)
 
 typeset -U config_files
 config_files=($ZSH_DIR/common/*.zsh)
-# config_files=($DOTFILES/*/*.zsh)
 
 # track directories for termite spawning
 touch /tmp/whereami
 
 # load the path files
 files_n=0
-_log 1 "1: beginning zshrc, load path files"
-for file in ${config_files:#*/path.zsh}; do
+_log 1 "beginning zshrc, load path files"
+for file in ${(M)config_files:#*/path.zsh}; do
   files_n=$((files_n+1))
-  _log 2 "1: sourcing path file: $file"
+  _log 2 "sourcing path file: $file"
   source "$file"
 done
-_log 1 "1: sourced ${files_n} path files"
+_log 1 "sourced ${files_n} path files"
 
 files_n=0
-_log 1 "2: loading config files that aren't path or completion"
+_log 1 "loading config files that aren't path or completion"
 for file in ${${config_files:#*/path.zsh}:#*/completion.zsh}; do
   files_n=$((files_n+1))
-  _log 2 "2: sourcing: $file"
+  _log 2 "sourcing: $file"
   source "$file"
 done
-_log 1 "2: sourced ${files_n} config files"
+_log 1 "sourced ${files_n} config files"
 #
-# _log 1 "3: initializing autocomplete with 24-hour expiration"
+# _log 1 "initializing autocomplete with 24-hour expiration"
 # autoload -Uz compinit
 # for dump in ~/.zcompdump(N.mh+24); do
 #   compinit
 # done
 # compinit -C
 #
-# _log 1 "4: loading all completion files"
+# _log 1 "loading all completion files"
 # files_n=0
 # for file in ${(M)config_files:#*/completion.zsh}; do
-#   _log 2 "4: loading completion: $file"
+#   _log 2 " loading completion: $file"
 #   files_n=$((files_n+1))
 #   source "$file"
 # done
-# _log 1 "4: loaded ${files_n} completion files"
+# _log 1 "loaded ${files_n} completion files"
 #
 # # TODO: perform a check beore reloading
 # if command -v antibody &>/dev/null; then
@@ -60,9 +59,8 @@ _log 1 "2: sourced ${files_n} config files"
 #
 # unset config_files updated_at
 
-_log 1 "6: looking for profile specific zshrc files"
 if [[ -e "${ZSH_DIR}/profiles/${ZSH_PROFILE}.zshrc" ]]; then
-  _log 2 "6: loading rc file: ${ZSH_PROFILE}.zshrc"
+  _log 1 "loading rc file: ${ZSH_PROFILE}.zshrc"
   source "${ZSH_DIR}/profiles/${ZSH_PROFILE}.zshrc"
 fi
 
@@ -73,18 +71,21 @@ if [[ "$_ZSH_PROFILE_INT" == true ]]; then
   exec 2>&3 3>&-
 fi
 
-# use .localrc for things not wanted in repo
-# shellcheck disable=SC1090
-[ -f ~/.localrc ] && . ~/.localrc
+function _finish_load {
+  # use .localrc for things not wanted in repo
+  # shellcheck disable=SC1090
+  [ -f ~/.localrc ] && . ~/.localrc
 
-load_end=$(date +%s.%N)
-load_diff=$(printf '%.3g' $(echo "$load_end - $_ZSH_LOAD_START" | bc))
-func_n=$(functions | grep '()' | wc -l)
-alias_n=$(alias | wc -l)
-export_n=$(export | wc -l)
-complete_n=$(for com compl in ${(kv)_comps:#-*(-|-,*)}; do printf "%s %s\n" $com $compl; done | wc -l)
-_log 0 "finished loading in %F{67}${load_diff}s%f"
-_log 0 "($export_n exports, $alias_n aliases, $func_n functions, $complete_n completions)"
+  load_end=$(date +%s.%N)
+  load_diff=$(printf '%.3g' $(echo "$load_end - $_ZSH_LOAD_START" | bc))
+  func_n=$(functions | grep '()' | wc -l)
+  alias_n=$(alias | wc -l)
+  export_n=$(export | wc -l)
+  complete_n=$(for com compl in ${(kv)_comps:#-*(-|-,*)}; do printf "%s %s\n" $com $compl; done | wc -l)
+  _log 0 "finished loading in %F{67}${load_diff}s%f"
+  _log 1 "($export_n exports, $alias_n aliases, $func_n functions, $complete_n completions)"
 
-export _ZSH_LOAD_START=""
+  export _ZSH_LOAD_START=""
+}
 
+_finish_load

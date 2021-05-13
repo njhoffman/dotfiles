@@ -23,11 +23,8 @@ if [[ -n "$(command -v docker)" ]]; then
 fi
 
 # terraform
-alias tshow="stdbuf -i0 -o0 -e0 terraform show -no-color | vimcat -c \"set syn=terraform\""
-
-# aws-shell always load profile
-# alias aws-shell='aws-shell --profile "$AWS_PROFILE"'
-alias aws="/usr/local/aws-cli/v2/current/bin/aws"
+[[ -n "$(command -v terraform)" ]] &&
+  alias tshow="stdbuf -i0 -o0 -e0 terraform show -no-color | vimcat -c \"set syn=terraform\""
 
 [[ -n "$(command -v helm)" ]] &&
   alias helm-lint="helm lint . && helm template . | kubeval --force-color --strict" &&
@@ -37,7 +34,7 @@ alias kube-score-existing='kubectl api-resources --verbs=list --namespaced -o na
     | xargs -n1 -I{} bash -c "kubectl get {} --all-namespaces -oyaml && echo ---" \
     | kube-score score -'
 
-if [[ -n "$(command -v molecule)" ]];
+if [[ -n "$(command -v molecule)" ]]; then
   alias mol-reload="molecule destroy && molecule converge"
   alias m-r="molecule destroy && molecule converge"
   alias m-c="molecule converge"
