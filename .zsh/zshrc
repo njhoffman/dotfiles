@@ -91,5 +91,20 @@ function _finish_load {
   export _ZSH_LOAD_START=""
 }
 
+function _load_files {
+  files_n=0
+  files=$@
+  for file in ${files}; do
+    files_n=$((files_n+1))
+    _log 2 "sourcing path file: $file"
+    source "$file"
+  done
+  _log 1 "sourced ${files_n} path files"
+}
+
+# _log 1 "beginning zshrc, load path files"
+# _load_files ${(M)config_files:#*/path.zsh}
+# _log 1 "load config files (not path or completion)"
+# _load_files ${${config_files:#*/path.zsh}:#*/completion.zsh}
 _stop_profiler
 _finish_load
