@@ -1,16 +1,8 @@
-# install zplug if not exists
-if [[ -z "$(command -v zplug)" ]]; then
-  # curl -sL --proto-redir -all,https \
-  #   https://raw.githubusercontent.com/zplug/installer/master/installer.zsh | zsh
-  export ZPLUG_HOME="$HOME/.zplug"
-  [[ ! -d ~/.zplug ]] && git clone https://github.com/zplug/zplug $ZPLUG_HOME
-fi
-
 dir=${0:a:h}
 
-source "$ZPLUG_HOME/init.zsh"
+export ZSH_LOADER="zplug" # zinit, antigen
 
-zplug zplug/zplug, hook-build:'zplug --self-manage'
+source "${dir}/plugins.init.zsh"
 
 source "${dir}/plugins/alias-tips.zsh"
 source "${dir}/plugins/anyframe.zsh"
@@ -28,6 +20,7 @@ source "${dir}/plugins/zsh-autosuggestions.zsh"
 source "${dir}/plugins/zsh-vim-mode.zsh"
 
 # zplug kyanagi/faster-vcs-info, as:command, use:'VCS_INFO_*', lazy:true
+# zplug zplug/zplug, hook-build:'zplug --self-manage'
 # zplug jreese/zsh-titles
 # zplug RobSis/zsh-completion-generator
 # zplug RobSis/zsh-reentry-hook
@@ -71,7 +64,6 @@ zplug "plugins/colorize",          from:oh-my-zsh
 zplug "plugins/colored-man-pages", from:oh-my-zsh
 zplug "plugins/command-not-found", from:oh-my-zsh
 zplug "plugins/cp",                from:oh-my-zsh
-zplug "plugins/copydir"            from:oh-my-zsh
 zplug "plugins/docker",            from:oh-my-zsh
 zplug "plugins/extract",           from:oh-my-zsh
 zplug "plugins/git",               from:oh-my-zsh

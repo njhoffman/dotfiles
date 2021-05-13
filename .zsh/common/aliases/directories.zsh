@@ -26,6 +26,5 @@ if [ -n "$(command -v colorls)" ]; then
   # alias ll="exa -a -l -@ -F --icons --color-scale -b -g --extended --git"
   alias lt="LC_COLLATE=C colorls --group-directories-first --almost-all --tree"
   alias tree="LC_COLLATE=C colorls --tree"
-  alias grep="grep --color"
 fi
 

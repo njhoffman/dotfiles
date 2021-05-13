@@ -1,11 +1,11 @@
 
 alias docker-compose="COMPOSE_DOCKER_CLI_BUILD=1 DOCKER_BUILDKIT=1 docker-compose"
 alias docker-compose-update="sudo curl -L 'https://github.com/docker/compose/releases/download/1.25.5/docker-compose-$(uname -s)-$(uname -m)' -o /usr/local/bin/docker-compose"
-alias dc="docker-compose"
+alias d-c="docker-compose"
 alias docker-rm-stopped="docker rm \$(docker ps -qa)"
 alias docker-prune="docker system prune --all"
 alias docker-build="DOCKER_BUILDKIT=1 dive build"
-alias db="docker-build"
+alias d-b="docker-build"
 alias docker-tree="dockviz images -t -l"
 alias docker-tree-all="dockviz images -t"
 alias docker-vis="dockviz containers -d | dot -Tpng -o containers.png"
