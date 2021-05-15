@@ -9,25 +9,12 @@ inoremap <special> <Esc> <Esc>hl
 nnoremap <Leader><S-T> :retab <CR>
 nnoremap <Leader><S-W> <CR>:set list!<CR>
 
-" help commands and notes
-" !xterm -e vim +help & (help in another xterm window)
-" :helptags (search all *.txt for tags, go into tags-?? file)
-" : Ctrl-D or Tab for completion,
-" : g0 table of contents
-" :set helpheight = 20
-" <Ctrl-]> or :ta {subject} to jump ahead, Ctrl-T/Ctrl-O jump back
-" g] view all tag definitions
-" :tag /min, :tnext (jump to all tag matches)
-" add-local-help, write-local-help
-
 " fix popup menu navigation compatibility problem
 imap <ESC>oA <ESC>ki
 imap <ESC>oB <ESC>ji
 imap <ESC>oC <ESC>li
 imap <ESC>oD <ESC>hi
 
-" Shift+U undotree
-nnoremap U :UndotreeToggle<cr>
 
 " better commandline mode mappings
 cnoremap <silent> <M-[> <C-u>:History:<CR>
@@ -100,6 +87,14 @@ nnoremap - 4<C-W>-
 nnoremap <silent>T :tabnext<CR>
 nnoremap <silent><Leader>t :tabnext<CR>
 
+" map close buffer
+" nnoremap <silent> <Leader>d :bd<CR>
+nnoremap <silent> <Leader>d :Sayonara<CR>
+
+" barbar
+map <silent> H :BufferPrev<CR>
+map <silent> L :BufferNext<CR>
+
 " go to jumplist
 " nmap <Leader>jl :call GotoJump()<CR>
 
@@ -119,20 +114,14 @@ nnoremap <silent> ZZ zR
 " insert new line and switch to insert mode
 nmap <M-CR> i<CR><Esc>O
 
-" source .vimrc
-nnoremap <Leader>r :so $HOME/.config/nvim/init.vim<CR>:echo 'Reloaded $HOME/.nvim/init.vim'<CR>
+" restart neovim
+nnoremap <Leader>r :Restart<CR>:lua require('feline').reset_highlights()<CR>
+" lua require('feline').reset_highlights()
 
 " remap join lines to ,j (slow for some reason)
 " nnoremap <silent> <Leader>j J
 
-" tab switches between two most recently used buffers
-" nnoremap <TAB> :e#<CR>
-
-" Open tig
-nnoremap <Leader>gg :tabnew<CR>:terminal tig<CR>
-
 " tab control
-
 " Use :hide to get rid of all windows unless you really need them open.
 " Use <C-W>L, <C-W>H etc to move windows around. Don't forget :tab sp to open the current file (or a new one) in a new tab.
 " :map <LEFT> <C-W>h and :map <RIGHT> <C-W>l, etc make it much easier to move between windows. :map <C-LEFT> :tabprev<CR> and :map <C-RIGHT> :tabnext<CR> make it much easier to move between tabs.
@@ -145,80 +134,58 @@ noremap <Leader>ts :tabnew split<CR>
 
 " ctrl+s in insert mode to save and enter normal mode
 inoremap <silent> <C-s> <Esc>:w <CR>
+nnoremap <silent> <C-s> :w<CR>
 
 " Plugin Key Mapping
-nnoremap <Leader>e :e $HOME/scratchpads/js/scratchpad.js<CR>
+nnoremap <Leader>e :e $HOME/projects/scratchpads/js/scratchpad.js<CR>
 " nnoremap <A-r> :FloatermRepl<CR>
 " vnoremap <A-r> :FloatermRepl<CR>
+
+" Shift+U undotree
+nnoremap U :UndotreeToggle<cr>
 
 nnoremap <silent> <A-t> :AsyncTaskFzf<CR>
 
 " :" Select files from selected resources (project, git, directory, buffer, project_old, project_mru, project_mrw, old, mru, mrw)
 
-let fzf_command = $FZF_DEFAULT_COMMAND . ' -E "*.jpg" -E "*.png" -E "*.gif" -E "*.svg" -E "*.ttf" -E "*.woff" --type f'
-Shortcut Open project/git files/buffer from project root
-      \ map <silent> <C-p> :<C-u>CocCommand fzf-preview.FromResources buffer project<CR>
-Shortcut Open directory files from current file
-      \ map <silent> <A-p> :<C-u>CocCommand fzf-preview.DirectoryFiles <C-R>=expand('%:h')<CR><CR>
+map <silent> <C-p> :<C-u>FzfPreviewDirectoryFiles <C-R>=expand('%:h')<CR><CR>
+map <silent> <A-p> :<C-u>FzfPreviewFromResources buffer project<CR>
 
-Shortcut Open files from home directory
-      \ map <silent> <A-o> :<C-u>CocCommand fzf-preview.DirectoryFiles ~<CR>
+map <silent> <A-o> :<C-u>FzfPreviewDirectoryFiles ~<CR>
 
-Shortcut Show AsyncTask list
-      \ map <silent> <C-t> :<C-u>AsyncTaskFzf <CR>
-Shortcut Show AsyncTask list
-      \ map <silent> <A-t> :<C-u>AsyncTaskFzf <CR>
+map <silent> <C-t> :<C-u>AsyncTaskFzf <CR>
+map <silent> <A-t> :<C-u>AsyncTaskFzf <CR>
 
-Shortcut Open yanks history
-      \ map <silent> <C-y> :<C-u>CocCommand fzf-preview.Yankround<CR>
-Shortcut Open snippets
-      \ map <silent> <A-y> :<C-u>Snippets<CR>
+map <silent> <C-y> :<C-u>FzfPreviewYankround<CR>
+map <silent> <A-y> :<C-u>Snippets<CR>
 
-Shortcut View Git Actions
-      \ map <silent> <C-g> :<C-u>CocCommand fzf-preview.GitActions<CR>
-Shortcut Open git status changed files
-      \ map <silent> <A-g> :<C-u>CocCommand fzf-preview.GitStatus<CR>
+map <silent> <C-g> :<C-u>FzfPreviewGitActions<CR>
+map <silent> <A-g> :<C-u>FzfPreviewGitStatus<CR>
 
-Shortcut Open oldfiles list
-      \ map <silent> <C-u> :<C-u>CocCommand fzf-preview.FromResources old<CR>
-Shortcut Show command history
-      \ map <silent> <A-u> :<C-u>CocCommand fzf-preview.CommandPalette<CR>
+map <silent> <C-u> :<C-u>FzfPreviewFromResources old<CR>
+map <silent> <A-u> :<C-u>FzfPreviewCommandPalette<CR>
 
-Shortcut Show git logs for current buffer
-      \ map <silent> <C-d> :<C-u>CocCommand fzf-preview.GitCurrentLogs<CR>
-Shortcut Show git logs for project
-      \ map <silent> <A-d> :<C-u>CocCommand fzf-preview.GitLogs<CR>
+map <silent> <C-d> :<C-u>FzfPreviewGitCurrentLogs<CR>
+map <silent> <A-d> :<C-u>FzfPreviewGitLogs<CR>
 
-nnoremap <silent> <C-s> :w<CR>
-Shortcut Search (ripgrep) in project files
-      \ nnoremap <silent> <A-s> :<C-u>RG<CR>
-" Shortcut Search (GGrep) in git history
-"       \ map <silent> <A-s> :<C-u>GGrep<CR>
-Shortcut Search for selected content in project files
-      \ xnoremap <silent> <C-s> "sy:CocCommand   fzf-preview.ProjectGrep<Space>-F<Space>"<C-r>=substitute(substitute(@s, '\n', '', 'g'), '/', '\\/', 'g')<CR>"
+"  map <silent> <A-s> :<C-u>GGrep<CR>
+nnoremap <silent> <A-s> :<C-u>RG<CR>
+xnoremap <silent> <C-s> "sy:CocCommand   fzf-preview.ProjectGrep<Space>-F<Space>"<C-r>=substitute(substitute(@s, '\n', '', 'g'), '/', '\\/', 'g')<CR>"
 
-Shortcut Show all buffers
-      \ map <silent> <C-e> :CocCommand fzf-preview.AllBuffers<CR>
-Shortcut List avaliable sessions
-      \ map <silent> <A-e> :Sessions<CR>
-" Shortcut Show all bookmarks
-"       \ map <silent> <A-e> :CocCommand fzf-preview.Bookmarks<CR>
+map <silent> <C-e> :FzfPreviewAllBuffers<CR>
+map <silent> <A-e> :Sessions<CR>
 
-Shortcut Show shortcuts list (defined in shortcuts-post as well)
-      \ map <silent> <M-lt>[> :Shortcuts<CR>
-Shortcut Show helptags
-      \ map <silent> <A-/> :Helptags<CR>
+" map <silent> <A-e> :FzfPreviewBookmarks<CR>
 
-" Shortcut Open file ranger
-      " \ map <silent> <A-r> :FloatermNew --width=0.9 --height=0.7 ranger<CR>
-Shortcut Show jumps list
-      \ map <silent> <A-j> :CocCommand fzf-preview.Jumps<CR>
-Shortcut Toggle vista panel
-      \ map <silent> <A-v> :Vista!!<CR>
-Shortcut Show location list
-      \ map <silent> <A-m> :CocCommand fzf-preview.LocationList<CR>
-" Shortcut Show quickfix list
-"       \ map <silent> <A-m> :CocCommand fzf-preview.QuickFix<CR>
+map <silent> <A-/> :Helptags<CR>
+
+" map <silent> <A-r> :FloatermNew --width=0.9 --height=0.7 ranger<CR>
+
+map <silent> <A-j> :FzfPreviewJumps<CR>
+map <silent> <A-v> :Vista!!<CR>
+map <silent> <A-m> :FzfPreviewLocationList<CR>
+
+" map <silent> <A-m> :FzfPreviewQuickFix<CR>
 
 
 command! -bang Maps call fzf#vim#maps(' ')
@@ -243,48 +210,15 @@ command! -bang OMaps call fzf#vim#maps('o')
 " easily exit floating window
 nmap <esc> <esc><Plug>(coc-float-hide).
 
-" traverses within location window
-try
-    nmap <silent> [c :call CocAction('diagnosticNext')<cr>
-    nmap <silent> ]c :call CocAction('diagnosticPrevious')<cr>
-endtry
 
 " vim-fugitive
 nmap <silent> gD :Gdiffsplit<cr>
 
-" Use `[g` and `]g` to navigate diagnostics outside of window
-nmap <silent> [g <Plug>(coc-diagnostic-prev)
-nmap <silent> ]g <Plug>(coc-diagnostic-next)
-"
-" " Remap keys for gotos
-" nmap <silent> gf <Plug>(coc-definition)
-nmap <silent> gd <Plug>(coc-definition)
-nmap <silent> <Leader>gs <Plug>(coc-git-chunkinfo)
-nmap <silent> <Leader>gS <Plug>(coc-git-commit)
-nmap <silent> gy <Plug>(coc-type-definition)
-nmap <silent> gi <Plug>(coc-implementation)
-nmap <silent> gr <Plug>(coc-references)
-" " navigate chunks of current buffer
-" nmap [g <Plug>(coc-git-prevchunk)
-" nmap ]g <Plug>(coc-git-nextchunk)
-" " navigate conflicts of current buffer
-" nmap [c <Plug>(coc-git-prevconflict)
-" nmap ]c <Plug>(coc-git-nextconflict)
-" " show chunk diff at current position
-" nmap gs <Plug>(coc-git-chunkinfo)
-" " show commit contains current position
-" nmap gc <Plug>(coc-git-commit)
-" " create text object for git chunks
-omap ig <Plug>(coc-git-chunk-inner)
-xmap ig <Plug>(coc-git-chunk-inner)
-omap ag <Plug>(coc-git-chunk-outer)
-xmap ag <Plug>(coc-git-chunk-outer)
-"
-" Use gk to show documentation in preview window
-nmap <silent> gk :call <SID>show_documentation()<CR>
-
 " goto file from anywhere on line
 nnoremap gf ^f/gf
+
+" Use gk to show documentation in preview window
+nmap <silent> gk :call <SID>show_documentation()<CR>
 
 function! s:show_documentation()
   if (index(['vim','help'], &filetype) >= 0)
@@ -294,9 +228,6 @@ function! s:show_documentation()
   endif
 endfunction
 
-" Highlight symbol under cursor on CursorHold
-autocmd CursorHold * silent call CocActionAsync('highlight')
-"
 " " Remap for rename current word
 " nmap <leader>rn <Plug>(coc-rename)
 "
@@ -313,7 +244,6 @@ nnoremap <Leader>gc :Commits<CR>
 " pressing  esc in command line opens up command history window
 cmap <silent> <A-O> :History:<CR>
 
-
 " map <C-\> to exit terminal-mode
 tnoremap <C-\> <C-\><C-n>
 
@@ -321,15 +251,14 @@ tnoremap <C-\> <C-\><C-n>
 " let g:netrw_banner = 0
 " let g:netrw_altfile = 1
 " open files from netrw in a previous window, unless we're opening the current dir
-let g:netrw_browse_split = 4
+" let g:netrw_browse_split = 4
 
 if has('nvim')
-    " Increase terminal buffer 10x
-    let g:terminal_scrollback_buffer_size = 10000
-    " let $TMUX_TUI_ENABLE_SHELL_CURSOR=1
-    " Workaround for bug #4299
-    " Neovim-remote for terminal buffers
-    let $VISUAL = 'nvr -cc split --remote-wait'
+  " Increase terminal buffer 10x
+  let g:terminal_scrollback_buffer_size = 10000
+  " let $TMUX_TUI_ENABLE_SHELL_CURSOR=1
+  " Workaround for bug #4299
+  let $VISUAL = 'nvr -cc split --remote-wait'
 endif
 
 augroup vimrcQfClose

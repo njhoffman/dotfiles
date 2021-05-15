@@ -17,7 +17,6 @@ set incsearch                        " show search matches as you type
 set scrolloff=10                     " keep at least 5 lines above/below
 set sidescrolloff=10                 " keep at least 5 lines left/right
 set omnifunc=syntaxcomplete#Complete " turn on omni-completion (C-N or C-P to navigate)
-set completeopt=menuone,preview		 	 " omnicomplete inserts longest common text of all matches instead of 1st match
 set previewheight=10                 " max lines for preview height
 set clipboard=unnamedplus           " use system clipboard
 set nofoldenable                     " no folding
@@ -97,7 +96,15 @@ set shada='2000,<2000,s300,:3000,h,n~/.vim/.shada
 " vim: set timeoutlen=1000 ttimeoutlen=0
 " zsh: # KEYTIMEOUT=1 # 10ms for key sequences
 
+filetype plugin on
+
+set updatetime=300
 set pumheight=20                     " menu hegiht
+
+" omnicomplete inserts longest common text of all matches instead of 1st match
+set completeopt=menuone
+set completeopt+=noinsert
+set completeopt-=preview
 " filetype plugin indent on
 
 " Set a variable on the buffer that tells the sh syntax highlighter

@@ -14,16 +14,9 @@ Plug 'mildred/vim-bufmru'
 " map <A-b> :BufferNext<CR>
 " nmap <Esc>B :BufMRUPrev<CR>
 " nmap <Esc>b :BufMRUNext<CR>
-" barbar
-" map <silent> H :BufferPrev<CR>
-" map <silent> L :BufferNext<CR>
 " bufferline
 " map <silent> H :BufferLineCyclePrev<CR>
 " map <silent> L :BufferLineCycleNext<CR>
-
-" bufferline
-map <silent> H :BufMRUPrev<CR>
-map <silent> L :BufMRUNext<CR>
 
 "  Shift H/L to navigate in normal mode
 " map <S-h> :bp<CR>

@@ -4,8 +4,10 @@
 
 if [[ "$ZSH_LOADER" == "zplug" ]]; then
   zplug "larkery/zsh-histdb"
+  zplug "m42e/zsh-histdb-fzf"
 elif [[ "$ZSH_LOADER" == "zinit" ]]; then
   zinit light larkery/zsh-histdb
+  zinit light m42e/zsh-histdb-fzf
 elif [[ "$ZSH_LOADER" == "antigen" ]]; then
   echo "antigen"
 fi
@@ -37,9 +39,7 @@ _zsh_autosuggest_strategy_histdb_top_fallback() {
 
 ZSH_AUTOSUGGEST_STRATEGY=histdb_top_fallback
 
-export HISTFILESIZE=1000000000
-export HISTSIZE=1000000000
-
-load_file $HOME/.zplug/repos/larkery/zsh-histdb/sqlite-history.zsh
+# bindkey '^R' histdb-fzf-widget
+# load_file $HOME/.zplug/repos/larkery/zsh-histdb/sqlite-history.zsh
 autoload -Uz add-zsh-hook
 

@@ -1,4 +1,6 @@
 
+export PROJECTS="$HOME/projects"
+
 [[ -d "$HOME/projects/personal/movieman"  && -n "$NODE_PATH" ]] && \
   alias mm="node ~/projects/personal/movieman/lib/index.js"
 

@@ -342,7 +342,6 @@ endfunction
 nnoremap <silent> <leader><C-o> :call FileCO(v:true)<CR>
 nnoremap <silent> <leader><C-i> :call FileCO(v:false)<CR>
 
-
 " I prefer a more automatic behavior where when cursoring over a word, I see either the diagnostic if it exists, otherwise the documentation. I wrote a snippet to accomplish this:
 " function! ShowDocIfNoDiagnostic(timer_id)
 "   if (coc#util#has_float() == 0)

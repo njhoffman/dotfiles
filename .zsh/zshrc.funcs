@@ -54,7 +54,7 @@ function _log {
   level=$1
   msg="$2"
 
-  if [[ $level -le $_ZSH_VERBOSITY ]]; then
+  if [[ $level -le $ZSH_VERBOSITY ]]; then
     print -P "%F{42}${ZSH_PROFILE}:%f $msg"
   fi
 }

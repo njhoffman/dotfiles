@@ -10,20 +10,18 @@ call plug#begin()
 "
 " ---------- Visual Enhancements----------
 "
-source $plugins/bookmarks.vim          " location marking/tagging
-Plug 'psliwka/vim-smoothie'
-" nmap <silent> <M-b> 3<Plug>(SmoothieBackwards)
-" nmap <silent> <M-f> 3<Plug>(SmoothieForwards)
-
+source $plugins/bookmarks.vim        " location marking/tagging
+source $plugins/vim-smoothie.vim     " smooth scrolling
+source $plugins/expand-selection.vim " incrementally expand visual selection
+source $plugins/highlights.vim       " plugins for showing inline colors
+source $plugins/indent-guide.vim     " show indentation lines
+source $plugins/syntax.vim           " syntax language packs and treesitter
+" source $plugins/treesitter.vim       " syntax language packs and treesitter
+source $plugins/vimade.vim           " inactive window dimming
+source $plugins/vitality.vim         " cursor enhancement
 " source $plugins/comfortable-motion.vim " more pleasant scrolling in vim
-source $plugins/expand-selection.vim   " incrementally expand visual selection
-source $plugins/highlights.vim         " plugins for showing inline colors
-source $plugins/indent-guide.vim       " show indentation lines
-source $plugins/syntax.vim             " syntax language packs and treesitter
-source $plugins/treesitter.vim             " syntax language packs and treesitter
-source $plugins/vimade.vim             " inactive window dimming
-source $plugins/vitality.vim           " cursor enhancement
 " source $plugins/rainbow-parentheses.vim " add/remove surrounding characters
+
 
 " ---------- Manual Formatting ----------
 "
@@ -33,6 +31,10 @@ source $plugins/sandwich.vim   " add/remove surrounding characters
 source $plugins/snippets.vim   " ultisnips interface and snippet packages
 source $plugins/splitjoin.vim  " switch between single line and multi-line statements
 source $plugins/table-mode.vim " format or enter data into table structure
+
+" converts between js function signature types
+Plug 'mvolkmann/vim-js-arrow-function'
+" JsAnonFnToArrowFn
 
 Plug 'wsdjeg/notifications.vim'
 
@@ -59,27 +61,8 @@ nnoremap gF ^f'gf
 " Plugin "zoubin/vim-gotofile"
 
 Plug 'meain/vim-package-json'
+source $plugins/codi.vim
 
-Plug 'metakirby5/codi.vim'
-" available repl
-" Codi [filetype] activates Codi for the current buffer, using the provided filetype or the buffer's filetype.
-" Codi! deactivates Codi for the current buffer.
-" Codi!! [filetype] toggles Codi for the current buffer, using the provided filetype or the buffer's filetype.
-" g:codi#interpreters is a list of user-defined interpreters. See the documentation for more information.
-" g:codi#aliases is a list of user-defined interpreter filetype aliases. See the documentation for more information.
-" The below options can also be set on a per-interpreter basis via g:codi#interpreters:
-"
-" g:codi#autocmd determines what autocommands trigger updates. See the documentation for more information.
-" g:codi#width is the width of the Codi split.
-" g:codi#rightsplit is whether or not Codi spawns on the right side.
-" g:codi#rightalign is whether or not to right-align the Codi buffer.
-" g:codi#autoclose is whether or not to close Codi when the associated buffer is closed.
-" g:codi#raw is whether or not to display interpreter results without alignment formatting (useful for debugging).
-" g:codi#sync is whether or not to force synchronous execution. No reason to touch this unless you want to compare async to sync.
-" Autocommands
-" CodiEnterPre, CodiEnterPost: When a Codi pane enters.
-" CodiUpdatePre, CodiUpdatePost: When a Codi pane updates.
-" CodiLeavePre, CodiLeavePost: When a Codi pane leaves.
 " convert numbers
 Plug 'glts/vim-radical'
 " crd, crx, cro, crb, gA
@@ -88,39 +71,17 @@ Plug 'glts/vim-radical'
 Plug 'tpope/vim-speeddating'
 " # <C-A>/ # <C-X>
 
-" converts between js function signature types
-Plug 'mvolkmann/vim-js-arrow-function'
-" JsAnonFnToArrowFn
 
 " ---------- Autoformatting ----------
 "
 " source $plugins/pear-tree.vim    " auto-pairing start/end text objects
 Plug 'tpope/vim-endwise'
+" load project .editorconfig settings
 source $plugins/editorconfig.vim " load project .editorconfig settings
+source $plugins/neoformat.vim    " buffer formatting tools
 
 " coc-prettier handles this now
 " source $plugins/prettier.vim     " prettier automatic formatting
-
-" auto formatting for most file types
-Plug 'sbdchd/neoformat'
-
-" :Neoformat
-" :Neoformat jsbeauty
-" Enable alignment
-let g:neoformat_basic_format_align = 1
-
-" Enable tab to spaces conversion
-let g:neoformat_basic_format_retab = 1
-
-" Enable trimmming of trailing whitespace
-let g:neoformat_basic_format_trim = 1
-let g:neoformat_run_all_formatters = 1
-let g:neoformat_only_msg_on_error = 1
-let g:neoformat_verbose = 1 " only affects the verbosity of Neoformat
-" Or
-" let &verbose            = 1 " also increases verbosity of the editor as a whole
-
-set fillchars+=vert:\│
 
 " Plugin 'Konfekt/vim-alias'
 " Plugin 'dbakker/vim-projectroot'
@@ -146,89 +107,36 @@ set fillchars+=vert:\│
 "           \ '<c-o>:silent! TableModeDisable<cr>' : '__'
 
 " ---------- Search and Visual Navigation ----------
-source $plugins/ack.vim        " search within files grep-like
-source $plugins/easymotion.vim " quick hint screen navigation
-source $plugins/wordmotion.vim " enhanced word motion definitions
-
-Plug 'kevinhwang91/nvim-hlslens'
-
-noremap <silent> n <Cmd>execute('normal! ' . v:count1 . 'n')<CR>
-            \<Cmd>lua require('hlslens').start()<CR>
-noremap <silent> N <Cmd>execute('normal! ' . v:count1 . 'N')<CR>
-            \<Cmd>lua require('hlslens').start()<CR>
-noremap * *<Cmd>lua require('hlslens').start()<CR>
-noremap # #<Cmd>lua require('hlslens').start()<CR>
-noremap g* g*<Cmd>lua require('hlslens').start()<CR>
-noremap g# g#<Cmd>lua require('hlslens').start()<CR>
-
-" use : instead of <Cmd>
-nnoremap <silent> <leader>l :nohlsearch<CR>
-
-highlight default link HlSearchLensCur IncSearch
-highlight default link HlSearchLens WildMenu
-highlight default link HlSearchCur IncSearch
+"
+source $plugins/ack.vim              " search within files grep-like
+source $plugins/easymotion.vim       " quick hint screen navigation
+source $plugins/wordmotion.vim       " enhanced word motion definitions
+source $plugins/nvim-hlslens.vim     " virtual text labels for search
+source $plugins/vim-visual-multi.vim " multiple cursor support
+source $plugins/matchup.vim          " match on more than '%'
 
 " ---------- Interfaces ----------
+"
 
-source $plugins/telescope.vim " debugging tools
-source $plugins/dap.vim " debugging tools
+source $plugins/telescope.vim " fuzzy finderr interface
+source $plugins/dap.vim       " debugging tools
+
+" source $plugins/clap.vim           " custom popup ui interface
+" source $plugins/coc-extensions.vim " full featured intellisense code completion
+" source $plugins/coc.vim            " full featured intellisense code completion
+source $plugins/nvim-lspconfig.vim   " language server
+source $plugins/floaterm.vim    " floating window interface
+source $plugins/fzf-preview.vim " fuzzy file finder
+source $plugins/fzf.vim         " fuzzy file finder
+source $plugins/vista.vim       " sidebar tags navigator
+
+" ---------- Buffer/Window Management ----------
+"
+
+source $plugins/buffers.vim
 
 " provides single command for smart buffer deletion
 Plug 'mhinz/vim-sayonara'
-" map close buffer
-" TODO: close window if exists, if not close buffer
-" nnoremap <silent> <Leader>d :bd<CR>
-nnoremap <silent> <Leader>d :Sayonara<CR>
-
-Plug 'kyazdani42/nvim-web-devicons'
-
-" source $plugins/clap.vim           " custom popup ui interface
-source $plugins/coc-extensions.vim " full featured intellisense code completion
-source $plugins/coc.vim            " full featured intellisense code completion
-source $plugins/floaterm.vim       " floating window interface
-source $plugins/fzf-preview.vim    " fuzzy file finder
-source $plugins/fzf.vim            " fuzzy file finder
-" source $plugins/startify.vim       " fancy start screen
-source $plugins/vista.vim          " sidebar tags navigator
-
-Plug 'glepnir/dashboard-nvim'
-" clap, fzf, telescope
-let g:dashboard_default_executive ='telescope'
-" let g:dashboard_custom_shortcut={
-"       \ 'last_session'       : 'SPC s l',
-"       \ 'find_history'       : 'SPC f h',
-"       \ 'find_file'          : 'SPC f f',
-"       \ 'new_file'           : 'SPC c n',
-"       \ 'change_colorscheme' : 'SPC t c',
-"       \ 'find_word'          : 'SPC f a',
-"       \ 'book_marks'         : 'SPC f b',
-"       \ }
-
-" nmap <Leader>ss :<C-u>SessionSave<CR>
-" nmap <Leader>sl :<C-u>SessionLoad<CR>
-nnoremap <silent> <Leader>fh :DashboardFindHistory<CR>
-nnoremap <silent> <Leader>ff :DashboardFindFile<CR>
-nnoremap <silent> <Leader>tc :DashboardChangeColorscheme<CR>
-nnoremap <silent> <Leader>fa :DashboardFindWord<CR>
-nnoremap <silent> <Leader>fb :DashboardJumpMark<CR>
-nnoremap <silent> <Leader>cn :DashboardNewFile<CR>
-" highlight TelescopeSelection      guifg=#D79921 gui=bold " selected item
-" highlight TelescopeSelectionCaret guifg=#CC241D " selection caret
-" highlight TelescopeMultiSelection guifg=#928374 " multisections
-" highlight TelescopeNormal         guibg=#00000  " floating windows created by telescope.
-
-" Border highlight groups.
-" highlight TelescopeBorder         guifg=#ffffff
-" highlight TelescopePromptBorder   guifg=#ffffff
-" highlight TelescopeResultsBorder  guifg=#ffffff
-" highlight TelescopePreviewBorder  guifg=#ffffff
-"
-" " Used for highlighting characters that you match.
-" highlight TelescopeMatching       guifg=blue
-
-" Used for the prompt prefix
-" highlight TelescopePromptPrefix   guifg=red
-
 " Plugin 'jeetsukumaran/vim-buffergator'
 Plug 'rbtnn/vim-rabbit-ui'
 
@@ -255,23 +163,23 @@ let g:sidepanel_config['buffergator'] = {}
 let g:sidepanel_config['vimfiler'] = {}
 let g:sidepanel_config['defx'] = {}
 
-" " file ranger for netrw replacement
+" file ranger for netrw replacement
 Plug 'francoiscabrol/ranger.vim'
 Plug 'rbgrouleff/bclose.vim'
 let g:NERDTreeHijackNetrw = 0
 let g:ranger_replace_netrw = 1
 
 " ---------- Statusbar and Bufferline ----------
+"
 
-source $plugins/devicons.vim            " add filetype glyps to various vim plugins
-source $plugins/airline.vim             " airline status bar enhancement
-source $plugins/fugitive.vim            " branch indicator for vim-airline
-" source $plugins/barbar.vim              " barbar bufferline
-" source $plugins/bufferline.vim          " akinsho bufferline, needs bufferline-post
-" Plug 'glepnir/galaxyline.nvim' , {'branch': 'main'}
-" If you want to display icons, then use one of these plugins:
-Plug 'kyazdani42/nvim-web-devicons' " lua
-" Plug 'famiu/feline.nvim'
+source $plugins/devicons.vim   " add filetype glyps to various vim plugins
+" source $plugins/gitsigns.vim   " show git status icons
+source $plugins/fugitive.vim   " branch indicator for vim-airline
+" source $plugins/feline.vim     " elegant statusbar
+source $plugins/barbar.vim     " barbar bufferline
+" source $plugins/airline.vim    " airline status bar enhancement
+" source $plugins/bufferline.vim " akinsho bufferline, needs bufferline-post
+" source $plugins/galaxyline.vim   " modern statusbar
 
 " ---------- Key Mapping ----------
 "
@@ -282,24 +190,25 @@ source $plugins/unimpaired.vim       " pairing keymappings for ][
 " ---------- Productivity ----------
 "
 
-source $plugins/shortcuts.vim   " Shortcuts discovery, needs shortcuts-post
 source $plugins/wakatime.vim    " Wakatime timetracking integration
 " source $plugins/taskwarrior.vim " taskwarrior interface
 " source $plugins/hardtime.vim    " vim movements discipline
 
-" ---------- Other ----------
+" ---------- Session Management ----------
 "
 
 source $plugins/asynctasks.vim   " asynctask runner
-source $plugins/buffers.vim      " buffer management enhancements
 source $plugins/clipboard.vim    " clipboard emulation between vim sessions and host
-source $plugins/matchup.vim      " match on more than '%'
 source $plugins/profiler.vim     " profile vim plugins and startup time
 source $plugins/projects.vim     " project management plugins
 source $plugins/suda.vim         " sudo write support
 source $plugins/system-tools.vim " doing shell stuff from vim
 source $plugins/undotree.vim     " undo tree interface
 source $plugins/vimwiki.vim      " personal wiki interface
+
+
+" ---------- Other ----------
+"
 
 Plug 'urbainvaes/vim-ripple'
 " Optional dependency
@@ -337,6 +246,7 @@ let s:default_repls = {
 " Plugin 'ludovicchabant/vim-gutentags'
 " let g:gutentags_cache_dir = $HOME . '/.gutencache'
 
+Plug 'famiu/nvim-reload'
 
 " include plugin maps for repeat (.)
 Plug 'tpope/vim-repeat'
@@ -423,12 +333,13 @@ let g:browser_search_engines = {
 call plug#end()
 
 " source $plugins/bufferline-post.vim
+" source $plugins/galaxyline-post-1.vim
 source $plugins/bqf-post.vim
-source $plugins/treesitter-post.vim
-source $plugins/shortcuts-post.vim
-source $plugins/telescope-post.vim
 source $plugins/dap-post.vim
 " source $plugins/feline-post.vim
-" source $plugins/galaxyline-post-1.vim
+source $plugins/nvim-hlslens-post.vim
+" source $plugins/nvim-lspconfig-post.vim
+source $plugins/telescope-post.vim
+" source $plugins/treesitter-post.vim
 
 " call yankstack#setup()

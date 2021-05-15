@@ -23,6 +23,7 @@ if [ -z "$SSH_AUTH_SOCK" ]; then
     ssh-add
 fi
 
+export DOTFILES="$HOME/.cfg"
 export LESS="--tabs=4 --no-init --LONG-PROMPT --ignore-case --quit-if-one-screen --RAW-CONTROL-CHARS"
 export NO_AT_BRIDGE=1 # turn off warning of connection to dbus for a11y features
 export TASKRC="$home_dir/.config/taskwarrior/.taskrc"
@@ -98,29 +99,28 @@ export KREW_ROOT=~/.krew
 export PATH="${KREW_ROOT:-$HOME/.krew}/bin:$PATH"
 
 # export XDG_CONFIG_HOME=/usr/local/lib/python2.7/dist-packages/powerline:~/.config/powerline:~/.config
-export POWERLINE_CONFIG_COMMAND=/usr/local/bin/powerline-config
-export POWERLINE_CONFIG_PATHS=/home/$USER/.shell/powerline:/home/$USER/.shell/.powerline:/home/$USER/.config/powerline
+# export POWERLINE_CONFIG_COMMAND=/usr/local/bin/powerline-config
+# export POWERLINE_CONFIG_PATHS=/home/$USER/.shell/powerline:/home/$USER/.shell/.powerline:/home/$USER/.config/powerline
 
 [[ -n "$(command -v npm)" ]] &&
   export NODE_PATH=$(npm root -g)
 
-export PATH=$PATH:~/.bin:~/bin:~/bin/aws:~/bin/docker:/usr/local/bin:~/.local/bin
-export PATH="$PATH:/usr/local/aws-cli/v2/current/bin"
+# export PATH=$PATH:~/.bin:~/bin:~/bin/aws:~/bin/docker:/usr/local/bin:~/.local/bin
+# export PATH="$PATH:/usr/local/aws-cli/v2/current/bin"
+# export COLUMNS="120"
+# export PATH="$PATH:/home/nicholas/ACLI"
 
 # Find your Python User Base path (where Python --user will install packages/scripts)
 [[ -n "$(command -v python3)" ]] &&
   USER_BASE_PATH=$(python3 -m site --user-base)
 export PATH=$PATH:$USER_BASE_PATH/bin
-export PATH=$PATH:/home/linuxbrew/.linxbrew/sbin
 
 export CHEAT_USE_FZF=true
 
 # superman (man in vim)
-export PATH="$PATH:$HOME/.vim/bundle/vim-superman/bin"
-# complete -o default -o nospace -F _man vman
+[[ -d "$HOME/.config/nvim/plugins/vim-superman" ]] &&
+  export PATH="$PATH:$HOME/.config/nvim/plugins/vim-superman/bin"
 
-export COLUMNS="120"
-export PATH="$PATH:/home/nicholas/ACLI"
 
 export KUBECONFIG=$KUBECONFIG:~/.kube/minikube:~/.kube/spadash-dev0-eks:~/.kube/spadash-prod0-eks
 
@@ -134,5 +134,3 @@ export KUBECONFIG=$KUBECONFIG:~/.kube/minikube:~/.kube/spadash-dev0-eks:~/.kube/
 #   systemctl --user import-environment PATH EDITOR LANG
 # fi
 #
-
-

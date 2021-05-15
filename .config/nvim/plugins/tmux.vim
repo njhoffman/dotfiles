@@ -7,24 +7,6 @@ Plug 'tmux-plugins/vim-tmux'
 " g!    => esxecute visual lines as tmux command
 " g!!   => execute just the current line as tmux command
 
-" fix FocusGained and FocusLost problems with tmux
-Plug 'tmux-plugins/vim-tmux-focus-events'
-
-" hack to turn on paste mode automatically
-function! WrapForTmux(s)
-  if !exists('$TMUX')
-    return a:s
-  endif
-
-  let tmux_start = "\<Esc>Ptmux;"
-  let tmux_end = "\<Esc>\\"
-
-  return tmux_start . substitute(a:s, "\<Esc>", "\<Esc>\<Esc>", 'g') . tmux_end
-endfunction
-
-" let &t_SI .= WrapForTmux("\<Esc>[?2004h")
-" let &t_EI .= WrapForTmux("\<Esc>[?2004l")
-
 " send keys to others panes/sessions from vim
 " VimuxRunLastCommand, vimuxRunCommand
 Plug 'benmills/vimux'

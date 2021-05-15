@@ -15,6 +15,8 @@ alias now='date +"%T"'
 alias nowtime=now
 alias nowdate='date +"%d-%m-%Y"'
 
+# alias gh-search="ghs repo --sort=stars"
+
 source "$dir/aliases/backup.zsh"
 source "$dir/aliases/directories.zsh"
 source "$dir/aliases/fasd.zsh"

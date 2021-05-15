@@ -22,6 +22,8 @@ source $HOME/.config/nvim/plugins.vim
 source $HOME/.config/nvim/functions.vim
 source $HOME/.config/nvim/mappings.vim
 
+" Loads lua config
+lua require('init')
 
 " remove ansi colors
 " :s/\e\[[0-9;]*m//g
