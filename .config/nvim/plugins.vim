@@ -1,11 +1,29 @@
-" ********** Plugins Loader ********** "
+"---- vim-plug setup  ----
+let vimplug_exists=expand('~/.local/share/nvim/site/autoload/plug.vim')
+if has('win32')&&!has('win64')
+  let curl_exists=expand('C:\Windows\Sysnative\curl.exe')
+else
+  let curl_exists=expand('curl')
+endif
 
-let $plugins="~/.config/nvim/plugins"
+if !filereadable(vimplug_exists)
+  if !executable(curl_exists)
+    echoerr "You have to install curl or first install vim-plug yourself!"
+    execute "q!"
+  endif
+  echo "Installing Vim-Plug..."
+  echo ""
+  silent exec "!"curl_exists" -fLo " . shellescape(vimplug_exists) . " --create-dirs https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim"
+  let g:not_finish_vimplug = "yes"
 
-""" Vim-Plug
+  autocmd VimEnter * PlugInstall
+endif
+"-------- end vim-plug setup ----
+
+
 call plug#begin()
 
-
+let $plugins="~/.config/nvim/plugins"
 " still need to checkout: https://github.com/wellle/targets.vim
 "
 " ---------- Visual Enhancements----------
@@ -16,7 +34,7 @@ source $plugins/expand-selection.vim " incrementally expand visual selection
 source $plugins/highlights.vim       " plugins for showing inline colors
 source $plugins/indent-guide.vim     " show indentation lines
 source $plugins/syntax.vim           " syntax language packs and treesitter
-" source $plugins/treesitter.vim       " syntax language packs and treesitter
+source $plugins/barbar.vim           " modern tab line
 source $plugins/vimade.vim           " inactive window dimming
 source $plugins/vitality.vim         " cursor enhancement
 " source $plugins/comfortable-motion.vim " more pleasant scrolling in vim
@@ -25,7 +43,7 @@ source $plugins/vitality.vim         " cursor enhancement
 
 " ---------- Manual Formatting ----------
 "
-source $plugins/comments.vim   " block comment formatting
+" source $plugins/comments.vim   " block comment formatting
 source $plugins/easy-align.vim " alignment enhancer
 source $plugins/sandwich.vim   " add/remove surrounding characters
 source $plugins/snippets.vim   " ultisnips interface and snippet packages
@@ -78,7 +96,7 @@ Plug 'tpope/vim-speeddating'
 Plug 'tpope/vim-endwise'
 " load project .editorconfig settings
 source $plugins/editorconfig.vim " load project .editorconfig settings
-source $plugins/neoformat.vim    " buffer formatting tools
+" source $plugins/neoformat.vim    " buffer formatting tools
 
 " coc-prettier handles this now
 " source $plugins/prettier.vim     " prettier automatic formatting
@@ -109,22 +127,17 @@ source $plugins/neoformat.vim    " buffer formatting tools
 " ---------- Search and Visual Navigation ----------
 "
 source $plugins/ack.vim              " search within files grep-like
-source $plugins/easymotion.vim       " quick hint screen navigation
+" source $plugins/easymotion.vim       " quick hint screen navigation
 source $plugins/wordmotion.vim       " enhanced word motion definitions
-source $plugins/nvim-hlslens.vim     " virtual text labels for search
 source $plugins/vim-visual-multi.vim " multiple cursor support
 source $plugins/matchup.vim          " match on more than '%'
 
 " ---------- Interfaces ----------
 "
 
-source $plugins/telescope.vim " fuzzy finderr interface
-source $plugins/dap.vim       " debugging tools
-
 " source $plugins/clap.vim           " custom popup ui interface
 " source $plugins/coc-extensions.vim " full featured intellisense code completion
 " source $plugins/coc.vim            " full featured intellisense code completion
-source $plugins/nvim-lspconfig.vim   " language server
 source $plugins/floaterm.vim    " floating window interface
 source $plugins/fzf-preview.vim " fuzzy file finder
 source $plugins/fzf.vim         " fuzzy file finder
@@ -172,14 +185,8 @@ let g:ranger_replace_netrw = 1
 " ---------- Statusbar and Bufferline ----------
 "
 
-source $plugins/devicons.vim   " add filetype glyps to various vim plugins
-" source $plugins/gitsigns.vim   " show git status icons
 source $plugins/fugitive.vim   " branch indicator for vim-airline
-" source $plugins/feline.vim     " elegant statusbar
-source $plugins/barbar.vim     " barbar bufferline
 " source $plugins/airline.vim    " airline status bar enhancement
-" source $plugins/bufferline.vim " akinsho bufferline, needs bufferline-post
-" source $plugins/galaxyline.vim   " modern statusbar
 
 " ---------- Key Mapping ----------
 "
@@ -286,11 +293,6 @@ Plug 'tpope/vim-repeat'
 " let g:Mac_NamedMacroParametersByFileType = {}
 " let g:Mac_FzfOptions = {'window': {'width': 0.75, 'height': 0.6}}
 
-" better quick fix window
-Plug 'kevinhwang91/nvim-bqf'
-" Press <Tab> or <S-Tab> to toggle the sign of item
-" Press zn or zN will create new quickfix list
-" Press zf in quickfix window will enter fzf mode.
 
 Plug 'osyo-manga/vim-over'
 let g:over_enable_auto_nohlsearch = 1
@@ -329,17 +331,16 @@ let g:browser_search_engines = {
   \ 'wikipedia': 'https://en.wikipedia.org/wiki/%s',
   \ 'youtube':'https://www.youtube.com/results?search_query=%s&page=&utm_source=opensearch',
   \ }
+
+
+
 " end plugin loading
 call plug#end()
 
-" source $plugins/bufferline-post.vim
-" source $plugins/galaxyline-post-1.vim
-source $plugins/bqf-post.vim
-source $plugins/dap-post.vim
-" source $plugins/feline-post.vim
-source $plugins/nvim-hlslens-post.vim
-" source $plugins/nvim-lspconfig-post.vim
-source $plugins/telescope-post.vim
-" source $plugins/treesitter-post.vim
+" Automatically install missing plugins on startup
+autocmd VimEnter *
+  \  if len(filter(values(g:plugs), '!isdirectory(v:val.dir)'))
+  \|   PlugInstall --sync | q
+  \| endif
 
 " call yankstack#setup()

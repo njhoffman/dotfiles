@@ -1,24 +1,14 @@
 -- Auto install plugin manager if doesn't exist
 local execute = vim.api.nvim_command
 local fn = vim.fn
+local config = require "config"
+
+local LSP = config.LSP
+local Opts = config.Opts
+local Completion = config.Completion
 
 -- Theming
-local default = "gruvbox"
-local colors = vim.fn.getcompletion("", "color")
-
-local function default_theme(t, s)
-  if s == nil or s:gsub("%s+", "") == "" then
-    return default
-  else
-    s = s:gsub("%s+", "")
-  end
-  for _, v in pairs(t) do
-    if v == s then
-      return s
-    end
-  end
-  return "default"
-end
+local default = "jellybeans"
 
 local function color_style_or_empty(check)
   local v
@@ -30,12 +20,21 @@ local function color_style_or_empty(check)
   return v
 end
 
-C = default_theme(colors, Theming.colorscheme)
-CS = color_style_or_empty(Theming.colorscheme_style)
-
 -- LSP
 
-local servers = {"bash", "clangd", "css", "emmet", "json", "lua", "python", "tsserver", "html", "latex"}
+local servers = {
+  "bash",
+  "clangd",
+  "css",
+  "diagnosticls",
+  "gopls",
+  "json",
+  "lua",
+  "python",
+  "tsserver",
+  "html",
+  "latex",
+}
 
 for _, v in pairs(servers) do
   if LSP[v] == nil then

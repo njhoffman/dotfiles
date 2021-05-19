@@ -67,6 +67,5 @@ finish_setup() {
 zi0c atinit'zpcompinit; zpcdreplay; finish_setup'
 zinit light zdharma/fast-syntax-highlighting
 
-
 local script=${(%):-%x}
 _file_success $script

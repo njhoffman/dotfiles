@@ -8,8 +8,7 @@ set ignorecase                       " ignore case by default
 set smartcase                        " ignore case if search pattern is all lowercase, case-sensitive otherwise
 set smarttab                         " insert tabs on the start of a line according to shiftwidth
 set autoindent                       " always autoindent
-set copyindent		 			        		" copy previous indentation on autoindenting
-set norelativenumber                 " this might speed things up
+set copyindent	 	 			             " copy previous indentation on autoindenting
 set nowrap                           " no line wrapping
 set number                           " turn line numbers on
 set hlsearch                         " highlight all matching search terms
@@ -18,10 +17,9 @@ set scrolloff=10                     " keep at least 5 lines above/below
 set sidescrolloff=10                 " keep at least 5 lines left/right
 set omnifunc=syntaxcomplete#Complete " turn on omni-completion (C-N or C-P to navigate)
 set previewheight=10                 " max lines for preview height
-set clipboard=unnamedplus           " use system clipboard
+set clipboard=unnamedplus            " use system clipboard
 set nofoldenable                     " no folding
 set foldmethod=indent                " speed up syntax highlighting
-set confirm                          " ask to write unsaved changes instead of halting with warning
 set cul                              " active line highlighting
 set history=2000                     " command search history size
 set undolevels=1000                  " how many undos to trace
@@ -30,7 +28,9 @@ set visualbell                       " dont beep
 set noerrorbells                     " dont beep
 set lazyredraw                       " buffer screen updates, increases speed
 set hidden                           " allows buffers to be hidden without writing to file
-set signcolumn=yes                   " always show left hand sign column (displays errors for syntastic)
+set signcolumn=yes:1                  " can be auto, auto:1-2, yes, yes:2 number, no
+set numberwidth=4                    " give numbers odd number for big icon signs
+set relativenumber                   " show numbers relative to cursor
 set backup
 set backupcopy=yes                   " prevents vim from renaming original file/creating a new one screwing up file watchers
 set backupdir=$HOME/.vim/backup/     " put backup files, double slashes avoid name collisions
@@ -50,7 +50,8 @@ set sessionoptions-=buffers
 set sessionoptions-=options
 
 set ttyfast                          " we have a fast terminal
-" set autowriteall						     	 " automatically save changes to buffer before hiding
+set autowriteall			  			     	 " automatically save changes to buffer before hiding
+set confirm                          " ask to write unsaved changes instead of halting with warning
 set autoread   								       " autoload files that changed outside of vim
 set redrawtime=10000                 " timeout before vim quits trying to apply syntax highlighting
 set switchbuf=useopen                " if buffer already open in window, switch don't open new window
@@ -107,11 +108,8 @@ set completeopt+=noinsert
 set completeopt-=preview
 " filetype plugin indent on
 
-" Set a variable on the buffer that tells the sh syntax highlighter
-" that this is bash:
-" let b:is_bash = 1
-" Set the filetype to sh
-" set ft=sh
+" embed lua syntax in vim files
+let g:vimsyn_embed = 'l'
 
 " set tags=./tags;$HOME				     		 " load tags from current directoyr all the way to home
 " set nocursorline                     " cursor line highlighting slows things down a lot, turn off if sluggish performance

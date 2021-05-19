@@ -20,7 +20,7 @@ cmds=(
   diff
   dig
   dnf
-  # docker
+  docker
   docker-compose
   docker-machine
   du
@@ -40,7 +40,6 @@ cmds=(
   ip
   iptables
   iwconfig
-  journalctl
   kubectl
   last
   ldap
@@ -50,14 +49,9 @@ cmds=(
   lsattr
   lsblk
   lsmod
-  lsof
   lspci
-  make
-  mount
   mtr
   mvn
-  netstat
-  nmap
   ntpdate
   php
   ping
@@ -71,9 +65,6 @@ cmds=(
   sockstat
   ss
   stat
-  sysctl
-  systemctl
-  tcpdump
   traceroute
   traceroute6
   tune2fs
@@ -82,7 +73,10 @@ cmds=(
   vmstat
   wdiff
   whois
+  whois
 )
+
+setopt COMPLETE_ALIASES
 
 # Set alias for available commands.
 for cmd in $cmds ; do
@@ -90,6 +84,8 @@ for cmd in $cmds ; do
     $cmd() {
       grc --colour=auto ${commands[$0]} "$@"
     }
+    # Prevent grc aliases from overriding zsh completions.
+    # alias $cmd="grc --colour=on ${commands[$0]} $cmd"
   fi
 done
 

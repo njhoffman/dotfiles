@@ -43,20 +43,23 @@ function utils.map(mode, key, result, opts)
 end
 
 -- Terminal
-local Terminal = require("toggleterm.terminal").Terminal
+local has_toggleterm,toggleterm = pcall(require,"toggleterm")
+if has_toggleterm then
+  local Terminal = require("toggleterm.terminal").Terminal
+  local lazygit =
+    Terminal:new(
+    {
+      cmd = "lazygit",
+      direction = "float",
+      hidden = true
+    }
+  )
 
-local lazygit =
-  Terminal:new(
-  {
-    cmd = "lazygit",
-    direction = "float",
-    hidden = true
-  }
-)
-
-function utils._lazygit_toggle()
-    lazygit:toggle()
+  function utils._lazygit_toggle()
+      lazygit:toggle()
+  end
 end
+
 
 -- Telescope
 function utils.search_nvim()

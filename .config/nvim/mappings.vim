@@ -95,6 +95,21 @@ nnoremap <silent> <Leader>d :Sayonara<CR>
 map <silent> H :BufferPrev<CR>
 map <silent> L :BufferNext<CR>
 
+" Goto buffer in position...
+nnoremap <silent>    <A-1> :BufferGoto 1<CR>
+nnoremap <silent>    <A-2> :BufferGoto 2<CR>
+nnoremap <silent>    <A-3> :BufferGoto 3<CR>
+nnoremap <silent>    <A-4> :BufferGoto 4<CR>
+nnoremap <silent>    <A-5> :BufferGoto 5<CR>
+nnoremap <silent>    <A-6> :BufferGoto 6<CR>
+nnoremap <silent>    <A-7> :BufferGoto 7<CR>
+nnoremap <silent>    <A-8> :BufferGoto 8<CR>
+nnoremap <silent>    <A-9> :BufferLast<CR>
+
+
+" Magic buffer-picking mode
+nnoremap <silent> <C-s>    :BufferPick<CR>
+
 " go to jumplist
 " nmap <Leader>jl :call GotoJump()<CR>
 
@@ -148,8 +163,10 @@ nnoremap <silent> <A-t> :AsyncTaskFzf<CR>
 
 " :" Select files from selected resources (project, git, directory, buffer, project_old, project_mru, project_mrw, old, mru, mrw)
 
-map <silent> <C-p> :<C-u>FzfPreviewDirectoryFiles <C-R>=expand('%:h')<CR><CR>
-map <silent> <A-p> :<C-u>FzfPreviewFromResources buffer project<CR>
+" map <silent> <A-p> :<C-u>FzfPreviewFromResources buffer project<CR>
+" map <silent> <A-p> :<C-u>FzfPreviewDirectoryFiles <C-R>=$HOME<CR><CR>
+map <silent> <C-p> :<C-u>call GFilesFallback()<CR>
+map <silent> <A-p> :<C-u>FzfPreviewFromResources old<CR>
 
 map <silent> <A-o> :<C-u>FzfPreviewDirectoryFiles ~<CR>
 
@@ -216,17 +233,6 @@ nmap <silent> gD :Gdiffsplit<cr>
 
 " goto file from anywhere on line
 nnoremap gf ^f/gf
-
-" Use gk to show documentation in preview window
-nmap <silent> gk :call <SID>show_documentation()<CR>
-
-function! s:show_documentation()
-  if (index(['vim','help'], &filetype) >= 0)
-    execute 'h '.expand('<cword>')
-  else
-    call CocAction('doHover')
-  endif
-endfunction
 
 " " Remap for rename current word
 " nmap <leader>rn <Plug>(coc-rename)
@@ -407,3 +413,15 @@ command! -bar IndentNormally
 "   autocmd!
 "   autocmd FileType * IndentIgnoringBlanks
 " augroup END
+
+" noremap <silent> n <Cmd>execute('normal! ' . v:count1 . 'n')<CR>
+"             \<Cmd>lua require('hlslens').start()<CR>
+" noremap <silent> N <Cmd>execute('normal! ' . v:count1 . 'N')<CR>
+"             \<Cmd>lua require('hlslens').start()<CR>
+" noremap * *<Cmd>lua require('hlslens').start()<CR>
+" noremap # #<Cmd>lua require('hlslens').start()<CR>
+" noremap g* g*<Cmd>lua require('hlslens').start()<CR>
+" noremap g# g#<Cmd>lua require('hlslens').start()<CR>
+
+" " use : instead of <Cmd>
+nnoremap <silent> <leader>l :nohlsearch<CR>

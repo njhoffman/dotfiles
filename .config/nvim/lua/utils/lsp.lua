@@ -1,9 +1,30 @@
 local lsp_config = {}
 DATA_PATH = vim.fn.stdpath("data")
+local f = require("rockerboo.functional")
 local lspinstall = DATA_PATH .. "/lspinstall/"
 
 lsp_config.capabilities = vim.lsp.protocol.make_client_capabilities()
 lsp_config.capabilities.textDocument.completion.completionItem.snippetSupport = true
+
+local log_capabilities = function(capabilities)
+  local reduce = function(filter)
+    local result = {}
+    for k, _ in pairs(capabilities) do
+      table.insert(
+        result,
+        f.map(
+          function(v)
+            return {v = capabilities[v]}
+          end
+        )(f.filter(f.contains(k))(filter))
+      )
+    end
+    return f.flatten(result)
+  end
+
+  --[[ local log = utils.log_to_file("/tmp/neovim-lsp-capabilities.log")
+  log(vim.inspect(reduce(capabilities))) ]]
+end
 
 local function documentHighlight(client, bufnr)
   -- Set autocommands conditional on server_capabilities
@@ -32,38 +53,13 @@ function lsp_config.common_on_attach(client, bufnr)
   end
 end
 
--- LSP commands
--- ==================================================
-lsp_config.cmds = {
-  bash = {lspinstall .. "bash/node_modules/.bin/bash-language-server", "start"},
-  css = {
-    "node",
-    lspinstall .. "css/vscode-css/css-language-features/server/dist/node/cssServerMain.js",
-    "--stdio"
-  },
-  clangd = {lspinstall .. "cpp/clangd/bin/clangd"},
-  html = {
-    "node",
-    lspinstall .. "html/vscode-html/html-language-features/server/dist/node/htmlServerMain.js",
-    "--stdio"
-  },
-  json = {
-    "node",
-    lspinstall .. "json/vscode-json/json-language-features/server/dist/node/jsonServerMain.js",
-    "--stdio"
-  },
-  python = {lspinstall .. "python/node_modules/.bin/pyright-langserver", "--stdio"},
-  texlab = {lspinstall .. "latex/texlab"},
-  tsserver = {lspinstall .. "typescript/node_modules/.bin/typescript-language-server", "--stdio"}
-}
-
 -- Add LSP colors to colorschemes that don't support it yet
 -- =========================================================
 local defaults = {
-  Error = "#db4b4b",
-  Warning = "#e0af68",
+  Error       = "#db4b4b",
+  Warning     = "#e0af68",
   Information = "#0db9d7",
-  Hint = "#10B981"
+  Hint        = "#10B981",
 }
 
 local config = {}
@@ -128,6 +124,7 @@ end
 function lsp_config.setup(options)
   config = vim.tbl_deep_extend("force", {}, defaults, options or {})
 end
+
 
 lsp_config.setup()
 

@@ -2,159 +2,60 @@
 
 export GRC='grc -es --colour=on'
 
-# grc_cmds=(
-# e ant
-#   blkid
-#   configure
-#   cvs
-#   df
-#   diff
-#   dig
-#   dnf
-#   docker-machinels
-#   dockerimages
-#   dockerinfo
-#   dockernetwork
-#   dockerps
-#   dockerpull
-#   dockersearch
-#   dockerversion
-#   du
-#   env
-#   esperanto
-#   fdisk
-#   findmnt
-#   free
-#   g++
-#   gcc
-#   getfacl
-#   getsebool
-#   id
-#   ifconfig
-#   iostat_sar
-#   ip
-#   ipaddr
-#   ipneighbor
-#   iproute
-#   iptables
-#   irclog
-#   iwconfig
-#   jobs
-#   last
-#   ldap
-#   log
-#   lolcat
-#   lsattr
-#   lsblk
-#   lsmod
-#   lsof
-#   lspci
-#   ls
-#   mount
-#   mtr
-#   mvn
-#   netstat
-#   nmap
-#   ntpdate
-#   php
-#   ping
-#   ping2
-#   proftpd
-#   ps
-##   pv
-#   semanageboolean
-#   semanagefcontext
-#   semanageuser
-#   sensors
-#   showmount
-#   sql
-#   ss
-#   stat
-#   sysctl
-#   systemctl
-#   tail
-#   tcpdump
-#   traceroute
-#   traceroute6
-#   tune2fs
-#   ulimit
-#   uptime
-#   vmstat
-#   wdiff
-#   whois
-# )
 
-# grc_cmds=(
-#   cc
-#   configure
-#   cvs
-#   df
-#   dig
-#   du
-#   env
-#   fdisk
-#   free
-#   g++
-#   gcc
-#   getfacl
-#   getsebool
-#   id
-#   ifconfig
-#   ip
-#   ipaddr
-#   ipneighbor
-#   iproute
-#   iptables
-#   iwconfig
-#   last
-#   ldap
-#   lsattr
-#   lsblk
-#   lsmod
-#   lsof
-#   lspci
-#   mount
-#   mtr
-#   netstat
-#   nmap
-#   ping
-#   ping2
-#   php
-#   ps
-# #  pv
-#   sensors
-#   sql
-#   ss
-#   stat
-#   sysctl
-#   systemctl
-#   tcpdump
-#   traceroute
-#   ulimit
-#   uptime
-#   vmstat
-#   wdiff
-#   whois
-# )
-#
-# # TODO: make quick undo color aliases
-# # loop through known commands plus all those with named conf files
-# for cmd in "${grc_cmds[@]}"; do
-#   # if the command exists, alias it to pass through grc
-#   type "$cmd" >/dev/null 2>&1 && alias "$cmd"="$GRC -c conf.$cmd $cmd"
-# done
-#
+
+grc_alias_cmds=(
+  lsof
+  journalctl
+  make
+  mount
+  netstat
+  nmap
+  sysctl
+  systemctl
+  tcpdump
+)
+
+setopt COMPLETE_ALIASES
+for cmd in "${grc_alias_cmds[@]}"; do
+  # if the command exists, alias it to pass through grc
+  type "$cmd" >/dev/null 2>&1 && alias "$cmd"="$GRC -c conf.$cmd $cmd"
+done
+
 # custom ones
-# alias gmake="$GRC -c conf.gcc gmake"
-# alias make="$GRC -c conf.gcc make"
-# alias journalctl="$GRC -c conf.log journalctl"
+alias gmake="$GRC -c conf.gcc gmake"
+alias make="$GRC -c conf.gcc make"
+alias journalctl="$GRC -c conf.log journalctl"
 alias pv="grc -s --colour=on -c conf.log pv"
+# apt-get update: conf.docker-machinels
+# apt-cache search: conf.dockersearch
+# git commit:
+# git add
+#
 
-alias diff='colordiff'
-alias grep='grep --color=auto'
-alias egrep='egrep --color=auto'
-alias fgrep='fgrep --color=auto'
-
+# Name      | Type    | Description
+# ------------------------------------------------------------
+# apm       | Partial | Coloriser for APM sub-logs.
+# distcc    | Full    | Coloriser for distcc(1) logs.
+# dpkg      | Full    | Coloriser for dpkg logs.
+# exim      | Full    | Coloriser for exim logs.
+# fetchmail | Partial | Coloriser for fetchmail(1) sub-logs.
+# ftpstats  | Full    | Coloriser for ftpstats (pure-ftpd) logs.
+# httpd     | Full    | Coloriser for generic HTTPD access and error logs.
+# icecast   | Full    | Coloriser for Icecast(8) logs.
+# oops      | Full    | Coloriser for oops proxy logs.
+# php       | Full    | Coloriser for PHP logs.
+# postfix   | Partial | Coloriser for postfix(1) sub-logs.
+# procmail  | Full    | Coloriser for procmail(1) logs.
+# proftpd   | Full    | Coloriser for proftpd access and auth logs.
+# squid     | Full    | Coloriser for squid access, store and cache logs.
+# sulog     | Full    | Coloriser for su(1) logs.
+# super     | Full    | Coloriser for super(1) logs.
+# syslog    | Full    | Generic syslog(8) log coloriser.
+# ulogd     | Partial | Coloriser for ulogd sub-logs.
+# vsftpd    | Full    | Coloriser for vsftpd(8) logs.
+# xferlog   | Full    | Generic xferlog coloriser.
+#
 # alias findpid="grc -es --colour=on ps axww -o pid,user,%cpu,%mem,start,time,fname,command | fzfp | sed 's/^ *//' | cut -f1 -d' '"
 alias findpid="grc --colour=on -es -c conf.ps ps axww -o pid,user,%cpu,%mem,time,fname,command | fzf-tmux $FZF_TMUX_OPTS --ansi --header-lines=1 --preview='S_COLORS=always pidstat -du --human -p {1}' | sed 's/^ *//' | cut -f1 -d' '"
 alias progressc="ccze -A < <(progress)"

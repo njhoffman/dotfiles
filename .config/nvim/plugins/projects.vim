@@ -1,20 +1,15 @@
 " project management plugins
 
 Plug 'airblade/vim-rooter'
-let g:rooter_patterns = ['package.json', '.git']
+let g:rooter_patterns = ['package.json', '.git', 'Makefile']
 " let g:rooter_patterns = ['!=extras', '!^fixtures', '!build/env.sh']
-"
-" let g:rooter_patterns = ['=src']
-" let g:rooter_patterns = ['.git', 'Makefile', '*.sln', 'build/env.sh']
 "   To specify the root has a certain directory as an ancestor (useful for excluding directories), prefix it with ^:
 " let g:rooter_patterns = ['^fixtures']
 "
+" home, current, or blan
+let g:rooter_change_directory_for_non_project_files = 'current'
 " Non-project files
 " Don't change directory (default).
-" let g:rooter_change_directory_for_non_project_files = ''
-" Change to file's directory (similar to autochdir).
-" let g:rooter_change_directory_for_non_project_files = 'current'
-"   let g:rooter_change_directory_for_non_project_files = 'home'
 " let g:rooter_cd_cmd = 'lcd'
 " To stop Rooter echoing the project directory:
 "   let g:rooter_silent_chdir = 1

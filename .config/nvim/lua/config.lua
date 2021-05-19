@@ -1,6 +1,6 @@
 Opts = {
   preserve_cursor = true,
-  highlight_yank = true,
+  highlight_yank = false,
   relativenumber = true,
   cursorline = true,
   listchars = true,
@@ -13,85 +13,139 @@ Opts = {
 
 Theming = {
   -- Press <space>fc to see all available themes
-  colorscheme = "neon",
-  -- colorscheme = "jellybeans",
-  --[[ Some colorscheme have multiple styles to choose from:
-  @gruvbox = medium, soft, hard ]]
-  colorscheme_style = "",
-  -- Options: classic, slant, minimal, vscode, default
-  statusline = "vscode",
-  -- Options: gruvbox, nord, dark
-  statusline_color = "dark"
+  -- colorscheme = "neon",
+  colorscheme = "material"
 }
 
 LSP = {
   enabled = true,
-  virtual_text = true,
-  highlight_word = true,
+  underline = false,
+  update_in_insert = false,
+  signs = true,
+  virtual_text = false,
+  highlight_word = false,
+  efm = true,
+  -- virtual_text = { spacing = 4 }
   ---------------
   -- Autostart --
   ---------------
   bash = true,
-  clangd = true,
+  cpp = true,
+  dockerfile = true,
   json = true,
-  latex = true,
+  latex = false,
   lua = true,
   python = true,
-  -- WebDev
-  html = true,
-  css = true,
-  tsserver = true,
-  emmet = true
+  go = true,
+  gopls = false,
+  rust = true,
+  html = false,
+  css = false,
+  typescript = true,
+  emmet = false,
+  yaml = true
 }
 
 Completion = {
-  enabled = true,
+  enabled   = true,
   autopairs = true,
-  items = 10,
+  items     = 10,
   ---------------------------
   -- Sources of Completion --
   ---------------------------
   snippets = true,
-  lsp = true,
-  buffer = true,
-  path = true,
-  calc = true,
-  spell = true,
-  emoji = true
+  lsp      = true,
+  buffer   = true,
+  path     = true,
+  calc     = true,
+  spell    = true,
+  emoji    = true
 }
 
 Formatting = {
   -- if format_on_save is enable it will always trim trailing white spaces
-  format_on_save = true,
+  format_on_save      = false,
   trim_trailing_space = true,
-  indent_size = 2
+  indent_size         = 2
 }
 
 Treesitter = {
   enabled = true,
-  rainbow = true,
+  rainbow = false,
+  indent = true,
   -------------
   -- Parsers --
   -------------
   parsers = {
     "bash",
+    "beancount",
+    "bibtex",
     "c",
+    "c_sharp",
+    "clojure",
+    "comment",
+    "commonlisp",
+    "cpp",
     "css",
-    "html",
+    "dart",
+    "devicetree",
+    "dockerfile",
+    "elm",
+    "erlang",
+    "fennel",
+    "fish",
+    "fortran",
+    "go",
+    "gomod",
+    "graphql",
+    "haskell",
+    "java",
     "javascript",
+    "jsdoc",
     "json",
+    "julia",
+    "kotlin",
+    "latex",
+    "ledger",
     "lua",
+    "nix",
+    "ocaml",
+    "ocaml_interface",
+    "ocamllex",
+    "php",
     "python",
+    "ql",
+    -- 'Tree-sitter query language',
+    "r",
+    "regex",
+    "rst",
+    "ruby",
+    "rust",
+    "scala",
+    "scss",
+    "sparql",
+    "supercollider",
+    "svelte",
+    "swift",
+    "teal",
+    "toml",
     "tsx",
+    "turtle",
     "typescript",
-    "yaml"
+    "verilog",
+    "vue",
+    "yaml",
+    "zig"
   }
 }
 
--- https://github.com/neovim/nvim-lspconfig/blob/master/CONFIG.md#vimls
--- https://github.com/neovim/nvim-lspconfig/blob/master/CONFIG.md#dockerls
--- https://github.com/neovim/nvim-lspconfig/blob/master/CONFIG.md#gopls
--- https://github.com/neovim/nvim-lspconfig/blob/master/CONFIG.md#stylelint_lsp
--- https://github.com/neovim/nvim-lspconfig/blob/master/CONFIG.md#sqlls- https://github.com/neovim/nvim-lspconfig/blob/master/CONFIG.md#terraformls
--- https://github.com/neovim/nvim-lspconfig/blob/master/CONFIG.md#tflint
--- https://github.com/neovim/nvim-lspconfig/blob/master/CONFIG.md#yamlls
+local config = {
+  Opts = Opts,
+  LSP = LSP,
+  Theming = Theming,
+  Completion = Completion,
+  Treesitter = Treesitter,
+  Formatting = Formatting
+}
+
+return config

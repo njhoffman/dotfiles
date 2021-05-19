@@ -6,14 +6,15 @@ if [ "$system_type" = "Darwin" ]; then
   brew install shellcheck
   brew install shfmt
   brew install llvm
+  brew install markdownlint-cli
   fd 'clangd$' /usr/local/ --exec ln -s '{}' "$HOME"/.local/bin | :
 
   curl -L https://github.com/rust-analyzer/rust-analyzer/releases/download/nightly/rust-analyzer-mac.gz | gunzip -f > "$HOME"/.local/bin/rust-analyzer && chmod +x "$HOME"/.local/bin/rust-analyzer
 
 else
-  sudo dnf install -y \
-    ShellCheck \
-    clang-tools-extra \
+  sudo apt-get install -y \
+    shellcheck \
+    clang-tools \
     ;
 
   curl -L https://github.com/rust-analyzer/rust-analyzer/releases/download/nightly/rust-analyzer-linux.gz | gunzip -f > "$HOME"/.local/bin/rust-analyzer && chmod +x "$HOME"/.local/bin/rust-analyzer

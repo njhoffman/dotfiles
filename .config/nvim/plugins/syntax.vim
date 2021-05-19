@@ -36,6 +36,7 @@ Plug 'jparise/vim-graphql'
 Plug 'arzg/vim-sh'
 Plug 'ericpruitt/tmux.vim'
 Plug 'andrewstuart/vim-kubernetes'
+Plug 'StanAngeloff/php.vim'
 " to fix https://github.com/neoclide/coc-snippets/issues/126
 Plug 'honza/vim-snippets'
 

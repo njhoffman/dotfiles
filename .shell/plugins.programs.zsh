@@ -102,9 +102,9 @@
 
       # # fzf-based tab-completion, load after all other completion plugins
       # z_lucid wait'1'
-      zinit light Aloxaf/fzf-tab
-      zi0b has'fzf' pick'completion.zsh' src'key-bindings.zsh'
-      zinit light $HOME/.fzf/shell
+      # zinit light Aloxaf/fzf-tab
+      # zi0b has'fzf' pick'completion.zsh' src'key-bindings.zsh'
+      # zinit light $HOME/.fzf/shell
 
       zinit ice from"gh-r" as"command"
       zinit load junegunn/fzf-bin
@@ -231,10 +231,6 @@
   # glow
   zinit ice from from'gh-r' bpick'*x_x86*'
   zinit light charmbracelet/glow
-
-  # neovim
-  zinit ice from"gh-r" as"program" bpick"*appimage*" ver"nightly" mv"nvim* -> nvim" pick"nvim"
-  zinit light neovim/neovim
 
   # lazygit
   zinit ice lucid wait"0" as"program" from"gh-r" mv"lazygit* -> lazygit" atload"alias lg='lazygit'"

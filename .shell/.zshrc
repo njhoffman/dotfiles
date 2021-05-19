@@ -109,6 +109,8 @@ split_pwd() {
 
 # fi
 
+function pipver() { curl -s https://pypi.org/rss/project/$1/releases.xml | sed -n 's/\s*<title>\([0-9.]*\).*/\1/p' ;}
+
 #TODO: why have to double assign this?
 bindkey '^I' expand-or-complete
 

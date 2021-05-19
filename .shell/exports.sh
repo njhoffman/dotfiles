@@ -17,7 +17,6 @@ LS_COLORS=$LS_COLORS'ow=1;96:'
 export LS_COLORS
 export EXA_COLORS="da=1;34"
 
-
 if [[ -z "$PKG_CONFIG_PATH" ]]; then
   export PKG_CONFIG_PATH=$(pkg-config --variable pc_path pkg-config)
 fi
@@ -131,13 +130,12 @@ export PATH=$GOPATH/bin:$GOROOT/bin:$PATH
 
 export PATH="/usr/local/opt/icu4c/sbin:/usr/local/opt/icu4c/bin:$PATH"
 
-
 export KREW_ROOT=~/.krew
 export PATH="${KREW_ROOT:-$HOME/.krew}/bin:$PATH"
 
 # export XDG_CONFIG_HOME=/usr/local/lib/python2.7/dist-packages/powerline:~/.config/powerline:~/.config
-export POWERLINE_CONFIG_COMMAND=/usr/local/bin/powerline-config
-export POWERLINE_CONFIG_PATHS=/home/$USER/.shell/powerline:/home/$USER/.shell/.powerline:/home/$USER/.config/powerline
+# export POWERLINE_CONFIG_COMMAND=/usr/local/bin/powerline-config
+# export POWERLINE_CONFIG_PATHS=/home/$USER/.shell/powerline:/home/$USER/.shell/.powerline:/home/$USER/.config/powerline
 export NODE_PATH=$(npm root -g)
 
 export PATH=$PATH:~/.bin:~/bin:~/bin/aws:~/bin/docker:/usr/local/bin:~/.local/bin

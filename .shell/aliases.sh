@@ -4,11 +4,20 @@ filepath=$(readlink -f $0)
 alias refresh_aliases="source $filepath"
 
 # alias fuck='sudo $(history -p \!\!)'
-alias _='sudo'
+alias _="sudo "
+alias sudo="sudo "
 
 alias db=dotbare
 alias dots=dotbare
 
+alias gh-search="ghs repo --sort=stars"
+
+alias bat="bat -p"
+# | bat -p -l html
+alias pup="pup --color"
+alias pup-links="pup --color 'body a attr{href}'"
+alias pup-headers="pup --color 'h1,h2,h3,h4,h5,h6 {text}'"
+alias pup-links-json="pup --color 'body a json{}' | bat -p -l json"
 # directory listing
 alias ls="LC_COLLATE=C ls --color=auto"
 alias l='LC_COLLATE=C colorls --group-directories-first --almost-all --git-status'
@@ -163,6 +172,7 @@ alias vimdiff="nvim -d"
 alias vc="nvimpager -c"
 alias vcat="nvimpager -c"
 alias vimcat="nvimpager -c"
+alias vim-syntax="nvim ~/.config/nvim/test/lsp/**/*.*"
 
 alias tldr="tldr --theme ocean"
 
@@ -352,6 +362,9 @@ if which fasd >/dev/null; then
     }
   fi
 fi
+
+# set two finger and edge scrollling
+alias gset-touchpad="gsettings set org.gnome.settings-daemon.peripherals.input-devices hotplug-command '\"'$HOME'/.config/scroll-touchpad\"'"
 
 alias fzp="fzf-tmux -p 80%"
 alias adoc-list="grc -es -c conf.dockersearch --colour=auto ansible-doc -l | grep '^\w\+\s'"

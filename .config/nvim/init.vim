@@ -1,10 +1,4 @@
 " ********** Main Loader **********
-
-set runtimepath-=~/.config/nvim
-set runtimepath-=~/.config/nvim/after
-set runtimepath-=~/.local/share/nvim/site
-set runtimepath-=~/.local/share/nvim/site/after
-
 set runtimepath^=~/.config/nvim
 set runtimepath+=~/.config/nvim/after
 set runtimepath^=~/.local/share/nvim/site
@@ -16,14 +10,14 @@ let mapleader=","
 " Load external files
 source $HOME/.config/nvim/settings.vim
 source $HOME/.config/nvim/autocommands.vim
-source $HOME/.config/nvim/color.vim
-source $HOME/.config/nvim/colors.vim
 source $HOME/.config/nvim/plugins.vim
 source $HOME/.config/nvim/functions.vim
+
+lua << EOF
+  -- trace, debug, info, warn, error
+  vim.lsp.set_log_level("info")
+  require('init')
+EOF
+
 source $HOME/.config/nvim/mappings.vim
-
-" Loads lua config
-lua require('init')
-
-" remove ansi colors
-" :s/\e\[[0-9;]*m//g
+source $HOME/.config/nvim/plugins/barbar-colors.vim

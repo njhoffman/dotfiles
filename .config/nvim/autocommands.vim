@@ -58,9 +58,22 @@ if has("autocmd")
     autocmd FileType qf nmap <buffer> p <plug>(qf-preview-open)
   augroup END
 
-  " custom syntax extension assignments
+  augroup two_space_ft
+    autocmd!
+    autocmd FileType vim setlocal tabstop=2 softtabstop=2 shiftwidth=2 expandtab
+    autocmd FileType typescript setlocal tabstop=2 softtabstop=2 shiftwidth=2 expandtab
+    autocmd FileType yaml setlocal tabstop=2 softtabstop=2 shiftwidth=2 expandtab
+    autocmd FileType yml setlocal tabstop=2 softtabstop=2 shiftwidth=2 expandtab
+    autocmd FileType tf setlocal tabstop=2 softtabstop=2 shiftwidth=2 expandtab
+    autocmd FileType proto setlocal tabstop=2 softtabstop=2 shiftwidth=2 expandtab
+    autocmd FileType lua setlocal tabstop=2 softtabstop=2 shiftwidth=2 expandtab
+  augroup end
+
   augroup filetypedetect
-    au BufNewFile,BufRead *.module set filetype=php
+    au BufNewFile,BufRead *.module setlocal ft=php syn=php
+    " force bash syntax for shell scripts by default custom syntax extension assignments
+    au BufNewFile,BufRead *.php setlocal ft=php syn=php
+    au! BufRead,BufNewFile *bash* let b:is_bash = 1 | setfiletype sh
     au BufNewFile,BufRead *.md  set ft=vimwiki syn=vimwiki
     au BufNewFile,BufRead .pa set ft=config
     au BufNewFile,BufRead .env.* set ft=config
