@@ -190,4 +190,3 @@ dap.configurations.javascript = {
     outFiles = { '${workspaceFolder}/build/**/*.js', '!**/node_modules/**' };
   },
 }
-

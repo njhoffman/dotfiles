@@ -1,4 +1,4 @@
-local f = require("rockerboo.functional")
+local f = require("utils.functional")
 
 describe("functional", function()
 	it("map list", function()

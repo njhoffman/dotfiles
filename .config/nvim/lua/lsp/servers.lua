@@ -2,11 +2,6 @@ local lspconfig = require "lspconfig"
 local capabilities = require "utils.lsp".capabilities
 local common_on_attach = require "utils.lsp".common_on_attach
 
--- LspInstall cpp dockerfile json lua python yaml
--- LspInstall bash diagnosticls typescript go ruby rust
--- angular bash cmake cpp csharp css dockerfile elixir elm go graphql html java json kotlin latex lua php
--- python ruby rust svelte tailwindcss terraform typescript vim vue yaml -- deno diagnosticls efm rome
-
 function setup_tsserver(client, bufnr)
   local ts_utils = require("nvim-lsp-ts-utils")
 

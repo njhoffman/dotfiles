@@ -1,6 +1,6 @@
 local lsp_status = require("lsp-status")
 local status = require("rockerboo.lsp_status")
-local utils = require("rockerboo.utils")
+local utils = require("utils.core")
 local config = require("lspconfig")
 
 -- vim.lsp.set_log_level("debug")
@@ -47,11 +47,6 @@ local setup = function()
 
   --- Language servers
   local on_attach_vim = function(client, bufnr)
-    print("'" .. client.name .. "' language server attached")
-
-    utils.log_to_file("/tmp/nvim-lsp-client.log")(vim.inspect(client))
-
-    -- log_capabilities(client.resolved_capabilities)
 
     lsp_status.on_attach(client)
 

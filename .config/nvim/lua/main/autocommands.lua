@@ -1,4 +1,4 @@
-local config = require "config"
+local config = require "main.config-loader"
 local u = require "utils.core"
 local Formatting = config.Formatting
 local Opts = config.Opts

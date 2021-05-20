@@ -1,30 +1,30 @@
 -- General settings
-require "config"
-
-require "utils.packer"
-
-require "utils.handlers"
--- require "main.options"
--- require "main.mappings"
-require "main.autocommands"
 
 -- install 3rd party plugin packages
 require "plugins"
 
 -- install lsp services
 require "lsp"
+
+-- require "main.options"
+require "main.mappings"
+require "main.autocommands"
+
 -- require "debuggers"
 
 -- plugin config and startup
 require "plugins.bqf"
 require "plugins.compe"
+require "plugins.kommentary"
 require "plugins.nvim-hlslens"
 require "plugins.nvim-lspconfig"
+require "plugins.nvim-tree"
 require "plugins.statusline"
 require "plugins.telescope"
 require "plugins.todo"
 require "plugins.toggleterm"
 require "plugins.treesitter"
+require "plugins.trouble"
 -- require "plugins.general"
 -- require "plugins.bufferline"
 -- require "plugins.galaxyline"

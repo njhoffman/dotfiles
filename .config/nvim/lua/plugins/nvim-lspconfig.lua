@@ -1,4 +1,4 @@
-local lsp_config = require "utils.lsp"
+local lsp_config = require "lsp.setup"
 
 local efm_options = {
   documentFormatting = true,
@@ -56,7 +56,7 @@ local function make_config()
     -- enable snippet support
     capabilities = capabilities,
     -- map buffer local keybindings when the language server attaches
-    on_attach = lsp_config.on_attach
+    on_attach = lsp_config.common_on_attach
   }
 end
 
@@ -83,6 +83,21 @@ local function setup_servers()
     if server == "efm" then
       config.init_options = efm_options
       config.settings = efm_settings
+    end
+
+    if server == "typescript" then
+      on_attach = function(client, bufnr)
+        require("nvim-lsp-ts-utils").setup(
+          {
+            -- defaults
+            disable_commands = false,
+            enable_import_on_completion = false,
+            import_on_completion_timeout = 5000
+          }
+        )
+
+        return lsp_config.on_attach(client, bufnr)
+      end
     end
 
     require "lspconfig"[server].setup(config)

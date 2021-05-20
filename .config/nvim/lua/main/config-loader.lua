@@ -1,39 +1,47 @@
 -- Auto install plugin manager if doesn't exist
 local execute = vim.api.nvim_command
 local fn = vim.fn
-local config = require "config"
+local config = require("config")
 
 local LSP = config.LSP
 local Opts = config.Opts
 local Completion = config.Completion
 
--- Theming
-local default = "jellybeans"
-
-local function color_style_or_empty(check)
-  local v
-  if check ~= nil then
-    v = check:gsub("%s+", "")
-  else
-    v = ""
-  end
-  return v
-end
-
 -- LSP
-
 local servers = {
+  "angular",
   "bash",
-  "clangd",
+  "cmake",
+  "cpp",
+  "csharp",
   "css",
-  "diagnosticls",
-  "gopls",
-  "json",
-  "lua",
-  "python",
-  "tsserver",
+  "dockerfile",
+  "elixir",
+  "elm",
+  "go",
+  "graphql",
   "html",
+  "java",
+  "json",
+  "kotlin",
   "latex",
+  "lua",
+  "php",
+  "python",
+  "ruby",
+  "rust",
+  "svelte",
+  "tailwindcss",
+  "terraform",
+  "typescript",
+  "vim",
+  "vue",
+  "yaml",
+  --non-language specific
+  "deno",
+  "diagnosticls",
+  "efm",
+  "rome"
 }
 
 for _, v in pairs(servers) do
@@ -98,3 +106,9 @@ Completion.calc = compe_menu(Completion.calc, "  (Calc)", "[C]", nil, nil)
 Completion.snippets = compe_menu(Completion.snippets, " ﬌ (Snippet)", "[S]", 1500, nil)
 Completion.emoji = compe_menu(Completion.emoji, nil, "[ ﲃ ]", nil, {"markdown", "text"})
 Completion.lsp = compe_menu(Completion.lsp, nil, "[L]", nil, nil)
+
+config.Completion = Completion
+config.Opts = Opts
+config.LSP = LSP
+
+return config

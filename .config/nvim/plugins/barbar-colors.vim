@@ -158,10 +158,10 @@ call s:_('VertSplit', s:base4,   s:bg, 'none')
 
 " Auto-completion
 
-hi! Pmenu guifg=#99aacc guibg=#001818  ctermbg=234 ctermfg=250
-hi! PmenuSel guifg=#bceeff guibg=#226888 ctermbg=23 ctermfg=255
-hi! PmenuThumb ctermbg=23 ctermfg=255
-hi! NormalFloat guifg=#99aacc guibg=#100812  ctermbg=234 ctermfg=250
+" hi! Pmenu guifg=#99aacc guibg=#001818  ctermbg=234 ctermfg=250
+" hi! PmenuSel guifg=#bceeff guibg=#226888 ctermbg=23 ctermfg=255
+" hi! PmenuThumb ctermbg=23 ctermfg=255
+" hi! NormalFloat guifg=#99aacc guibg=#100812  ctermbg=234 ctermfg=250
 
 if exists('&pumblend')
   set pumblend=20
@@ -199,4 +199,3 @@ call s:_('BufferTabpageFill',    s:base4,          s:bg_other,    'bold')
 " call s:_('BufferPart',        s:diff_info_fg,   s:diff_info_bg0, 'bold')
 
 " }}}
-

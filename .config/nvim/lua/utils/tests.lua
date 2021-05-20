@@ -10,7 +10,7 @@ local keymap = function(mode, key, map, opts)
 end
 
 test_runner.setup = function()
-  keymap("n", "<leader>t", "require('rockerboo.tests').run(vim.fn.expand('%:p'))")
+  keymap("n", "<leader>t", "require('utils.tests').run(vim.fn.expand('%:p'))")
 end
 
 test_runner.run = function(file_or_directory)

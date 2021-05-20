@@ -1,6 +1,9 @@
 local lsp_config = {}
 DATA_PATH = vim.fn.stdpath("data")
-local f = require("rockerboo.functional")
+local lsp_status = require("lsp-status")
+local f = require("utils.functional")
+local utils = require("utils.core")
+local status = require("utils.lsp_status")
 local lspinstall = DATA_PATH .. "/lspinstall/"
 
 lsp_config.capabilities = vim.lsp.protocol.make_client_capabilities()
@@ -26,26 +29,63 @@ local log_capabilities = function(capabilities)
   log(vim.inspect(reduce(capabilities))) ]]
 end
 
+local function documentFormat(client,bufnr)
+  if client.resolved_capabilities.document_formatting then
+    utils.keymap(
+      {
+        "n",
+        "<Leader>aa",
+        "<cmd>lua vim.lsp.buf.formatting()<cr>",
+        {}
+      }
+    )
+    vim.api.nvim_command([[augroup Format]])
+    vim.api.nvim_command([[autocmd! * <buffer>]])
+    vim.api.nvim_command([[autocmd BufWritePost <buffer> lua vim.lsp.buf.formatting_sync(nil, 500)]])
+    vim.api.nvim_command([[augroup END]])
+    -- vim.cmd([[ autocmd BufWritePre * :lua vim.lsp.buf.formatting_sync(nil, 500) ]])
+    -- if client.name ~= "tsserver" then
+    -- end
+    print(string.format("Formatting supported %s", client.name))
+  end
+end
+
 local function documentHighlight(client, bufnr)
   -- Set autocommands conditional on server_capabilities
   if client.resolved_capabilities.document_highlight then
     vim.api.nvim_exec(
-    [[
-    hi LspReferenceRead cterm=bold ctermbg=red guibg=#464646
-    hi LspReferenceText cterm=bold ctermbg=red guibg=#464646
-    hi LspReferenceWrite cterm=bold ctermbg=red guibg=#464646
-    augroup lsp_document_highlight
-    autocmd! * <buffer>
-    autocmd CursorHold <buffer> lua vim.lsp.buf.document_highlight()
-    autocmd CursorMoved <buffer> lua vim.lsp.buf.clear_references()
-    augroup END
-    ]],
-    false
+      [[
+      hi LspReferenceRead cterm=bold ctermbg=red guibg=#464646
+      hi LspReferenceText cterm=bold ctermbg=red guibg=#464646
+      hi LspReferenceWrite cterm=bold ctermbg=red guibg=#464646
+      augroup lsp_document_highlight
+      autocmd! * <buffer>
+      autocmd CursorHold <buffer> lua vim.lsp.buf.document_highlight()
+      autocmd CursorMoved <buffer> lua vim.lsp.buf.clear_references()
+      augroup END
+      ]],
+      false
     )
   end
 end
+-- vim.api.nvim_command([[augroup Format]])
+-- vim.api.nvim_command([[autocmd! * <buffer>]])
+-- vim.api.nvim_command([[autocmd BufWritePost <buffer> lua vim.lsp.buf.formatting_sync(nil, 500)]])
+-- vim.api.nvim_command([[augroup END]])
+-- vim.cmd([[ autocmd BufWritePre * :lua vim.lsp.buf.formatting_sync(nil, 500) ]])
 
+
+-- log_capabilities(client.resolved_capabilities)
 function lsp_config.common_on_attach(client, bufnr)
+  lsp_status.on_attach(client)
+  print("'" .. client.name .. "' language server attached")
+  utils.log_to_file("/tmp/nvim-lsp-client.log")(vim.inspect(client))
+  -- vim.cmd([[ setlocal omnifunc=v:lua.vim.lsp.omnifunc ]])
+  local capLog = utils.log_to_file("/tmp/capabilities.log")
+  capLog("client.name: " .. client.name .. "\n" .. vim.inspect(client.resolved_capabilities))
+
+  documentFormat(client, bufnr)
+
   if LSP.highlight_word == nil or LSP.highlight_word == true then
     documentHighlight(client, bufnr)
   elseif LSP.highlight_word == false then
@@ -122,6 +162,7 @@ function lsp_config.fix()
 end
 
 function lsp_config.setup(options)
+  status.activate()
   config = vim.tbl_deep_extend("force", {}, defaults, options or {})
 end
 

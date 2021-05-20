@@ -1,14 +1,14 @@
 Opts = {
   preserve_cursor = true,
-  highlight_yank = false,
-  relativenumber = true,
-  cursorline = true,
-  listchars = true,
-  wrap = false,
-  timeoutlen = 500,
-  updatetime = 300,
-  scrolloff = 10,
-  explorer_side = "right"
+  highlight_yank  = false,
+  relativenumber  = true,
+  cursorline      = true,
+  listchars       = true,
+  wrap            = false,
+  timeoutlen      = 500,
+  updatetime      = 300,
+  scrolloff       = 10,
+  explorer_side   = "right"
 }
 
 Theming = {
@@ -18,32 +18,49 @@ Theming = {
 }
 
 LSP = {
-  enabled = true,
-  underline = false,
+  enabled          = true,
+  underline        = false,
   update_in_insert = false,
-  signs = true,
-  virtual_text = false,
-  highlight_word = false,
-  efm = true,
+  signs            = true,
+  virtual_text     = false,
+  highlight_word   = false,
   -- virtual_text = { spacing = 4 }
   ---------------
   -- Autostart --
   ---------------
-  bash = true,
-  cpp = true,
-  dockerfile = true,
-  json = true,
-  latex = false,
-  lua = true,
-  python = true,
-  go = true,
-  gopls = false,
-  rust = true,
-  html = false,
-  css = false,
-  typescript = true,
-  emmet = false,
-  yaml = true
+  angular     = false,
+  bash        = true,
+  cmake       = false,
+  cpp         = true,
+  csharp      = true,
+  css         = true,
+  dockerfile  = true,
+  elixir      = false,
+  elm         = true,
+  go          = true,
+  graphql     = true,
+  html        = true,
+  java        = true,
+  json        = true,
+  kotlin      = false,
+  latex       = false,
+  lua         = true,
+  php         = true,
+  python      = true,
+  ruby        = true,
+  rust        = true,
+  svelte      = false,
+  tailwindcss = true,
+  terraform   = true,
+  typescript  = true,
+  vim         = true,
+  vue         = false,
+  yaml        = true,
+  --non-language specific
+  deno         = false,
+  diagnosticls = false,
+  efm          = true,
+  rome         = false
 }
 
 Completion = {
