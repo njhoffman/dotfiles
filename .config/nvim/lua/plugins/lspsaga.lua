@@ -1,9 +1,10 @@
-local saga = require 'lspsaga'
+local config = require "config"
+local plugin = {}
 
 --      ﮻  ﱥ    ● ★ ◉ ◎ ◯ ? ✖ Ⓘ ⓧ ⓞ  Ⓘ ◆ ◇ ⬢ ✔ ♥       
 --                             
 
-saga.init_lsp_saga {
+local sagaconfig = {
   use_saga_diagnostic_sign = true,
   error_sign = '﮻',
   warn_sign = '',
@@ -17,8 +18,8 @@ saga.init_lsp_saga {
     sign_priority = 20,
     virtual_text = true,
   },
-  finder_definition_icon = '  ',
-  finder_reference_icon = '  ',
+  finder_definition_icon = '   ',
+  finder_reference_icon = '   ',
   max_preview_lines = 20, -- preview lines of lsp_finder and definition preview
   finder_action_keys = {
     open = 'o',
@@ -42,38 +43,46 @@ saga.init_lsp_saga {
   rename_prompt_prefix = '➤',
 }
 
+function plugin.setup(use)
+  use "glepnir/lspsaga.nvim"
+  require("lspsaga").init_lsp_saga(sagaconfig)
+end
 
--- highlight groups
---[[ LspSagaFinderSelection	Currently active entry in the finder window that gets previewed.
-LspFloatWinNormal
-LspFloatWinBorder
-LspSagaBorderTitle
-TargetWord
-ReferencesCount
-DefinitionCount
-TargetFileName
-DefinitionIcon
-ReferencesIcon
-ProviderTruncateLine
-SagaShadow
-LspSagaFinderSelection
-DiagnosticTruncateLine
-DiagnosticError
-DiagnosticWarning
-DiagnosticInformation
-DiagnosticHint
-DefinitionPreviewTitle
-LspSagaShTruncateLine
-LspSagaDocTruncateLine
-LineDiagTuncateLine
-LspSagaCodeActionTitle
-LspSagaCodeActionTruncateLine
-LspSagaCodeActionContent
-LspSagaRenamePromptPrefix
-LspSagaRenameBorder
-LspSagaHoverBorder
-LspSagaSignatureHelpBorder
-LspSagaCodeActionBorder
-LspSagaAutoPreview
-LspSagaDefPreviewBorder
-LspLinesDiagBorder ]]
+return plugin
+
+
+--[[ highlight groups
+  LspSagaFinderSelection	Currently active entry in the finder window that gets previewed.
+  LspFloatWinNormal
+  LspFloatWinBorder
+  LspSagaBorderTitle
+  TargetWord
+  ReferencesCount
+  DefinitionCount
+  TargetFileName
+  DefinitionIcon
+  ReferencesIcon
+  ProviderTruncateLine
+  SagaShadow
+  LspSagaFinderSelection
+  DiagnosticTruncateLine
+  DiagnosticError
+  DiagnosticWarning
+  DiagnosticInformation
+  DiagnosticHint
+  DefinitionPreviewTitle
+  LspSagaShTruncateLine
+  LspSagaDocTruncateLine
+  LineDiagTuncateLine
+  LspSagaCodeActionTitle
+  LspSagaCodeActionTruncateLine
+  LspSagaCodeActionContent
+  LspSagaRenamePromptPrefix
+  LspSagaRenameBorder
+  LspSagaHoverBorder
+  LspSagaSignatureHelpBorder
+  LspSagaCodeActionBorder
+  LspSagaAutoPreview
+  LspSagaDefPreviewBorder
+  LspLinesDiagBorder
+]]

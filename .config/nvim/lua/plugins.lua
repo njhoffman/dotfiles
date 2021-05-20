@@ -1,4 +1,7 @@
 require "utils.packer"
+local config = require"config"
+local Plugins = config.Plugins
+
 -- Only required if you have packer configured as `opt`
 vim.cmd [[packadd packer.nvim]]
 
@@ -7,20 +10,25 @@ return require("packer").startup(
     use "wbthomason/packer.nvim"
 
     -- LSP, Autocomplete and snippets
+    if LSP.enable ~= 0 and LSP.enable ~= false then
+
+      use "jose-elias-alvarez/nvim-lsp-ts-utils"
+      use "kabouzeid/nvim-lspinstall"
+      use "neovim/nvim-lspconfig"
+      use "nvim-lua/lsp-status.nvim"
+      use "hrsh7th/vim-vsnip"
+      require"plugins.lspsaga".setup(use)
+      require"plugins.nvim_compe".setup(use)
+      require"lsp".setup(use)
+    end
+
+    -- ====================================
+    -- DAP
     use {
-      {"glepnir/lspsaga.nvim"},
-      {"hrsh7th/nvim-compe"},
-      {"hrsh7th/vim-vsnip"},
-      {"jose-elias-alvarez/nvim-lsp-ts-utils"},
-      {"kabouzeid/nvim-lspinstall"},
-      {"neovim/nvim-lspconfig"},
-      {"nvim-lua/completion-nvim"},
-      {"nvim-lua/diagnostic-nvim"},
-      {"nvim-lua/lsp-status.nvim"},
       {"mfussenegger/nvim-dap"},
       {"theHamsta/nvim-dap-virtual-text"},
+      {"nvim-telescope/telescope-dap.nvim"}
     }
-    -- ====================================
 
     -- Telescope
     use {
@@ -33,7 +41,6 @@ return require("packer").startup(
         {"ryanoasis/vim-devicons"},
         {"nvim-telescope/telescope-fzy-native.nvim"},
         {"nvim-telescope/telescope.nvim"},
-        {"nvim-telescope/telescope-dap.nvim"}
       }
     }
     -- ====================================
@@ -83,6 +90,11 @@ return require("packer").startup(
       "christianchiarulli/nvcode-color-schemes.vim",
       "rakr/vim-one"
     }
+
+    if Plugins.mundo ~= 0 and Plugins.mundo ~= false then
+      require"plugins.mundo".setup(use)
+    end
+
   end
 )
 -- {'glepnir/galaxyline.nvim', branch = 'main'},

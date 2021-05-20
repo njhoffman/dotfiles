@@ -11,6 +11,11 @@ vim.cmd('hi! CursorLineNr guifg=#afd7ff ctermfg=Black')
 vim.cmd('hi! CursorColumn guibg=NONE ctermbg=NONE')
 vim.cmd('hi! Comment gui=italic')
 
+-- LspDiagnosticsFloatingError
+-- LspDiagnosticsFloatingWarning
+-- LspDiagnosticsFloatingInformation
+-- LspDiagnosticsFloatingHint
+
 vim.cmd('hi! LspDiagnosticsDefaultWarning guifg=#664400')
 vim.cmd('hi! LspDiagnosticsDefaultError guifg=#990000')
 vim.cmd('hi! LspDiagnosticsDefaultHint guifg=#666688')
@@ -18,10 +23,13 @@ vim.cmd('hi! LspDiagnosticsDefaultInformation guifg=#664466')
 
 -- vim.cmd('hi! Pmenu guifg=#717cb4 guibg=#090b10')
 -- vim.cmd('hi! Pmenu guifg=#818ce4 guibg=#000804')
-vim.cmd('hi! Pmenu guifg=#819bb4 guibg=#000804')
+vim.cmd('hi! Pmenu guifg=#819bb4 guibg=#101814')
 vim.cmd('hi! PmenuSel guifg=#84ffff guibg=#3a3c45')
 vim.cmd('hi! PmenuSbar guifg=#717cb4 guibg=#090b10')
 vim.cmd('hi! PmenuThumb guifg=#8f93a2 guibg=#84ffff')
+-- vim.g.completion_menu_length = 30
+-- vim.g.pumwidth = ##
+
 -- vim.cmd('hi! NormalFloat guifg=#8f93a2 guibg=#090b10')
 -- material.bg =			'#0F111A'
 -- material.bg_alt =		'#090B10'

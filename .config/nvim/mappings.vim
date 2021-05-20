@@ -227,9 +227,9 @@ command! -bang OMaps call fzf#vim#maps('o')
 " easily exit floating window
 nmap <esc> <esc><Plug>(coc-float-hide).
 
-
+lua vim.lsp.diagnostic.show_line_diagnostics()
 " vim-fugitive
-nmap <silent> gD :Gdiffsplit<cr>
+nmap <silent><leader>gD :Gdiffsplit<cr>
 
 " goto file from anywhere on line
 nnoremap gf ^f/gf

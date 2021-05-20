@@ -1,11 +1,23 @@
+local dap = require('dap')
+local config = require('config')
+local DAP = config.DAP
+
 -- =============================
 --              DAP
 -- =============================
-local dap = require('dap')
-dap.set_log_level('TRACE');
+-- mfussenegger/nvim-dap
+-- C/C++/Rust Go Java Mockdebug Python Ruby Dart Haskell Javascript/Node PHP Scala Neovim Lua .NET
+
+
+if DAP.log_level ~= nil or DAP.log_level ~= false or DAP.log_level ~= 0 then
+  dap.set_log_level(DAP.log_level);
+end
 
 -- Enable virtual text.
-vim.g.dap_virtual_text = true
+-- TODO: check options
+if DAP.virtual_text ~= nil or DAP.virtual_text ~= false or DAP.virtual_text ~= 0 then
+  vim.g.dap_virtual_text = DAP.virtual_text
+end
 
 local ensure_script = os.getenv('PLAID_PATH') .. '/go.git/scripts/ensure_debugger_session.sh';
 
@@ -106,6 +118,9 @@ dap.adapters.node2 = {
   command = os.getenv('HOME') .. '/.nvm/versions/node/v12.18.2/bin/node';
   args = { os.getenv('HOME') .. '/vscode-node-debug2/out/src/nodeDebug.js' };
 }
+
+-- RUBY
+-- C/CPP
 
 -- =============================
 --         CONFIGURATIONS

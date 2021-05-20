@@ -1,5 +1,6 @@
 " enhanced word motions
 Plug 'chaoren/vim-wordmotion'
+let g:wordmotion_mappings = { 'ge' : '<nop>' }
 
 " a word (lowercase) is any of the following
 "

@@ -1,4 +1,16 @@
 " ********** Global Settings **********
+set runtimepath-=~/.config/nvim
+set runtimepath-=~/.config/nvim/after
+set runtimepath-=~/.local/share/nvim/site
+set runtimepath-=~/.local/share/nvim/site/after
+
+set runtimepath^=~/.config/nvim
+set runtimepath+=~/.config/nvim/after
+set runtimepath^=~/.local/share/nvim/site
+set runtimepath+=~/.local/share/nvim/site/after
+
+" change mapleader to ,
+let mapleader=","
 
 set expandtab                        " use space instead of acutal tab character
 set tabstop=2                        " a tab is 2 spaces

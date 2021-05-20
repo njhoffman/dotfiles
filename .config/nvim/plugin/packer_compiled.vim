@@ -79,14 +79,6 @@ _G.packer_plugins = {
     loaded = true,
     path = "/home/nicholas/.local/share/nvim/site/pack/packer/start/boo-colorscheme-nvim"
   },
-  ["completion-nvim"] = {
-    loaded = true,
-    path = "/home/nicholas/.local/share/nvim/site/pack/packer/start/completion-nvim"
-  },
-  ["diagnostic-nvim"] = {
-    loaded = true,
-    path = "/home/nicholas/.local/share/nvim/site/pack/packer/start/diagnostic-nvim"
-  },
   ["feline.nvim"] = {
     loaded = true,
     path = "/home/nicholas/.local/share/nvim/site/pack/packer/start/feline.nvim"
@@ -230,6 +222,10 @@ _G.packer_plugins = {
   ["vim-devicons"] = {
     loaded = true,
     path = "/home/nicholas/.local/share/nvim/site/pack/packer/start/vim-devicons"
+  },
+  ["vim-mundo"] = {
+    loaded = true,
+    path = "/home/nicholas/.local/share/nvim/site/pack/packer/start/vim-mundo"
   },
   ["vim-nightfly-guicolors"] = {
     loaded = true,

@@ -1,2 +1,2 @@
 require('telescope').load_extension('dap')
-require('dbg.typescript')
+require('debug.typescript')

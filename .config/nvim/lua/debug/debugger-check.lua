@@ -1,0 +1,30 @@
+-- .xdg_home/nvim/extensions/vscode-node-debug2/out/src/nodeDebug.js
+--
+-- dap.adapters.node2 = {
+--   command = os.getenv('HOME') .. '/.nvm/versions/node/v12.18.2/bin/node';
+--   args = { os.getenv('HOME') .. '/vscode-node-debug2/out/src/nodeDebug.js' };
+-- }
+-- dap.adapters.go = function(cb, config)
+--     command = os.getenv('HOME') .. '/.nvm/versions/node/v12.18.2/bin/node';
+--     args = { os.getenv('HOME') .. '/vscode-go/dist/debugAdapter.js' };
+--   };
+-- dap.adapters.python = {
+--   command = os.getenv('HOME') .. '/.pyenv/versions/neovim3/bin/python';
+--   args = { '-m', 'debugpy.adapter' };
+-- }
+
+-- local pdaasAdapter = {
+--     type = "executable";
+--     name = "node2";
+--     command = "node";
+--     args = { "/Users/awalker/vscode-node-debug2/out/src/nodeDebug.js" };
+-- };
+-- local pdaasConfig = {
+--     type = "node2";
+--     request = "launch";
+--     program = "/Users/awalker/pdaas/build/pd2/scripts/cli/index.js";
+--     cwd = vim.fn.getcwd();
+--     sourceMaps = true;
+--     protocol = "inspector";
+--     console = "integratedTerminal";
+-- };

@@ -210,7 +210,7 @@ source $plugins/profiler.vim     " profile vim plugins and startup time
 source $plugins/projects.vim     " project management plugins
 source $plugins/suda.vim         " sudo write support
 source $plugins/system-tools.vim " doing shell stuff from vim
-source $plugins/undotree.vim     " undo tree interface
+" source $plugins/undotree.vim     " undo tree interface
 source $plugins/vimwiki.vim      " personal wiki interface
 
 

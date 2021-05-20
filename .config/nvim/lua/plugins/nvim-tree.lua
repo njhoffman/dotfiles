@@ -1,4 +1,4 @@
-local config = require "main.config-loader"
+local config = require"config"
 
 vim.g.nvim_tree_disable_keybindings=0
 vim.g.nvim_tree_indent_markers = 1

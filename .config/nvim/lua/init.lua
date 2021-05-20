@@ -3,21 +3,18 @@
 -- install 3rd party plugin packages
 require "plugins"
 
--- install lsp services
-require "lsp"
+-- install debugger adapter protocol functionality
+-- require "main.debugger"
 
 -- require "main.options"
 require "main.mappings"
 require "main.autocommands"
 
--- require "debuggers"
 
 -- plugin config and startup
 require "plugins.bqf"
-require "plugins.compe"
 require "plugins.kommentary"
 require "plugins.nvim-hlslens"
-require "plugins.nvim-lspconfig"
 require "plugins.nvim-tree"
 require "plugins.statusline"
 require "plugins.telescope"
