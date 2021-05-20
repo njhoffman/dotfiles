@@ -1,5 +1,6 @@
+local plugin = {}
 
-require('hlslens').setup{
+local hlslens_config = {
   -- enable hlslens after searching
   -- type: boolean
   auto_enable = true,
@@ -15,6 +16,12 @@ require('hlslens').setup{
   virt_priority = 50
 }
 
+function plugin.setup(use)
+  use "kevinhwang91/nvim-hlslens"
+  require('hlslens').setup(hlslens_config)
+end
+
+return plugin
 -- " integrate with vim-visual-multi multiple cursors
 -- aug VMlens
 --   au!

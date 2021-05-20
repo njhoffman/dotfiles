@@ -4,7 +4,7 @@ local plugin = {}
 --      ﮻  ﱥ    ● ★ ◉ ◎ ◯ ? ✖ Ⓘ ⓧ ⓞ  Ⓘ ◆ ◇ ⬢ ✔ ♥       
 --                             
 
-local sagaconfig = {
+local saga_config = {
   use_saga_diagnostic_sign = true,
   error_sign = '﮻',
   warn_sign = '',
@@ -45,7 +45,7 @@ local sagaconfig = {
 
 function plugin.setup(use)
   use "glepnir/lspsaga.nvim"
-  require("lspsaga").init_lsp_saga(sagaconfig)
+  require("lspsaga").init_lsp_saga(saga_config)
 end
 
 return plugin

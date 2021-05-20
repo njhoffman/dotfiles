@@ -1,4 +1,6 @@
-require('bqf').setup({
+local plugin = {}
+
+local bqf_config = {
   auto_enable = true,
   preview = {
     win_height = 12,
@@ -17,7 +19,14 @@ require('bqf').setup({
       extra_opts = {'--bind', 'ctrl-o:toggle-all', '--prompt', '> '}
     }
   }
-})
+}
+
+function plugin.setup(use)
+  use "kevinhwang91/nvim-bqf"
+  require("bqf").setup(bqf_config)
+end
+
+return plugin
 
 -- root = {
 --     auto_enable = {

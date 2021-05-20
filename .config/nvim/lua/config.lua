@@ -3,11 +3,12 @@ local execute = vim.api.nvim_command
 local fn = vim.fn
 local userSettings = require("settings")
 
+local DAP = userSettings.DAP
 local LSP = userSettings.LSP
 local Opts = userSettings.Opts
 local Completion = userSettings.Completion
 
--- LSP
+-- all available LSP from lspinstall
 local servers = {
   "angular",
   "bash",
@@ -131,8 +132,15 @@ Completion.snippets = compe_menu(Completion.snippets, " ﬌ (Snippet)", "[S]", 1
 Completion.emoji = compe_menu(Completion.emoji, nil, "[ ﲃ ]", nil, {"markdown", "text"})
 Completion.lsp = compe_menu(Completion.lsp, nil, "[L]", nil, nil)
 
+-- Dap
+if DAP.enabled == nil then
+  DAP.enabled = false
+end
+
+
 userSettings.Completion = Completion
 userSettings.Opts = Opts
 userSettings.LSP = LSP
+userSettings.DAP = DAP
 
 return userSettings

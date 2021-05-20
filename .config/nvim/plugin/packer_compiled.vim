@@ -83,10 +83,6 @@ _G.packer_plugins = {
     loaded = true,
     path = "/home/nicholas/.local/share/nvim/site/pack/packer/start/feline.nvim"
   },
-  ["gitsigns.nvim"] = {
-    loaded = true,
-    path = "/home/nicholas/.local/share/nvim/site/pack/packer/start/gitsigns.nvim"
-  },
   ["gruvbox.nvim"] = {
     loaded = true,
     path = "/home/nicholas/.local/share/nvim/site/pack/packer/start/gruvbox.nvim"
@@ -187,10 +183,6 @@ _G.packer_plugins = {
     loaded = true,
     path = "/home/nicholas/.local/share/nvim/site/pack/packer/start/nvim-web-devicons"
   },
-  ["packer.nvim"] = {
-    loaded = true,
-    path = "/home/nicholas/.local/share/nvim/site/pack/packer/start/packer.nvim"
-  },
   ["plenary.nvim"] = {
     loaded = true,
     path = "/home/nicholas/.local/share/nvim/site/pack/packer/start/plenary.nvim"
@@ -234,6 +226,14 @@ _G.packer_plugins = {
   ["vim-one"] = {
     loaded = true,
     path = "/home/nicholas/.local/share/nvim/site/pack/packer/start/vim-one"
+  },
+  ["vim-sensible"] = {
+    loaded = true,
+    path = "/home/nicholas/.local/share/nvim/site/pack/packer/start/vim-sensible"
+  },
+  ["vim-unimpaired"] = {
+    loaded = true,
+    path = "/home/nicholas/.local/share/nvim/site/pack/packer/start/vim-unimpaired"
   },
   ["vim-vsnip"] = {
     loaded = true,

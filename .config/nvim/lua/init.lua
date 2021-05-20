@@ -12,16 +12,9 @@ require "main.autocommands"
 
 
 -- plugin config and startup
-require "plugins.bqf"
-require "plugins.kommentary"
-require "plugins.nvim-hlslens"
-require "plugins.nvim-tree"
 require "plugins.statusline"
 require "plugins.telescope"
-require "plugins.todo"
-require "plugins.toggleterm"
 require "plugins.treesitter"
-require "plugins.trouble"
 -- require "plugins.general"
 -- require "plugins.bufferline"
 -- require "plugins.galaxyline"

@@ -1,7 +1,7 @@
 
--- "folke/todo-comments.nvim",
+local plugin = {}
 
-require('todo-comments').setup {
+local todo_config = {
   signs = true, -- show icons in the signs column
   -- keywords recognized as todo comments
   keywords = {
@@ -52,3 +52,10 @@ require('todo-comments').setup {
     -- pattern = [[\b(KEYWORDS)\b]], -- match without the extra colon. You'll likely get false positives
   },
 }
+
+function plugin.setup(use)
+  use "folke/todo-comments.nvim"
+  require('todo-comments').setup(todo_config)
+end
+
+return plugin

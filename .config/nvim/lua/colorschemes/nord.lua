@@ -23,7 +23,7 @@ vim.cmd('hi! LspDiagnosticsDefaultInformation guifg=#664466')
 
 -- vim.cmd('hi! Pmenu guifg=#717cb4 guibg=#090b10')
 -- vim.cmd('hi! Pmenu guifg=#818ce4 guibg=#000804')
-vim.cmd('hi! Pmenu guifg=#819bb4 guibg=#101814')
+vim.cmd('hi! Pmenu guifg=#819bb4 guibg=#061218')
 vim.cmd('hi! PmenuSel guifg=#84ffff guibg=#3a3c45')
 vim.cmd('hi! PmenuSbar guifg=#717cb4 guibg=#090b10')
 vim.cmd('hi! PmenuThumb guifg=#8f93a2 guibg=#84ffff')

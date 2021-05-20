@@ -192,7 +192,7 @@ source $plugins/fugitive.vim   " branch indicator for vim-airline
 "
 source $plugins/quickfix.vim         " quickfix window enhancements
 source $plugins/tmux.vim             " tmux integration
-source $plugins/unimpaired.vim       " pairing keymappings for ][
+" source $plugins/unimpaired.vim       " pairing keymappings for ][
 
 " ---------- Productivity ----------
 "

@@ -1,13 +1,22 @@
-require "toggleterm".setup {
-    size = 20,
-    -- open_mapping = [[<a-t>]],
-    shade_filetypes = {},
-    shade_terminals = true,
-    shading_factor = "1", -- the degree by which to darken to terminal colour, default: 1 for dark backgrounds, 3 for light
-    start_in_insert = true,
-    persist_size = true,
-    direction = "horizontal"
+local plugin = {}
+
+local toggleterm_config = {
+  size = 20,
+  -- open_mapping = [[<a-t>]],
+  shade_filetypes = {},
+  shade_terminals = true,
+  shading_factor = "1", -- the degree by which to darken to terminal colour, default: 1 for dark backgrounds, 3 for light
+  start_in_insert = true,
+  persist_size = true,
+  direction = "horizontal"
 }
+
+function plugin.setup(use)
+  use "akinsho/nvim-toggleterm.lua"
+  require("toggleterm").setup(toggleterm_config)
+end
+
+return plugin
 
 -- require("toggleterm").setup{
 --   -- size can be a number or function which is passed the current terminal

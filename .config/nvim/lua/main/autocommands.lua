@@ -14,9 +14,9 @@ local autocmds = {
     {"TermOpen", "*", [[tnoremap <buffer> <Esc> <c-\><c-n>]]},
     {"TermOpen", "*", "set nonu"}
   },
-  packer = {
-    {"BufWritePost", "plugins.lua", "PackerCompile"}
-  }
+  -- packer = {
+  --   {"BufWritePost", "plugins.lua", "PackerCompile"}
+  -- }
 }
 
 -- vim.cmd([[autocmd ColorScheme * lua require("utils.lsp").fix("ColorScheme")]])

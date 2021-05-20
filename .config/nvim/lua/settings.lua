@@ -140,6 +140,7 @@ Plugins = {
 }
 
 local config = {
+  DAP = DAP,
   Opts = Opts,
   LSP = LSP,
   Theming = Theming,
