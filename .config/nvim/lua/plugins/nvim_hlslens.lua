@@ -16,12 +16,17 @@ local hlslens_config = {
   virt_priority = 50
 }
 
-function plugin.setup(use)
-  use "kevinhwang91/nvim-hlslens"
+function plugin.load()
   require('hlslens').setup(hlslens_config)
 end
 
+function plugin.setup(use)
+  use {  "kevinhwang91/nvim-hlslens", config = plugin.load }
+end
+
 return plugin
+
+
 -- " integrate with vim-visual-multi multiple cursors
 -- aug VMlens
 --   au!

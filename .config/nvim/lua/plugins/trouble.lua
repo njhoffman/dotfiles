@@ -40,9 +40,14 @@ local trouble_config = {
   use_lsp_diagnostic_signs = false -- enabling this will use the signs defined in your lsp client
 }
 
-function plugin.setup(use)
-  use "folke/trouble.nvim"
+
+
+function plugin.load()
   require("trouble").setup(trouble_config)
+end
+
+function plugin.setup(use)
+  use { "folke/trouble.nvim", config = plugin.load }
 end
 
 return plugin

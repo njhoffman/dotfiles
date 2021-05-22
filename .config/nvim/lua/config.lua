@@ -1,4 +1,3 @@
--- Auto install plugin manager if doesn't exist
 local execute = vim.api.nvim_command
 local fn = vim.fn
 local userSettings = require("settings")
@@ -7,6 +6,7 @@ local DAP = userSettings.DAP
 local LSP = userSettings.LSP
 local Opts = userSettings.Opts
 local Completion = userSettings.Completion
+local Treesitter = userSettings.Treesitter
 
 -- all available LSP from lspinstall
 local servers = {
@@ -138,9 +138,16 @@ if DAP.enabled == nil then
 end
 
 
+-- Treesitter
+if Treesitter.enabled == nil then
+  Treesitter.enabled = true
+end
+
+
 userSettings.Completion = Completion
 userSettings.Opts = Opts
 userSettings.LSP = LSP
 userSettings.DAP = DAP
+userSettings.Treesitter = Treesitter
 
 return userSettings

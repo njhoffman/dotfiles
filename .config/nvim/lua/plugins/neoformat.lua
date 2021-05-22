@@ -19,10 +19,14 @@ function plugin.config()
   -- augroup END
 end
 
-function plugin.setup(use)
-  use "sbdchd/neoformat"
-  require('neoformat')
+function plugin.load()
+  require("neoformat")
   plugin.config()
+end
+
+
+function plugin.setup(use)
+  use { "sbdchd/neoformat", config = plugin.load }
 end
 
 return plugin

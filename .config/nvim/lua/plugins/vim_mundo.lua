@@ -1,8 +1,6 @@
+local plugin = {}
 
-local plugins = {}
-
-function plugins.setup(use)
-  use { "simnalamburt/vim-mundo"}
+function plugin.config()
   vim.g.mundo_width = 45
   vim.g.mundo_preview_height = 15
   vim.g.mundo_right = 1
@@ -16,4 +14,12 @@ function plugins.setup(use)
   -- vim.g.mundo_tree_statusline = nil
 end
 
-return plugins
+function plugin.load()
+  plugin.config()
+end
+
+function plugin.setup(use)
+  use { "simnalamburt/vim-mundo", config = plugin.load }
+end
+
+return plugin

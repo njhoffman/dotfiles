@@ -5,7 +5,7 @@ local lsp_diagnostics = require('lsp.diagnostics')
 local plugin = {}
 
 -- lsp-install
-local function setup_servers()
+function plugin.setup_servers()
   lsp_install.setup()
 
   -- get all installed servers
@@ -21,13 +21,38 @@ local function setup_servers()
 end
 
 
-function plugin.setup(use)
-  setup_servers()
-  -- Automatically reload after `:LspInstall <server>` so we don't have to restart neovim
-  require "lspinstall".post_install_hook = function()
-    setup_servers() -- reload installed servers
+function plugin.load()
+-- Automatically reload after `:LspInstall <server>` so we don't have to restart neovim
+  require"lspinstall".post_install_hook = function()
+    plugin.setup_servers() -- reload installed servers
     vim.cmd("bufdo e") -- this triggers the FileType autocmd that starts the server
   end
+  plugin.setup_servers()
+
+end
+
+function plugin.setup(use)
+
 end
 
 return plugin
+
+-- vim.lsp.handlers["textDocument/hover"] =
+--   vim.lsp.with(
+--   vim.lsp.handlers.hover,
+--   {
+--     border = "single"
+--   }
+-- )
+
+-- vim.lsp.handlers["textDocument/signatureHelp"] =
+--   vim.lsp.with(
+--   vim.lsp.handlers.signature_help,
+--   {
+--     border = "single"
+--   }
+-- )
+
+-- vim.cmd [[nnoremap <buffer><silent> <C-space> :lua vim.lsp.diagnostic.show_line_diagnostics({ border = "single" })<CR>]]
+-- vim.cmd [[nnoremap <buffer><silent> ]g :lua vim.lsp.diagnostic.goto_next({ popup_opts = { border = "single" }})<CR>]]
+-- vim.cmd [[nnoremap <buffer><silent> [g :lua vim.lsp.diagnostic.goto_prev({ popup_opts = { border = "single" }})<CR>]]

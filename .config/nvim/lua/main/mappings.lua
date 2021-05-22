@@ -5,3 +5,10 @@ local lsp_mappings = require("mappings.lsp")
 lsp_mappings.lsp_saga()
 plugin_mappings.nvim_tree()
 plugin_mappings.telescope()
+
+-- deleting lines
+-- :g/profile/d
+-- :g/^\s*$/d
+-- :g!/^\s*"/d
+-- Note that g! is equivalent to v, so you could also do the above with:
+-- :v/^\s*"/d

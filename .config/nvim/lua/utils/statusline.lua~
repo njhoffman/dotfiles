@@ -1,6 +1,6 @@
 local M = {}
 M.b = vim.b
-M.vi_mode_utils = require("feline.providers.vi_mode")
+M.vi_mode_utils = require("feline.providers.vi-mode")
 M.lsp = require("feline.providers.lsp")
 local config = require('config')
 

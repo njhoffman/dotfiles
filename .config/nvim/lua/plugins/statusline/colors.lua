@@ -1,5 +1,20 @@
 local color = {}
 
+color.defaults = {
+  black = '#1B1B1B',
+  skyblue = '#50B0F0',
+  cyan = '#009090',
+  green = '#60A040',
+  -- oceanblue = '#0066cc',
+  oceanblue = '#224777',
+  magenta = '#C26BDB',
+  orange = '#FF9000',
+  red = '#D10000',
+  violet = '#9E93E8',
+  white = '#FFFFFF',
+  yellow = '#E1E120'
+}
+
 color.gruvbox = {
   default_fg = "#ebdbb2",
   default_bg = "#3c3836",

@@ -1,0 +1,43 @@
+" profile vim startup times
+Plug 'bchretien/vim-profiler'
+" vim-profiler.py nvim -n 10
+" vim-profiler.py -n 5 nvim foo.cc -c ":exec ':normal ia' | :q\!"
+
+
+
+../plugins.lua:8:1: accessing undefined variable ^[[0m^[[1mvim^[[0m
+../plugins.lua:12:3: accessing undefined variable ^[[0m^[[1muse^[[0m
+../plugins.lua:18:3: accessing undefined variable ^[[0m^[[1muse^[[0m
+../plugins.lua:19:3: accessing undefined variable ^[[0m^[[1muse^[[0m
+../plugins.lua:20:3: accessing undefined variable ^[[0m^[[1muse^[[0m
+../plugins.lua:21:3: accessing undefined variable ^[[0m^[[1muse^[[0m
+../plugins.lua:22:44: accessing undefined variable ^[[0m^[[1muse^[[0m
+../plugins.lua:23:35: accessing undefined variable ^[[0m^[[1muse^[[0m
+../plugins.lua:29:5: accessing undefined variable ^[[0m^[[1muse^[[0m
+../plugins.lua:41:40: accessing undefined variable ^[[0m^[[1muse^[[0m
+../plugins.lua:42:43: accessing undefined variable ^[[0m^[[1muse^[[0m
+../plugins.lua:43:28: accessing undefined variable ^[[0m^[[1muse^[[0m
+../plugins.lua:51:5: accessing undefined variable ^[[0m^[[1muse^[[0m
+../plugins.lua:62:5: accessing undefined variable ^[[0m^[[1muse^[[0m
+../plugins.lua:63:47: accessing undefined variable ^[[0m^[[1muse^[[0m
+../plugins.lua:64:43: accessing undefined variable ^[[0m^[[1muse^[[0m
+../plugins.lua:65:41: accessing undefined variable ^[[0m^[[1muse^[[0m
+../plugins.lua:66:35: accessing undefined variable ^[[0m^[[1muse^[[0m
+../plugins.lua:72:32: accessing undefined variable ^[[0m^[[1muse^[[0m
+../plugins.lua:73:32: accessing undefined variable ^[[0m^[[1muse^[[0m
+../plugins.lua:74:40: accessing undefined variable ^[[0m^[[1muse^[[0m
+../plugins.lua:75:38: accessing undefined variable ^[[0m^[[1muse^[[0m
+../plugins.lua:81:39: accessing undefined variable ^[[0m^[[1muse^[[0m
+../plugins.lua:87:38: accessing undefined variable ^[[0m^[[1muse^[[0m
+../plugins.lua:90:38: accessing undefined variable ^[[0m^[[1muse^[[0m
+../plugins.lua:93:42: accessing undefined variable ^[[0m^[[1muse^[[0m
+../plugins.lua:96:38: accessing undefined variable ^[[0m^[[1muse^[[0m
+../plugins.lua:99:39: accessing undefined variable ^[[0m^[[1muse^[[0m
+../plugins.lua:102:41: accessing undefined variable ^[[0m^[[1muse^[[0m
+../plugins.lua:108:37: accessing undefined variable ^[[0m^[[1muse^[[0m
+../plugins.lua:111:36: accessing undefined variable ^[[0m^[[1muse^[[0m
+../plugins.lua:114:38: accessing undefined variable ^[[0m^[[1muse^[[0m
+../plugins.lua:117:38: accessing undefined variable ^[[0m^[[1muse^[[0m
+../plugins.lua:120:44: accessing undefined variable ^[[0m^[[1muse^[[0m
+../plugins.lua:123:41: accessing undefined variable ^[[0m^[[1muse^[[0m
+../plugins.lua:128:3: accessing undefined variable ^[[0m^[[1muse^[[0m

@@ -34,12 +34,15 @@ function plugin.mapping()
     .. "'toggle_comment_custom_commentstring'" .. ')<cr>', { noremap = true, silent = true })
 end
 
-function plugin.setup(use)
-  use "b3nj5m1n/kommentary"
+function plugin.load()
   require('kommentary.config').configure_language("default", {
     prefer_single_line_comments = true,
   })
   plugin.mapping()
+end
+
+function plugin.setup(use)
+  use { "b3nj5m1n/kommentary", config = plugin.load }
 end
 
 return plugin

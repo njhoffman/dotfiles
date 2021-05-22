@@ -1,35 +1,41 @@
 " search within files grep-like
-"
-
 Plug 'Chun-Yang/vim-action-ag'
-" gag gagw gawi'
-" use * to search current word in normal mode
-" nmap * <Plug>AgActionWord
-" use * to search selected text in visual mode
-" vmap * <Plug>AgActionVisual
+
+" gag => searhc selected text
+" gagw => search the word
+" gawi' => search the word in quotes
+
+" nmap * <Plug>AgActionWord => use * to search current word in normal mode
+" vmap * <Plug>AgActionVisual => use * to search selected text in visual mode
+" let g:vim_action_ag_escape_chars = '#%.^$*+?()[{\\|'
 
 Plug 'mileszs/ack.vim'
-" let g:ackprg = 'ag --nogroup --column --vimgrep -S --hidden -u'
 
-" hi! IncSearch      xxx cterm=reverse gui=reverse
 " hi! IncSearch      xxx cterm=reverse gui=reverse
 " hi! Search         xxx ctermfg=0 ctermbg=11 guifg=#afffff
 " hi! EasyMotionIncSearchDefault xxx cterm=bold ctermfg=40 gui=bold guifg=#7fbf00
 
-" nnoremap <Leader>s :Ag<CR>
-if executable('ag')
-  let g:ackprg = 'ag --nogroup --column --nonumber -S --hidden'
-  let g:agprg = 'ag --nogroup --column --nonumber -S --hidden'
-endif
-" o to open, O top open and close the quickfix window
-" go to preview file
+" Use ripgrep for searching ⚡️
+" Options include:
+" --vimgrep -> Needed to parse the rg response properly for ack.vim
+" --type-not sql -> Avoid huge sql file dumps as it slows down the search
+" --smart-case -> Search case insensitive if all lowercase pattern, Search case sensitively otherwise
+" let g:ackprg = 'rg --vimgrep --type-not sql --smart-case'
+let g:ackprg = 'ag --nogroup --column --vimgrep -S --hidden -u'
 
-" press shift-O to close preview window when opening file
-" let g:ackprg = 'ag --nogroup --nocolor --column'
+" Auto close the Quickfix list after pressing '<enter>' on a list item
+let g:ack_autoclose = 1
 
-" browse tags of source code files in a sidebar
-" needs ctags
-" Plug 'Tagbar'
-" nnoremap <F5> :buffers<CR>:buffer<Space>
-" nnoremap <F6> :TagbarToggle<CR>
-" let g:tagbar_ctags_bin = '/home/vagrant/.nvm/version/node/v6.10.3/lib/node_modules/jsctags/bin/jsctags'
+" Any empty ack search will search for the work the cursor is on
+let g:ack_use_cword_for_empty_search = 1
+
+" Don't jump to first match
+cnoreabbrev Ack Ack!
+
+" Maps <leader>/ so we're ready to type the search keyword
+nnoremap <Leader>/ :Ack!<Space>
+" }}}
+
+" Navigate quickfix list with ease
+nnoremap <silent> [q :cprevious<CR>
+nnoremap <silent> ]q :cnext<CR>

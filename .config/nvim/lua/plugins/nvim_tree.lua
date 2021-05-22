@@ -23,10 +23,13 @@ function plugin.config()
     folder = {default = "", open = "", empty = "", empty_open = "", symlink = ""}
   }
 
+end
+
+function plugin.mapping()
+
   local tree_cb = require "nvim-tree.config".nvim_tree_callback
 
   vim.g.nvim_tree_bindings = {
-    -- mappings
     ["<CR>"] = tree_cb("edit"),
     ["o"] = tree_cb("edit"),
     ["<2-LeftMouse>"] = tree_cb("edit"),
@@ -56,10 +59,14 @@ function plugin.config()
   }
 end
 
+function plugin.load()
+  plugin.config()
+  plugin.mapping()
+end
+
 
 function plugin.setup(use)
-  use "kyazdani42/nvim-tree.lua"
-  plugin.config()
+  use { "kyazdani42/nvim-tree.lua", config = plugin.load }
 end
 
 return plugin

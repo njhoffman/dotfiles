@@ -1,6 +1,4 @@
 
-local plugin = {}
-
 local todo_config = {
   signs = true, -- show icons in the signs column
   -- keywords recognized as todo comments
@@ -53,9 +51,14 @@ local todo_config = {
   },
 }
 
-function plugin.setup(use)
-  use "folke/todo-comments.nvim"
+local plugin = {}
+
+function plugin.load()
   require('todo-comments').setup(todo_config)
+end
+
+function plugin.setup(use)
+  use { "folke/todo-comments.nvim", config = plugin.load }
 end
 
 return plugin

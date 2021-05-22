@@ -67,9 +67,6 @@ let s:white      = '#efefef'
 let s:green_alt  = '#799033'
 
 let s:bg= 'NONE'
-" let s:bg = "#000000"
-" let s:bg = "#151515"
-" let s:bg             = '#282c34'
 let s:bg_alt         = '#21242b'
 let s:bg_highlight   = '#2E323C'
 let s:bg_popup       = '#0c0c0c'
@@ -163,9 +160,9 @@ call s:_('VertSplit', s:base4,   s:bg, 'none')
 " hi! PmenuThumb ctermbg=23 ctermfg=255
 " hi! NormalFloat guifg=#99aacc guibg=#100812  ctermbg=234 ctermfg=250
 
-if exists('&pumblend')
-  set pumblend=20
-end
+" if exists('&pumblend')
+"   set pumblend=20
+" end
 
 let s:bg_current = s:bg
 let s:bg_visible = s:bg

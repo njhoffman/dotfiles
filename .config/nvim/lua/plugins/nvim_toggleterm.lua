@@ -11,9 +11,12 @@ local toggleterm_config = {
   direction = "horizontal"
 }
 
-function plugin.setup(use)
-  use "akinsho/nvim-toggleterm.lua"
+function plugin.load()
   require("toggleterm").setup(toggleterm_config)
+end
+
+function plugin.setup(use)
+  use {  "akinsho/nvim-toggleterm.lua", config = plugin.load }
 end
 
 return plugin

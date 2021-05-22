@@ -25,9 +25,12 @@ local gitsigns_config = {
   use_decoration_api = false
 }
 
-function plugin.setup(use)
-  use "lewis6991/gitsigns.nvim"
+function plugin.load()
   require("gitsigns").setup(gitsigns_config)
+end
+
+function plugin.setup(use)
+  use { "lewis6991/gitsigns.nvim", config = plugin.load }
 end
 
 return plugin

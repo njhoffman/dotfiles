@@ -1,13 +1,16 @@
+
 local treeParsers = require('settings-parsers')
 
-Opts = {
+local settings = {}
+
+settings.Opts = {
   preserve_cursor = true,
-  highlight_yank  = false,
+  highlight_yank  = true,
   relativenumber  = true,
   cursorline      = true,
   listchars       = true,
   wrap            = false,
-  timeoutlen      = 500,
+  timeoutlen      = 200,
   updatetime      = 300,
   scrolloff       = 10,
   explorer_side   = "right",
@@ -15,7 +18,7 @@ Opts = {
   log_stdout       = false,
 }
 
-Theming = {
+settings.Theming = {
   colorscheme = 'nord',
   diagnostic_colors = {
     Error       = "#db4b4b",
@@ -25,7 +28,7 @@ Theming = {
   }
 }
 
-DAP = {
+settings.DAP = {
   enabled      = true,
   log_level    = 'trace',
   log_path     = '/tmp/nvim-dap.log',
@@ -37,7 +40,7 @@ DAP = {
 
 -- -- trace, debug, info, warn, error
 -- vim.lsp.set_log_level("info")
-LSP = {
+settings.LSP = {
   enabled          = true,
   log_level        = 'info',
   underline        = false,
@@ -91,7 +94,7 @@ LSP = {
   rome         = false
 }
 
-Completion = {
+settings.Completion = {
   enabled   = true,
   autopairs = true,
   items     = 10,
@@ -107,14 +110,14 @@ Completion = {
   emoji    = true
 }
 
-Formatting = {
+settings.Formatting = {
   -- if format_on_save is enable it will always trim trailing white spaces
   format_on_save      = false,
   trim_trailing_space = true,
   indent_size         = 2
 }
 
-Treesitter = {
+settings.Treesitter = {
   enabled = true,
   rainbow = false,
   indent = true,
@@ -124,7 +127,7 @@ Treesitter = {
   parsers = treeParsers
 }
 
-Plugins = {
+settings.Plugins = {
   feline = true,
   kommentary = true,
   neoformat = true,
@@ -139,15 +142,4 @@ Plugins = {
 
 }
 
-local config = {
-  DAP = DAP,
-  Opts = Opts,
-  LSP = LSP,
-  Theming = Theming,
-  Completion = Completion,
-  Treesitter = Treesitter,
-  Formatting = Formatting,
-  Plugins = Plugins
-}
-
-return config
+return settings

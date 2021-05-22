@@ -243,7 +243,7 @@ xmap <leader>f  <Plug>(coc-format-selected)
 " Maps, Highlights, Locate <str>, fzf-preview.CocCurrentDiagnostics, Lets, Lists, Maps
 
 nnoremap <Leader>gl :BCommits<CR>
-nnoremap <Leader>gc :Commits<CR>
+nnoremap <Leader>gL :Commits<CR>
 " :Maps :Commands :Helptags :Snippets
 " <leader>l => javascript toggle conceal level
 

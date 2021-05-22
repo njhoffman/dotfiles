@@ -1,4 +1,3 @@
-local lspTsUtils = require('nvim-lsp-ts-utils')
 local lsp_status = require('lsp.lspstatus')
 local lsp_config = require('lsp.lspconfig')
 -- local lsp_config = require "lsp.setup"
@@ -48,7 +47,7 @@ lsp_servers.efm = {
 
 lsp_servers.typescript = {
   on_attach = function(client, bufnr)
-    lspTsUtils.setup(
+    local lspTsUtils = require('nvim-lsp-ts-utils').setup(
       {
         -- defaults
         disable_commands = false,
@@ -57,7 +56,7 @@ lsp_servers.typescript = {
       }
     )
 
-    return lsp_config.on_attach(client, bufnr)
+    return lsp_config.on_common_attach(client, bufnr)
   end
 }
 

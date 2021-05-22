@@ -21,9 +21,12 @@ local bqf_config = {
   }
 }
 
-function plugin.setup(use)
-  use "kevinhwang91/nvim-bqf"
+function plugin.load()
   require("bqf").setup(bqf_config)
+end
+
+function plugin.setup(use)
+  use { "kevinhwang91/nvim-bqf", config = plugin.load  }
 end
 
 return plugin

@@ -1,5 +1,4 @@
 local config = require "config"
-local plugin = {}
 
 --      ﮻  ﱥ    ● ★ ◉ ◎ ◯ ? ✖ Ⓘ ⓧ ⓞ  Ⓘ ◆ ◇ ⬢ ✔ ♥       
 --                             
@@ -43,10 +42,20 @@ local saga_config = {
   rename_prompt_prefix = '➤',
 }
 
-function plugin.setup(use)
-  use "glepnir/lspsaga.nvim"
+local plugin = {}
+
+function plugin.load()
   require("lspsaga").init_lsp_saga(saga_config)
 end
+
+function plugin.setup(use)
+  use {
+    "glepnir/lspsaga.nvim",
+    config = plugin.load,
+    requires = 'neovim/nvim-lspconfig',
+  }
+end
+
 
 return plugin
 
