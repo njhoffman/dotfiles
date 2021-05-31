@@ -1,15 +1,6 @@
 local u = require("utils.core")
 
 local plugins = {}
--- vim-mundo
-  u.map('n', '<f5>',':MundoToggle<CR>')
-
--- nvim-tree
-function plugins.nvim_tree()
-  u.map("n", "<f6>", ":NvimTreeToggle<CR>")
-  u.map("n", "<f7>", ":NvimTreeRefresh<CR>")
-  u.map("n", "<f8>", ":NvimTreeFindFile<CR>")
-end
 
 function plugins.fzf_preview()
    -- (project, git, directory, buffer, project_old, project_mru, project_mrw, old, mru, mrw)
@@ -62,7 +53,7 @@ function plugins.fzf()
   vim.cmd('map <silent> <A-e> :Sessions<CR>')
   vim.cmd('map <silent> <A-j> :FzfPreviewJumps<CR>')
   -- vim.cmd('map <silent> <A-s> :<C-u>GGrep<CR>')
-  vim.cmd('map <silent> <A-s> :<C-u>RG<CR>')
+  vim.cmd('map <silent> <A-s> :FzfPreviewProjectGrep<CR>')
   -- vim.cmd('map <silent> <A-v> :Vista!!<CR>')
   -- vim.cmd('map <silent> <A-y> :<C-u>Snippets<CR>')
 end

@@ -1,20 +1,20 @@
--- General settings
+-- dofile('/home/wil/.config/nvim/lua/profiler.lua')
+
+-- general settings
+require "main.options"
+
 
 -- install 3rd party plugin packages
-require "plugins"
+local plugins = require "plugins"
 
 -- install debugger adapter protocol functionality
 -- require "main.debugger"
-
--- require "main.options"
-require "main.mappings"
 require "main.autocommands"
 
 
 -- plugin config and startup
-require "plugins.statusline"
-require "plugins.telescope"
-require "plugins.treesitter"
+-- require "plugins.telescope"
+-- require "plugins.treesitter"
 -- require "plugins.general"
 -- require "plugins.bufferline"
 -- require "plugins.galaxyline"
@@ -24,7 +24,8 @@ require "plugins.treesitter"
 -- require "plugins.startify"
 
 require "main.colorscheme"
-require "plugins.feline"
+require "plugins.feline".load()
+require "main.mapping"
 
 -- only available after plugins loaded
 -- if packer_plugins["nvim-treesitter"] and packer_plugins["nvim-treesitter"].loaded then

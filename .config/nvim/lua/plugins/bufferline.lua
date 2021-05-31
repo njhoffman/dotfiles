@@ -21,24 +21,21 @@
 -- "     return buffer_a.modified > buffer_b.modified
 -- "   end
 -- " }
-
-
-require'bufferline'.setup{
+require"bufferline".setup {
   options = {
-    close_icon = '',
-    left_trunc_marker = '',
-    right_trunc_marker = '',
+    close_icon = "",
+    left_trunc_marker = "",
+    right_trunc_marker = "",
     show_buffer_close_icons = false,
     tab_size = 20,
     max_name_length = 20,
     max_prefix_length = 20,
-    separator_style = { '|', '|' },
+    separator_style = {"|", "|"},
     enforce_regular_tabs = true,
-    sort_by = 'directory',
-    always_show_bufferline = true
-  }
+    sort_by = "directory",
+    always_show_bufferline = true,
+  },
 }
-
 
 -- " lua require'bufferline'.setup{ options = { tab_size = 12 } }
 -- " lua require'bufferline'.setup{}

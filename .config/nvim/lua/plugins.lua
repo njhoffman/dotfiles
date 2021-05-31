@@ -1,47 +1,48 @@
+-- require"utils.bootstrap_packer"
+
+local packer = require"packer"
 local config = require"config"
+local log = require"logger"
 
-local Plugins = config.Plugins
+packer.startup(function()
 
-require"utils.bootstrap_packer"
-
--- Only required if you have packer configured as `opt`
-vim.cmd [[packadd packer.nvim]]
-
-
-return require('packer').startup(function()
   use "wbthomason/packer.nvim"
 
-  --  Plug "rafcamlet/nvim_luapad"
-
   -- ====================================
-  -- Key mapping
+  -- Basic key maps
   use "tpope/vim-repeat"
   use "tpope/vim-unimpaired"
-  use "tpope/vim-sensible"
   use "ryanoasis/vim-devicons"
+  require"plugins.sayonara".setup(use)
   require"plugins.nvim_web_devicons".setup(use)
   require"plugins.gitsigns".setup(use)
 
+  -- ====================================
+  -- Treesitter and syntax
+ if config.Treesitter.enabled ~= 0 and config.Treesitter.enabled ~= false then
+   require"plugins.treesitter".setup(use)
+ end
+  -- ====================================
+  -- Fuzzy search (telescope, fzf)
+  require"plugins.fzf".setup(use)
+  require"plugins.fzf_preview".setup(use)
+  require"plugins.telescope".setup(use)
 
   -- ====================================
   -- LSP, Autocomplete and snippets
   if config.LSP.enabled ~= 0 and config.LSP.enabled ~= false then
     use {
-      "neovim/nvim-lspconfig",
+      { "jose-elias-alvarez/nvim-lsp-ts-utils" },
+      { "kabouzeid/nvim-lspinstall" },
+      { "nvim-lua/lsp-status.nvim" },
+      { "hrsh7th/vim-vsnip" },
+      { "glepnir/lspsaga.nvim", config = require"plugins.lspsaga".init() },
+      { "hrsh7th/nvim-compe", config = require"plugins.nvim_compe".init() },
+      { "neovim/nvim-lspconfig", config = require"lsp".load() },
       requires = {
-        { "nvim_lua/popup.nvim"},
-        { "nvim_lua/plenary.nvim"},
-        { "jose-elias-alvarez/nvim-lsp-ts-utils" },
-        { "kabouzeid/nvim-lspinstall" },
-        { "nvim-lua/lsp-status.nvim" },
-        { "hrsh7th/vim-vsnip" }
-      },
-      config = function()
-        -- start lsp servers
-        require"plugins.lspsaga".setup(use)
-        require"plugins.nvim_compe".setup(use)
-        require"lsp".setup(use)
-      end
+         "nvim-lua/popup.nvim",
+         "nvim-lua/plenary.nvim",
+      }
     }
   end
 
@@ -50,108 +51,139 @@ return require('packer').startup(function()
   if config.DAP.enabled ~= 0 and config.DAP.enabled ~= false then
     use {
       "mfussenegger/nvim-dap",
-      "theHamsta/nvim-dap-virtual-text",
-      "nvim-telescope/telescope-dap.nvim",
-      requires = "nvim-telescope/telescope.nvim"
+      requires = {
+        "theHamsta/nvim-dap-virtual-text",
+        "nvim-telescope/telescope-dap.nvim"
+      }
     }
-  end
 
+ -- use {
+ --    'puremourning/vimspector',
+ --    setup = [[vim.g.vimspector_enable_mappings = 'HUMAN']],
+ --    disable = true
+ --  }
+  end
   -- ====================================
   -- Visual enhancements
-  if Plugins.vim_smoothie ~= 0 and Plugins.vim_smoothie ~= false then
     use { 'gerw/vim-HiLinkTrace' }
     require"plugins.vim_plugin_AnsiEsc".setup(use)
     require"plugins.vim_hexokinase".setup(use)
     require"plugins.vim_smoothie".setup(use)
     require"plugins.vimade".setup(use)
-  end
+  -- use {
+  --   'norcalli/nvim-colorizer.lua',
+  --   ft = {'css', 'javascript', 'vim', 'html'},
+  --   config = [[require('colorizer').setup {'css', 'javascript', 'vim', 'html'}]]
+  -- }
 
   -- ====================================
-  -- Fuzzy search (telescope, fzf)
-  if Plugins.telescope ~= 0 and Plugins.telescope ~= false then
-    require"plugins.ack".setup(use)
-    require"plugins.fzf".setup(use)
-    require"plugins.fzf_preview".setup(use)
-    require"plugins.telescope".setup(use)
-  end
-
-  -- ====================================
-  -- Treesitter and syntax
-  if config.Treesitter.enabled == nil or config.Treesitter.enabled == true then
-    require"plugins.treesitter".setup(use)
-  end
-
-  -- ====================================
-  -- Utils
-  if Plugins.easyalign ~= 0 and Plugins.easyalign ~= false then
+  -- Formatting utils
     require"plugins.easyalign".setup(use)
-  end
-  if Plugins.splitjoin ~= 0 and Plugins.splitjoin ~= false then
     require"plugins.splitjoin".setup(use)
-  end
-  if Plugins.todo_comments ~= 0 and Plugins.todo_comments ~= false then
     require"plugins.todo_comments".setup(use)
-  end
-  if Plugins.neoformat ~= 0 and Plugins.neoformat ~= false then
     require"plugins.neoformat".setup(use)
-  end
-  if Plugins.kommentary ~= 0 and Plugins.kommentary ~= false then
     require"plugins.kommentary".setup(use)
-  end
-  if Plugins.vim_profiler ~= 0 and Plugins.vim_profiler ~= false then
     use { 'bchretien/vim-profiler' }
     use { 'tweekmonster/startuptime.vim' }
     -- vim-profiler.py nvim -n 10
     -- vim-profiler.py -n 5 nvim foo.cc -c ":exec ':normal ia' | :q\!"
-  end
 
   -- ====================================
   -- Interface plugins
-  if Plugins.nvim_bqf ~= 0 and Plugins.nvim_bqf ~= false then
+    require"plugins.dashboard-nvim".setup(use)
     require"plugins.nvim_bqf".setup(use)
-  end
-  if Plugins.trouble ~= 0 and Plugins.trouble ~= false then
     require"plugins.trouble".setup(use)
-  end
-  if Plugins.vim_mundo ~= 0 and Plugins.vim_mundo ~= false then
     require"plugins.vim_mundo".setup(use)
-  end
-  if Plugins.nvim_tree ~= 0 and Plugins.nvim_tree ~= false then
     require"plugins.nvim_tree".setup(use)
-  end
-  if Plugins.nvim_toggleterm ~= 0 and Plugins.nvim_toggleterm ~= false then
     require"plugins.nvim_toggleterm".setup(use)
-  end
-  if Plugins.nvim_hlslens ~= 0 and Plugins.nvim_hlslens ~= false then
     require"plugins.nvim_hlslens".setup(use)
-  end
+
+  -- ====================================
+  -- Project management
+    require"plugins.vim-rooter".setup(use)
 
   -- ====================================
   -- Themes
   use {
-    "famiu/feline.nvim",
-    "neg-serg/neg",
     "arcticicestudio/nord-vim",
-    -- "kyazdani42/blue_moon",
-    -- "rockerBOO/boo_colorscheme_nvim",
-    -- {"npxbr/gruvbox.nvim", requires = "rktjmp/lush.nvim"},
-    -- "marko_cerovac/material.nvim",
-    -- "shaunsingh/moonlight.nvim",
-    -- "rafamadriz/neon",
-    -- "bluz71/vim_nightfly_guicolors",
-    -- "christianchiarulli/nvcode_color_schemes.vim",
-    -- "rakr/vim_one"
+    -- "neg-serg/neg",
+     -- "kyazdani42/blue-moon",
+     -- "rockerBOO/boo-colorscheme-nvim",
+     -- {"npxbr/gruvbox.nvim", requires = "rktjmp/lush.nvim"},
+     -- "marko-cerovac/material.nvim",
+     -- "shaunsingh/moonlight.nvim",
+     -- "rafamadriz/neon",
+     -- "bluz71/vim-nightfly-guicolors",
+     -- "christianchiarulli/nvcode-color-schemes.vim",
+     -- "rakr/vim-one"
   }
+  require"plugins.feline".setup(use)
+  require"plugins.barbar".setup(use)
 
+  -- ====================================
+  -- Motion
+  -- vim-wordmotion, vim-sneak, 'terryma/vim-expand-region'
 end
 )
--- {'glepnir/galaxyline.nvim', branch = 'main'},
+
+local plugins = setmetatable({}, {
+  __index = function(_, key)
+    init()
+    return packer[key]
+  end
+})
+
+return packer
+-- Git
+-- use {
+--   {'tpope/vim-fugitive', cmd = {'Git', 'Gstatus', 'Gblame', 'Gpush', 'Gpull'}}, {
+--     'lewis6991/gitsigns.nvim',
+--     requires = {'nvim-lua/plenary.nvim'},
+--     config = [[require('config.gitsigns')]],
+--     event = 'BufEnter'
+--   }, {'TimUntersberger/neogit', opt = true}
+-- }
+-- -- Terminal
+--   use 'voldikss/vim-floaterm'
+
+--   -- REPLs
+--   use {
+--     'hkupty/iron.nvim',
+--     setup = [[vim.g.iron_map_defaults = 0]],
+--     config = [[require('config.iron')]],
+--     cmd = {'IronRepl', 'IronSend', 'IronReplHere'}
+  -- }
+-- Wrapping/delimiters
+-- use {
+--   'machakann/vim-sandwich',
+--   {'andymass/vim-matchup', setup = [[require('config.matchup')]], event = 'BufEnter'}
+-- }
+--
+-- Path navigation
+-- use 'justinmk/vim-dirvish'
+
+-- Plugin development
+  -- use 'folke/lua-dev.nvim'
 -- "folke/which_key.nvim",
+--  Plug "rafcamlet/nvim_luapad"
 -- "machakann/vim_sandwich",
---   'akinsho/nvim_bufferline.lua'
 --   "windwp/nvim_autopairs",
 --   "norcalli/nvim_colorizer.lua",
 --   {"turbio/bracey.vim", run = "npm install_server"},
 --   {"iamcco/markdown_preview.nvim", run = "cd app && yarn install"}
---   {'haorenW1025/completion_nvim'},
 -- "~/repos/friendly_snippets"
+
+-- " automatically save sessions
+-- Plug 'tpope/vim-obsession'
+-- " :Obsess / :Obsess! <file> to record a sessoin
+-- " vim -S <file> / :source <file>
+
+-- " switch/manage sessions cleanly
+-- Plug 'dhruvasagar/vim-prosession'
+-- " Prosession {dir} -> switch to session in dir
+-- " update tmux window with session
+-- let g:prosession_tmux_title = 1
+-- let g:prosession_tmux_title_format = "vim - @@@"
+-- let g:prosession_on_startup = 1
+-- " different sessions per branch
+-- let g:prosession_per_branch = 0

@@ -1,10 +1,4 @@
 -- log.lua
---
--- Inspired by rxi/log.lua
--- Modified by tjdevries and can be found at github.com/tjdevries/vlog.nvim
---
--- This library is free software; you can redistribute it and/or modify it
--- under the terms of the MIT license. See LICENSE for details.
 
 -- User configuration section
 local default_config = {

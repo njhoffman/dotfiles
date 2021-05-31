@@ -6,19 +6,11 @@ local bqf_config = {
     win_height = 12,
     win_vheight = 12,
     delay_syntax = 80,
-    border_chars = {'│', '│', '─', '─', '╭', '╮', '╰', '╯', '█'}
+    border_chars = {"│", "│", "─", "─", "╭", "╮", "╰", "╯", "█"},
     -- border_chars = {'┃', '┃', '━', '━', '┏', '┓', '┗', '┛', '█'}
   },
-  func_map = {
-    vsplit = '',
-    ptogglemode = 'z,',
-    stoggleup = ''
-  },
-  filter = {
-    fzf = {
-      extra_opts = {'--bind', 'ctrl-o:toggle-all', '--prompt', '> '}
-    }
-  }
+  func_map = {vsplit = "", ptogglemode = "z,", stoggleup = ""},
+  filter = {fzf = {extra_opts = {"--bind", "ctrl-o:toggle-all", "--prompt", "> "}}},
 }
 
 function plugin.load()
@@ -26,7 +18,7 @@ function plugin.load()
 end
 
 function plugin.setup(use)
-  use { "kevinhwang91/nvim-bqf", config = plugin.load  }
+  use {"kevinhwang91/nvim-bqf", config = plugin.load}
 end
 
 return plugin

@@ -1,25 +1,23 @@
 local plugin = {}
-local u = require("utils.core")
 
-function plugin.mapping()
-  -- vim-easy-align alignment inhancer
-  -- Start interactive EasyAlign in visual mode (e.g. vipga)
-  vim.cmd('xmap ga <Plug>(EasyAlign)')
-  -- Start interactive EasyAlign for a motion/text object (e.g. gaip)
-  vim.cmd('nmap ga <Plug>(EasyAlign)')
-  -- vmap <Enter> <Plug>(EasyAlign)
-  vim.g.easy_align_ignore_groups = {'Comment', 'String'}
+function set_mapping()
+  local map = require("utils.core").map
+  map({'x', 'n'}, 'ga', '<Plug>(EasyAlign)', { noremap = false, silent = true })
+  vim.g.easy_align_ignore_groups = {"Comment", "String"}
 end
-
-function plugin.load()
-  plugin.mapping()
-end
+-- nmap <Leader>= <Plug>(EasyAlign)ip=``
 
 function plugin.setup(use)
-  use { 'junegunn/vim-easy-align', config = plugin.load }
+  use {"junegunn/vim-easy-align"}
+  set_mapping()
 end
 
 return plugin
+
+-- vipga=  gaip=
+-- apple   =red
+-- grass+=green
+-- sky-=   blue
 
 -- TODO: map Enter to delimiter_align in interactive mode
 

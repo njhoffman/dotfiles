@@ -1,89 +1,37 @@
-00000000: 0a76 696d 2e67 2e6a 656c 6c79 6265 616e  .vim.g.jellybean
-00000010: 735f 7573 655f 6c6f 7763 6f6c 6f72 5f62  s_use_lowcolor_b
-00000020: 6c61 636b 203d 2031 0a76 696d 2e67 2e6a  lack = 1.vim.g.j
-00000030: 656c 6c79 6265 616e 735f 7573 655f 6775  ellybeans_use_gu
-00000040: 695f 6974 616c 6963 7320 3d20 310a 7669  i_italics = 1.vi
-00000050: 6d2e 672e 6a65 6c6c 7962 6561 6e73 5f75  m.g.jellybeans_u
-00000060: 7365 5f74 6572 6d5f 6974 616c 6963 7320  se_term_italics
-00000070: 3d20 310a 7669 6d2e 672e 6a65 6c6c 7962  = 1.vim.g.jellyb
-00000080: 6561 6e73 5f75 7365 5f74 6572 6d5f 6261  eans_use_term_ba
-00000090: 636b 6772 6f75 6e64 5f63 6f6c 6f72 203d  ckground_color =
-000000a0: 2031 0a2d 2d20 7669 6d2e 672e 6a65 6c6c   1.-- vim.g.jell
-000000b0: 7962 6561 6e73 5f62 6163 6b67 726f 756e  ybeans_backgroun
-000000c0: 645f 636f 6c6f 7220 3d20 276e 6f6e 6527  d_color = 'none'
-000000d0: 0a2d 2d20 7669 6d2e 672e 6a65 6c6c 7962  .-- vim.g.jellyb
-000000e0: 6561 6e73 5f6f 7665 7272 6964 6573 203d  eans_overrides =
-000000f0: 207b 2020 2020 2762 6163 6b67 726f 756e   {    'backgroun
-00000100: 6427 3a20 7b20 2767 7569 6267 273a 2027  d': { 'guibg': '
-00000110: 6e6f 6e65 2720 7d20 7d0a 0a2d 2d20 7669  none' } }..-- vi
-00000120: 6d2e 672e 6a65 6c6c 7962 6561 6e73 5f6f  m.g.jellybeans_o
-00000130: 7665 7272 6964 6573 2e62 6163 6b67 726f  verrides.backgro
-00000140: 756e 6420 3d20 7b20 6775 6962 673a 2027  und = { guibg: '
-00000150: 6e6f 6e65 2720 7d0a 0a76 696d 2e63 6d64  none' }..vim.cmd
-00000160: 2827 636f 6c6f 7273 6368 656d 6520 6a65  ('colorscheme je
-00000170: 6c6c 7962 6561 6e73 2729 0a76 696d 2e63  llybeans').vim.c
-00000180: 6d64 2827 6869 2120 4e6f 726d 616c 2067  md('hi! Normal g
-00000190: 7569 6267 3d4e 4f4e 4520 6374 6572 6d62  uibg=NONE ctermb
-000001a0: 673d 4e4f 4e45 2729 0a76 696d 2e63 6d64  g=NONE').vim.cmd
-000001b0: 2827 6869 2120 456e 644f 6642 7566 6665  ('hi! EndOfBuffe
-000001c0: 7220 6775 6962 673d 4e4f 4e45 2063 7465  r guibg=NONE cte
-000001d0: 726d 6267 3d4e 4f4e 4527 290a 7669 6d2e  rmbg=NONE').vim.
-000001e0: 636d 6428 2768 6921 2053 6967 6e43 6f6c  cmd('hi! SignCol
-000001f0: 756d 6e20 6775 6962 673d 4e4f 4e45 2063  umn guibg=NONE c
-00000200: 7465 726d 6267 3d4e 4f4e 4527 290a 0a0a  termbg=NONE')...
-00000210: 2d2d 2076 696d 2e63 6d64 2827 6869 2120  -- vim.cmd('hi!
-00000220: 6261 636b 6772 6f75 6e64 2067 7569 6267  background guibg
-00000230: 3d4e 4f4e 4527 290a 7669 6d2e 636d 6428  =NONE').vim.cmd(
-00000240: 2768 6921 2053 7472 696e 6720 6775 6966  'hi! String guif
-00000250: 673d 2332 3242 4239 3920 6374 6572 6d66  g=#22BB99 ctermf
-00000260: 673d 6772 6565 6e27 290a 7669 6d2e 636d  g=green').vim.cm
-00000270: 6428 2768 6921 2043 6f6e 7374 616e 7420  d('hi! Constant
-00000280: 6775 6966 673d 2336 3639 3961 6120 6374  guifg=#6699aa ct
-00000290: 6572 6d66 673d 4c69 6768 7442 6c75 6527  ermfg=LightBlue'
-000002a0: 290a 7669 6d2e 636d 6428 2768 6921 2049  ).vim.cmd('hi! I
-000002b0: 6465 6e74 6966 6965 7220 6775 6966 673d  dentifier guifg=
-000002c0: 2338 6562 3963 3620 6374 6572 6d66 673d  #8eb9c6 ctermfg=
-000002d0: 4c69 6768 7443 7961 6e27 290a 7669 6d2e  LightCyan').vim.
-000002e0: 636d 6428 2768 6921 2053 746f 7261 6765  cmd('hi! Storage
-000002f0: 436c 6173 7320 6775 6966 673d 2363 3539  Class guifg=#c59
-00000300: 6636 6620 6374 6572 6d66 673d 426c 7565  f6f ctermfg=Blue
-00000310: 2729 0a0a 7669 6d2e 636d 6428 2768 6921  ')..vim.cmd('hi!
-00000320: 204c 696e 654e 7220 6775 6962 673d 4e4f   LineNr guibg=NO
-00000330: 4e45 2063 7465 726d 6267 3d4e 4f4e 4527  NE ctermbg=NONE'
-00000340: 290a 7669 6d2e 636d 6428 2768 6921 2043  ).vim.cmd('hi! C
-00000350: 7572 736f 724c 696e 6520 6775 6962 673d  ursorLine guibg=
-00000360: 2330 3831 3231 3420 6374 6572 6d66 673d  #081214 ctermfg=
-00000370: 426c 6163 6b27 290a 7669 6d2e 636d 6428  Black').vim.cmd(
-00000380: 2768 6921 2043 7572 736f 724c 696e 654e  'hi! CursorLineN
-00000390: 7220 6775 6966 673d 2361 6664 3766 6620  r guifg=#afd7ff
-000003a0: 6374 6572 6d66 673d 426c 6163 6b27 290a  ctermfg=Black').
-000003b0: 7669 6d2e 636d 6428 2768 6921 2043 7572  vim.cmd('hi! Cur
-000003c0: 736f 7243 6f6c 756d 6e20 6775 6962 673d  sorColumn guibg=
-000003d0: 4e4f 4e45 2063 7465 726d 6267 3d4e 4f4e  NONE ctermbg=NON
-000003e0: 4527 290a 0a76 696d 2e63 6d64 2827 6869  E')..vim.cmd('hi
-000003f0: 2120 4769 7447 7574 7465 7241 6464 2067  ! GitGutterAdd g
-00000400: 7569 6667 3d23 3030 3737 3030 2067 7569  uifg=#007700 gui
-00000410: 6267 3d4e 4f4e 4520 6374 6572 6d62 673d  bg=NONE ctermbg=
-00000420: 4e4f 4e45 2729 3b0a 7669 6d2e 636d 6428  NONE');.vim.cmd(
-00000430: 2768 6921 2047 6974 4775 7474 6572 4368  'hi! GitGutterCh
-00000440: 616e 6765 2067 7569 6667 3d23 3939 3939  ange guifg=#9999
-00000450: 3030 2067 7569 6267 3d4e 4f4e 4520 6374  00 guibg=NONE ct
-00000460: 6572 6d62 673d 4e4f 4e45 2729 3b0a 7669  ermbg=NONE');.vi
-00000470: 6d2e 636d 6428 2768 6921 2047 6974 4775  m.cmd('hi! GitGu
-00000480: 7474 6572 4465 6c65 7465 2067 7569 6667  tterDelete guifg
-00000490: 3d23 3838 3030 3030 2067 7569 6267 3d4e  =#880000 guibg=N
-000004a0: 4f4e 4520 6374 6572 6d62 673d 4e4f 4e45  ONE ctermbg=NONE
-000004b0: 2729 3b0a 0a2d 2d20 7472 616e 7370 6172  ');..-- transpar
-000004c0: 656e 7420 6267 0a2d 2d20 7669 6d2e 6175  ent bg.-- vim.au
-000004d0: 746f 636d 6420 7669 6d65 6e74 6572 202a  tocmd vimenter *
-000004e0: 2068 6920 4e6f 726d 616c 2067 7569 6267   hi Normal guibg
-000004f0: 3d4e 4f4e 4520 6374 6572 6d62 673d 4e4f  =NONE ctermbg=NO
-00000500: 4e45 0a2d 2d20 7669 6d2e 6175 746f 636d  NE.-- vim.autocm
-00000510: 6420 7669 6d65 6e74 6572 202a 2068 6920  d vimenter * hi
-00000520: 456e 644f 6642 7566 6665 7220 6775 6962  EndOfBuffer guib
-00000530: 673d 4e4f 4e45 2063 7465 726d 6267 3d4e  g=NONE ctermbg=N
-00000540: 4f4e 450a 2d2d 2076 696d 2e61 7574 6f63  ONE.-- vim.autoc
-00000550: 6d64 2076 696d 656e 7465 7220 2a20 6869  md vimenter * hi
-00000560: 2053 6967 6e43 6f6c 756d 6e20 6775 6962   SignColumn guib
-00000570: 673d 4e4f 4e45 2063 7465 726d 6267 3d4e  g=NONE ctermbg=N
-00000580: 4f4e 450a 0a                             ONE..
+
+
+vim.g.jellybeans_use_lowcolor_black = 1
+vim.g.jellybeans_use_gui_italics = 1
+vim.g.jellybeans_use_term_italics = 1
+vim.g.jellybeans_use_term_background_color = 1
+-- vim.g.jellybeans_background_color = 'none'
+-- vim.g.jellybeans_overrides = {    'background': { 'guibg': 'none' } }
+
+-- vim.g.jellybeans_overrides.background = { guibg: 'none' }
+
+vim.cmd('colorscheme jellybeans')
+vim.cmd('hi! Normal guibg=NONE ctermbg=NONE')
+vim.cmd('hi! EndOfBuffer guibg=NONE ctermbg=NONE')
+vim.cmd('hi! SignColumn guibg=NONE ctermbg=NONE')
+
+
+-- vim.cmd('hi! background guibg=NONE')
+vim.cmd('hi! String guifg=#22BB99 ctermfg=green')
+vim.cmd('hi! Constant guifg=#6699aa ctermfg=LightBlue')
+vim.cmd('hi! Identifier guifg=#8eb9c6 ctermfg=LightCyan')
+vim.cmd('hi! StorageClass guifg=#c59f6f ctermfg=Blue')
+
+vim.cmd('hi! LineNr guibg=NONE ctermbg=NONE')
+vim.cmd('hi! CursorLine guibg=#081214 ctermfg=Black')
+vim.cmd('hi! CursorLineNr guifg=#afd7ff ctermfg=Black')
+vim.cmd('hi! CursorColumn guibg=NONE ctermbg=NONE')
+
+vim.cmd('hi! GitGutterAdd guifg=#007700 guibg=NONE ctermbg=NONE')
+vim.cmd('hi! GitGutterChange guifg=#999900 guibg=NONE ctermbg=NONE')
+vim.cmd('hi! GitGutterDelete guifg=#880000 guibg=NONE ctermbg=NONE')
+
+-- transparent bg
+-- vim.autocmd vimenter * hi Normal guibg=NONE ctermbg=NONE
+-- vim.autocmd vimenter * hi EndOfBuffer guibg=NONE ctermbg=NONE
+-- vim.autocmd vimenter * hi SignColumn guibg=NONE ctermbg=NONE
+

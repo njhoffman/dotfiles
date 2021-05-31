@@ -35,20 +35,6 @@ nnoremap q; q:
 " Disable ex mode
 nnoremap Q <Nop>
 
-" map underscore to remove search highlighting
-nnoremap <silent> _ :nohl<CR>
-
-" Blink current search match
-nnoremap <silent> n n:call <SID>BlinkCurrentMatch()<CR>
-nnoremap <silent> N N:call <SID>BlinkCurrentMatch()<CR>
-function! s:BlinkCurrentMatch()
-  let target = '\c\%#'.@/
-  let match = matchadd('IncSearch', target)
-  redraw
-  sleep 100m
-  call matchdelete(match)
-  redraw
-endfunction
 
 " map vertical/horizontal splits
 " nnoremap <silent> <Leader>w vsplit <CR>
@@ -87,28 +73,6 @@ nnoremap - 4<C-W>-
 nnoremap <silent>T :tabnext<CR>
 nnoremap <silent><Leader>t :tabnext<CR>
 
-" map close buffer
-" nnoremap <silent> <Leader>d :bd<CR>
-nnoremap <silent> <Leader>d :Sayonara<CR>
-
-" barbar
-map <silent> H :BufferPrev<CR>
-map <silent> L :BufferNext<CR>
-
-" Goto buffer in position...
-nnoremap <silent>    <A-1> :BufferGoto 1<CR>
-nnoremap <silent>    <A-2> :BufferGoto 2<CR>
-nnoremap <silent>    <A-3> :BufferGoto 3<CR>
-nnoremap <silent>    <A-4> :BufferGoto 4<CR>
-nnoremap <silent>    <A-5> :BufferGoto 5<CR>
-nnoremap <silent>    <A-6> :BufferGoto 6<CR>
-nnoremap <silent>    <A-7> :BufferGoto 7<CR>
-nnoremap <silent>    <A-8> :BufferGoto 8<CR>
-nnoremap <silent>    <A-9> :BufferLast<CR>
-
-
-" Magic buffer-picking mode
-nnoremap <silent> <C-s>    :BufferPick<CR>
 
 " go to jumplist
 " nmap <Leader>jl :call GotoJump()<CR>

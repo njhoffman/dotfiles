@@ -1,6 +1,5 @@
 vim = vim
 local utils = {}
-local scopes = {o = vim.o, b = vim.bo, w = vim.wo}
 
 -- autocommands
 function utils.define_augroups(definitions) -- {{{1
@@ -25,21 +24,23 @@ function utils.define_augroups(definitions) -- {{{1
   end
 end
 
--- options
-function utils.opt(scope, key, value)
-  scopes[scope][key] = value
-  if scope ~= "o" then
-    scopes["o"][key] = value
-  end
+-- local scopes = {o = vim.o, b = vim.bo, w = vim.wo}
+
+function utils.opt(o, v, scopes)
+  scopes = scopes or {vim.o}
+  for _, s in ipairs(scopes) do s[o] = v end
 end
 
 -- mappings
-function utils.map(mode, key, result, opts)
+function utils.map(modes, key, result, opts)
   local options = {noremap = true, silent = true}
   if opts then
     options = vim.tbl_extend("force", options, opts)
   end
-  vim.api.nvim_set_keymap(mode, key, result, options)
+  if type(modes) == 'string' then modes = {modes} end
+  for _, mode in ipairs(modes) do
+    vim.api.nvim_set_keymap(mode, key, result, options)
+  end
 end
 
 -- Terminal

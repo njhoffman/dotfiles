@@ -34,7 +34,7 @@ source $plugins/expand-selection.vim " incrementally expand visual selection
 " source $plugins/highlights.vim       " plugins for showing inline colors
 source $plugins/indent-guide.vim     " show indentation lines
 source $plugins/syntax.vim           " syntax language packs and treesitter
-source $plugins/barbar.vim           " modern tab line
+" source $plugins/barbar.vim           " modern tab line
 " source $plugins/vimade.vim           " inactive window dimming
 source $plugins/vitality.vim         " cursor enhancement
 " source $plugins/comfortable-motion.vim " more pleasant scrolling in vim

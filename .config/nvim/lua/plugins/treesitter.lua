@@ -1,31 +1,34 @@
-local config = require("config")
-
---local ensure_installed = config.Treesitter.parsers
-
-local treesitter_config = {
-  highlight = {
-    enable = true,
-    use_languagetree = true,
-    additional_vim_regex_highlighting = true,
-    -- disable = { "c", "rust", "javascript" },  -- list of language that will be disabled
-  },
-  indent = { enable = config.Treesitter.indent},
-  rainbow = {enable = config.Treesitter.rainbow},
-  incremental_selection = {
-    enable = true,
-    keymaps = {
-      init_selection = "gnn",
-      node_incremental = "grn",
-      scope_incremental = "grc",
-      node_decremental = "grm",
-    },
-  }
-}
 
 local plugin = {}
 
 function plugin.load()
-  require "nvim-treesitter.configs".setup(treesitter_config)
+  local config = require("config").Treesitter
+  local tsconfig = require"nvim-treesitter.configs"
+  tsconfig.setup {
+    ensure_installed = config.parsers,
+    highlight = {
+      enable = true,
+      use_languagetree = true,
+      additional_vim_regex_highlighting = true,
+      -- disable = { "c", "rust", "javascript" },
+    },
+    refactor = {
+      smart_rename = {enable = true, keymaps = {smart_rename = "grr"}},
+      highlight_definitions = {enable = true}
+      -- highlight_current_scope = { enable = true }
+    },
+    indent = {enable = config.indent},
+    rainbow = {enable = config.rainbow},
+    incremental_selection = {
+      enable = true,
+      keymaps = {
+        init_selection = "gnn",
+        node_incremental = "grn",
+        scope_incremental = "grc",
+        node_decremental = "grm",
+      },
+    },
+  }
 end
 
 function plugin.setup(use)
@@ -33,15 +36,8 @@ function plugin.setup(use)
     "nvim-treesitter/nvim-treesitter",
     run = ":TSUpdate",
     config = plugin.load,
-    requires = { "p00f/nvim-ts-rainbow" }
+    requires = {"p00f/nvim-ts-rainbow", "nvim-lua/plenary.nvim", "nvim-treesitter/nvim-treesitter-refactor"},
   }
 end
 
-require'nvim-treesitter.configs'.setup {
-  rainbow = {
-    enable = true,
-    extended_mode = true, -- Highlight also non-parentheses delimiters, boolean or table: lang -> boolean
-    max_file_lines = 1000, -- Do not enable for files with more than 1000 lines, int
-  }
-}
 return plugin

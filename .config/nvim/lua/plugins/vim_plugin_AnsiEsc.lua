@@ -12,7 +12,7 @@ function plugin.load()
 end
 
 function plugin.setup(use)
-  use { 'joeysino/vim-plugin-AnsiEsc' }
+  use {"joeysino/vim-plugin-AnsiEsc"}
 end
 
 return plugin

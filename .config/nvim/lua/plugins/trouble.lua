@@ -22,7 +22,7 @@ local trouble_config = {
     open_folds = {"zR", "zr"}, -- open all folds
     toggle_fold = {"zA", "za"}, -- toggle fold of current file
     previous = "k", -- preview item
-    next = "j" -- next item
+    next = "j", -- next item
   },
   indent_lines = true, -- add an indent guide below the fold icons
   auto_open = false, -- automatically open the list when you have diagnostics
@@ -35,19 +35,17 @@ local trouble_config = {
     warning = "",
     hint = "",
     information = "",
-    other = "﫠"
+    other = "﫠",
   },
-  use_lsp_diagnostic_signs = false -- enabling this will use the signs defined in your lsp client
+  use_lsp_diagnostic_signs = false, -- enabling this will use the signs defined in your lsp client
 }
-
-
 
 function plugin.load()
   require("trouble").setup(trouble_config)
 end
 
 function plugin.setup(use)
-  use { "folke/trouble.nvim", config = plugin.load }
+  use {"folke/trouble.nvim", config = plugin.load}
 end
 
 return plugin

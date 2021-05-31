@@ -1,7 +1,5 @@
 local config = require("config")
-local u = require("utils.core")
 
-local plugin = {}
 local Completion = config.Completion
 
 local compe_config = {
@@ -25,8 +23,8 @@ local compe_config = {
     nvim_lsp = Completion.lsp,
     spell = Completion.spell,
     emoji = Completion.emoji,
-    nvim_lua = {menu = "[]"}
-  }
+    nvim_lua = {menu = "[]"},
+  },
 }
 
 -- symbols for autocomplete
@@ -55,13 +53,16 @@ vim.lsp.protocol.CompletionItemKind = {
   " ﳤ  (Struct)",
   "   (Event)",
   "   (Operator)",
-  "   (TypeParameter)"
+  "   (TypeParameter)",
 }
 
-function plugin.mapping()
+function set_config()
+  local u = require("utils.core")
   local t = function(str)
     return vim.api.nvim_replace_termcodes(str, true, true, true)
   end
+
+  vim.o.completeopt = "menuone,noselect"
 
   local check_back_space = function()
     local col = vim.fn.col(".") - 1
@@ -107,20 +108,29 @@ function plugin.mapping()
   vim.api.nvim_set_keymap("s", "<Tab>", "v:lua.tab_complete()", {expr = true})
   vim.api.nvim_set_keymap("i", "<S-Tab>", "v:lua.s_tab_complete()", {expr = true})
   vim.api.nvim_set_keymap("s", "<S-Tab>", "v:lua.s_tab_complete()", {expr = true})
-  vim.api.nvim_set_keymap("i", "<S-l>", [[vsnip#jumpable(1)   ? '<Plug>(vsnip-jump-next)'      : '<S-l>']], {expr = true})
-  vim.api.nvim_set_keymap("s", "<S-l>", [[vsnip#jumpable(1)   ? '<Plug>(vsnip-jump-next)'      : '<S-l>']], {expr = true})
-  vim.api.nvim_set_keymap("i", "<S-j>", [[vsnip#expandable()  ? '<Plug>(vsnip-expand)'         : '<S-j>']], {expr = true})
+  vim.api.nvim_set_keymap("i", "<S-l>",
+                          [[vsnip#jumpable(1)   ? '<Plug>(vsnip-jump-next)'      : '<S-l>']],
+                          {expr = true})
+  vim.api.nvim_set_keymap("s", "<S-l>",
+                          [[vsnip#jumpable(1)   ? '<Plug>(vsnip-jump-next)'      : '<S-l>']],
+                          {expr = true})
+  vim.api.nvim_set_keymap("i", "<S-j>",
+                          [[vsnip#expandable()  ? '<Plug>(vsnip-expand)'         : '<S-j>']],
+                          {expr = true})
 end
 
+local plugin = {}
+
 function plugin.load()
-  vim.o.completeopt = "menuone,noselect"
-  require('compe').setup(compe_config)
-  plugin.mapping()
+  require("compe").setup(compe_config)
+  set_config()
 end
 
 function plugin.setup(use)
-  use { 'hrsh7th/nvim-compe', config = plugin.load }
+  use {"hrsh7th/nvim-compe", config = plugin.load}
 end
+
+plugin.init = set_config
 
 return plugin
 
@@ -155,7 +165,6 @@ return plugin
 
 -- set completeopt=menuone,noselect
 -- vim.api.nvim_set_keymap("s", "<S-j>", [[vsnip#expandable()  ? '<Plug>(vsnip-expand)'         : '<S-j>']], {expr = true})
-
 
 -- 6   - /home/nicholas/.local/share/nvim/site/plugged/ack.vim/      │~
 --   1 - /home/nicholas/.local/share/nvim/site/plugged/asyncrun.vim/ │~

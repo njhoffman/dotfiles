@@ -2,13 +2,20 @@ local config = require "config"
 local u = require "utils.core"
 local Formatting = config.Formatting
 local Opts = config.Opts
+local af = require('../utils/autofunc')
+
+-- relative in normal mode, absolute in insert
+af('BufEnter,FocusGained,InsertLeave', '*', function()
+  if vim.bo.filetype ~= "dashboard" then vim.wo.relativenumber = true end
+end)
+af('BufLeave,FocusLost,InsertEnter',   '*', function() vim.wo.relativenumber = false end)
 
 local autocmds = {
   filetypes = {
     {"BufNewFile,BufRead", "*.ejs", "set filetype=html"},
     {"FileType", "markdown", "setlocal wrap spell"},
     {"FileType", "*", "setlocal formatoptions-=c formatoptions-=r formatoptions-=o"},
-    {"FileType", "toggleterm", "setlocal nonumber norelativenumber"}
+    {"FileType", "toggleterm", "setlocal nonumber norelativenumber"},
   },
   terminal = {
     {"TermOpen", "*", [[tnoremap <buffer> <Esc> <c-\><c-n>]]},
@@ -21,6 +28,7 @@ local autocmds = {
 
 -- vim.cmd([[autocmd ColorScheme * lua require("utils.lsp").fix("ColorScheme")]])
 
+  -- {'TextYankPost', '*', 'lua require(\'vim.highlight\').on_yank({higroup = \'Search\', timeout = 200})'},
 -- define tables to insert
 local hl_yank = {
   {"TextYankPost", "*", 'lua require"vim.highlight".on_yank()'}

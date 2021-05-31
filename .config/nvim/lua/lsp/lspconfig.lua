@@ -110,7 +110,6 @@ local function documentHoverDiagnostic(client, bufnr)
     )
   end
 end
-
 -- log_capabilities(client.resolved_capabilities)
 function lsp_config.common_on_attach(client, bufnr)
   lsp_status.on_attach(client)
@@ -121,7 +120,7 @@ function lsp_config.common_on_attach(client, bufnr)
   documentFormat(client, bufnr)
   lsp_mappings.lsp_attach(client, bufnr)
 
-  if LSP.highlight_word == nil or LSP.highlight_word == true then
+  if config.LSP.highlight_word == nil or config.LSP.highlight_word == true then
     documentHighlight(client, bufnr)
   end
 end

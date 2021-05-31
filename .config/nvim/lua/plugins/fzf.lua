@@ -1,8 +1,8 @@
 local plugin = {}
-local plugin_maps = require('mappings.plugins')
+local plugin_maps = require("mappings.plugins")
 
 function plugin.config()
-  vim.g.fzf_command_prefix = ''
+  vim.g.fzf_command_prefix = ""
 end
 
 function plugin.load()
@@ -12,10 +12,7 @@ end
 
 function plugin.setup(use)
   -- switch between single line and multi-line statements
-  use {
-    'junegunn/fzf.vim',
-    requires = { 'junegunn/fzf', dir = '~/.fzf', run = './install --all' }
-  }
+  use {"junegunn/fzf.vim", requires = {"junegunn/fzf", dir = "~/.fzf", run = "./install --all"}}
 
   plugin.load()
 end
