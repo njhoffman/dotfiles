@@ -2,28 +2,17 @@
 
 -- general settings
 require "main.options"
-
+require "main.colorscheme"
 
 -- install 3rd party plugin packages
 local plugins = require "plugins"
 
+require("debug.typescript")
+require "lsp".load()
+
 -- install debugger adapter protocol functionality
--- require "main.debugger"
 require "main.autocommands"
 
-
--- plugin config and startup
--- require "plugins.telescope"
--- require "plugins.treesitter"
--- require "plugins.general"
--- require "plugins.bufferline"
--- require "plugins.galaxyline"
--- require "plugins.completion"
--- require "plugins.which-key"
--- require "plugins.nvim-tree"
--- require "plugins.startify"
-
-require "main.colorscheme"
 require "plugins.feline".load()
 require "main.mapping"
 

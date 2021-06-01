@@ -3,38 +3,28 @@ local plugin = {}
 signs_config_1 = {
   add = {
     hl = "GitSignsAddFaded",
-    text = "│ ",
+    text = "│ "
     -- text = " ▎",
-    numhl = "GitSignsAddNrFaded",
-    linehl = "GitSignsAddLnFaded"
   },
   change = {
     hl = "GitSignsChangeFaded",
     -- text = " ▎",
-    text = "│ ",
-    numhl = "GitSignsChangeNrFaded",
-    linehl = "GitSignsChangeLnFaded"
+    text = "│ "
   },
   delete = {
     hl = "GitSignsDeleteFaded",
-    text = "│ ",
+    text = "│ "
     -- text = " ▎",
-    numhl = "GitSignsDeleteNrFaded",
-    linehl = "GitSignsDeleteLnFaded"
   },
   topdelete = {
     hl = "GitSignsDeleteFaded",
-    text = "│ ",
+    text = "│ "
     -- text = " ▎",
-    numhl = "GitSignsDeleteNrFaded",
-    linehl = "GitSignsDeleteLnFaded"
   },
   changedelete = {
     hl = "GitSignsChangeDeleteFaded",
-    text = "│ ",
+    text = "│ "
     -- text = " ▎",
-    numhl = "GitSignsChangeDeleteNrFaded",
-    linehl = "GitSignsChangeDeleteLnFaded"
   }
 }
 

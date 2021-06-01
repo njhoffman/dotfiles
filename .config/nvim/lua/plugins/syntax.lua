@@ -12,7 +12,27 @@ function plugin.setup(use)
     -- jsx/tsx syntax
     "yuezk/vim-js",
     "HerringtonDarkholme/yats.vim",
-    "maxmellon/vim-jsx-pretty"
+    "maxmellon/vim-jsx-pretty",
+    -- plucked syntax from vim-polyglot
+    "zinit-zsh/zinit-vim-syntax",
+    "neoclide/jsonc.vim",
+    "elzr/vim-json",
+    "GutenYe/json5.vim",
+    "chr4/nginx.vim",
+    "rodjek/vim-puppet",
+    "hashivim/vim-terraform",
+    "wgwoods/vim-systemd-syntax",
+    "pearofducks/ansible-vim",
+    "ekalinin/Dockerfile.vim",
+    "tpope/vim-git",
+    "jparise/vim-graphql",
+    "arzg/vim-sh",
+    "ericpruitt/tmux.vim",
+    "andrewstuart/vim-kubernetes",
+    "StanAngeloff/php.vim",
+    "gisphm/vim-gitignore"
+    -- to fix https://github.com/neoclide/coc-snippets/issues/126
+    -- 'honza/vim-snippets'
   }
   plugin.load()
 end

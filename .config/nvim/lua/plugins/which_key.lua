@@ -1,15 +1,16 @@
 local plugin = {}
 
 function plugin.load()
-  require("which-key").setup{
+  local map = require("utils.core").map
+  require("which-key").setup {
     window = {
-      border = "none",
+      border = "shadow",
       position = "bottom",
-      margin = { 1, 0, 1, 0 },
-      padding = { 2, 2, 2, 2 },
-
+      margin = {1, 0, 1, 0},
+      padding = {2, 2, 2, 2}
     }
   }
+  map("n", "<leader>wk", ":WhichKey<CR>", {silent = true})
 end
 
 -- :WhichKey " show all mappings
@@ -17,8 +18,11 @@ end
 -- :WhichKey <leader> v " show all <leader> mappings for VISUAL mode
 -- :WhichKey '' v " show ALL mappings for VISUAL mode
 
+-- ' or ` ... Marks , "(NRML) or <c-r>(INST) ... Registers
+-- :h
+
 function plugin.setup(use)
-  use {'folke/which-key.nvim', config = plugin.load}
+  use {"folke/which-key.nvim", config = plugin.load}
 end
 
 return plugin

@@ -24,7 +24,7 @@ end
 function set_mapping()
   map("n", "H", ":BufferPrev<CR>")
   map("n", "L", ":BufferNext<CR>")
-  map("n", "<Leader>da", ":BufferCloseAllButCurrent<CR>")
+  map("n", "<Leader>D", ":BufferCloseAllButCurrent<CR>")
   -- nnoremap <silent>    <A-1> :BufferGoto 1<CR>
   -- nnoremap <silent>    <A-2> :BufferGoto 2<CR>
   -- nnoremap <silent>    <A-3> :BufferGoto 3<CR>

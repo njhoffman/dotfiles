@@ -49,7 +49,7 @@ lsp_servers.efm = {
     "eruby",
     "go",
     "graphql",
-    "help",
+    -- "help",
     "html",
     -- "javascript",
     "json",

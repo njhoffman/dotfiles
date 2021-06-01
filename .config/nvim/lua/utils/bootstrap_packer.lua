@@ -6,18 +6,14 @@ if not packer_exists then
     return
   end
 
-  local directory = string.format(
-  '%s/site/pack/packer/start/',
-  vim.fn.stdpath('data')
+  local directory = string.format("%s/site/pack/packer/start/", vim.fn.stdpath("data"))
+
+  vim.fn.mkdir(directory, "p")
+
+  local git_clone_cmd =
+    vim.fn.system(
+    string.format("git clone %s %s", "https://github.com/wbthomason/packer.nvim", directory .. "/packer.nvim")
   )
-
-  vim.fn.mkdir(directory, 'p')
-
-  local git_clone_cmd = vim.fn.system(string.format(
-  'git clone %s %s',
-  'https://github.com/wbthomason/packer.nvim',
-  directory .. '/packer.nvim'
-  ))
 
   print(git_clone_cmd)
   print("Installed packer.nvim")
@@ -32,9 +28,12 @@ end
 --   execute('!git clone https://github.com/wbthomason/packer.nvim '.. install_path)
 -- end
 
-vim.api.nvim_exec([[
+vim.api.nvim_exec(
+  [[
   augroup Packer
     autocmd!
     autocmd BufWritePost init.lua PackerCompile
   augroup end
-]], false)
+]],
+  false
+)

@@ -9,6 +9,12 @@ packer.startup(
     use "wbthomason/packer.nvim"
 
     -- ====================================
+    -- DAP
+    if config.DAP.enabled ~= 0 and config.DAP.enabled ~= false then
+      require "plugins.dap".setup(use)
+    end
+
+    -- ====================================
     -- Basic key mappings and shared icon sets
     use "tpope/vim-repeat"
     use "ryanoasis/vim-devicons"
@@ -26,22 +32,12 @@ packer.startup(
     require "plugins.syntax".setup(use)
 
     -- ====================================
-    -- Fuzzy search (telescope, fzf)
-    require "plugins.fzf".setup(use)
-    require "plugins.fzf_preview".setup(use)
-    require "plugins.telescope".setup(use)
-    require "plugins.leaderf".setup(use)
-
-    -- ====================================
     -- LSP, Autocomplete and snippets
     if config.LSP.enabled ~= 0 and config.LSP.enabled ~= false then
       require "plugins.nvim_compe".setup(use)
       require "plugins.lspsaga".setup(use)
       use {
         "neovim/nvim-lspconfig",
-        config = function()
-          require "lsp".load()
-        end,
         requires = {
           "jose-elias-alvarez/nvim-lsp-ts-utils",
           "kabouzeid/nvim-lspinstall",
@@ -53,24 +49,16 @@ packer.startup(
         }
       }
     end
+    -- "tsuyoshicho/vim-efm-langserver-settings", -- auto config efm lsp
 
+    -- "gfanto/fzf-lsp.nvim"
     -- ====================================
-    -- DAP
-    if config.DAP.enabled ~= 0 and config.DAP.enabled ~= false then
-      use {
-        "mfussenegger/nvim-dap",
-        requires = {
-          "theHamsta/nvim-dap-virtual-text",
-          "nvim-telescope/telescope-dap.nvim"
-        }
-      }
+    -- Fuzzy search (telescope, fzf)
+    require "plugins.fzf".setup(use)
+    require "plugins.fzf_preview".setup(use)
+    require "plugins.telescope".setup(use)
+    require "plugins.leaderf".setup(use)
 
-    -- use {
-    --    'puremourning/vimspector',
-    --    setup = [[vim.g.vimspector_enable_mappings = 'HUMAN']],
-    --    disable = true
-    --  }
-    end
     -- ====================================
     -- Visual enhancements
     use {"gerw/vim-HiLinkTrace"}
@@ -91,6 +79,7 @@ packer.startup(
     require "plugins.todo_comments".setup(use)
     require "plugins.neoformat".setup(use)
     require "plugins.kommentary".setup(use)
+    require "plugins.vim_multiple_cursors".setup(use)
 
     -- ====================================
     -- System utils
@@ -117,6 +106,12 @@ packer.startup(
     require "plugins.nvim_hlslens".setup(use)
     require "plugins.which_key".setup(use)
     require "plugins.vim_yoink".setup(use)
+
+    -- ====================================
+    -- Integrations
+    require "plugins.vimwiki".setup(use)
+    require "plugins.vimux".setup(use)
+    require "plugins.asynctasks".setup(use)
 
     -- ====================================
     -- Project management

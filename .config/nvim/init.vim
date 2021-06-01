@@ -9,11 +9,6 @@ set runtimepath^=~/.config/nvim
 set runtimepath+=~/.local/share/nvim/site/after
 set runtimepath^=~/.local/share/nvim/site
 
-if has("persistent_undo")
-  set undodir=$HOME/.vim/undo
-  set undofile
-endif
-
 " let g:backupdir=expand(stdpath('data') . '/backup')
 " if !isdirectory(g:backupdir)
 "    mkdir(g:backupdir, "p")
@@ -43,7 +38,7 @@ function! GFilesFallback()
 endfunction
 
 lua << EOF
-  require('init')
+require('init')
 EOF
 " source $HOME/.config/nvim/mappings.vim
 source $HOME/.config/nvim/plugins/barbar-colors.vim

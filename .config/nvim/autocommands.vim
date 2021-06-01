@@ -2,7 +2,6 @@
 " ********** Event Driven Functions **********
 "
 if has("autocmd")
-
   " prevent empty buffer in startify window
   autocmd User Startified setlocal buflisted
 
