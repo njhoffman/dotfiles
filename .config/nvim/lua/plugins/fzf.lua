@@ -1,19 +1,35 @@
 local plugin = {}
-local plugin_maps = require("mappings.plugins")
 
-function plugin.config()
+function set_mappings()
+  -- <plug>(fzf-maps-n)	Normal mode mappings
+  -- <plug>(fzf-maps-i)	Insert mode mappings
+  -- <plug>(fzf-maps-x)	Visual mode mappings
+  -- <plug>(fzf-maps-o)	Operator-pending mappings
+  -- <plug>(fzf-complete-word)	cat /usr/share/dict/words
+  -- <plug>(fzf-complete-path)	Path completion using find (file + dir)
+  -- <plug>(fzf-complete-file)	File completion using find
+  -- <plug>(fzf-complete-line)	Line completion (all open buffers)
+  vim.cmd("map <silent> <A-/> :Helptags<CR>")
+  vim.cmd("map <silent> <A-e> :Sessions<CR>")
+  vim.cmd("map <silent> <A-j> :FzfPreviewJumps<CR>")
+  -- vim.cmd('map <silent> <A-s> :<C-u>GGrep<CR>')
+  vim.cmd("map <silent> <A-s> :FzfPreviewProjectGrep<CR>")
+  -- vim.cmd('map <silent> <A-v> :Vista!!<CR>')
+  -- vim.cmd('map <silent> <A-y> :<C-u>Snippets<CR>')
+end
+
+function set_config()
   vim.g.fzf_command_prefix = ""
 end
 
 function plugin.load()
-  plugin.config()
-  plugin_maps.fzf()
+  set_config()
+  set_mappings()
 end
 
 function plugin.setup(use)
   -- switch between single line and multi-line statements
   use {"junegunn/fzf.vim", requires = {"junegunn/fzf", dir = "~/.fzf", run = "./install --all"}}
-
   plugin.load()
 end
 

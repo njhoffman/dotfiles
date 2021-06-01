@@ -1,4 +1,3 @@
-
 local plugin = {}
 
 function set_config()
@@ -21,17 +20,17 @@ function set_config()
       split = "i",
       quit = {"q", "<C-[>"},
       scroll_down = "<C-f>",
-      scroll_up = "<C-b>",
+      scroll_up = "<C-b>"
     },
     code_action_keys = {quit = {"q", "<C-[>"}, exec = "<CR>"},
     rename_action_keys = {
       quit = {"<C-c>", "<C-[>"},
-      exec = "<CR>", -- quit can be a table
+      exec = "<CR>" -- quit can be a table
     },
     definition_preview_icon = "   ",
     -- "single" "double" "round" "plus"
     border_style = "round",
-    rename_prompt_prefix = "➤",
+    rename_prompt_prefix = "➤"
   }
 end
 
@@ -40,10 +39,9 @@ function plugin.load()
 end
 
 function plugin.setup(use)
-  use {"glepnir/lspsaga.nvim", config = plugin.load, requires = "neovim/nvim-lspconfig"}
+  use {"glepnir/lspsaga.nvim", config = plugin.load}
 end
 
-plugin.init = set_config
 return plugin
 
 --      ﮻  ﱥ    ● ★ ◉ ◎ ◯ ? ✖ Ⓘ ⓧ ⓞ  Ⓘ ◆ ◇ ⬢ ✔ ♥       

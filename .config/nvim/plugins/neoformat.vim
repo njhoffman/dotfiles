@@ -95,5 +95,3 @@ let g:shfmt_opt="-ci"
 " YAML        pyaml, prettier
 " zig         zig fmt
 " zsh         shfmt
-
-

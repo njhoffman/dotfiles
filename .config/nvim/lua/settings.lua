@@ -42,7 +42,8 @@ settings.DAP = {
 -- vim.lsp.set_log_level("info")
 settings.LSP = {
   enabled          = true,
-  log_level        = 'info',
+  -- TODO: efm or other lsp format boolean
+  log_level        = 'warn',
   underline        = false,
   update_in_insert = false,
   signs            = true,
@@ -101,45 +102,31 @@ settings.Completion = {
   ---------------------------
   -- Sources of Completion --
   ---------------------------
-  snippets = true,
+  snippets = false,
   lsp      = true,
   buffer   = true,
   path     = true,
   calc     = true,
-  spell    = true,
+  spell    = false,
   emoji    = true
 }
 
 settings.Formatting = {
   -- if format_on_save is enable it will always trim trailing white spaces
-  format_on_save      = false,
+  format_on_save      = true,
   trim_trailing_space = true,
   indent_size         = 2
 }
 
 settings.Treesitter = {
-  enabled = true,
-  rainbow = false,
-  indent = true,
+  enabled   = true,
+  rainbow   = false,
+  indent    = true,
+  highlight = false,
   -------------
   -- Parsers --
   -------------
   parsers = treeParsers
-}
-
-settings.Plugins = {
-  feline = true,
-  kommentary = true,
-  neoformat = true,
-  nvimbqf = true,
-  nvimhlslens = true,
-  nvimtree = true,
-  telescope = true,
-  todocomments = true,
-  toggleterm = true,
-  trouble = true,
-  vimmundo = true,
-
 }
 
 return settings

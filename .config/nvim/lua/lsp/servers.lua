@@ -1,9 +1,9 @@
-local lsp_status = require('lsp.lspstatus')
-local lsp_config = require('lsp.lspconfig')
+local lsp_status = require("lsp.lspstatus")
+local lsp_config = require("lsp.lspconfig")
 -- local lsp_config = require "lsp.setup"
 
-local config = require('config')
-local theme = config.Theming;
+local config = require("config")
+local theme = config.Theming
 
 function lsp_config.setup(options)
   lsp_status.activate()
@@ -16,7 +16,8 @@ local lsp_servers = {}
 
 lsp_servers.efm = {
   init_options = {
-    documentFormatting = true,
+    -- TODO: figure out best way to handle formatting between lsp, efm, and neoformat
+    documentFormatting = false,
     hover = true,
     documentSymbol = true,
     codeAction = true,
@@ -24,8 +25,7 @@ lsp_servers.efm = {
   },
   settings = {
     rootMarkers = {
-      ".lua-format",
-      -- ".eslintrc.cjs",
+      ".rooter", -- ".eslintrc.cjs",
       ".eslintrc",
       ".eslintrc.json",
       ".eslintrc.js",
@@ -36,18 +36,48 @@ lsp_servers.efm = {
       ".prettierrc.yaml",
       ".prettier.config.js",
       ".prettier.config.cjs"
-    },
+    }
   },
+  -- TODO: limit this by config and what is being enabled by lsp
   filetypes = {
-    "asciidoc", "c", "cpp", "css", "graphql", "help", "html", "javascript", "json5",
-    "less", "markdown", "proto", "python", "review", "rst", "ruby", "sass", "scss",
-    "sh", "sugarss", "text", "typescript", "vim", "vue", "yaml"
+    "asciidoc",
+    "c",
+    "cpp",
+    "css",
+    "csv",
+    "dockerfile",
+    "eruby",
+    "go",
+    "graphql",
+    "help",
+    "html",
+    -- "javascript",
+    "json",
+    "less",
+    -- "lua",
+    "make",
+    "markdown",
+    "proto",
+    "python",
+    "review",
+    "rust",
+    "ruby",
+    "sass",
+    "scss",
+    "sh",
+    "sugarss",
+    "text",
+    -- "typescript",
+    "vim",
+    "vue",
+    "yaml"
   }
 }
 
 lsp_servers.typescript = {
   on_attach = function(client, bufnr)
-    local lspTsUtils = require('nvim-lsp-ts-utils').setup(
+    local lspTsUtils =
+      require("nvim-lsp-ts-utils").setup(
       {
         -- defaults
         disable_commands = false,
@@ -55,8 +85,7 @@ lsp_servers.typescript = {
         import_on_completion_timeout = 5000
       }
     )
-
-    return lsp_config.on_common_attach(client, bufnr)
+    return lsp_config.common_on_attach(client, bufnr)
   end
 }
 

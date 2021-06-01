@@ -5,12 +5,12 @@ local lsp_diagnostics = {}
 -- LSP Diagnostics
 -- ================================================
 function lsp_diagnostics.configure()
-  vim.cmd('hi! LspDiagnosticsVirtualTextError guifg=Red ctermfg=Red')
-  vim.cmd('hi! LspDiagnosticsVirtualTextWarning guifg=Yellow ctermfg=Yellow')
-  vim.cmd('hi! LspDiagnosticsVirtualTextInformation guifg=White ctermfg=White')
-  vim.cmd('hi! LspDiagnosticsVirtualTextHint guifg=White ctermfg=White')
+  vim.cmd("hi! LspDiagnosticsVirtualTextError guifg=Red ctermfg=Red")
+  vim.cmd("hi! LspDiagnosticsVirtualTextWarning guifg=Yellow ctermfg=Yellow")
+  vim.cmd("hi! LspDiagnosticsVirtualTextInformation guifg=White ctermfg=White")
+  vim.cmd("hi! LspDiagnosticsVirtualTextHint guifg=White ctermfg=White")
 
-  if (LSP.signs == 'hidden') then
+  if (LSP.signs == "hidden") then
     -- just color numbers, dont show icons
     vim.fn.sign_define("LspDiagnosticsSignError", {text = "", numhl = "LspDiagnosticsSignError"})
     vim.fn.sign_define("LspDiagnosticsSignWarning", {text = "", numhl = "LspDiagnosticsSignWarning"})
@@ -19,26 +19,42 @@ function lsp_diagnostics.configure()
   elseif (LSP.signs ~= false and LSP.signs ~= 0) then
     vim.fn.sign_define(
       "LspDiagnosticsSignError",
-      {texthl = "LspDiagnosticsSignError", text = "", numhl = "LspDiagnosticsSignError"}
+      {
+        texthl = "LspDiagnosticsSignError",
+        text = "",
+        numhl = "LspDiagnosticsSignError"
+      }
     )
     vim.fn.sign_define(
       "LspDiagnosticsSignWarning",
-      {texthl = "LspDiagnosticsSignWarning", text = "", numhl = "LspDiagnosticsSignWarning"}
+      {
+        texthl = "LspDiagnosticsSignWarning",
+        text = "",
+        numhl = "LspDiagnosticsSignWarning"
+      }
     )
     vim.fn.sign_define(
       "LspDiagnosticsSignInformation",
-      {texthl = "LspDiagnosticsSignInformation", text = "", numhl = "LspDiagnosticsSignInformation"}
+      {
+        texthl = "LspDiagnosticsSignInformation",
+        text = "",
+        numhl = "LspDiagnosticsSignInformation"
+      }
     )
     vim.fn.sign_define(
       "LspDiagnosticsSignHint",
-      {texthl = "LspDiagnosticsSignHint", text = "", numhl = "LspDiagnosticsSignHint"}
+      {
+        texthl = "LspDiagnosticsSignHint",
+        text = "",
+        numhl = "LspDiagnosticsSignHint"
+      }
     )
   end
 end
 
 function lsp_diagnostics.publish()
-vim.lsp.handlers["textDocument/publishDiagnostics"] =
-  vim.lsp.with(
+  vim.lsp.handlers["textDocument/publishDiagnostics"] =
+    vim.lsp.with(
     vim.lsp.diagnostic.on_publish_diagnostics,
     {
       severity_sort = false,
@@ -67,7 +83,7 @@ vim.lsp.handlers["textDocument/publishDiagnostics"] =
         end
       end
     }
-)
+  )
 end
 
 function lsp_diagnostics.setup()

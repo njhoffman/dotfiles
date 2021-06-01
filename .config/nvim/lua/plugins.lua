@@ -1,137 +1,163 @@
 -- require"utils.bootstrap_packer"
 
-local packer = require"packer"
-local config = require"config"
-local log = require"logger"
+local packer = require "packer"
+local config = require "config"
+local log = require "logger"
 
-packer.startup(function()
+packer.startup(
+  function()
+    use "wbthomason/packer.nvim"
 
-  use "wbthomason/packer.nvim"
+    -- ====================================
+    -- Basic key mappings and shared icon sets
+    use "tpope/vim-repeat"
+    use "ryanoasis/vim-devicons"
+    require "plugins.vim_unimpaired".setup(use)
+    require "plugins.vim_surround".setup(use)
+    require "plugins.sayonara".setup(use)
+    require "plugins.nvim_web_devicons".setup(use)
+    require "plugins.gitsigns".setup(use)
 
-  -- ====================================
-  -- Basic key maps
-  use "tpope/vim-repeat"
-  use "tpope/vim-unimpaired"
-  use "ryanoasis/vim-devicons"
-  require"plugins.sayonara".setup(use)
-  require"plugins.nvim_web_devicons".setup(use)
-  require"plugins.gitsigns".setup(use)
+    -- ====================================
+    -- Treesitter and syntax
+    if config.Treesitter.enabled ~= 0 and config.Treesitter.enabled ~= false then
+      require "plugins.treesitter".setup(use)
+    end
+    require "plugins.syntax".setup(use)
 
-  -- ====================================
-  -- Treesitter and syntax
- if config.Treesitter.enabled ~= 0 and config.Treesitter.enabled ~= false then
-   require"plugins.treesitter".setup(use)
- end
-  -- ====================================
-  -- Fuzzy search (telescope, fzf)
-  require"plugins.fzf".setup(use)
-  require"plugins.fzf_preview".setup(use)
-  require"plugins.telescope".setup(use)
+    -- ====================================
+    -- Fuzzy search (telescope, fzf)
+    require "plugins.fzf".setup(use)
+    require "plugins.fzf_preview".setup(use)
+    require "plugins.telescope".setup(use)
+    require "plugins.leaderf".setup(use)
 
-  -- ====================================
-  -- LSP, Autocomplete and snippets
-  if config.LSP.enabled ~= 0 and config.LSP.enabled ~= false then
-    use {
-      { "jose-elias-alvarez/nvim-lsp-ts-utils" },
-      { "kabouzeid/nvim-lspinstall" },
-      { "nvim-lua/lsp-status.nvim" },
-      { "hrsh7th/vim-vsnip" },
-      { "glepnir/lspsaga.nvim", config = require"plugins.lspsaga".init() },
-      { "hrsh7th/nvim-compe", config = require"plugins.nvim_compe".init() },
-      { "neovim/nvim-lspconfig", config = require"lsp".load() },
-      requires = {
-         "nvim-lua/popup.nvim",
-         "nvim-lua/plenary.nvim",
+    -- ====================================
+    -- LSP, Autocomplete and snippets
+    if config.LSP.enabled ~= 0 and config.LSP.enabled ~= false then
+      require "plugins.nvim_compe".setup(use)
+      require "plugins.lspsaga".setup(use)
+      use {
+        "neovim/nvim-lspconfig",
+        config = function()
+          require "lsp".load()
+        end,
+        requires = {
+          "jose-elias-alvarez/nvim-lsp-ts-utils",
+          "kabouzeid/nvim-lspinstall",
+          "nvim-lua/lsp-status.nvim",
+          "hrsh7th/vim-vsnip",
+          "onsails/lspkind-nvim",
+          "nvim-lua/popup.nvim",
+          "nvim-lua/plenary.nvim"
+        }
       }
-    }
-  end
+    end
 
-  -- ====================================
-  -- DAP
-  if config.DAP.enabled ~= 0 and config.DAP.enabled ~= false then
-    use {
-      "mfussenegger/nvim-dap",
-      requires = {
-        "theHamsta/nvim-dap-virtual-text",
-        "nvim-telescope/telescope-dap.nvim"
+    -- ====================================
+    -- DAP
+    if config.DAP.enabled ~= 0 and config.DAP.enabled ~= false then
+      use {
+        "mfussenegger/nvim-dap",
+        requires = {
+          "theHamsta/nvim-dap-virtual-text",
+          "nvim-telescope/telescope-dap.nvim"
+        }
       }
-    }
 
- -- use {
- --    'puremourning/vimspector',
- --    setup = [[vim.g.vimspector_enable_mappings = 'HUMAN']],
- --    disable = true
- --  }
-  end
-  -- ====================================
-  -- Visual enhancements
-    use { 'gerw/vim-HiLinkTrace' }
-    require"plugins.vim_plugin_AnsiEsc".setup(use)
-    require"plugins.vim_hexokinase".setup(use)
-    require"plugins.vim_smoothie".setup(use)
-    require"plugins.vimade".setup(use)
-  -- use {
-  --   'norcalli/nvim-colorizer.lua',
-  --   ft = {'css', 'javascript', 'vim', 'html'},
-  --   config = [[require('colorizer').setup {'css', 'javascript', 'vim', 'html'}]]
-  -- }
+    -- use {
+    --    'puremourning/vimspector',
+    --    setup = [[vim.g.vimspector_enable_mappings = 'HUMAN']],
+    --    disable = true
+    --  }
+    end
+    -- ====================================
+    -- Visual enhancements
+    use {"gerw/vim-HiLinkTrace"}
+    require "plugins.vim_plugin_AnsiEsc".setup(use)
+    -- require "plugins.vim_hexokinase".setup(use)
+    require "plugins.nvim_colorizer".setup(use)
+    require "plugins.vimade".setup(use)
 
-  -- ====================================
-  -- Formatting utils
-    require"plugins.easyalign".setup(use)
-    require"plugins.splitjoin".setup(use)
-    require"plugins.todo_comments".setup(use)
-    require"plugins.neoformat".setup(use)
-    require"plugins.kommentary".setup(use)
-    use { 'bchretien/vim-profiler' }
-    use { 'tweekmonster/startuptime.vim' }
+    -- ====================================
+    -- Motion plugins
+    require "plugins.vim_smoothie".setup(use)
+    require "plugins.vim_sneak".setup(use)
+
+    -- ====================================
+    -- Formatting utils
+    require "plugins.easyalign".setup(use)
+    require "plugins.splitjoin".setup(use)
+    require "plugins.todo_comments".setup(use)
+    require "plugins.neoformat".setup(use)
+    require "plugins.kommentary".setup(use)
+
+    -- ====================================
+    -- System utils
+    -- Delete, Unlink, Move, Rename, Chmod, Mkdir, Cfind/locate, Lfind/locate, Wall, SudoWrite/Edit
+    use {"tpope/vim-eunuch"}
+    use {"bchretien/vim-profiler"}
+    use {"tweekmonster/startuptime.vim"}
+    require "plugins.nvim_reload".setup(use)
+    -- Plug 'qpkorr/vim-renamer'
+    -- let g:RenamerShowHidden=1
+
     -- vim-profiler.py nvim -n 10
     -- vim-profiler.py -n 5 nvim foo.cc -c ":exec ':normal ia' | :q\!"
 
-  -- ====================================
-  -- Interface plugins
-    require"plugins.dashboard-nvim".setup(use)
-    require"plugins.nvim_bqf".setup(use)
-    require"plugins.trouble".setup(use)
-    require"plugins.vim_mundo".setup(use)
-    require"plugins.nvim_tree".setup(use)
-    require"plugins.nvim_toggleterm".setup(use)
-    require"plugins.nvim_hlslens".setup(use)
+    -- ====================================
+    -- Interface plugins
+    require "plugins.dashboard-nvim".setup(use)
+    require "plugins.nvim_bqf".setup(use)
+    require "plugins.trouble".setup(use)
+    require "plugins.diffview".setup(use)
+    require "plugins.vim_mundo".setup(use)
+    require "plugins.nvim_tree".setup(use)
+    require "plugins.nvim_toggleterm".setup(use)
+    require "plugins.nvim_hlslens".setup(use)
+    require "plugins.which_key".setup(use)
+    require "plugins.vim_yoink".setup(use)
 
-  -- ====================================
-  -- Project management
-    require"plugins.vim-rooter".setup(use)
+    -- ====================================
+    -- Project management
+    require "plugins.vim-rooter".setup(use)
+    use {"wakatime/vim-wakatime"} -- WakaTimeToday, WakaTimeApiKey, WakaTimeDebugEnable
 
-  -- ====================================
-  -- Themes
-  use {
-    "arcticicestudio/nord-vim",
-    -- "neg-serg/neg",
-     -- "kyazdani42/blue-moon",
-     -- "rockerBOO/boo-colorscheme-nvim",
-     -- {"npxbr/gruvbox.nvim", requires = "rktjmp/lush.nvim"},
-     -- "marko-cerovac/material.nvim",
-     -- "shaunsingh/moonlight.nvim",
-     -- "rafamadriz/neon",
-     -- "bluz71/vim-nightfly-guicolors",
-     -- "christianchiarulli/nvcode-color-schemes.vim",
-     -- "rakr/vim-one"
-  }
-  require"plugins.feline".setup(use)
-  require"plugins.barbar".setup(use)
+    -- ====================================
+    -- Themes
+    use {
+      "shaunsingh/nord.nvim"
+      -- "arcticicestudio/nord-vim"
+      -- "neg-serg/neg",
+      -- "kyazdani42/blue-moon",
+      -- "rockerBOO/boo-colorscheme-nvim",
+      -- {"npxbr/gruvbox.nvim", requires = "rktjmp/lush.nvim"},
+      -- "marko-cerovac/material.nvim",
+      -- "shaunsingh/moonlight.nvim",
+      -- "rafamadriz/neon",
+      -- "bluz71/vim-nightfly-guicolors",
+      -- "christianchiarulli/nvcode-color-schemes.vim",
+      -- "rakr/vim-one"
+    }
+    require "plugins.feline".setup(use)
+    require "plugins.barbar".setup(use)
 
-  -- ====================================
-  -- Motion
-  -- vim-wordmotion, vim-sneak, 'terryma/vim-expand-region'
-end
+    -- ====================================
+    -- Motion
+    -- vim-wordmotion, vim-sneak, 'terryma/vim-expand-region'
+  end
 )
 
-local plugins = setmetatable({}, {
-  __index = function(_, key)
-    init()
-    return packer[key]
-  end
-})
+local plugins =
+  setmetatable(
+  {},
+  {
+    __index = function(_, key)
+      init()
+      return packer[key]
+    end
+  }
+)
 
 return packer
 -- Git
@@ -152,7 +178,7 @@ return packer
 --     setup = [[vim.g.iron_map_defaults = 0]],
 --     config = [[require('config.iron')]],
 --     cmd = {'IronRepl', 'IronSend', 'IronReplHere'}
-  -- }
+-- }
 -- Wrapping/delimiters
 -- use {
 --   'machakann/vim-sandwich',
@@ -163,8 +189,7 @@ return packer
 -- use 'justinmk/vim-dirvish'
 
 -- Plugin development
-  -- use 'folke/lua-dev.nvim'
--- "folke/which_key.nvim",
+-- use 'folke/lua-dev.nvim'
 --  Plug "rafcamlet/nvim_luapad"
 -- "machakann/vim_sandwich",
 --   "windwp/nvim_autopairs",

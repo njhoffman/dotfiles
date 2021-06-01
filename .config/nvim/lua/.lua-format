@@ -20,7 +20,7 @@ break_before_table_rb: true
 chop_down_table: true
 chop_down_kv_table: true
 
-column_table_limit: 100
+column_table_limit: 120
 
 table_sep: ','
 extra_sep_at_table_end: true

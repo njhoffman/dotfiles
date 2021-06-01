@@ -2,13 +2,13 @@ local config = require("config")
 local lsp_status = require("lsp-status")
 local f = require("utils.functional")
 local utils = require("utils.core")
-local lsp_mappings = require('mappings.lsp')
+local lsp_mappings = require("mappings.lsp")
 
 DATA_PATH = vim.fn.stdpath("data")
 local lspinstall = DATA_PATH .. "/lspinstall/"
-local theme = config.Theme;
+local theme = config.Theme
 
-local lsp_config = {}
+lsp_config = {}
 
 lsp_config.capabilities = vim.lsp.protocol.make_client_capabilities()
 lsp_config.capabilities.textDocument.completion.completionItem.snippetSupport = true
@@ -27,11 +27,14 @@ local log_capabilities = function(capabilities)
   local reduce = function(filter)
     local result = {}
     for k, _ in pairs(capabilities) do
-      table.insert(result, f.map(
-        function(v)
-          return {v = capabilities[v]}
-        end
-      )(f.filter(f.contains(k))(filter)))
+      table.insert(
+        result,
+        f.map(
+          function(v)
+            return {v = capabilities[v]}
+          end
+        )(f.filter(f.contains(k))(filter))
+      )
     end
     return f.flatten(result)
   end
@@ -40,13 +43,13 @@ local log_capabilities = function(capabilities)
 end
 
 local function assignRootPattern(pattern)
- local cwd  = vim.loop.cwd();
- local root = lsp_config.util.root_pattern("composer.json", ".git")(pattern);
+  local cwd = vim.loop.cwd()
+  local root = lsp_config.util.root_pattern("composer.json", ".git")(pattern)
   -- prefer cwd if root is a descendant
-  return lsp_config.util.path.is_descendant(cwd, root) and cwd or root;
+  return lsp_config.util.path.is_descendant(cwd, root) and cwd or root
 end
 
-local function documentFormat(client,bufnr)
+local function documentFormat(client, bufnr)
   if client.resolved_capabilities.document_formatting then
     utils.keymap(
       {
@@ -70,14 +73,14 @@ local function documentHighlight(client, bufnr)
   if client.resolved_capabilities.document_highlight then
     vim.api.nvim_exec(
       [[
-      hi LspReferenceRead cterm=bold ctermbg=red guibg=#464646
-      hi LspReferenceText cterm=bold ctermbg=red guibg=#464646
-      hi LspReferenceWrite cterm=bold ctermbg=red guibg=#464646
-      augroup lsp_document_highlight
-      autocmd! * <buffer>
-      autocmd CursorHold <buffer> lua vim.lsp.buf.document_highlight()
-      autocmd CursorMoved <buffer> lua vim.lsp.buf.clear_references()
-      augroup END
+    hi LspReferenceRead cterm=bold ctermbg=red guibg=#464646
+    hi LspReferenceText cterm=bold ctermbg=red guibg=#464646
+    hi LspReferenceWrite cterm=bold ctermbg=red guibg=#464646
+    augroup lsp_document_highlight
+    autocmd! * <buffer>
+    autocmd CursorHold <buffer> lua vim.lsp.buf.document_highlight()
+    autocmd CursorMoved <buffer> lua vim.lsp.buf.clear_references()
+    augroup END
       ]],
       false
     )
@@ -89,22 +92,22 @@ local function documentHoverDiagnostic(client, bufnr)
   if config.LSP.hover_diagnostic == "popup" then
     vim.api.nvim_exec(
       [[
-      augroup lsp_diagnostic
-      autocmd! * <buffer>
-      autocmd CursorHold * lua require"lspsaga.diagnostic".show_line_diagnostics()
-      autocmd CursorHoldI * silent! lua require"lspsaga.diagnostic".signature_help()
-      augroup END
+    augroup lsp_diagnostic
+    autocmd! * <buffer>
+    autocmd CursorHold * lua require"lspsaga.diagnostic".show_line_diagnostics()
+    autocmd CursorHoldI * silent! lua require"lspsaga.diagnostic".signature_help()
+    augroup END
       ]],
       false
     )
   elseif config.LSP.hover_diagnostic == "virtual" then
     vim.api.nvim_exec(
       [[
-      augroup lsp_diagnostic
-      autocmd! * <buffer>
-      autocmd CursorHold * lua vim.lsp.diagnostic.show_line_diagnostics()
-      autocmd CursorHoldI * silent! lua vim.lsp.buf.signature_help()
-      augroup END
+    augroup lsp_diagnostic
+    autocmd! * <buffer>
+    autocmd CursorHold * lua vim.lsp.diagnostic.show_line_diagnostics()
+    autocmd CursorHoldI * silent! lua vim.lsp.buf.signature_help()
+    augroup END
       ]],
       false
     )

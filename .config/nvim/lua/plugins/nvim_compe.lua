@@ -1,32 +1,3 @@
-local config = require("config")
-
-local Completion = config.Completion
-
-local compe_config = {
-  enabled = Completion.enabled,
-  autocomplete = true,
-  debug = false,
-  min_length = 2,
-  preselect = "always",
-  throttle_time = 80,
-  source_timeout = 200,
-  incomplete_delay = 400,
-  max_abbr_width = 100,
-  max_kind_width = 100,
-  max_menu_width = 100,
-  documentation = true,
-  source = {
-    path = Completion.path,
-    buffer = Completion.buffer,
-    calc = Completion.calc,
-    vsnip = Completion.snippets,
-    nvim_lsp = Completion.lsp,
-    spell = Completion.spell,
-    emoji = Completion.emoji,
-    nvim_lua = {menu = "[]"},
-  },
-}
-
 -- symbols for autocomplete
 vim.lsp.protocol.CompletionItemKind = {
   "   (Text) ",
@@ -53,16 +24,24 @@ vim.lsp.protocol.CompletionItemKind = {
   " ﳤ  (Struct)",
   "   (Event)",
   "   (Operator)",
-  "   (TypeParameter)",
+  "   (TypeParameter)"
 }
 
 function set_config()
-  local u = require("utils.core")
+  vim.g.loaded_compe_treesitter = true
+  vim.g.loaded_compe_snippets_nvim = true
+  vim.g.loaded_compe_spell = true
+  vim.g.loaded_compe_tags = true
+  vim.g.loaded_compe_ultisnips = true
+  vim.g.loaded_compe_vim_lsc = true
+  vim.g.loaded_compe_vim_lsp = true
+end
+
+function set_mapping()
+  local map = require("utils.core").map
   local t = function(str)
     return vim.api.nvim_replace_termcodes(str, true, true, true)
   end
-
-  vim.o.completeopt = "menuone,noselect"
 
   local check_back_space = function()
     local col = vim.fn.col(".") - 1
@@ -98,39 +77,69 @@ function set_config()
     end
   end
 
-  u.map("i", "<CR>", "compe#confirm('<CR>')")
-  u.map("i", "<C-Space>", "compe#complete()")
-  u.map("i", "<C-f>", "compe#scroll({ 'delta': +4 })")
-  u.map("i", "<C-b>", "compe#scroll({ 'delta': -4 })")
+  local opts = {noremap = true, silent = true, expr = true}
+  map("i", "<C-Space>", [[compe#complete()]], opts)
+  map("i", "<C-c>", [[compe#complete()]], opts)
+  map("i", "<CR>", [[compe#confirm('<cr>')]], opts)
+  map("i", "<C-e>", [[compe#close('<c-e>')]], opts)
+
+  -- u.map("i", "<CR>", "compe#confirm('<CR>')")
+  -- u.map("i", "<C-f>", "compe#scroll({ 'delta': +4 })")
+  -- u.map("i", "<C-b>", "compe#scroll({ 'delta': -4 })")
 
   -- vim.api.nvim_set_keymap("i", "<CR>", "compe#confirm('<CR>')", {expr = true})
-  vim.api.nvim_set_keymap("i", "<Tab>", "v:lua.tab_complete()", {expr = true})
-  vim.api.nvim_set_keymap("s", "<Tab>", "v:lua.tab_complete()", {expr = true})
-  vim.api.nvim_set_keymap("i", "<S-Tab>", "v:lua.s_tab_complete()", {expr = true})
-  vim.api.nvim_set_keymap("s", "<S-Tab>", "v:lua.s_tab_complete()", {expr = true})
-  vim.api.nvim_set_keymap("i", "<S-l>",
-                          [[vsnip#jumpable(1)   ? '<Plug>(vsnip-jump-next)'      : '<S-l>']],
-                          {expr = true})
-  vim.api.nvim_set_keymap("s", "<S-l>",
-                          [[vsnip#jumpable(1)   ? '<Plug>(vsnip-jump-next)'      : '<S-l>']],
-                          {expr = true})
-  vim.api.nvim_set_keymap("i", "<S-j>",
-                          [[vsnip#expandable()  ? '<Plug>(vsnip-expand)'         : '<S-j>']],
-                          {expr = true})
+  -- vim.api.nvim_set_keymap("i", "<Tab>", "v:lua.tab_complete()", {expr = true})
+  -- vim.api.nvim_set_keymap("s", "<Tab>", "v:lua.tab_complete()", {expr = true})
+  -- vim.api.nvim_set_keymap("i", "<S-Tab>", "v:lua.s_tab_complete()", {expr = true})
+  -- vim.api.nvim_set_keymap("s", "<S-Tab>", "v:lua.s_tab_complete()", {expr = true})
+  -- vim.api.nvim_set_keymap("i", "<S-l>",
+  --                         [[vsnip#jumpable(1)   ? '<Plug>(vsnip-jump-next)'      : '<S-l>']],
+  --                         {expr = true})
+  -- vim.api.nvim_set_keymap("s", "<S-l>",
+  --                         [[vsnip#jumpable(1)   ? '<Plug>(vsnip-jump-next)'      : '<S-l>']],
+  --                         {expr = true})
+  -- vim.api.nvim_set_keymap("i", "<S-j>",
+  --                         [[vsnip#expandable()  ? '<Plug>(vsnip-expand)'         : '<S-j>']],
+  --                         {expr = true})
 end
 
 local plugin = {}
 
 function plugin.load()
-  require("compe").setup(compe_config)
+  local config = require "config".Completion
+
+  require("compe").setup {
+    enabled = config.enabled,
+    autocomplete = true,
+    debug = false,
+    min_length = 2,
+    preselect = "always",
+    throttle_time = 80,
+    source_timeout = 200,
+    incomplete_delay = 400,
+    max_abbr_width = 100,
+    max_kind_width = 100,
+    max_menu_width = 100,
+    documentation = true,
+    source = {
+      path = config.path,
+      buffer = config.buffer,
+      calc = config.calc,
+      vsnip = config.snippets,
+      nvim_lsp = config.lsp,
+      spell = config.spell,
+      emoji = config.emoji,
+      nvim_lua = {menu = "[]"}
+    }
+  }
+
   set_config()
+  set_mapping()
 end
 
 function plugin.setup(use)
-  use {"hrsh7th/nvim-compe", config = plugin.load}
+  use {"hrsh7th/nvim-compe", config = plugin.load, event = "InsertEnter *"}
 end
-
-plugin.init = set_config
 
 return plugin
 

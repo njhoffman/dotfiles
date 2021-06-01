@@ -7,5 +7,7 @@
 -- require "../colorschemes/neg"
 -- require "../colorschemes/neon"
 -- require "../colorschemes/nightfly"
-require "../colorschemes/nord"
+-- require "../colorschemes/nord-vim"
+-- require "../colorschemes/nord-nvim"
+require "../colorschemes/nord-nick"
 -- require "../colorschemes/nvcode"

@@ -1,3 +1,7 @@
 #!/bin/bash
 
-grc -es -c conf.log --colour=auto tail -f ~/.local/share/nvim/vlog.nvim.log
+tail -f ~/.cache/nvim/lsp.log | ccze -A
+# tail -f /tmp/nvim-dap.log | ccze -A
+# tail -f /tmp/efm.log | ccze -A
+
+# grc -es -c conf.log --colour=auto tail -f ~/.local/share/nvim/vlog.nvim.log

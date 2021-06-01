@@ -2,8 +2,13 @@ local g = vim.g
 local cmd = vim.cmd
 local o, wo, bo = vim.o, vim.wo, vim.bo
 
-local opt = require('utils.core').opt
-
+local opt = require("utils.core").opt
+-- -- Disable some built-in plugins we don't want
+-- local disabled_built_ins = {
+--   'gzip', 'man', 'matchit', 'matchparen', 'shada_plugin', 'tarPlugin', 'tar', 'zipPlugin', 'zip',
+--   'netrwPlugin'
+-- }
+-- for i = 1, 10 do g['loaded_' .. disabled_built_ins[i]] = 1 end
 -- Leader/local leader
 g.mapleader = [[,]]
 g.maplocalleader = [[,]]
@@ -11,56 +16,57 @@ g.maplocalleader = [[,]]
 -- Settings
 local buffer = {o, bo}
 local window = {o, wo}
-opt('termguicolors', true)
-opt('background', 'dark')
-opt('scrolloff', 7)
-opt('wildignore', '*.o,*~,*.pyc')
-opt('wildmode', 'longest,full')
-opt('whichwrap', o.whichwrap .. '<,>,h,l')
-opt('inccommand', 'nosplit')
-opt('lazyredraw', true)
-opt('showmatch', true)
-opt('hlsearch', true)
-opt('ignorecase', true)
-opt('smartcase', true)
-opt('clipboard', 'unnamedplus')
-opt('laststatus', 2)
-opt('showmode', false)
-opt('shada', [['20,<50,s10,h,/100]])
-opt('hidden', true)
-opt('shortmess', o.shortmess .. 'c')
-opt('completeopt', 'menuone,noselect')
-opt('joinspaces', false)
-opt('guicursor', [[n-v-c:block,i-ci-ve:ver25,r-cr:hor20,o:hor50]])
-opt('updatetime', 300)
-opt('previewheight', 5)
-opt('cmdheight', 2)
-opt('scrolloff', 5)
-opt('sidescrolloff', 5)
-opt('display', 'msgsep')
-opt('mouse', 'nivh')
-opt('splitright', true)
-opt('splitbelow', true)
-opt('backup', false)
-opt('writebackup', false)
+opt("background", "dark")
+opt("backup", false)
+opt("clipboard", "unnamedplus")
+opt("cmdheight", 2)
+opt("completeopt", "menu,menuone,noselect")
+opt("display", "msgsep")
+opt("encoding", "UTF-8")
+opt("guicursor", [[n-v-c:block,i-ci-ve:ver25,r-cr:hor20,o:hor50]])
+opt("hidden", true)
+opt("hlsearch", true)
+opt("ignorecase", true)
+opt("inccommand", "nosplit")
+opt("joinspaces", false)
+opt("laststatus", 2)
+opt("lazyredraw", true)
+opt("mouse", "nivh")
+opt("previewheight", 7)
+opt("scrolloff", 7)
+opt("shada", [[!,'2000,<2000,s300,:3000,n~/.vim/.shada]])
+opt("shortmess", o.shortmess .. "cS")
+opt("showmatch", true)
+opt("showmode", false)
+opt("sidescrolloff", 5)
+opt("smartcase", true)
+opt("splitbelow", true)
+opt("splitright", true)
+opt("termguicolors", true)
+opt("undolevels", 1000)
+opt("updatetime", 300)
+opt("whichwrap", o.whichwrap .. "<,>,h,l")
+opt("wildignore", "*.o,*~,*.pyc")
+opt("wildmode", "longest,full")
+opt("writebackup", false)
 
-opt('wrap', false, window)
-opt('number', true, window)
-opt('relativenumber', true, window)
-opt('conceallevel', 2, window)
-opt('concealcursor', 'nc', window)
-opt('cursorline', true, window)
-opt('signcolumn', 'yes:1', window)
+opt("wrap", false, window)
+opt("number", true, window)
+opt("relativenumber", true, window)
+opt("conceallevel", 2, window)
+opt("concealcursor", "nc", window)
+opt("cursorline", true, window)
+opt("signcolumn", "yes:1", window)
 
-opt('textwidth', 100, buffer)
-opt('tabstop', 2, buffer)
-opt('softtabstop', 0, buffer)
-opt('expandtab', true, buffer)
-opt('shiftwidth', 2, buffer)
-opt('smartindent', true, buffer)
-opt('undofile', true, buffer)
-opt('synmaxcol', 500, buffer)
-opt('modeline', false, buffer)
+opt("textwidth", 100, buffer)
+opt("tabstop", 2, buffer)
+opt("softtabstop", 0, buffer)
+opt("expandtab", true, buffer)
+opt("shiftwidth", 2, buffer)
+opt("smartindent", true, buffer)
+opt("undofile", true, buffer)
+opt("synmaxcol", 500, buffer)
+opt("modeline", false, buffer)
 
 -- we support termguicolors
 
@@ -71,7 +77,7 @@ opt('modeline', false, buffer)
 -- vim.v.lang = 'en_US'
 
 -- enable syntax highlighting
-vim.cmd('syntax on')
+vim.cmd("syntax on")
 
 -- enable filetype detection
 -- vim.cmd('filetype plugin indent on')
@@ -79,8 +85,6 @@ vim.cmd('syntax on')
 -- vim.cmd('set iskeyword+=-') -- treat dash separated words as a word text object"
 -- vim.cmd('set shortmess+=c') -- Don't pass messages to |ins-completion-menu|.
 -- vim.cmd('set inccommand=split') -- Make substitution work in realtime
--- vim.o.hidden = O.hidden_files -- Required to keep multiple buffers open multiple buffers
--- vim.o.title = true
 -- TERMINAL = vim.fn.expand('$TERMINAL')
 -- vim.cmd('let &titleold="'..TERMINAL..'"')
 -- vim.o.titlestring="%<%F%=%l/%L - nvim"
