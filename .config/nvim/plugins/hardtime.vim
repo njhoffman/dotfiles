@@ -8,4 +8,3 @@ Plug 'takac/vim-hardtime'
 " let g:list_of_insert_keys = ['<UP>', '<DOWN>', '<LEFT>', '<RIGHT>']
 " let g:list_of_disabled_keys = []
 " let g:hardtime_timeout = 2000
-

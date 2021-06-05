@@ -44,7 +44,9 @@ function set_config()
 end
 
 function plugin.setup(use)
-  use {"tpope/vim-unimpaired"}
+  use {
+    "tpope/vim-unimpaired"
+  }
 end
 
 return plugin

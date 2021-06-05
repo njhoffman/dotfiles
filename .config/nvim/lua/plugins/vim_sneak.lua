@@ -25,8 +25,61 @@ local plugin = {}
 -- Type gUz\} to upper-case the text from the cursor until the next instance of the literal text \}
 -- Type . to repeat the gUz\} operation.
 
+function set_mapping()
+  -- 2-character Sneak (default)
+  vim.cmd([[nmap ? <Plug>Sneak_s]])
+  vim.cmd([[nmap ? <Plug>Sneak_S]])
+  -- visual-mode
+  vim.cmd([[xmap ? <Plug>Sneak_s]])
+  vim.cmd([[xmap ? <Plug>Sneak_S]])
+  -- operator-pending-mode
+  vim.cmd([[omap ? <Plug>Sneak_s]])
+  vim.cmd([[omap ? <Plug>Sneak_S]])
+
+  -- repeat motion
+  vim.cmd([[map ? <Plug>Sneak_;]])
+  vim.cmd([[map ? <Plug>Sneak_,]])
+
+  -- 1-character enhanced 'f'
+  vim.cmd([[nmap ? <Plug>Sneak_f]])
+  vim.cmd([[nmap ? <Plug>Sneak_F]])
+  -- visual-mode
+  vim.cmd([[xmap ? <Plug>Sneak_f]])
+  vim.cmd([[xmap ? <Plug>Sneak_F]])
+  -- operator-pending-mode
+  vim.cmd([[omap ? <Plug>Sneak_f]])
+  vim.cmd([[omap ? <Plug>Sneak_F]])
+
+  -- 1-character enhanced 't'
+  vim.cmd([[nmap ? <Plug>Sneak_t]])
+  vim.cmd([[nmap ? <Plug>Sneak_T]])
+  -- visual-mode
+  vim.cmd([[xmap ? <Plug>Sneak_t]])
+  vim.cmd([[xmap ? <Plug>Sneak_T]])
+  -- operator-pending-mode
+  vim.cmd([[omap ? <Plug>Sneak_t]])
+  vim.cmd([[omap ? <Plug>Sneak_T]])
+
+  -- label-mode
+  vim.cmd([[nmap ? <Plug>SneakLabel_s]])
+  vim.cmd([[nmap ? <Plug>SneakLabel_S]])
+
+  -- TODO: figure out right way to unmap these keys
+  -- vim.cmd([[unmap s]])
+  -- vim.cmd([[unmap S]])
+  -- vim.cmd([[unmap ?]])
+  -- vim.cmd([[unmap ;]])
+  -- vim.cmd([[unmap \]])
+  --
+  -- vim.api.nvim_set_keymap("n", "f", "<Plug>Sneak_f", {noremap = false, silent = false})
+  -- vim.api.nvim_set_keymap("n", "F", "<Plug>Sneak_F", {noremap = false, silent = false})
+  -- vim.api.nvim_set_keymap("n", "t", "<Plug>Sneak_t", {noremap = false, silent = false})
+  -- vim.api.nvim_set_keymap("n", "T", "<Plug>Sneak_T", {noremap = false, silent = false})
+end
+
 function plugin.setup(use)
-  use {"justinmk/vim-sneak"}
+  use {"justinmk/vim-sneak"} --, config = set_mapping}
+  set_mapping()
 end
 
 return plugin

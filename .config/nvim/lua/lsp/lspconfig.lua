@@ -1,8 +1,9 @@
 local config = require("config")
 local lsp_status = require("lsp-status")
+local lsp_signature = require "lsp_signature"
 local f = require("utils.functional")
 local utils = require("utils.core")
-local lsp_mappings = require("mappings.lsp")
+-- local lsp_mappings = require("mappings.lsp")
 
 DATA_PATH = vim.fn.stdpath("data")
 local lspinstall = DATA_PATH .. "/lspinstall/"
@@ -12,6 +13,23 @@ lsp_config = {}
 
 lsp_config.capabilities = vim.lsp.protocol.make_client_capabilities()
 lsp_config.capabilities.textDocument.completion.completionItem.snippetSupport = true
+lsp_config.capabilities.textDocument.codeAction = {
+  dynamicRegistration = false,
+  codeActionLiteralSupport = {
+    codeActionKind = {
+      valueSet = {
+        "",
+        "quickfix",
+        "refactor",
+        "refactor.extract",
+        "refactor.inline",
+        "refactor.rewrite",
+        "source",
+        "source.organizeImports"
+      }
+    }
+  }
+}
 
 function lsp_config.log(msg)
   if (config.LSP.log_stdout) then
@@ -115,13 +133,15 @@ local function documentHoverDiagnostic(client, bufnr)
 end
 -- log_capabilities(client.resolved_capabilities)
 function lsp_config.common_on_attach(client, bufnr)
-  lsp_status.on_attach(client)
+  vim.api.nvim_buf_set_option(bufnr, "omnifunc", "v:lua.vim.lsp.omnifunc")
   -- vim.cmd([[ setlocal omnifunc=v:lua.vim.lsp.omnifunc ]])
+  lsp_signature.on_attach(client)
+  lsp_status.on_attach(client)
   lsp_config.log("client.name: " .. client.name .. "\n" .. vim.inspect(client.resolved_capabilities))
 
   documentHoverDiagnostic(client, bufnr)
   documentFormat(client, bufnr)
-  lsp_mappings.lsp_attach(client, bufnr)
+  -- lsp_mappings.lsp_attach(client, bufnr)
 
   if config.LSP.highlight_word == nil or config.LSP.highlight_word == true then
     documentHighlight(client, bufnr)

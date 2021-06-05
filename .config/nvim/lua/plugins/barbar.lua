@@ -22,9 +22,9 @@ function set_config()
 end
 
 function set_mapping()
-  map("n", "H", ":BufferPrev<CR>")
-  map("n", "L", ":BufferNext<CR>")
-  map("n", "<Leader>D", ":BufferCloseAllButCurrent<CR>")
+  -- map("n", "H", ":BufferPrev<CR>")
+  -- map("n", "L", ":BufferNext<CR>")
+  -- map("n", "<Leader>D", ":BufferCloseAllButCurrent<CR>")
   -- nnoremap <silent>    <A-1> :BufferGoto 1<CR>
   -- nnoremap <silent>    <A-2> :BufferGoto 2<CR>
   -- nnoremap <silent>    <A-3> :BufferGoto 3<CR>
@@ -38,7 +38,6 @@ function set_mapping()
   --
   -- " Magic buffer-picking mode
   -- nnoremap <silent> <C-s>    :BufferPick<CR>
-
   -- " Move to previous/next
   -- nnoremap <silent>    <A-,> :BufferPrevious<CR>
   -- nnoremap <silent>    <A-.> :BufferNext<CR>

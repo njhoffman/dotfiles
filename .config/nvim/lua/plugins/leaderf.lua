@@ -13,12 +13,12 @@ end
 function plugin.setup(use)
   use {
     "Yggdroot/LeaderF",
-    run = ":LeaderfInstallCExtension",
-    config = plugin.load
+    run = ":LeaderfInstallCExtension"
+    -- config = plugin.load
   }
+  plugin.load()
 end
 
-plugin.init = set_config
 return plugin
 
 -- " don't show the help in normal mode

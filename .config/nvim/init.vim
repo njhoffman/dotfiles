@@ -24,21 +24,19 @@ set runtimepath^=~/.local/share/nvim/site
 " source $HOME/.config/nvim/functions.vim
 " source $HOME/.config/nvim/plugins.vim
 
-function! GFilesFallback()
-  let output = system('git rev-parse --show-toplevel') " Is there a faster way?
-  let prefix = get(g:, 'fzf_command_prefix', '')
-  if v:shell_error == 0
-    " exec "normal :" . prefix . "GFiles\<CR>"
-    exec "normal :FzfPreviewFromResources project\<CR>"
-  else
-    exec "normal :FzfPreviewFromResources directory\<CR>"
-    " exec "normal :" . prefix . "Files\<CR>"
+source $HOME/.config/nvim/functions.fzf.vim
+
+" fasd integration
+" function! s:fasd_update() abort
+function! Fasd_update() abort
+  if empty(&buftype) || &filetype ==# 'dirvish'
+    call jobstart(['fasd', '-A', expand('%:p')])
   endif
-  return 0
 endfunction
 
 lua << EOF
 require('init')
 EOF
+
 " source $HOME/.config/nvim/mappings.vim
 source $HOME/.config/nvim/plugins/barbar-colors.vim

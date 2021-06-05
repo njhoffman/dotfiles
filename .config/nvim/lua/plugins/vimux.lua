@@ -1,7 +1,9 @@
 local plugin = {}
 
 function plugin.load()
-  vim.g.VimuxHeight = 20
+  -- echo g:VimuxRunnerIndex
+  -- TODO: style tmux pane when controlled, add vim status section
+  vim.g.VimuxHeight = 30
   vim.g.VimuxUseNearest = 1
   vim.g.VimuxResetSequence = "q C-u"
   vim.g.VimuxPromptString = ""

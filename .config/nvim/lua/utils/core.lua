@@ -28,7 +28,9 @@ end
 
 function utils.opt(o, v, scopes)
   scopes = scopes or {vim.o}
-  for _, s in ipairs(scopes) do s[o] = v end
+  for _, s in ipairs(scopes) do
+    s[o] = v
+  end
 end
 
 -- mappings
@@ -37,14 +39,16 @@ function utils.map(modes, key, result, opts)
   if opts then
     options = vim.tbl_extend("force", options, opts)
   end
-  if type(modes) == 'string' then modes = {modes} end
+  if type(modes) == "string" then
+    modes = {modes}
+  end
   for _, mode in ipairs(modes) do
     vim.api.nvim_set_keymap(mode, key, result, options)
   end
 end
 
 -- Terminal
-local has_toggleterm,toggleterm = pcall(require,"toggleterm")
+local has_toggleterm, toggleterm = pcall(require, "toggleterm")
 if has_toggleterm then
   local Terminal = require("toggleterm.terminal").Terminal
   local lazygit =
@@ -57,10 +61,9 @@ if has_toggleterm then
   )
 
   function utils._lazygit_toggle()
-      lazygit:toggle()
+    lazygit:toggle()
   end
 end
-
 
 -- Telescope
 function utils.search_nvim()
@@ -84,7 +87,9 @@ end
 
 -- @param maps list of keymaps
 utils.keymaps = function(maps)
-  for _, m in ipairs(maps) do utils.keymap(m) end
+  for _, m in ipairs(maps) do
+    utils.keymap(m)
+  end
 end
 
 -- Skip these servers for formatting
@@ -103,14 +108,20 @@ utils.lsp_format = function()
   -- @param client lsp client
   local once = function(client)
     return function(skip, f)
-      for _, key in ipairs(skip) do if client.name == key then return end end
+      for _, key in ipairs(skip) do
+        if client.name == key then
+          return
+        end
+      end
 
       f(client)
     end
   end
 
   -- Run our formatters
-  for _, client in pairs(vim.lsp.buf_get_clients()) do once(client)(skip_formatting_lsp, format) end
+  for _, client in pairs(vim.lsp.buf_get_clients()) do
+    once(client)(skip_formatting_lsp, format)
+  end
 end
 
 utils.log_to_file = function(logfile)

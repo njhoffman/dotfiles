@@ -57,16 +57,6 @@ Plugin.load = function()
   -- vim.fn.sign_define('DapBreakpoint', {text='■', texthl='DAPBreakpointSign', linehl='', numhl='DAPBreakpointSign'})
   -- vim.fn.sign_define('DapLogPoint', {text='◆', texthl='DAPLogPointSign', linehl='', numhl='DAPLogPointSign'})
   -- vim.fn.sign_define('DapStopped', {text='→', texthl='', linehl='debugPC', numhl=''})
-
-  local map = require("utils.core").map
-  map("n", "<F8>", [[:lua require('dap').continue()<CR>]])
-  map("n", "<F9>", [[:lua require('dap').step_over()<CR>]])
-  map("n", "<F10>", [[:lua require('dap').step_into()<CR>]])
-  map("n", "<F11>", [[:lua require('dap').step_out()<CR>]])
-  map("n", "<S-F12>", [[:lua require('dap').repl.run_last()<CR>]])
-  map("n", "<leader>tb", [[:lua require"dap".toggle_breakpoint()<CR>]])
-  map("n", "<leader>cb", [[:lua require"dap".set_breakpoint(vim.fn.input("Breakpoint condition: "))<CR>]])
-  map("n", "<leader>lb", [[:lua require"dap".set_breakpoint(nil, nil, vim.fn.input("Log point message: "))<CR>]])
 end
 
 Plugin.setup = function(use)

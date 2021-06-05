@@ -10,7 +10,7 @@ function set_config()
     infor_sign = "",
     dianostic_header_icon = "   ",
     code_action_icon = "",
-    code_action_prompt = {enable = true, sign = true, sign_priority = 20, virtual_text = true},
+    code_action_prompt = {enable = false, sign = true, sign_priority = 20, virtual_text = true},
     finder_definition_icon = "   ",
     finder_reference_icon = "   ",
     max_preview_lines = 20, -- preview lines of lsp_finder and definition preview
@@ -39,7 +39,9 @@ function plugin.load()
 end
 
 function plugin.setup(use)
-  use {"glepnir/lspsaga.nvim", config = plugin.load}
+  -- use {"glepnir/lspsaga.nvim", config = plugin.load}
+  use {"glepnir/lspsaga.nvim"}
+  set_config()
 end
 
 return plugin

@@ -41,8 +41,8 @@ lsp_servers.efm = {
   -- TODO: limit this by config and what is being enabled by lsp
   filetypes = {
     "asciidoc",
-    "c",
-    "cpp",
+    -- "c",
+    -- "cpp",
     "css",
     "csv",
     "dockerfile",
@@ -76,17 +76,48 @@ lsp_servers.efm = {
 
 lsp_servers.typescript = {
   on_attach = function(client, bufnr)
-    local lspTsUtils =
-      require("nvim-lsp-ts-utils").setup(
+    local lspTsUtils = require("nvim-lsp-ts-utils")
+
+    lspTsUtils.setup(
       {
         -- defaults
+        debug = false,
         disable_commands = false,
         enable_import_on_completion = false,
-        import_on_completion_timeout = 5000
+        import_on_completion_timeout = 5000,
+        -- eslint
+        eslint_enable_code_actions = true,
+        -- eslint_bin = "eslint",
+        eslint_bin = "eslint_d",
+        eslint_args = {"-f", "json", "--stdin", "--stdin-filename", "$FILENAME"},
+        eslint_enable_disable_comments = true,
+        -- experimental settings!
+        -- eslint diagnostics
+        eslint_enable_diagnostics = true,
+        eslint_diagnostics_debounce = 250,
+        -- formatting
+        enable_formatting = false,
+        formatter = "prettier",
+        formatter_args = {"--stdin-filepath", "$FILENAME"},
+        format_on_save = false,
+        no_save_after_format = false,
+        -- parentheses completion
+        complete_parens = false,
+        signature_help_in_parens = true,
+        -- update imports on file move
+        update_imports_on_move = true,
+        require_confirmation_on_move = false,
+        -- watch_dir = "/src"
+        watch_dir = "/"
       }
     )
+
+    lspTsUtils.setup_client(client)
+
     return lsp_config.common_on_attach(client, bufnr)
-  end
+  end,
+  -- autostart = LSP.tsserver
+  filetypes = {"javascript", "javascriptreact", "javascript.jsx", "typescript", "typescriptreact", "typescript.tsx"}
 }
 
 lsp_servers.lua = {
@@ -107,6 +138,9 @@ lsp_servers.lua = {
           [vim.fn.expand("$VIMRUNTIME/lua")] = true,
           [vim.fn.expand("$VIMRUNTIME/lua/vim/lsp")] = true
         }
+      },
+      telemetry = {
+        enable = false
       }
     }
   }
@@ -134,6 +168,7 @@ function lsp_servers.make_config(server_name)
     server_config.filetypes = lsp_servers.efm.filetypes
   elseif server_name == "typescript" then
     server_config.on_attach = lsp_servers.typescript.on_attach
+    server_config.filetypes = lsp_servers.typescript.filetypes
   end
   return server_config
 end

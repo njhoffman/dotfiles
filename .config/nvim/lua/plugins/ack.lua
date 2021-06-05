@@ -13,15 +13,9 @@ function set_config()
   -- vim.cmd("cnoreabbrev Ack Ack!")
 end
 
-function set_mapping()
-  -- Maps <leader>/ so we're ready to type the search keyword
-  map("n", "<Leader>/", ":Ack!<Space>")
-  map("n", "<Leader>/", "<Plug>AgActionWord")
-  map("v", "<Leader>/", "<Plug>AgActionVisual")
-  -- gag => searhc selected text
-  -- gagw => search the word
-  -- gawi' => search the word in quotes
-end
+-- gag => searhc selected text
+-- gagw => search the word
+-- gawi' => search the word in quotes
 
 function plugin.load()
   -- set_config()

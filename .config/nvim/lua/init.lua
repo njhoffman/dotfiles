@@ -7,14 +7,15 @@ require "main.colorscheme"
 -- install 3rd party plugin packages
 local plugins = require "plugins"
 
-require("debug.typescript")
+-- require("debug.typescript")
 require "lsp".load()
 
--- install debugger adapter protocol functionality
+-- -- install debugger adapter protocol functionality
 require "main.autocommands"
 
 require "plugins.feline".load()
-require "main.mapping"
+require "main.mappings"
+require "main.mappings.pickers"
 
 -- only available after plugins loaded
 -- if packer_plugins["nvim-treesitter"] and packer_plugins["nvim-treesitter"].loaded then

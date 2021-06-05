@@ -24,6 +24,11 @@ packer.startup(
     require "plugins.nvim_web_devicons".setup(use)
     require "plugins.gitsigns".setup(use)
 
+    -- Project management
+    require "plugins.vim-rooter".setup(use)
+    require "plugins.auto-session".setup(use)
+    use {"wakatime/vim-wakatime"} -- WakaTimeToday, WakaTimeApiKey, WakaTimeDebugEnable
+
     -- ====================================
     -- Treesitter and syntax
     if config.Treesitter.enabled ~= 0 and config.Treesitter.enabled ~= false then
@@ -35,7 +40,9 @@ packer.startup(
     -- LSP, Autocomplete and snippets
     if config.LSP.enabled ~= 0 and config.LSP.enabled ~= false then
       require "plugins.nvim_compe".setup(use)
+      require "plugins.nvim-lightbulb".setup(use)
       require "plugins.lspsaga".setup(use)
+      require "plugins.lsp_signature".setup(use)
       use {
         "neovim/nvim-lspconfig",
         requires = {
@@ -57,14 +64,14 @@ packer.startup(
     require "plugins.fzf".setup(use)
     require "plugins.fzf_preview".setup(use)
     require "plugins.telescope".setup(use)
-    require "plugins.leaderf".setup(use)
+    -- require "plugins.leaderf".setup(use)
 
     -- ====================================
     -- Visual enhancements
     use {"gerw/vim-HiLinkTrace"}
     require "plugins.vim_plugin_AnsiEsc".setup(use)
-    -- require "plugins.vim_hexokinase".setup(use)
-    require "plugins.nvim_colorizer".setup(use)
+    require "plugins.vim_hexokinase".setup(use)
+    -- require "plugins.nvim_colorizer".setup(use)
     require "plugins.vimade".setup(use)
 
     -- ====================================
@@ -87,10 +94,8 @@ packer.startup(
     use {"tpope/vim-eunuch"}
     use {"bchretien/vim-profiler"}
     use {"tweekmonster/startuptime.vim"}
+    use {"qpkorr/vim-renamer"}
     require "plugins.nvim_reload".setup(use)
-    -- Plug 'qpkorr/vim-renamer'
-    -- let g:RenamerShowHidden=1
-
     -- vim-profiler.py nvim -n 10
     -- vim-profiler.py -n 5 nvim foo.cc -c ":exec ':normal ia' | :q\!"
 
@@ -112,11 +117,9 @@ packer.startup(
     require "plugins.vimwiki".setup(use)
     require "plugins.vimux".setup(use)
     require "plugins.asynctasks".setup(use)
+    require "plugins.nvim-gdb".setup(use)
 
     -- ====================================
-    -- Project management
-    require "plugins.vim-rooter".setup(use)
-    use {"wakatime/vim-wakatime"} -- WakaTimeToday, WakaTimeApiKey, WakaTimeDebugEnable
 
     -- ====================================
     -- Themes

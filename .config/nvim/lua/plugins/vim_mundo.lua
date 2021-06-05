@@ -14,14 +14,8 @@ function set_config()
   -- vim.g.mundo_tree_statusline = nil
 end
 
-function set_mappings()
-  local map = require('utils.core').map
-  map("n", "<F5>", ":MundoToggle<CR>")
-end
-
 function plugin.load()
   set_config()
-  set_mappings()
 end
 
 function plugin.setup(use)
@@ -31,14 +25,14 @@ end
 return plugin
 
 -- Your current position in the undo tree is marked with an @ character. Other nodes are marked with an o character.
- -- j/k  - Next/Prev undo state.
- -- J/K  - Next/Prev write state.
- -- i    - Toggle 'inline diff' mode.
- -- /    - Find changes that match string.
- -- n/N  - Next/Prev undo that matches search.
- -- P    - Play current state to selected undo.
- -- d    - Vert diff of undo with current state.
- -- p    - Diff of selected undo and current state.
- -- r    - Diff of selected undo and prior undo.
- -- q    - Quit!
- -- <cr> - Revert to selected state.
+-- j/k  - Next/Prev undo state.
+-- J/K  - Next/Prev write state.
+-- i    - Toggle 'inline diff' mode.
+-- /    - Find changes that match string.
+-- n/N  - Next/Prev undo that matches search.
+-- P    - Play current state to selected undo.
+-- d    - Vert diff of undo with current state.
+-- p    - Diff of selected undo and current state.
+-- r    - Diff of selected undo and prior undo.
+-- q    - Quit!
+-- <cr> - Revert to selected state.

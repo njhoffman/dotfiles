@@ -3,35 +3,50 @@ local plugin = {}
 local map = require("utils.core").map
 
 function set_mappings()
-  map("n", "<leader>ff", ":Telescope find_files<CR>")
-  map("n", "<leader>fo", ":Telescope oldfiles<CR>")
-  map("n", "<leader>fg", ":Telescope live_grep<CR>")
-  map("n", "<leader>fh", ":Telescope help_tags<CR>")
-  map("n", "<leader>fc", ":Telescope colorscheme<CR>")
-  map("n", "<leader>fn", ":lua require('utils.core').search_nvim()<CR>")
-  map("n", "<leader>b", ":Telescope buffers<CR>")
-  vim.api.nvim_set_keymap(
-    "n",
-    "<C-p>",
-    ":lua require'telescope'.extensions.project.project{}<CR>",
-    {noremap = true, silent = true}
-  )
-  -- require'telescope'.extensions.dap.commands{}
-  -- require'telescope'.extensions.dap.configurations{}
-  -- require'telescope'.extensions.dap.list_breakpoints{}
-  -- require'telescope'.extensions.dap.variables{}
-  -- require'telescope'.extensions.dap.frames{}
+  -- nnoremap <Leader>f :lua require'telescope.builtin'.find_files(require('telescope.themes').get_dropdown({ winblend = 10 }))<cr>
+  -- Telescope find_files theme=get_dropdown
 end
+
+-- Dropdown list theme using a builtin theme definitions :
+local center_list =
+  require "telescope.themes".get_dropdown(
+  {
+    winblend = 10,
+    width = 0.5,
+    prompt = " ",
+    results_height = 15,
+    previewer = false
+  }
+)
+
+-- Settings for with preview option
+local with_preview = {
+  winblend = 10,
+  show_line = false,
+  results_title = false,
+  preview_title = false,
+  layout_config = {
+    preview_width = 0.5
+  }
+}
 
 plugin.load = function()
   local sorters = require "telescope.sorters"
   local previewers = require "telescope.previewers"
   local actions = require("telescope.actions")
   local telescope = require("telescope")
+
+  -- require("telescope.builtin").buffers(
+  --   {
+  --     entry_maker = require "vimrc.telescope.my_make_entry".gen_from_buffer_like_leaderf()
+  --   }
+  -- )
+
   -- Fuzzy find over current tasks
   -- telescope.load_extension("frecency")
   -- telescope.load_extension('ultisnips')
   -- telescope.load_extension('octo')
+  telescope.load_extension("session-lens")
   telescope.load_extension("dap")
   telescope.load_extension("fzy_native")
   telescope.load_extension("project")
@@ -42,9 +57,27 @@ plugin.load = function()
 
   telescope.setup {
     defaults = {
+      vimgrep_arguments = {
+        "rg",
+        "--color=never",
+        "--no-heading",
+        "--with-filename",
+        "--line-number",
+        "--column",
+        "--smart-case"
+      },
+      find_command = {
+        "rg",
+        "--ignore",
+        "--hidden",
+        "--files prompt_prefix=🔍"
+      },
+      prompt_position = "top",
       prompt_prefix = "λ ",
       selection_caret = "|> ",
-      layout_strategy = "flex", -- flex, horizontal
+      selection_strategy = "reset", -- follow, reset, row
+      sorting_strategy = "ascending",
+      layout_strategy = "flex", -- flex, horizontal, veritical, center
       scroll_strategy = "cycle",
       width = 0.5,
       shorten_path = true,
@@ -280,24 +313,6 @@ return plugin
 -- elseif client.resolved_capabilities.document_range_formatting then
 --     buf_set_keymap("n", "<leader>lf", "<cmd>lua vim.lsp.buf.range_formatting()<CR>", opts)
 
--- -- Code actions
--- capabilities.textDocument.codeAction = {
---   dynamicRegistration = false;
---       codeActionLiteralSupport = {
---           codeActionKind = {
---               valueSet = {
---                  "",
---                  "quickfix",
---                  "refactor",
---                  "refactor.extract",
---                  "refactor.inline",
---                  "refactor.rewrite",
---                  "source",
---                  "source.organizeImports",
---               };
---           };
---       };
--- }
 -- end
 --
 -- -- new lsp instructions

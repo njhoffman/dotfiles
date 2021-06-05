@@ -1,8 +1,7 @@
-
 snippet autoenv ".autoenv.zsh template"
-	#!/usr/bin/env zsh
-	if [[ $autoenv_event == 'enter' ]]; then
-		autoenv_source_parent
-		$0
-	fi
+#!/usr/bin/env zsh
+if [[ $autoenv_event == 'enter' ]]; then
+  autoenv_source_parent
+  $0
+fi
 endsnippet

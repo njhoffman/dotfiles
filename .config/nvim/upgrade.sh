@@ -1,6 +1,9 @@
 #!/usr/bin/env bash
 set -e
 
+# packer
+git clone https://github.com/wbthomason/packer.nvim ~/.local/share/nvim/site/pack/packer/start/packer.nvim
+
 system_type=$(uname -s)
 if [ "$system_type" = "Darwin" ]; then
   brew install shellcheck
