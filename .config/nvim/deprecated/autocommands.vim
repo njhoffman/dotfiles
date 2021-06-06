@@ -68,6 +68,7 @@ if has("autocmd")
     autocmd FileType lua setlocal tabstop=2 softtabstop=2 shiftwidth=2 expandtab
   augroup end
 
+
   augroup filetypedetect
     au BufNewFile,BufRead *.module setlocal ft=php syn=php
     " force bash syntax for shell scripts by default custom syntax extension assignments

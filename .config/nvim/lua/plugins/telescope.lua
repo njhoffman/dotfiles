@@ -1,5 +1,5 @@
 local plugin = {}
-
+local actions = require("telescope.actions")
 local map = require("utils.core").map
 
 function set_mappings()
@@ -7,6 +7,37 @@ function set_mappings()
   -- Telescope find_files theme=get_dropdown
 end
 
+-- local center_list =
+--   require "telescope.themes".get_dropdown(
+--   {
+--     width = 0.5,
+--     results_title = false,
+--     results_height = 20,
+--     previewer = false,
+--     color_devicons = true
+--   }
+-- )
+
+-- local with_preview =
+--   require "telescope.themes".get_dropdown(
+--   {
+--     results_title = false,
+--     results_height = 20,
+--     shorten_path = true,
+--     prompt_position = "top",
+--     layout_strategy = "horizontal",
+--     width = 0.75,
+--     vimgrep_arguments = {
+--       "rg",
+--       "--hidden",
+--       "--with-filename",
+--       "--line-number",
+--       "--no-heading",
+--       "--column",
+--       "--color=never"
+--     }
+--   }
+-- )
 -- Dropdown list theme using a builtin theme definitions :
 local center_list =
   require "telescope.themes".get_dropdown(
@@ -50,6 +81,8 @@ plugin.load = function()
   telescope.load_extension("dap")
   telescope.load_extension("fzy_native")
   telescope.load_extension("project")
+  telescope.load_extension("asynctasks")
+  -- telescope.extensions.asynctasks.all()
 
   -- require('telescope').extensions.project.project{ display_type = 'full'}
   -- require("telescope").extensions.packer.plugins()
@@ -118,7 +151,7 @@ plugin.load = function()
       }
     }
   }
-  set_mappings()
+  -- set_mappings()
 end
 
 function plugin.setup(use)
@@ -128,7 +161,7 @@ function plugin.setup(use)
       "mfussenegger/nvim-dap",
       "nvim-lua/popup.nvim",
       "nvim-lua/plenary.nvim",
-      "GustavoKatel/telescope-asynctasks.nvim",
+      {"GustavoKatel/telescope-asynctasks.nvim"},
       "nvim-telescope/telescope-fzy-native.nvim",
       "nvim-telescope/telescope-dap.nvim",
       "nvim-telescope/telescope-project.nvim",
@@ -140,6 +173,54 @@ function plugin.setup(use)
   }
 end
 
+_G.FindFile = function()
+  local opts = vim.deepcopy(center_list)
+  opts.prompt_title = "Find in project (CTRL-P)"
+  opts.find_command = {"rg", "--hidden", "--files"}
+  require("telescope.builtin").find_files(opts)
+end
+
+_G.FindBuffer = function()
+  local my_make_entry = require("rc.telescope.my_make_entry")
+  local opts = vim.deepcopy(center_list)
+  opts.prompt_title = "Find in open buffers"
+  opts.find_command = {"rg", "--hidden", "--files", "--color=never"}
+  opts.entry_maker = my_make_entry.gen_from_buffer_like_leaderf()
+  require("telescope.builtin").buffers(opts)
+end
+
+_G.FindString = function()
+  local opts = vim.deepcopy(with_preview)
+  opts.search = vim.fn.input("Grep for > ")
+  opts.prompt_title = "Filter results"
+  require("telescope.builtin").grep_string(opts)
+end
+
+_G.FindLive = function()
+  local opts = vim.deepcopy(with_preview)
+  opts.prompt_title = "Live search"
+  require("telescope.builtin").live_grep(opts)
+end
+
+_G.FindDot = function()
+  local opts = vim.deepcopy(center_list)
+  opts.prompt_title = "Find in dotfiles"
+  opts.cwd = "$HOME/Projects/dotfiles/"
+  opts.results_height = 10
+  require("telescope.builtin").find_files(opts)
+end
+
+_G.FindGit = function()
+  require("telescope.builtin").git_branches(
+    {
+      attach_mappings = function(_, map)
+        map("i", "<c-d>", actions.git_delete_branch)
+        map("n", "<c-d>", actions.git_delete_branch)
+        return true
+      end
+    }
+  )
+end
 return plugin
 
 -- defaults = {
@@ -208,12 +289,6 @@ return plugin
 -- 'full' (Show the title and the path of the project)
 -- 'minimal' (Default. Show the title of the project only)
 --
---  telescope mappings
---  nnoremap <leader><space> :Telescope git_files<CR>
---  nnoremap <leader>ff :Telescope live_grep<CR>
---  nnoremap <leader>FF :Telescope find_files<CR>
---  nnoremap <leader>fg :Telescope git_branches<CR>
---  nnoremap <leader>fb :Telescope buffers<CR>
 
 -- fzf-native
 -- https://github.com/nvim-telescope/telescope-fzf-native.nvim
@@ -287,25 +362,6 @@ return plugin
 -- local function buf_set_option(...) vim.api.nvim_buf_set_option(bufnr, ...) end
 
 -- buf_set_option('omnifunc', 'v:lua.vim.lsp.omnifunc')
-
--- -- Mappings.
--- local opts = { noremap=true, silent=true }
--- buf_set_keymap('n', 'gD', '<Cmd>lua vim.lsp.buf.declaration()<CR>', opts)
--- buf_set_keymap('n', 'gd', '<Cmd>lua vim.lsp.buf.definition()<CR>', opts)
--- buf_set_keymap('n', 'K', '<Cmd>lua vim.lsp.buf.hover()<CR>', opts)
--- buf_set_keymap('n', 'gi', '<cmd>lua vim.lsp.buf.implementation()<CR>', opts)
--- buf_set_keymap('n', '<C-k>', '<cmd>lua vim.lsp.buf.signature_help()<CR>', opts)
--- buf_set_keymap('n', '[d', '<cmd>lua vim.lsp.diagnostic.goto_prev()<CR>', opts)
--- buf_set_keymap('n', ']d', '<cmd>lua vim.lsp.diagnostic.goto_next()<CR>', opts)
--- buf_set_keymap('n', '<leader>law', '<cmd>lua vim.lsp.buf.add_workspace_folder()<CR>', opts)
--- buf_set_keymap('n', '<leader>lrw', '<cmd>lua vim.lsp.buf.remove_workspace_folder()<CR>', opts)
--- buf_set_keymap('n', '<leader>llw', '<cmd>lua print(vim.inspect(vim.lsp.buf.list_workspace_folders()))<CR>', opts)
--- buf_set_keymap('n', '<leader>lt', '<cmd>lua vim.lsp.buf.type_definition()<CR>', opts)
--- buf_set_keymap('n', '<leader>lrn', '<cmd>lua vim.lsp.buf.rename()<CR>', opts)
--- buf_set_keymap('n', '<leader>lrf', '<cmd>lua vim.lsp.buf.references()<CR>', opts)
--- buf_set_keymap('n', '<leader>ld', '<cmd>lua vim.lsp.diagnostic.show_line_diagnostics()<CR>', opts)
--- buf_set_keymap('n', '<leader>ll', '<cmd>lua vim.lsp.diagnostic.set_loclist()<CR>', opts)
--- buf_set_keymap('n', '<leader>lca', '<cmd>lua vim.lsp.buf.code_action()<CR>', opts)
 
 -- -- Set some keybinds conditional on server capabilities
 -- if client.resolved_capabilities.document_formatting then

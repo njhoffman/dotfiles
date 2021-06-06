@@ -59,8 +59,8 @@ function set_config()
 end
 
 function plugin.load()
-  set_config()
-  set_mappings()
+  -- set_config()
+  -- set_mappings()
 end
 
 function plugin.setup(use)

@@ -325,3 +325,8 @@ function plugin.setup(use)
 end
 
 return plugin
+
+--[[ nf-fa-sort_amount_asc                                     
+nf-fa-sort_amount_desc                                    
+nf-fa-spinner                                             
+nf-fa-star                                                 ]]

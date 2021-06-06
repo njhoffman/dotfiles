@@ -6,7 +6,7 @@ function set_config()
   vim.g.mundo_right = 1
   vim.g.mundo_help = 0
   vim.g.mundo_disable = 0
-  vim.g.mundo_preview_bottom = 0
+  vim.g.mundo_preview_bottom = 1
   vim.g.mundo_close_on_revert = 0
   vim.g.mundo_auto_preview = 1
   vim.g.mundo_playback_delay = 60

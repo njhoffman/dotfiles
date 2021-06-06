@@ -80,12 +80,12 @@ function set_mapping()
   local opts = {noremap = true, silent = true, expr = true}
   -- map("i", "<C-Space>", [[compe#complete()]], opts)
   map("i", "<C-c>", [[compe#complete()]], opts)
-  -- map("i", "<CR>", [[compe#confirm('<cr>')]], opts)
+  map("i", "<CR>", [[compe#confirm('<cr>')]], opts)
   map("i", "<C-e>", [[compe#close('<c-e>')]], opts)
 
   -- u.map("i", "<CR>", "compe#confirm('<CR>')")
-  map("i", "<C-f>", "compe#scroll({ 'delta': +4 })", opts)
-  map("i", "<C-b>", "compe#scroll({ 'delta': -4 })", opts)
+  map("i", "<C-f>", "[[compe#scroll({ 'delta': +4 })]]", opts)
+  map("i", "<C-b>", "[[compe#scroll({ 'delta': -4 })]]", opts)
 
   -- vim.api.nvim_set_keymap("i", "<CR>", "compe#confirm('<CR>')", {expr = true})
   vim.api.nvim_set_keymap("i", "<Tab>", "v:lua.tab_complete()", {expr = true})
@@ -136,6 +136,13 @@ function plugin.load()
   set_config()
   set_mapping()
 end
+
+-- local map = require('config.utils').map
+-- local opts = {noremap = false, expr = true}
+-- map('i', '<Tab>', [[vsnip#jumpable(1)  ? '<Plug>(vsnip-jump-next)' : '<Tab>']], opts)
+-- map('s', '<Tab>', [[vsnip#jumpable(1)  ? '<Plug>(vsnip-jump-next)' : '<Tab>']], opts)
+-- map('i', '<S-Tab>', [[vsnip#jumpable(-1) ? '<Plug>(vsnip-jump-prev)' : '<S-Tab>']], opts)
+-- map('s', '<S-Tab>', [[vsnip#jumpable(-1) ? '<Plug>(vsnip-jump-prev)' : '<S-Tab>']], opts)
 
 function plugin.setup(use)
   use {"hrsh7th/nvim-compe", config = plugin.load, event = "InsertEnter *"}

@@ -5,24 +5,31 @@ local Opts = config.Opts
 local af = require("../utils/autofunc")
 
 -- relative in normal mode, absolute in insert
-af(
-  "BufEnter,FocusGained,InsertLeave",
-  "*",
-  function()
-    if vim.bo.filetype ~= "dashboard" then
-      vim.wo.relativenumber = true
-    end
-  end
-)
-af(
-  "BufLeave,FocusLost,InsertEnter",
-  "*",
-  function()
-    vim.wo.relativenumber = false
-  end
-)
+-- af(
+--   "BufEnter,FocusGained,InsertLeave",
+--   "*",
+--   function()
+--     if vim.bo.filetype ~= "dashboard" then
+--       vim.wo.relativenumber = true
+--     end
+--   end
+-- )
+-- af(
+--   "BufLeave,FocusLost,InsertEnter",
+--   "*",
+--   function()
+--     vim.wo.relativenumber = false
+--   end
+-- )
 
 local autocmds = {
+  Mundo = {
+    {"FileType", "Mundo", "noremap <buffer>  :q<cr>"}
+  },
+  helpfile = {
+    {"FileType", "help", "noremap <buffer> q :q<cr>"},
+    {"FileType", "help", "noremap <buffer>  :q<cr>"}
+  },
   fasd = {
     -- {"BufWinEnter,BufFilePost", "*", [[call s:fasd_update()]]}
     {"BufWinEnter,BufFilePost", "*", [[call Fasd_update()]]}
@@ -36,13 +43,13 @@ local autocmds = {
   terminal = {
     {"TermOpen", "*", [[tnoremap <buffer> <Esc> <c-\><c-n>]]},
     {"TermOpen", "*", "set nonu"}
-  }
+  },
   -- lsp = {
   --   {"CursorHold,CursorHoldI", "*", "lua require'nvim-lightbulb'.update_lightbulb()"}
   -- }
-  -- packer = {
-  --   {"BufWritePost", "plugins.lua", "PackerCompile"}
-  -- }
+  packer = {
+    {"BufWritePost", "plugins.lua", "PackerCompile"}
+  }
 }
 
 -- vim.cmd([[autocmd ColorScheme * lua require("utils.lsp").fix("ColorScheme")]])

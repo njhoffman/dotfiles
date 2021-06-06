@@ -102,7 +102,7 @@ settings.Completion = {
   ---------------------------
   -- Sources of Completion --
   ---------------------------
-  snippets = false,
+  snippets = true,
   lsp      = true,
   buffer   = true,
   path     = true,

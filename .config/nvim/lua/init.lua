@@ -5,7 +5,7 @@ require "main.options"
 require "main.colorscheme"
 
 -- install 3rd party plugin packages
-local plugins = require "plugins"
+require "plugins"
 
 -- require("debug.typescript")
 require "lsp".load()
@@ -16,6 +16,7 @@ require "main.autocommands"
 require "plugins.feline".load()
 require "main.mappings"
 require "main.mappings.pickers"
+require "main.mappings.lsp"
 
 -- only available after plugins loaded
 -- if packer_plugins["nvim-treesitter"] and packer_plugins["nvim-treesitter"].loaded then

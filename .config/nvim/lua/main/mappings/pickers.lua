@@ -1,3 +1,91 @@
+local unused_alternates = {
+  ["<A-s>"] = {":<C-u>:Rg<CR>", "search (ag)"}
+  -- ["<A-s>"] = {":<C-u>:FzfPreviewProjectGrepRpc<CR>", "search (grep)"}
+}
+--     name = "find",
+--         a = "code actions",
+--         b = "buffers",
+-- 		c = "in current buffer",
+--         f = "files",
+--         g = "grep files",
+--         h = "help",
+-- 		o = "options",
+--         m = "manual pages",
+--         r = "recent files",
+--         s = "settings",
+--         t = "colorschemes"
+--     }
+-- }, { prefix = "<leader>" })
+
+-- -- Directory
+-- wk.register({
+--     d = {
+--         name = "directory",
+--         a = "add directory",
+--         l = "list directories",
+--         r = "remove directory",
+--     }
+-- }, { prefix = "<leader>" })
+
+-- -- Window
+-- wk.register({
+--     w = {
+--         name = "window",
+--         v = "vertical split",
+--         s = "horizontal split",
+--         t = "tab split",
+--         r = "rotate",
+--         l = "load session",
+--         a = "archive session"
+--     }
+-- -- Mappings.
+-- local opts = { noremap=true, silent=true }
+-- vim.api.nvim_set_keymap("n", "<C-p>", ":lua FindFile()<CR>", {silent = true, noremap = true})
+-- vim.api.nvim_set_keymap("n", "<leader>ff", ":lua FindBuffer()<CR>", {silent = true, noremap = true})
+-- vim.api.nvim_set_keymap("n", "<leader>fg", ":lua FindString()<CR>", {silent = true, noremap = true})
+-- vim.api.nvim_set_keymap("n", "<leader>fl", ":lua FindLive()<CR>", {silent = true, noremap = true})
+-- vim.api.nvim_set_keymap("n", "<leader>fd", ":lua FindDot()<CR>", {silent = true, noremap = true})
+-- vim.api.nvim_set_keymap("n", "<leader>fb", ":lua FindGit()<CR>", {silent = true, noremap = true})
+--  telescope mappings
+--  nnoremap <leader><space> :Telescope git_files<CR>
+--  nnoremap <leader>ff :Telescope live_grep<CR>
+--  nnoremap <leader>FF :Telescope find_files<CR>
+--  nnoremap <leader>fg :Telescope git_branches<CR>
+
+local picker_maps = {
+  ["<C-p>"] = {"<cmd>call GFilesFallback()<cr>", "project files"},
+  ["<A-p>"] = {"<cmd>FzfPreviewDirectoryFiles<cr>", "directory files"},
+  ["<A-o>"] = {"<cmd>FzfPreviewDirectoryFilesRpc ~<cr>", "home files"},
+  ["<C-g>"] = {"<cmd>FzfPreviewGitActionsRpc<cr>", "git actions"},
+  ["<A-g>"] = {"<cmd>FzfPreviewGitStatus<cr>", "git status"},
+  ["<C-u>"] = {"<cmd>FzfPreviewFromResources old<cr>", "mru files"},
+  ["<A-u>"] = {"<cmd>FzfPreviewCommandPaletteRpc<cr>", "commands"},
+  ["<C-d>"] = {"<cmd>FzfPreviewGitCurrentLogsRpc<cr>", "git file log"},
+  ["<A-d>"] = {"<cmd>FzfPreviewGitLogsRpc<cr>", "git log"},
+  ["<C-e>"] = {"<cmd>FzfPreviewAllBuffersRpc<cr>", "buffers"},
+  ["<A-e>"] = {"<cmd>Sessions<cr>", "sessions"},
+  ["<A-j>"] = {"<cmd>FzfPreviewJumpsRpc<cr>", "jumps"},
+  ["<A-/>"] = {"<cmd>Helptags<cr>", "jumps"},
+  ["<A-m>"] = {"<cmd>FzfPreviewLocationListRpc<cr>", "location list"},
+  ["<A-s>"] = {"<cmd>Ag<cr>", "search (ag)"},
+  ["<leader>f"] = {
+    name = "+find",
+    c = {"<cmd>Telescope colorscheme<cr>", "colorscheme"},
+    f = {"<cmd>Telescope find_files<cr>", "file"},
+    g = {"<cmd>Telescope live_grep<cr>", "grep text"},
+    h = {"<cmd>Telescope help_tags<cr>", "vim tags"},
+    n = {"<cmd>lua require('utils.core').search_nvim()<cr>", "nvim dotfiles"},
+    o = {"<cmd>Telescope oldfiles<cr>", "recent files"},
+    m = {"<plug>(fzf-maps-n)", "mappings (normal)"},
+    mi = {"<plug>(fzf-maps-i)", "mappings (insert)"},
+    mv = {"<plug>(fzf-maps-v)", "mappings (visual)"},
+    mo = {"<plug>(fzf-maps-o)", "mappings (operator)"},
+    p = "personal config",
+    pn = {"<cmd>e ~/.config/nvim/lua/config.lua<cr>", "nvim"},
+    ps = {"<cmd>e ~/.shell/.zshrc<cr>", "shell"}
+  }
+}
+
 local opts = {
   mode = "n", -- NORMAL mode
   buffer = nil, -- Global mappings. Specify a buffer number for buffer local mappings
@@ -6,27 +94,10 @@ local opts = {
   nowait = false -- use `nowait` when creating keymaps
 }
 
-local picker_maps = {
-  ["<C-p>"] = {":<C-u>call GFilesFallback()<CR>", "project files"},
-  ["<A-p>"] = {":<C-u>FzfPreviewDirectoryFiles<CR>", "directory files"},
-  ["<A-o>"] = {":<C-u>FzfPreviewDirectoryFilesRpc ~<CR>", "home files"},
-  ["<C-g>"] = {":<C-u>FzfPreviewGitActionsRpc<CR>", "git actions"},
-  ["<A-g>"] = {":<C-u>FzfPreviewGitStatus<CR>", "git status"},
-  ["<C-u>"] = {":<C-u>FzfPreviewFromResources old<CR>", "mru files"},
-  ["<A-u>"] = {":<C-u>FzfPreviewCommandPaletteRpc<CR>", "commands"},
-  ["<C-d>"] = {":<C-u>FzfPreviewGitCurrentLogsRpc<CR>", "git file log"},
-  ["<A-d>"] = {":<C-u>FzfPreviewGitLogsRpc<CR>", "git log"},
-  ["<C-e>"] = {":<C-u>FzfPreviewAllBuffersRpc<CR>", "buffers"},
-  ["<A-e>"] = {":<C-u>Sessions<CR>", "sessions"},
-  ["<A-j>"] = {":<C-u>FzfPreviewJumpsRpc<CR>", "jumps"},
-  ["<A-/>"] = {":<C-u>Helptags<CR>", "jumps"},
-  ["<A-m>"] = {":<C-u>FzfPreviewLocationListRpc<CR>", "location list"},
-  -- ["<A-s>"] = {":<C-u>:Rg<CR>", "search (ag)"},
-  -- ["<A-s>"] = {":<C-u>:FzfPreviewProjectGrepRpc<CR>", "search (grep)"},
-  ["<A-s>"] = {":<C-u>:Ag<CR>", "search (ag)"}
-}
-
 require("which-key").register(picker_maps, opts)
+
+-- map("n", "<leader>fn", ":lua require('utils.core').search_nvim()<CR>")
+-- map("n", "<leader>b", ":Telescope buffers show_all=true sort_lastued=true<CR>")
 
 -- local telescope_maps = {
 -- t = {

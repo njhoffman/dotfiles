@@ -130,6 +130,34 @@ command! Dots call fzf#run(fzf#wrap({
       \ 'options': [ '--multi', '--preview', 'cat {}' ]
       \ }))
 
+""""""""""""
+" Yanks
+function! s:yank_list()
+  redir => ys
+  silent call EasyClip#Yank#ShowYanks()
+  redir END
+  return split(ys, '\n')[1:]
+endfunction
+
+function! s:yank_handler(reg)
+  if empty(a:reg)
+    echo "aborted register paste"
+  else
+    let token = split(a:reg, ' ')
+    execute 'Paste' . token[0]
+  endif
+endfunction
+
+function! s:fzf_yanks() abort
+  let l:opts = {
+        \ 'source': <sid>yank_list(),
+        \ 'sink': function('s:yank_handler'),
+        \ 'options': '-m ',
+        \ 'window': FloatingFZF() }
+  call fzf#run(fzf#wrap(l:opts))
+endfunction
+command! -bang FZFYanks call s:fzf_yanks()
+command! -bang Clips call s:fzf_yanks()
 
 """"""""""""
 " :FASD

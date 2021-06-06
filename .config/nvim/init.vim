@@ -25,6 +25,12 @@ set runtimepath^=~/.local/share/nvim/site
 " source $HOME/.config/nvim/plugins.vim
 
 source $HOME/.config/nvim/functions.fzf.vim
+source $HOME/.config/nvim/functions.unimpaired.vim
+" source $HOME/.config/nvim/functions.surround.vim
+
+function! Remove_comments(code)
+  return substitute(a:code, "^#[^\r]*\r\\|\r#[^\r]*", "", "g")
+endfunction
 
 " fasd integration
 " function! s:fasd_update() abort

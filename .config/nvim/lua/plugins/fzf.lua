@@ -1,10 +1,6 @@
 local plugin = {}
 
 function set_mappings()
-  -- <plug>(fzf-maps-n)	Normal mode mappings
-  -- <plug>(fzf-maps-i)	Insert mode mappings
-  -- <plug>(fzf-maps-x)	Visual mode mappings
-  -- <plug>(fzf-maps-o)	Operator-pending mappings
   -- <plug>(fzf-complete-word)	cat /usr/share/dict/words
   -- <plug>(fzf-complete-path)	Path completion using find (file + dir)
   -- <plug>(fzf-complete-file)	File completion using find
@@ -24,7 +20,7 @@ end
 
 function plugin.load()
   set_config()
-  set_mappings()
+  -- set_mappings()
 end
 
 function plugin.setup(use)

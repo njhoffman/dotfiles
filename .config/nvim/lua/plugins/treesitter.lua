@@ -2,9 +2,10 @@ local plugin = {}
 
 -- :TSPlaygroundToggle
 -- :TSHighlightCapturesUnderCursor
-
 function plugin.load()
   local config = require("config").Treesitter
+  require("nvim-ts-autotag")
+
   local tsconfig = require "nvim-treesitter.configs"
   tsconfig.setup {
     -- one of "all", "maintained" (parsers with maintainers), or a list of languages
@@ -39,6 +40,11 @@ function plugin.load()
       highlight_definitions = {enable = true}
       -- highlight_current_scope = { enable = true }
     },
+    matchup = {
+      enable = true -- mandatory, false will disable the whole extension
+      -- disable = {"c", "ruby"} -- optional, list of language that will be disabled
+    },
+    autotag = {enable = true},
     indent = {enable = config.indent},
     rainbow = {enable = config.rainbow},
     incremental_selection = {
@@ -62,10 +68,18 @@ function plugin.setup(use)
     requires = {
       "p00f/nvim-ts-rainbow",
       "nvim-lua/plenary.nvim",
+      "windwp/nvim-ts-autotag",
+      {
+        "andymass/vim-matchup",
+        event = "BufEnter",
+        config = function()
+          vim.g.matchup_matchparen_deferred = 1
+          vim.g.matchup_matchparen_offscreen = {method = "popup"}
+        end
+      },
       "nvim-treesitter/nvim-treesitter-refactor",
       "nvim-treesitter/playground"
     }
   }
 end
-
 return plugin

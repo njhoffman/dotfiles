@@ -1,10 +1,7 @@
 plugin = {}
 
-function set_mappings()
-  local map = require("utils.core").map
-end
-
 function set_config()
+  local map = require("utils.core").map
   local config = require("config").Opts
   local tree_cb = require "nvim-tree.config".nvim_tree_callback
   local g = vim.g
@@ -71,17 +68,17 @@ end
 
 function plugin.load()
   require("nvim-tree").on_enter()
-  set_mappings()
-  set_config()
   require("nvim-tree.events").on_nvim_tree_ready(
     function()
       vim.cmd("NvimTreeRefresh")
     end
   )
+  set_config()
 end
 
 function plugin.setup(use)
-  use {"kyazdani42/nvim-tree.lua", requires = "nvim-web-devicons", config = plugin.load}
+  use {"kyazdani42/nvim-tree.lua", requires = "nvim-web-devicons" }
+  set_config()
 end
 
 return plugin
