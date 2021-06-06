@@ -12,27 +12,27 @@ function! s:build_quickfix_list(lines)
 endfunction
 
 let g:fzf_action = {
-  \ 'ctrl-q': function('s:build_quickfix_list'),
-  \ 'ctrl-t': 'tab split',
-  \ 'ctrl-x': 'split',
-  \ 'ctrl-v': 'vsplit' }
+      \ 'ctrl-q': function('s:build_quickfix_list'),
+      \ 'ctrl-t': 'tab split',
+      \ 'ctrl-x': 'split',
+      \ 'ctrl-v': 'vsplit' }
 
 "
 " Customize fzf colors to match your color scheme
 let g:fzf_colors =
-\ { 'fg':      ['fg', 'Normal'],
-  \ 'bg':      ['bg', 'Normal'],
-  \ 'hl':      ['fg', 'Comment'],
-  \ 'fg+':     ['fg', 'CursorLine', 'CursorColumn', 'Normal'],
-  \ 'bg+':     ['bg', 'CursorLine', 'CursorColumn'],
-  \ 'hl+':     ['fg', 'Statement'],
-  \ 'info':    ['fg', 'PreProc'],
-  \ 'border':  ['fg', 'Comment'],
-  \ 'prompt':  ['fg', 'Conditional'],
-  \ 'pointer': ['fg', 'Exception'],
-  \ 'marker':  ['fg', 'Keyword'],
-  \ 'spinner': ['fg', 'Label'],
-  \ 'header':  ['fg', 'Comment'] }
+      \ { 'fg':      ['fg', 'Normal'],
+      \ 'bg':      ['bg', 'Normal'],
+      \ 'hl':      ['fg', 'Comment'],
+      \ 'fg+':     ['fg', 'CursorLine', 'CursorColumn', 'Normal'],
+      \ 'bg+':     ['bg', 'CursorLine', 'CursorColumn'],
+      \ 'hl+':     ['fg', 'Statement'],
+      \ 'info':    ['fg', 'PreProc'],
+      \ 'border':  ['fg', 'Comment'],
+      \ 'prompt':  ['fg', 'Conditional'],
+      \ 'pointer': ['fg', 'Exception'],
+      \ 'marker':  ['fg', 'Keyword'],
+      \ 'spinner': ['fg', 'Label'],
+      \ 'header':  ['fg', 'Comment'] }
 
 " [Buffers] Jump to the existing window if possible
 let g:fzf_buffers_jump = 1
@@ -240,11 +240,11 @@ endfunction
 
 function! s:registers(...) abort
   let l:opts = {
-    \ 'source': s:get_registers(),
-    \ 'sink': {x -> feedkeys(matchstr(x, '\v^\S+\ze.*') . (a:1 ? 'P' : 'p'), 'x')},
-    \ 'options': '--prompt="Reg> "',
-    \ 'window': _fzf_get_window_props()
-    \ }
+        \ 'source': s:get_registers(),
+        \ 'sink': {x -> feedkeys(matchstr(x, '\v^\S+\ze.*') . (a:1 ? 'P' : 'p'), 'x')},
+        \ 'options': '--prompt="Reg> "',
+        \ 'window': _fzf_get_window_props()
+        \ }
   call fzf#run(fzf#wrap(l:opts))
 endfunction
 
@@ -263,10 +263,10 @@ endfunction
 
 function! s:highlights(...) abort
   let l:opts = {
-    \ 'source': s:get_highlights(),
-    \ 'sink': function('s:highlights_handler'),
-    \ 'options': '--prompt="Hlt> "',
-    \ 'highlight': 'WarningMsg' }
+        \ 'source': s:get_highlights(),
+        \ 'sink': function('s:highlights_handler'),
+        \ 'options': '--prompt="Hlt> "',
+        \ 'highlight': 'WarningMsg' }
   call fzf#run(fzf#wrap(l:opts))
 endfunction
 
@@ -290,10 +290,10 @@ endfunction
 
 function! s:fzf_yanks() abort
   let l:opts = {
-    \ 'source': <sid>yank_list(),
-    \ 'sink': function('s:yank_handler'),
-    \ 'options': '-m ',
-    \ 'window': FloatingFZF() }
+        \ 'source': <sid>yank_list(),
+        \ 'sink': function('s:yank_handler'),
+        \ 'options': '-m ',
+        \ 'window': FloatingFZF() }
   call fzf#run(fzf#wrap(l:opts))
 endfunction
 command! -bang FZFYanks call s:fzf_yanks()
@@ -315,12 +315,12 @@ function! GetSessions()
 endfunction
 
 function! GoToSession(session)
-    let filepath = split(a:session , '\s\+')[0]
-    execute "Prosession " . filepath . "\<c-o>"
+  let filepath = split(a:session , '\s\+')[0]
+  execute "Prosession " . filepath . "\<c-o>"
 endfunction
 command! Sessions call fzf#run(fzf#wrap({
-        \ 'source': GetSessions(),
-        \ 'sink': function('GoToSession')}))
+      \ 'source': GetSessions(),
+      \ 'sink': function('GoToSession')}))
 
 function! GetJumps()
   redir => cout
@@ -330,12 +330,12 @@ function! GetJumps()
 endfunction
 
 function! GoToJump(jump)
-    let jumpnumber = split(a:jump, '\s\+')[0]
-    execute "normal " . jumpnumber . "\<c-o>"
+  let jumpnumber = split(a:jump, '\s\+')[0]
+  execute "normal " . jumpnumber . "\<c-o>"
 endfunction
 command! Jumps call fzf#run(fzf#wrap({
-        \ 'source': GetJumps(),
-        \ 'sink': function('GoToJump')}))
+      \ 'source': GetJumps(),
+      \ 'sink': function('GoToJump')}))
 
 " Path completion with custom source command
 inoremap <expr> <c-x><c-f> fzf#vim#complete#path('fd')
@@ -345,24 +345,24 @@ inoremap <expr> <c-x><c-f> fzf#vim#complete#path('rg --files')
 inoremap <expr> <c-x><c-k> fzf#vim#complete#word({'window': { 'width': 0.2, 'height': 0.9, 'xoffset': 1 }})
 
 command! Dots call fzf#run(fzf#wrap({
-  \ 'source': 'dotbare ls-files --full-name --directory "${DOTBARE_TREE}" | awk -v home="${DOTBARE_TREE}/" "{print home \$0}"',
-  \ 'sink': 'e',
-  \ 'options': [ '--multi', '--preview', 'cat {}' ]
-  \ }))
+      \ 'source': 'dotbare ls-files --full-name --directory "${DOTBARE_TREE}" | awk -v home="${DOTBARE_TREE}/" "{print home \$0}"',
+      \ 'sink': 'e',
+      \ 'options': [ '--multi', '--preview', 'cat {}' ]
+      \ }))
 
 " let g:fzf_command_prefix = 'Fz'
 " let g:fzf_commands_expect = 'alt-enter'
 " let g:fzf_history_dir = '~/.local/share/fzf-history'
-    " nnoremap <silent> <Leader>b :Buffers<CR>
-    " nnoremap <silent> <C-f> :Files<CR>
-    " nnoremap <silent> <Leader>f :Rg<CR>
-    " nnoremap <silent> <Leader>/ :BLines<CR>
-    " nnoremap <silent> <Leader>' :Marks<CR>
-    " nnoremap <silent> <Leader>g :Commits<CR>
-    " nnoremap <silent> <Leader>H :Helptags<CR>
-    " nnoremap <silent> <Leader>hh :History<CR>
-    " nnoremap <silent> <Leader>h: :History:<CR>
-    " nnoremap <silent> <Leader>h/ :History/<CR>
+" nnoremap <silent> <Leader>b :Buffers<CR>
+" nnoremap <silent> <C-f> :Files<CR>
+" nnoremap <silent> <Leader>f :Rg<CR>
+" nnoremap <silent> <Leader>/ :BLines<CR>
+" nnoremap <silent> <Leader>' :Marks<CR>
+" nnoremap <silent> <Leader>g :Commits<CR>
+" nnoremap <silent> <Leader>H :Helptags<CR>
+" nnoremap <silent> <Leader>hh :History<CR>
+" nnoremap <silent> <Leader>h: :History:<CR>
+" nnoremap <silent> <Leader>h/ :History/<CR>
 "
 "
 " function! s:set_fzf_maps()
@@ -381,29 +381,27 @@ command! Dots call fzf#run(fzf#wrap({
 "   autocmd FileType fzf call <SID>set_fzf_maps()
 " augroup END
 " No
-" :Files [PATH]	Files (runs $FZF_DEFAULT_COMMAND if defined)
-" :GFiles [OPTS]	Git files (git ls-files)
-" :GFiles?	Git files (git status)
-" :Buffers	Open buffers
-" :Colors	Color schemes
-" :Ag [PATTERN]	ag search result (ALT-A to select all, ALT-D to deselect all)
-" :Rg [PATTERN]	rg search result (ALT-A to select all, ALT-D to deselect all)
-" :Lines [QUERY]	Lines in loaded buffers
-" :BLines [QUERY]	Lines in the current buffer
-" :Tags [QUERY]	Tags in the project (ctags -R)
-" :BTags [QUERY]	Tags in the current buffer
-" :Marks	Marks
-" :Windows	Windows
-" :Locate PATTERN	locate command output
-" :History	v:oldfiles and open buffers
-" :History:	Command history
-" :History/	Search history
-" :Snippets	Snippets (UltiSnips)
-" :Commits	Git commits (requires fugitive.vim)
-" :BCommits	Git commits for the current buffer
-" :Commands	Commands
-" :Maps	Normal mode mappings
-" :Helptags	Help tags 1
-" :Filetypes	File types
-
-
+" :Files [PATH] Files (runs $FZF_DEFAULT_COMMAND if defined)
+" :GFiles [OPTS]  Git files (git ls-files)
+" :GFiles?  Git files (git status)
+" :Buffers  Open buffers
+" :Colors Color schemes
+" :Ag [PATTERN] ag search result (ALT-A to select all, ALT-D to deselect all)
+" :Rg [PATTERN] rg search result (ALT-A to select all, ALT-D to deselect all)
+" :Lines [QUERY]  Lines in loaded buffers
+" :BLines [QUERY] Lines in the current buffer
+" :Tags [QUERY] Tags in the project (ctags -R)
+" :BTags [QUERY]  Tags in the current buffer
+" :Marks  Marks
+" :Windows  Windows
+" :Locate PATTERN locate command output
+" :History  v:oldfiles and open buffers
+" :History: Command history
+" :History/ Search history
+" :Snippets Snippets (UltiSnips)
+" :Commits  Git commits (requires fugitive.vim)
+" :BCommits Git commits for the current buffer
+" :Commands Commands
+" :Maps Normal mode mappings
+" :Helptags Help tags 1
+" :Filetypes  File types

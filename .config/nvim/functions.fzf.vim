@@ -1,5 +1,16 @@
-""""""""""""
+function! s:fzf_sink(what)
+  let p1 = stridx(a:what, '<')
+  if p1 >= 0
+    let name = strpart(a:what, 0, p1)
+    let name = substitute(name, '^\s*\(.\{-}\)\s*$', '\1', '')
+    if name != ''
+      exec "AsyncTask ". fnameescape(name)
+    endif
+  endif
+endfunction
 
+""""""""""""
+" GFiles fallback to Project files
 function! GFilesFallback()
   let output = system('git rev-parse --show-toplevel') " Is there a faster way?
   let prefix = get(g:, 'fzf_command_prefix', '')

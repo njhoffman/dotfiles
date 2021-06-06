@@ -73,6 +73,7 @@ packer.startup(
 
     -- ====================================
     -- Fuzzy search (telescope, fzf)
+    require "plugins.vim_clap".setup(use)
     require "plugins.fzf".setup(use)
     require "plugins.fzf_preview".setup(use)
     require "plugins.telescope".setup(use)
