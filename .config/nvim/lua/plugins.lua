@@ -22,7 +22,7 @@ packer.startup(
     -- require "plugins.vim_surround".setup(use)
     require "plugins.surround".setup(use)
     require "plugins.vim-bbye".setup(use)
-    -- require "plugins.sayonara".setup(use)
+    require "plugins.sayonara".setup(use)
     require "plugins.nvim_web_devicons".setup(use)
     require "plugins.gitsigns".setup(use)
 

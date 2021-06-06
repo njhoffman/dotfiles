@@ -12,15 +12,12 @@ local map = require("utils.core").map
 
 -- basics
 map("i", "jk", [[col('.') == 1 ? '<esc>' : '<esc>l']], {expr = true})
-map("n", "Q", ":qa<CR>")
 map("n", "<leader>tS", ":luafile %<CR>", {silent = false})
 map("n", "<BS>", "<C-^>")
 map("t", "<C-o>", [[<C-\><C-n>]])
 map("n", "<A-t>", ":ToggleTerm<CR>")
 map("t", "<A-t>", [[<C-\><C-n>:ToggleTerm<CR>]])
 map("n", "D", "d$")
-map("n", "_", ":nohl<CR>")
-map("n", "<leader><cr>", ":noh<CR>")
 
 -- :map <C-X> <ESC>:x<CR>
 -- :imap <C-X> <ESC>:x<CR>
@@ -50,9 +47,9 @@ map("n", "<leader>t;", "A;<ESC>")
 map("n", "<leader>t:", "A:<ESC>")
 
 -- buffer management
--- map("n", "<Leader>w", "<cmd>w<cr>", {silent = true})
--- map("n", "<leader>x", "<cmd>bd<cr>", {silent = true, nowait = true})
--- map("n", "<leader>x", "<cmd>Sayonara!<cr>", {silent = true, nowait = true})
+
+-- " Return to last edit position when opening files (You want this!)
+-- au BufReadPost * if line("'\"") > 1 && line("'\"") <= line("$") | exe "normal! g'\"" | endif
 
 -- Esc in the terminal
 map("t", "jj", [[<C-\><C-n>]])
@@ -86,7 +83,8 @@ map("n", "<Leader>q", "<c-w><c-p><cmd>q<cr>")
 -- nnoremap <leader>e :exe getline(line('.'))<cr>
 -- Run the current line as if it were a command. Often more convenient than q: when experimenting.
 -- nnoremap Q <nop>
-
+-- " Toggle paste mode on and off
+-- map <leader>pp :setlocal paste!<cr>
 -- visual mode mappings
 -- Visually select, paste the text that was last edited/pasted
 map("n", "gv", "`[v`]", {noremap = false})
@@ -110,8 +108,6 @@ map("v", "p", "p`]")
 map("n", "p", "p`]")
 
 -- map("n", "<F5>", ":lua require('utils.core')._lazygit_toggle()<CR>")
-map("n", "<leader>e", ":NvimTreeToggle<CR>")
-map("n", "<leader>b", ":Telescope buffers<CR>")
 -- :map <C-X> <ESC>:x<CR>
 -- :imap <C-X> <ESC>:x<CR>
 
@@ -127,52 +123,54 @@ map("n", "<leader>b", ":Telescope buffers<CR>")
 -- TODO: add shift mapping for twice the speed
 
 local buffer_maps = {
-  ["Q"] = {"<cmd>:noa w<cr>", "Write files without autocommands"},
-  ["<C-q>"] = {"<cmd>qa!<cr>", "Quick exit without saving"},
+  -- ["q"] = {"<cmd>update | bdelete<CR>", "Save and safely remove buffer"},
+  -- ["gg"] = {"<Plug>(Smoothie_gg)", "Scroll to top"},
+  ["Q"] = {"<nop>"},
+  ["_"] = {"<cmd><noh><cr>", "remove highlight"},
+  ["q"] = {"<cmd>Sayonara<cr>", "Quick exit with saving"},
+  ["<C-q>"] = {"<cmd>qa<cr>", "Quick exit without saving"},
   ["<C-x>"] = {"<cmd>xa!<cr>", "Quick exit with saving"},
-  ["<C-s>"] = {"<esc><cmd>w<cr>", "Quick save"},
-  ["<leader>x"] = {"<cmd>Bdelete<cr>", "Smart buffer delete"},
-  ["<Leader>!"] = {":BufferCloseAllButCurrent<CR>", "Close all buffers but current"},
-  ["<TAB>"] = {":bn<CR>", "Cycle buffers"},
-  ["<S-TAB>"] = {":bp<CR>", "Cycle buffers"},
-  ["<leader>q"] = {":update | bdelete<CR>", "Save and safely remove buffer"},
+  ["<C-s>"] = {"<cmd>w<cr><esc>", "Quick save"},
+  ["<TAB>"] = {"<cmd>bn<CR>", "Cycle buffers"},
+  ["<S-TAB>"] = {"<cmd>bp<CR>", "Cycle buffers"},
   ["H"] = {"<cmd>BufferPrev<CR>", "Buffer left"},
   ["L"] = {"<cmd>BufferNext<CR>", "Buffer right"},
   ["<C-f>"] = {"<Plug>(SmoothieDownwards)<Plug>(SmoothieDownwards)", "Scroll forward"},
   ["<C-b>"] = {"<Plug>(SmoothieBackwards)", "Scroll backwards"},
   ["G"] = {"<Plug>(Smoothie_G)", "Scroll to bottom"},
-  -- ["gg"] = {"<Plug>(Smoothie_gg)", "Scroll to top"},
   ["<leader>"] = {
-    ["!"] = "close all buffers but current",
-    ["*"] = "save all buffers",
-    ["b"] = "show buffers",
-    ["q"] = "quit buffer",
-    ["w"] = "save",
-    ["e"] = "explorer",
-    ["u"] = {"<cmd>MundoToggle<cr>", "undo tree"},
-    ["h"] = "no highlight"
+    ["<cr>"] = {"<cmd>nohl<cr>", "remove highlight"},
+    ["q"] = {"<cmd>update | bdelete<CR>", "Save and safely remove buffer"},
+    ["x"] = {"<cmd>Bdelete<cr>", "Delete buffer without messing windows up"},
+    ["!"] = {"<cmd>BufferCloseAllButCurrent<CR>", "Close all buffers but current"},
+    -- ["*"] = "save all buffers",
+    ["ZZ"] = "Write if modified and exit",
+    ["w"] = {"<cmd>:noa w<cr>", "Write files without autocommands"},
+    ["b"] = {"<cmd>FindBuffer<cr>", "Find buffer"},
+    ["e"] = {"<cmd>NvimTreeToggle<cr>", "toggle explorer"},
+    ["u"] = {"<cmd>MundoToggle<cr>", "toggle undo tree"},
     -- ["["] = {"<cmd>bprev<cr>", "prev buffer"},
     -- ["]"] = {"<cmd>bnext<cr>", "next buffer"},
-  },
-  ["<leader>n"] = {
-    name = "+new",
-    ["f"] = "create new file",
-    ["s"] = "create new file in a split",
-    ["t"] = "create new file in tab"
-  },
-  ["<leader>j"] = {
-    name = "+jump windows",
-    ["h"] = {"<cmd>wincmd h<cr>", "Left"},
-    ["j"] = {"<cmd>wincmd j<cr>", "Down"},
-    ["k"] = {"<cmd>wincmd k<cr>", "Up"},
-    ["l"] = {"<cmd>wincmd l<cr>", "Right"}
-  },
-  ["<leader>s"] = {
-    name = "+session",
-    ["s"] = {"<cmd>SSave<cr>", "session save"},
-    ["c"] = {"<cmd>SClose<cr>", "session close"},
-    ["d"] = {"<cmd>SDelete<cr>", "session delete"},
-    ["l"] = {"<cmd>SLoad<cr>", "session load"}
+    ["<leader>n"] = {
+      name = "+new",
+      ["f"] = "create new file",
+      ["s"] = "create new file in a split",
+      ["t"] = "create new file in tab"
+    },
+    ["<leader>j"] = {
+      name = "+jump windows",
+      ["h"] = {"<cmd>wincmd h<cr>", "Left"},
+      ["j"] = {"<cmd>wincmd j<cr>", "Down"},
+      ["k"] = {"<cmd>wincmd k<cr>", "Up"},
+      ["l"] = {"<cmd>wincmd l<cr>", "Right"}
+    },
+    ["<leader>s"] = {
+      name = "+session",
+      ["s"] = {"<cmd>SSave<cr>", "session save"},
+      ["c"] = {"<cmd>SClose<cr>", "session close"},
+      ["d"] = {"<cmd>SDelete<cr>", "session delete"},
+      ["l"] = {"<cmd>SLoad<cr>", "session load"}
+    }
   }
 }
 

@@ -37,7 +37,7 @@ local autocmds = {
   filetypes = {
     {"BufNewFile,BufRead", "*.ejs", "set filetype=html"},
     {"FileType", "markdown", "setlocal wrap spell"},
-    {"FileType", "*", "setlocal formatoptions-=c formatoptions-=r formatoptions-=o"},
+    -- {"FileType", "*", "setlocal formatoptions-=c formatoptions-=r formatoptions-=o"},
     {"FileType", "toggleterm", "setlocal nonumber norelativenumber"}
   },
   terminal = {
