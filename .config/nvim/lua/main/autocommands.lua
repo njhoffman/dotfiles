@@ -23,6 +23,19 @@ local af = require("../utils/autofunc")
 -- )
 
 local autocmds = {
+  Clap = {
+    --  use <C-n>/<C-p> instead of <C-j>/<C-k> to navigate the result, disable hints
+    {"FileType", "clap_input", "inoremap <silent> <buffer> <C-n> <C-R>=clap#navigation#linewise('down')<CR>"},
+    {"FileType", "clap_input", "inoremap <silent> <buffer> <C-p> <C-R>=clap#navigation#linewise('up')<CR>"},
+    -- {"FileType,", "clap_input", "let g:completion_enable_auto_pop = 0"},
+    -- {"FileType,", "clap_input", "call compe#setup({ 'enabled': v:false }, 0)"}
+    {"CompleteChanged", "*", "redraw"},
+    {"FocusLost", "*", "VimadeFadeActive"},
+    {"FocusGained", "*", "VimadeUnfadeActive"}
+    -- vim.cmd("au! CompleteChanged * redraw")
+    -- vim.cmd("au! FocusLost * VimadeFadeActive")
+    -- vim.cmd("au! FocusGained * VimadeUnfadeActive")
+  },
   Mundo = {
     {"FileType", "Mundo", "noremap <buffer>  :q<cr>"}
   },
@@ -43,16 +56,16 @@ local autocmds = {
   terminal = {
     {"TermOpen", "*", [[tnoremap <buffer> <Esc> <c-\><c-n>]]},
     {"TermOpen", "*", "set nonu"}
-  },
+  }
   -- lsp = {
   --   {"CursorHold,CursorHoldI", "*", "lua require'nvim-lightbulb'.update_lightbulb()"}
   -- }
-  packer = {
-    {"BufWritePost", "plugins.lua", "PackerCompile"}
-  }
+  -- packer = {
+  --   {"BufWritePost", "plugins.lua", "PackerCompile"}
+  -- }
 }
 
--- vim.cmd([[autocmd ColorScheme * lua require("utils.lsp").fix("ColorScheme")]])
+vim.cmd([[autocmd ColorScheme * lua require("utils.lsp").fix("ColorScheme")]])
 
 -- define tables to insert
 local hl_yank = {

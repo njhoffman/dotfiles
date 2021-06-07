@@ -124,7 +124,7 @@ map("n", "p", "p`]")
 
 local buffer_maps = {
   -- ["q"] = {"<cmd>update | bdelete<CR>", "Save and safely remove buffer"},
-  -- ["gg"] = {"<Plug>(Smoothie_gg)", "Scroll to top"},
+  ["gg"] = {"<Plug>(Smoothie_gg)", "Scroll to top"},
   ["Q"] = {"<nop>"},
   ["_"] = {"<cmd><noh><cr>", "remove highlight"},
   ["<C-q>"] = {"<cmd>qa<cr>", "Quick exit without saving"},

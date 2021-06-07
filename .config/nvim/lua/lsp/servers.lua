@@ -68,9 +68,22 @@ lsp_servers.efm = {
     "sugarss",
     "text",
     -- "typescript",
-    "vim",
+    -- "vim",
     "vue",
     "yaml"
+  }
+}
+vim.g.null_ls_disable = true
+
+-- enable null-ls integration (optional)
+require("null-ls").setup {
+  {
+    debounce = 250,
+    keep_alive_interval = 60000, -- 60 seconds,
+    save_after_format = true,
+    default_timeout = 5000,
+    sources = nil,
+    on_attach = nil
   }
 }
 
@@ -83,7 +96,7 @@ lsp_servers.typescript = {
         -- defaults
         debug = false,
         disable_commands = false,
-        enable_import_on_completion = false,
+        enable_import_on_completion = true,
         import_on_completion_timeout = 5000,
         -- eslint
         eslint_enable_code_actions = true,
@@ -113,7 +126,6 @@ lsp_servers.typescript = {
     )
 
     lspTsUtils.setup_client(client)
-
     return lsp_config.common_on_attach(client, bufnr)
   end,
   -- autostart = LSP.tsserver

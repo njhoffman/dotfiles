@@ -1,44 +1,54 @@
 local plugin = {}
 
-function plugin.config()
-  vim.g.vimade = {enabletreesitter = 1}
-  vim.g.vimade.basegroups = {
-    "VirtualText",
-    "Search",
-    "SignColumn",
-    "v2hexokinase",
-    "LineNr",
-    "CursorLine",
-    "CursorLineNr",
-    "DiffAdd",
-    "DiffChange",
-    "DiffDelete",
-    "DiffText",
-    "FoldColumn",
-    "Whitespace"
-  }
-  vim.cmd("au! CompleteChanged * redraw")
-  vim.cmd("au! FocusLost * VimadeFadeActive")
-  vim.cmd("au! FocusGained * VimadeUnfadeActive")
-
-  vim.g.vimade.rowbufsize = 15
-  vim.g.vimade.colbufsize = 15
-  vim.g.vimade.fadelevel = 0.9
-  vim.g.vimade.signsretentionperiod = 1000
-  vim.g.vimade.fadepriority = 50
-  vim.g.vimade.enablesigns = 1
-  vim.g.vimade.enablefocusfading = 1
-end
-
-function plugin.load()
-  -- require "vimade"
-  plugin.config()
-end
-
 function plugin.setup(use)
   use {"TaDaa/vimade"}
-  -- , config = plugin.load}
-  plugin.load()
+
+  -- vim.cmd(
+  --   [[
+  --   let g:vimade = {
+  --   \ "normalid": '',
+  --   \ "normalncid": '',
+  --   \ "basefg": '',
+  --   \ "basebg": '',
+  --   \ "fadelevel": 0.4,
+  --   }]]
+  -- )
+
+  --  vim.g.vimade = {
+  --    enabletreesitter = 1,
+  --    basegroups = {
+  --      "VirtualText",
+  --      "Search",
+  --      "SignColumn",
+  --      "v2hexokinase",
+  --      "LineNr",
+  --      "CursorLine",
+  --      "CursorLineNr",
+  --      "DiffAdd",
+  --      "DiffChange",
+  --      "DiffDelete",
+  --      "DiffText",
+  --      "FoldColumn",
+  --      "Whitespace"
+  --    },
+  --    rowbufsize = 15,
+  --    colbufsize = 15,
+  --    fadelevel = 0.7,
+  --    signsretentionperiod = 1000,
+  --    fadepriority = 50,
+  --    enablesigns = 1,
+  --    enablefocusfading = 1
+  --  }
+  vim.cmd([[let g:vimade  = {}]])
+  vim.cmd([[let g:vimade.fadelevel = 0.7]])
+  vim.cmd([[let g:vimade.enabletreesitter = 1]])
+  vim.cmd([[let g:vimade.fadepriority = 50]])
+  vim.cmd([[let g:vimade.colbufsize = 15]])
+  vim.cmd([[let g:vimade.rowbufsize = 15]])
+  vim.cmd([[let g:vimade.signsretentionperiod = 1]])
+  vim.cmd([[let g:vimade.enablefocusfading = 1]])
+
+  -- print(vim.inspect(vim.g.vimade.fadelevel))
 end
 
 return plugin

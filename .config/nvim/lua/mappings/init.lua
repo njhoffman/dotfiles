@@ -39,13 +39,6 @@ map("n", "<leader>nf", [[:e <C-R>=expand("%:p:h") . "/" <CR>]], {silent = false}
 map("n", "<leader>ns", [[:vsp <C-R>=expand("%:p:h") . "/" <CR>]], {silent = false})
 map("n", "<leader>nt", [[:tabedit <C-R>=expand("%:p:h") . "/" <CR>]], {silent = false})
 
--- text
-map("n", [[<leader>tu]], [[guw]])
-map("n", [[<leader>tU]], [[gUw]])
-map("n", "<leader>t,", "A,<ESC>")
-map("n", "<leader>t;", "A;<ESC>")
-map("n", "<leader>t:", "A:<ESC>")
-
 -- buffer management
 
 -- " Return to last edit position when opening files (You want this!)
@@ -54,37 +47,6 @@ map("n", "<leader>t:", "A:<ESC>")
 -- Esc in the terminal
 map("t", "jj", [[<C-\><C-n>]])
 
--- Window movement
-map("n", "<c-h>", "<c-w>h")
-map("n", "<c-j>", "<c-w>j")
-map("n", "<c-k>", "<c-w>k")
-map("n", "<c-l>", "<c-w>l")
-map("n", "<Leader>;", "<c-w>w")
-map("n", "<Leader>H", "<cmd>vnew<cr>")
-map("n", "<Leader>V", "<cmd>new<cr>")
--- make full screen / equal heights, close non-focused window
-map("n", "<Leader>_", "<c-w>_")
-map("n", "<Leader>|", "<c-w>|")
-map("n", "<Leader>=", "<c-w>=")
-map("n", "<Leader>q", "<c-w><c-p><cmd>q<cr>")
--- map("n", "<S-k>", ":resize -2<CR>")
--- map("n", "<S-j>", ":resize +2<CR>")
--- map("n", "<S-h>", ":vertical resize -2<CR>")
--- map("n", "<S-l>", ":vertical resize +2<CR>")
--- " C-W make all equal, C-W -/+ change height, CTRL-W >/< change width
--- nnoremap + 4<C-W>+
--- nnoremap - 4<C-W>-
--- nnoremap Q @@
--- Instead of stumbling into ex mode, repeat the last macro used.
--- nnoremap s "_d
--- Makes s (along with corresponding maps for ss and S) act like d, except it doesn’t save the cut text to a register. Helps when I want to delete something without clobbering my unnamed register.
--- nnoremap <c-j> <c-w>j
--- Move to window below. Corresponding maps for h, k, l. Makes using windows much easier.
--- nnoremap <leader>e :exe getline(line('.'))<cr>
--- Run the current line as if it were a command. Often more convenient than q: when experimenting.
--- nnoremap Q <nop>
--- " Toggle paste mode on and off
--- map <leader>pp :setlocal paste!<cr>
 -- visual mode mappings
 -- Visually select, paste the text that was last edited/pasted
 map("n", "gv", "`[v`]", {noremap = false})
@@ -111,44 +73,82 @@ map("n", "p", "p`]")
 -- :map <C-X> <ESC>:x<CR>
 -- :imap <C-X> <ESC>:x<CR>
 
--- <Plug>(ripple_open_repl)	y<cr> (nmap)	Open REPL
--- <Plug>(ripple_send_motion)	yr (nmap)	Send motion to REPL
--- <Plug>(ripple_send_previous)	yp (nmap)	Resend previous code selection
--- <Plug>(ripple_send_selection)	R (xmap)	Send selection to REPL
--- <Plug>(ripple_send_line)	yrr (nmap)	Send line to REPL
--- <Plug>(ripple_send_buffer)	yr<cr> (nmap)	Send whole buffer to REPL
-
 -- ["<C-f>"] = {"<Plug>(SmoothieForwards)", "Scroll forward"},
 -- TODO: fork and add option to limit overshot
 -- TODO: add shift mapping for twice the speed
 
-local buffer_maps = {
-  -- ["q"] = {"<cmd>update | bdelete<CR>", "Save and safely remove buffer"},
-  -- ["gg"] = {"<Plug>(Smoothie_gg)", "Scroll to top"},
-  ["Q"] = {"<nop>"},
-  ["_"] = {"<cmd><noh><cr>", "remove highlight"},
-  ["q"] = {"<cmd>Sayonara<cr>", "Quick exit with saving"},
-  ["<C-q>"] = {"<cmd>qa<cr>", "Quick exit without saving"},
-  ["<C-x>"] = {"<cmd>xa!<cr>", "Quick exit with saving"},
-  ["<C-s>"] = {"<cmd>w<cr><esc>", "Quick save"},
-  ["<TAB>"] = {"<cmd>bn<CR>", "Cycle buffers"},
-  ["<S-TAB>"] = {"<cmd>bp<CR>", "Cycle buffers"},
-  ["H"] = {"<cmd>BufferPrev<CR>", "Buffer left"},
-  ["L"] = {"<cmd>BufferNext<CR>", "Buffer right"},
+-- Window movement
+-- " C-W make all equal, C-W -/+ change height, CTRL-W >/< change width
+
+-- nnoremap + 4<C-W>+
+-- nnoremap - 4<C-W>-
+
+-- nnoremap Q @@
+-- Instead of stumbling into ex mode, repeat the last macro used.
+
+-- nnoremap s "_d
+-- Makes s (along with corresponding maps for ss and S) act like d, except it doesn’t save the cut text to a register. Helps when I want to delete something without clobbering my unnamed register.
+
+-- nnoremap <c-j> <c-w>j
+-- Move to window below. Corresponding maps for h, k, l. Makes using windows much easier.
+
+-- nnoremap <leader>e :exe getline(line('.'))<cr>
+-- Run the current line as if it were a command. Often more convenient than q: when experimenting.
+
+local window_map = {
+  ["<S-k>"] = {":resize -2<CR>"},
+  ["<S-j>"] = {":resize +2<CR>"},
+  ["<S-h>"] = {":vertical resize -2<CR>"},
+  ["<S-l>"] = {":vertical resize +2<CR>"},
+  ["<c-h>"] = {"<c-w>h"},
+  ["<c-j>"] = {"<c-w>j"},
+  ["<c-k>"] = {"<c-w>k"},
+  ["<c-l>"] = {"<c-w>l"},
+  ["<Leader>"] = {
+    [";"] = {"<c-w>w"},
+    ["H"] = {"<cmd>vnew<cr>"},
+    ["V"] = {"<cmd>new<cr>"},
+    ["_"] = {"<c-w>_"},
+    ["|"] = {"<c-w>|"},
+    ["= "] = {"<c-w>="},
+    ["q"] = {"<c-w><c-p><cmd>q<cr>"}
+  },
+  ["<Leader>j"] = {
+    name = "+jump windows",
+    ["h"] = {"<cmd>wincmd h<cr>", "Left"},
+    ["j"] = {"<cmd>wincmd j<cr>", "Down"},
+    ["k"] = {"<cmd>wincmd k<cr>", "Up"},
+    ["l"] = {"<cmd>wincmd l<cr>", "Right"}
+  }
+}
+
+local movement_map = {
   ["<C-f>"] = {"<Plug>(SmoothieDownwards)<Plug>(SmoothieDownwards)", "Scroll forward"},
   ["<C-b>"] = {"<Plug>(SmoothieBackwards)", "Scroll backwards"},
   ["G"] = {"<Plug>(Smoothie_G)", "Scroll to bottom"},
-  ["<leader>"] = {
+  ["gg"] = {"<Plug>(Smoothie_gg)", "Scroll to top"}
+}
+
+local buffer_map = {
+  -- ["q"] = {"<cmd>update | bdelete<CR>", "Save and safely remove buffer"},
+  ["Q"] = {"<nop>"},
+  ["_"] = {"<cmd><noh><cr>", "remove highlight"},
+  ["<C-q>"] = {"<cmd>qa<cr>", "Quick exit without saving"},
+  ["<C-x>"] = {"<cmd>xa!<cr>", "Quick exit with saving"},
+  ["<C-s>"] = {"<cmd>w<cr><esc>", "Quick save"},
+  ["<tab>"] = {"<cmd>bn<CR>", "Cycle buffers"},
+  ["<S-tab>"] = {"<cmd>bp<CR>", "Cycle buffers"},
+  ["H"] = {"<cmd>BufferPrev<CR>", "Buffer left"},
+  ["L"] = {"<cmd>BufferNext<CR>", "Buffer right"},
+  ["ZZ"] = "Write if modified and exit",
+  ["<Leader>"] = {
     ["<cr>"] = {"<cmd>nohl<cr>", "remove highlight"},
-    ["q"] = {"<cmd>update | bdelete<CR>", "Save and safely remove buffer"},
+    -- ["q"] = {"<cmd>update | bdelete<CR>", "Save and safely remove buffer"},
+    ["q"] = {"<cmd>Sayonara<cr>", "Quick exit with saving"},
     ["x"] = {"<cmd>Bdelete<cr>", "Delete buffer without messing windows up"},
     ["!"] = {"<cmd>BufferCloseAllButCurrent<CR>", "Close all buffers but current"},
-    -- ["*"] = "save all buffers",
-    ["ZZ"] = "Write if modified and exit",
     ["w"] = {"<cmd>:noa w<cr>", "Write files without autocommands"},
-    ["b"] = {"<cmd>FindBuffer<cr>", "Find buffer"},
-    ["e"] = {"<cmd>NvimTreeToggle<cr>", "toggle explorer"},
-    ["u"] = {"<cmd>MundoToggle<cr>", "toggle undo tree"},
+    -- ["*"] = "save all buffers",
     -- ["["] = {"<cmd>bprev<cr>", "prev buffer"},
     -- ["]"] = {"<cmd>bnext<cr>", "next buffer"},
     ["<leader>n"] = {
@@ -156,88 +156,16 @@ local buffer_maps = {
       ["f"] = "create new file",
       ["s"] = "create new file in a split",
       ["t"] = "create new file in tab"
-    },
-    ["<leader>j"] = {
-      name = "+jump windows",
-      ["h"] = {"<cmd>wincmd h<cr>", "Left"},
-      ["j"] = {"<cmd>wincmd j<cr>", "Down"},
-      ["k"] = {"<cmd>wincmd k<cr>", "Up"},
-      ["l"] = {"<cmd>wincmd l<cr>", "Right"}
-    },
-    ["<leader>s"] = {
-      name = "+session",
-      ["s"] = {"<cmd>SSave<cr>", "session save"},
-      ["c"] = {"<cmd>SClose<cr>", "session close"},
-      ["d"] = {"<cmd>SDelete<cr>", "session delete"},
-      ["l"] = {"<cmd>SLoad<cr>", "session load"}
     }
+    -- ["<leader>s"] = {
+    --   name = "+session",
+    --   ["s"] = {"<cmd>SSave<cr>", "session save"},
+    --   ["c"] = {"<cmd>SClose<cr>", "session close"},
+    --   ["d"] = {"<cmd>SDelete<cr>", "session delete"},
+    --   ["l"] = {"<cmd>SLoad<cr>", "session load"}
+    -- }
   }
 }
-
-local format_maps = {
-  ["<leader>s"] = {
-    name = "+surround",
-    ["a"] = "add surrounding",
-    ["d"] = "delete surrounding",
-    ["db"] = "automatically seearch and delete",
-    ["r"] = "replace surrounding",
-    ["rb"] = "automatically search and select to replace"
-  },
-  ["<leader>t"] = {
-    name = "+text",
-    [","] = "add comma to end of line",
-    [";"] = "add semicolon to end of line",
-    [":"] = "add colon to end of line",
-    ["u"] = "lowercase",
-    ["U"] = "uppercase",
-    ["S"] = "source file"
-  }
-}
-
--- gitsigns
---   buffer = true?
-
-local interface_maps = {
-  ["<leader>o"] = {
-    name = "+open",
-    ["t"] = {"<cmd>ToggleTerm<cr>", "terminal"},
-    ["e"] = {"<cmd>NvimTreeFindFile<cr>", "find current file"},
-    ["u"] = {"<cmd>MundoToggle<cr>", "undo tree"}
-  },
-  ["<leader>p"] = {
-    name = "+plugins",
-    ["u"] = {"<cmd>PackerUpdate<cr>", "update"},
-    ["i"] = {"<cmd>PackerInstall<cr>", "install"},
-    ["S"] = {"<cmd>PackerSync<cr>", "sync"},
-    ["c"] = {"<cmd>PackerClean<cr>", "clean"},
-    ["s"] = {"<cmd>PackerStatus<cr>", "status"}
-  }
-}
-
--- Ignore
-require("which-key").register(
-  {
-    ["<leader>cic"] = "which_key_ignore",
-    ["<leader>ci"] = "which_key_ignore",
-    ["<leader>1"] = "which_key_ignore",
-    ["<leader>2"] = "which_key_ignore",
-    ["<leader>3"] = "which_key_ignore",
-    ["<leader>4"] = "which_key_ignore",
-    ["<leader>5"] = "which_key_ignore",
-    ["<leader>6"] = "which_key_ignore",
-    ["<leader>7"] = "which_key_ignore",
-    ["<leader>8"] = "which_key_ignore",
-    ["<leader>9"] = "which_key_ignore"
-  }
-)
-
-require("which-key").register(
-  {
-    ["<leader>cd"] = "which_key_ignore",
-    ["<leader>ci"] = "which_key_ignore"
-  },
-  {mode = "v"}
-)
 
 local opts = {
   mode = "n",
@@ -247,9 +175,9 @@ local opts = {
   nowait = false
 }
 
-require("which-key").register(buffer_maps, opts)
-require("which-key").register(format_maps, opts)
-require("which-key").register(interface_maps, opts)
+require("which-key").register(movement_map, opts)
+require("which-key").register(window_map, opts)
+require("which-key").register(buffer_map, opts)
 
 -- vim.g.dashboard_custom_shortcut = {
 --   last_session       = 'SPC s l',

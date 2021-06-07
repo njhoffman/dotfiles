@@ -16,11 +16,12 @@ require "main.autocommands"
 require "plugins.feline".load()
 
 require "mappings"
+require "mappings.lsp"
 require "mappings.pickers"
--- require "main.mappings.lsp"
--- require "mappings.integrations"
--- require "mappings.lsp"
--- require "mappings.formatters"
+require "mappings.integrations"
+require "mappings.unimpaired"
+require "mappings.formatters"
+require "mappings.ignored"
 
 -- only available after plugins loaded
 -- if packer_plugins["nvim-treesitter"] and packer_plugins["nvim-treesitter"].loaded then

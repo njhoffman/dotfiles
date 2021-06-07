@@ -175,11 +175,11 @@ function get_components()
       if #project_path == 0 then
         return {fg = "white", bg = "#333333"}
       end
-      return {fg = "white", bg = "#224488"}
+      return {fg = "white", bg = "#440088"}
     end,
     -- left_sep = {str = "slant_left", hl = {fg = "#224488", bg = "NONE"}},
     left_sep = function()
-      local val = {str = "slant_left", fg = "white", bg = "#224488"}
+      local val = {str = "slant_left", fg = "white", bg = "#224488", style = "bold"}
       local project_path = vim.fn.FindRootDirectory()
       if #project_path == 0 then
         val.bg = "#333333"
@@ -198,6 +198,7 @@ function get_components()
 
   components.left.active[5] = {
     provider = "file_size",
+    left_sep = {" ", {hl = {bg = "NONE", fg = "dodgerblue3"}}},
     enabled = function()
       return fn.getfsize(fn.expand("%:p")) > 0
     end,

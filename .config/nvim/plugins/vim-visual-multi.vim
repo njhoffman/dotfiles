@@ -28,5 +28,3 @@ let g:VM_default_mappings = 0
 " press q to skip current and get next occurrence
 " press Q to remove current cursor/selection
 " start insert mode with i,a,I,A
-
-

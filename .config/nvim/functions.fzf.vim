@@ -1,3 +1,22 @@
+function! _fzf_get_window_props()
+  let l:width = winwidth('%')
+
+  let l:window_w = 0.9
+  let l:window_h = 0.85
+
+  if l:width > 160 && l:width < 200
+    let l:window_w = 0.85
+    let l:window_h = 0.7
+  elseif l:width > 200 && l:width < 300
+    let l:window_w = 0.7
+    let l:window_h = 0.5
+  elseif l:width > 300
+    let l:window_w = 0.6
+    let l:window_h = 0.4
+  endif
+  return { 'width': l:window_w, 'height': l:window_h, 'highlight': 'Error' }
+endfunction
+
 function! s:fzf_sink(what)
   let p1 = stridx(a:what, '<')
   if p1 >= 0

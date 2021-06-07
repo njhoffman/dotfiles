@@ -70,6 +70,7 @@ local picker_maps = {
   ["<A-s>"] = {"<cmd>Ag<cr>", "search (ag)"},
   ["<leader>f"] = {
     name = "+find",
+    ["b"] = {"<cmd>FindBuffer<cr>", "Find buffer"},
     c = {"<cmd>Telescope colorscheme<cr>", "colorscheme"},
     f = {"<cmd>Telescope find_files<cr>", "file"},
     g = {"<cmd>Telescope live_grep<cr>", "grep text"},

@@ -49,6 +49,7 @@ packer.startup(
         "neovim/nvim-lspconfig",
         requires = {
           "jose-elias-alvarez/nvim-lsp-ts-utils",
+          "jose-elias-alvarez/null-ls.nvim",
           "kabouzeid/nvim-lspinstall",
           "nvim-lua/lsp-status.nvim",
           "rafamadriz/friendly-snippets",
@@ -115,7 +116,7 @@ packer.startup(
     require "plugins.nvim_reload".setup(use)
     -- vim-profiler.py nvim -n 10
     -- vim-profiler.py -n 5 nvim foo.cc -c ":exec ':normal ia' | :q\!"
-
+    -- strace gvim -V9log.txt file.tex > stdout.txt 2> stderr.txt
     -- ====================================
     -- Interface plugins
     require "plugins.dashboard-nvim".setup(use)
@@ -128,7 +129,6 @@ packer.startup(
     require "plugins.nvim_hlslens".setup(use)
     require "plugins.which_key".setup(use)
     require "plugins.vim_yoink".setup(use)
-
     -- ====================================
 
     -- ====================================

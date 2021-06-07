@@ -113,7 +113,7 @@ endfunction
 
 " strip tabs
 function! StripTabs()
- silent! :%s/\t/  /g
+  silent! :%s/\t/  /g
 endfunction
 
 " go to jump list #
@@ -259,6 +259,8 @@ function! AltCommand(path, vim_command)
     exec a:vim_command . " " . l:alternate
   endif
 endfunction
+" Find the alternate file for the current path and open it
+nnoremap <leader>. :w<cr>:call AltCommand(expand('%'), ':e')<cr>
 
 function! Try_edit(the_file) abort
   if filereadable(a:the_file)
@@ -315,27 +317,27 @@ autocmd BufEnter * if !empty(matchstr(@%, "term",0)) | tnoremap <buffer> <Esc> <
 " Repeat <C-o> or <C-i> jump commands until the current buffer changes
 " or no other jumps are available
 function FileCO(up)
-    let current_buffer = bufnr()
+  let current_buffer = bufnr()
 
-    " Get the jump list and parse the position of the first jump in the list
-    " if the number is zero then we reached the top
-    redir => jumps_output
-    silent jumps
-    redir END
-    let lastjump = split(jumps_output, '\n')[1]
-    let lastjumppos = str2nr(matchstr(lastjump, '\d\+'))
+  " Get the jump list and parse the position of the first jump in the list
+  " if the number is zero then we reached the top
+  redir => jumps_output
+  silent jumps
+  redir END
+  let lastjump = split(jumps_output, '\n')[1]
+  let lastjumppos = str2nr(matchstr(lastjump, '\d\+'))
 
-    " Execute the jump command until the buffer changes or there are no more jumps
-    while bufnr() == current_buffer && lastjumppos > 0
-        if a:up == v:true
-            execute "normal! \<c-o>"
-        else
-            " \<CR> is an ugly hack to do nothing but let the normal command
-            " see that it has an argument
-            execute "normal! \<CR>\<c-i>"
-        endif
-        let lastjumppos = lastjumppos - 1
-    endwhile
+  " Execute the jump command until the buffer changes or there are no more jumps
+  while bufnr() == current_buffer && lastjumppos > 0
+    if a:up == v:true
+      execute "normal! \<c-o>"
+    else
+      " \<CR> is an ugly hack to do nothing but let the normal command
+      " see that it has an argument
+      execute "normal! \<CR>\<c-i>"
+    endif
+    let lastjumppos = lastjumppos - 1
+  endwhile
 endfunction
 
 " Overriding <C-o> and <C-i> is a bad idea let's prefix them with <leader> instead
@@ -356,5 +358,3 @@ nnoremap <silent> <leader><C-i> :call FileCO(v:false)<CR>
 " autocmd CursorHoldI * :call <SID>show_hover_doc()
 " autocmd CursorHold * :call <SID>show_hover_doc()
 "
-" Find the alternate file for the current path and open it
-nnoremap <leader>. :w<cr>:call AltCommand(expand('%'), ':e')<cr>

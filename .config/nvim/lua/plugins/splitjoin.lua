@@ -1,16 +1,9 @@
 local plugin = {}
 
-function set_config()
+function plugin.setup(use)
+  use {"andrewradev/splitjoin.vim"}
   vim.g.splitjoin_align = 1
   vim.g.splitjoin_curly_brace_padding = 1
-end
-
-function plugin.load()
-  set_config()
-end
-
-function plugin.setup(use)
-  use {"andrewradev/splitjoin.vim", config = plugin.load}
 end
 
 return plugin
