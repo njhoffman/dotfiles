@@ -14,6 +14,10 @@ function plugin.setup(use)
     "HerringtonDarkholme/yats.vim",
     "maxmellon/vim-jsx-pretty",
     -- plucked syntax from vim-polyglot
+    "moll/vim-node",
+    "editorconfig/editorconfig-vim",
+    "chrisbra/csv.vim",
+    "npxbr/glow.nvim",
     "zinit-zsh/zinit-vim-syntax",
     "neoclide/jsonc.vim",
     "elzr/vim-json",

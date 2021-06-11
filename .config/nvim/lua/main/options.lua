@@ -68,6 +68,9 @@ opt("whichwrap", "b,s,<,>,[,],h,l")
 opt("autoread", true)
 
 -- window scope
+opt("foldlevel", 1, window)
+opt("foldnestmax", 10, window)
+opt("foldenable", false, window)
 opt("concealcursor", "nc", window)
 opt("conceallevel", 2, window)
 opt("cursorline", true, window)
@@ -86,8 +89,17 @@ opt("synmaxcol", 500, buffer)
 opt("tabstop", 2, buffer)
 opt("textwidth", 100, buffer)
 opt("undofile", true, buffer)
+opt("fileformat", "unix", buffer)
 
 -- vim.o.guifont = "FiraCode Nerd Font:h17"
+
+vim.cmd [[autocmd BufReadPost * lua goto_last_pos()]]
+function goto_last_pos()
+  local last_pos = vim.fn.line('\'"')
+  if last_pos > 0 and last_pos <= vim.fn.line("$") then
+    vim.api.nvim_win_set_cursor(0, {last_pos, 0})
+  end
+end
 
 -- " Enable filetype plugins
 vim.cmd([[filetype plugin on]])

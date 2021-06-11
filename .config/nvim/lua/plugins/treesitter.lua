@@ -10,7 +10,6 @@ function plugin.load()
   tsconfig.setup {
     -- one of "all", "maintained" (parsers with maintainers), or a list of languages
     ensure_installed = "all",
-    textobjects = {enable = true},
     playground = {
       enable = true,
       disable = {},
@@ -46,6 +45,31 @@ function plugin.load()
     },
     autotag = {enable = true},
     indent = {enable = config.indent},
+    -- textobjects = {enable = true},
+    textobjects = {
+      select = {
+        enable = true,
+        keymaps = {
+          ["aa"] = "@parameter.outer",
+          ["ia"] = "@parameter.inner",
+          ["af"] = "@function.outer",
+          ["if"] = "@function.inner",
+          ["ac"] = "@class.outer",
+          ["ic"] = "@class.inner"
+        }
+      },
+      swap = {
+        enable = true,
+        swap_next = {["<leader>a"] = "@parameter.inner"},
+        swap_previous = {["<leader>A"] = "@parameter.inner"}
+      },
+      move = {
+        enable = true,
+        set_jumps = true,
+        goto_next_start = {["]f"] = "@function.outer", ["]c"] = "@class.outer"},
+        goto_previous_start = {["[f"] = "@function.outer", ["[c"] = "@class.outer"}
+      }
+    },
     rainbow = {enable = config.rainbow},
     incremental_selection = {
       enable = true,
@@ -83,3 +107,14 @@ function plugin.setup(use)
   }
 end
 return plugin
+
+-- -------------------- TEXT OBJECTS --------------------------
+-- for _, ch in ipairs({
+--   '<space>', '!', '#', '$', '%', '&', '*', '+', ',', '-', '.',
+--   '/', ':', ';', '=', '?', '@', '<bslash>', '^', '_', '~', '<bar>',
+-- }) do
+--   map('x', fmt('i%s', ch), fmt(':<C-u>normal! T%svt%s<CR>', ch, ch), {silent = true})
+--   map('o', fmt('i%s', ch), fmt(':<C-u>normal vi%s<CR>', ch), {silent = true})
+--   map('x', fmt('a%s', ch), fmt(':<C-u>normal! F%svf%s<CR>', ch, ch), {silent = true})
+--   map('o', fmt('a%s', ch), fmt(':<C-u>normal va%s<CR>', ch), {silent = true})
+-- end

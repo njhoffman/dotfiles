@@ -3,8 +3,9 @@
 --   buffer = true?
 
 local integrations_map = {
-  ["e"] = {"<cmd>NvimTreeToggle<cr>", "toggle explorer"},
-  ["u"] = {"<cmd>MundoToggle<cr>", "toggle undo tree"},
+  ["E"] = {"<cmd>NvimTreeToggle<cr>", "toggle explorer"},
+  ["U"] = {"<cmd>MundoToggle<cr>", "toggle undo tree"},
+  ["T"] = {"<cmd>ToggleTerm<cr>", "terminal"},
   ["<leader>o"] = {
     name = "+open",
     ["t"] = {"<cmd>ToggleTerm<cr>", "terminal"},
@@ -52,6 +53,17 @@ local opts = {
 }
 
 require("which-key").register(integrations_map, opts)
+
+-- ocal log = [[\%C(yellow)\%h\%Cred\%d \%Creset\%s \%Cgreen(\%ar) \%Cblue\%an\%Creset]]
+-- map('n', '<leader>g<space>', ':Git ')
+-- map('n', '<leader>gd', '<cmd>Gvdiffsplit<CR>')
+-- map('n', '<leader>gg', '<cmd>Git<CR>')
+-- map('n', '<leader>gl', fmt('<cmd>term git log --graph --all --format="%s"<CR><cmd>start<CR>',
+-- ocal log = [[\%C(yellow)\%h\%Cred\%d \%Creset\%s \%Cgreen(\%ar) \%Cblue\%an\%Creset]]
+-- map('n', '<leader>g<space>', ':Git ')
+-- map('n', '<leader>gd', '<cmd>Gvdiffsplit<CR>')
+-- map('n', '<leader>gg', '<cmd>Git<CR>')
+-- map('n', '<leader>gl', fmt('<cmd>term git log --graph --all --format="%s"<CR><cmd>start<CR>',
 
 -- <Plug>(ripple_open_repl)	y<cr> (nmap)	Open REPL
 -- <Plug>(ripple_send_motion)	yr (nmap)	Send motion to REPL

@@ -74,7 +74,7 @@ packer.startup(
 
     -- ====================================
     -- Fuzzy search (telescope, fzf)
-    require "plugins.vim_clap".setup(use)
+    -- require "plugins.vim_clap".setup(use)
     require "plugins.fzf".setup(use)
     require "plugins.fzf_preview".setup(use)
     require "plugins.telescope".setup(use)
@@ -117,6 +117,7 @@ packer.startup(
     -- vim-profiler.py nvim -n 10
     -- vim-profiler.py -n 5 nvim foo.cc -c ":exec ':normal ia' | :q\!"
     -- strace gvim -V9log.txt file.tex > stdout.txt 2> stderr.txt
+
     -- ====================================
     -- Interface plugins
     require "plugins.dashboard-nvim".setup(use)
@@ -129,6 +130,11 @@ packer.startup(
     require "plugins.nvim_hlslens".setup(use)
     require "plugins.which_key".setup(use)
     require "plugins.vim_yoink".setup(use)
+    -- use 'windwp/nvim-spectre'
+    --   use 'nacro90/numb.nvim'
+    -- use 'dyng/ctrlsf.vim'
+    -- use 'dstein64/nvim-scrollview'
+    -- use 'chaoren/vim-wordmotion'
     -- ====================================
 
     -- ====================================

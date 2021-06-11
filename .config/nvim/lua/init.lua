@@ -21,6 +21,7 @@ require "mappings.pickers"
 require "mappings.integrations"
 require "mappings.unimpaired"
 require "mappings.formatters"
+require "mappings.movement"
 require "mappings.ignored"
 
 -- only available after plugins loaded

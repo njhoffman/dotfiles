@@ -9,7 +9,6 @@ local map = require("utils.core").map
 -- :g/profile/d
 -- :g/^\s*$/d
 -- :g!/^\s*"/d
-
 -- basics
 map("i", "jk", [[col('.') == 1 ? '<esc>' : '<esc>l']], {expr = true})
 map("n", "<leader>tS", ":luafile %<CR>", {silent = false})
@@ -18,6 +17,10 @@ map("t", "<C-o>", [[<C-\><C-n>]])
 map("n", "<A-t>", ":ToggleTerm<CR>")
 map("t", "<A-t>", [[<C-\><C-n>:ToggleTerm<CR>]])
 map("n", "D", "d$")
+
+-- map('t', '<ESC>', '&filetype == "fzf" ? "\\<ESC>" : "\\<C-\\>\\<C-n>"' , {expr = true})
+-- map('t', 'jj', '<ESC>', {noremap = false})
+-- map('v', '<leader>s', ':s//gcI<Left><Left><Left><Left>')
 
 -- :map <C-X> <ESC>:x<CR>
 -- :imap <C-X> <ESC>:x<CR>
@@ -122,17 +125,10 @@ local window_map = {
   }
 }
 
-local movement_map = {
-  ["<C-f>"] = {"<Plug>(SmoothieDownwards)<Plug>(SmoothieDownwards)", "Scroll forward"},
-  ["<C-b>"] = {"<Plug>(SmoothieBackwards)", "Scroll backwards"},
-  ["G"] = {"<Plug>(Smoothie_G)", "Scroll to bottom"},
-  ["gg"] = {"<Plug>(Smoothie_gg)", "Scroll to top"}
-}
-
 local buffer_map = {
   -- ["q"] = {"<cmd>update | bdelete<CR>", "Save and safely remove buffer"},
   ["Q"] = {"<nop>"},
-  ["_"] = {"<cmd><noh><cr>", "remove highlight"},
+  ["_"] = {"<cmd>noh<cr>", "remove highlight"},
   ["<C-q>"] = {"<cmd>qa<cr>", "Quick exit without saving"},
   ["<C-x>"] = {"<cmd>xa!<cr>", "Quick exit with saving"},
   ["<C-s>"] = {"<cmd>w<cr><esc>", "Quick save"},
@@ -175,9 +171,8 @@ local opts = {
   nowait = false
 }
 
-require("which-key").register(movement_map, opts)
-require("which-key").register(window_map, opts)
 require("which-key").register(buffer_map, opts)
+require("which-key").register(window_map, opts)
 
 -- vim.g.dashboard_custom_shortcut = {
 --   last_session       = 'SPC s l',

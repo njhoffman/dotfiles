@@ -17,7 +17,7 @@ function set_config()
     hi_parameter = "Search", -- how your parameter will be highlight
     max_height = 12, -- max height of signature floating_window, if content is more than max_height, you can scroll down
     -- to view the hiding contents
-    max_width = 120, -- max_width of signature floating_window, line will be wrapped if exceed max_width
+    max_width = 80, -- max_width of signature floating_window, line will be wrapped if exceed max_width
     handler_opts = {
       border = "shadow" -- double, single, shadow, none
     }
@@ -32,7 +32,7 @@ function plugin.load()
 end
 
 function plugin.setup(use)
-  use {"ray-x/lsp_signature.nvim", config = plugin.load()}
+  use {"ray-x/lsp_signature.nvim", config = plugin.load}
 end
 
 return plugin
