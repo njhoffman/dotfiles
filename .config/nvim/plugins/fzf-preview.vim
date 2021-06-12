@@ -42,19 +42,19 @@ let g:fzf_preview_git_status_command = 'git -c color.status=always status --shor
 
 " Commands used for git status preview.
 let g:fzf_preview_git_status_preview_command =  "[[ $(git diff --cached -- {-1}) != \"\" ]] && git diff --cached --color=always -- {-1} || " .
-\ "[[ $(git diff -- {-1}) != \"\" ]] && git diff --color=always -- {-1} || " .
-\ g:fzf_preview_command
+      \ "[[ $(git diff -- {-1}) != \"\" ]] && git diff --color=always -- {-1} || " .
+      \ g:fzf_preview_command
 
-  " if !s:is_win && &columns > s:wide
-  "   let suffix = executable('delta') ? '| delta' : '--color=always'
-  "   call extend(options.options,
-  "   \ ['--preview', 'echo {} | grep -o "[a-f0-9]\{7,\}" | head -1 | xargs git show --format=format: ' . suffix])
+" if !s:is_win && &columns > s:wide
+"   let suffix = executable('delta') ? '| delta' : '--color=always'
+"   call extend(options.options,
+"   \ ['--preview', 'echo {} | grep -o "[a-f0-9]\{7,\}" | head -1 | xargs git show --format=format: ' . suffix])
 
 " Commands used for project grep
 let g:fzf_preview_grep_cmd = 'rg --line-number --no-heading --hidden'
 
 " MRU and MRW cache directory
-let g:fzf_preview_cache_directory = expand('~/.cache/vim/fzf_preview')
+let g:fzf_preview_cache_directory = expand('~/.cache/nvim/fzf_preview')
 
 " If this value is not 0, disable mru and mrw
 let g:fzf_preview_disable_mru = 0
@@ -68,30 +68,27 @@ let g:fzf_preview_lines_command = 'bat --color=always --plain --number' " Instal
 " Commands used for preview of the grep result
 let g:fzf_preview_grep_preview_cmd = expand('<sfile>:h:h') . '/bin/preview_fzf_grep'
 
-" Cache directory for mru and mrw
-let g:fzf_preview_cache_directory = expand('~/.cache/vim/fzf_preview')
-
 " Keyboard shortcuts while fzf preview is active
 " let g:fzf_preview_preview_key_bindings = 'ctrl-d:preview-page-down,ctrl-u:preview-page-up,?:toggle-preview'
 let g:fzf_preview_preview_key_bindings = 'Ctrl-/:toggle-preview,ctrl-p:up,ctrl-n:down,tab:down,shift-tab:up,ctrl-b:page-up,ctrl-f:page-down,alt-g:top,alt-b:page-up+page-up+page-up,alt-f:page-down+page-down+page-down,alt-n:toggle-down,alt-p:toggle-up,alt-space:toggle,ctrl-alt-a:toggle-all,alt-a:toggle-all,up:preview-up,down:preview-down,pgup:preview-page-up,pgdn:preview-page-down,shift-up:preview-page-up,shift-down:preview-page-down,ctrl-y:execute-silent(echo {+} | xsel --clipboard),ctrl-e:execute(nvim {+} < /dev/tty > /dev/tty 2>&1),ctrl-v:execute(code {+})'
 
 " Specify the color of fzf
-" fg	Text
-" bg	Background
-" preview-fg	Preview window text
-" preview-bg	Preview window background
-" hl	Highlighted substrings
-" fg+	Text (current line)
-" bg+	Background (current line)
-" gutter	Gutter on the left (defaults to bg+)
-" hl+	Highlighted substrings (current line)
-" info	Info
-" border	Border of the preview window and horizontal separators (--border)
-" prompt	Prompt
-" pointer	Pointer to the current line
-" marker	Multi-select marker
-" spinner	Streaming input indicator
-" header	Header
+" fg  Text
+" bg  Background
+" preview-fg  Preview window text
+" preview-bg  Preview window background
+" hl  Highlighted substrings
+" fg+ Text (current line)
+" bg+ Background (current line)
+" gutter  Gutter on the left (defaults to bg+)
+" hl+ Highlighted substrings (current line)
+" info  Info
+" border  Border of the preview window and horizontal separators (--border)
+" prompt  Prompt
+" pointer Pointer to the current line
+" marker  Multi-select marker
+" spinner Streaming input indicator
+" header  Header
 " let s:fzf_preview_fzf_color_option = '--color="bg:#000018,bg+:#002222,border:#006B6B,spinner:#98BC99,header:#55FFFF" '
 " let s:fzf_preview_fzf_color_option = '--color="fg:188,bg:233,hl:103,fg+:222,bg+:234,hl+:104,info:183,prompt:110,spinner:107,pointer:167,marker:215"  '
 " let s:fzf_preview_fzf_color_option = '--color="dark,fg:-1,bg:-1,hl:#5fff87,fg+:-1,bg+:-1,hl+:#ffaf5f,info:#af87ff,prompt:#5fff87,pointer:#ff87d7,marker:#ff87d7,spinner:#ff87d7" '
@@ -123,7 +120,8 @@ let g:fzf_preview_dev_icons_limit = 10000
 
 " The theme used in the bat preview
 " $FZF_PREVIEW_PREVIEW_BAT_THEME = 'ansi-dark'
-"
+$FZF_PREVIEW_PREVIEW_BAT_THEME = 'base16'
+
 augroup fzf_preview
   autocmd!
   autocmd User fzf_preview#initialized call s:fzf_preview_settings()
@@ -231,7 +229,6 @@ endfunction
 " :CocCommand fzf-preview.CocCurrentDiagnostics " Select current file diagnostics from coc.nvim (only coc extensions)
 "
 " :CocCommand fzf-preview.CocTypeDefinitions    " Select type definitions from coc.nvim (only coc extensions)
-
 function! GFilesFallback()
   let output = system('git rev-parse --show-toplevel') " Is there a faster way?
   let prefix = get(g:, 'fzf_command_prefix', '')
@@ -246,7 +243,8 @@ function! GFilesFallback()
 endfunction
 
 " The theme used in the bat preview
-let $BAT_THEME = 'base16'
+" let $BAT_THEME = 'base16'
+$FZF_PREVIEW_PREVIEW_BAT_THEME = 'ansi'
 
 " coc extensions
 nmap <Leader>f [fzf-p]

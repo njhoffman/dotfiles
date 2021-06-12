@@ -40,9 +40,12 @@ function! Fasd_update() abort
   endif
 endfunction
 
+
 lua << EOF
 require('init')
 EOF
+
+source $HOME/.config/nvim/plugins.vim
 
 " source $HOME/.config/nvim/mappings.vim
 " source $HOME/.config/nvim/colors/barbar-colors.vim

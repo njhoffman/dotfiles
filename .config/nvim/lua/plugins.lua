@@ -36,6 +36,43 @@ packer.startup(
     end
 
     -- ====================================
+    -- -- Syntax add-ons
+    use {
+      -- jsx/tsx syntax
+      "yuezk/vim-js",
+      "HerringtonDarkholme/yats.vim",
+      "maxmellon/vim-jsx-pretty"
+    }
+    -- markdown
+    use "plasticboy/vim-markdown"
+
+    -- plucked syntax from vim-polyglot
+    use "GutenYe/json5.vim"
+    use "StanAngeloff/php.vim"
+    use "andrewstuart/vim-kubernetes"
+    use "arzg/vim-sh"
+    use "chr4/nginx.vim"
+    use "chrisbra/csv.vim"
+    use "editorconfig/editorconfig-vim"
+    use "ekalinin/Dockerfile.vim"
+    use "elzr/vim-json"
+    use "ericpruitt/tmux.vim"
+    use "gisphm/vim-gitignore"
+    use "hashivim/vim-terraform"
+    use "jparise/vim-graphql"
+    use "moll/vim-node"
+    use "neoclide/jsonc.vim"
+    use "npxbr/glow.nvim"
+    use "pearofducks/ansible-vim"
+    use "rodjek/vim-puppet"
+    use "tpope/vim-git"
+    use "wgwoods/vim-systemd-syntax"
+    use "zinit-zsh/zinit-vim-syntax"
+    use "tpope/vim-liquid"
+    -- to fix https://github.com/neoclide/coc-snippets/issues/126
+    -- 'honza/vim-snippets'
+
+    -- ====================================
     -- LSP, Autocomplete and snippets
     if config.LSP.enabled ~= 0 and config.LSP.enabled ~= false then
       use {
@@ -61,42 +98,6 @@ packer.startup(
     end
 
     -- ====================================
-    -- -- Syntax add-ons
-    use {
-      -- jsx/tsx syntax
-      "yuezk/vim-js",
-      "HerringtonDarkholme/yats.vim",
-      "maxmellon/vim-jsx-pretty",
-      -- markdown
-      "plasticboy/vim-markdown",
-      -- plucked syntax from vim-polyglot
-      "GutenYe/json5.vim",
-      "StanAngeloff/php.vim",
-      "andrewstuart/vim-kubernetes",
-      "arzg/vim-sh",
-      "chr4/nginx.vim",
-      "chrisbra/csv.vim",
-      "editorconfig/editorconfig-vim",
-      "ekalinin/Dockerfile.vim",
-      "elzr/vim-json",
-      "ericpruitt/tmux.vim",
-      "gisphm/vim-gitignore",
-      "hashivim/vim-terraform",
-      "jparise/vim-graphql",
-      "moll/vim-node",
-      "neoclide/jsonc.vim",
-      "npxbr/glow.nvim",
-      "pearofducks/ansible-vim",
-      "rodjek/vim-puppet",
-      "tpope/vim-git",
-      "tpope/vim-liquid",
-      "wgwoods/vim-systemd-syntax",
-      "zinit-zsh/zinit-vim-syntax"
-      -- to fix https://github.com/neoclide/coc-snippets/issues/126
-      -- 'honza/vim-snippets'
-    }
-
-    -- ====================================
     -- DAP
     if config.DAP.enabled ~= 0 and config.DAP.enabled ~= false then
       use {
@@ -116,8 +117,8 @@ packer.startup(
     use {"urbainvaes/vim-ripple", requires = "machakann/vim-highlightedyank"}
     use {
       "lewis6991/gitsigns.nvim",
-      requires = {"nvim-lua/plenary.nvim"}
-      -- config = [[require('config.gitsigns')]],
+      requires = "nvim-lua/plenary.nvim",
+      config = [[require('plugins.configs.lua.gitsigns')]]
       -- event = "BufEnter"
     }
     use {
@@ -212,6 +213,7 @@ packer.startup(
     use "bchretien/vim-profiler"
     use "tweekmonster/startuptime.vim"
     use "qpkorr/vim-renamer"
+    use "famiu/nvim-reload"
     -- vim-profiler.py nvim -n 10
     -- vim-profiler.py -n 5 nvim foo.cc -c ":exec ':normal ia' | :q\!"
     -- strace gvim -V9log.txt file.tex > stdout.txt 2> stderr.txt

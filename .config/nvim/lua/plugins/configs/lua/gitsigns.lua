@@ -50,10 +50,14 @@ require("gitsigns").setup {
   --   ["x ih"] = ':<C-U>lua require"gitsigns".text_object()<CR>'
   -- },
   watch_index = {interval = 1000},
+  current_line_blame = false,
+  current_line_blame_delay = 1000,
+  current_line_blame_position = "eol",
   sign_priority = 6,
   update_debounce = 200,
   status_formatter = nil, -- Use default
-  use_decoration_api = false
+  use_decoration_api = true,
+  use_internal_diff = true
 }
 
 -- signs = {

@@ -1,3 +1,4 @@
+-- Remove all inactive statusline components
 -- This table is equal to the default separators table
 local separators = {
   vertical_bar = "┃",
@@ -161,13 +162,15 @@ function get_components()
 
   components.left.active[3] = {
     provider = function()
+      -- TODO: trunccate path intelligently
       local project_path = vim.fn.FindRootDirectory()
       if #project_path == 0 then
         project_path = vim.fn.getcwd()
         return string.gsub(project_path, os.getenv("HOME"), "~")
       else
+        -- return project_name
         project_path, project_name = string.match(project_path, "(.*)%/(.*)")
-        return project_name
+        return project_name or ""
       end
     end,
     hl = function()

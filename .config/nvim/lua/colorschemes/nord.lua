@@ -49,7 +49,7 @@ local spec =
       PmenuSbar {fg = "#717cb4", bg = "#202331"},
       PmenuThumb {fg = "#8f93a2", bg = "#84ffff"},
       SignColumn {bg = "none"},
-      CursorLine {bg = nord.CursorLine.bg.darken(50)},
+      CursorLine {bg = nord.CursorLine.bg.darken(50), gui = "none"},
       CursorLineNr {fg = "#afd7ff", bg = CursorLine.bg},
       CursorColumn {},
       -- base groups
@@ -117,6 +117,15 @@ local spec =
       GitSignsDeleteNrFaded = {fg = clr_over.red_faded},
       GitSignsDeleteLnFaded = {fg = clr_over.red_faded}
       -- --html
+      -- TSStrike = {},
+      -- TSUnderline = {},
+      -- Underline {},
+      -- Underlined {},
+      -- htmlLink = {},
+      -- htmlUnderline = {},
+      -- htmlUnderlineItalic = {},
+      -- htmlUnderLineItalic = {}
+      -- Underlined, CursorLine, TSUnderline, htmlUnderline, htmlUnderlineItalic, htmlUnderLineItalic,
       -- vim.cmd("hi! htmlTag guifg=#7f90aa")
       -- vim.cmd("hi! htmlEndTag guifg=#7f90aa")
       -- vim.cmd("hi! htmlArg guifg=#7f90aa")

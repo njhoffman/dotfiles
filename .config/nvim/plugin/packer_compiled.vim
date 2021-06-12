@@ -141,6 +141,7 @@ _G.packer_plugins = {
     path = "/home/nicholas/.local/share/nvim/site/pack/packer/start/fzf.vim"
   },
   ["gitsigns.nvim"] = {
+    config = { "require('plugins.configs.lua.gitsigns')" },
     loaded = true,
     path = "/home/nicholas/.local/share/nvim/site/pack/packer/start/gitsigns.nvim"
   },
@@ -236,6 +237,10 @@ _G.packer_plugins = {
   ["nvim-lspinstall"] = {
     loaded = true,
     path = "/home/nicholas/.local/share/nvim/site/pack/packer/start/nvim-lspinstall"
+  },
+  ["nvim-reload"] = {
+    loaded = true,
+    path = "/home/nicholas/.local/share/nvim/site/pack/packer/start/nvim-reload"
   },
   ["nvim-toggleterm.lua"] = {
     loaded = true,
@@ -526,6 +531,10 @@ _G.packer_plugins = {
 }
 
 time("Defining packer_plugins", false)
+-- Config for: gitsigns.nvim
+time("Config for gitsigns.nvim", true)
+require('plugins.configs.lua.gitsigns')
+time("Config for gitsigns.nvim", false)
 -- Config for: lush.nvim
 time("Config for lush.nvim", true)
 try_loadstring("\27LJ\2\nw\0\0\3\0\4\0\t6\0\0\0009\0\1\0'\2\2\0B\0\2\0016\0\0\0009\0\1\0'\2\3\0B\0\2\1K\0\1\0007source $HOME/.config/nvim/colors/barbar-colors.vim\21colorscheme nord\bcmd\bvim\0", "config", "lush.nvim")

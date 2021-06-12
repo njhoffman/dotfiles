@@ -69,6 +69,8 @@ require("plugins.configs.lua.nvim_hlslens")
 require("plugins.configs.vim.scrollbar")
 require("plugins.configs.vim.vim_plugin_AnsiEsc")
 
+-- reload
+require("plugins.configs.lua.nvim_reload")
 -- themes
 require("plugins.configs.lua.barbar")
 require("plugins.configs.lua.feline")
