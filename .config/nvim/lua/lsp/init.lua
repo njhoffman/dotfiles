@@ -3,10 +3,10 @@ local lsp_servers = require("lsp.servers")
 local lsp_diagnostics = require("lsp.diagnostics")
 local map = require("utils.core").map
 
-local plugin = {}
+local M = {}
 
 -- lsp-install
-function plugin.setup_servers()
+function M.setup_servers()
   lsp_install.setup()
 
   -- get all installed servers
@@ -22,14 +22,13 @@ function plugin.setup_servers()
   lsp_diagnostics.setup()
 end
 
-function plugin.load()
-  -- Automatically reload after `:LspInstall <server>` so we don't have to restart neovim
-  require "lspinstall".post_install_hook = function()
-    plugin.setup_servers() -- reload installed servers
-    vim.cmd("bufdo e") -- this triggers the FileType autocmd that starts the server
-  end
-  plugin.setup_servers()
+-- Automatically reload after `:LspInstall <server>` so we don't have to restart neovim
+require "lspinstall".post_install_hook = function()
+  M.setup_servers() -- reload installed servers
+  vim.cmd("bufdo e") -- this triggers the FileType autocmd that starts the server
 end
+
+M.setup_servers()
 
 function diagnostic_toggle_virtual_text()
   local virtual_text = vim.b.lsp_virtual_text_enabled
@@ -40,8 +39,6 @@ end
 
 map("n", "<leader>tv", ":lua diagnostic_toggle_virtual_text()<CR>")
 -- map("n", "<leader>tg", ":lua diagnostic_toggle_signs()<CR>")
-
-return plugin
 
 -- vim.lsp.handlers["textDocument/hover"] =
 --   vim.lsp.with(

@@ -1,19 +1,17 @@
 -- dofile('/home/wil/.config/nvim/lua/profiler.lua')
 
--- general settings
-require "main.options"
-require "main.colorscheme"
+require "lsp"
+-- require("debug.typescript")
 
 -- install 3rd party plugin packages
 require "plugins"
+require "plugins-config"
 
--- require("debug.typescript")
-require "lsp".load()
+-- general settings
+require "main.options"
+-- require "main.colorscheme"
 
--- -- install debugger adapter protocol functionality
 require "main.autocommands"
-
-require "plugins.feline".load()
 
 require "mappings"
 require "mappings.lsp"

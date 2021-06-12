@@ -55,8 +55,8 @@ endif
 
 " Backwards compatibility
 if exists("g:jellybeans_background_color")
-  \ || exists("g:jellybeans_background_color_256")
-  \ || exists("g:jellybeans_use_term_background_color")
+      \ || exists("g:jellybeans_background_color_256")
+      \ || exists("g:jellybeans_use_term_background_color")
 
   let s:overrides = deepcopy(s:overrides)
 
@@ -73,7 +73,7 @@ if exists("g:jellybeans_background_color")
   endif
 
   if exists("g:jellybeans_use_term_background_color")
-    \ && g:jellybeans_use_term_background_color
+        \ && g:jellybeans_use_term_background_color
     let s:overrides["background"]["ctermbg"] = "NONE"
     let s:overrides["background"]["256ctermbg"] = "NONE"
   endif
@@ -98,7 +98,7 @@ endif
 " [^1]: Tested on 8.0.567. Does not apply to Neovim.
 "
 if has_key(s:overrides, "background") && has_key(s:overrides["background"], "guibg")
-    let s:background_color = s:overrides["background"]["guibg"]
+  let s:background_color = s:overrides["background"]["guibg"]
 endif
 
 " Color approximation functions by Henry So, Jr. and David Liang {{{
@@ -341,16 +341,16 @@ endfun
 fun! s:X(group, fg, bg, attr, lcfg, lcbg)
   if s:low_color
     let l:cmd = "hi ".a:group.
-    \ " ctermfg=".s:prefix_highlight_value_with("", a:lcfg).
-    \ " ctermbg=".s:prefix_highlight_value_with("", a:lcbg)
+          \ " ctermfg=".s:prefix_highlight_value_with("", a:lcfg).
+          \ " ctermbg=".s:prefix_highlight_value_with("", a:lcbg)
   else
     let l:cmd = "hi ".a:group.
-    \ " guifg=".s:prefix_highlight_value_with("#", a:fg).
-    \ " guibg=".s:prefix_highlight_value_with("#", a:bg)
+          \ " guifg=".s:prefix_highlight_value_with("#", a:fg).
+          \ " guibg=".s:prefix_highlight_value_with("#", a:bg)
     if !s:true_color
       let l:cmd = l:cmd.
-      \ " ctermfg=".s:rgb(a:fg).
-      \ " ctermbg=".s:rgb(a:bg)
+            \ " ctermfg=".s:rgb(a:fg).
+            \ " ctermbg=".s:rgb(a:bg)
     endif
   endif
 
@@ -388,21 +388,21 @@ set background=dark
 " low-color terminals if the preferred background color is
 " not available.
 if !has('gui_running') && $TERM_PROGRAM == "Apple_Terminal"
-    let s:matchParenGuiFg = "dd0093"
-    let s:matchParenGuiBg = "000000"
+  let s:matchParenGuiFg = "dd0093"
+  let s:matchParenGuiBg = "000000"
 else
-    let s:matchParenGuiFg = "ffffff"
-    let s:matchParenGuiBg = "556779"
+  let s:matchParenGuiFg = "ffffff"
+  let s:matchParenGuiBg = "556779"
 endif
 if s:termBlack != "Black"
-    let s:matchParenTermFg = "Magenta"
-    let s:matchParenTermBg = ""
+  let s:matchParenTermFg = "Magenta"
+  let s:matchParenTermBg = ""
 else
-    let s:matchParenTermFg = ""
-    let s:matchParenTermBg = s:termBlack
+  let s:matchParenTermFg = ""
+  let s:matchParenTermBg = s:termBlack
 endif
 call s:X("MatchParen",s:matchParenGuiFg,s:matchParenGuiBg,"bold",
-\                     s:matchParenTermFg,s:matchParenTermBg)
+      \                     s:matchParenTermFg,s:matchParenTermBg)
 
 call s:X("TabLine","000000","b0b8c0","italic","",s:termBlack)
 call s:X("TabLineFill","9098a0","","","",s:termBlack)
@@ -647,10 +647,10 @@ if !empty("s:overrides")
   endfun
   fun! s:load_color_def(group, def)
     call s:X(a:group, get(a:def, "guifg", s:current_color(a:group, "fg", "gui")),
-    \                 get(a:def, "guibg", s:current_color(a:group, "bg", "gui")),
-    \                 get(a:def, "attr", s:current_attr(a:group)),
-    \                 get(a:def, "ctermfg", s:current_color(a:group, "fg", "cterm")),
-    \                 get(a:def, "ctermbg", s:current_color(a:group, "bg", "cterm")))
+          \                 get(a:def, "guibg", s:current_color(a:group, "bg", "gui")),
+          \                 get(a:def, "attr", s:current_attr(a:group)),
+          \                 get(a:def, "ctermfg", s:current_color(a:group, "fg", "cterm")),
+          \                 get(a:def, "ctermbg", s:current_color(a:group, "bg", "cterm")))
     if !s:low_color
       for l:prop in ["ctermfg", "ctermbg"]
         let l:override_key = "256".l:prop
@@ -693,8 +693,8 @@ call s:X("CursorLine","","081214","","",s:termBlack)
 call s:X("CursorColumn","","","","",s:termBlack)
 
 if &diff
-    hi! CursorLine cterm=none ctermfg=none ctermbg=none
-    set cursorline!
+  hi! CursorLine cterm=none ctermfg=none ctermbg=none
+  set cursorline!
 endif
 
 call s:X("CursorLineNr", "afd7ff","","","",s:termBlack)
@@ -704,7 +704,7 @@ call s:X("CursorLineNr", "afd7ff","","","",s:termBlack)
 call s:X("MatchParen","60a0a0","000022","bold","","DarkCyan")
 call s:X("MatchParenCursor","a0c0b0", "", "bold","","DarkCyan")
 
-  " Tabs
+" Tabs
 call s:X("TabLineSel","000000","f0f0f0","bold",s:termBlack,"White")
 " call s:X("TabLineSel","000000","f0f0f0","italic,bold",s:termBlack,"White")
 
@@ -738,7 +738,7 @@ call s:X("Title","CCCCCC","","bold","Green","")
 " call s:X("Title","70b950","","bold","Green","")
 
 call s:X("Constant","87afff","","","Red","")
-" call s:X("Constant","cf6a4c","","","Red","")
+" call s:X("Constant","#cf6a4c","","","Red","")
 
 call s:X("Delimiter","7F90AA","","","Grey","")
 " call s:X("Delimiter","668799","","","Grey","")
@@ -746,7 +746,7 @@ call s:X("Delimiter","7F90AA","","","Grey","")
 call s:X("Keyword","BECDE6","","","Grey","")
 
 call s:X("Type","BECDE6","","","Grey","")
-" call s:X("Type","ffb964","","","Yellow","")
+" call s:X("Type","#ffb964","","","Yellow","")
 
 call s:X("String","22BB99","","","Green","")
 " call s:X("String","99ad6a","","","Green","")
@@ -995,4 +995,3 @@ hi! EasyMotionShadeDefault guifg=#666077
 "
 " hi EasyMotionMoveHL ctermbg=green ctermfg=black
 " hi EasyMotionIncSearch ctermbg=green ctermfg=black
-

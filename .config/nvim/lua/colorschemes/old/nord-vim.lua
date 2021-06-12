@@ -11,6 +11,21 @@ vim.cmd("hi! CursorLineNr guifg=#afd7ff ctermfg=Black")
 vim.cmd("hi! CursorColumn guibg=NONE ctermbg=NONE")
 vim.cmd("hi! Comment gui=italic")
 
+--html
+vim.cmd("hi! htmlTag guifg=#7f90aa")
+vim.cmd("hi! htmlEndTag guifg=#7f90aa")
+vim.cmd("hi! htmlArg guifg=#7f90aa")
+vim.cmd("hi! htmlTagName guifg=#7f90aa")
+-- jsx
+vim.cmd("hi! jsxTagName guifg=#ff6600")
+vim.cmd("hi! jsxAttrib guifg=#88bbdd")
+vim.cmd("hi! jsxEqual guifg=#6699bb")
+vim.cmd("hi! jsxComponentName jsxTag")
+vim.cmd("hi! link jsxRegexpString javascriptRegExpString")
+vim.cmd("hi! link jsTemplateVar javascriptTemplateVar")
+vim.cmd("hi! link jsTemplateDelim javascriptTemplateDelim")
+vim.cmd("hi! link jsTemplateString javascriptTemplateString")
+
 -- LspDiagnosticsFloatingError
 -- LspDiagnosticsFloatingWarning
 -- LspDiagnosticsFloatingInformation

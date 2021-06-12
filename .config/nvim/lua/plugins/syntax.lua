@@ -21,6 +21,7 @@ function plugin.setup(use)
     "zinit-zsh/zinit-vim-syntax",
     "neoclide/jsonc.vim",
     "elzr/vim-json",
+    "tpope/vim-liquid",
     "GutenYe/json5.vim",
     "chr4/nginx.vim",
     "rodjek/vim-puppet",

@@ -5,6 +5,26 @@ vim.g.nord_cursorline_transparent = true
 vim.g.nord_disable_background = true
 require("nord-nick").set()
 
+vim.cmd("hi! Type guifg=#becd36")
+--html
+vim.cmd("hi! htmlTag guifg=#7f90aa")
+vim.cmd("hi! htmlEndTag guifg=#7f90aa")
+vim.cmd("hi! htmlArg guifg=#7f90aa")
+vim.cmd("hi! htmlTagName guifg=#7f90aa")
+
+-- jsx
+vim.cmd("hi! jsxTag guifg=#ff6600")
+vim.cmd("hi! jsxTagName guifg=#ff6600")
+vim.cmd("hi! jsxAttrib guifg=#88bbdd")
+vim.cmd("hi! jsxEqual guifg=#6699bb")
+
+vim.cmd("hi! link jsVariableType Type")
+vim.cmd("hi! link jsxComponentName jsxTag")
+vim.cmd("hi! link jsxRegexpString javascriptRegExpString")
+vim.cmd("hi! link jsTemplateVar javascriptTemplateVar")
+vim.cmd("hi! link jsTemplateDelim javascriptTemplateDelim")
+vim.cmd("hi! link jsTemplateString javascriptTemplateString")
+
 -- vim.cmd("hi! Normal guibg=NONE ctermbg=NONE")
 -- vim.cmd("hi! EndOfBuffer guibg=NONE ctermbg=NONE")
 -- vim.cmd("hi! SignColumn guibg=NONE ctermbg=NONE")

@@ -45,4 +45,4 @@ require('init')
 EOF
 
 " source $HOME/.config/nvim/mappings.vim
-source $HOME/.config/nvim/plugins/barbar-colors.vim
+" source $HOME/.config/nvim/colors/barbar-colors.vim

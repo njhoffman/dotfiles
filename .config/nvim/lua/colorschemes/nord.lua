@@ -1,0 +1,87 @@
+local lush = require("lush")
+local hsl = lush.hsl
+
+vim.g.vim_jsx_pretty_colorful_config = 1
+vim.g.vim_jsx_pretty_highlight_close_tag = 1
+-- vim.o.background = "dark" -- or "light" for light mode
+
+local nord = require("colorschemes.lush-themes.nord-nvim")
+
+local clr_over = {
+  orange = "#cc8877",
+  yellow = "#bdb994"
+}
+local spec =
+  lush.extends({nord}).with(
+  function()
+    return {
+      Normal {fg = nord.Normal.fg.darken(15), bg = "none"},
+      -- String {fg = "#22bb99"},
+      Comment {fg = "#5c667a", gui = "italic"},
+      SignColumn {bg = "none"},
+      CursorLine {bg = nord.CursorLine.bg.darken(50)},
+      CursorLineNr {fg = "#afd7ff", bg = CursorLine.bg},
+      CursorColumn {},
+      Constant {fg = "#6699aa"},
+      Identifier {fg = "#8eb9c6"},
+      Type {fg = clr_over.yellow},
+      MatchParen {fg = "#60a0a0", bg = "000022"},
+      MatchParenCursor {fg = "#a0c0b0"},
+      TSTagDelimiter {fg = "#7f90aa"},
+      TSURI {fg = "#8eb9f6", gui = "none"},
+      -- jsx-pretty
+      -- jsxElement {fg = "#ff6600"},
+      jsxTag {fg = clr_over.orange},
+      jsxComponentName {fg = clr_over.orange},
+      jsxTagName {fg = clr_over.orange},
+      jsxOpenTag {fg = clr_over.orange},
+      jsxCloseTag {fg = "#7f90aa"},
+      -- jsxCloseString {fg = "#ff6600"},
+      jsxAttrib {fg = "#88bbdd"},
+      jsxEqual {fg = "#6699bb"},
+      -- js-other
+      -- jsVariableType {fg = jsStorageClass.fg},
+      -- jsIf {fg = jsConditional.fg},
+      -- jsFunctionCall {fg = jsFuncCall.fg},
+      -- jsIdentifier {fg = jsDestructuringBlock.fg},
+      -- jsModuleDefault {fg = jsExportDefault.fg},
+      -- jsSwitch {fg = jsConditional.fg},
+      -- jsSwitchCase {fg = jsLabel.fg},
+      -- jsRegexpString {javascriptRegExpString},
+      -- jsTemplateVar {javascriptTemplateVar},
+      -- jsTemplateDelim {javascriptTemplateDelim},
+      -- jsTemplateString {javascriptTemplateString},
+      -- jsStorageClass {StorageClass},
+      -- jsReturn {Statement},
+      -- jsConditional {Conditional},
+      -- jsExportDefault {fg = StorageClass.fg},
+      -- jsExportDefaultGroup {jsExportDefault},
+      -- jsLabel {Label},
+      --- nvim-hlslens
+      HlSearchLensCur {fg = "#ff2266", bg = "#003333"},
+      HlSearchLens {fg = "#00ddff", bg = "none"},
+      HlSearchCur {fg = "#00ffdd", bg = "none"}
+
+      -- --html
+      -- vim.cmd("hi! htmlTag guifg=#7f90aa")
+      -- vim.cmd("hi! htmlEndTag guifg=#7f90aa")
+      -- vim.cmd("hi! htmlArg guifg=#7f90aa")
+      -- vim.cmd("hi! htmlTagName guifg=#7f90aa")
+
+      -- -- jsx
+      -- vim.cmd("hi! jsxTag guifg=#ff6600")
+      -- vim.cmd("hi! jsxTagName guifg=#ff6600")
+      -- vim.cmd("hi! jsxAttrib guifg=#88bbdd")
+      -- vim.cmd("hi! jsxEqual guifg=#6699bb")
+
+      -- vim.cmd("hi! link jsVariableType Type")
+      -- vim.cmd("hi! link jsxComponentName jsxTag")
+      -- vim.cmd("hi! link jsxRegexpString javascriptRegExpString")
+      -- vim.cmd("hi! link jsTemplateVar javascriptTemplateVar")
+      -- vim.cmd("hi! link jsTemplateDelim javascriptTemplateDelim")
+      -- vim.cmd("hi! link jsTemplateString javascriptTemplateString")
+    }
+  end
+)
+
+return spec

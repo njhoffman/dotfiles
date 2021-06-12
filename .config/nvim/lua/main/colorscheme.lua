@@ -8,6 +8,10 @@
 -- require "../colorschemes/neon"
 -- require "../colorschemes/nightfly"
 -- require "../colorschemes/nord-vim"
+-- require "../colorschemes/nord-nick"
+-- require "../colorschemes/nord-lush"
 -- require "../colorschemes/nord-nvim"
-require "../colorschemes/nord-nick"
 -- require "../colorschemes/nvcode"
+-- require("lush_theme.jellybeans-nvim")
+-- local spec = require("colorschemes.nord-nvim")
+-- require("lush")(spec)

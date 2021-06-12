@@ -9,7 +9,8 @@ function plugin.load()
   local tsconfig = require "nvim-treesitter.configs"
   tsconfig.setup {
     -- one of "all", "maintained" (parsers with maintainers), or a list of languages
-    ensure_installed = "all",
+    -- ensure_installed = "all",
+    ensure_installed = require("settings-parsers"),
     playground = {
       enable = true,
       disable = {},
