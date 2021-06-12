@@ -66,6 +66,8 @@ packer.startup(
       "yuezk/vim-js",
       "HerringtonDarkholme/yats.vim",
       "maxmellon/vim-jsx-pretty",
+      -- markdown
+      "plasticboy/vim-markdown",
       -- plucked syntax from vim-polyglot
       "GutenYe/json5.vim",
       "StanAngeloff/php.vim",

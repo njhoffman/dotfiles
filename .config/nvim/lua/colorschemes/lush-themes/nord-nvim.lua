@@ -4,6 +4,19 @@ local v = vim.g -- this must be done, because lush is executed in a bare environ
 
 v.colors_name = "nord"
 
+-- material.bg =			'#0F111A'
+-- material.bg_alt =		'#090B10'
+-- material.fg =			'#8F93A2'
+-- material.text =			'#717CB4'
+-- material.comments =		'#464B5D'
+-- material.selection = 	'#1F2233'
+-- material.contrast =		'#090B10'
+-- material.active =		'#1A1C25'
+-- material.border =		'#1f2233'
+-- material.line_numbers =	'#3B3F51'
+-- material.highlight =	'#1F2233'
+-- material.disabled =		'#464B5D'
+-- material.accent =		'#84FFFF'
 local clrs = {
   nord0 = hsl(220, 16, 22), -- #2F3541
   nord1 = hsl(222, 16, 28), -- #3C4353
@@ -23,7 +36,11 @@ local clrs = {
   -- nord14 = hsl(92, 28, 65), -- #A4BF8D
   nord14 = "#22BB99",
   -- nord15 = hsl(311, 20, 63), -- #B48EAD
-  nord15 = "#646EAD"
+  nord15 = "#646EAD",
+  none = "NONE",
+  highlight = "#1F2233",
+  disabled = "#464B5D",
+  accent = "#84FFFF"
 }
 
 local nord3_brightened = {
@@ -97,7 +114,6 @@ v.terminal_color_12 = clrs.nord9.hex
 v.terminal_color_13 = clrs.nord15.hex
 v.terminal_color_14 = clrs.nord7.hex
 v.terminal_color_15 = clrs.nord6.hex
-
 local theme =
   lush(
   function()
@@ -119,7 +135,7 @@ local theme =
       MatchParen {fg = clrs.nord8, bg = clrs.nord3},
       NonText {fg = clrs.nord2},
       Normal {fg = clrs.nord4, bg = clrs.nord0},
-      Pmenu {fg = clrs.nord4, bg = clrs.nord2},
+      Pmenu {fg = clrs.nord4, bg = clrs.nord0},
       PmenuSbar {fg = clrs.nord4, bg = clrs.nord2},
       PmenuSel {fg = clrs.nord8, bg = clrs.nord3},
       PmenuThumb {fg = clrs.nord8, bg = clrs.nord3},
@@ -152,6 +168,7 @@ local theme =
       VisualNOS {bg = clrs.nord2},
       -- +-- Gutter --+
       CursorColumn {bg = clrs.nord1},
+      CursorIM = {fg = clrs.cursor, bg = clrs.none, style = "reverse"}, -- like Cursor, but used when in IME mode
       CursorLineNr {
         fg = clrs.nord4,
         bg = cfg.nord_cursor_line_number_background == 1 and nil or clrs.nord1
@@ -195,6 +212,21 @@ local theme =
         bg = cfg.nord_bold_vertical_split_line == 0 and clrs.nord0 or clrs.nord1,
         gui = "NONE"
       },
+      -- +--- Other ---+
+      CommandMode = {fg = clrs.gray, bg = nord.none, style = "reverse"},
+      InsertMode = {fg = clrs.nord14, bg = nord.none, style = "reverse"},
+      NormalMode = {fg = clrs.accent, bg = nord.none, style = "reverse"},
+      ReplacelMode = {fg = clrs.nord11, bg = nord.none, style = "reverse"},
+      VisualMode = {fg = clrs.nord9, bg = nord.none, style = "reverse"},
+      Debug = {fg = clrs.nord11}, -- debugging statements
+      Ignore = {fg = clrs.disabled}, -- left blank, hidden
+      QuickFixLine = {fg = clrs.highlight, clrs.nord6, style = "reverse"},
+      ToolbarButton = {fg = clrs.fg, bg = clrs.none, style = "bold"},
+      ToolbarLine = {fg = clrs.fg, bg = clrs.bg_alt},
+      healthError = {fg = clrs.error},
+      healthSuccess = {fg = clrs.nord14},
+      healthWarning = {fg = clrs.nord15},
+      qfLineNr = {fg = clrs.highlight, clrs.nord6, style = "reverse"},
       -- +----------------------+
       -- + Language Base Groups +
       -- +----------------------+
@@ -224,7 +256,7 @@ local theme =
       String {fg = clrs.nord14},
       Structure {fg = clrs.nord9},
       Tag {fg = clrs.nord4},
-      Todo {fg = clrs.nord13, bg = nil},
+      Todo {fg = clrs.nord13, bg = nil, gui = "bold, italic"},
       Type {fg = clrs.nord9, gui = "NONE"},
       Typedef {fg = clrs.nord9},
       Macro {Define},
@@ -276,9 +308,9 @@ local theme =
       TSText = {fg = clrs.text}, -- For strings considenord11 text in a markup language.
       TSTextReference = {fg = clrs.nord15}, -- TODO: fixme
       TSEmphasis = {fg = clrs.nord10}, -- For text to be represented with emphasis.
-      TSUnderline = {fg = clrs.fg, bg = nord.none}, -- For text to be represented with an underline.
+      TSUnderline = {fg = clrs.fg, bg = clrs.none}, -- For text to be represented with an underline.
       TSStrike = {}, -- For strikethrough text.
-      TSTitle = {fg = clrs.nord10, bg = nord.none, style = "bold"}, -- Text that is part of a title.
+      TSTitle = {fg = clrs.nord10, bg = clrs.none, style = "bold"}, -- Text that is part of a title.
       TSLiteral = {fg = clrs.fg}, -- Literal text.
       TSURI = {fg = clrs.link}, -- Any URI like a link or email.
       TSComment = {fg = clrs.nord3_bright},
@@ -521,6 +553,11 @@ local theme =
       -- + Plugin Support +
       -- +----------------+
       -- +--- UI ---+
+      -- dashboard
+      DashboardShortCut = {fg = clrs.nord7},
+      DashboardHeader = {fg = clrs.nord9},
+      DashboardCenter = {fg = clrs.nord8},
+      DashboardFooter = {fg = clrs.nord14, style = "italic"},
       -- ALE
       -- > w0rp/ale
       ALEWarningSign {fg = clrs.nord13},
@@ -640,6 +677,94 @@ local theme =
       StartifyBracket {Delimiter},
       StartifySlash {Normal},
       StartifySpecial {Comment},
+      -- LspTrouble
+      LspTroubleText = {fg = clrs.text},
+      LspTroubleCount = {fg = clrs.nord9, bg = clrs.active},
+      LspTroubleNormal = {fg = clrs.fg, bg = clrs.sidebar},
+      -- Diff
+      diffAdded = {fg = clrs.nord14},
+      diffRemoved = {fg = clrs.nord11},
+      diffChanged = {fg = clrs.nord15},
+      diffOldFile = {fg = clrs.yelow},
+      diffNewFile = {fg = clrs.nord12},
+      diffFile = {fg = clrs.nord7},
+      diffLine = {fg = clrs.comments},
+      diffIndexLine = {fg = clrs.nord9},
+      -- Neogit
+      NeogitBranch = {fg = clrs.nord10},
+      NeogitRemote = {fg = clrs.nord9},
+      NeogitHunkHeader = {fg = clrs.fg, bg = clrs.highlight},
+      NeogitHunkHeaderHighlight = {fg = clrs.nord7, bg = clrs.contrast},
+      NeogitDiffContextHighlight = {fg = clrs.bg_alt, bg = clrs.contrast},
+      NeogitDiffDeleteHighlight = {fg = clrs.nord11},
+      NeogitDiffAddHighlight = {fg = clrs.nord14},
+      -- GitGutter
+      GitGutterAdd = {fg = clrs.nord14}, -- diff mode: Added line |diff.txt|
+      GitGutterChange = {fg = clrs.nord15}, -- diff mode: Changed line |diff.txt|
+      GitGutterDelete = {fg = clrs.nord11}, -- diff mode: Deleted line |diff.txt|
+      -- GitSigns
+      GitSignsAdd = {fg = clrs.nord14}, -- diff mode: Added line |diff.txt|
+      GitSignsAddNr = {fg = clrs.nord14}, -- diff mode: Added line |diff.txt|
+      GitSignsAddLn = {fg = clrs.nord14}, -- diff mode: Added line |diff.txt|
+      GitSignsChange = {fg = clrs.nord15}, -- diff mode: Changed line |diff.txt|
+      GitSignsChangeNr = {fg = clrs.nord15}, -- diff mode: Changed line |diff.txt|
+      GitSignsChangeLn = {fg = clrs.nord15}, -- diff mode: Changed line |diff.txt|
+      GitSignsDelete = {fg = clrs.nord11}, -- diff mode: Deleted line |diff.txt|
+      GitSignsDeleteNr = {fg = clrs.nord11}, -- diff mode: Deleted line |diff.txt|
+      GitSignsDeleteLn = {fg = clrs.nord11}, -- diff mode: Deleted line |diff.txt|
+      -- Telescope
+      TelescopePromptBorder = {fg = clrs.nord8},
+      TelescopeResultsBorder = {fg = clrs.nord9},
+      TelescopePreviewBorder = {fg = clrs.nord14},
+      TelescopeSelectionCaret = {fg = clrs.nord9},
+      TelescopeSelection = {fg = clrs.nord9},
+      TelescopeMatching = {fg = clrs.nord8},
+      TelescopeNormal = {fg = clrs.fg, bg = clrs.float},
+      -- NvimTree
+      NvimTreeRootFolder = {fg = clrs.nord7, style = "bold"},
+      NvimTreeGitDirty = {fg = clrs.nord15},
+      NvimTreeGitNew = {fg = clrs.nord14},
+      NvimTreeImageFile = {fg = clrs.nord15},
+      NvimTreeExecFile = {fg = clrs.nord14},
+      NvimTreeSpecialFile = {fg = clrs.nord9, style = spec.underline},
+      NvimTreeFolderName = {fg = clrs.nord10},
+      NvimTreeEmptyFolderName = {fg = clrs.disabled},
+      NvimTreeFolderIcon = {fg = clrs.accent},
+      NvimTreeIndentMarker = {fg = clrs.disabled},
+      LspDiagnosticsError = {fg = clrs.error},
+      LspDiagnosticsWarning = {fg = clrs.nord15},
+      LspDiagnosticsInformation = {fg = clrs.nord10},
+      LspDiagnosticsHint = {fg = clrs.nord9},
+      -- WhichKey
+      WhichKey = {fg = clrs.accent, style = "bold"},
+      WhichKeyGroup = {fg = clrs.text},
+      WhichKeyDesc = {fg = clrs.nord7, style = "italic"},
+      WhichKeySeperator = {fg = clrs.fg},
+      WhichKeyFloating = {bg = clrs.float},
+      WhichKeyFloat = {bg = clrs.float},
+      -- LspSaga
+      DiagnosticError = {fg = clrs.error},
+      DiagnosticWarning = {fg = clrs.nord15},
+      DiagnosticInformation = {fg = clrs.nord10},
+      DiagnosticHint = {fg = clrs.nord9},
+      DiagnosticTruncateLine = {fg = clrs.fg},
+      LspFloatWinNormal = {bg = clrs.contrast},
+      LspFloatWinBorder = {fg = clrs.nord9},
+      LspSagaBorderTitle = {fg = clrs.nord8},
+      LspSagaHoverBorder = {fg = clrs.nord10},
+      LspSagaRenameBorder = {fg = clrs.nord14},
+      LspSagaDefPreviewBorder = {fg = clrs.nord14},
+      LspSagaCodeActionBorder = {fg = clrs.nord7},
+      LspSagaFinderSelection = {fg = clrs.nord14},
+      LspSagaCodeActionTitle = {fg = clrs.nord10},
+      LspSagaCodeActionContent = {fg = clrs.nord9},
+      LspSagaSignatureHelpBorder = {fg = clrs.nord13},
+      ReferencesCount = {fg = clrs.nord9},
+      DefinitionCount = {fg = clrs.nord9},
+      DefinitionIcon = {fg = clrs.nord7},
+      ReferencesIcon = {fg = clrs.nord7},
+      TargetWord = {fg = clrs.nord8},
+      --
       -- +--- Languages ---+
       -- Haskell
       -- > neovimhaskell/haskell-vim

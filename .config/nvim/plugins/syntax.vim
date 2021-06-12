@@ -47,4 +47,4 @@ Plug 'gisphm/vim-gitignore'
 " ensure jsx has latest version
 " let g:polyglot_disabled = ['jsx']
 " let g:polyglot_disabled = { "autoindent", "sensible" }
-let g_javascript_sql_dialect = 'pgsql'
+let g:javascript_sql_dialect = 'pgsql'

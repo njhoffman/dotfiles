@@ -53,7 +53,7 @@ end
 
 if LSP.log_level == nil then
   -- trace, debug, info, warn, error
-  LSP.log_level = 'info'
+  LSP.log_level = "info"
 end
 
 if LSP.hover_diagnostic == nil then
@@ -63,7 +63,7 @@ end
 if LSP.virtual_text == nil then
   LSP.virtual_text = {
     spacing = 2,
-    severity_limit = "Error",
+    severity_limit = "Error"
   }
 end
 
@@ -137,12 +137,10 @@ if DAP.enabled == nil then
   DAP.enabled = false
 end
 
-
 -- Treesitter
 if Treesitter.enabled == nil then
   Treesitter.enabled = true
 end
-
 
 userSettings.Completion = Completion
 userSettings.Opts = Opts

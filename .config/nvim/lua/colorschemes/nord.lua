@@ -3,7 +3,29 @@ local hsl = lush.hsl
 
 vim.g.vim_jsx_pretty_colorful_config = 1
 vim.g.vim_jsx_pretty_highlight_close_tag = 1
+
+vim.g.javascript_sql_dialect = "pgsql"
 -- vim.o.background = "dark" -- or "light" for light mode
+vim.g.vim_markdown_conceal_code_blocks = 0
+vim.g.vim_markdown_fenced_languages = {
+  "coffee",
+  "css",
+  "erb=eruby",
+  "javascript",
+  "js=javascript",
+  "json=javascript",
+  "python",
+  "css",
+  "sh",
+  "bash=sh",
+  "html",
+  "zsh",
+  "ruby",
+  "sass",
+  "xml"
+}
+
+vim.g.vim_markdown_no_extensions_in_markdown = 1
 
 local nord = require("colorschemes.lush-themes.nord-nvim")
 
@@ -15,13 +37,21 @@ local spec =
   lush.extends({nord}).with(
   function()
     return {
-      Normal {fg = nord.Normal.fg.darken(15), bg = "none"},
-      -- String {fg = "#22bb99"},
-      Comment {fg = "#5c667a", gui = "italic"},
+      -- ui components
+      NormalFloat {fg = "#8f93a2", bg = "#090b10"}, -- normal text and background color for floating windows
+      Pmenu {fg = "#718cc4", bg = "#060614"},
+      PmenuSel {fg = "#84ffff", bg = "#1a1c2b"},
+      PmenuSbar {fg = "#717cb4", bg = "#202331"},
+      PmenuThumb {fg = "#8f93a2", bg = "#84ffff"},
       SignColumn {bg = "none"},
       CursorLine {bg = nord.CursorLine.bg.darken(50)},
       CursorLineNr {fg = "#afd7ff", bg = CursorLine.bg},
       CursorColumn {},
+      -- base groups
+
+      Normal {fg = nord.Normal.fg.darken(15), bg = "none"},
+      String {fg = "#22bb99"},
+      Comment {fg = "#5c667a", gui = "italic"},
       Constant {fg = "#6699aa"},
       Identifier {fg = "#8eb9c6"},
       Type {fg = clr_over.yellow},
@@ -61,18 +91,11 @@ local spec =
       HlSearchLensCur {fg = "#ff2266", bg = "#003333"},
       HlSearchLens {fg = "#00ddff", bg = "none"},
       HlSearchCur {fg = "#00ffdd", bg = "none"}
-
       -- --html
       -- vim.cmd("hi! htmlTag guifg=#7f90aa")
       -- vim.cmd("hi! htmlEndTag guifg=#7f90aa")
       -- vim.cmd("hi! htmlArg guifg=#7f90aa")
       -- vim.cmd("hi! htmlTagName guifg=#7f90aa")
-
-      -- -- jsx
-      -- vim.cmd("hi! jsxTag guifg=#ff6600")
-      -- vim.cmd("hi! jsxTagName guifg=#ff6600")
-      -- vim.cmd("hi! jsxAttrib guifg=#88bbdd")
-      -- vim.cmd("hi! jsxEqual guifg=#6699bb")
 
       -- vim.cmd("hi! link jsVariableType Type")
       -- vim.cmd("hi! link jsxComponentName jsxTag")
