@@ -25,27 +25,23 @@ local af = require("../utils/autofunc")
 local autocmds = {
   Clap = {
     --  use <C-n>/<C-p> instead of <C-j>/<C-k> to navigate the result, disable hints
-    {"FileType", "clap_input", "inoremap <silent> <buffer> <C-n> <C-R>=clap#navigation#linewise('down')<CR>"},
-    {"FileType", "clap_input", "inoremap <silent> <buffer> <C-p> <C-R>=clap#navigation#linewise('up')<CR>"},
-    -- {"FileType,", "clap_input", "let g:completion_enable_auto_pop = 0"},
+    {
+      "FileType", "clap_input",
+      "inoremap <silent> <buffer> <C-n> <C-R>=clap#navigation#linewise('down')<CR>"
+    }, {
+      "FileType", "clap_input",
+      "inoremap <silent> <buffer> <C-p> <C-R>=clap#navigation#linewise('up')<CR>"
+    }, -- {"FileType,", "clap_input", "let g:completion_enable_auto_pop = 0"},
     -- {"FileType,", "clap_input", "call compe#setup({ 'enabled': v:false }, 0)"}
-    {"CompleteChanged", "*", "redraw"},
-    {"FocusLost", "*", "VimadeFadeActive"},
+    {"CompleteChanged", "*", "redraw"}, {"FocusLost", "*", "VimadeFadeActive"},
     {"FocusGained", "*", "VimadeUnfadeActive"}
-    -- vim.cmd("au! CompleteChanged * redraw")
-    -- vim.cmd("au! FocusLost * VimadeFadeActive")
-    -- vim.cmd("au! FocusGained * VimadeUnfadeActive")
   },
-  Mundo = {
-    {"FileType", "Mundo", "noremap <buffer>  :q<cr>"}
-  },
+  Mundo = {{"FileType", "Mundo", "noremap <buffer>  :q<cr>"}},
   helpfile = {
     {"FileType", "help", "noremap <buffer> q :q<cr>"},
     {"FileType", "help", "noremap <buffer>  :q<cr>"}
   },
-  fasd = {
-    {"BufWinEnter,BufFilePost", "*", [[call Fasd_update()]]}
-  },
+  fasd = {{"BufWinEnter,BufFilePost", "*", [[call Fasd_update()]]}},
   filetypes = {
     {"BufNewFile,BufRead", "*.ejs", "set filetype=html"},
     {"FileType", "markdown", "setlocal wrap spell"},
@@ -55,37 +51,27 @@ local autocmds = {
   terminal = {
     {"TermOpen", "*", [[tnoremap <buffer> <Esc> <c-\><c-n>]]},
     {"TermOpen", "*", "set nonu"}
-  }
+  },
+  packer = {{"BufWritePost", "plugins.lua", "PackerCompile"}}
   -- lsp = {
   --   {"CursorHold,CursorHoldI", "*", "lua require'nvim-lightbulb'.update_lightbulb()"}
-  -- }
-  -- packer = {
-  --   {"BufWritePost", "plugins.lua", "PackerCompile"}
   -- }
 }
 
 -- vim.cmd([[autocmd ColorScheme * lua require("utils.lsp").fix("ColorScheme")]])
 
 -- define tables to insert
-local hl_yank = {
-  {"TextYankPost", "*", 'lua require"vim.highlight".on_yank()'}
-}
+local hl_yank = {{"TextYankPost", "*", 'lua require"vim.highlight".on_yank()'}}
 
 local preserve_cursor = {
-  {"BufReadPost", "*", [[if line("'\"") > 1 && line("'\"") <= line("$") | exe "normal! g'\"" | endif]]}
-}
-
-local format = {
   {
-    "BufWritePre",
-    "*",
-    [[try | undojoin | Neoformat | catch /^Vim\%((\a\+)\)\=:E790/ | finally | silent Neoformat | endtry]]
+    "BufReadPost", "*",
+    [[if line("'\"") > 1 && line("'\"") <= line("$") | exe "normal! g'\"" | endif]]
   }
 }
 
 local trim_whitespaces = {
-  {"BufWritePre", "*", [[%s/\s\+$//e]]},
-  {"BufWritePre", "*", [[%s/\n\+\%$//e]]}
+  {"BufWritePre", "*", [[%s/\s\+$//e]]}, {"BufWritePre", "*", [[%s/\n\+\%$//e]]}
   -- {"BufWritePre", "*.[ch]", [[*.[ch] %s/\%$/\r/e]]}
 }
 
@@ -99,11 +85,10 @@ if Opts.highlight_yank == true or Opts.highlight_yank == nil then
 end
 
 if Formatting.format_on_save == true or Formatting.format_on_save == nil then
-  table.insert(autocmds, format)
+  -- table.insert(autocmds, format)
 end
 
-if Formatting.trim_trailing_space == true or Formatting.trim_trailing_space == nil then
-  table.insert(autocmds, trim_whitespaces)
-end
+if Formatting.trim_trailing_space == true or Formatting.trim_trailing_space ==
+    nil then table.insert(autocmds, trim_whitespaces) end
 
 u.define_augroups(autocmds)

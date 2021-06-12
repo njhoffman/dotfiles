@@ -174,6 +174,20 @@ local opts = {
 require("which-key").register(buffer_map, opts)
 require("which-key").register(window_map, opts)
 
+local insert_map = {
+  ["<C-s>"] = {"<cmd>w<cr><esc>", "Quick save"}
+}
+
+local insert_opts = {
+  mode = "i",
+  buffer = nil,
+  silent = true,
+  noremap = true,
+  nowait = false
+}
+
+require("which-key").register(insert_map, opts)
+
 -- vim.g.dashboard_custom_shortcut = {
 --   last_session       = 'SPC s l',
 --   find_history       = 'SPC f h',

@@ -82,11 +82,13 @@ packer.startup(
           "jose-elias-alvarez/null-ls.nvim",
           "kabouzeid/nvim-lspinstall",
           "nvim-lua/lsp-status.nvim",
+          'nvim-lua/lsp_extensions.nvim',
           "onsails/lspkind-nvim",
           "nvim-lua/popup.nvim",
           "nvim-lua/plenary.nvim"
         }
       }
+      -- use { "tsuyoshicho/vim-efm-langserver-settings", requires = "prabirshrestha/vim-lsp"}
       -- use {"hrsh7th/vim-vsnip", event = "InsertEnter *", config = [[require('config.vsnip')]]}
       -- use {"hrsh7th/nvim-compe", event = "InsertEnter *", config = [[require('config.compe')]]}
       use "rafamadriz/friendly-snippets"
@@ -114,11 +116,12 @@ packer.startup(
     use "preservim/vimux"
     use {"vimwiki/vimwiki", branch = "dev"}
     use {"skywind3000/asynctasks.vim", requires = "skywind3000/asyncrun.vim"}
+    use {'folke/lua-dev.nvim'}
     use {"urbainvaes/vim-ripple", requires = "machakann/vim-highlightedyank"}
     use {
       "lewis6991/gitsigns.nvim",
       requires = "nvim-lua/plenary.nvim",
-      config = [[require('plugins.configs.lua.gitsigns')]]
+      -- config = [[require('plugins.configs.lua.gitsigns')]]
       -- event = "BufEnter"
     }
     use {
@@ -202,7 +205,7 @@ packer.startup(
     use "junegunn/vim-easy-align"
     use "andrewradev/splitjoin.vim"
     use "folke/todo-comments.nvim"
-    use "sbdchd/neoformat"
+    -- use "sbdchd/neoformat"
     use "b3nj5m1n/kommentary"
     use "terryma/vim-multiple-cursors"
 
@@ -276,9 +279,12 @@ return packer
 -- }
 -- "tsuyoshicho/vim-efm-langserver-settings", -- auto config efm lsp
 -- "gfanto/fzf-lsp.nvim"
+-- {"iamcco/markdown-preview.nvim", run = "cd app && yarn install"}
 -- -- Terminal
 --   use 'voldikss/vim-floaterm'
 -- Path navigation
+ -- use 'blindFS/vim-taskwarrior' -- Task management
+ --    use 'tools-life/taskwiki'
 -- use 'justinmk/vim-dirvish'
 -- Plugin development
 -- use 'folke/lua-dev.nvim'

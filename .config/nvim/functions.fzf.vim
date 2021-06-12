@@ -36,9 +36,9 @@ function! GFilesFallback()
   let prefix = get(g:, 'fzf_command_prefix', '')
   if v:shell_error == 0
     " exec "normal :" . prefix . "GFiles\<CR>"
-    exec "normal :FzfPreviewFromResources project\<CR>"
+    exec "normal :FzfPreviewFromResources project old\<CR>"
   else
-    exec "normal :FzfPreviewFromResources directory\<CR>"
+    exec "normal :FzfPreviewFromResources directory old\<CR>"
     " exec "normal :" . prefix . "Files\<CR>"
   endif
   return 0
@@ -133,6 +133,21 @@ function! GoToSession(session)
 endfunction
 command! Sessions call fzf#run(fzf#wrap({ 'source': GetSessions(), 'sink': function('GoToSession')}))
 
+""""""""""""
+" :Autocommands
+function! GetAutocommands()
+  redir => cout
+  silent autocmd
+  redir END
+  return reverse(split(cout, "\n")[1:])
+endfunction
+
+function! GoToAutocommand(ac)
+  " let acfile = split(a:ac, '\s\+')[0]
+  let acfile = ac
+  execute "e " . acfile. "<cr>"
+endfunction
+command! Autocommands call fzf#run(fzf#wrap({ 'source': GetAutocommands(), 'sink': function('GoToAutocommand'),  'window': _fzf_get_window_props()}))
 
 """"""""""""
 " :Jumps
@@ -147,21 +162,19 @@ function! GoToJump(jump)
   let jumpnumber = split(a:jump, '\s\+')[0]
   execute "normal " . jumpnumber . "\<c-o>"
 endfunction
-command! Jumps call fzf#run(fzf#wrap({ 'source': GetJumps(), 'sink': function('GoToJump')}))
+command! Jumps call fzf#run(fzf#wrap({ 'source': GetJumps(), 'sink': function('GoToJump'), 'window': _fzf_get_window_props() }))
 
 """"""""""""
 " Dots
-command! Dots call fzf#run(fzf#wrap({
-      \ 'source': 'dotbare ls-files --full-name --directory "${DOTBARE_TREE}" | awk -v home="${DOTBARE_TREE}/" "{print home \$0}"',
-      \ 'sink': 'e',
-      \ 'options': [ '--multi', '--preview', 'cat {}' ]
-      \ }))
+
+let dotbare_cmd = 'dotbare ls-files --full-name --directory "${DOTBARE_TREE}" | awk -v home="${DOTBARE_TREE}/" "{print home \$0}"'
+command! Dots call fzf#run(fzf#wrap({  'source': dotbare_cmd, 'sink': 'e', 'options': [ '--multi', '--preview', 'cat {}' ] }))
 
 """"""""""""
 " Yanks
 function! s:yank_list()
   redir => ys
-  silent call EasyClip#Yank#ShowYanks()
+  silent call yoink#showYanks()
   redir END
   return split(ys, '\n')[1:]
 endfunction
@@ -188,6 +201,6 @@ command! -bang Clips call s:fzf_yanks()
 
 """"""""""""
 " :FASD
-command! Fasd call fzf#run(fzf#wrap({'source': 'fasd -a', 'options': '--no-sort --tac --tiebreak=index'}))
-command! Fasdd call fzf#run(fzf#wrap({'source': 'fasd -dl', 'options': '--no-sort --tac --tiebreak=index'}))
-command! Fasdf call fzf#run(fzf#wrap({'source': 'fasd -fl', 'options': '--no-sort --tac --tiebreak=index'}))
+command! Fasd call fzf#run(fzf#wrap({'source': 'fasd -a', 'options': '--no-sort --tac --tiebreak=index', 'window': _fzf_get_window_props() }))
+command! Fasdd call fzf#run(fzf#wrap({'source': 'fasd -dl', 'options': '--no-sort --tac --tiebreak=index', 'window': _fzf_get_window_props()}))
+command! Fasdf call fzf#run(fzf#wrap({'source': 'fasd -fl', 'options': '--no-sort --tac --tiebreak=index', 'window': _fzf_get_window_props()}))

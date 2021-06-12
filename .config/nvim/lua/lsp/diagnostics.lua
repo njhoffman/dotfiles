@@ -52,6 +52,24 @@ function lsp_diagnostics.configure()
   end
 end
 
+function lsp_diagnostics.extensions()
+  vim.lsp.handlers["textDocument/publishDiagnostics"] =
+    vim.lsp.with(
+      require('lsp_extensions.workspace.diagnostic').handler, {
+        signs = {
+          severity_limit = "Error",
+        }
+      }
+    )
+end
+-- -- Get the counts from your curreent workspace:
+-- local ws_errors = require('lsp_extensions.workspace.diagnostic').get_count(0, 'Error')
+-- local ws_hints = require('lsp_extensions.workspace.diagnostic').get_count(0, 'Hint')
+
+-- -- Set the qflist for the current workspace
+-- --  For more information, see `:help vim.lsp.diagnostic.set_loc_list()`, since this has some of the same configuration.
+-- require('lsp_extensions.workspace.diagnostic').set_qf_list()
+
 function lsp_diagnostics.publish()
   vim.lsp.handlers["textDocument/publishDiagnostics"] =
     vim.lsp.with(
@@ -89,6 +107,7 @@ end
 function lsp_diagnostics.setup()
   lsp_diagnostics.configure()
   lsp_diagnostics.publish()
+  -- lsp_diagnostics.extensions()
 end
 
 return lsp_diagnostics
