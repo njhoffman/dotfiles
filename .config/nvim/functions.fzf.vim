@@ -1,3 +1,4 @@
+""""""""""""
 function! _fzf_get_window_props()
   let l:width = winwidth('%')
 
@@ -130,9 +131,7 @@ function! GoToSession(session)
   let filepath = split(a:session , '\s\+')[0]
   execute "Prosession " . filepath . "\<c-o>"
 endfunction
-command! Sessions call fzf#run(fzf#wrap({
-      \ 'source': GetSessions(),
-      \ 'sink': function('GoToSession')}))
+command! Sessions call fzf#run(fzf#wrap({ 'source': GetSessions(), 'sink': function('GoToSession')}))
 
 
 """"""""""""
@@ -148,9 +147,7 @@ function! GoToJump(jump)
   let jumpnumber = split(a:jump, '\s\+')[0]
   execute "normal " . jumpnumber . "\<c-o>"
 endfunction
-command! Jumps call fzf#run(fzf#wrap({
-      \ 'source': GetJumps(),
-      \ 'sink': function('GoToJump')}))
+command! Jumps call fzf#run(fzf#wrap({ 'source': GetJumps(), 'sink': function('GoToJump')}))
 
 """"""""""""
 " Dots

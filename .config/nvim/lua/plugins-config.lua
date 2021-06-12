@@ -40,6 +40,7 @@ require("plugins.configs.vim.vim_multiple_cursors")
 
 -- integrations
 require("plugins.configs.lua.gitsigns")
+require("plugins.configs.lua.neogit")
 require("plugins.configs.vim.vimwiki")
 require("plugins.configs.vim.vimux")
 require("plugins.configs.vim.asynctasks")

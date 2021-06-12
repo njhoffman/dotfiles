@@ -71,19 +71,21 @@ local picker_maps = {
   ["<leader>f"] = {
     name = "+find",
     ["b"] = {"<cmd>FindBuffer<cr>", "Find buffer"},
-    c = {"<cmd>Telescope colorscheme<cr>", "colorscheme"},
-    f = {"<cmd>Telescope find_files<cr>", "file"},
-    g = {"<cmd>Telescope live_grep<cr>", "grep text"},
-    h = {"<cmd>Telescope help_tags<cr>", "vim tags"},
-    n = {"<cmd>lua require('utils.core').search_nvim()<cr>", "nvim dotfiles"},
-    o = {"<cmd>Telescope oldfiles<cr>", "recent files"},
-    m = {"<plug>(fzf-maps-n)", "mappings (normal)"},
-    mi = {"<plug>(fzf-maps-i)", "mappings (insert)"},
-    mv = {"<plug>(fzf-maps-v)", "mappings (visual)"},
-    mo = {"<plug>(fzf-maps-o)", "mappings (operator)"},
-    p = "personal config",
-    pn = {"<cmd>e ~/.config/nvim/lua/config.lua<cr>", "nvim"},
-    ps = {"<cmd>e ~/.shell/.zshrc<cr>", "shell"}
+    ["c"] = {"<cmd>Telescope colorscheme<cr>", "colorscheme"},
+    ["f"] = {"<cmd>Telescope find_files<cr>", "file"},
+    ["g"] = {"<cmd>Telescope live_grep<cr>", "grep text"},
+    ["h"] = {"<cmd>Telescope help_tags<cr>", "vim tags"},
+    ["n"] = {"<cmd>lua require('utils.core').search_nvim()<cr>", "nvim dotfiles"},
+    ["o"] = {"<cmd>Telescope oldfiles<cr>", "recent files"},
+    ["m"] = {"<plug>(fzf-maps-n)", "mappings (normal)"},
+    ["mi"] = {"<plug>(fzf-maps-i)", "mappings (insert)"},
+    ["mv"] = {"<plug>(fzf-maps-v)", "mappings (visual)"},
+    ["mo"] = {"<plug>(fzf-maps-o)", "mappings (operator)"},
+    ["p"] = {
+      name = "+personal-config",
+      ["n"] = {"<cmd>e ~/.config/nvim/lua/config.lua<cr>", "nvim"},
+      ["s"] = {"<cmd>e ~/.shell/.zshrc<cr>", "shell"}
+    }
   }
 }
 

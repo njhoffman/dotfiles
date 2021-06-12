@@ -1,4 +1,4 @@
-vim.g.ripple_enable_mappings = 1
+vim.g.ripple_enable_mappings = 0
 
 -- <Plug> Mapping	Default key mapping	Description
 -- <Plug>(ripple_open_repl)	y<cr> (nmap)	Open REPL

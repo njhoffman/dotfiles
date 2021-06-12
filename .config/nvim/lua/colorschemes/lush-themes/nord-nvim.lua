@@ -1,3 +1,6 @@
+-- https://github.com/kunzaatko/nord.nvim
+-- https://github.com/shaunsingh/nord.nvim
+
 local lush = require("lush")
 local hsl = lush.hsl
 local v = vim.g -- this must be done, because lush is executed in a bare environment

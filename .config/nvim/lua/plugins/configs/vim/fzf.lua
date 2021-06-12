@@ -1,15 +1,41 @@
--- <plug>(fzf-complete-word)	cat /usr/share/dict/words
--- <plug>(fzf-complete-path)	Path completion using find (file + dir)
--- <plug>(fzf-complete-file)	File completion using find
--- <plug>(fzf-complete-line)	Line completion (all open buffers)
--- vim.cmd("map <silent> <A-/> :Helptags<CR>")
--- vim.cmd("map <silent> <A-e> :Sessions<CR>")
--- vim.cmd("map <silent> <A-j> :FzfPreviewJumpsRpc<CR>")
--- vim.cmd("map <silent> <A-s> :Rg<CR>")
--- vim.cmd("map <silent> <A-s> :FzfPreviewProjectGrepRpc<CR>")
--- vim.cmd('map <silent> <A-v> :Vista!!<CR>')
--- vim.cmd('map <silent> <A-y> :<C-u>Snippets<CR>')
 vim.g.fzf_command_prefix = ""
+
+-- vim.cmd([[let g:fzf_action = {  'ctrl-q': function('build_quickfix_list'), 'ctrl-t': 'tab split', 'ctrl-x': 'split', 'ctrl-v': 'vsplit' }]])
+vim.cmd([[let g:fzf_action = { 'ctrl-t': 'tab split', 'ctrl-x': 'split', 'ctrl-v': 'vsplit' }]])
+
+-- Customize fzf colors to match your color scheme
+vim.g.fzf_colors = {
+  fg = {"fg", "Normal"},
+  bg = {"bg", "Normal"},
+  hl = {"fg", "Comment"},
+  ["fg+"] = {"fg", "CursorLine", "CursorColumn", "Normal"},
+  ["bg+"] = {"bg", "CursorLine", "CursorColumn"},
+  ["hl+"] = {"fg", "Statement"},
+  info = {"fg", "PreProc"},
+  border = {"fg", "Comment"},
+  prompt = {"fg", "Conditional"},
+  pointer = {"fg", "Exception"},
+  marker = {"fg", "Keyword"},
+  spinner = {"fg", "Label"},
+  header = {"fg", "Comment"}
+}
+
+-- [Buffers] Jump to the existing window if possible
+vim.g.fzf_buffers_jump = 1
+
+-- [B]Commits] Customize the options used by 'git log':
+vim.g.fzf_commits_log_options = '--graph --color=always --format="%C(auto)%h%d %s %C(black)%C(bold)%cr"'
+
+-- [Tags] Command to generate tags file
+-- let g:fzf_tags_command = 'ctags -R'
+
+-- [Commands] --expect expression for directly executing the command
+vim.g.fzf_commands_expect = "alt-enter,ctrl-x"
+
+-- Enable per-command history.
+vim.g.fzf_history_dir = "~/.local/share/fzf-history"
+
+-- let s:fzf_color = '--color="bg:#000000,bg+:#002222,border:#006B6B,spinner:#98BC99,header:#55FFFF" '
 
 -- switch between single line and multi-line statements
 

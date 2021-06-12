@@ -31,7 +31,12 @@ local nord = require("colorschemes.lush-themes.nord-nvim")
 
 local clr_over = {
   orange = "#cc8877",
-  yellow = "#bdb994"
+  yellow = "#bdb994",
+  yellow_faded = "#7B6B3B",
+  purple_faded = "#6A6CAB",
+  red_faded = "#7F212A",
+  green_faded = "#128A67",
+  blue_faded = "#5171A1"
 }
 local spec =
   lush.extends({nord}).with(
@@ -48,7 +53,6 @@ local spec =
       CursorLineNr {fg = "#afd7ff", bg = CursorLine.bg},
       CursorColumn {},
       -- base groups
-
       Normal {fg = nord.Normal.fg.darken(15), bg = "none"},
       String {fg = "#22bb99"},
       Comment {fg = "#5c667a", gui = "italic"},
@@ -57,8 +61,14 @@ local spec =
       Type {fg = clr_over.yellow},
       MatchParen {fg = "#60a0a0", bg = "000022"},
       MatchParenCursor {fg = "#a0c0b0"},
+      --
       TSTagDelimiter {fg = "#7f90aa"},
       TSURI {fg = "#8eb9f6", gui = "none"},
+      yamlTSField {fg = "#717cb4"},
+      yamlBlockMappingKey {yamlTSField},
+      --
+      liquidExpression {Type},
+      liquidDelimiter {fg = clr_over.orange},
       -- jsx-pretty
       -- jsxElement {fg = "#ff6600"},
       jsxTag {fg = clr_over.orange},
@@ -90,7 +100,22 @@ local spec =
       --- nvim-hlslens
       HlSearchLensCur {fg = "#ff2266", bg = "#003333"},
       HlSearchLens {fg = "#00ddff", bg = "none"},
-      HlSearchCur {fg = "#00ffdd", bg = "none"}
+      HlSearchCur {fg = "#00ffdd", bg = "none"},
+      ---
+
+      -- GitSigns Faded
+      GitSignsAddFaded = {fg = clr_over.green_faded},
+      GitSignsAddNrFaded = {fg = clr_over.green_faded},
+      GitSignsAddLnFaded = {fg = clr_over.green_faded},
+      GitSignsChangeFaded = {fg = clr_over.yellow_faded},
+      GitSignsChangeNrFaded = {fg = clr_over.yellow_faded},
+      GitSignsChangeLnFaded = {fg = clr_over.yellow_faded},
+      GitSignsChangeDeleteFaded = {fg = clr_over.purple_faded},
+      GitSignsChangeDeleteNrFaded = {fg = clr_over.purple_faded},
+      GitSignsChangeDeleteLnFaded = {fg = clr_over.purple_faded},
+      GitSignsDeleteFaded = {fg = clr_over.red_faded},
+      GitSignsDeleteNrFaded = {fg = clr_over.red_faded},
+      GitSignsDeleteLnFaded = {fg = clr_over.red_faded}
       -- --html
       -- vim.cmd("hi! htmlTag guifg=#7f90aa")
       -- vim.cmd("hi! htmlEndTag guifg=#7f90aa")

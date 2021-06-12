@@ -14,6 +14,7 @@ packer.startup(
     use "blackCauldron7/surround.nvim"
     use "moll/vim-bbye"
     use "mhinz/vim-sayonara"
+    use "aymericbeaumet/vim-symlink"
 
     -- Project management
     use "airblade/vim-rooter"
@@ -113,7 +114,41 @@ packer.startup(
     use {"vimwiki/vimwiki", branch = "dev"}
     use {"skywind3000/asynctasks.vim", requires = "skywind3000/asyncrun.vim"}
     use {"urbainvaes/vim-ripple", requires = "machakann/vim-highlightedyank"}
-    use {"lewis6991/gitsigns.nvim", requires = {"nvim-lua/plenary.nvim"}}
+    use {
+      "lewis6991/gitsigns.nvim",
+      requires = {"nvim-lua/plenary.nvim"}
+      -- config = [[require('config.gitsigns')]],
+      -- event = "BufEnter"
+    }
+    use {
+      {
+        "tpope/vim-fugitive"
+        -- cmd = {
+        --   "GBrowse",
+        --   "GDelete",
+        --   "GMove",
+        --   "GRemove",
+        --   "GRename",
+        --   "Gblame",
+        --   "Gdiff",
+        --   "Gdiffsplit",
+        --   "Gedit",
+        --   "Gfetch",
+        --   "Ggrep",
+        --   "Git",
+        --   "Glgrep",
+        --   "Gpull",
+        --   "Gpush",
+        --   "Gread",
+        --   "Gsplit",
+        --   "Gstatus",
+        --   "Gvdiffsplit",
+        --   "Gwrite"
+        -- }
+      },
+      {"TimUntersberger/neogit"}
+      -- {"TimUntersberger/neogit", opt = true}
+    }
 
     -- ====================================
     -- Pickers (telescope, fzf)
@@ -201,18 +236,14 @@ packer.startup(
 
     -- ====================================
     -- Themes
-    -- use "shaunsingh/nord.nvim"
-    -- use "arcticicestudio/nord-vim"
     -- use "neg-serg/neg"
     -- use "kyazdani42/blue-moon"
     -- use "rockerBOO/boo-colorscheme-nvim"
-    -- use "marko-cerovac/material.nvim"
     -- use "shaunsingh/moonlight.nvim"
     -- use "rafamadriz/neon"
     -- use "bluz71/vim-nightfly-guicolors"
     -- use "christianchiarulli/nvcode-color-schemes.vim"
     -- use "rakr/vim-one"
-    -- lush themes
     -- use  {"npxbr/gruvbox.nvim", requires = "rktjmp/lush.nvim"}
     use {"romgrk/barbar.nvim", requires = "romgrk/doom-one.vim"}
     use "famiu/feline.nvim"
@@ -224,14 +255,6 @@ packer.startup(
         vim.cmd("source $HOME/.config/nvim/colors/barbar-colors.vim")
       end
     }
-    -- use {"metalelf0/jellybeans-nvim", requires = "rktjmp/lush.nvim"}
-    -- use {
-    --   "kunzaatko/nord.nvim",
-    --   requires = "rktjmp/lush.nvim",
-    --   config = function()
-    --     vim.cmd("colorscheme nord")
-    --   end
-    -- }
 
     -- ====================================
     -- Motion

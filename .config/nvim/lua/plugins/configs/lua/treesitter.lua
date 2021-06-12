@@ -27,7 +27,7 @@ tsconfig.setup {
     enable = {enable = config.highlight},
     use_languagetree = true,
     additional_vim_regex_highlighting = false,
-    disable = {"javascript", "markdown"}
+    disable = {"javascript", "markdown", "liquid"}
   },
   refactor = {
     smart_rename = {enable = true, keymaps = {smart_rename = "grr"}},

@@ -1,41 +1,37 @@
+bars = {thick = " ▎", thin = " │"}
 signs_config_1 = {
   add = {
     hl = "GitSignsAddFaded",
-    text = "│ "
-    -- text = " ▎",
+    text = bars.thin
   },
   change = {
     hl = "GitSignsChangeFaded",
-    -- text = " ▎",
-    text = "│ "
+    text = bars.thin
   },
   delete = {
     hl = "GitSignsDeleteFaded",
-    text = "│ "
-    -- text = " ▎",
+    text = bars.thin
   },
   topdelete = {
     hl = "GitSignsDeleteFaded",
-    text = "│ "
-    -- text = " ▎",
+    text = bars.thin
   },
   changedelete = {
     hl = "GitSignsChangeDeleteFaded",
-    text = "│ "
-    -- text = " ▎",
+    text = bars.thin
   }
 }
 
 signs_config_2 = {
-  add = {hl = "GreenSign", text = "│", numhl = "GitSignsAddNr"},
-  change = {hl = "BlueSign", text = "│", numhl = "GitSignsChangeNr"},
-  delete = {hl = "RedSign", text = "│", numhl = "GitSignsDeleteNr"},
-  topdelete = {hl = "RedSign", text = "│", numhl = "GitSignsDeleteNr"},
-  changedelete = {hl = "PurpleSign", text = "│", numhl = "GitSignsChangeDeleteNr"}
+  add = {hl = "GreenSign", text = bars.thick, numhl = "GitSignsAddNr"},
+  change = {hl = "BlueSign", text = bars.thick, numhl = "GitSignsChangeNr"},
+  delete = {hl = "RedSign", text = bars.thick, numhl = "GitSignsDeleteNr"},
+  topdelete = {hl = "RedSign", text = bars.thick, numhl = "GitSignsDeleteNr"},
+  changedelete = {hl = "PurpleSign", text = bars.thick, numhl = "GitSignsChangeDeleteNr"}
 }
 
 require("gitsigns").setup {
-  signs = signs_config_1,
+  signs = signs_config_2,
   numhl = false,
   linehl = false,
   -- keymaps = {

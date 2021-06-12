@@ -44,7 +44,6 @@ local autocmds = {
     {"FileType", "help", "noremap <buffer>  :q<cr>"}
   },
   fasd = {
-    -- {"BufWinEnter,BufFilePost", "*", [[call s:fasd_update()]]}
     {"BufWinEnter,BufFilePost", "*", [[call Fasd_update()]]}
   },
   filetypes = {

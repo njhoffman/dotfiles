@@ -185,6 +185,10 @@ _G.packer_plugins = {
     loaded = true,
     path = "/home/nicholas/.local/share/nvim/site/pack/packer/start/neoformat"
   },
+  neogit = {
+    loaded = true,
+    path = "/home/nicholas/.local/share/nvim/site/pack/packer/start/neogit"
+  },
   ["nginx.vim"] = {
     loaded = true,
     path = "/home/nicholas/.local/share/nvim/site/pack/packer/start/nginx.vim"
@@ -361,6 +365,10 @@ _G.packer_plugins = {
     loaded = true,
     path = "/home/nicholas/.local/share/nvim/site/pack/packer/start/vim-eunuch"
   },
+  ["vim-fugitive"] = {
+    loaded = true,
+    path = "/home/nicholas/.local/share/nvim/site/pack/packer/start/vim-fugitive"
+  },
   ["vim-git"] = {
     loaded = true,
     path = "/home/nicholas/.local/share/nvim/site/pack/packer/start/vim-git"
@@ -462,6 +470,10 @@ _G.packer_plugins = {
   ["vim-smoothie"] = {
     loaded = true,
     path = "/home/nicholas/.local/share/nvim/site/pack/packer/start/vim-smoothie"
+  },
+  ["vim-symlink"] = {
+    loaded = true,
+    path = "/home/nicholas/.local/share/nvim/site/pack/packer/start/vim-symlink"
   },
   ["vim-systemd-syntax"] = {
     loaded = true,
