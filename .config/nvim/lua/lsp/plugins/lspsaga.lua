@@ -1,4 +1,5 @@
 local config = require "config"
+
 require("lspsaga").init_lsp_saga {
   use_saga_diagnostic_sign = true,
   error_sign = "﮻",

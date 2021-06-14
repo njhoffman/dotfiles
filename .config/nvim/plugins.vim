@@ -30,6 +30,7 @@ call plug#begin(stdpath('data') . '/plugged')
 " Plug  'tpope/vim-git',
 " Plug  'wgwoods/vim-systemd-syntax',
 " Plug  'zinit-zsh/zinit-vim-syntax'
+Plug 'LnL7/vim-nix'
 Plug  'tpope/vim-liquid'
 
 call plug#end()

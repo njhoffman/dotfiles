@@ -1,6 +1,7 @@
 local map = require("utils.core").map
 
 local config = require "config".Completion
+
 require("compe").setup {
   enabled = config.enabled,
   autocomplete = true,

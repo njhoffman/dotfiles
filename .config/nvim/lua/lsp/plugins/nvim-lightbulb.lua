@@ -1,4 +1,4 @@
-local af = require("../utils/autofunc")
+local af = require("utils.autofunc")
 
 af(
   "CursorHold,CursorHoldI",
@@ -37,7 +37,7 @@ af(
     }
     -- vim.api.nvim_command("highlight LightBulbVirtualText ctermfg= ctermbg= guifg=#007777 guibg=")
     vim.api.nvim_command("highlight LightBulbVirtualText guifg=#666688")
-    require "nvim-lightbulb".update_lightbulb(lightbulb_config)
+    -- require "nvim-lightbulb".update_lightbulb(lightbulb_config)
   end
 )
 -- vim.cmd [[autocmd CursorHold,CursorHoldI * lua require'nvim-lightbulb'.update_lightbulb(lightbulb_config)]]

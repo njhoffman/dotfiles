@@ -27,7 +27,7 @@ tsconfig.setup {
     enable = {enable = config.highlight},
     use_languagetree = true,
     additional_vim_regex_highlighting = true,
-    disable = {"javascript", "markdown"}
+    disable = {"javascript"}
   },
   refactor = {
     smart_rename = {enable = true, keymaps = {smart_rename = "grr"}},
@@ -62,7 +62,10 @@ tsconfig.setup {
       enable = true,
       set_jumps = true,
       goto_next_start = {["]f"] = "@function.outer", ["]c"] = "@class.outer"},
-      goto_previous_start = {["[f"] = "@function.outer", ["[c"] = "@class.outer"}
+      goto_previous_start = {
+        ["[f"] = "@function.outer",
+        ["[c"] = "@class.outer"
+      }
     }
   },
   rainbow = {enable = config.rainbow},

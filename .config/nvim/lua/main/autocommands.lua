@@ -43,8 +43,16 @@ local autocmds = {
   },
   fasd = {{"BufWinEnter,BufFilePost", "*", [[call Fasd_update()]]}},
   filetypes = {
-    {"BufNewFile,BufRead", "*.ejs", "set filetype=html"},
-    {"FileType", "markdown", "setlocal wrap spell"},
+    {"BufNewFile,BufRead", "*.ejs", "set ft=html"},
+    {
+      "BufNewFile,BufRead", "*.md",
+      "set ft=markdown syn=markdown conceallevel=1"
+    }, {"FileType", "markdown", "hi! markdownH1 guifg=#45a5f8"},
+    {"FileType", "markdown", "hi! markdownH2 guifg=#45a5e8"},
+    {"FileType", "markdown", "hi! markdownH3 guifg=#45a5d8"},
+    {"FileType", "markdown", "hi! markdownH4 guifg=#45a5c8"},
+    {"FileType", "markdown", "hi! markdownH5 guifg=#45a5b8"},
+    {"FileType", "markdown", "hi! markdownH6 guifg=#45a5a8"},
     -- {"FileType", "*", "setlocal formatoptions-=c formatoptions-=r formatoptions-=o"},
     {"FileType", "toggleterm", "setlocal nonumber norelativenumber"}
   },

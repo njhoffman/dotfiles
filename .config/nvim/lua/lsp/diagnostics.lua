@@ -5,10 +5,18 @@ local lsp_diagnostics = {}
 -- LSP Diagnostics
 -- ================================================
 function lsp_diagnostics.configure()
-  vim.cmd("hi! LspDiagnosticsVirtualTextError guifg=Red ctermfg=Red")
-  vim.cmd("hi! LspDiagnosticsVirtualTextWarning guifg=Yellow ctermfg=Yellow")
-  vim.cmd("hi! LspDiagnosticsVirtualTextInformation guifg=White ctermfg=White")
-  vim.cmd("hi! LspDiagnosticsVirtualTextHint guifg=White ctermfg=White")
+  vim.cmd("hi LspDiagnosticsUnderlineError gui=undercurl")
+  vim.cmd("hi LspDiagnosticsUnderlineWarning gui=undercurl")
+  vim.cmd("hi LspDiagnosticsUnderlineInformation gui=undercurl")
+  vim.cmd("hi LspDiagnosticsUnderlineHint gui=undercurl")
+  vim.cmd("hi LspDiagnosticsVirtualTextError guifg=#ff4400 guibg=none")
+  vim.cmd("hi LspDiagnosticsVirtualTextWarning guifg=#ffbc53 guibg=none")
+  vim.cmd("hi LspDiagnosticsVirtualTextInformation guifg=#193BBF guibg=none")
+  vim.cmd("hi LspDiagnosticsVirtualTextHint guifg=#787878 guibg=none")
+  vim.cmd("hi LspDiagnosticsFloatingError guifg=#ff4400 guibg=#3f3f3f")
+  vim.cmd("hi LspDiagnosticsFloatingWarning guifg=#674D00 guibg=#3f3f3f")
+  vim.cmd("hi LspDiagnosticsFloatingInformation guifg=#183380 guibg=#3f3f3f")
+  vim.cmd("hi LspDiagnosticsFloatingHint guifg=#484841 guibg=#3f3f3f")
 
   if (LSP.signs == "hidden") then
     -- just color numbers, dont show icons
@@ -51,6 +59,26 @@ function lsp_diagnostics.configure()
     )
   end
 end
+  vim.api.nvim_exec([[
+    " Format on save
+    " autocmd BufWritePre *.js lua vim.lsp.buf.formatting_sync(nil, 100)
+    " autocmd BufWritePre *.ts lua vim.lsp.buf.formatting_sync(nil, 100)
+    " autocmd BufWritePre *.vue lua vim.lsp.buf.formatting_sync(nil, 100)
+    " autocmd BufWritePre *.html lua vim.lsp.buf.formatting_sync(nil, 100)
+    " autocmd BufWritePre *.css lua vim.lsp.buf.formatting_sync(nil, 100)
+  ]], false)
+
+  -- When leaving insert mode => add linting errors to location list.
+  vim.api.nvim_exec([[
+    fun! LspLocationList()
+      lua vim.lsp.diagnostic.set_loclist({open_loclist = false})
+    endfun
+    augroup LSP_Location_List
+      autocmd!
+      autocmd! InsertLeave * :call LspLocationList()
+    augroup END
+  ]], false)
+
 
 function lsp_diagnostics.extensions()
   vim.lsp.handlers["textDocument/publishDiagnostics"] =
@@ -102,6 +130,14 @@ function lsp_diagnostics.publish()
       end
     }
   )
+end
+
+function diagnostic_toggle_virtual_text()
+  local virtual_text = vim.b.lsp_virtual_text_enabled
+  virtual_text = not virtual_text
+  vim.b.lsp_virtual_text_enabled = virtual_text
+  vim.lsp.diagnostic.display(vim.lsp.diagnostic.get(0, 1), 0, 1,
+    {virtual_text = virtual_text})
 end
 
 function lsp_diagnostics.setup()

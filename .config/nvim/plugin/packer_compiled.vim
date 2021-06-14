@@ -46,7 +46,7 @@ local function save_profiles(threshold)
   _G._packer.profile_output = results
 end
 
-time("Luarocks path setup", true)
+time([[Luarocks path setup]], true)
 local package_path_str = "/home/nicholas/.cache/nvim/packer_hererocks/2.1.0-beta3/share/lua/5.1/?.lua;/home/nicholas/.cache/nvim/packer_hererocks/2.1.0-beta3/share/lua/5.1/?/init.lua;/home/nicholas/.cache/nvim/packer_hererocks/2.1.0-beta3/lib/luarocks/rocks-5.1/?.lua;/home/nicholas/.cache/nvim/packer_hererocks/2.1.0-beta3/lib/luarocks/rocks-5.1/?/init.lua"
 local install_cpath_pattern = "/home/nicholas/.cache/nvim/packer_hererocks/2.1.0-beta3/lib/lua/5.1/?.so"
 if not string.find(package.path, package_path_str, 1, true) then
@@ -57,8 +57,8 @@ if not string.find(package.cpath, install_cpath_pattern, 1, true) then
   package.cpath = package.cpath .. ';' .. install_cpath_pattern
 end
 
-time("Luarocks path setup", false)
-time("try_loadstring definition", true)
+time([[Luarocks path setup]], false)
+time([[try_loadstring definition]], true)
 local function try_loadstring(s, component, name)
   local success, result = pcall(loadstring(s))
   if not success then
@@ -69,8 +69,8 @@ local function try_loadstring(s, component, name)
   return result
 end
 
-time("try_loadstring definition", false)
-time("Defining packer_plugins", true)
+time([[try_loadstring definition]], false)
+time([[Defining packer_plugins]], true)
 _G.packer_plugins = {
   ["Dockerfile.vim"] = {
     loaded = true,
@@ -99,6 +99,10 @@ _G.packer_plugins = {
   ["barbar.nvim"] = {
     loaded = true,
     path = "/home/nicholas/.local/share/nvim/site/pack/packer/start/barbar.nvim"
+  },
+  core = {
+    loaded = true,
+    path = "/home/nicholas/.local/share/nvim/site/pack/packer/start/core"
   },
   ["csv.vim"] = {
     loaded = true,
@@ -192,6 +196,10 @@ _G.packer_plugins = {
   neogit = {
     loaded = true,
     path = "/home/nicholas/.local/share/nvim/site/pack/packer/start/neogit"
+  },
+  ["neuron.nvim"] = {
+    loaded = true,
+    path = "/home/nicholas/.local/share/nvim/site/pack/packer/start/neuron.nvim"
   },
   ["nginx.vim"] = {
     loaded = true,
@@ -301,6 +309,10 @@ _G.packer_plugins = {
     loaded = true,
     path = "/home/nicholas/.local/share/nvim/site/pack/packer/start/session-lens"
   },
+  ["snippets.nvim"] = {
+    loaded = true,
+    path = "/home/nicholas/.local/share/nvim/site/pack/packer/start/snippets.nvim"
+  },
   ["splitjoin.vim"] = {
     loaded = true,
     path = "/home/nicholas/.local/share/nvim/site/pack/packer/start/splitjoin.vim"
@@ -312,6 +324,10 @@ _G.packer_plugins = {
   ["surround.nvim"] = {
     loaded = true,
     path = "/home/nicholas/.local/share/nvim/site/pack/packer/start/surround.nvim"
+  },
+  tabular = {
+    loaded = true,
+    path = "/home/nicholas/.local/share/nvim/site/pack/packer/start/tabular"
   },
   ["telescope-asynctasks.nvim"] = {
     loaded = true,
@@ -349,6 +365,10 @@ _G.packer_plugins = {
     loaded = true,
     path = "/home/nicholas/.local/share/nvim/site/pack/packer/start/todo-comments.nvim"
   },
+  ["tree-sitter-markdown"] = {
+    loaded = true,
+    path = "/home/nicholas/.local/share/nvim/site/pack/packer/start/tree-sitter-markdown"
+  },
   ["trouble.nvim"] = {
     loaded = true,
     path = "/home/nicholas/.local/share/nvim/site/pack/packer/start/trouble.nvim"
@@ -360,6 +380,14 @@ _G.packer_plugins = {
   ["vim-bbye"] = {
     loaded = true,
     path = "/home/nicholas/.local/share/nvim/site/pack/packer/start/vim-bbye"
+  },
+  ["vim-coffee-script"] = {
+    loaded = true,
+    path = "/home/nicholas/.local/share/nvim/site/pack/packer/start/vim-coffee-script"
+  },
+  ["vim-cool"] = {
+    loaded = true,
+    path = "/home/nicholas/.local/share/nvim/site/pack/packer/start/vim-cool"
   },
   ["vim-devicons"] = {
     loaded = true,
@@ -416,10 +444,6 @@ _G.packer_plugins = {
   ["vim-liquid"] = {
     loaded = true,
     path = "/home/nicholas/.local/share/nvim/site/pack/packer/start/vim-liquid"
-  },
-  ["vim-markdown"] = {
-    loaded = true,
-    path = "/home/nicholas/.local/share/nvim/site/pack/packer/start/vim-markdown"
   },
   ["vim-matchup"] = {
     after_files = { "/home/nicholas/.local/share/nvim/site/pack/packer/opt/vim-matchup/after/plugin/matchit.vim" },
@@ -491,6 +515,10 @@ _G.packer_plugins = {
     loaded = true,
     path = "/home/nicholas/.local/share/nvim/site/pack/packer/start/vim-terraform"
   },
+  ["vim-test"] = {
+    loaded = true,
+    path = "/home/nicholas/.local/share/nvim/site/pack/packer/start/vim-test"
+  },
   ["vim-vsnip"] = {
     loaded = true,
     path = "/home/nicholas/.local/share/nvim/site/pack/packer/start/vim-vsnip"
@@ -515,10 +543,6 @@ _G.packer_plugins = {
     loaded = true,
     path = "/home/nicholas/.local/share/nvim/site/pack/packer/start/vimux"
   },
-  vimwiki = {
-    loaded = true,
-    path = "/home/nicholas/.local/share/nvim/site/pack/packer/start/vimwiki"
-  },
   ["which-key.nvim"] = {
     loaded = true,
     path = "/home/nicholas/.local/share/nvim/site/pack/packer/start/which-key.nvim"
@@ -533,17 +557,17 @@ _G.packer_plugins = {
   }
 }
 
-time("Defining packer_plugins", false)
+time([[Defining packer_plugins]], false)
 -- Config for: lush.nvim
-time("Config for lush.nvim", true)
+time([[Config for lush.nvim]], true)
 try_loadstring("\27LJ\2\nw\0\0\3\0\4\0\t6\0\0\0009\0\1\0'\2\2\0B\0\2\0016\0\0\0009\0\1\0'\2\3\0B\0\2\1K\0\1\0007source $HOME/.config/nvim/colors/barbar-colors.vim\21colorscheme nord\bcmd\bvim\0", "config", "lush.nvim")
-time("Config for lush.nvim", false)
+time([[Config for lush.nvim]], false)
 vim.cmd [[augroup packer_load_aucmds]]
 vim.cmd [[au!]]
   -- Event lazy-loads
-time("Defining lazy-load event autocommands", true)
+time([[Defining lazy-load event autocommands]], true)
 vim.cmd [[au BufEnter * ++once lua require("packer.load")({'vim-matchup'}, { event = "BufEnter *" }, _G.packer_plugins)]]
-time("Defining lazy-load event autocommands", false)
+time([[Defining lazy-load event autocommands]], false)
 vim.cmd("augroup END")
 if should_profile then save_profiles() end
 

@@ -151,18 +151,19 @@ command! Autocommands call fzf#run(fzf#wrap({ 'source': GetAutocommands(), 'sink
 
 """"""""""""
 " :Jumps
-function! GetJumps()
-  redir => cout
-  silent jumps
-  redir END
-  return reverse(split(cout, "\n")[1:])
-endfunction
+" function! GetJumps()
+"   redir => cout
+"   silent jumps
+"   redir END
+"   return reverse(split(cout, "\n")[1:])
+" endfunction
 
-function! GoToJump(jump)
-  let jumpnumber = split(a:jump, '\s\+')[0]
-  execute "normal " . jumpnumber . "\<c-o>"
-endfunction
-command! Jumps call fzf#run(fzf#wrap({ 'source': GetJumps(), 'sink': function('GoToJump'), 'window': _fzf_get_window_props() }))
+" function! GoToJump(jump)
+"   let jumpnumber = split(a:jump, '\s\+')[0]
+"   execute "normal " . jumpnumber . "\<c-o>"
+" endfunction
+" command! Jumps call fzf#run(fzf#wrap({ 'source': GetJumps(), 'sink': function('GoToJump'), 'window': _fzf_get_window_props() }))
+command! Jumps FzfPreviewJumpsRpc()
 
 """"""""""""
 " Dots

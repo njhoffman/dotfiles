@@ -1,0 +1,64 @@
+#import '../fragments/Appointment.graphql'
+#import '../fragments/CustomerAccount.graphql'
+#import '../fragments/ProviderAccount.graphql'
+#import '../fragments/Shift.graphql'
+
+query Appointments(
+  $first: Int
+  $offset: Int
+  $orderBy: [AppointmentsOrderBy!] = DURATION_ASC
+  $filter: AppointmentFilter
+) {
+  appointments(first: $first, offset: $offset, orderBy: $orderBy, filter: $filter) {
+    nodes {
+      ...AppointmentNoNesting
+    }
+    totalCount
+  }
+  meta @client {
+    key
+    callCount
+    timing
+    name
+  }
+}
+
+query AppointmentsDeep(
+  $first: Int
+  $offset: Int
+  $orderBy: [AppointmentsOrderBy!] = DURATION_ASC
+  $filter: AppointmentFilter
+) {
+  appointments(first: $first, offset: $offset, orderBy: $orderBy, filter: $filter) {
+    nodes {
+      ...AppointmentDeepNesting
+    }
+    totalCount
+  }
+  meta @client {
+    key
+    callCount
+    timing
+    name
+  }
+}
+
+query AppointmentInvoices(
+  $first: Int
+  $offset: Int
+  $orderBy: [AppointmentInvoicesOrderBy!] = ID_DESC
+  $filter: AppointmentInvoiceFilter
+) {
+  appointmentInvoices(first: $first, offset: $offset, orderBy: $orderBy, filter: $filter) {
+    nodes {
+      ...AppointmentInvoiceDeepNesting
+    }
+    totalCount
+  }
+  meta @client {
+    key
+    callCount
+    timing
+    name
+  }
+}

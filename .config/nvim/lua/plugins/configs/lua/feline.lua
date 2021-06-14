@@ -1,5 +1,8 @@
 -- Remove all inactive statusline components
 -- This table is equal to the default separators table
+local u = require("utils/statusline")
+local cc = require("plugins/statusline/colors")[u.status_color].colors
+
 local separators = {
   vertical_bar = "┃",
   vertical_bar_thin = "│",
@@ -27,78 +30,176 @@ local properties = {
   force_inactive = {
     bufnames = {},
     buftypes = {"terminal"},
-    filetypes = {"NvimTree", "dbui", "packer", "startify", "fugitive", "fugitiveblame", "dashboard"}
+    filetypes = {
+      "NvimTree", "dbui", "packer", "startify", "fugitive", "fugitiveblame",
+      "dashboard"
+    }
   }
 }
 
-function get_colors()
-  local u = require("utils/statusline")
-  local colors = require("plugins/statusline/colors")
-  local cc = colors[u.status_color].colors
+local colors = {
+  fore = cc.fore,
+  back = cc.back,
+  dark = cc.dark,
+  white = cc.white,
+  skyblue = cc.skyblue,
+  cyan = '#22ccff',
+  green = cc.green,
+  oceanblue = cc.oceanblue,
+  magenta = cc.magenta,
+  orange = cc.orange,
+  red = cc.red,
+  violet = cc.violet,
+  yellow = cc.yellow
+}
 
-  local colorsets = {}
+local vi_mode_text = {
+  n = "NORMAL",
+  i = "INSERT",
+  v = "VISUAL",
+  [""] = "V-BLOCK",
+  V = "V-LINE",
+  c = "COMMAND",
+  no = "UNKNOWN",
+  s = "UNKNOWN",
+  S = "UNKNOWN",
+  ic = "UNKNOWN",
+  R = "REPLACE",
+  Rv = "UNKNOWN",
+  cv = "UNKWON",
+  ce = "UNKNOWN",
+  r = "REPLACE",
+  rm = "UNKNOWN",
+  t = "INSERT"
+}
 
-  colorsets.colors = {
-    fore = cc.fore,
-    back = cc.back,
-    dark = cc.dark,
-    white = cc.white,
-    skyblue = cc.skyblue,
-    cyan = cc.cyan,
-    green = cc.green,
-    oceanblue = cc.oceanblue,
-    magenta = cc.magenta,
-    orange = cc.orange,
-    red = cc.red,
-    violet = cc.violet,
-    yellow = cc.yellow
-  }
+local mode_alias = {
+  n = 'NORMAL',
+  no = 'OP',
+  nov = 'OP',
+  noV = 'OP',
+  ['no'] = 'OP',
+  niI = 'NORMAL',
+  niR = 'NORMAL',
+  niV = 'NORMAL',
+  v = 'VISUAL',
+  V = 'VISUAL',
+  [''] = 'BLOCK',
+  s = 'SELECT',
+  S = 'SELECT',
+  [''] = 'BLOCK',
+  i = 'INSERT',
+  ic = 'INSERT',
+  ix = 'INSERT',
+  R = 'REPLACE',
+  Rc = 'REPLACE',
+  Rv = 'V-REPLACE',
+  Rx = 'REPLACE',
+  c = 'COMMAND',
+  cv = 'COMMAND',
+  ce = 'COMMAND',
+  r = 'ENTER',
+  rm = 'MORE',
+  ['r?'] = 'CONFIRM',
+  ['!'] = 'SHELL',
+  t = 'TERM',
+  ['null'] = 'NONE'
+}
 
-  colorsets.vi_mode_colors = {
-    NORMAL = colors.green,
-    INSERT = colors.blue,
-    VISUAL = colors.violet,
-    OP = colors.green,
-    BLOCK = colors.blue,
-    REPLACE = colors.red,
-    ["V-REPLACE"] = colors.red,
-    ENTER = colors.cyan,
-    MORE = colors.cyan,
-    SELECT = colors.orange,
-    COMMAND = colors.magenta,
-    SHELL = colors.green,
-    TERM = colors.blue,
-    NONE = colors.yellow
-  }
+local M = {
+  bg = "#2c323c",
+  fg = "none",
+  yellow = "#e5c07b",
+  cyan = "#8abeb7",
+  darkblue = "#528bff",
+  green = "#98c379",
+  orange = "#d19a66",
+  violet = "#b294bb",
+  magenta = "#ff80ff",
+  blue = "#61afef",
+  red = "#e88388"
+}
 
-  colorsets.vi_mode_text = {
-    n = "NORMAL",
-    i = "INSERT",
-    v = "VISUAL",
-    [""] = "V-BLOCK",
-    V = "V-LINE",
-    c = "COMMAND",
-    no = "UNKNOWN",
-    s = "UNKNOWN",
-    S = "UNKNOWN",
-    ic = "UNKNOWN",
-    R = "REPLACE",
-    Rv = "UNKNOWN",
-    cv = "UNKWON",
-    ce = "UNKNOWN",
-    r = "REPLACE",
-    rm = "UNKNOWN",
-    t = "INSERT"
-  }
+local vi_mode_colors = {
+  -- NORMAL = 'green',
+  -- INSERT = 'red',
+  -- VISUAL = 'skyblue',
+  -- OP = 'green',
+  -- BLOCK = 'skyblue',
+  -- REPLACE = 'violet',
+  -- ['V-REPLACE'] = 'violet',
+  -- ENTER = 'cyan',
+  -- MORE = 'cyan',
+  -- SELECT = 'orange',
+  -- COMMAND = 'green',
+  -- SHELL = 'green',
+  -- TERM = 'green',
+  -- NONE = 'yellow'
+  NORMAL = colors.green,
+  INSERT = colors.blue,
+  VISUAL = colors.violet,
+  OP = colors.green,
+  BLOCK = colors.blue,
+  REPLACE = colors.red,
+  ["V-REPLACE"] = colors.red,
+  ENTER = colors.cyan,
+  MORE = colors.cyan,
+  SELECT = colors.orange,
+  COMMAND = colors.magenta,
+  SHELL = colors.green,
+  TERM = colors.blue,
+  NONE = colors.yellow
+}
 
-  return colorsets
+M.mode_colors = vi_mode_colors
+
+M.mode_colors = {
+  NORMAL = "#00aa44",
+  INSERT = "#0077ff",
+  VISUAL = "#9922ff",
+  OP = colors.green,
+  BLOCK = colors.skyblue,
+  REPLACE = "#ff0022",
+  ['V-REPLACE'] = "#ff0022",
+  ENTER = colors.cyan,
+  MORE = colors.cyan,
+  SELECT = colors.orange,
+  COMMAND = "#aa8844",
+  SHELL = colors.green,
+  TERM = colors.green,
+  NONE = colors.yellow
+}
+
+-- Functions for statusline
+function M.get_vim_mode() return mode_alias[vim.fn.mode()] end
+function M.get_mode_color() return M.mode_colors[M.get_vim_mode()] end
+
+-- String to title case
+local function title_case(str)
+  return string.gsub(string.lower(str), '%a', string.upper, 1)
+end
+
+function M.get_mode_highlight_name() return
+    'Vim' .. title_case(M.get_vim_mode()) end
+
+function M.vi_mode(component)
+  if component.icon then
+    if component.icon == '' then
+      return M.get_vim_mode()
+    else
+      return component.icon
+    end
+  else
+    return ''
+  end
 end
 
 function get_components()
   local lsp = require("feline/providers/lsp")
-  local vi_mode_utils = require("feline/providers/vi_mode")
   local u = require("utils/statusline")
+
   local color = require("plugins/statusline/colors")
+
   local b = vim.b
   local fn = vim.fn
 
@@ -117,37 +218,21 @@ function get_components()
     return icon .. os
   end
 
-  local M = {
-    bg = "#2c323c",
-    fg = "none",
-    yellow = "#e5c07b",
-    cyan = "#8abeb7",
-    darkblue = "#528bff",
-    green = "#98c379",
-    orange = "#d19a66",
-    violet = "#b294bb",
-    magenta = "#ff80ff",
-    blue = "#61afef",
-    red = "#e88388"
-  }
-
   local components = {
     left = {active = {}, inactive = {}},
     mid = {active = {}, inactive = {}},
     right = {active = {}, inactive = {}}
   }
 
-  components.left.active[1] = {provider = "▊  ", hl = {fg = "skyblue"}}
+  components.left.active[1] = {provider = "▊  ", hl = {fg = "cyan"}}
 
   components.left.active[2] = {
     provider = "vi_mode",
     hl = function()
       local val = {}
-
-      val.name = vi_mode_utils.get_mode_highlight_name()
-      val.fg = vi_mode_utils.get_mode_color()
+      val.name = M.get_mode_highlight_name()
+      val.fg = M.get_mode_color()
       val.style = "bold"
-
       return val
     end,
     right_sep = "  "
@@ -160,33 +245,48 @@ function get_components()
   --   right_sep = {"slant_right_2", " "}
   -- }
 
+  local project_path = nil
+  local last_buffer = nil
+  local project_name = nil
+
+  function Get_project_path()
+    if vim.fn.bufnr() ~= last_buffer then
+      project_path = nil
+      project_name = nil
+      last_buffer = nil
+    end
+    if project_name == nil or project_name == "" then
+      project_path = vim.fn.FindRootDirectory()
+      if project_path == nil or project_path == "" then
+        project_name = string.gsub(vim.fn.getcwd(), os.getenv("HOME"), "~")
+      else
+        project_path, project_name = string.match(project_path, "(.*)%/(.*)")
+      end
+      last_buffer = vim.fn.bufnr()
+    end
+  end
+
   components.left.active[3] = {
     provider = function()
-      -- TODO: trunccate path intelligently
-      local project_path = vim.fn.FindRootDirectory()
-      if #project_path == 0 then
-        project_path = vim.fn.getcwd()
-        return string.gsub(project_path, os.getenv("HOME"), "~")
-      else
-        -- return project_name
-        project_path, project_name = string.match(project_path, "(.*)%/(.*)")
-        return project_name or ""
-      end
+      Get_project_path()
+      return project_name or ""
     end,
     hl = function()
-      local project_path = vim.fn.FindRootDirectory()
-      if #project_path == 0 then
+      if project_path == nil or project_path == "" then
         return {fg = "white", bg = "#333333"}
       end
       return {fg = "white", bg = "#440088"}
     end,
     -- left_sep = {str = "slant_left", hl = {fg = "#224488", bg = "NONE"}},
     left_sep = function()
-      local val = {str = "slant_left", fg = "white", bg = "#224488", style = "bold"}
-      local project_path = vim.fn.FindRootDirectory()
-      if #project_path == 0 then
-        val.bg = "#333333"
-      end
+
+      local val = {
+        str = "slant_left",
+        fg = "white",
+        bg = "#224488",
+        style = "bold"
+      }
+      if project_path == nil then val.bg = "#333333" end
       return val
     end,
     right_sep = {"slant_right_2"}
@@ -202,10 +302,10 @@ function get_components()
   components.left.active[5] = {
     provider = "file_size",
     left_sep = {" ", {hl = {bg = "NONE", fg = "dodgerblue3"}}},
-    enabled = function()
-      return fn.getfsize(fn.expand("%:p")) > 0
-    end,
-    right_sep = {"", {str = "slant_left_2_thin", hl = {fg = "fg", bg = "bg"}}, " "}
+    enabled = function() return fn.getfsize(fn.expand("%:p")) > 0 end,
+    right_sep = {
+      "", {str = "slant_left_2_thin", hl = {fg = "fg", bg = "bg"}}, " "
+    }
   }
 
   components.left.active[6] = {
@@ -215,35 +315,27 @@ function get_components()
 
   components.left.active[7] = {
     provider = "diagnostic_errors",
-    enabled = function()
-      return lsp.diagnostics_exist("Error")
-    end,
+    enabled = function() return lsp.diagnostics_exist("Error") end,
     hl = {fg = "red"}
   }
 
   components.left.active[8] = {
     provider = "diagnostic_warnings",
-    enabled = function()
-      return lsp.diagnostics_exist("Warning")
-    end,
+    enabled = function() return lsp.diagnostics_exist("Warning") end,
     hl = {fg = "yellow"}
   }
 
   components.left.active[9] = {
     provider = "diagnostic_hints",
-    enabled = function()
-      return lsp.diagnostics_exist("Hint")
-    end,
+    enabled = function() return lsp.diagnostics_exist("Hint") end,
     -- hl = {fg = "cyan"}
     hl = {fg = "dodgerblue"}
   }
 
   components.left.active[10] = {
     provider = "diagnostic_info",
-    enabled = function()
-      return lsp.diagnostics_exist("Information")
-    end,
-    hl = {fg = "skyblue"}
+    enabled = function() return lsp.diagnostics_exist("Information") end,
+    hl = {fg = "cyan"}
   }
 
   components.right.active[1] = {
@@ -261,9 +353,15 @@ function get_components()
     end
   }
 
-  components.right.active[2] = {provider = "git_diff_added", hl = {fg = "green", bg = "black"}}
+  components.right.active[2] = {
+    provider = "git_diff_added",
+    hl = {fg = "green", bg = "black"}
+  }
 
-  components.right.active[3] = {provider = "git_diff_changed", hl = {fg = "orange", bg = "black"}}
+  components.right.active[3] = {
+    provider = "git_diff_changed",
+    hl = {fg = "orange", bg = "black"}
+  }
 
   components.right.active[4] = {
     provider = "git_diff_removed",
@@ -281,12 +379,25 @@ function get_components()
   }
 
   components.right.active[5] = {
-    provider = "file_type",
+    provider = function() return vim.bo.filetype:lower() end,
+    -- provider = "file_type",
     file = {
-      info = {provider = M.get_current_ufn, hl = {fg = c.blue, style = "bold"}, left_sep = " "},
-      encoding = {provider = "file_encoding", left_sep = " ", hl = {fg = c.violet, style = "bold"}},
+      info = {
+        provider = M.get_current_ufn,
+        hl = {fg = c.blue, style = "bold"},
+        left_sep = " "
+      },
+      encoding = {
+        provider = "file_encoding",
+        left_sep = " ",
+        hl = {fg = c.violet, style = "bold"}
+      },
       type = {provider = "file_type"},
-      os = {provider = file_osinfo, left_sep = " ", hl = {fg = c.violet, style = "bold"}}
+      os = {
+        provider = file_osinfo,
+        left_sep = " ",
+        hl = {fg = c.violet, style = "bold"}
+      }
     }
   }
 
@@ -299,26 +410,22 @@ function get_components()
 
   components.right.active[7] = {
     provider = "scroll_bar",
-    hl = {fg = "skyblue", style = "bold"},
+    hl = {fg = "cyan", style = "bold"},
     right_sep = {str = " ", hl = {fg = "NONE", bg = "NONE"}}
   }
 
   return components
 end
 
-local colorsets = get_colors()
-
-require("feline").setup(
-  {
-    default_fg = "#909090",
-    default_bg = "#0F1216",
-    properties = properties,
-    separators = separators,
-    colors = colorsets.colors,
-    vi_mode_colors = colorsets.vi_mode_colors,
-    components = get_components()
-  }
-)
+require("feline").setup({
+  default_fg = "#909090",
+  default_bg = "#0F1216",
+  properties = properties,
+  separators = separators,
+  colors = colors,
+  vi_mode_colors = M.mode_colors,
+  components = get_components()
+})
 
 --[[ nf-fa-sort_amount_asc                                     
 nf-fa-sort_amount_desc                                    

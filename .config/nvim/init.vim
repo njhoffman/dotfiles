@@ -26,6 +26,18 @@ set runtimepath^=~/.local/share/nvim/site
 
 source $HOME/.config/nvim/functions.fzf.vim
 source $HOME/.config/nvim/functions.unimpaired.vim
+
+" use the 'alt' program to quickly load alternate file
+" Run a given vim command on the results of alt from a given path.
+function! AltCommand(path, vim_command)
+  let l:alternate = system("alt " . a:path)
+  if empty(l:alternate)
+    echo "No alternate file for " . a:path . " exists!"
+  else
+    exec a:vim_command . " " . l:alternate
+  endif
+endfunction
+" Find the alternate file for the current path and open it
 " source $HOME/.config/nvim/functions.surround.vim
 
 function! Remove_comments(code)
@@ -42,10 +54,11 @@ endfunction
 
 
 lua << EOF
-require('init')
+  require('init')
+  require('lsp_signature').on_attach()
+  require('snippets').use_suggested_mappings()
 EOF
 
 source $HOME/.config/nvim/plugins.vim
-
 " source $HOME/.config/nvim/mappings.vim
 " source $HOME/.config/nvim/colors/barbar-colors.vim

@@ -10,18 +10,11 @@ require("plugins.configs.lua.surround")
 -- project management
 require("plugins.configs.lua.auto-session")
 require("plugins.configs.lua.session-lens")
+require("plugins.configs.vim.vim-rooter")
 
 -- treesitter & syntax
 require("plugins.configs.lua.treesitter")
 require("plugins.configs.vim.syntax")
-
--- lsp
-if config.LSP.enabled ~= 0 and config.LSP.enabled ~= false then
-  require("plugins.configs.lua.nvim-lightbulb")
-  require("plugins.configs.lua.lspsaga")
-  require("plugins.configs.lua.lsp_signature")
-  require("plugins.configs.lua.nvim_compe")
-end
 
 -- pickers
 require("plugins.configs.vim.fzf")
@@ -41,7 +34,8 @@ require("plugins.configs.vim.vim_multiple_cursors")
 -- integrations
 require("plugins.configs.lua.gitsigns")
 require("plugins.configs.lua.neogit")
-require("plugins.configs.vim.vimwiki")
+require("plugins.configs.lua.neuron")
+-- require("plugins.configs.vim.vimwiki")
 require("plugins.configs.vim.vimux")
 require("plugins.configs.vim.asynctasks")
 require("plugins.configs.vim.vim-ripple")

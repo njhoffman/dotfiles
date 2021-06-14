@@ -8,7 +8,6 @@
 --     ge      => Show diag error (S)
 --    ,rn      => Rename (S)
 --     gq      => Location list
-
 -- buf_set_keymap('n', '<leader>lrn', '<cmd>lua vim.lsp.buf.rename()<CR>', opts)
 -- buf_set_keymap('n', 'gd', '<Cmd>lua vim.lsp.buf.definition()<CR>', opts)
 -- buf_set_keymap('n', 'K', '<Cmd>lua vim.lsp.buf.hover()<CR>', opts)
@@ -36,7 +35,6 @@
 -- vim.api.nvim_buf_set_keymap(bufnr, 'n', '<leader>rn', '<cmd>lua vim.lsp.buf.rename()<CR>', opts)
 -- vim.api.nvim_buf_set_keymap(bufnr, 'n', 'K', '<Cmd>lua vim.lsp.buf.hover()<CR>', opts)
 -- vim.api.nvim_buf_set_keymap(bufnr, 'n', 'gD', '<Cmd>lua vim.lsp.buf.declaration()<CR>', opts)
-
 -- vim.cmd("nnoremap <silent>gh :Lspsaga lsp_finder<CR>")
 -- vim.cmd("nnoremap <silent>gca :Lspsaga code_action<CR>")
 -- vim.cmd("vnoremap <silent>gca :<C-U>Lspsaga range_code_action<CR>")
@@ -60,23 +58,32 @@
 -- -- vim.cmd('nnoremap <silent><leader>cc <cmd>lua<CR> require"lspsaga.diagnostic".show_cursor_diagnostics()<CR>')
 -- -- float terminal also you can pass the cli command in open_float_terminal function
 
+-- map("n", "<leader>tv", ":lua diagnostic_toggle_virtual_text()<CR>")
 local lsp_maps = {
   ["K"] = {"<cmd>Lspsaga hover_doc<cr>", "hover document"},
   ["g"] = {
     name = "+goto actions",
-    -- ["a"] = {"<cmd>Lspsaga code_action<cr>", "code actions"},
     ["d"] = {"<cmd>Telescope lsp_definitions<cr>", "lsp definitions"},
     ["D"] = {"<cmd>lua vim.lsp.buf.declaration()<cr>", "buffer declaration"},
     ["k"] = {"<cmd>Lspsaga hover_doc<cr>", "hover document"},
     ["o"] = {"<cmd>TSLspOrganize<cr>", "organize imports"},
+    -- ["a"] = {"<cmd>Lspsaga code_action<cr>", "code actions"},
     -- ["f"] = {"<cmd>TSLspFixCurrent<cr>", "eslint fix"},
-    ["r"] = {"<cmd>TSLspRenameFile<cr>", "rename file"},
-    ["i"] = {"<cmd>TSLspImportAll<cr>", "import all"},
+    -- ["r"] = {"<cmd>TSLspRenameFile<cr>", "rename file"},
+    -- ["i"] = {"<cmd>TSLspImportAll<cr>", "import all"},
     ["h"] = {"<cmd>Telescope lsp_finder<cr>", "lsp finder"},
     ["r"] = {"<cmd>Telescope lsp_references<cr>", "lsp references"},
     ["s"] = {"<cmd>Telescope lsp_signature_help<cr>", "signature help"},
     ["y"] = {"<cmd>lua vim.lsp.buf.type_definition()<cr>", "buffer definition"},
     -- other goto/transforms under cursor
+    ["f"] = {"Edit file under cursor"},
+    ["x"] = {"Open file under cursor"}, -- map X to background
+    ["i"] = {"Move to last insertion"},
+    ["I"] = {"Insert at beginning"},
+    ["a"] = {"Ascii under cursor"},
+    ["u"] = {"Lowercase motion"},
+    ["U"] = {"Uppercase motion"},
+    ["n"] = {"Select last search match"},
     ["v"] = {"visually select last edited/pasted text"},
     ["c"] = {"comment text"},
     ["cc"] = {"comment line"}
@@ -86,8 +93,12 @@ local lsp_maps = {
     name = "+lsp",
     ["a"] = {"<cmd>Lspsaga code_action<cr>", "code action"},
     ["A"] = {"<cmd>Lspsaga range_code_action<cr>", "selected action"},
-    ["d"] = {"<cmd>Telescope lsp_document_diagnostics<cr>", "document diagnostics"},
-    ["D"] = {"<cmd>Telescope lsp_workspace_diagnostics<cr>", "workspace diagnostics"},
+    ["d"] = {
+      "<cmd>Telescope lsp_document_diagnostics<cr>", "document diagnostics"
+    },
+    ["D"] = {
+      "<cmd>Telescope lsp_workspace_diagnostics<cr>", "workspace diagnostics"
+    },
     ["l"] = {"<cmd>Lspsaga show_line_diagnostics<cr>", "line diagnostics"},
     ["f"] = {"<cmd>Lspsaga lsp_finder<cr>", "lsp finder"},
     ["i"] = {"<cmd>LspInfo<cr>", "lsp server info"},
@@ -108,8 +119,12 @@ local lsp_maps = {
   ["<leader>d"] = {
     name = "+dap",
     ["t"] = {'[[ lua require"dap".toggle_breakpoint()<CR>]]'},
-    ["c"] = {'[[ lua require"dap".set_breakpoint(vim.fn.input("Breakpoint condition: "))<CR>]]'},
-    ["l"] = {'[[ lua require"dap".set_breakpoint(nil, nil, vim.fn.input("Log point message: "))<CR>]]'}
+    ["c"] = {
+      '[[ lua require"dap".set_breakpoint(vim.fn.input("Breakpoint condition: "))<CR>]]'
+    },
+    ["l"] = {
+      '[[ lua require"dap".set_breakpoint(nil, nil, vim.fn.input("Log point message: "))<CR>]]'
+    }
   }
 }
 

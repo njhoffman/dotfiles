@@ -1,11 +1,13 @@
 -- ["<F5>"] = {"<cmd>MundoToggle<CR>"},
 -- gitsigns
 --   buffer = true?
-
 local integrations_map = {
   ["E"] = {"<cmd>NvimTreeToggle<cr>", "toggle explorer"},
   ["U"] = {"<cmd>MundoToggle<cr>", "toggle undo tree"},
   ["T"] = {"<cmd>ToggleTerm<cr>", "terminal"},
+  ["<leader>."] = {
+    [[:w<cr>:call AltCommand(expand('%'), ':e')<cr>]], "load alt file"
+  },
   ["<leader>o"] = {
     name = "+open",
     ["t"] = {"<cmd>ToggleTerm<cr>", "terminal"},

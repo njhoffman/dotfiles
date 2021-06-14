@@ -34,7 +34,7 @@ local servers = {
   "svelte",
   "tailwindcss",
   "terraform",
-  "typescript",
+  -- "typescript",
   "vim",
   "vue",
   "yaml",

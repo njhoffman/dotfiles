@@ -67,7 +67,8 @@ local picker_maps = {
   ["<A-j>"] = {"<cmd>FzfPreviewJumpsRpc<cr>", "jumps"},
   ["<A-/>"] = {"<cmd>Helptags<cr>", "jumps"},
   ["<A-m>"] = {"<cmd>FzfPreviewLocationListRpc<cr>", "location list"},
-  ["<A-s>"] = {"<cmd>Ag<cr>", "search (ag)"},
+  -- ["<A-s>"] = {"<cmd>FzfPreviewProjectGrepRpcRecall<cr>", "search (rg)"},
+  ["<A-s>"] = {"<cmd>Rg<cr>", "search (rg)"},
   ["<leader>f"] = {
     name = "+find",
     ["b"] = {"<cmd>FindBuffer<cr>", "Find buffer"},
@@ -75,7 +76,9 @@ local picker_maps = {
     ["f"] = {"<cmd>Telescope find_files<cr>", "file"},
     ["g"] = {"<cmd>Telescope live_grep<cr>", "grep text"},
     ["h"] = {"<cmd>Telescope help_tags<cr>", "vim tags"},
-    ["n"] = {"<cmd>lua require('utils.core').search_nvim()<cr>", "nvim dotfiles"},
+    ["n"] = {
+      "<cmd>lua require('utils.core').search_nvim()<cr>", "nvim dotfiles"
+    },
     ["o"] = {"<cmd>Telescope oldfiles<cr>", "recent files"},
     ["m"] = {"<plug>(fzf-maps-n)", "mappings (normal)"},
     ["mi"] = {"<plug>(fzf-maps-i)", "mappings (insert)"},

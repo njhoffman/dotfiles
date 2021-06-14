@@ -1,53 +1,99 @@
-class Node:
-
-    def __init__(self, data):
-
+class BSTNode:
+    def __init__(self, val=None):
         self.left = None
         self.right = None
-        self.data = data
+        self.val = val
 
-        # Insert method to create nodes
-        def insert(self, data):
+    def insert(self, val):
+        if not self.val:
+            self.val = val
+            return
 
-            if self.data:
-                if data < self.data:
-                    if self.left is None:
-                        self.left = Node(data)
-                    else:
-                        self.left.insert(data)
-                    elif data > self.data:
-                    if self.right is None:
-                        self.right = Node(data)
-                    else:
-                        self.right.insert(data)
-                else:
-                    self.data = data
+        if self.val == val:
+            return
 
-        # findval method to compare the value with nodes
-        def findval(self, lkpval):
-            if lkpval < self.data:
-                if self.left is None:
-                    return str(lkpval)+" Not Found"
-                return self.left.findval(lkpval)
-            elif lkpval > self.data:
-                if self.right is None:
-                    return str(lkpval)+" Not Found"
-                return self.right.findval(lkpval)
-            else:
-                print(str(self.data) + ' is found')
-
-        # Print the tree
-        def PrintTree(self):
+        if val < self.val:
             if self.left:
-                self.left.PrintTree()
-                print( self.data),
-                if self.right:
-                    self.right.PrintTree()
+                self.left.insert(val)
+                return
+            self.left = BSTNode(val)
+            return
 
+        if self.right:
+            self.right.insert(val)
+            return
+        self.right = BSTNode(val)
 
-root = Node(12)
-root.insert(6)
-root.insert(14)
-root.insert(3)
-print(root.findval(7))
-print(root.findval(14))
+    def get_min(self):
+        current = self
+        while current.left is not None:
+            current = current.left
+        return current.val
+
+    def get_max(self):
+        current = self
+        while current.right is not None:
+            current = current.right
+        return current.val
+
+    def delete(self, val):
+        if self == None:
+            return self
+        if val < self.val:
+            if self.left:
+                self.left = self.left.delete(val)
+            return self
+        if val > self.val:
+            if self.right:
+                self.right = self.right.delete(val)
+            return self
+        if self.right == None:
+            return self.left
+        if self.left == None:
+            return self.right
+        min_larger_node = self.right
+        while min_larger_node.left:
+            min_larger_node = min_larger_node.left
+        self.val = min_larger_node.val
+        self.right = self.right.delete(min_larger_node.val)
+        return self
+
+    def exists(self, val):
+        if val == self.val:
+            return True
+
+        if val < self.val:
+            if self.left == None:
+                return False
+            return self.left.exists(val)
+
+        if self.right == None:
+            return False
+        return self.right.exists(val)
+
+    def preorder(self, vals):
+        if self.val is not None:
+            vals.append(self.val)
+        if self.left is not None:
+            self.left.preorder(vals)
+        if self.right is not None:
+            self.right.preorder(vals)
+        return vals
+
+    def inorder(self, vals):
+        if self.left is not None:
+            self.left.inorder(vals)
+        if self.val is not None:
+            vals.append(self.val)
+        if self.right is not None:
+            self.right.inorder(vals)
+        return vals
+
+    def postorder(self, vals):
+        if self.left is not None:
+            self.left.postorder(vals)
+        if self.right is not None:
+            self.right.postorder(vals)
+        if self.val is not None:
+            vals.append(self.val)
+        return vals

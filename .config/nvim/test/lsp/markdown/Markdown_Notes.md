@@ -1,5 +1,4 @@
 = Markdown Cheatsheet =
-
 Looks better in markdown syntax:
 * inline html
   * blockquotes
@@ -96,6 +95,7 @@ http://www.example.com or <http://www.example.com> and sometimes
 example.com (but not on Github, for example).
 
 Some text to show that the reference links can follow later.
+ABCs are what I need.  JiLi
 
 [arbitrary case-insensitive reference text]: https://www.mozilla.org
 [1]: http://slashdot.org
@@ -125,7 +125,7 @@ var s = 'JavaScript syntax highlighting';
 alert(s);
 ```
 
-```sh
+```bash
 echo "Hello from a shell: $PWD"
 ```
 

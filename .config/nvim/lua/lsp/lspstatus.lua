@@ -19,4 +19,5 @@ status.activate = function()
   lsp_status.register_progress()
 end
 
+
 return status

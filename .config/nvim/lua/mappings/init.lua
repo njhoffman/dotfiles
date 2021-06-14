@@ -42,6 +42,9 @@ map("n", "<leader>nf", [[:e <C-R>=expand("%:p:h") . "/" <CR>]], {silent = false}
 map("n", "<leader>ns", [[:vsp <C-R>=expand("%:p:h") . "/" <CR>]], {silent = false})
 map("n", "<leader>nt", [[:tabedit <C-R>=expand("%:p:h") . "/" <CR>]], {silent = false})
 
+
+-- prevent "write partial file" nonsense
+vim.cmd([[cabbrev <expr> w getcmdtype()==':' && getcmdline() == "'<,'>w" ? '<c-u>w' : 'w']])
 -- buffer management
 
 -- " Return to last edit position when opening files (You want this!)
@@ -138,7 +141,7 @@ local buffer_map = {
   ["L"] = {"<cmd>BufferNext<CR>", "Buffer right"},
   ["ZZ"] = "Write if modified and exit",
   ["<Leader>"] = {
-    ["<cr>"] = {"<cmd>nohl<cr>", "remove highlight"},
+    ["<cr>"] = {"<cmd>noh<cr>", "remove highlight"},
     -- ["q"] = {"<cmd>update | bdelete<CR>", "Save and safely remove buffer"},
     ["q"] = {"<cmd>Sayonara<cr>", "Quick exit with saving"},
     ["x"] = {"<cmd>Bdelete<cr>", "Delete buffer without messing windows up"},
