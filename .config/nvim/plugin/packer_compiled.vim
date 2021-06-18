@@ -128,6 +128,10 @@ _G.packer_plugins = {
     loaded = true,
     path = "/home/nicholas/.local/share/nvim/site/pack/packer/start/feline.nvim"
   },
+  ["float-preview.nvim"] = {
+    loaded = true,
+    path = "/home/nicholas/.local/share/nvim/site/pack/packer/start/float-preview.nvim"
+  },
   ["friendly-snippets"] = {
     loaded = true,
     path = "/home/nicholas/.local/share/nvim/site/pack/packer/start/friendly-snippets"
@@ -143,6 +147,10 @@ _G.packer_plugins = {
   ["fzf.vim"] = {
     loaded = true,
     path = "/home/nicholas/.local/share/nvim/site/pack/packer/start/fzf.vim"
+  },
+  ["fzy-vim"] = {
+    loaded = true,
+    path = "/home/nicholas/.local/share/nvim/site/pack/packer/start/fzy-vim"
   },
   ["gitsigns.nvim"] = {
     loaded = true,
@@ -321,6 +329,10 @@ _G.packer_plugins = {
     loaded = true,
     path = "/home/nicholas/.local/share/nvim/site/pack/packer/start/startuptime.vim"
   },
+  ["suda.vim"] = {
+    loaded = true,
+    path = "/home/nicholas/.local/share/nvim/site/pack/packer/start/suda.vim"
+  },
   ["surround.nvim"] = {
     loaded = true,
     path = "/home/nicholas/.local/share/nvim/site/pack/packer/start/surround.nvim"
@@ -348,10 +360,6 @@ _G.packer_plugins = {
   ["telescope-packer.nvim"] = {
     loaded = true,
     path = "/home/nicholas/.local/share/nvim/site/pack/packer/start/telescope-packer.nvim"
-  },
-  ["telescope-project.nvim"] = {
-    loaded = true,
-    path = "/home/nicholas/.local/share/nvim/site/pack/packer/start/telescope-project.nvim"
   },
   ["telescope.nvim"] = {
     loaded = true,
@@ -400,6 +408,10 @@ _G.packer_plugins = {
   ["vim-eunuch"] = {
     loaded = true,
     path = "/home/nicholas/.local/share/nvim/site/pack/packer/start/vim-eunuch"
+  },
+  ["vim-floaterm"] = {
+    loaded = true,
+    path = "/home/nicholas/.local/share/nvim/site/pack/packer/start/vim-floaterm"
   },
   ["vim-fugitive"] = {
     loaded = true,

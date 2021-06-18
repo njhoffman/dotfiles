@@ -8,14 +8,14 @@
 # $1: option
 # $2: default value
 tmux_get() {
-    local value="$(tmux show -gqv "$1")"
-    [ -n "$value" ] && echo "$value" || echo "$2"
+  local value="$(tmux show -gqv "$1")"
+  [ -n "$value" ] && echo "$value" || echo "$2"
 }
 
 # $1: option
 # $2: value
 tmux_set() {
-    tmux set-option -gq "$1" "$2"
+  tmux set-option -gq "$1" "$2"
 }
 
 # Options
@@ -37,33 +37,33 @@ date_format=$(tmux_get @tmux_power_date_format '%F')
 # TC=$(tmux_get '@tmux_power_theme' 'moon')
 TC="#67aedb"
 case $TC in
-    'gold' )
-        TC='#ffb86c'
-        ;;
-    'redwine' )
-        TC='#b34a47'
-        ;;
-    'moon' )
-        TC='#00abab'
-        ;;
-    'forest' )
-        TC='#228b22'
-        ;;
-    'violet' )
-        TC='#9370db'
-        ;;
-    'snow' )
-        TC='#fffafa'
-        ;;
-    'coral' )
-        TC='#ff7f50'
-        ;;
-    'sky' )
-        TC='#87ceeb'
-        ;;
-    'default' ) # Useful when your term changes colour dynamically (e.g. pywal)
-        TC='colour3'
-        ;;
+'gold')
+  TC='#ffb86c'
+  ;;
+'redwine')
+  TC='#b34a47'
+  ;;
+'moon')
+  TC='#00abab'
+  ;;
+'forest')
+  TC='#228b22'
+  ;;
+'violet')
+  TC='#9370db'
+  ;;
+'snow')
+  TC='#fffafa'
+  ;;
+'coral')
+  TC='#ff7f50'
+  ;;
+'sky')
+  TC='#87ceeb'
+  ;;
+'default') # Useful when your term changes colour dynamically (e.g. pywal)
+  TC='colour3'
+  ;;
 esac
 
 # G01=#080808 #232
@@ -122,12 +122,12 @@ user=$(whoami)
 LS="#[fg=$TC,bg=$G04] $session_icon #S "
 # LS="#[fg=$G04,bg=$TC,bold] $user_icon $user@#h #[fg=$TC,bg=$G04,nobold]$right_arrow_icon#[fg=$TC,bg=$G04] $session_icon #S "
 if "$show_upload_speed"; then
-    LS="$LS#[fg=$G04,bg=$G04]$right_arrow_icon#[fg=$TC,bg=$G03] $upload_speed_icon #{upload_speed} #[fg=$G05,bg=$BG]$right_arrow_icon"
+  LS="$LS#[fg=$G04,bg=$G04]$right_arrow_icon#[fg=$TC,bg=$G03] $upload_speed_icon #{upload_speed} #[fg=$G05,bg=$BG]$right_arrow_icon"
 else
-    LS="$LS#[fg=$G04,bg=$BG]$right_arrow_icon"
+  LS="$LS#[fg=$G04,bg=$BG]$right_arrow_icon"
 fi
 if [[ $prefix_highlight_pos == 'L' || $prefix_highlight_pos == 'LR' ]]; then
-    LS="$LS#{prefix_highlight}"
+  LS="$LS#{prefix_highlight}"
 fi
 tmux_set status-left "$LS"
 
@@ -137,23 +137,21 @@ tmux_set status-right-fg "$G12"
 tmux_set status-right-length 150
 #(/home/nicholas/.config/tmux/plugins/tmux-continuum/scripts/continuum_save.sh)#[fg=#262626,bg=#000000]#[fg=#67aedb,bg=#262626]  %T #[fg=#67aedb,bg=#262626]#[fg=#1c1c1c,bg=#67aedb]  %F
 # RS="#[fg=$TC,bg=$G04] $time_icon $time_format #[fg=$TC,bg=$G04]$left_arrow_icon#[fg=$G03,bg=$TC] $date_icon $date_format "
- RS="#{=|-50|…;s|$HOME|~|:pane_current_path} #[fg=$TC,bg=$G04] $time_icon $time_format #[fg=$TC,bg=$G04]$left_arrow_icon#[fg=$G03,bg=$TC] $date_icon $date_format "
+RS="#{=|-50|…;s|$HOME|~|:pane_current_path} #[fg=$TC,bg=$G04] $time_icon $time_format #[fg=$TC,bg=$G04]$left_arrow_icon#[fg=$G03,bg=$TC] $date_icon $date_format "
 if "$show_download_speed"; then
-    RS="#[fg=$G03,bg=$BG]$left_arrow_icon#[fg=$TC,bg=$G03] $download_speed_icon #{download_speed} #[fg=$G04,bg=$G03]$left_arrow_icon$RS"
+  RS="#[fg=$G03,bg=$BG]$left_arrow_icon#[fg=$TC,bg=$G03] $download_speed_icon #{download_speed} #[fg=$G04,bg=$G03]$left_arrow_icon$RS"
 fi
 if "$show_web_reachable"; then
-    RS=" #{web_reachable_status} $RS"
+  RS=" #{web_reachable_status} $RS"
 fi
 if [[ $prefix_highlight_pos == 'R' || $prefix_highlight_pos == 'LR' ]]; then
-    RS="#{prefix_highlight}$RS"
+  RS="#{prefix_highlight}$RS"
 fi
-
 
 tmux_set status-right "$RS"
 
-
 # Window status
-tmux_set window-status-format "#[bg=$BG]  #I:#W#F "
+# tmux_set window-status-format "#[bg=$BG]  #I:#W#F "
 # tmux_set window-status-current-format "#[fg=$BG,bg=$G04]$right_arrow_icon#[fg=$TC,bold] #I:#W#F #[fg=$G04,bg=$BG,nobold]$right_arrow_icon"
 tmux_set window-status-current-format "#[fg=$BG,bg=$G04]$right_arrow_icon#[fg=#bbddff,bold] #I:#W#F #[fg=$G04,bg=$BG,nobold]$right_arrow_icon"
 

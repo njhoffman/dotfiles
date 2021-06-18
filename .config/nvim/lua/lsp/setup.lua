@@ -20,53 +20,53 @@ end
 
     require "lspinstall".setup()
 
-    -- Load omnifunc popup icons
-    -- require('lsp.ls.lspkind')
+    -- -- Load omnifunc popup icons
+    -- -- require('lsp.ls.lspkind')
 
-    -- Load Bash Language Server configuration
-    require('lsp.ls.bashls')
+    -- -- Load Bash Language Server configuration
+    -- require('lsp.ls.bashls')
 
-    -- Load CSS Language Server configuration
-    require('lsp.ls.cssls')
+    -- -- Load CSS Language Server configuration
+    -- require('lsp.ls.cssls')
 
-    -- Load Dockerfile Language Server configuration
-    require('lsp.ls.dockerls')
+    -- -- Load Dockerfile Language Server configuration
+    -- require('lsp.ls.dockerls')
 
     -- Load EFM Language Server configuration
     require('lsp.ls.efmls')
 
-    -- Load Gloang Server configuration
-    require "lsp.ls.gopls"
+    -- -- Load Gloang Server configuration
+    -- require "lsp.ls.gopls"
 
-    -- Load HTML Language Server configuration
-    require('lsp.ls.html')
+    -- -- Load HTML Language Server configuration
+    -- require('lsp.ls.html')
 
-    -- Load Json Language Server configuration
-    require('lsp.ls.jsonls')
+    -- -- Load Json Language Server configuration
+    -- require('lsp.ls.jsonls')
 
-    -- Load Lua Language Server configuration
-    require('lsp.ls.luals')
+    -- -- Load Lua Language Server configuration
+    -- require('lsp.ls.luals')
 
-    -- Python Language Server configuration
-    require('lsp.ls.pyright')
+    -- -- Python Language Server configuration
+    -- require('lsp.ls.pyright')
 
-    -- Ruby Language configuration
-    require "lsp.ls.solargraph"
+    -- -- Ruby Language configuration
+    -- require "lsp.ls.solargraph"
 
-    -- Rust Language configuration
-    require "lsp.ls.rust_analyzer"
+    -- -- Rust Language configuration
+    -- require "lsp.ls.rust_analyzer"
 
-    -- SQL Language Server configuration
-    require('lsp.ls.sqlls')
+    -- -- SQL Language Server configuration
+    -- require('lsp.ls.sqlls')
 
-    -- Load TypeScript Language Server (tsserver) configuration
-    require('lsp.ls.tsserver')
+    -- -- Load TypeScript Language Server (tsserver) configuration
+    -- require('lsp.ls.tsserver')
 
-    -- Load Vim Language Server (vls) configuration
-    require('lsp.ls.vimls')
+    -- -- Load Vim Language Server (vls) configuration
+    -- require('lsp.ls.vimls')
 
-    -- Load Yaml Language Server (yaml) configuration
-    require('lsp.ls.yamlls')
+    -- -- Load Yaml Language Server (yaml) configuration
+    -- require('lsp.ls.yamlls')
 
   -----------------------------------------------
   -- Last but not least - general language server
@@ -76,24 +76,24 @@ end
   require('snippets').use_suggested_mappings()
 
   local servers = {
-    bashls = {},
-    clangd = {},
-    cssls = {},
+    -- bashls = {},
+    -- clangd = {},
+    -- cssls = {},
     efm = {},
-    gopls = {},
-    html = {},
-    jsonls = {},
-    lua = {},
-    pyright = {},
-    rust_analyzer = {},
-    tsserver = {},
-    vimls = {}
+    -- gopls = {},
+    -- html = {},
+    -- jsonls = {},
+    -- lua = {},
+    -- pyright = {},
+    -- rust_analyzer = {},
+    -- tsserver = {},
+    -- vimls = {}
   }
   -- local servers = require'lspinstall'.installed_servers()
   -- table.insert(servers, 'tsserver')
   -- table.insert(servers, 'clangd')
   for server, _ in pairs(servers) do
-    print(vim.inspect(server))
+    -- print(vim.inspect(server))
     -- require'lspconfig'[server].setup{}
   end
 

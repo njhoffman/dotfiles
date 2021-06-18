@@ -100,6 +100,15 @@
         atclone"cp contrib/fzy-* $ZPFX/bin" \
         make"!PREFIX=$ZPFX install"
 
+      # # ALT-C: cd into the selected directory
+      # # CTRL-T: Place the selected file path in the command line
+      # # CTRL-R: Place the selected command from history in the command line
+      # # CTRL-P: Place the selected process ID in the command line
+      # bindkey '\ec' fzy-cd-widget
+      # bindkey '^S'  fzy-file-widget
+      # bindkey '^R'  fzy-history-widget
+      # bindkey '^~'  fzy-proc-widget
+
       # # fzf-based tab-completion, load after all other completion plugins
       # z_lucid wait'1'
       # zinit light Aloxaf/fzf-tab

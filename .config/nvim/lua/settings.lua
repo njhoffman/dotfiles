@@ -14,7 +14,7 @@ settings.Opts = {
   updatetime      = 300,
   scrolloff       = 10,
   explorer_side   = "right",
-  log_path        = '/tmp/nvim.log',
+  log_path        = '~/.local/log/nvim.log',
   log_stdout       = false,
 }
 
@@ -31,7 +31,7 @@ settings.Theming = {
 settings.DAP = {
   enabled      = true,
   log_level    = 'trace',
-  log_path     = '/tmp/nvim-dap.log',
+  log_path     = '~/.local/log/nvim-dap.log',
   virtual_text = true,
   python       = true,
   go           = true,
@@ -43,7 +43,7 @@ settings.DAP = {
 settings.LSP = {
   enabled          = true,
   -- TODO: efm or other lsp format boolean
-  log_level        = 'warn',
+  log_level        = 'info',
   underline        = false,
   update_in_insert = false,
   signs            = true,
@@ -152,7 +152,7 @@ Python.linter = nil -- add an additional linter for more coverage than pyright
 
 Lua = {}
 Lua.formatter = 'lua-format'
-Lua.formatLineLength = 80
+Lua.formatLineLength = 120
 
 JS_TS = {}
 JS_TS.formatter = 'prettier'

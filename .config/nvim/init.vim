@@ -9,21 +9,6 @@ set runtimepath^=~/.config/nvim
 set runtimepath+=~/.local/share/nvim/site/after
 set runtimepath^=~/.local/share/nvim/site
 
-" let g:backupdir=expand(stdpath('data') . '/backup')
-" if !isdirectory(g:backupdir)
-"    mkdir(g:backupdir, "p")
-" endif
-" let &backupdir=g:backupdir
-"
-"
-" ********** Main Loader **********
-
-" Load external files
-" source $HOME/.config/nvim/settings.vim
-" source $HOME/.config/nvim/autocommands.vim
-" source $HOME/.config/nvim/functions.vim
-" source $HOME/.config/nvim/plugins.vim
-
 source $HOME/.config/nvim/functions.fzf.vim
 source $HOME/.config/nvim/functions.unimpaired.vim
 
@@ -52,6 +37,23 @@ function! Fasd_update() abort
   endif
 endfunction
 
+function! FzyCommand(choice_command, vim_command)
+  try
+    let output = system(a:choice_command . " | fzy ")
+  catch /Vim:Interrupt/
+    " Swallow errors from ^C, allow redraw! below
+  endtry
+  redraw!
+  if v:shell_error == 0 && !empty(output)
+    exec a:vim_command . ' ' . output
+  endif
+endfunction
+
+nnoremap <leader>e :call FzyCommand("find . -type f", ":e")<cr>
+nnoremap <leader>v :call FzyCommand("find . -type f", ":vs")<cr>
+nnoremap <leader>s :call FzyCommand("find . -type f", ":sp")<cr>
+
+let $NVIM_TUI_ENABLE_CURSOR_SHAPE = 0
 
 lua << EOF
   require('init')
@@ -60,5 +62,3 @@ lua << EOF
 EOF
 
 source $HOME/.config/nvim/plugins.vim
-" source $HOME/.config/nvim/mappings.vim
-" source $HOME/.config/nvim/colors/barbar-colors.vim

@@ -1,6 +1,6 @@
 #!/bin/bash
 
-export TERM="xterm-256color"
+# export TERM="xterm-256color"
 # export TERM="xterm-color"
 # export TERM="vte-256color"
 # curl -LO http://invisible-island.net/datafiles/current/terminfo.src.gz
@@ -87,7 +87,7 @@ export VISUAL='/usr/local/bin/nvim'
 export VIMPAGER_VIM='/usr/local/bin/nvim -u ~/.vimrc'
 # export PAGER=nvimpager
 export PAGER="less -EFXRS"
-export BAT_THEME=ansi-dark
+export BAT_THEME="base16" # ansi-dark
 # export VIMPAGER_RC='~/.vimrc'
 
 export ANSIBLE_CONFIG="$HOME/.config/ansible/ansible.cfg"

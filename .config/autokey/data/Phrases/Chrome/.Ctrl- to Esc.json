@@ -24,7 +24,7 @@
         "hotKey": "["
     },
     "filter": {
-        "regex": "google-chrome.Google-chrome",
+        "regex": "google-chrome*",
         "isRecursive": false
     }
 }

@@ -29,4 +29,3 @@ bindsym $mod+o --release exec \
 # %%hotkey: Show rofi switch window menu
 bindsym $mod+Tab --release exec \
   $dir_bin/move-cursor-center.sh && rofi -show window
-

@@ -3,9 +3,17 @@
 filepath=$(readlink -f $0)
 alias refresh_aliases="source $filepath"
 
+alias ytdl="youtube-dl -4 -x --audio-format mp3"
+
 # alias fuck='sudo $(history -p \!\!)'
 alias _="sudo "
 alias sudo="sudo "
+alias mysudo='sudo -E env "PATH=$PATH"'
+
+alias nix-install=""
+alias nixls="grc -c conf.docker-machinels -es --colour=on nix-env --query --status -P --description"
+alias nixcomp="grc -c conf.docker-machinels -es --colour=on nix-env --available --query --status -P
+--description --compare"
 
 alias db=dotbare
 alias dots=dotbare
@@ -86,7 +94,6 @@ alias iptlistout='sudo /sbin/iptables -L OUTPUT -n -v --line-numbers'
 alias iptlistfw='sudo /sbin/iptables -L FORWARD -n -v --line-numbers'
 alias firewall=iptlist
 
-
 ## safety nets ##
 # do not delete / or prompt if deleting more than 3 files at a time #
 alias rm='rm -I --preserve-root'
@@ -101,15 +108,15 @@ alias chown='chown --preserve-root'
 alias chmod='chmod --preserve-root'
 alias chgrp='chgrp --preserve-root'
 
-[[ -d "$HOME/projects/personal/movieman"  && -n "$NODE_PATH" ]] && \
+[[ -d "$HOME/projects/personal/movieman" && -n "$NODE_PATH" ]] &&
   alias mm="node ~/projects/personal/movieman/lib/index.js"
 
-if [[ -d "$HOME/projects/personal/wikiscan"  && -n "$NODE_PATH" ]]; then
+if [[ -d "$HOME/projects/personal/wikiscan" && -n "$NODE_PATH" ]]; then
   alias wikiscan="$HOME/projects/personal/wikiscan/bin/wikiscan.sh"
   alias ws="$HOME/projects/personal/wikiscan/bin/wikiscan.sh"
 fi
 
-if [[ -d "$HOME/projects/personal/musicman"  && -n "$NODE_PATH" ]]; then
+if [[ -d "$HOME/projects/personal/musicman" && -n "$NODE_PATH" ]]; then
   alias mr="node ~/projects/personal/musicman/cli/lib/cli.js"
   alias mre="node ~/projects/personal/musicman/cli/lib/cli.js edit"
   alias mrp="mpc clear && node ~/projects/personal/musicman/cli/lib/cli.js playlist rating: ./ && mpc load current && mpc play"
@@ -131,6 +138,10 @@ alias fdi="fdfind --hidden --no-ignore-vcs --no-ignore -L"
 alias rg="rg --line-number --hidden --no-heading --color=always --smart-case"
 alias rgi="rg --line-number --hidden --no-ignore --no-heading --color=always --smart-case"
 alias agi="ag --unrestricted --hidden"
+
+if [ -x "$(command -v ultra)" ]; then
+  alias nodes="ultra --monitor"
+fi
 
 if [ -x "$(command -v broot)" ]; then
   # alias tree="br -c :pt"
@@ -235,8 +246,8 @@ alias ethtool='ethtool eth1'
 # # Only useful for laptop as all servers are without wireless interface
 # alias iwconfig='iwconfig wlan0'
 
-alias myps='ps -fHu $USER'     # if not $USER, try $LOGIN
-alias myports="netstat -lntp 2>/dev/null | grep -v ' - *$'"  # Linux only?
+alias myps='ps -fHu $USER'                                  # if not $USER, try $LOGIN
+alias myports="netstat -lntp 2>/dev/null | grep -v ' - *$'" # Linux only?
 
 # spadash
 alias sdmigrate="migrate up -path=migrations -database=postgres://spadash:spadash@localhost:5432/"
@@ -282,6 +293,7 @@ alias twd='timew summary :day'
 alias aws="/usr/local/aws-cli/v2/current/bin/aws"
 
 # logspout docker log aggregator
+alias ctop="docker run --rm -ti --name=ctop -v /var/run/docker.sock:/var/run/docker.sock quay.io/vektorlab/ctop:latest"
 alias logspoutd="docker run -d --name='logspout' -e VIRTUAL_HOST=logs.local --volume=/var/run/docker.sock:/var/run/docker.sock --publish=127.0.0.1:8000:80 gliderlabs/logspout"
 alias logspout="curl localhost:8000/logs"
 # lazydocker
@@ -336,7 +348,7 @@ if which fasd >/dev/null; then
       local file
       test -e "$1" && $EDITOR "$@" && return
       file="$(fasd -Rfl "$*")"
-      [[ -z "$file" ]] && file=$(fd --type f . $HOME | fzf-tmux -p 80%)
+      [[ -z "$file" ]] && file=$(fd --type f . $HOME | fzf-tmux -p 80% --query "$@")
       $EDITOR "${file}" || $EDITOR "$@"
       # file="$(fasd -Rfl "$*" | fzf -1 -0 --no-sort +m)" && $EDITOR "${file}" || $EDITOR "$@"
     }
@@ -353,10 +365,10 @@ if which fasd >/dev/null; then
       [ $# -eq 1 ] && test -d "$1" && cd "$1" && return
       local dir
       dir="$(fasd -Rdl "$*" | head -n1)"
-      if [[ -n "$dir" ]]
-        then cd "${dir}" || return 1
+      if [[ -n "$dir" ]]; then
+        cd "${dir}" || return 1
       else
-        dir=$(fd --type d . $HOME | fzf-tmux -p 80%)
+        dir=$(fd --type d . $HOME | fzf-tmux -p 80% --query "$@")
         cd "${dir}" || return 1
       fi
     }

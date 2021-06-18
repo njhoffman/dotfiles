@@ -1,7 +1,7 @@
 
 // create an object for the BinarySearchTree
 
-var BST = new BinarySearchTree();
+  var BST = new BinarySearchTree();
 // Inserting nodes to the BinarySearchTree
 BST.insert(15);
 BST.insert(25);

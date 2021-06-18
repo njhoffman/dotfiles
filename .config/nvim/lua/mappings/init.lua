@@ -10,14 +10,13 @@ local map = require("utils.core").map
 -- :g/^\s*$/d
 -- :g!/^\s*"/d
 -- basics
-map("i", "jk", [[col('.') == 1 ? '<esc>' : '<esc>l']], {expr = true})
-map("n", "<leader>tS", ":luafile %<CR>", {silent = false})
+map("i", "jk", [[col('.') == 1 ? '<esc>' : '<esc>l']], { expr = true })
+map("n", "<leader>tS", ":luafile %<CR>", { silent = false })
 map("n", "<BS>", "<C-^>")
 map("t", "<C-o>", [[<C-\><C-n>]])
-map("n", "<A-t>", ":ToggleTerm<CR>")
+-- map("n", "<A-t>", ":ToggleTerm<CR>")
 map("t", "<A-t>", [[<C-\><C-n>:ToggleTerm<CR>]])
 map("n", "D", "d$")
-
 -- map('t', '<ESC>', '&filetype == "fzf" ? "\\<ESC>" : "\\<C-\\>\\<C-n>"' , {expr = true})
 -- map('t', 'jj', '<ESC>', {noremap = false})
 -- map('v', '<leader>s', ':s//gcI<Left><Left><Left><Left>')
@@ -38,13 +37,16 @@ vim.cmd([[au CmdwinLeave : let &cpt = b:cpt_save]])
 -- vim.cmd([[au CmdwinEnter [/?]  startinsert]])
 vim.cmd([[au CmdwinEnter * startinsert]])
 
-map("n", "<leader>nf", [[:e <C-R>=expand("%:p:h") . "/" <CR>]], {silent = false})
-map("n", "<leader>ns", [[:vsp <C-R>=expand("%:p:h") . "/" <CR>]], {silent = false})
-map("n", "<leader>nt", [[:tabedit <C-R>=expand("%:p:h") . "/" <CR>]], {silent = false})
-
+map("n", "<leader>nf", [[:e <C-R>=expand("%:p:h") . "/" <CR>]],
+    { silent = false })
+map("n", "<leader>ns", [[:vsp <C-R>=expand("%:p:h") . "/" <CR>]],
+    { silent = false })
+map("n", "<leader>nt", [[:tabedit <C-R>=expand("%:p:h") . "/" <CR>]],
+    { silent = false })
 
 -- prevent "write partial file" nonsense
-vim.cmd([[cabbrev <expr> w getcmdtype()==':' && getcmdline() == "'<,'>w" ? '<c-u>w' : 'w']])
+vim.cmd(
+    [[cabbrev <expr> w getcmdtype()==':' && getcmdline() == "'<,'>w" ? '<c-u>w' : 'w']])
 -- buffer management
 
 -- " Return to last edit position when opening files (You want this!)
@@ -54,10 +56,12 @@ vim.cmd([[cabbrev <expr> w getcmdtype()==':' && getcmdline() == "'<,'>w" ? '<c-u
 map("t", "jj", [[<C-\><C-n>]])
 
 -- visual mode mappings
+-- vim.cmd([[xmap <leader>s <plug>(scratch-selection-reuse)]])
+-- vim.cmd([[xmap <leader>S <plug>(scratch-selection-clear)]])
 -- Visually select, paste the text that was last edited/pasted
-map("n", "gv", "`[v`]", {noremap = false})
-map("n", "<leader>[", "`[V`]<", {noremap = true})
-map("n", "<leader>]", "`[V`]>", {noremap = true})
+map("n", "gv", "`[v`]", { noremap = false })
+map("n", "<leader>[", "`[V`]<", { noremap = true })
+map("n", "<leader>]", "`[V`]>", { noremap = true })
 -- Move selected line / block of text in visual mode
 map("x", "K", ":move '<-2<CR>gv=gv")
 map("x", "J", ":move '>+1<CR>gv=gv")
@@ -66,10 +70,12 @@ map("x", "J", ":move '>+1<CR>gv=gv")
 -- vnoremap <silent> # :<C-u>call VisualSelection('', '')<CR>?<C-R>=@/<CR><CR>
 
 -- Remap for dealing with word wrap in Normal mode/Visual mode
-map("n", "k", 'v:count == 0 ? "gk" : "k"', {expr = true})
-map("n", "j", 'v:count == 0 ? "gj" : "j"', {expr = true})
-map("x", "k", '(v:count == 0 && mode() !=# "V") ? "gk" : "k"', {expr = true})
-map("x", "j", '(v:count == 0 && mode() !=# "V") ? "gj" : "j"', {expr = true})
+map("n", "k", "v:count == 0 ? \"gk\" : \"k\"", { expr = true })
+map("n", "j", "v:count == 0 ? \"gj\" : \"j\"", { expr = true })
+map("x", "k", "(v:count == 0 && mode() !=# \"V\") ? \"gk\" : \"k\"",
+    { expr = true })
+map("x", "j", "(v:count == 0 && mode() !=# \"V\") ? \"gj\" : \"j\"",
+    { expr = true })
 -- Automatically jump to the end of pasted text
 map("v", "y", "y`]")
 map("v", "p", "p`]")
@@ -102,51 +108,56 @@ map("n", "p", "p`]")
 -- Run the current line as if it were a command. Often more convenient than q: when experimenting.
 
 local window_map = {
-  ["<S-k>"] = {":resize -2<CR>"},
-  ["<S-j>"] = {":resize +2<CR>"},
-  ["<S-h>"] = {":vertical resize -2<CR>"},
-  ["<S-l>"] = {":vertical resize +2<CR>"},
-  ["<c-h>"] = {"<c-w>h"},
-  ["<c-j>"] = {"<c-w>j"},
-  ["<c-k>"] = {"<c-w>k"},
-  ["<c-l>"] = {"<c-w>l"},
-  ["<Leader>"] = {
-    [";"] = {"<c-w>w"},
-    ["H"] = {"<cmd>vnew<cr>"},
-    ["V"] = {"<cmd>new<cr>"},
-    ["_"] = {"<c-w>_"},
-    ["|"] = {"<c-w>|"},
-    ["= "] = {"<c-w>="},
-    ["q"] = {"<c-w><c-p><cmd>q<cr>"}
+  ["<s-k>"] = { ":resize -2<CR>" },
+  ["<s-j>"] = { ":resize +2<CR>" },
+  ["<s-h>"] = { ":vertical resize -2<CR>" },
+  ["<s-l>"] = { ":vertical resize +2<CR>" },
+  ["<c-h>"] = { "<c-w>h" },
+  ["<c-j>"] = { "<c-w>j" },
+  ["<c-k>"] = { "<c-w>k" },
+  ["<c-l>"] = { "<c-w>l" },
+  ["<leader>"] = {
+    [";"] = { "<c-w>w" },
+    ["H"] = { "<cmd>vnew<cr>" },
+    ["V"] = { "<cmd>new<cr>" },
+    ["_"] = { "<c-w>_" },
+    ["|"] = { "<c-w>|" },
+    ["= "] = { "<c-w>=" },
+    ["q"] = { "<c-w><c-p><cmd>q<cr>" },
   },
-  ["<Leader>j"] = {
+  ["<leader>j"] = {
     name = "+jump windows",
-    ["h"] = {"<cmd>wincmd h<cr>", "Left"},
-    ["j"] = {"<cmd>wincmd j<cr>", "Down"},
-    ["k"] = {"<cmd>wincmd k<cr>", "Up"},
-    ["l"] = {"<cmd>wincmd l<cr>", "Right"}
-  }
+    ["h"] = { "<cmd>wincmd h<cr>", "Left" },
+    ["j"] = { "<cmd>wincmd j<cr>", "Down" },
+    ["k"] = { "<cmd>wincmd k<cr>", "Up" },
+    ["l"] = { "<cmd>wincmd l<cr>", "Right" },
+  },
 }
 
 local buffer_map = {
   -- ["q"] = {"<cmd>update | bdelete<CR>", "Save and safely remove buffer"},
-  ["Q"] = {"<nop>"},
-  ["_"] = {"<cmd>noh<cr>", "remove highlight"},
-  ["<C-q>"] = {"<cmd>qa<cr>", "Quick exit without saving"},
-  ["<C-x>"] = {"<cmd>xa!<cr>", "Quick exit with saving"},
-  ["<C-s>"] = {"<cmd>w<cr><esc>", "Quick save"},
-  ["<tab>"] = {"<cmd>bn<CR>", "Cycle buffers"},
-  ["<S-tab>"] = {"<cmd>bp<CR>", "Cycle buffers"},
-  ["H"] = {"<cmd>BufferPrev<CR>", "Buffer left"},
-  ["L"] = {"<cmd>BufferNext<CR>", "Buffer right"},
+  ["Q"] = { "<nop>" },
+  ["_"] = { "<cmd>noh<cr>", "remove highlight" },
+  ["<c-q>"] = { "<cmd>qa<cr>", "Quick exit without saving" },
+  ["<c-x>"] = { "<cmd>xa!<cr>", "Quick exit with saving" },
+  ["<C-s>"] = { "<cmd>w<cr><esc>", "Quick save" },
+  ["<tab>"] = { "<cmd>bn<CR>", "Cycle buffers" },
+  ["<s-tab>"] = { "<cmd>bp<CR>", "Cycle buffers" },
+  ["H"] = { "<cmd>BufferPrev<CR>", "Buffer left" },
+  ["L"] = { "<cmd>BufferNext<CR>", "Buffer right" },
   ["ZZ"] = "Write if modified and exit",
-  ["<Leader>"] = {
-    ["<cr>"] = {"<cmd>noh<cr>", "remove highlight"},
-    -- ["q"] = {"<cmd>update | bdelete<CR>", "Save and safely remove buffer"},
-    ["q"] = {"<cmd>Sayonara<cr>", "Quick exit with saving"},
-    ["x"] = {"<cmd>Bdelete<cr>", "Delete buffer without messing windows up"},
-    ["!"] = {"<cmd>BufferCloseAllButCurrent<CR>", "Close all buffers but current"},
-    ["w"] = {"<cmd>:noa w<cr>", "Write files without autocommands"},
+  -- ["<Leader>s"] = { "<cmd>call scratch#insert(0)<cr>", "scratch clear"},
+  -- ["<Leader>S"] = { "<cmd>call scratch#insert(1)<cr>", "scratch reuse"},
+  ["<leader>"] = {
+    ["<cr>"] = { "<cmd>noh<cr>", "remove highlight" },
+    ["q"] = { "<cmd>Sayonara<cr>", "Close window saving" },
+    ["x"] = { "<cmd>update | bdelete<CR>", "Save and safely remove buffer" },
+    -- ["x"] = { "<cmd>Bdelete<cr>", "Delete buffer without messing windows up" },
+    ["!"] = {
+      "<cmd>BufferCloseAllButCurrent<CR>",
+      "Close all buffers but current",
+    },
+    ["w"] = { "<cmd>:noa w<cr>", "Write files without autocommands" },
     -- ["*"] = "save all buffers",
     -- ["["] = {"<cmd>bprev<cr>", "prev buffer"},
     -- ["]"] = {"<cmd>bnext<cr>", "next buffer"},
@@ -154,8 +165,8 @@ local buffer_map = {
       name = "+new",
       ["f"] = "create new file",
       ["s"] = "create new file in a split",
-      ["t"] = "create new file in tab"
-    }
+      ["t"] = "create new file in tab",
+    },
     -- ["<leader>s"] = {
     --   name = "+session",
     --   ["s"] = {"<cmd>SSave<cr>", "session save"},
@@ -163,7 +174,7 @@ local buffer_map = {
     --   ["d"] = {"<cmd>SDelete<cr>", "session delete"},
     --   ["l"] = {"<cmd>SLoad<cr>", "session load"}
     -- }
-  }
+  },
 }
 
 local opts = {
@@ -171,25 +182,23 @@ local opts = {
   buffer = nil,
   silent = true,
   noremap = true,
-  nowait = false
+  nowait = false,
 }
 
 require("which-key").register(buffer_map, opts)
 require("which-key").register(window_map, opts)
 
-local insert_map = {
-  ["<C-s>"] = {"<cmd>w<cr><esc>", "Quick save"}
-}
+local insert_map = { ["<c-s>"] = { "<cmd>w<cr><esc>", "Quick save" } }
 
 local insert_opts = {
   mode = "i",
   buffer = nil,
   silent = true,
   noremap = true,
-  nowait = false
+  nowait = false,
 }
 
-require("which-key").register(insert_map, opts)
+require("which-key").register(insert_map, insert_opts)
 
 -- vim.g.dashboard_custom_shortcut = {
 --   last_session       = 'SPC s l',
@@ -201,7 +210,7 @@ require("which-key").register(insert_map, opts)
 --   book_marks         = 'SPC f b',
 
 -- }
---fzf
+-- fzf
 
 --
 -- map("n", ",gdb", "<Plug>(EasyAlign)", {noremap = false, silent = true})

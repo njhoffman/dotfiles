@@ -26,8 +26,6 @@ local lsp_commands = {
   rust = {lspinstall .. "rust/rust-analyzer"},
   tsserver = {lspinstall .. "typescript/node_modules/.bin/typescript-language-server", "--stdio"},
   vim = {lspinstall .. "vim/node_modules/.bin/vim-language-server", "--stdio"},
-
 }
-
 
 return lsp_commands

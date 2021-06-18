@@ -14,7 +14,7 @@ for_window [class="Termite" title="floatme"] floating enable, border pixel 3, re
 for_window [instance="^dclock-ws1$"] resize set 87 240, move position 271 0
 for_window [class="Eog"] floating enable
 # for_window [class="Termite" title="scratchpad"] floating enable, resize set 50 ppt 80 ppt, move position center, move to scratchpad
-for_window [class="Termite" title="__scratchpad__"] floating enable, resize set 1000 800, move position center, move to scratchpad
+for_window [title="__scratchpad__"] floating enable, resize set 1000 800, move position center, move to scratchpad
 # for_window [class="Termite" title="dropdown"] floating enable
 for_window [instance="www.windy.com" window_role="pop-up"] floating enable, move position center, move to scratchpad, border pixel 3
 for_window [instance="www.feedly.com" window_role="pop-up"] floating enable, move position center, move to scratchpad, border pixel 3
@@ -65,4 +65,3 @@ for_window [class="Xfburn"] floating enable
 
 # switch to workspace with urgent window automatically
 for_window [urgent=latest] focus
-

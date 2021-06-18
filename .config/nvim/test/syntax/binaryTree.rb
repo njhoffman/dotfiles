@@ -3,7 +3,7 @@ class BinaryTree
 
   attr_accessor :value
 
-  def initialize( value = nil )
+  def initialize(value = nil)
     @value = value
   end
 
@@ -11,24 +11,24 @@ class BinaryTree
     return if selfnil?
 
     yield selfvalue
-    selflefteach( &block ) if selfleft
-    selfrighteach( &block ) if selfright
+    selflefteach(&block) if selfleft
+    selfrighteach(&block) if selfright
   end
 
   def empty?
     # code here
   end
 
-  def <<( value ) # insert
+  def <<(value) # insert
     return selfvalue = value if selfvalue == nil
 
     test = selfvalue <=> value
     case test
-    when -,
-      @right = BinaryTreenew if selfvalue == nil
+    when
+      # @right = BinaryTreenew if selfvalue == nil
       selfright << value
     when
-      @left = BinaryTreenew if selfvalue == nil
+      # @left = BinaryTreenew if selfvalue == nil
       selfleft << value
     end
   end

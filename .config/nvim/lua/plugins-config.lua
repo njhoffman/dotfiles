@@ -50,6 +50,9 @@ require("plugins.configs.lua.diffview")
 require("plugins.configs.lua.which_key")
 require("plugins.configs.vim.vim_yoink")
 require("plugins.configs.vim.vim_mundo")
+require("plugins.configs.vim.vim-floaterm")
+require("plugins.configs.vim.float-preview")
+-- require("plugins.configs.vim.scratch")
 
 -- motion
 require("plugins.configs.vim.vim_smoothie")

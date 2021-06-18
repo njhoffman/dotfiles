@@ -1,0 +1,42 @@
+{
+  "name": "fakercli",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "dev": "nodemon --config ./nodemon.json lib/index.js",
+    "lint": "esw lib --color",
+    "lint:fix": "npm run lint -- --fix",
+    "lint:watch": "npm run lint -- --watch --clear",
+    "start": "node lib/index.js",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "bin": {
+    "fakercli": "./lib/index.js"
+  },
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "chalk": "^4.1.0",
+    "command-line-args": "^5.1.1",
+    "commander": "^5.0.0",
+    "faker": "git+https://github.com/Marak/Faker.js",
+    "flat": "^5.0.0",
+    "lodash": "^4.17.15"
+  },
+  "devDependencies": {
+    "babel-eslint": "^10.1.0",
+    "eslint": "^6.8.0",
+    "eslint-config-airbnb-base": "^14.1.0",
+    "eslint-config-prettier": "^6.10.1",
+    "eslint-config-standard": "^14.1.1",
+    "eslint-plugin-babel": "^5.3.0",
+    "eslint-plugin-import": "^2.20.2",
+    "eslint-plugin-prettier": "^3.1.2",
+    "eslint-plugin-promise": "^4.2.1",
+    "eslint-watch": "^6.0.1",
+    "nodemon": "^2.0.2",
+    "npm-check": "^5.9.2",
+    "prettier": "^2.0.2"
+  }
+}

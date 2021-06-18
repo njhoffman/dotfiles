@@ -19,43 +19,93 @@ local efm_on_attach = function(client, bufnr)
   M.common_on_attach(client, bufnr)
 end
 
+-- missing: puppet-lint, haskell (hlint), erlang (elvis), rust (rust-clippy), sql (sqlfluff), php
+-- (phplint), perlcritic, perltidy, npm-package-json-lint, graphql-schema-linter, dotenv-linter,
+-- clang-format, clang-tidy, ansible-lint,
+-- kubernetes lint
+
 -- Formatting and linting via efm
 local eslint = require("lsp.efm.eslint")
-local lua_format = require("lsp.efm.lua-format")
-local eslint_prettier = require("lsp.efm.eslint-prettier")
-local prettier = require("lsp.efm.prettier")
 local efm_tsserver = require("lsp.efm.tsserver")
 local efm_python = require("lsp.efm.python")
-local efm_sh = require("lsp.efm.sh")
+local node_utils = require("utils.node")
+
+local eslint_prettier = {
+  formatCommand = node_utils.get_formatter_command(),
+  formatStdin = true,
+}
+
+local prettier = {
+  -- parser <flow|babel|babel-flow|babel-ts|typescript|espree|meriyah|css|less|scss|
+  -- json|json5|json-stringify|graphql|markdown|mdx|vue|yaml|glimmer|html|angular|lwc|ruby|rbs|haml>
+  formatCommand = "prettier --stdin-filepath ${INPUT} --single-quote --arrow-parens 'avoid' --trailing-comma all",
+  formatStdin = true,
+}
 
 local languages = {
-  conf = {prettier},
+  conf = { prettier },
   css = { prettier },
-  graphql = {prettier},
+  graphql = { prettier },
   html = { prettier },
-  javascript = { eslint_prettier, eslint },
-  javascriptreact = { eslint_prettier, eslint },
   json = { prettier },
-  lua = { lua_format },
   markdown = { prettier },
-  python = { efm_python },
   scss = { prettier },
-  sh = { efm_sh },
+  yaml = { prettier },
+  -- python = {black, isort, flake8, mypy},
+  -- python = { efm_python },
   typescript = { eslint_prettier, eslint },
   typescriptreact = { eslint_prettier, eslint },
+  -- javascript = { eslint_prettier, eslint },
+  -- javascriptreact = { eslint_prettier, eslint },
+  javascript = efm_tsserver,
+  javascriptreact = efm_tsserver,
+  rust = { { formatCommand = "rustfmt", formatStdin = true } },
   vue = { eslint_prettier, eslint },
-  yaml = {prettier},
-  -- javascript = efm_tsserver,
-  -- javascriptreact = efm_tsserver,
-  -- typescript = efm_tsserver,
-  -- typescriptreact = efm_tsserver,
+  csv = {},
+  eruby = {},
+  less = {},
+  proto = {},
+}
+
+-- local filetypes = vim.tbl_keys(languages)
+-- print(vim.inspect(filetypes))
+local filetypes = {
+  "c",
+  "cpp",
+  "css",
+  "csv",
+  "dockerfile",
+  "eruby",
+  "go",
+  "graphql",
+  "html",
+  "javascript",
+  "javascriptreact",
+  "json",
+  "less",
+  "lua",
+  "make",
+  "markdown",
+  "proto",
+  "python",
+  "ruby",
+  "rust",
+  "scss",
+  "sh",
+  "terraform",
+  "typescript",
+  "typescriptreact",
+  "vim",
+  "vue",
+  "yaml",
+  "zsh",
 }
 
 lspconfig.efm.setup {
   root_dir = require("lspconfig").util.root_pattern(".git", vim.fn.getcwd()),
   on_attach = efm_on_attach,
-  init_options = {documentFormatting = true, codeAction = true},
-  filetypes = vim.tbl_keys(languages),
+  init_options = { documentFormatting = true, codeAction = true },
+  filetypes = filetypes,
   settings = {
     lintDebounce = 500,
     rootMarkers = {
@@ -71,70 +121,10 @@ lspconfig.efm.setup {
       ".prettierrc.yml",
       ".prettierrc.yaml",
       ".prettier.config.js",
-      ".prettier.config.cjs"
+      ".prettier.config.cjs",
     },
-    languages = languages,
-    log_level = 1,
-    log_file = "/tmp/nvim-efm.log"
-  }
+    -- languages = languages,
+    log_level = 5,
+    log_file = "~/.local/log/nvim-efm.log",
+  },
 }
-
--- local languages = {
---   lua = {luafmt},
---   -- typescript = {prettier, eslint},
---   -- javascript = {prettier, eslint},
---   -- typescriptreact = {prettier, eslint},
---   -- javascriptreact = {prettier, eslint},
---   json = {prettier},
---   html = {prettier},
---   scss = {prettier},
---   css = {prettier},
---   markdown = {prettier},
---   rust = {rustfmt},
---   --
---   -- python = {autopep}
---   -- "c",
---   -- "cpp",
---   -- "help",
---   asciidoc = {},
---   csv = {},
---   dockerfile = {},
---   eruby = {},
---   go = {},
---   graphql = {},
---   less = {},
---   make = {},
---   proto = {},
---   -- python = {},
---   review = {},
---   ruby = {},
---   sass = {},
---   sh = {},
---   sugarss = {},
---   text = {},
---   vim = {},
---   vue = {}
--- }
-
--- lsp_servers.efm = {
---   init_options = {
---     -- TODO: figure out best way to handle formatting between lsp, efm, and neoformat
---     documentFormatting = true,
---     hover = true,
---     documentSymbol = true,
---     codeAction = true,
---     completion = true
---   },
---   settings = {
---     languages = languages,
---     log_level = 1,
---     log_file = '~/efm.log',
---     rootMarkers = {
---       ".rooter", -- ".eslintrc.cjs",
---       ".eslintrc", ".eslintrc.json", ".eslintrc.js", ".prettierrc",
---       ".prettierrc.js", ".prettierrc.json", ".prettierrc.yml",
---       ".prettierrc.yaml", ".prettier.config.js", ".prettier.config.cjs"
---     }
---   },
---   filetypes = vim.tbl_keys(languages)
--- }

@@ -1,23 +1,23 @@
 # Main Colors
 unrecognized_file: steelblue
 recognized_file:   skyblue
-executable_file:  indianred
+executable_file:   indianred
 dir:               dodgerblue
 
 # Link
-dead_link: red
-link:      cyan
+dead_link:         red
+link:              cyan
 
 # special files
-socket:   darkcyan
-blockdev: midnightblue
-chardev:  dodgerblue
+socket:            darkcyan
+blockdev:          midnightblue
+chardev:           dodgerblue
 
 # Access Modes
-read:      lightseagreen
-write:     dodgerblue
-exec:      maroon
-no_access: dimgray
+read:              lightseagreen
+write:             dodgerblue
+exec:              maroon
+no_access:         dimgray
 
 # Age
 # hour_old:   deepskyblue
@@ -26,29 +26,29 @@ no_access: dimgray
 # day_old:     lightslategray
 # hour_old:    darkseagreen
 # no_modifier: slategray
-hour_old:    slategray
-day_old:     dimgray
-no_modifier: darkgray
+hour_old:          slategray
+day_old:           dimgray
+no_modifier:       darkgray
 
 # File Size
-file_large:  orange
-file_medium: gold
-file_small:  peachpuff
+file_large:        orange
+file_medium:       gold
+file_small:        peachpuff
 
 # Random
-report: white
-user:   rosybrown
-normal: darksalmon
-tree:   cyan
-empty:  yellow
-error:  red
+report:            white
+user:              rosybrown
+normal:            darksalmon
+tree:              cyan
+empty:             yellow
+error:             red
 
 # Git
-addition:     chartreuse
-modification: darkkhaki
-deletion:     darkred
-untracked:    darkorange
-unchanged:    forestgreen
+addition:          chartreuse
+modification:      darkkhaki
+deletion:          darkred
+untracked:         darkorange
+unchanged:         forestgreen
 #
 # aliceblue
 # antiquewhite

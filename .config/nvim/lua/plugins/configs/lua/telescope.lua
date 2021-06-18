@@ -73,7 +73,7 @@ local telescope = require("telescope")
 telescope.load_extension("session-lens")
 telescope.load_extension("dap")
 telescope.load_extension("fzy_native")
-telescope.load_extension("project")
+-- telescope.load_extension("project")
 telescope.load_extension("asynctasks")
 -- telescope.extensions.asynctasks.all()
 

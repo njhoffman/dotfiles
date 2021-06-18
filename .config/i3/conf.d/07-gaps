@@ -58,5 +58,5 @@ bindsym $mod+Shift+g mode "$mode_gaps"
 
   smart_borders on
   smart_borders no_gaps
-  border_radius 5
+  # border_radius 5
 # }}}

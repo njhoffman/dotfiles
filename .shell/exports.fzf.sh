@@ -91,4 +91,4 @@ export FZF_TMUX_OPTS="-p 80%"
 # export FZF_COMPLETION_TRIGGER=''
 # export FZF_COMPLETION_TRIGGER='**'
 
-alias fzf="fzf-tmux"
+# alias fzf="fzf-tmux"

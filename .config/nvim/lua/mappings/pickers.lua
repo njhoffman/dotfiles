@@ -1,5 +1,5 @@
 local unused_alternates = {
-  ["<A-s>"] = {":<C-u>:Rg<CR>", "search (ag)"}
+  ["<A-s>"] = { ":<C-u>:Rg<CR>", "search (ag)" },
   -- ["<A-s>"] = {":<C-u>:FzfPreviewProjectGrepRpc<CR>", "search (grep)"}
 }
 --     name = "find",
@@ -53,43 +53,45 @@ local unused_alternates = {
 --  nnoremap <leader>fg :Telescope git_branches<CR>
 
 local picker_maps = {
-  ["<C-p>"] = {"<cmd>call GFilesFallback()<cr>", "project files"},
-  ["<A-p>"] = {"<cmd>FzfPreviewDirectoryFiles<cr>", "directory files"},
-  ["<A-o>"] = {"<cmd>FzfPreviewDirectoryFilesRpc ~<cr>", "home files"},
-  ["<C-g>"] = {"<cmd>FzfPreviewGitActionsRpc<cr>", "git actions"},
-  ["<A-g>"] = {"<cmd>FzfPreviewGitStatus<cr>", "git status"},
-  ["<C-u>"] = {"<cmd>FzfPreviewFromResources old<cr>", "mru files"},
-  ["<A-u>"] = {"<cmd>FzfPreviewCommandPaletteRpc<cr>", "commands"},
-  ["<C-d>"] = {"<cmd>FzfPreviewGitCurrentLogsRpc<cr>", "git file log"},
-  ["<A-d>"] = {"<cmd>FzfPreviewGitLogsRpc<cr>", "git log"},
-  ["<C-e>"] = {"<cmd>FzfPreviewAllBuffersRpc<cr>", "buffers"},
-  ["<A-e>"] = {"<cmd>Sessions<cr>", "sessions"},
-  ["<A-j>"] = {"<cmd>FzfPreviewJumpsRpc<cr>", "jumps"},
-  ["<A-/>"] = {"<cmd>Helptags<cr>", "jumps"},
-  ["<A-m>"] = {"<cmd>FzfPreviewLocationListRpc<cr>", "location list"},
+  ["<C-p>"] = { "<cmd>call GFilesFallback()<cr>", "project files" },
+  ["<A-p>"] = { "<cmd>FzfPreviewFromResources directory<cr>", "directory files" },
+  -- ["<A-p>"] = {"<cmd>FzfPreviewDirectoryFilesRpc<cr>", "directory files"},
+  ["<A-o>"] = { "<cmd>FzfPreviewDirectoryFilesRpc ~<cr>", "home files" },
+  ["<C-g>"] = { "<cmd>FzfPreviewGitActionsRpc<cr>", "git actions" },
+  ["<A-g>"] = { "<cmd>FzfPreviewGitStatus<cr>", "git status" },
+  ["<C-u>"] = { "<cmd>FzfPreviewFromResources old<cr>", "mru files" },
+  ["<A-u>"] = { "<cmd>FzfPreviewCommandPaletteRpc<cr>", "commands" },
+  ["<C-d>"] = { "<cmd>FzfPreviewGitCurrentLogsRpc<cr>", "git file log" },
+  ["<A-d>"] = { "<cmd>FzfPreviewGitLogsRpc<cr>", "git log" },
+  ["<C-e>"] = { "<cmd>FzfPreviewAllBuffersRpc<cr>", "buffers" },
+  ["<A-e>"] = { "<cmd>Sessions<cr>", "sessions" },
+  ["<A-j>"] = { "<cmd>FzfPreviewJumpsRpc<cr>", "jumps" },
+  ["<A-/>"] = { "<cmd>Helptags<cr>", "jumps" },
+  ["<A-m>"] = { "<cmd>FzfPreviewLocationListRpc<cr>", "location list" },
   -- ["<A-s>"] = {"<cmd>FzfPreviewProjectGrepRpcRecall<cr>", "search (rg)"},
-  ["<A-s>"] = {"<cmd>Rg<cr>", "search (rg)"},
+  ["<A-s>"] = { "<cmd>Rg<cr>", "search (rg)" },
   ["<leader>f"] = {
     name = "+find",
-    ["b"] = {"<cmd>FindBuffer<cr>", "Find buffer"},
-    ["c"] = {"<cmd>Telescope colorscheme<cr>", "colorscheme"},
-    ["f"] = {"<cmd>Telescope find_files<cr>", "file"},
-    ["g"] = {"<cmd>Telescope live_grep<cr>", "grep text"},
-    ["h"] = {"<cmd>Telescope help_tags<cr>", "vim tags"},
+    ["b"] = { "<cmd>FindBuffer<cr>", "Find buffer" },
+    ["c"] = { "<cmd>Telescope colorscheme<cr>", "colorscheme" },
+    ["f"] = { "<cmd>Telescope find_files<cr>", "file" },
+    ["g"] = { "<cmd>Telescope live_grep<cr>", "grep text" },
+    ["h"] = { "<cmd>Telescope help_tags<cr>", "vim tags" },
     ["n"] = {
-      "<cmd>lua require('utils.core').search_nvim()<cr>", "nvim dotfiles"
+      "<cmd>lua require('utils.core').search_nvim()<cr>",
+      "nvim dotfiles",
     },
-    ["o"] = {"<cmd>Telescope oldfiles<cr>", "recent files"},
-    ["m"] = {"<plug>(fzf-maps-n)", "mappings (normal)"},
-    ["mi"] = {"<plug>(fzf-maps-i)", "mappings (insert)"},
-    ["mv"] = {"<plug>(fzf-maps-v)", "mappings (visual)"},
-    ["mo"] = {"<plug>(fzf-maps-o)", "mappings (operator)"},
+    ["o"] = { "<cmd>Telescope oldfiles<cr>", "recent files" },
+    ["m"] = { "<plug>(fzf-maps-n)", "mappings (normal)" },
+    ["mi"] = { "<plug>(fzf-maps-i)", "mappings (insert)" },
+    ["mv"] = { "<plug>(fzf-maps-v)", "mappings (visual)" },
+    ["mo"] = { "<plug>(fzf-maps-o)", "mappings (operator)" },
     ["p"] = {
       name = "+personal-config",
-      ["n"] = {"<cmd>e ~/.config/nvim/lua/config.lua<cr>", "nvim"},
-      ["s"] = {"<cmd>e ~/.shell/.zshrc<cr>", "shell"}
-    }
-  }
+      ["n"] = { "<cmd>e ~/.config/nvim/lua/config.lua<cr>", "nvim" },
+      ["s"] = { "<cmd>e ~/.shell/.zshrc<cr>", "shell" },
+    },
+  },
 }
 
 local opts = {
@@ -97,7 +99,7 @@ local opts = {
   buffer = nil, -- Global mappings. Specify a buffer number for buffer local mappings
   silent = true, -- use `silent` when creating keymaps
   noremap = true, -- use `noremap` when creating keymaps
-  nowait = false -- use `nowait` when creating keymaps
+  nowait = false, -- use `nowait` when creating keymaps
 }
 
 require("which-key").register(picker_maps, opts)
