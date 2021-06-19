@@ -59,6 +59,5 @@ lua << EOF
   require('init')
   require('lsp_signature').on_attach()
   require('snippets').use_suggested_mappings()
+  vim.cmd([[hi! Underlined gui=none]])
 EOF
-
-source $HOME/.config/nvim/plugins.vim

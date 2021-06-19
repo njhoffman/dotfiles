@@ -243,18 +243,11 @@ function M.get_components()
     right_sep = "  ",
   }
 
-  -- components.left.active[3] = {
-  --   provider = "file_info",
-  --   hl = {fg = "white", bg = "oceanblue", style = "bold"},
-  --   left_sep = {" ", "slant_left_2", {str = " ", hl = {bg = "oceanblue", fg = "NONE"}}},
-  --   right_sep = {"slant_right_2", " "}
-  -- }
-
   local project_path = nil
   local last_buffer = nil
   local project_name = nil
 
-  function Get_project_path()
+  local function get_project_path()
     if vim.fn.bufnr() ~= last_buffer then
       project_path = nil
       project_name = nil
@@ -273,7 +266,7 @@ function M.get_components()
 
   components.left.active[3] = {
     provider = function()
-      Get_project_path()
+      get_project_path()
       return project_name or ""
     end,
     hl = function()
@@ -383,44 +376,68 @@ function M.get_components()
       else
         val.str = ""
       end
-
       return val
     end,
   }
 
+  local active_clients = nil
+  local last_active_client_buffer = vim.fn.bufnr()
+
+  local function lsp_active_status()
+    -- lsp_status:                ⏻ ⏼ ⭘      
+    if vim.fn.bufnr() ~= last_active_client_buffer then
+      active_clients = vim.lsp.buf_get_clients()
+      last_active_client_buffer = vim.fn.bufnr()
+    end
+
+    if active_clients == nil or #active_clients == 0 then
+      active_clients = vim.lsp.buf_get_clients()
+    end
+
+    if #active_clients == 0 then return " " end
+    if #active_clients > 1 then return #active_clients end
+    if active_clients[1].name == "efm" then return "" end
+    return ""
+  end
+
   components.right.active[5] = {
     provider = function() return vim.bo.filetype:lower() end,
-    -- provider = "file_type",
-    file = {
-      info = {
-        provider = M.get_current_ufn,
-        hl = { fg = c.blue, style = "bold" },
-        left_sep = " ",
-      },
-      encoding = {
-        provider = "file_encoding",
-        left_sep = " ",
-        hl = { fg = c.violet, style = "bold" },
-      },
-      type = { provider = "file_type" },
-      os = {
-        provider = file_osinfo,
-        left_sep = " ",
-        hl = { fg = c.violet, style = "bold" },
-      },
-    },
+    hl = function()
+      if active_clients == nil or #active_clients == 0 then
+        return { fg = "fg" }
+      end
+      if active_clients[1].name == "efm" then
+        return { fg = "#6688cc", style = "italic" }
+      end
+      return { fg = "#00aacc", style = "italic" }
+    end,
   }
 
-  -- lsp_status:        
-
   components.right.active[6] = {
-    provider = "line_percentage",
-    hl = { style = "bold" },
-    left_sep = "  ",
-    right_sep = " ",
+    provider = lsp_active_status,
+    hl = function()
+      if active_clients == nil or #active_clients == 0 then
+        return { fg = "none" }
+      end
+      if #active_clients > 1 then return { fg = "#ff0000", style = "bold" } end
+      if active_clients[1].name == "efm" then
+        return { fg = "#6688ff", style = "none" }
+      end
+      return { fg = "#00ccff", style = "none" }
+    end,
+
+    left_sep = " ",
+    right_sep = "",
   }
 
   components.right.active[7] = {
+    provider = "line_percentage",
+    hl = { style = "bold" },
+    left_sep = " ",
+    right_sep = " ",
+  }
+
+  components.right.active[8] = {
     provider = "scroll_bar",
     hl = { fg = "cyan", style = "bold" },
     right_sep = { str = " ", hl = { fg = "NONE", bg = "NONE" } },

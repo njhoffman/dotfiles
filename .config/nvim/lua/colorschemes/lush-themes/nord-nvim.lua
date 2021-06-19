@@ -461,6 +461,8 @@ local theme =
       htmlH6 {markdownH1},
       htmlSpecialChar {SpecialChar},
       htmlTagN {htmlTag},
+      pandocReferenceURL = { gui = "none", style = "none" },
+      pandocUListItem = { gui = "none", style = "none" },
       javaDocTags {fg = clrs.nord7},
       javaCommentTitle {Comment},
       javaScriptBraces {Delimiter},

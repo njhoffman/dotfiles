@@ -1,25 +1,10 @@
-" Webgl Shaders
-syn include @GLSL syntax/glsl.vim
-syn region ShaderScript
-      \ start="<script [^>]*type=\('\|\"\)x-shader/x-\(vertex\|fragment\)\('\|\"\)[^>]*>"
-      \ keepend
-      \ end="</script>"me=s-1
-      \ contains=@GLSL,htmlScriptTag,@htmlPreproc
+" disable the current htmlLink syntax
+highlight link htmlLink text
 
-" PSL
-syn clear htmlHead
-syn match pslPositive '%?\w\+?%'
-syn match pslNegative '%!\w\+!%'
-syn match pslValue '"%\S\+%"'
-syn match pslImport '%import .*$'
-syn match pslMultiline '%MULTILINE%'
+" enable a new htmlLink syntax
+syn region htmlLink start="<a\>\_[^>]*\<href\>" end="</a>"me=e-4 keepend contains=@Spell,htmlTag,htmlEndTag,htmlSpecialChar,htmlPreProc,htmlComment,htmlLinkText,javaScript,@htmlPreproc
+syn match htmlLinkText contained contains=@Spell,htmlTag,htmlEndTag,htmlSpecialChar,htmlPreProc,htmlComment,htmlLinkText,javaScript,@htmlPreproc "^\s*\zs.\{-}\ze\s*$"
+syn match htmlLinkText contained contains=@Spell,htmlTag,htmlEndTag,htmlSpecialChar,htmlPreProc,htmlComment,htmlLinkText,javaScript,@htmlPreproc "\S.\{-}\ze\s*$"
 
-
-" JAVA SCRIPT
-
-syn include @htmlJavaScript syntax/javascript.vim
-unlet b:current_syntax
-syn region javascript start=+%spidercode%+ keepend end=+%spidercode%+ contains=@htmlJavaScript,htmlCssStyleComment,htmlScriptTag,@htmlPreproc
-
-
-
+" enable the new syntax
+hi def link htmlLinkText                Underlined

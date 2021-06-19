@@ -39,6 +39,7 @@ require("plugins.configs.lua.neuron")
 require("plugins.configs.vim.vimux")
 require("plugins.configs.vim.asynctasks")
 require("plugins.configs.vim.vim-ripple")
+require("plugins.configs.vim.pandoc")
 
 -- interfaces
 require("plugins.configs.lua.nvim_bqf")

@@ -5,14 +5,25 @@ vim.g.vim_jsx_pretty_colorful_config = 1
 vim.g.vim_jsx_pretty_highlight_close_tag = 1
 
 vim.g.javascript_sql_dialect = "pgsql"
--- vim.o.background = "dark" -- or "light" for light mode
+vim.o.background = "dark" -- or "light" for light mode
 vim.g.vim_markdown_conceal_code_blocks = 0
 vim.g.markdown_fenced_languages = {
-  "coffee", "css", "erb=eruby", "javascript", "js=javascript",
-  "json=javascript", "python", "css", "sh", "bash=sh", "html", "zsh", "ruby",
-  "sass", "xml"
+  -- "coffee",
+  -- "css",
+  -- "erb=eruby",
+  "javascript",
+  -- "js=javascript",
+  -- "json=javascript",
+  -- "python",
+  -- "css",
+  "sh",
+  "bash=sh",
+  -- "html",
+  -- "zsh",
+  -- "ruby",
+  -- "sass",
+  -- "xml",
 }
-
 
 local nord = require("colorschemes.lush-themes.nord-nvim")
 
@@ -34,6 +45,9 @@ local nord = require("colorschemes.lush-themes.nord-nvim")
 -- " hi mkdCode ctermfg=88  guifg=#427b58 ctermbg=None cterm=bold
 -- "
 -- hi VimWikiTag guifg=#994444 gui=italic
+vim.cmd([[hi! Underlined gui=none]]);
+vim.cmd([[hi! pandocReferenceURL gui=none]]);
+vim.cmd([[hi! pandocUListItem gui=none]]);
 
 local clr_over = {
   orange = "#cc8877",
@@ -42,47 +56,50 @@ local clr_over = {
   purple_faded = "#6A6CAB",
   red_faded = "#7F212A",
   green_faded = "#128A67",
-  blue_faded = "#5171A1"
+  blue_faded = "#5171A1",
 }
-local spec = lush.extends({nord}).with(function()
+local spec = lush.extends({ nord }).with(function()
   return {
+    Underline = { gui = "none" },
+    Underlined = { gui = "none" },
     -- ui components
-    NormalFloat {fg = "#8f93a2", bg = "#090b10"}, -- normal text and background color for floating windows
-    Pmenu {fg = "#718cc4", bg = "#060614"},
-    PmenuSel {fg = "#84ffff", bg = "#1a1c2b"},
-    PmenuSbar {fg = "#717cb4", bg = "#202331"},
-    PmenuThumb {fg = "#8f93a2", bg = "#84ffff"},
-    SignColumn {bg = "none"},
-    CursorLine {bg = nord.CursorLine.bg.darken(50), gui = "none"},
-    CursorLineNr {fg = "#afd7ff", bg = CursorLine.bg},
+    NormalFloat { fg = "#8f93a2", bg = "#090b10" }, -- normal text and background color for floating windows
+    Pmenu { fg = "#718cc4", bg = "#060614" },
+    PmenuSel { fg = "#84ffff", bg = "#1a1c2b" },
+    PmenuSbar { fg = "#717cb4", bg = "#202331" },
+    PmenuThumb { fg = "#8f93a2", bg = "#84ffff" },
+    SignColumn { bg = "none" },
+    CursorLine { bg = nord.CursorLine.bg.darken(50), gui = "none" },
+    CursorLineNr { fg = "#afd7ff", bg = CursorLine.bg },
     CursorColumn {},
     -- base groups
-    Normal {fg = nord.Normal.fg.darken(15), bg = "none"},
-    String {fg = "#22bb99"},
-    Comment {fg = "#5c667a", gui = "italic"},
-    Constant {fg = "#6699aa"},
-    Identifier {fg = "#8eb9c6"},
-    Type {fg = clr_over.yellow},
-    MatchParen {fg = "#60a0a0", bg = "000022"},
-    MatchParenCursor {fg = "#a0c0b0"},
+    Normal { fg = nord.Normal.fg.darken(15), bg = "none" },
+    String { fg = "#22bb99" },
+    Comment { fg = "#5c667a", gui = "italic" },
+    Constant { fg = "#6699aa" },
+    Identifier { fg = "#8eb9c6" },
+    Type { fg = clr_over.yellow },
+    MatchParen { fg = "#60a0a0", bg = "000022" },
+    MatchParenCursor { fg = "#a0c0b0" },
     --
-    TSTagDelimiter {fg = "#7f90aa"},
-    TSURI {fg = "#8eb9f6", gui = "none"},
-    yamlTSField {fg = "#717cb4"},
-    yamlBlockMappingKey {yamlTSField},
+    TSTagDelimiter { fg = "#7f90aa" },
+    TSURI { fg = "#8eb9f6", gui = "none" },
+    yamlTSField { fg = "#717cb4" },
+    yamlBlockMappingKey { yamlTSField },
     --
-    liquidExpression {Type},
-    liquidDelimiter {fg = clr_over.orange},
+    liquidExpression { Type },
+    liquidDelimiter { fg = clr_over.orange },
+    pandocReferenceURL = { gui = "none " },
     -- jsx-pretty
     -- jsxElement {fg = "#ff6600"},
-    jsxTag {fg = clr_over.orange},
-    jsxComponentName {fg = clr_over.orange},
-    jsxTagName {fg = clr_over.orange},
-    jsxOpenTag {fg = clr_over.orange},
-    jsxCloseTag {fg = "#7f90aa"},
+    jsxTag { fg = clr_over.orange },
+    jsxComponentName { fg = clr_over.orange },
+    jsxTagName { fg = clr_over.orange },
+    jsxOpenTag { fg = clr_over.orange },
+    jsxCloseTag { fg = "#7f90aa" },
     -- jsxCloseString {fg = "#ff6600"},
-    jsxAttrib {fg = "#88bbdd"},
-    jsxEqual {fg = "#6699bb"},
+    jsxAttrib { fg = "#88bbdd" },
+    jsxEqual { fg = "#6699bb" },
     -- js-other
     -- jsVariableType {fg = jsStorageClass.fg},
     -- jsIf {fg = jsConditional.fg},
@@ -102,42 +119,44 @@ local spec = lush.extends({nord}).with(function()
     -- jsExportDefaultGroup {jsExportDefault},
     -- jsLabel {Label},
     --- nvim-hlslens
-    HlSearchLensCur {fg = "#ff2266", bg = "#003333"},
-    HlSearchLens {fg = "#00ddff", bg = "none"},
-    HlSearchCur {fg = "#00ffdd", bg = "none"},
+    HlSearchLensCur { fg = "#ff2266", bg = "#003333" },
+    HlSearchLens { fg = "#00ddff", bg = "none" },
+    HlSearchCur { fg = "#00ffdd", bg = "none" },
     ---
 
     -- GitSigns Faded
-    GitSignsAddFaded = {fg = clr_over.green_faded},
-    GitSignsAddNrFaded = {fg = clr_over.green_faded},
-    GitSignsAddLnFaded = {fg = clr_over.green_faded},
-    GitSignsChangeFaded = {fg = clr_over.yellow_faded},
-    GitSignsChangeNrFaded = {fg = clr_over.yellow_faded},
-    GitSignsChangeLnFaded = {fg = clr_over.yellow_faded},
-    GitSignsChangeDeleteFaded = {fg = clr_over.purple_faded},
-    GitSignsChangeDeleteNrFaded = {fg = clr_over.purple_faded},
-    GitSignsChangeDeleteLnFaded = {fg = clr_over.purple_faded},
-    GitSignsDeleteFaded = {fg = clr_over.red_faded},
-    GitSignsDeleteNrFaded = {fg = clr_over.red_faded},
-    GitSignsDeleteLnFaded = {fg = clr_over.red_faded},
+    GitSignsAddFaded = { fg = clr_over.green_faded },
+    GitSignsAddNrFaded = { fg = clr_over.green_faded },
+    GitSignsAddLnFaded = { fg = clr_over.green_faded },
+    GitSignsChangeFaded = { fg = clr_over.yellow_faded },
+    GitSignsChangeNrFaded = { fg = clr_over.yellow_faded },
+    GitSignsChangeLnFaded = { fg = clr_over.yellow_faded },
+    GitSignsChangeDeleteFaded = { fg = clr_over.purple_faded },
+    GitSignsChangeDeleteNrFaded = { fg = clr_over.purple_faded },
+    GitSignsChangeDeleteLnFaded = { fg = clr_over.purple_faded },
+    GitSignsDeleteFaded = { fg = clr_over.red_faded },
+    GitSignsDeleteNrFaded = { fg = clr_over.red_faded },
+    GitSignsDeleteLnFaded = { fg = clr_over.red_faded },
     -- --html
     markdownH = {},
     markdownTSTitle = {},
     SpecialKey = {},
-    htmlH1 = {fg = "#45a5f8"},
-    htmlH2 = {fg = "#45a5e8"},
-    htmlH3 = {fg = "#45a5d8"},
-    htmlH4 = {fg = "#45a5c8"},
-    htmlH5 = {fg = "#45a5b8"},
-    htmlH6 = {fg = "#45a5a8"},
-    markdownH1 = {fg = "#45a5f8"},
-    markdownH2 = {fg = "#45a5e8"},
-    markdownH3 = {fg = "#45a5d8"},
-    markdownH4 = {fg = "#45a5c8"},
-    markdownH5 = {fg = "#45a5b8"},
-    markdownH6 = {fg = "#45a5a8"},
-    mkdHeading = {fg = "#557588"},
-    markdownLinkText = {fg = "#00ccff"}
+    htmlH1 = { fg = "#45a5f8" },
+    htmlH2 = { fg = "#45a5e8" },
+    htmlH3 = { fg = "#45a5d8" },
+    htmlH4 = { fg = "#45a5c8" },
+    htmlH5 = { fg = "#45a5b8" },
+    htmlH6 = { fg = "#45a5a8" },
+    markdownH1 = { fg = "#45a5f8" },
+    markdownH2 = { fg = "#45a5e8" },
+    markdownH3 = { fg = "#45a5d8" },
+    markdownH4 = { fg = "#45a5c8" },
+    markdownH5 = { fg = "#45a5b8" },
+    markdownH6 = { fg = "#45a5a8" },
+    mkdHeading = { fg = "#557588" },
+    markdownLinkText = { fg = "#00ccff" },
+    pandocReferenceURL = { gui = "none" },
+    pandocUListItem = { gui = "none" },
     -- TSStrike = {},
     -- TSUnderline = {},
     -- Underline {},

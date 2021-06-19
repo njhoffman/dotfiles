@@ -48,11 +48,11 @@ local autocmds = {
   fasd = { { "BufWinEnter,BufFilePost", "*", [[call Fasd_update()]] } },
   FiletypeDetect = {
     { "BufNewFile,BufRead", "*.ejs", "set ft=html" },
-    {
-      "BufNewFile,BufRead",
-      "*.md",
-      "set ft=markdown syn=markdown conceallevel=1",
-    },
+    -- {
+    --   "BufNewFile,BufRead",
+    --   "*.md",
+    --   "set ft=pandoc.markdown nospell conceallevel=3",
+    -- },
     { "BufNewFile,BufRead", "*bash*", "let b:is_bash = 1 | setfiletype sh" },
     { "BufNewFile,BufRead", ".env.*", "setlocal ft=config syn=config" },
     { "BufNewFile,BufRead", "*.env", "setlocal ft=config syn=config" },
@@ -79,6 +79,10 @@ local autocmds = {
     --   " au BufEnter * if &bufhidden =~ 'wipe' && &buftype =~ 'nofile' | setf preview | endif
   },
   filetypes = {
+    { "FileType", "pandoc", "set conceallevel=3 nospell" },
+    { "FileType", "markdown", "hi! Underlined gui=NONE" },
+    { "FileType", "markdown", "hi! pandocAtxStart guibg=#45a5f8" },
+    { "FileType", "markdown", "hi! pandocAtxHeader guifg=#4575b8 gui=bold" },
     { "FileType", "markdown", "hi! markdownH1 guifg=#45a5f8" },
     { "FileType", "markdown", "hi! markdownH2 guifg=#45a5e8" },
     { "FileType", "markdown", "hi! markdownH3 guifg=#45a5d8" },

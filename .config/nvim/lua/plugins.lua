@@ -44,7 +44,13 @@ packer.startup(function(use)
     "HerringtonDarkholme/yats.vim",
     "maxmellon/vim-jsx-pretty",
   }
+
   -- markdown
+  -- use {'npxbr/glow.nvim', cmd={'GlowInstall'}}
+  -- use 'davidgranstrom/nvim-markdown-preview'
+  -- use "gabrielelana/vim-markdown"
+  use "vim-pandoc/vim-pandoc"
+  use "vim-pandoc/vim-pandoc-syntax"
   -- use "plasticboy/vim-markdown"
   use "godlygeek/tabular"
   use "kchmck/vim-coffee-script"
@@ -71,7 +77,10 @@ packer.startup(function(use)
   use "tpope/vim-git"
   use "wgwoods/vim-systemd-syntax"
   use "zinit-zsh/zinit-vim-syntax"
-  use "tpope/vim-liquid"
+  use "LnL7/vim-nix"
+  use "njhoffman/vim-liquid"
+  use "PotatoesMaster/i3-vim-syntax"
+  -- use "tpope/vim-liquid"
   -- to fix https://github.com/neoclide/coc-snippets/issues/126
   -- 'honza/vim-snippets'
   use "norcalli/snippets.nvim"
@@ -117,8 +126,11 @@ packer.startup(function(use)
   -- Integrations
   use "preservim/vimux"
   -- use {"vimwiki/vimwiki", branch = "dev"}
+  -- use "tools-life/taskwiki"
+  -- use "farseer90718/vim-taskwarrior"
+  -- use "chiefnoah/neuron-v2.vim"
   use {
-    "oberblastmeister/neuron.nvim",
+    "njhoffman/neuron.nvim",
     branch = "unstable",
     requires = { "nvim-lua/popup.nvim", "nvim-lua/plenary.nvim" },
   }

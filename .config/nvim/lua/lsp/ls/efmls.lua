@@ -85,7 +85,7 @@ local filetypes = {
   "less",
   "lua",
   "make",
-  "markdown",
+  -- "markdown",
   "proto",
   "python",
   "ruby",
