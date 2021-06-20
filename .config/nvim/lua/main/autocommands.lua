@@ -2,7 +2,6 @@ local config = require "config"
 local u = require "utils.core"
 local Formatting = config.Formatting
 local Opts = config.Opts
-local af = require("../utils/autofunc")
 
 -- relative in normal mode, absolute in insert
 -- af(
@@ -23,23 +22,6 @@ local af = require("../utils/autofunc")
 -- )
 
 local autocmds = {
-  Clap = {
-    --  use <C-n>/<C-p> instead of <C-j>/<C-k> to navigate the result, disable hints
-    {
-      "FileType",
-      "clap_input",
-      "inoremap <silent> <buffer> <C-n> <C-R>=clap#navigation#linewise('down')<CR>",
-    },
-    {
-      "FileType",
-      "clap_input",
-      "inoremap <silent> <buffer> <C-p> <C-R>=clap#navigation#linewise('up')<CR>",
-    }, -- {"FileType,", "clap_input", "let g:completion_enable_auto_pop = 0"},
-    -- {"FileType,", "clap_input", "call compe#setup({ 'enabled': v:false }, 0)"}
-    { "CompleteChanged", "*", "redraw" },
-    { "FocusLost", "*", "VimadeFadeActive" },
-    { "FocusGained", "*", "VimadeUnfadeActive" },
-  },
   Mundo = { { "FileType", "Mundo", "noremap <buffer>  :q<cr>" } },
   helpfile = {
     { "FileType", "help", "noremap <buffer> q :q<cr>" },
@@ -48,11 +30,6 @@ local autocmds = {
   fasd = { { "BufWinEnter,BufFilePost", "*", [[call Fasd_update()]] } },
   FiletypeDetect = {
     { "BufNewFile,BufRead", "*.ejs", "set ft=html" },
-    -- {
-    --   "BufNewFile,BufRead",
-    --   "*.md",
-    --   "set ft=pandoc.markdown nospell conceallevel=3",
-    -- },
     { "BufNewFile,BufRead", "*bash*", "let b:is_bash = 1 | setfiletype sh" },
     { "BufNewFile,BufRead", ".env.*", "setlocal ft=config syn=config" },
     { "BufNewFile,BufRead", "*.env", "setlocal ft=config syn=config" },
@@ -79,16 +56,16 @@ local autocmds = {
     --   " au BufEnter * if &bufhidden =~ 'wipe' && &buftype =~ 'nofile' | setf preview | endif
   },
   filetypes = {
-    { "FileType", "pandoc", "set conceallevel=3 nospell" },
-    { "FileType", "markdown", "hi! Underlined gui=NONE" },
-    { "FileType", "markdown", "hi! pandocAtxStart guibg=#45a5f8" },
-    { "FileType", "markdown", "hi! pandocAtxHeader guifg=#4575b8 gui=bold" },
-    { "FileType", "markdown", "hi! markdownH1 guifg=#45a5f8" },
-    { "FileType", "markdown", "hi! markdownH2 guifg=#45a5e8" },
-    { "FileType", "markdown", "hi! markdownH3 guifg=#45a5d8" },
-    { "FileType", "markdown", "hi! markdownH4 guifg=#45a5c8" },
-    { "FileType", "markdown", "hi! markdownH5 guifg=#45a5b8" },
-    { "FileType", "markdown", "hi! markdownH6 guifg=#45a5a8" },
+    { "FileType", "pandoc", "set conceallevel=3 nospell wrap" },
+    { "FileType", "pandoc", "hi! Underlined gui=NONE" },
+    { "FileType", "pandoc", "hi! pandocAtxStart guibg=#45a5f8" },
+    { "FileType", "pandoc", "hi! pandocAtxHeader guifg=#4575b8 gui=bold" },
+    -- { "FileType", "markdown", "hi! markdownH1 guifg=#45a5f8" },
+    -- { "FileType", "markdown", "hi! markdownH2 guifg=#45a5e8" },
+    -- { "FileType", "markdown", "hi! markdownH3 guifg=#45a5d8" },
+    -- { "FileType", "markdown", "hi! markdownH4 guifg=#45a5c8" },
+    -- { "FileType", "markdown", "hi! markdownH5 guifg=#45a5b8" },
+    -- { "FileType", "markdown", "hi! markdownH6 guifg=#45a5a8" },
     -- {"FileType", "*", "setlocal formatoptions-=c formatoptions-=r formatoptions-=o"},
     { "FileType", "toggleterm", "setlocal nonumber norelativenumber" },
   },
@@ -137,9 +114,9 @@ if Opts.highlight_yank == true or Opts.highlight_yank == nil then
   table.insert(autocmds, hl_yank)
 end
 
-if Formatting.format_on_save == true or Formatting.format_on_save == nil then
+--[[ if Formatting.format_on_save == true or Formatting.format_on_save == nil then
   -- table.insert(autocmds, format)
-end
+end ]]
 
 if Formatting.trim_trailing_space == true or Formatting.trim_trailing_space ==
     nil then table.insert(autocmds, trim_whitespaces) end

@@ -24,7 +24,7 @@ require("plugins.configs.lua.telescope")
 require("plugins.configs.lua.nvim_web_devicons")
 
 -- formatting
-require("plugins.configs.lua.neoformat")
+-- require("plugins.configs.lua.neoformat")
 require("plugins.configs.lua.todo_comments")
 require("plugins.configs.lua.kommentary")
 require("plugins.configs.vim.easyalign")
@@ -33,9 +33,9 @@ require("plugins.configs.vim.vim_multiple_cursors")
 
 -- integrations
 require("plugins.configs.lua.gitsigns")
-require("plugins.configs.lua.neogit")
-require("plugins.configs.lua.neuron")
+-- require("plugins.configs.lua.neogit")
 -- require("plugins.configs.vim.vimwiki")
+require("plugins.configs.lua.neuron")
 require("plugins.configs.vim.vimux")
 require("plugins.configs.vim.asynctasks")
 require("plugins.configs.vim.vim-ripple")
@@ -49,6 +49,8 @@ require("plugins.configs.lua.nvim_tree")
 require("plugins.configs.lua.nvim_toggleterm")
 require("plugins.configs.lua.diffview")
 require("plugins.configs.lua.which_key")
+require("plugins.configs.lua.snap")
+
 require("plugins.configs.vim.vim_yoink")
 require("plugins.configs.vim.vim_mundo")
 require("plugins.configs.vim.vim-floaterm")
@@ -62,7 +64,7 @@ require("plugins.configs.vim.vim_matchup")
 
 -- visual
 require("plugins.configs.vim.vim_hexokinase")
-require("plugins.configs.vim.vimade")
+-- require("plugins.configs.vim.vimade")
 require("plugins.configs.lua.nvim_hlslens")
 require("plugins.configs.vim.scrollbar")
 require("plugins.configs.vim.vim_plugin_AnsiEsc")

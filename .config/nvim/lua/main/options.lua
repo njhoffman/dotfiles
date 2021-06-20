@@ -13,8 +13,8 @@ local opt = require("utils.core").opt
 g.mapleader = [[,]]
 g.maplocalleader = [[,]]
 
-local buffer = {o, bo}
-local window = {o, wo}
+local buffer = { o, bo }
+local window = { o, wo }
 
 -- global scope
 opt("background", "dark")
@@ -27,7 +27,9 @@ opt("tw", 1000)
 opt("swapfile", false)
 opt("clipboard", "unnamedplus")
 opt("cmdheight", 2)
+opt("cmdwinheight", 7)
 opt("completeopt", "noinsert,noselect,menuone")
+opt("cpoptions", "aABceFs_")
 opt("display", "msgsep")
 opt("encoding", "UTF-8")
 opt("guicursor", [[n-v-c:block,i-ci-ve:ver25,r-cr:hor20,o:hor50]])
@@ -96,9 +98,9 @@ opt("fileformat", "unix", buffer)
 
 vim.cmd [[autocmd BufReadPost * lua goto_last_pos()]]
 function goto_last_pos()
-  local last_pos = vim.fn.line('\'"')
+  local last_pos = vim.fn.line("'\"")
   if last_pos > 0 and last_pos <= vim.fn.line("$") then
-    vim.api.nvim_win_set_cursor(0, {last_pos, 0})
+    vim.api.nvim_win_set_cursor(0, { last_pos, 0 })
   end
 end
 

@@ -1,10 +1,8 @@
 -- dofile('/home/wil/.config/nvim/lua/profiler.lua')
-
 -- require("debug.typescript")
-
 require "plugins"
 -- install 3rd party plugin packages
-require "plugins-config"
+-- require "plugins-config"
 
 require "lsp.setup"
 

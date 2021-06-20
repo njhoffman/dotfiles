@@ -293,7 +293,8 @@ function M.get_components()
   components.left.active[4] = {
     provider = "file_info",
     hl = { fg = "white", bg = "dodgerblue3", style = "bold" },
-    left_sep = { "slant_left", { hl = { bg = "NONE", fg = "dodgerblue3" } } },
+    left_sep = { "slant_left",
+                 { hl = { bg = "NONE", fg = "dodgerblue3" }, " " } },
     right_sep = { "slant_right_2", "  " },
   }
 
@@ -405,11 +406,12 @@ function M.get_components()
     hl = function()
       if active_clients == nil or #active_clients == 0 then
         return { fg = "fg" }
+      else
+        if active_clients[1].name == "efm" then
+          return { fg = "#6688cc", style = "italic" }
+        end
+        return { fg = "#00aacc", style = "italic" }
       end
-      if active_clients[1].name == "efm" then
-        return { fg = "#6688cc", style = "italic" }
-      end
-      return { fg = "#00aacc", style = "italic" }
     end,
   }
 
@@ -427,7 +429,7 @@ function M.get_components()
     end,
 
     left_sep = " ",
-    right_sep = "",
+    right_sep = " ",
   }
 
   components.right.active[7] = {

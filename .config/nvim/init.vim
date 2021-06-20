@@ -9,6 +9,10 @@ set runtimepath^=~/.config/nvim
 set runtimepath+=~/.local/share/nvim/site/after
 set runtimepath^=~/.local/share/nvim/site
 
+"clear out previous autocmds to stop them being duplicated when resourcing
+"  this file
+" autocmd!
+
 source $HOME/.config/nvim/functions.fzf.vim
 source $HOME/.config/nvim/functions.unimpaired.vim
 
@@ -56,8 +60,9 @@ nnoremap <leader>s :call FzyCommand("find . -type f", ":sp")<cr>
 let $NVIM_TUI_ENABLE_CURSOR_SHAPE = 0
 
 lua << EOF
-  require('init')
-  require('lsp_signature').on_attach()
-  require('snippets').use_suggested_mappings()
-  vim.cmd([[hi! Underlined gui=none]])
+   require('init')
+   require('lsp_signature').on_attach()
+   require('snippets').use_suggested_mappings()
 EOF
+
+source $HOME/.config/nvim/plugins.vim

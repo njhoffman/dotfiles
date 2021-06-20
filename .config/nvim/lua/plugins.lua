@@ -37,52 +37,7 @@ packer.startup(function(use)
   end
 
   -- ====================================
-  -- -- Syntax add-ons
-  use {
-    -- jsx/tsx syntax
-    "yuezk/vim-js",
-    "HerringtonDarkholme/yats.vim",
-    "maxmellon/vim-jsx-pretty",
-  }
-
-  -- markdown
-  -- use {'npxbr/glow.nvim', cmd={'GlowInstall'}}
-  -- use 'davidgranstrom/nvim-markdown-preview'
-  -- use "gabrielelana/vim-markdown"
-  use "vim-pandoc/vim-pandoc"
-  use "vim-pandoc/vim-pandoc-syntax"
-  -- use "plasticboy/vim-markdown"
-  use "godlygeek/tabular"
-  use "kchmck/vim-coffee-script"
-
-  -- plucked syntax from vim-polyglot
-  use "GutenYe/json5.vim"
-  use "StanAngeloff/php.vim"
-  use "andrewstuart/vim-kubernetes"
-  use "arzg/vim-sh"
-  use "chr4/nginx.vim"
-  use "chrisbra/csv.vim"
-  use "editorconfig/editorconfig-vim"
-  use "ekalinin/Dockerfile.vim"
-  use "elzr/vim-json"
-  use "ericpruitt/tmux.vim"
-  use "gisphm/vim-gitignore"
-  use "hashivim/vim-terraform"
-  use "jparise/vim-graphql"
-  use "moll/vim-node"
-  use "neoclide/jsonc.vim"
-  use "npxbr/glow.nvim"
-  use "pearofducks/ansible-vim"
-  use "rodjek/vim-puppet"
-  use "tpope/vim-git"
-  use "wgwoods/vim-systemd-syntax"
-  use "zinit-zsh/zinit-vim-syntax"
-  use "LnL7/vim-nix"
   use "njhoffman/vim-liquid"
-  use "PotatoesMaster/i3-vim-syntax"
-  -- use "tpope/vim-liquid"
-  -- to fix https://github.com/neoclide/coc-snippets/issues/126
-  -- 'honza/vim-snippets'
   use "norcalli/snippets.nvim"
   -- ====================================
   -- LSP, Autocomplete and snippets
@@ -125,15 +80,15 @@ packer.startup(function(use)
   -- ====================================
   -- Integrations
   use "preservim/vimux"
-  -- use {"vimwiki/vimwiki", branch = "dev"}
-  -- use "tools-life/taskwiki"
-  -- use "farseer90718/vim-taskwarrior"
-  -- use "chiefnoah/neuron-v2.vim"
+  use "xarthurx/vim-taskwarrior"
   use {
     "njhoffman/neuron.nvim",
     branch = "unstable",
     requires = { "nvim-lua/popup.nvim", "nvim-lua/plenary.nvim" },
   }
+  -- use {"vimwiki/vimwiki", branch = "dev"}
+  -- use "tools-life/taskwiki"
+  -- use "chiefnoah/neuron-v2.vim"
   use { "skywind3000/asynctasks.vim", requires = "skywind3000/asyncrun.vim" }
   use { "vim-test/vim-test" }
   use { "urbainvaes/vim-ripple", requires = "machakann/vim-highlightedyank" }
@@ -144,7 +99,6 @@ packer.startup(function(use)
     -- event = "BufEnter"
   }
   use {
-    {
       "tpope/vim-fugitive",
       -- cmd = {
       --   "GBrowse",
@@ -168,14 +122,13 @@ packer.startup(function(use)
       --   "Gvdiffsplit",
       --   "Gwrite"
       -- }
-    },
-    { "TimUntersberger/neogit" },
-    -- {"TimUntersberger/neogit", opt = true}
   }
+    -- { "TimUntersberger/neogit" },
 
   -- ====================================
   -- Pickers (telescope, fzf)
   use "matbme/JABS.nvim"
+  use { "camspiers/snap", rocks = { "fzy" } }
   use {
     "junegunn/fzf.vim",
     requires = { "junegunn/fzf", dir = "~/.fzf", run = "./install --all" },
@@ -281,9 +234,8 @@ packer.startup(function(use)
   use "svermeulen/vim-yoink"
   use "ncm2/float-preview.nvim"
   use "voldikss/vim-floaterm"
-  -- use "voldikss/fzf-floaterm"
-  -- use "voldikss/LeaderF-floaterm"
-  -- use 'windwp/vim-floaterm-repl'
+  use "voldikss/fzf-floaterm"
+  -- use { "voldikss/LeaderF-floaterm", requires = "Yggdroot/LeaderF" }
   -- use 'windwp/vim-floaterm-repl'
   -- use "mtth/scratch.vim"
   -- use 'windwp/nvim-spectre'
@@ -328,14 +280,13 @@ return packer
 --     requires = {'nvim-lua/plenary.nvim'},
 --     config = [[require('config.gitsigns')]],
 --     event = 'BufEnter'
---   }, {'TimUntersberger/neogit', opt = true}
+--   },
 -- }
 -- "tsuyoshicho/vim-efm-langserver-settings", -- auto config efm lsp
 -- "gfanto/fzf-lsp.nvim"
 -- -- Terminal
 --   use 'voldikss/vim-floaterm'
 -- Path navigation
--- use 'blindFS/vim-taskwarrior' -- Task management
 --    use 'tools-life/taskwiki'
 -- use 'justinmk/vim-dirvish'
 -- Plugin development

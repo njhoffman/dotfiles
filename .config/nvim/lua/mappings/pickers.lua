@@ -1,7 +1,3 @@
-local unused_alternates = {
-  ["<A-s>"] = { ":<C-u>:Rg<CR>", "search (ag)" },
-  -- ["<A-s>"] = {":<C-u>:FzfPreviewProjectGrepRpc<CR>", "search (grep)"}
-}
 --     name = "find",
 --         a = "code actions",
 --         b = "buffers",
@@ -16,7 +12,6 @@ local unused_alternates = {
 --         t = "colorschemes"
 --     }
 -- }, { prefix = "<leader>" })
-
 -- -- Directory
 -- wk.register({
 --     d = {
@@ -26,7 +21,6 @@ local unused_alternates = {
 --         r = "remove directory",
 --     }
 -- }, { prefix = "<leader>" })
-
 -- -- Window
 -- wk.register({
 --     w = {
@@ -51,6 +45,32 @@ local unused_alternates = {
 --  nnoremap <leader>ff :Telescope live_grep<CR>
 --  nnoremap <leader>FF :Telescope find_files<CR>
 --  nnoremap <leader>fg :Telescope git_branches<CR>
+vim.api.nvim_command(
+    "command! -nargs=0 SnapVimGrep lua require(\"plugins.configs.lua.snap\").snapVimGrep()")
+vim.api.nvim_command(
+    "command! -nargs=0 SnapVimGrepFzf lua require(\"plugins.configs.lua.snap\").snapVimGrepFzf()")
+vim.api.nvim_command(
+    "command! -nargs=0 SnapRipGrepSystem lua require(\"plugins.configs.lua.snap\").snapRipGrepSystem()")
+vim.api.nvim_command(
+    "command! -nargs=0 SnapFzyRipGrep lua require(\"plugins.configs.lua.snap\").snapFzyRipGrep()")
+vim.api.nvim_command(
+    "command! -nargs=0 SnapFzfRipGrep lua require(\"plugins.configs.lua.snap\").snapFzfRipGrep()")
+vim.api.nvim_command(
+    "command! -nargs=0 SnapFindOldFiles lua require(\"plugins.configs.lua.snap\").snapFindOldFiles()")
+vim.api.nvim_command(
+    "command! -nargs=0 SnapFindBuffers lua require(\"plugins.configs.lua.snap\").snapFindBuffers()")
+vim.api.nvim_command(
+    "command! -nargs=0 SnapFindGitFilesFallback lua require(\"plugins.configs.lua.snap\").snapFindGitFilesFallback()")
+vim.api.nvim_command(
+    "command! -nargs=0 SnapFindHelpTags lua require(\"plugins.configs.lua.snap\").snapFindHelpTags()")
+vim.api.nvim_command(
+    "command! -nargs=0 SnapSearchMainPaths lua require(\"plugins.configs.lua.snap\").snapSearchMainPaths()")
+
+local unused_alternates = {
+  ["<A-s>"] = { ":<C-u>:Rg<CR>", "search (ag)" },
+  -- ["<A-s>"] = {":<C-u>:FzfPreviewProjectGrepRpc<CR>", "search (grep)"}
+  ["<A-/>"] = { "<cmd>Helptags<cr>", "helptags" },
+}
 
 local picker_maps = {
   ["<C-p>"] = { "<cmd>call GFilesFallback()<cr>", "project files" },
@@ -66,7 +86,7 @@ local picker_maps = {
   ["<C-e>"] = { "<cmd>FzfPreviewAllBuffersRpc<cr>", "buffers" },
   ["<A-e>"] = { "<cmd>Sessions<cr>", "sessions" },
   ["<A-j>"] = { "<cmd>FzfPreviewJumpsRpc<cr>", "jumps" },
-  ["<A-/>"] = { "<cmd>Helptags<cr>", "jumps" },
+  ["<A-/>"] = { "<cmd>SnapFindHelpTags<cr>", "helptags" },
   ["<A-m>"] = { "<cmd>FzfPreviewLocationListRpc<cr>", "location list" },
   -- ["<A-s>"] = {"<cmd>FzfPreviewProjectGrepRpcRecall<cr>", "search (rg)"},
   ["<A-s>"] = { "<cmd>Rg<cr>", "search (rg)" },

@@ -72,17 +72,9 @@ end
 time([[try_loadstring definition]], false)
 time([[Defining packer_plugins]], true)
 _G.packer_plugins = {
-  ["Dockerfile.vim"] = {
-    loaded = true,
-    path = "/home/nicholas/.local/share/nvim/site/pack/packer/start/Dockerfile.vim"
-  },
   ["JABS.nvim"] = {
     loaded = true,
     path = "/home/nicholas/.local/share/nvim/site/pack/packer/start/JABS.nvim"
-  },
-  ["ansible-vim"] = {
-    loaded = true,
-    path = "/home/nicholas/.local/share/nvim/site/pack/packer/start/ansible-vim"
   },
   ["asyncrun.vim"] = {
     loaded = true,
@@ -104,10 +96,6 @@ _G.packer_plugins = {
     loaded = true,
     path = "/home/nicholas/.local/share/nvim/site/pack/packer/start/core"
   },
-  ["csv.vim"] = {
-    loaded = true,
-    path = "/home/nicholas/.local/share/nvim/site/pack/packer/start/csv.vim"
-  },
   ["dashboard-nvim"] = {
     loaded = true,
     path = "/home/nicholas/.local/share/nvim/site/pack/packer/start/dashboard-nvim"
@@ -119,10 +107,6 @@ _G.packer_plugins = {
   ["doom-one.vim"] = {
     loaded = true,
     path = "/home/nicholas/.local/share/nvim/site/pack/packer/start/doom-one.vim"
-  },
-  ["editorconfig-vim"] = {
-    loaded = true,
-    path = "/home/nicholas/.local/share/nvim/site/pack/packer/start/editorconfig-vim"
   },
   ["feline.nvim"] = {
     loaded = true,
@@ -140,6 +124,10 @@ _G.packer_plugins = {
     loaded = true,
     path = "/home/nicholas/.local/share/nvim/site/pack/packer/start/fzf"
   },
+  ["fzf-floaterm"] = {
+    loaded = true,
+    path = "/home/nicholas/.local/share/nvim/site/pack/packer/start/fzf-floaterm"
+  },
   ["fzf-preview.vim"] = {
     loaded = true,
     path = "/home/nicholas/.local/share/nvim/site/pack/packer/start/fzf-preview.vim"
@@ -155,22 +143,6 @@ _G.packer_plugins = {
   ["gitsigns.nvim"] = {
     loaded = true,
     path = "/home/nicholas/.local/share/nvim/site/pack/packer/start/gitsigns.nvim"
-  },
-  ["glow.nvim"] = {
-    loaded = true,
-    path = "/home/nicholas/.local/share/nvim/site/pack/packer/start/glow.nvim"
-  },
-  ["i3-vim-syntax"] = {
-    loaded = true,
-    path = "/home/nicholas/.local/share/nvim/site/pack/packer/start/i3-vim-syntax"
-  },
-  ["json5.vim"] = {
-    loaded = true,
-    path = "/home/nicholas/.local/share/nvim/site/pack/packer/start/json5.vim"
-  },
-  ["jsonc.vim"] = {
-    loaded = true,
-    path = "/home/nicholas/.local/share/nvim/site/pack/packer/start/jsonc.vim"
   },
   kommentary = {
     loaded = true,
@@ -205,17 +177,9 @@ _G.packer_plugins = {
     loaded = true,
     path = "/home/nicholas/.local/share/nvim/site/pack/packer/start/lush.nvim"
   },
-  neogit = {
-    loaded = true,
-    path = "/home/nicholas/.local/share/nvim/site/pack/packer/start/neogit"
-  },
   ["neuron.nvim"] = {
     loaded = true,
     path = "/home/nicholas/.local/share/nvim/site/pack/packer/start/neuron.nvim"
-  },
-  ["nginx.vim"] = {
-    loaded = true,
-    path = "/home/nicholas/.local/share/nvim/site/pack/packer/start/nginx.vim"
   },
   ["null-ls.nvim"] = {
     loaded = true,
@@ -297,10 +261,6 @@ _G.packer_plugins = {
     loaded = true,
     path = "/home/nicholas/.local/share/nvim/site/pack/packer/start/packer.nvim"
   },
-  ["php.vim"] = {
-    loaded = true,
-    path = "/home/nicholas/.local/share/nvim/site/pack/packer/start/php.vim"
-  },
   playground = {
     loaded = true,
     path = "/home/nicholas/.local/share/nvim/site/pack/packer/start/playground"
@@ -321,6 +281,10 @@ _G.packer_plugins = {
     loaded = true,
     path = "/home/nicholas/.local/share/nvim/site/pack/packer/start/session-lens"
   },
+  snap = {
+    loaded = true,
+    path = "/home/nicholas/.local/share/nvim/site/pack/packer/start/snap"
+  },
   ["snippets.nvim"] = {
     loaded = true,
     path = "/home/nicholas/.local/share/nvim/site/pack/packer/start/snippets.nvim"
@@ -340,10 +304,6 @@ _G.packer_plugins = {
   ["surround.nvim"] = {
     loaded = true,
     path = "/home/nicholas/.local/share/nvim/site/pack/packer/start/surround.nvim"
-  },
-  tabular = {
-    loaded = true,
-    path = "/home/nicholas/.local/share/nvim/site/pack/packer/start/tabular"
   },
   ["telescope-asynctasks.nvim"] = {
     loaded = true,
@@ -369,10 +329,6 @@ _G.packer_plugins = {
     loaded = true,
     path = "/home/nicholas/.local/share/nvim/site/pack/packer/start/telescope.nvim"
   },
-  ["tmux.vim"] = {
-    loaded = true,
-    path = "/home/nicholas/.local/share/nvim/site/pack/packer/start/tmux.vim"
-  },
   ["todo-comments.nvim"] = {
     loaded = true,
     path = "/home/nicholas/.local/share/nvim/site/pack/packer/start/todo-comments.nvim"
@@ -392,10 +348,6 @@ _G.packer_plugins = {
   ["vim-bbye"] = {
     loaded = true,
     path = "/home/nicholas/.local/share/nvim/site/pack/packer/start/vim-bbye"
-  },
-  ["vim-coffee-script"] = {
-    loaded = true,
-    path = "/home/nicholas/.local/share/nvim/site/pack/packer/start/vim-coffee-script"
   },
   ["vim-cool"] = {
     loaded = true,
@@ -421,18 +373,6 @@ _G.packer_plugins = {
     loaded = true,
     path = "/home/nicholas/.local/share/nvim/site/pack/packer/start/vim-fugitive"
   },
-  ["vim-git"] = {
-    loaded = true,
-    path = "/home/nicholas/.local/share/nvim/site/pack/packer/start/vim-git"
-  },
-  ["vim-gitignore"] = {
-    loaded = true,
-    path = "/home/nicholas/.local/share/nvim/site/pack/packer/start/vim-gitignore"
-  },
-  ["vim-graphql"] = {
-    loaded = true,
-    path = "/home/nicholas/.local/share/nvim/site/pack/packer/start/vim-graphql"
-  },
   ["vim-hexokinase"] = {
     loaded = true,
     path = "/home/nicholas/.local/share/nvim/site/pack/packer/start/vim-hexokinase"
@@ -440,22 +380,6 @@ _G.packer_plugins = {
   ["vim-highlightedyank"] = {
     loaded = true,
     path = "/home/nicholas/.local/share/nvim/site/pack/packer/start/vim-highlightedyank"
-  },
-  ["vim-js"] = {
-    loaded = true,
-    path = "/home/nicholas/.local/share/nvim/site/pack/packer/start/vim-js"
-  },
-  ["vim-json"] = {
-    loaded = true,
-    path = "/home/nicholas/.local/share/nvim/site/pack/packer/start/vim-json"
-  },
-  ["vim-jsx-pretty"] = {
-    loaded = true,
-    path = "/home/nicholas/.local/share/nvim/site/pack/packer/start/vim-jsx-pretty"
-  },
-  ["vim-kubernetes"] = {
-    loaded = true,
-    path = "/home/nicholas/.local/share/nvim/site/pack/packer/start/vim-kubernetes"
   },
   ["vim-liquid"] = {
     loaded = true,
@@ -475,22 +399,6 @@ _G.packer_plugins = {
     loaded = true,
     path = "/home/nicholas/.local/share/nvim/site/pack/packer/start/vim-mundo"
   },
-  ["vim-nix"] = {
-    loaded = true,
-    path = "/home/nicholas/.local/share/nvim/site/pack/packer/start/vim-nix"
-  },
-  ["vim-node"] = {
-    loaded = true,
-    path = "/home/nicholas/.local/share/nvim/site/pack/packer/start/vim-node"
-  },
-  ["vim-pandoc"] = {
-    loaded = true,
-    path = "/home/nicholas/.local/share/nvim/site/pack/packer/start/vim-pandoc"
-  },
-  ["vim-pandoc-syntax"] = {
-    loaded = true,
-    path = "/home/nicholas/.local/share/nvim/site/pack/packer/start/vim-pandoc-syntax"
-  },
   ["vim-plugin-AnsiEsc"] = {
     loaded = true,
     path = "/home/nicholas/.local/share/nvim/site/pack/packer/start/vim-plugin-AnsiEsc"
@@ -498,10 +406,6 @@ _G.packer_plugins = {
   ["vim-profiler"] = {
     loaded = true,
     path = "/home/nicholas/.local/share/nvim/site/pack/packer/start/vim-profiler"
-  },
-  ["vim-puppet"] = {
-    loaded = true,
-    path = "/home/nicholas/.local/share/nvim/site/pack/packer/start/vim-puppet"
   },
   ["vim-renamer"] = {
     loaded = true,
@@ -523,10 +427,6 @@ _G.packer_plugins = {
     loaded = true,
     path = "/home/nicholas/.local/share/nvim/site/pack/packer/start/vim-sayonara"
   },
-  ["vim-sh"] = {
-    loaded = true,
-    path = "/home/nicholas/.local/share/nvim/site/pack/packer/start/vim-sh"
-  },
   ["vim-smoothie"] = {
     loaded = true,
     path = "/home/nicholas/.local/share/nvim/site/pack/packer/start/vim-smoothie"
@@ -535,13 +435,9 @@ _G.packer_plugins = {
     loaded = true,
     path = "/home/nicholas/.local/share/nvim/site/pack/packer/start/vim-symlink"
   },
-  ["vim-systemd-syntax"] = {
+  ["vim-taskwarrior"] = {
     loaded = true,
-    path = "/home/nicholas/.local/share/nvim/site/pack/packer/start/vim-systemd-syntax"
-  },
-  ["vim-terraform"] = {
-    loaded = true,
-    path = "/home/nicholas/.local/share/nvim/site/pack/packer/start/vim-terraform"
+    path = "/home/nicholas/.local/share/nvim/site/pack/packer/start/vim-taskwarrior"
   },
   ["vim-test"] = {
     loaded = true,
@@ -574,14 +470,6 @@ _G.packer_plugins = {
   ["which-key.nvim"] = {
     loaded = true,
     path = "/home/nicholas/.local/share/nvim/site/pack/packer/start/which-key.nvim"
-  },
-  ["yats.vim"] = {
-    loaded = true,
-    path = "/home/nicholas/.local/share/nvim/site/pack/packer/start/yats.vim"
-  },
-  ["zinit-vim-syntax"] = {
-    loaded = true,
-    path = "/home/nicholas/.local/share/nvim/site/pack/packer/start/zinit-vim-syntax"
   }
 }
 

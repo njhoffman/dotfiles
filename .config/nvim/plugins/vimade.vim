@@ -2,7 +2,7 @@
 Plug 'TaDaa/vimade'
 let g:vimade = {}
 let g:vimade.basebg = '0000000'
-let g:vimade.fadelevel = 0.6
+let g:vimade.fadelevel = 0.4
 let g:vimade.fadepriority = 10
 let g:vimade.checkinterval = 100
 let g:vimade.signsretentionperiod = 1000
@@ -15,8 +15,8 @@ let g:vimade.groupdiff = 1
 let g:vimade.groupscrollbind = 0
 
 " shows search results?
-let g:vimade={}
-let g:vimade.fadepriority=0
+" let g:vimade={}
+" let g:vimade.fadepriority=0
 
 " should also help with search results
 au! CompleteChanged * call vimade#WinDisable()

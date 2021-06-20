@@ -4,8 +4,8 @@ require"neuron".setup {
   virtual_titles = true,
   mappings = true,
   run = nil, -- function to run when in neuron dir
-  -- neuron_dir = "~/zettelkasten",
-  neuron_dir = "~/reference/zettel/neuron-docs",
+  neuron_dir = "~/zettelkasten",
+  -- neuron_dir = "~/reference/zettel/neuron-docs",
   leader = "gz", -- the leader key to for all mappings, remember with 'go zettel'
 }
 vim.cmd([[nnoremap <buffer> <CR> <cmd>lua require'neuron'.enter_link()<CR>]])
@@ -29,8 +29,6 @@ vim.cmd([[nnoremap <buffer> <CR> <cmd>lua require'neuron'.enter_link()<CR>]])
 -- nnoremap <buffer> gz] <cmd>lua require'neuron'.goto_next_extmark()<CR>
 -- " go to previous
 -- nnoremap <buffer> gz[ <cmd>lua require'neuron'.goto_prev_extmark()<CR>]]
-
-
 
 -- neuron.vim
 -- gzZ shows a list of backlinks. Selecting one will navigate to it.

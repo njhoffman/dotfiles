@@ -32,10 +32,13 @@ vim.cmd([[cnoremap <C-p>          <Up>]])
 vim.cmd([[cnoremap <C-y>          <C-r>*]])
 -- vim.cmd([[cnoremap <esc>  <C-c>]])
 -- cnoremap <C-g>          <C-c>
-vim.cmd([[au CmdwinEnter : let b:cpt_save = &cpt | set cpt=.]])
-vim.cmd([[au CmdwinLeave : let &cpt = b:cpt_save]])
+-- vim.cmd([[au CmdwinEnter : let b:cpt_save = &cpt | set cpt=.]])
+-- vim.cmd([[au CmdwinLeave : let &cpt = b:cpt_save]])
 -- vim.cmd([[au CmdwinEnter [/?]  startinsert]])
-vim.cmd([[au CmdwinEnter * startinsert]])
+
+vim.cmd([[au CmdwinEnter * nnoremap <buffer><esc> <C-c><C-c>]])
+vim.cmd([[au CmdwinEnter * startinsert ]])
+vim.cmd([[au CmdwinEnter * set nonumber norelativenumber]])
 
 map("n", "<leader>nf", [[:e <C-R>=expand("%:p:h") . "/" <CR>]],
     { silent = false })
@@ -136,6 +139,7 @@ local window_map = {
 
 local buffer_map = {
   -- ["q"] = {"<cmd>update | bdelete<CR>", "Save and safely remove buffer"},
+  -- [":"] = { ":<C-f>", "auto open task window" },
   ["Q"] = { "<nop>" },
   ["_"] = { "<cmd>noh<cr>", "remove highlight" },
   ["<c-q>"] = { "<cmd>qa<cr>", "Quick exit without saving" },
