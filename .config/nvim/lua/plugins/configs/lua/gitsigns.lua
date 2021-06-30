@@ -31,7 +31,7 @@ signs_config_2 = {
 }
 
 require("gitsigns").setup {
-  signs = signs_config_2,
+  signs = signs_config_1,
   numhl = false,
   linehl = false,
   -- keymaps = {

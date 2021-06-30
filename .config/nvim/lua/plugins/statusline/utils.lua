@@ -2,6 +2,7 @@ local M = {}
 M.b = vim.b
 M.vi_mode_utils = require("feline.providers.vi_mode")
 M.lsp = require("feline.providers.lsp")
+
 local config = require("config")
 
 if config.Theming.statusline_color == nil or config.Theming.statusline_color:gsub("%s+", "") == "" then
@@ -9,6 +10,7 @@ if config.Theming.statusline_color == nil or config.Theming.statusline_color:gsu
 else
   M.status_color = config.Theming.statusline_color:gsub("%s+", "")
 end
+
 
 M.properties = {
   force_inactive = {
@@ -22,7 +24,8 @@ M.properties.force_inactive.filetypes = {
   "NvimTree",
   "packer",
   "startify",
-  "toggleterm"
+  "toggleterm",
+  "floaterm"
 }
 
 M.properties.force_inactive.buftypes = {

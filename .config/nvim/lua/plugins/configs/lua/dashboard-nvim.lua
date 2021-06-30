@@ -1,10 +1,12 @@
+-- TODO: Plugin info, project info, commands in project, common project switch
 -- vim.g.dashboard_preview_command = 'cat'
 -- vim.g.dashboard_preview_pipeline = 'lolcat'
 vim.g.dashboard_session_directory = vim.fn.stdpath("data") .. "/sessions/"
 -- vim.g.dashboard_custom_footer = {'myfooter'}
 -- vim.g.dashboard_preview_file = '~/.config/nvim/lua/plugins/dashboard-nvim.logo.cat'
 -- fzf, clap, telescope
-vim.g.dashboard_default_executive = "fzf"
+-- vim.g.dashboard_default_executive = "fzf"
+vim.g.dashboard_default_executive = "telescope"
 vim.g.dashboard_preview_file_height = 12
 vim.g.dashboard_preview_file_width = 80
 -- vim.g.dashboard_custom_shortcut = {
@@ -17,21 +19,6 @@ vim.g.dashboard_preview_file_width = 80
 --   book_marks         = 'SPC f b',
 
 -- }
--- vim.g.dashboard_custom_shortcut['last_session'] = 'SPC s l'
--- vim.g.dashboard_custom_shortcut['find_history'] = 'SPC f h'
--- vim.g.dashboard_custom_shortcut['find_file'] = 'SPC f f'
--- vim.g.dashboard_custom_shortcut['new_file'] = 'SPC c n'
--- vim.g.dashboard_custom_shortcut['change_colorscheme'] = 'SPC t c'
--- vim.g.dashboard_custom_shortcut['find_word'] = 'SPC f a'
--- vim.g.dashboard_custom_shortcut['book_marks'] = 'SPC f b'
---   { 'last_session'       = 'SPC s l' },
---   { 'find_history'       = 'SPC f h' } ,
---   { 'find_file'          = 'SPC f f' } ,
---   { 'new_file'           = 'SPC c n' } ,
---   { 'change_colorscheme' = 'SPC t c' } ,
---   { 'find_word'          = 'SPC f a' } ,
---   { 'book_marks'         = 'SPC f b' } ,
--- }
 
 vim.g.dashboard_custom_header = {
   " ███╗   ██╗ ███████╗ ██████╗  ██╗   ██╗ ██╗ ███╗   ███╗",
@@ -39,16 +26,26 @@ vim.g.dashboard_custom_header = {
   " ██╔██╗ ██║ █████╗  ██║   ██║ ██║   ██║ ██║ ██╔████╔██║",
   " ██║╚██╗██║ ██╔══╝  ██║   ██║ ╚██╗ ██╔╝ ██║ ██║╚██╔╝██║",
   " ██║ ╚████║ ███████╗╚██████╔╝  ╚████╔╝  ██║ ██║ ╚═╝ ██║",
-  " ╚═╝  ╚═══╝ ╚══════╝ ╚═════╝    ╚═══╝   ╚═╝ ╚═╝     ╚═╝"
+  " ╚═╝  ╚═══╝ ╚══════╝ ╚═════╝    ╚═══╝   ╚═╝ ╚═╝     ╚═╝",
 }
 
--- vim.g.dashboard_custom_section = {
---     a = {description = {' Find File          '}, command = 'Telescope find_files'},
---     b = {description = {' Recently Used Files'}, command = 'Telescope oldfiles'},
---     c = {description = {' Load Last Session  '}, command = 'SessionLoad'},
---     d = {description = {' Find Word          '}, command = 'Telescope live_grep'},
---     e = {description = {' Marks              '}, command = 'Telescope marks'}
--- }
+vim.g.dashboard_custom_section = {
+  a = {
+    description = { " Find File          " },
+    command = "Telescope find_files",
+  },
+  b = {
+    description = { " Recently Used Files" },
+    command = "Telescope oldfiles",
+  },
+  c = { description = { " Load Last Session  " }, command = "SessionLoad" },
+  d = {
+    description = { " Find Word          " },
+    command = "Telescope live_grep",
+  },
+  e = { description = { " Marks              " },
+        command = "Telescope marks" },
+}
 
 -- let g:dashboard_custom_header = [
 --     \'        ▄█          █          █▄          ',

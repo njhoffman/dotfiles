@@ -1,4 +1,3 @@
-
 // create an object for the BinarySearchTree
 
   var BST = new BinarySearchTree();

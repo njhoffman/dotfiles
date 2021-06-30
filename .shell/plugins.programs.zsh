@@ -88,11 +88,11 @@
   # fzf-related plugins {{{
 
       # fzf bynary and tmux helper script
-      zinit ice lucid wait'0c' as"command" id-as"junegunn/ fzf-tmux" pick"bin/fzf-tmux"
-      zinit light junegunn/fzf
+      # zinit ice lucid wait'0c' as"command" id-as"junegunn/ fzf-tmux" pick"bin/fzf-tmux"
+      # zinit light junegunn/fzf
 
-      zinit ice wait"1" lucid
-      zinit light junegunn/fzf
+      # zinit ice wait"1" lucid
+      # zinit light junegunn/fzf
 
       zinit ice wait"1" lucid
       zinit light jhawthorn/fzy
@@ -124,8 +124,8 @@
       zi_program has'fzf'
       zinit light denisidoro/navi
 
-      zi_program has'fzf' pick'fzf-tmux'
-      zinit light $GOPATH/src/github.com/junegunn/fzf/bin
+      # zi_program has'fzf' pick'fzf-tmux'
+      # zinit light $GOPATH/src/github.com/junegunn/fzf/bin
 
       # bind multiple widgets using fzf
       zinit ice lucid wait'0c' multisrc"shell/{completion,key-bindings}.zsh" id-as"junegunn/fzf_completions" pick"/dev/null"
@@ -191,8 +191,6 @@
         typeset -gA FZF_WIDGET_OPTS
         # Enable Exact-match by fzf-insert-history
         FZF_WIDGET_OPTS[insert-history]='--exact'
-        autoload -Uz chpwd_recent_dirs cdr add-zsh-hook
-        add-zsh-hook chpwd chpwd_recent_dirs
       # FZF_WIDGET_OPTS[fzf-select-widget]='-p 70%'
       FZF_WIDGET_TMUX=1
 

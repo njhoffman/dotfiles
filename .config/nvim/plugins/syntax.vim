@@ -41,6 +41,7 @@ Plug 'StanAngeloff/php.vim'
 Plug 'honza/vim-snippets'
 
 Plug 'gisphm/vim-gitignore'
+Plug 'mtdl9/vim-log-highlighting'
 
 " language pack collection
 " Plug 'sheerun/vim-polyglot'

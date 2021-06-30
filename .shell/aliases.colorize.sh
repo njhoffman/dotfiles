@@ -27,6 +27,7 @@ alias gmake="$GRC -c conf.gcc gmake"
 alias make="$GRC -c conf.gcc make"
 alias journalctl="$GRC -c conf.log journalctl"
 alias pv="grc -s --colour=on -c conf.log pv"
+alias configure="grc ./configure"
 # apt-get update: conf.docker-machinels
 # apt-cache search: conf.dockersearch
 # git commit:
@@ -249,5 +250,3 @@ gls() {
 # vsize       VSZ       see vsz.  (alias vsz).
 # vsz         VSZ       virtual memory size of the process in KiB (1024-byte units).  Device mappings are
 # wchan       WCHAN     name of the kernel function in which the process is sleeping, a "-" if the process is
-
-

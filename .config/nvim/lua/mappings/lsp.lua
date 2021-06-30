@@ -57,75 +57,79 @@
 -- -- only show diagnostic if cursor is over the area
 -- -- vim.cmd('nnoremap <silent><leader>cc <cmd>lua<CR> require"lspsaga.diagnostic".show_cursor_diagnostics()<CR>')
 -- -- float terminal also you can pass the cli command in open_float_terminal function
-
 -- map("n", "<leader>tv", ":lua diagnostic_toggle_virtual_text()<CR>")
 local lsp_maps = {
-  ["K"] = {"<cmd>Lspsaga hover_doc<cr>", "hover document"},
+  ["K"] = { "<cmd>Lspsaga hover_doc<cr>", "hover document" },
   ["g"] = {
     name = "+goto actions",
-    ["d"] = {"<cmd>Telescope lsp_definitions<cr>", "lsp definitions"},
-    ["D"] = {"<cmd>lua vim.lsp.buf.declaration()<cr>", "buffer declaration"},
-    ["k"] = {"<cmd>Lspsaga hover_doc<cr>", "hover document"},
-    ["o"] = {"<cmd>TSLspOrganize<cr>", "organize imports"},
+    ["d"] = { "<cmd>Telescope lsp_definitions<cr>", "lsp definitions" },
+    ["D"] = { "<cmd>lua vim.lsp.buf.declaration()<cr>", "buffer declaration" },
+    ["k"] = { "<cmd>Lspsaga hover_doc<cr>", "hover document" },
+    ["o"] = { "<cmd>TSLspOrganize<cr>", "organize imports" },
     -- ["a"] = {"<cmd>Lspsaga code_action<cr>", "code actions"},
     -- ["f"] = {"<cmd>TSLspFixCurrent<cr>", "eslint fix"},
     -- ["r"] = {"<cmd>TSLspRenameFile<cr>", "rename file"},
     -- ["i"] = {"<cmd>TSLspImportAll<cr>", "import all"},
-    ["h"] = {"<cmd>Telescope lsp_finder<cr>", "lsp finder"},
-    ["r"] = {"<cmd>Telescope lsp_references<cr>", "lsp references"},
-    ["s"] = {"<cmd>Telescope lsp_signature_help<cr>", "signature help"},
-    ["y"] = {"<cmd>lua vim.lsp.buf.type_definition()<cr>", "buffer definition"},
+    ["h"] = { "<cmd>Telescope lsp_finder<cr>", "lsp finder" },
+    ["r"] = { "<cmd>Telescope lsp_references<cr>", "lsp references" },
+    ["s"] = { "<cmd>Telescope lsp_signature_help<cr>", "signature help" },
+    ["y"] = { "<cmd>lua vim.lsp.buf.type_definition()<cr>", "buffer definition" },
     -- other goto/transforms under cursor
-    ["f"] = {"Edit file under cursor"},
-    ["x"] = {"Open file under cursor"}, -- map X to background
-    ["i"] = {"Move to last insertion"},
-    ["I"] = {"Insert at beginning"},
-    ["a"] = {"Ascii under cursor"},
-    ["u"] = {"Lowercase motion"},
-    ["U"] = {"Uppercase motion"},
-    ["n"] = {"Select last search match"},
-    ["v"] = {"visually select last edited/pasted text"},
-    ["c"] = {"comment text"},
-    ["cc"] = {"comment line"}
+    ["f"] = { "Edit file under cursor" },
+    ["x"] = { "Open file under cursor" }, -- map X to background
+    ["i"] = { "Move to last insertion" },
+    ["I"] = { "Insert at beginning" },
+    ["a"] = { "Ascii under cursor" },
+    ["u"] = { "Lowercase motion" },
+    ["U"] = { "Uppercase motion" },
+    ["n"] = { "Select last search match" },
+    ["v"] = { "visually select last edited/pasted text" },
+    -- ["c"] = { "comment text" },
   },
   --- lsp actions
   ["<leader>l"] = {
     name = "+lsp",
-    ["a"] = {"<cmd>Lspsaga code_action<cr>", "code action"},
-    ["A"] = {"<cmd>Lspsaga range_code_action<cr>", "selected action"},
+    ["a"] = { "<cmd>Lspsaga code_action<cr>", "code action" },
+    ["A"] = { "<cmd>Lspsaga range_code_action<cr>", "selected action" },
     ["d"] = {
-      "<cmd>Telescope lsp_document_diagnostics<cr>", "document diagnostics"
+      "<cmd>Telescope lsp_document_diagnostics<cr>",
+      "document diagnostics",
     },
     ["D"] = {
-      "<cmd>Telescope lsp_workspace_diagnostics<cr>", "workspace diagnostics"
+      "<cmd>Telescope lsp_workspace_diagnostics<cr>",
+      "workspace diagnostics",
     },
-    ["l"] = {"<cmd>Lspsaga show_line_diagnostics<cr>", "line diagnostics"},
-    ["f"] = {"<cmd>Lspsaga lsp_finder<cr>", "lsp finder"},
-    ["i"] = {"<cmd>LspInfo<cr>", "lsp server info"},
-    ["k"] = {"<cmd>Lspsaga signature_help<cr>", "signature help"},
-    ["F"] = {"<cmd>lua vim.lsp.buf.formatting()<cr>", "format"},
-    ["p"] = {"<cmd>Lspsaga preview_definition<cr>", "preview definition"},
-    ["r"] = {"<cmd>Lspsaga rename<cr>", "rename"},
-    ["s"] = {"<cmd>Telescope lsp_document_symbols<cr>", "document symbols"},
-    ["S"] = {"<cmd>Telescope lsp_workspace_symbols<cr>", "workspace symbols"},
-    [".a"] = {"<cmd>LspStop<cr>", "stop all"}
+    ["e"] = {
+      "<cmd>lua vim.cmd('e'..vim.lsp.get_log_path())<cr>",
+      "view lsp log",
+    },
+    ["l"] = { "<cmd>Lspsaga show_line_diagnostics<cr>", "line diagnostics" },
+    ["f"] = { "<cmd>Lspsaga lsp_finder<cr>", "lsp finder" },
+    ["i"] = { "<cmd>LspInfo<cr>", "lsp server info" },
+    ["k"] = { "<cmd>Lspsaga signature_help<cr>", "signature help" },
+    ["F"] = { "<cmd>lua vim.lsp.buf.formatting()<cr>", "format" },
+    ["p"] = { "<cmd>Lspsaga preview_definition<cr>", "preview definition" },
+    ["r"] = { "<cmd>Lspsaga rename<cr>", "rename" },
+    ["s"] = { "<cmd>Telescope lsp_document_symbols<cr>", "document symbols" },
+    ["S"] = { "<cmd>Telescope lsp_workspace_symbols<cr>", "workspace symbols" },
+    [".a"] = { "<cmd>LspStop<cr>", "stop all" },
   },
   --- DAP interactions
-  ["<F8>"] = {"[[ lua require('dap').continue()<CR>]]"},
-  ["<F9>"] = {"[[ lua require('dap').step_over()<CR>]]"},
-  ["<F10>"] = {"[[ lua require('dap').step_into()<CR>]]"},
-  ["<F11>"] = {"[[ lua require('dap').step_out()<CR>]]"},
-  ["<S-F12>"] = {"[[ lua require('dap').repl.run_last()<CR>]]"},
+  ["<F8>"] = { "[[ lua require('dap').continue()<CR>]]" },
+  ["<F9>"] = { "[[ lua require('dap').step_over()<CR>]]" },
+  ["<F10>"] = { "[[ lua require('dap').step_into()<CR>]]" },
+  ["<F11>"] = { "[[ lua require('dap').step_out()<CR>]]" },
+  ["<S-F12>"] = { "[[ lua require('dap').repl.run_last()<CR>]]" },
   ["<leader>d"] = {
     name = "+dap",
-    ["t"] = {'[[ lua require"dap".toggle_breakpoint()<CR>]]'},
+    ["t"] = { "[[ lua require\"dap\".toggle_breakpoint()<CR>]]" },
     ["c"] = {
-      '[[ lua require"dap".set_breakpoint(vim.fn.input("Breakpoint condition: "))<CR>]]'
+      "[[ lua require\"dap\".set_breakpoint(vim.fn.input(\"Breakpoint condition: \"))<CR>]]",
     },
     ["l"] = {
-      '[[ lua require"dap".set_breakpoint(nil, nil, vim.fn.input("Log point message: "))<CR>]]'
-    }
-  }
+      "[[ lua require\"dap\".set_breakpoint(nil, nil, vim.fn.input(\"Log point message: \"))<CR>]]",
+    },
+  },
 }
 
 -- map("n", "<c-p>", ":Lspsaga diagnostic_jump_prev<CR>")
@@ -139,7 +143,7 @@ local opts = {
   buffer = nil,
   silent = true,
   noremap = true,
-  nowait = false
+  nowait = false,
 }
 
 require("which-key").register(lsp_maps, opts)

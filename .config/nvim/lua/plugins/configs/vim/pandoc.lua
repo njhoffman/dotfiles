@@ -50,7 +50,7 @@ vim.cmd([[let g:pandoc#syntax#conceal#use = 1]])
 -- let g:pandoc#syntax#codeblocks#embeds#langs = ["ruby", "python", "cpp", "sh", "html", "javascript", "css", "zsh", "terraform", "ansible", "bash=sh"]
 
 vim.cmd([[
-  let g:pandoc#syntax#codeblocks#embeds#langs = ["shell=sh", "javascript", "bash=sh"]
+  let g:pandoc#syntax#codeblocks#embeds#langs = ["shell=sh", "javascript", "sh", "bash=sh"]
 ]])
 
 -- vim.cmd([[let g:pandoc#syntax#conceal#cchar_overrides = {"footnote" : "*"}]])

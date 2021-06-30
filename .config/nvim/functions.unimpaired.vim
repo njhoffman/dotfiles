@@ -473,7 +473,7 @@ call s:map('x', ']e', '<Plug>unimpairedMoveSelectionDown')
 
 " call s:map('n', '[ob', ':set background=light<CR>')
 " call s:map('n', ']ob', ':set background=dark<CR>')
-call s:map('n', 'yob', ':set background=<C-R>=&background == "dark" ? "light" : "dark"<CR><CR>')
+" call s:map('n', 'yob', ':set background=<C-R>=&background == "dark" ? "light" : "dark"<CR><CR>')
 " call s:option_map('c', 'cursorline', 'setlocal')
 " call s:option_map('-', 'cursorline', 'setlocal')
 " call s:option_map('_', 'cursorline', 'setlocal')

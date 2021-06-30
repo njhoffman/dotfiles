@@ -1,4 +1,4 @@
-local u = require("utils/statusline")
+local u = require("plugins/statusline/utils")
 
 local color = require("plugins/statusline/colors")
 local c = color[u.status_color]

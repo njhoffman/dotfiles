@@ -43,6 +43,7 @@ setopt complete_in_word
 # bash-like completion, only common part is completed, rest is listed
 unsetopt automenu menucomplete
 
+
 # Set list of themes to pick from when loading at random
 # Setting this variable when ZSH_THEME=random will cause zsh to load
 # a theme from this variable instead of looking in ~/.oh-my-zsh/themes/
@@ -92,28 +93,4 @@ COMPLETION_WAITING_DOTS="true"
 
 # skip verification of insecure directories
 # compaudit | xargs chmod g-w,o-w
-ZSH_DISABLE_COMPFIX=false
-setopt complete_in_word
-#
-# Modules
-#
-
-zmodload -i zsh/complist
-
-#
-# Autoloads
-#
-
-autoload -Uz allopt zed zmv zcalc colors
-colors
-
-autoload -Uz edit-command-line
-zle -N edit-command-line
-#bindkey -M vicmd v edit-command-line
-
-autoload -Uz select-word-style
-select-word-style shell
-
-autoload -Uz url-quote-magic
-zle -N self-insert url-quote-magic
 # }}}

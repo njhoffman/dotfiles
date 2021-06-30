@@ -6,6 +6,7 @@ local snap = require "snap"
 function M.snapVimGrep()
   -- snap.register.map({"n"}, {"<Leader>f"}, function ()
   snap.run {
+    reverse = true,
     producer = snap.get "producer.ripgrep.vimgrep",
     select = snap.get"select.vimgrep".select,
     multiselect = snap.get"select.vimgrep".multiselect,
@@ -16,6 +17,7 @@ end
 
 function M.snapRipGrepSystem()
   snap.run {
+    reverse = true,
     producer = snap.get "consumer.limit"(10000,
                                          snap.get "producer.ripgrep.vimgrep"),
     select = snap.get"select.vimgrep".select,
@@ -26,6 +28,7 @@ end
 
 function M.snapFzyRipGrep()
   snap.run {
+    reverse = true,
     producer = snap.get "consumer.fzy"(snap.get "producer.ripgrep.file"),
     select = snap.get"select.file".select,
     multiselect = snap.get"select.file".multiselect,
@@ -35,6 +38,7 @@ end
 
 function M.snapFzfRipGrep()
   snap.run {
+    reverse = true,
     producer = snap.get "consumer.fzf"(snap.get "producer.ripgrep.file"),
     select = snap.get"select.file".select,
     multiselect = snap.get"select.file".multiselect,
@@ -44,6 +48,7 @@ end
 
 function M.snapRipGrep()
   snap.run {
+    reverse = true,
     producer = snap.get "producer.ripgrep.vimgrep",
     select = snap.get"select.vimgrep".select,
     multiselect = snap.get"select.vimgrep".multiselect,
@@ -53,6 +58,7 @@ end
 
 function M.snapFindBuffers()
   snap.run {
+    reverse = true,
     producer = snap.get "consumer.fzy"(snap.get "producer.vim.buffer"),
     select = snap.get"select.file".select,
     multiselect = snap.get"select.file".multiselect,
@@ -62,6 +68,7 @@ end
 
 function M.snapFindOldFiles()
   snap.run {
+    reverse = true,
     producer = snap.get "consumer.fzy"(snap.get "producer.vim.oldfiles"),
     select = snap.get"select.file".select,
     multiselect = snap.get"select.file".multiselect,
@@ -71,6 +78,7 @@ end
 
 function M.snapFindGitFiles()
   snap.run {
+    reverse = true,
     producer = snap.get "consumer.fzy"(snap.get "producer.git.file"),
     select = snap.get"select.file".select,
     multiselect = snap.get"select.file".multiselect,
@@ -80,9 +88,10 @@ end
 
 function M.snapFindGitFilesFallback()
   snap.run {
+    reverse = true,
     producer = snap.get "consumer.fzf"(snap.get "consumer.try"(
                                            snap.get "producer.git.file",
-                                           snap.get "producer.ripgrep.file")),
+                                           snap.get "producer.fd.file")),
     select = snap.get"select.file".select,
     multiselect = snap.get"select.file".multiselect,
     views = { snap.get "preview.file" },
@@ -92,6 +101,7 @@ end
 function M.snapFindHelpTags()
   snap.run {
     prompt = "Help>",
+    reverse = true,
     producer = snap.get "consumer.fzy"(snap.get "producer.vim.help"),
     select = snap.get"select.help".select,
     views = { snap.get "preview.help" },
@@ -101,19 +111,20 @@ end
 -- The following will run the vimgrep producer and upon <C-q> will run fzf on the filtered results.
 function M.snapVimGrepFzf()
   snap.run {
-    producer = snap.get'producer.ripgrep.vimgrep',
-    steps = {{
-      consumer = snap.get'consumer.fzf',
-      config = {prompt = "FZF>"}
-    }},
-    select = snap.get'select.file'.select,
-    multiselect = snap.get'select.file'.multiselect,
-    views = {snap.get'preview.file'}
+    producer = snap.get "producer.ripgrep.vimgrep",
+    reverse = true,
+    steps = {
+      { consumer = snap.get "consumer.fzf", config = { prompt = "FZF>" } },
+    },
+    select = snap.get"select.file".select,
+    multiselect = snap.get"select.file".multiselect,
+    views = { snap.get "preview.file" },
   }
 end
 
 function M.snapSearchMainPaths()
   snap.run {
+    reverse = true,
     producer = snap.get "consumer.fzf"(snap.get "consumer.combine"(
                                            snap.get"producer.ripgrep.file".args(
                                                {}, "/directory1"),

@@ -1,7 +1,23 @@
 -- Remove all inactive statusline components
 -- This table is equal to the default separators table
-local u = require("utils/statusline")
+local u = require("plugins/statusline/utils")
 local cc = require("plugins/statusline/colors")[u.status_color].colors
+
+local colors = {
+  fore = cc.fore,
+  back = cc.back,
+  dark = cc.dark,
+  white = cc.white,
+  skyblue = cc.skyblue,
+  cyan = "#22ccff",
+  green = cc.green,
+  oceanblue = cc.oceanblue,
+  magenta = cc.magenta,
+  orange = cc.orange,
+  red = cc.red,
+  violet = cc.violet,
+  yellow = cc.yellow,
+}
 
 local separators = {
   vertical_bar = "┃",
@@ -40,22 +56,6 @@ local properties = {
       "dashboard",
     },
   },
-}
-
-local colors = {
-  fore = cc.fore,
-  back = cc.back,
-  dark = cc.dark,
-  white = cc.white,
-  skyblue = cc.skyblue,
-  cyan = "#22ccff",
-  green = cc.green,
-  oceanblue = cc.oceanblue,
-  magenta = cc.magenta,
-  orange = cc.orange,
-  red = cc.red,
-  violet = cc.violet,
-  yellow = cc.yellow,
 }
 
 local vi_mode_text = {
@@ -201,7 +201,7 @@ end
 
 function M.get_components()
   local lsp = require("feline/providers/lsp")
-  local u = require("utils/statusline")
+  local u = require("plugins/statusline/utils")
 
   local color = require("plugins/statusline/colors")
 
@@ -391,13 +391,13 @@ function M.get_components()
       last_active_client_buffer = vim.fn.bufnr()
     end
 
-    if active_clients == nil or #active_clients == 0 then
-      active_clients = vim.lsp.buf_get_clients()
-    end
+    -- if active_clients == nil or #active_clients == 0 then
+    --   active_clients = vim.lsp.buf_get_clients()
+    -- end
 
-    if #active_clients == 0 then return " " end
-    if #active_clients > 1 then return #active_clients end
-    if active_clients[1].name == "efm" then return "" end
+    -- if #active_clients == 0 then return " " end
+    -- if #active_clients > 1 then return #active_clients end
+    -- if active_clients[1].name == "efm" then return "" end
     return ""
   end
 

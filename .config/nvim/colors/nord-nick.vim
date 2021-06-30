@@ -5,7 +5,7 @@ let g:nord_cursorline_transparent = 1
 let g:nord_italic_comments = 1
 let g:nord_uniform_status_lines = 1
 let g:nord_underline = 0
-lua require("lush")(require("colorschemes.lush-themes.nord-nvim"))
+lua require("lush")(require("colorschemes.nord-nick"))
 
 " nord_cursor_line_number_background  0 Use the same background on number when cursorline enabled
 " nord_uniform_status_lines 0 Use the same background for all statuslines on split windows

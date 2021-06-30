@@ -9,7 +9,9 @@
 
 export SELENIUM_SERVER_JAR=/usr/local/bin/selenium-server-standalone-2.43.1.jar
 export LC_ALL="en_US.UTF-8"
+# export LC_ALL="C"
 export LANG="en_US.UTF-8"
+export LANGUAGE="en_US.UTF-8"
 export TZ='America/Chicago'
 export NO_AT_BRIDGE=1 # turn off warning of connection to dbus for a11y features
 # no=00;38;5;244:rs=0:di=00;38;5;33:
@@ -138,7 +140,8 @@ export PATH="${KREW_ROOT:-$HOME/.krew}/bin:$PATH"
 # export POWERLINE_CONFIG_PATHS=/home/$USER/.shell/powerline:/home/$USER/.shell/.powerline:/home/$USER/.config/powerline
 export NODE_PATH=$(npm root -g)
 
-export PATH=$PATH:~/.bin:~/bin:~/bin/aws:~/bin/docker:/usr/local/bin:~/.local/bin
+export ZK_PATH=~/zettelkasten
+export PATH=$PATH:~/.bin:~/bin:~/bin/aws:~/bin/docker:~/bin/zk:/usr/local/bin:~/.local/bin
 export PATH="$PATH:/usr/local/aws-cli/v2/current/bin"
 
 # Find your Python User Base path (where Python --user will install packages/scripts)

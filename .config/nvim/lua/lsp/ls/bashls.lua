@@ -1,9 +1,9 @@
 local lspconfig = require "lspconfig"
-local lsp_cmds = require('lsp.commands')
-local M = require("lsp.efm.handlers")
+local lsp_cmds = require"lsp.commands"
+local M = require"lsp.efm.handlers"
 
 -- function to attach completion when setting up lsp
-local on_attach = function(client, bufnr)
+local on_attach=function(client, bufnr)
   -- require'completion'.on_attach(client)
   M.common_on_attach(client, bufnr)
   print("'" .. client.name .. "' server attached")

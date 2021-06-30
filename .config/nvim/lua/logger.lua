@@ -2,7 +2,7 @@ local log = require("debug.log")
 
 local user_config = {
   -- Name of the plugin. Prepended to log messages
-  plugin = "vlog.nvim",
+  plugin = "nvim",
   -- Should print the output to neovim while running
   use_console = false,
   -- Should highlighting be used in console (using echohl)
@@ -13,15 +13,15 @@ local user_config = {
   level = "trace",
   -- Level configuration
   modes = {
-    {name = "trace", hl = "Comment"},
-    {name = "debug", hl = "Comment"},
-    {name = "info", hl = "None"},
-    {name = "warn", hl = "WarningMsg"},
-    {name = "error", hl = "ErrorMsg"},
-    {name = "fatal", hl = "ErrorMsg"}
+    { name = "trace", hl = "Comment" },
+    { name = "debug", hl = "Comment" },
+    { name = "info", hl = "None" },
+    { name = "warn", hl = "WarningMsg" },
+    { name = "error", hl = "ErrorMsg" },
+    { name = "fatal", hl = "ErrorMsg" },
   },
   -- Can limit the number of decimals displayed for floats
-  float_precision = 0.01
+  float_precision = 0.01,
 }
 
 log.new(user_config, true)

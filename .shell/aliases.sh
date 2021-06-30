@@ -15,6 +15,16 @@ alias nixls="grc -c conf.docker-machinels -es --colour=on nix-env --query --stat
 alias nixcomp="grc -c conf.docker-machinels -es --colour=on nix-env --available --query --status -P
 --description --compare"
 
+alias neuron="LC_ALL=C neuron -d ~/zettelkasten"
+alias zk="zk -W ~/zettelkasten"
+
+alias asynctask="~/bin/asynctask.py"
+alias at="~/bin/asynctask.py"
+alias at-fzf="~/bin/asynctask.py -f"
+alias atf="~/bin/asynctask.py -f"
+alias at-list="~/bin/asynctask.py -l"
+alias at-list-all="~/bin/asynctask.py -L"
+
 alias db=dotbare
 alias dots=dotbare
 
@@ -108,8 +118,8 @@ alias chown='chown --preserve-root'
 alias chmod='chmod --preserve-root'
 alias chgrp='chgrp --preserve-root'
 
-[[ -d "$HOME/projects/personal/movieman" && -n "$NODE_PATH" ]] &&
-  alias mm="node ~/projects/personal/movieman/lib/index.js"
+[[ -d "$HOME/projects/personal/movieman" && -n "$NODE_PATH" ]] \
+                                                               && alias mm="node ~/projects/personal/movieman/lib/index.js"
 
 if [[ -d "$HOME/projects/personal/wikiscan" && -n "$NODE_PATH" ]]; then
   alias wikiscan="$HOME/projects/personal/wikiscan/bin/wikiscan.sh"
@@ -129,6 +139,7 @@ fi
 alias open_command="xdg-open"
 alias googler="googler --colors GKmgxy"
 alias g="googler --colors GKmgxy -j --first --lucky"
+alias gs="googler --colors GKmgxy -j"
 alias fakercli="node $HOME/projects/fakercli/lib/index.js"
 alias fbt="fb --test"
 
@@ -322,16 +333,16 @@ alias pip-upgrade-all="pip list --outdated --format=freeze | grep -v '^\-e' | cu
 
 # GO111MODULE=on go get mvdan.cc/sh/v3/cmd/shfmt
 # TODO: make nvim function that loads exact match, fzf if none found
-if which fasd >/dev/null; then
+if which fasd > /dev/null; then
   # install fasd hooks and basic aliases in the shell
   eval "$(fasd --init auto)"
 
   # if there is fzf available use it to search fasd results
-  if which fzf >/dev/null; then
+  if which fzf > /dev/null; then
 
-    alias v >/dev/null && unalias v
-    alias vd >/dev/null && unalias vd
-    alias z >/dev/null && unalias z
+    alias v > /dev/null && unalias v
+    alias vd > /dev/null && unalias vd
+    alias z > /dev/null && unalias z
 
     # alias v='fasd -e nvim'
     alias a='fasd -a'    # any

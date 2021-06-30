@@ -6,7 +6,7 @@ local integrations_map = {
   ["U"] = { "<cmd>MundoToggle<cr>", "toggle undo tree" },
   ["T"] = { "<cmd>FloatermToggle<cr>", "terminal" },
   ["<leader>."] = {
-    [[:w<cr>:call AltCommand(expand('%'), ':e')<cr>]],
+    [[:call AltCommand(expand('%'), ':e')<cr>]],
     "load alt file",
   },
   ["<leader>o"] = {

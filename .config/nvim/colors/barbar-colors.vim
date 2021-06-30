@@ -109,8 +109,8 @@ let s:gh_danger_fg  = s:red
 " }}}
 " General UI                                                                 {{{
 
-call s:_('Normal',            s:fg,           s:bg)
-call s:_('EndOfBuffer',       s:fg,           s:bg)
+" call s:_('Normal',            s:fg,           s:bg)
+" call s:_('EndOfBuffer',       s:fg,           s:bg)
 " call s:_('NormalPopup',       s:fg_highlight, s:bg_popup)
 " call s:_('NormalPopover',     s:fg_highlight, s:bg_popup)
 " call s:_('NormalPopupPrompt', s:base7,        color#Darken(s:bg_popup, 0.3), 'bold')
@@ -143,15 +143,15 @@ hi! link TermNormalNC TermNormal
 " call s:_('Visual',         '', s:bg_visual)
 " call s:_('VisualBold',     '', s:bg_visual, 'bold')
 
-call s:_('WildMenu',       s:fg,            s:bg_selection)
+" call s:_('WildMenu',       s:fg,            s:bg_selection)
 
-call s:_('StatusLine',       s:base8,  s:bg_statusline, 'none')
-call s:_('StatusLineNC',     s:base6,  s:bg_statusline, 'none')
-call s:_('StatusLinePart',   s:base6,  s:bg_statusline, 'bold')
-call s:_('StatusLinePartNC', s:base6,  s:bg_statusline, 'bold')
+" call s:_('StatusLine',       s:base8,  s:bg_statusline, 'none')
+" call s:_('StatusLineNC',     s:base6,  s:bg_statusline, 'none')
+" call s:_('StatusLinePart',   s:base6,  s:bg_statusline, 'bold')
+" call s:_('StatusLinePartNC', s:base6,  s:bg_statusline, 'bold')
 
-call s:_('Separator', s:fg_alt, 'none')
-call s:_('VertSplit', s:base4,   s:bg, 'none')
+" call s:_('Separator', s:fg_alt, 'none')
+" call s:_('VertSplit', s:base4,   s:bg, 'none')
 
 " Auto-completion
 

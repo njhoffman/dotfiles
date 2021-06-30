@@ -20,6 +20,7 @@ source "$shell_dir/.zshrc.init"
   load_file "$shell_dir/options.zsh"
   load_file "$shell_dir/highlights.zsh"
   load_file "$shell_dir/powerlevel10k/p10k.zsh"
+  # source ~/powerlevel10k/powerlevel10k.zsh-theme
 
   [ -f "$home_dir/local.zsh" ] && load_file "$home_dir/local.zsh"
 
@@ -39,7 +40,6 @@ eval "$(fasd --init auto)"
 
 [ -d "$HOME/bin" ] && export PATH="$HOME/bin:$PATH"
 [ -d "$HOME/bin/colors" ] && export PATH="$HOME/bin/colors:$PATH"
-
 # reassign aliases in case of overwrite (i.e. git plugin of oh-my-zsh)
 # load_file "$shell_dir/aliases.sh"
 
@@ -93,26 +93,10 @@ split_pwd() {
     echo $W
   fi
 }
-# if [[ -z $_SHELL_INITIALIZED ]]; then
-  # twilio autocomplete setup
-  TWILIO_AC_ZSH_SETUP_PATH=/home/nicholas/.twilio-cli/autocomplete/zsh_setup && test -f $TWILIO_AC_ZSH_SETUP_PATH && source $TWILIO_AC_ZSH_SETUP_PATH;
-
-  # load autocompletion scripts
-  [[ -x "$(command -v kubectl)" ]] && source <(kubectl completion zsh)
-  [[ -x "$(command -v twilio)" ]] && source <(twilio autocomplete:script zsh)
-  [[ -x "$(command -v stern)" ]] && source <(stern --completion=zsh)
-  fpath=(~/.shell/completions $fpath)
-  autoload -U compinit && compinit
-  autoload -U bashcompinit && bashcompinit
-
-  complete -C '/usr/local/bin/aws_completer' aws
 
 # fi
 
 function pipver() { curl -s https://pypi.org/rss/project/$1/releases.xml | sed -n 's/\s*<title>\([0-9.]*\).*/\1/p' ;}
-
-#TODO: why have to double assign this?
-bindkey '^I' expand-or-complete
 
 # zle clear-screen
 #

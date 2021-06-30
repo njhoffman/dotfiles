@@ -1,10 +1,15 @@
 -- dofile('/home/wil/.config/nvim/lua/profiler.lua')
 -- require("debug.typescript")
-require "plugins"
+local logger = require("logger");
+
 -- install 3rd party plugin packages
--- require "plugins-config"
+
+require "plugins"
+require "plugins-config"
+logger.debug("Loaded plugins")
 
 require "lsp.setup"
+logger.debug("Loaded LSP")
 
 -- general settings
 require "main.options"
@@ -20,8 +25,11 @@ require "mappings.unimpaired"
 require "mappings.formatters"
 require "mappings.movement"
 require "mappings.ignored"
+logger.info(vim.inspect(packer_plugins))
+logger.info(string.format("Finished at %s", os.date("%H:%M:%S")))
 
--- only available after plugins loaded
--- if packer_plugins["nvim-treesitter"] and packer_plugins["nvim-treesitter"].loaded then
---   print("Treesitter fugitive is loaded")
--- end
+if packer_plugins ~= nil then
+  local count = 0
+  for _ in pairs(packer_plugins) do count = count + 1 end
+  logger.debug("Loaded plugins: " .. count)
+end

@@ -34,16 +34,21 @@ local map = require("utils.core").map
 --   }
 -- )
 -- Dropdown list theme using a builtin theme definitions :
-local center_list =
-  require "telescope.themes".get_dropdown(
-  {
-    winblend = 10,
-    width = 0.5,
-    prompt = " ",
-    results_height = 15,
-    previewer = false
-  }
-)
+local center_list = require"telescope.themes".get_dropdown({
+  winblend = 10,
+  width = 0.5,
+  prompt = " ",
+  results_height = 15,
+  previewer = false,
+})
+
+local center_list_preview = require"telescope.themes".get_dropdown({
+  winblend = 10,
+  width = 0.5,
+  prompt = " ",
+  results_height = 15,
+  layout_config = { preview_width = 0.5 },
+})
 
 -- Settings for with preview option
 local with_preview = {
@@ -51,9 +56,7 @@ local with_preview = {
   show_line = false,
   results_title = false,
   preview_title = false,
-  layout_config = {
-    preview_width = 0.5
-  }
+  layout_config = { preview_width = 0.5 },
 }
 local sorters = require "telescope.sorters"
 local previewers = require "telescope.previewers"
@@ -81,96 +84,109 @@ telescope.load_extension("asynctasks")
 -- require("telescope").extensions.packer.plugins()
 -- telescope.extensions.asynctasks.all()
 
+-- local mappings = {["enter-split"] = {"<C-x>"}, ["enter-tab"] = {"<C-t>"}, ["enter-vsplit"] = {"<C-v>"}, ["next-item"] = {"<C-n>"}, ["next-page"] = {"<C-f>"}, ["prev-item"] = {"<C-p>"}, ["prev-page"] = {"<C-b>"}, ["select-all"] = {"<C-a>"}, ["view-page-down"] = {"<C-d>"}, ["view-page-up"] = {"<C-u>"}, enter = {"<CR>"}, exit = {"<Esc>", "<C-c>"}, next = {"<C-q>"}, select = {"<Tab>"}, unselect = {"<S-Tab>"}}
 telescope.setup {
   defaults = {
     vimgrep_arguments = {
       "rg",
-      "--color=never",
+      -- "--color=never",
       "--no-heading",
       "--with-filename",
       "--line-number",
       "--column",
-      "--smart-case"
+      "--smart-case",
+      "--vimgrep",
     },
-    find_command = {
-      "rg",
-      "--ignore",
-      "--hidden",
-      "--files prompt_prefix=🔍"
-    },
+    find_command = { "rg", "--ignore", "--hidden", "--files prompt_prefix=🔍" },
     prompt_position = "top",
-    prompt_prefix = "λ ",
-    selection_caret = "|> ",
+    prompt_prefix = "> ",
+    selection_caret = "> ",
+    -- prompt_prefix = "λ ",
+    -- selection_caret = "|> ",
     selection_strategy = "reset", -- follow, reset, row
     sorting_strategy = "ascending",
     layout_strategy = "flex", -- flex, horizontal, veritical, center
     scroll_strategy = "cycle",
     width = 0.5,
-    shorten_path = true,
     color_devicons = true,
     winblend = 15,
     horizontal = {
       width_padding = 0.1,
       height_padding = 0.1,
-      preview_width = 0.6
+      preview_width = 0.6,
       -- mirror = false,
     },
     vertical = {
       width_padding = 0.05,
       height_padding = 1,
-      preview_height = 0.5
+      preview_height = 0.5,
       -- mirror = true,
     },
     mappings = {
+      -- actions.add_selection, remove_selection, preview_scrolling_up/down, center, send/add_selected_to_loclist,
+      -- open_qflist/loclist, cycle_previewers_next/previous, move_to_bottom/middle/top, smart_send, set_horizontal, set_vertical
+      -- move_selection_better, action_set.scroll_previewer = function (prompt_bufnr, direction)
       i = {
+        ["<cr>"] = actions.select_default + actions.center,
         ["<esc>"] = actions.close,
-        ["<C-q>"] = actions.send_to_qflist
+        ["<C-q>"] = actions.send_to_qflist,
         -- ["<C-h>"] = actions.goto_file_selection_split,
         -- ["<C-v>"] = actions.goto_file_selection_vsplit
+        -- ['<A- >'] = actions.toggle,
+        -- ['<A-f>'] = actions.toggle,
+        ["<C-u>"] = false,
       },
       n = {
-        ["<esc>"] = actions.close
-      }
+        ["<esc>"] = actions.close,
+        ["<c-j>"] = actions.move_selection_next,
+        ["<c-k>"] = actions.move_selection_previous,
+      },
     },
+    -- file_sorter =  require'telescope.sorters'.get_fuzzy_file,
+    -- file_previewer = previewers.vim_buffer_cat.new,
     file_sorter = sorters.get_fzy_sorter,
-    file_previewer = previewers.vim_buffer_cat.new,
+    generic_sorter = require"telescope.sorters".get_generic_fuzzy_sorter,
     grep_previewer = previewers.vim_buffer_vimgrep.new,
-    qflist_previewer = previewers.vim_buffer_qflist.new
+    qflist_previewer = previewers.vim_buffer_qflist.new,
+    shorten_path = true,
+    file_ignore_patterns = {},
   },
   extensions = {
-    fzy_native = {
-      override_generic_sorter = false,
-      override_file_sorter = true
-    }
-  }
+    fzy_native = { override_generic_sorter = false, override_file_sorter = true },
+  },
 }
 -- set_mappings()
 
 _G.FindFile = function()
   local opts = vim.deepcopy(center_list)
   opts.prompt_title = "Find in project (CTRL-P)"
-  opts.find_command = {"rg", "--hidden", "--files"}
+  opts.find_command = { "rg", "--hidden", "--files" }
   require("telescope.builtin").find_files(opts)
 end
 
 _G.FindBuffer = function()
   local my_make_entry = require("rc.telescope.my_make_entry")
-  local opts = vim.deepcopy(center_list)
+  local opts = vim.deepcopy(center_list_preview)
   opts.prompt_title = "Find in open buffers"
-  opts.find_command = {"rg", "--hidden", "--files", "--color=never"}
+  opts.find_command = { "rg", "--hidden", "--files", "--color=never" }
   opts.entry_maker = my_make_entry.gen_from_buffer_like_leaderf()
   require("telescope.builtin").buffers(opts)
 end
 
 _G.FindString = function()
-  local opts = vim.deepcopy(with_preview)
+  -- local opts = vim.deepcopy(with_preview)
+  local opts = require"telescope.themes".get_dropdown({ winblend = 10 })
+  local preview_opts = vim.deepcopy(with_preview)
+  for _, preview_opt in ipairs(preview_opts) do table.insert(opts, preview_opt) end
   opts.search = vim.fn.input("Grep for > ")
   opts.prompt_title = "Filter results"
   require("telescope.builtin").grep_string(opts)
 end
 
 _G.FindLive = function()
-  local opts = vim.deepcopy(with_preview)
+  -- local opts = vim.deepcopy(with_preview)
+  -- local opts = require "telescope.themes".get_dropdown({ winblend = 10 })
+  local opts = require"telescope.themes".get_ivy({ winblend = 10 })
   opts.prompt_title = "Live search"
   require("telescope.builtin").live_grep(opts)
 end
@@ -178,71 +194,24 @@ end
 _G.FindDot = function()
   local opts = vim.deepcopy(center_list)
   opts.prompt_title = "Find in dotfiles"
-  opts.cwd = "$HOME/Projects/dotfiles/"
+  opts.cwd = "$HOME/.config"
   opts.results_height = 10
   require("telescope.builtin").find_files(opts)
 end
 
 _G.FindGit = function()
-  require("telescope.builtin").git_branches(
-    {
-      attach_mappings = function(_, map)
-        map("i", "<c-d>", actions.git_delete_branch)
-        map("n", "<c-d>", actions.git_delete_branch)
-        return true
-      end
-    }
-  )
+  require("telescope.builtin").git_branches({
+    attach_mappings = function(_, map)
+      map("i", "<c-d>", actions.git_delete_branch)
+      map("n", "<c-d>", actions.git_delete_branch)
+      return true
+    end,
+  })
 end
+
+-- vim.cmd([[autocmd User TelescopePrompt setlocal wrap]])
+
 return plugin
-
--- defaults = {
---   vimgrep_arguments = {
---     'rg',
---     '--color=never',
---     '--no-heading',
---     '--with-filename',
---     '--line-number',
---     '--column',
---     '--smart-case'
---   },
---   prompt_position = "bottom",
---   prompt_prefix = "> ",
---   selection_caret = "> ",
---   entry_prefix = "  ",
---   initial_mode = "insert",
---   selection_strategy = "reset",
---   sorting_strategy = "descending",
---   layout_strategy = "horizontal",
---   layout_defaults = {
---     horizontal = {
---       mirror = false,
---     },
---     vertical = {
---       mirror = false,
---     },
---   },
---   file_sorter =  require'telescope.sorters'.get_fuzzy_file,
---   file_ignore_patterns = {},
---   generic_sorter =  require'telescope.sorters'.get_generic_fuzzy_sorter,
---   shorten_path = true,
---   winblend = 0,
---   width = 0.75,
---   preview_cutoff = 120,
---   results_height = 1,
---   results_width = 0.8,
---   border = {},
---   borderchars = { '─', '│', '─', '│', '╭', '╮', '╯', '╰' },
---   color_devicons = true,
---   use_less = true,
---   set_env = { ['COLORTERM'] = 'truecolor' }, -- default = nil,
---   file_previewer = require'telescope.previewers'.vim_buffer_cat.new,
---   grep_previewer = require'telescope.previewers'.vim_buffer_vimgrep.new,
---   qflist_previewer = require'telescope.previewers'.vim_buffer_qflist.new,
-
---   -- Developer configurations: Not meant for general override
---   buffer_previewer_maker = require'telescope.previewers'.buffer_previewer_maker
--- }
 
 -- Telescope projects
 -- d: delete currently selected project
@@ -257,11 +226,9 @@ return plugin
 -- Available options:
 -- Options can be added when requiring telescope project, as shown below:
 -- lua require'telescope'.extensions.project.project{ display_type = 'full' }
-
 -- display_type:
 -- 'full' (Show the title and the path of the project)
 -- 'minimal' (Default. Show the title of the project only)
---
 
 -- fzf-native
 -- https://github.com/nvim-telescope/telescope-fzf-native.nvim

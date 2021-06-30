@@ -609,9 +609,9 @@ if !exists("g:surround_no_mappings") || ! g:surround_no_mappings
   xmap S   <Plug>VSurround
   xmap gS  <Plug>VgSurround
   if !exists("g:surround_no_insert_mappings") || ! g:surround_no_insert_mappings
-    if !hasmapto("<Plug>Isurround","i") && "" == mapcheck("<C-S>","i")
-      imap    <C-S> <Plug>Isurround
-    endif
+    " if !hasmapto("<Plug>Isurround","i") && "" == mapcheck("<C-S>","i")
+    "   imap    <C-S> <Plug>Isurround
+    " endif
     imap      <C-G>s <Plug>Isurround
     imap      <C-G>S <Plug>ISurround
   endif

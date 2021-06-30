@@ -18,4 +18,3 @@ if zplug check b4b4r07/enhancd; then
   # ENHANCD_COMPLETION_KEYBIND
   # ENHANCD_COMPLETION_BEHAVIOR
 fi
-

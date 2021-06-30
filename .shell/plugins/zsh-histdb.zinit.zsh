@@ -35,5 +35,3 @@ export HISTFILESIZE=1000000000
 export HISTSIZE=1000000000
 
 load_file $HOME/.zinit light/repos/larkery/zsh-histdb/sqlite-history.zsh
-autoload -Uz add-zsh-hook
-

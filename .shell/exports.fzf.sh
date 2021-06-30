@@ -14,7 +14,7 @@ source $HOME/.shell/fzf-zsh-completion.sh
 # export FZF_ALT_C_COMMAND="command fdfind --hidden --follow --type d --color never"
 # export FZF_DEFAULT_OPTS='--height 40% --reverse --ansi --border --inline-info --color=dark,bg+:235,hl+:10,pointer:5'
 # export FZF_DEFAULT_OPTS='--color="bg:#000008,bg+:#002222,spinner:#079e71,hl:#488eb5,fg:#a3a3b6,header:#586e75,info:#cb4b16,pointer:#07ae71,marker:#07ae71,fg+:#839496,prompt:#07ae71,hl+:#07ae71"'
-bat_preview="([[ -f {} ]] && (bat --style=plain --color=always --line-range :100 {} || cat {})) || ([[ -d {} ]] && (colorls --tree --color=always {} | less)) || echo {} 2> /dev/null | head -200"
+bat_preview="([[ -f {} ]] && (bat --style=plain --color=always --line-range :100 {} || cat {})) || ([[ -d {} ]] && (/home/nicholas/.rvm/gems/ruby-2.7.2/bin/colorls --tree --color=always {} | less)) || echo {} 2> /dev/null | head -200"
 
 fzf_colors="bg:#000000,bg+:#222222,header:#586e75"
 fzf_colors+=",hl:#5f87af,hl+:#5fd7ff,fg:#a3a3b6"
@@ -35,7 +35,6 @@ export FZF_DEFAULT_OPTS="
   --prompt='∼ '
   --pointer='▶'
   --marker='✓ '
-  --header='C-e: edit, C-y: copy, C-v: execute'
   --bind 'change:top'
   --bind 'Ctrl-/:toggle-preview'
   --bind 'ctrl-p:up'
@@ -63,8 +62,10 @@ export FZF_DEFAULT_OPTS="
   --bind 'ctrl-v:execute(code {+})'
 "
 # --bind '?:toggle-preview'
+# --header='C-e: edit, C-y: copy, C-v: execute'
 
-export FZF_POPUP_OPTS=" --layout=reverse --info=inline --ansi --height=100% --multi --border --preview-window=:hidden --preview '([[ -f {} ]] && (bat --style=plain --color=always --line-range :100 {} || cat {})) || ([[ -d {} ]] && (colorls --tree --color=always {} | less)) || echo {} 2> /dev/null | head -200' --color='dark,bg+:235,hl+:5,pointer:5' --prompt='∼ ' --pointer='▶' --marker='✓ ' --bind 'Ctrl-/:toggle-preview' --bind 'ctrl-p:up' --bind 'ctrl-n:down' --bind 'ctrl-b:page-up' --bind 'ctrl-f:page-down' --bind 'ctrl-alt-a:toggle-all' --bind 'ctrl-y:execute-silent(echo {+} | pbcopy)' --bind 'ctrl-e:execute(nvim {+} < /dev/tty > /dev/tty 2>&1)' --bind 'ctrl-v:execute(code {+})' "
+export FZF_POPUP_OPTS=" --layout=reverse --info=inline --ansi --height=100% --multi --border --preview-window=:hidden --preview '([[ -f {} ]] && (bat --style=plain --color=always --line-range :100 {} || cat {})) || ([[ -d {} ]] && (/home/nicholas/.rvm/gems/ruby-2.7.2/bin/colorls --tree --color=always {} | less)) || echo {} 2> /dev/null | head -200' --color='dark,bg+:235,hl+:5,pointer:5' --prompt='∼ ' --pointer='▶' --marker='✓ ' --bind 'Ctrl-/:toggle-preview' --bind 'ctrl-p:up' --bind 'ctrl-n:down' --bind 'ctrl-b:page-up' --bind 'ctrl-f:page-down' --bind 'ctrl-alt-a:toggle-all' --bind 'ctrl-y:execute-silent(echo {+} | pbcopy)' --bind 'ctrl-e:execute(nvim {+} < /dev/tty > /dev/tty 2>&1)' --bind 'ctrl-v:execute(code {+})' "
+
 fzf_exclude="\
   --exclude \".git\" \
 "
@@ -81,14 +82,14 @@ export FZF_ALT_C_COMMAND="$fzf_command --type d $fzf_exclude"
 
 # ALT_C_OPTS, CTRL_R_OPTS, CTRL_T_OPTS
 export FZF_TMUX=1
-# default -w 50%
 export FZF_TMUX_OPTS="-p 80%"
 
-# fzf-direct-completion() {
-#   FZF_COMPLETION_TRIGGER= fzf-completion
-# }
-# zle -N fzf-direct-completion
-# export FZF_COMPLETION_TRIGGER=''
+fzf-direct-completion() {
+  FZF_COMPLETION_TRIGGER=fzf-completion
+}
+zle -N fzf-direct-completion
+
+export FZF_COMPLETION_TRIGGER=' '
 # export FZF_COMPLETION_TRIGGER='**'
 
 # alias fzf="fzf-tmux"

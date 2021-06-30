@@ -1,6 +1,6 @@
 local map = require("utils.core").map
 local config = require("config").Opts
-local tree_cb = require "nvim-tree.config".nvim_tree_callback
+local tree_cb = require"nvim-tree.config".nvim_tree_callback
 
 local g = vim.g
 
@@ -17,19 +17,34 @@ g.nvim_tree_lsp_diagnostics = 1
 g.nvim_tree_quit_on_open = 1
 g.nvim_tree_tab_open = 0
 g.nvim_tree_width = 40
-g.nvim_tree_auto_ignore_ft = {"startify", "dashboard"}
-g.nvim_tree_ignore = {".git", "node_modules", ".cache"}
+g.nvim_tree_auto_ignore_ft = { "startify", "dashboard" }
+g.nvim_tree_ignore = { ".git", "node_modules", ".cache" }
 g.nvim_tree_window_picker_exclude = {
-  filetype = {"packer", "qf"},
-  buftype = {"terminal"}
+  filetype = { "packer", "qf" },
+  buftype = { "terminal" },
 }
 
 g.nvim_tree_icons = {
   default = "",
   symlink = "",
-  lsp = {hint = "", info = "", warning = "", error = ""},
-  git = {unstaged = "✗", staged = "✓", unmerged = "", renamed = "➜", untracked = "★", deleted = "", ignored = "◌"},
-  folder = {default = "", open = "", empty = "", empty_open = "", symlink = "", symlink_open = ""}
+  lsp = { hint = "", info = "", warning = "", error = "" },
+  git = {
+    unstaged = "✗",
+    staged = "✓",
+    unmerged = "",
+    renamed = "➜",
+    untracked = "★",
+    deleted = "",
+    ignored = "◌",
+  },
+  folder = {
+    default = "",
+    open = "",
+    empty = "",
+    empty_open = "",
+    symlink = "",
+    symlink_open = "",
+  },
 }
 g.nvim_tree_bindings = {
   -- custom mapping
@@ -45,7 +60,7 @@ g.nvim_tree_bindings = {
   ["<C-]>"] = tree_cb("cd"),
   ["<C-v>"] = tree_cb("vsplit"),
   ["<C-x>"] = tree_cb("split"),
-  ["<C-t>"] = tree_cb("tabnew"),
+  -- ["<C-t>"] = tree_cb("tabnew"),
   ["<"] = tree_cb("prev_sibling"),
   [">"] = tree_cb("next_sibling"),
   ["<BS>"] = tree_cb("close_node"),
@@ -67,16 +82,14 @@ g.nvim_tree_bindings = {
   ["[c"] = tree_cb("prev_git_item"),
   ["]c"] = tree_cb("next_git_item"),
   ["-"] = tree_cb("dir_up"),
-  ["q"] = tree_cb("close")
+  ["q"] = tree_cb("close"),
 }
 
 -- require("nvim-tree").on_enter()
 
-require("nvim-tree.events").on_nvim_tree_ready(
-  function()
-    vim.cmd("NvimTreeRefresh")
-  end
-)
+require("nvim-tree.events").on_nvim_tree_ready(function()
+  vim.cmd("NvimTreeRefresh")
+end)
 
 -- g.nvim_tree_icons = {
 --   default = "",

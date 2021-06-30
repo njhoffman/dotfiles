@@ -39,8 +39,6 @@ local autocmds = {
     { "BufNewFile,BufRead", ".dockerignore", "setlocal ft=gitignore" },
     --   au BufNewFile,BufRead *.module setlocal ft=php syn=php
     --   " force bash syntax for shell scripts by default custom syntax extension assignments
-    --   au BufNewFile,BufRead *.php setlocal ft=php syn=php
-    --   au BufNewFile,BufRead *.md  set ft=vimwiki syn=vimwiki
     --   au BufNewFile,BufRead .pa set ft=config
     --   au BufNewFile,BufRead Chart.yaml  set ft=helm
     --   au BufNewFile,BufRead values.yaml set ft=helm
@@ -55,10 +53,15 @@ local autocmds = {
     --   au BufNewFile,BufRead *.service setlocal ft=systemd
     --   " au BufEnter * if &bufhidden =~ 'wipe' && &buftype =~ 'nofile' | setf preview | endif
   },
+  vimade = {
+    { "CompleteChanged", "*", "redraw" },
+    { "FocusLost", "*", "VimadeFadeActive" },
+    -- { "FocusGained", "*", "VimadeUnfadeActive" },
+  },
   filetypes = {
     { "FileType", "pandoc", "set conceallevel=3 nospell wrap" },
     { "FileType", "pandoc", "hi! Underlined gui=NONE" },
-    { "FileType", "pandoc", "hi! pandocAtxStart guibg=#45a5f8" },
+    -- { "FileType", "pandoc", "hi! pandocAtxStart guibg=#45a5f8" },
     { "FileType", "pandoc", "hi! pandocAtxHeader guifg=#4575b8 gui=bold" },
     -- { "FileType", "markdown", "hi! markdownH1 guifg=#45a5f8" },
     -- { "FileType", "markdown", "hi! markdownH2 guifg=#45a5e8" },
@@ -78,17 +81,27 @@ local autocmds = {
     { "TermOpen", "*", [[tnoremap <buffer> <Esc> <c-\><c-n>]] },
     { "TermOpen", "*", "set nonu" },
   },
-  packer = { { "BufWritePost", "plugins.lua", "PackerCompile" } },
+  packer = {
+    { "BufWritePost", "plugins.lua", "PackerCompile" },
+    { "BufWritePost", "plugins-config.lua", "PackerCompile" },
+    {
+      "User",
+      "PackerComplete,PackerCompileDone",
+      "call bufferline#highlight#setup() | lua require('feline').reset_highlights()",
+    },
+  },
   -- lsp = {
   --   {"CursorHold,CursorHoldI", "*", "lua require'nvim-lightbulb'.update_lightbulb()"}
   -- }
 }
 
--- vim.cmd([[autocmd ColorScheme * lua require("utils.lsp").fix("ColorScheme")]])
-
 -- define tables to insert
 local hl_yank = {
-  { "TextYankPost", "*", "lua require\"vim.highlight\".on_yank()" },
+  {
+    "TextYankPost",
+    "*",
+    "silent! lua vim.highlight.on_yank { higroup='IncSearch', timeout=400 }",
+  },
 }
 
 local preserve_cursor = {

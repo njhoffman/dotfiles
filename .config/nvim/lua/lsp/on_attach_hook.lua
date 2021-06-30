@@ -1,23 +1,29 @@
 local config = require("config")
-local util = require("lsp.util")
-local utils = require("utils.core")
 local lsp_signature = require "lsp_signature"
 local lsp_status = require("lsp-status")
+local f = require("utils.functional")
 
-local function documentFormat(client, bufnr)
+local function documentFormat(client)
   if client.resolved_capabilities.document_formatting then
     -- utils.keymap({"n", "<Leader>aa", "<cmd>lua vim.lsp.buf.formatting()<cr>", {}})
-    vim.api.nvim_command([[augroup Format]])
-    vim.api.nvim_command([[autocmd! * <buffer>]])
-    vim.api.nvim_command([[autocmd BufWritePost <buffer> lua vim.lsp.buf.formatting_sync(nil, 500)]])
-    -- vim.cmd [[autocmd BufWritePost <buffer> lua formatting()]]
-    vim.api.nvim_command([[augroup END]])
-    -- vim.cmd([[ autocmd BufWritePre * :lua vim.lsp.buf.formatting_sync(nil, 500) ]])
+    vim.cmd [[augroup Format]]
+    vim.cmd [[autocmd! * <buffer>]]
+
+    -- vim.cmd [[autocmd BufWritePre <buffer> lua require'lsp.formatters'.format()]]
+    vim.cmd [[autocmd BufWritePost <buffer> lua require'lsp.formatters'.format()]]
+
+    -- vim.cmd(
+    --     [[ autocmd BufWritePre * :lua vim.lsp.buf.formatting_sync(nil, 500) ]])
+    -- vim.api.nvim_command(
+    --     [[autocmd BufWritePost <buffer> lua vim.lsp.buf.formatting_sync(nil, 500)]])
+    vim.cmd [[augroup END]]
     -- lsp_config.log(string.format("Formatting supported %s", client.name))
+    -- elseif client.resolved_capabilities.document_range_formatting then
+    --   buf_set_keymap("n", "ff", "<cmd>lua vim.lsp.buf.range_formatting()<CR>", opts)
   end
 end
 
-local function documentCodeAction(client, bufnr)
+local function documentCodeAction(client)
   if client.resolved_capabilities.code_action then
     vim.cmd [[augroup CodeAction]]
     vim.cmd [[autocmd! * <buffer>]]
@@ -26,25 +32,7 @@ local function documentCodeAction(client, bufnr)
   end
 end
 
-local function formatAlt(client, bufnr)
-  vim.lsp.handlers["textDocument/formatting"] = function(err, _, result, _, bufnr)
-    if err ~= nil or result == nil then
-      return
-    end
-    if not vim.bo[bufnr].modified then
-      local view = vim.fn.winsaveview()
-      vim.lsp.util.apply_text_edits(result, bufnr)
-      vim.fn.winrestview(view)
-      if bufnr == vim.api.nvim_get_current_buf() then
-        vim.cmd("noautocmd :update")
-      end
-    end
-  end
-end
-
-
-
-local function documentHighlight(client, bufnr)
+local function documentHighlight(client)
   -- Set autocommands conditional on server_capabilities
   if client.resolved_capabilities.document_highlight then
     vim.api.nvim_exec([[
@@ -60,7 +48,7 @@ local function documentHighlight(client, bufnr)
   end
 end
 
-local function documentHoverDiagnostic(client, bufnr)
+local function documentHoverDiagnostic()
   -- Set autocommands conditional on server_capabilities
   if config.LSP.hover_diagnostic == "popup" then
     vim.api.nvim_exec([[
@@ -80,22 +68,44 @@ local function documentHoverDiagnostic(client, bufnr)
       ]], false)
   end
 end
--- log_capabilities(client.resolved_capabilities)
+
+local function log_capabilities(client)
+  -- @param filter = table {"hover"}
+  local capabilities = client.resolved_capabilities;
+  local reduce = function(filter)
+    local result = {}
+    for k, _ in pairs(capabilities) do
+      table.insert(result,
+                   f.map(function(v) return { v = capabilities[v] } end)(
+                       f.filter(f.contains(k))(filter)))
+    end
+    return f.flatten(result)
+  end
+
+  -- local log = utils.log_to_file("/tmp/neovim-lsp-capabilities.log")
+  require("logger").debug(client.name, vim.inspect(reduce(capabilities)))
+end
 
 local M = {}
 
 function M.common_on_attach(client, bufnr)
-  vim.api.nvim_buf_set_option(bufnr, "omnifunc", "v:lua.vim.lsp.omnifunc")
+  -- vim.api.nvim_buf_set_option(bufnr, "omnifunc", "v:lua.vim.lsp.omnifunc")
   -- vim.cmd([[ setlocal omnifunc=v:lua.vim.lsp.omnifunc ]])
-  lsp_signature.on_attach(client)
-  lsp_status.on_attach(client)
-  -- util.log("client.name: " .. client.name .. "\n" .. vim.inspect(client.resolved_capabilities))
-  documentHoverDiagnostic(client, bufnr)
-  documentFormat(client, bufnr)
-  -- documentFormatAlt(client, bufnr)
-  documentCodeAction(client, bufnr)
 
-  if config.LSP.highlight_word == nil or config.LSP.highlight_word == true then documentHighlight(client, bufnr) end
+  require"logger".debug("client.name: " .. client.name .. "\n" ..
+                            vim.inspect(client.resolved_capabilities))
+
+  -- util.log("client.name: " .. client.name .. "\n" .. vim.inspect(client.resolved_capabilities))
+  documentHoverDiagnostic()
+  documentFormat(client)
+  documentCodeAction(client)
+
+  if config.LSP.highlight_word == nil or config.LSP.highlight_word == true then
+    documentHighlight(client)
+  end
+
+  lsp_signature.on_attach(client, bufnr)
+  lsp_status.on_attach(client, bufnr)
 
   -- require("compe").on_attach()
 end

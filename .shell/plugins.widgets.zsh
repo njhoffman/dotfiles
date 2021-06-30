@@ -83,6 +83,36 @@ ZSH_AUTOSUGGEST_STRATEGY=histdb_top_fallback
   zinit light zsh-users/zsh-history-substring-search
 
   zi0a
+  zinit light b4b4r07/enhancd
+  # export ENHANCD_FILTER="fzf:peco:percol" # fzf-tmux
+  export ENHANCD_FILTER="fzy:peco:percol" # fzf-tmux
+  # export ENHANCD_HOOK_AFTER_CD='l'
+  export ENHANCD_COMMAND='cd'
+  export ENHANCD_DOT_ARG='..'
+  export ENHANCD_DISABLE_DOT=1
+  # ENHANCD_DIR
+  # ENHANCD_FILTER
+  # ENHANCD_DISABLE_HYPHEN
+  # ENHANCD_DISABLE_HOME
+  # ENHANCD_HYPHEN_ARG
+  # ENHANCD_HYPHEN_NUM
+  # ENHANCD_HOME_ARG
+  # ENHANCD_USE_FUZZY_MATCH
+  # ENHANCD_COMPLETION_KEYBIND
+  # ENHANCD_COMPLETION_BEHAVIOR
+
+  # percol point_right percol adds flavor of interactive selection to the traditional pipe concept on UNIX
+  # peco point_right Simplistic interactive filtering tool
+  # fzf point_right cherry_blossom fzf is a blazing fast command-line fuzzy finder written in Go
+  # fzy point_right mag A better fuzzy finder
+  # gof point_right gof - Go Fuzzy
+  # selecta point_right Selecta is a fuzzy text selector for files and anything else you need to select
+  # pick point_right Pick is "just like Selecta, but faster"
+  # icepick point_right icepick is a reimplementation of Selecta in Rust
+  # sentaku point_right Utility to make sentaku (selection, 選択(sentaku)) window with shell command
+  # hf point_right hf is a command line utility to quickly find files and execute a command
+
+  zi0a
   zinit light m42e/zsh-histdb-fzf
     bindkey '^U' histdb-fzf-widget
 

@@ -4,7 +4,6 @@
 -- map("n", "<leader>t,", "A,<ESC>")
 -- map("n", "<leader>t;", "A;<ESC>")
 -- map("n", "<leader>t:", "A:<ESC>")
-
 -- yoinks
 -- Change current yank and see a preview of it in the status bar
 -- nmap [y <plug>(YoinkRotateBack)
@@ -27,15 +26,14 @@
 -- Try adding this to your .vimrc:
 -- nmap <expr> p yoink#canSwap() ? '<plug>(YoinkPostPasteSwapBack)' : '<plug>(YoinkPaste_p)'
 -- nmap <expr> P yoink#canSwap() ? '<plug>(YoinkPostPasteSwapForward)' : '<plug>(YoinkPaste_P)'
-
 local formatters_map = {
   ["<leader>s"] = {
     name = "+surround",
     ["a"] = "add surrounding",
+    ["bd"] = "automatically seearch and delete",
+    ["br"] = "automatically search and select to replace",
     ["d"] = "delete surrounding",
-    ["db"] = "automatically seearch and delete",
     ["r"] = "replace surrounding",
-    ["rb"] = "automatically search and select to replace"
   },
   ["<leader>t"] = {
     name = "+text",
@@ -44,8 +42,8 @@ local formatters_map = {
     [":"] = "add colon to end of line",
     ["u"] = "lowercase",
     ["U"] = "uppercase",
-    ["S"] = "source file"
-  }
+    ["S"] = "source file",
+  },
 }
 
 local opts = {
@@ -53,7 +51,7 @@ local opts = {
   buffer = nil,
   silent = true,
   noremap = true,
-  nowait = false
+  nowait = false,
 }
 
 require("which-key").register(formatters_map, opts)

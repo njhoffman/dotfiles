@@ -1,3 +1,11 @@
+-- -- vim.cmd([[set background=dark]])
+-- vim.cmd([[hi clear]])
+-- vim.cmd([[
+-- if exists('syntax_on')
+--   syntax reset
+--   endif
+-- ]])
+-- vim.cmd([[let g:colors_name='nord']])
 local lush = require("lush")
 local hsl = lush.hsl
 
@@ -18,6 +26,7 @@ vim.g.markdown_fenced_languages = {
   -- "css",
   "sh",
   "bash=sh",
+  "sh",
   -- "html",
   -- "zsh",
   -- "ruby",
@@ -44,12 +53,18 @@ local nord = require("colorschemes.lush-themes.nord-nvim")
 -- " hi mkdCodeEnd ctermfg=239 guifg=#9E9E9E ctermbg=None gui=bold
 -- " hi mkdCode ctermfg=88  guifg=#427b58 ctermbg=None cterm=bold
 -- "
+
+-- nord_cursor_line_number_background  0 Use the same background on number when cursorline enabled
 -- hi VimWikiTag guifg=#994444 gui=italic
-vim.cmd([[hi! Underlined gui=none]]);
-vim.cmd([[hi! pandocReferenceURL gui=none]]);
-vim.cmd([[hi! pandocUListItem gui=none]]);
+-- vim.cmd([[hi! Underlined guibg=none gui=none]]);
+-- vim.cmd([[hi! pandocReferenceURL guibg=none gui=none]])
+-- vim.cmd([[hi! pandocUListItem guibg=none gui=none]])
+-- vim.cmd([[hi! NonText guibg=none gui=none]])
+-- vim.cmd([[hi! Folded guibg=none gui=none]])
 
 local clr_over = {
+  -- selection = "#2F3243",
+  selection = "#24334a",
   orange = "#cc8877",
   yellow = "#bdb994",
   yellow_faded = "#7B6B3B",
@@ -69,18 +84,27 @@ local spec = lush.extends({ nord }).with(function()
     PmenuSbar { fg = "#717cb4", bg = "#202331" },
     PmenuThumb { fg = "#8f93a2", bg = "#84ffff" },
     SignColumn { bg = "none" },
-    CursorLine { bg = nord.CursorLine.bg.darken(50), gui = "none" },
+    -- CursorLine { bg = nord.CursorLine.bg.darken(50), gui = "none" },
+    CursorLine { bg = "#142028", gui = "none" },
     CursorLineNr { fg = "#afd7ff", bg = CursorLine.bg },
     CursorColumn {},
     -- base groups
+    -- Normal { fg = nord.Normal.fg.darken(15), bg = "#000000" },
     Normal { fg = nord.Normal.fg.darken(15), bg = "none" },
     String { fg = "#22bb99" },
     Comment { fg = "#5c667a", gui = "italic" },
     Constant { fg = "#6699aa" },
     Identifier { fg = "#8eb9c6" },
-    Type { fg = clr_over.yellow },
+    Type { fg = "#818cc4" },
     MatchParen { fg = "#60a0a0", bg = "000022" },
     MatchParenCursor { fg = "#a0c0b0" },
+    Visual { fg = "none", bg = clr_over.selection },
+    VisualNOS { fg = "none", bg = clr_over.selection },
+    Search { fg = "#7dafff" },
+    IncSearch { fg = "#eceff4", bg = "#5d81ac" },
+    -- IncSearch =				{ fg = material.highlight, bg = material.title, style = 'reverse' },
+    -- IncSearch { fg = clrs.nord6, bg = clrs.nord10, gui = spec.underline },
+
     --
     TSTagDelimiter { fg = "#7f90aa" },
     TSURI { fg = "#8eb9f6", gui = "none" },
@@ -100,6 +124,19 @@ local spec = lush.extends({ nord }).with(function()
     -- jsxCloseString {fg = "#ff6600"},
     jsxAttrib { fg = "#88bbdd" },
     jsxEqual { fg = "#6699bb" },
+
+    -- BufferInactiveIndex = { bg = "#000000" },
+    -- BufferInactive = { bg = "#000000" },
+    NonText { bg = "#000000", fg = "#555555" },
+    EndOfBuffer { fg = "#555555" },
+    LspDiagnosticsSignWarning { fg = "#675023" },
+    healthSuccess { fg = "#22BB99", bg = "#none" },
+    healthWarning { fg = "#EBCA89", bg = "#none" },
+    healthError { fg = "#BE6069", bg = "#none" },
+    -- healthError = {fg = clrs.error},
+    -- healthSuccess = {fg = clrs.nord14},
+    -- healthWarning = {fg = clrs.nord15},
+
     -- js-other
     -- jsVariableType {fg = jsStorageClass.fg},
     -- jsIf {fg = jsConditional.fg},
@@ -123,40 +160,39 @@ local spec = lush.extends({ nord }).with(function()
     HlSearchLens { fg = "#00ddff", bg = "none" },
     HlSearchCur { fg = "#00ffdd", bg = "none" },
     ---
-
     -- GitSigns Faded
-    GitSignsAddFaded = { fg = clr_over.green_faded },
-    GitSignsAddNrFaded = { fg = clr_over.green_faded },
-    GitSignsAddLnFaded = { fg = clr_over.green_faded },
-    GitSignsChangeFaded = { fg = clr_over.yellow_faded },
-    GitSignsChangeNrFaded = { fg = clr_over.yellow_faded },
-    GitSignsChangeLnFaded = { fg = clr_over.yellow_faded },
-    GitSignsChangeDeleteFaded = { fg = clr_over.purple_faded },
-    GitSignsChangeDeleteNrFaded = { fg = clr_over.purple_faded },
-    GitSignsChangeDeleteLnFaded = { fg = clr_over.purple_faded },
-    GitSignsDeleteFaded = { fg = clr_over.red_faded },
-    GitSignsDeleteNrFaded = { fg = clr_over.red_faded },
-    GitSignsDeleteLnFaded = { fg = clr_over.red_faded },
-    -- --html
-    markdownH = {},
-    markdownTSTitle = {},
-    SpecialKey = {},
-    htmlH1 = { fg = "#45a5f8" },
-    htmlH2 = { fg = "#45a5e8" },
-    htmlH3 = { fg = "#45a5d8" },
-    htmlH4 = { fg = "#45a5c8" },
-    htmlH5 = { fg = "#45a5b8" },
-    htmlH6 = { fg = "#45a5a8" },
-    markdownH1 = { fg = "#45a5f8" },
-    markdownH2 = { fg = "#45a5e8" },
-    markdownH3 = { fg = "#45a5d8" },
-    markdownH4 = { fg = "#45a5c8" },
-    markdownH5 = { fg = "#45a5b8" },
-    markdownH6 = { fg = "#45a5a8" },
-    mkdHeading = { fg = "#557588" },
-    markdownLinkText = { fg = "#00ccff" },
-    pandocReferenceURL = { gui = "none" },
-    pandocUListItem = { gui = "none" },
+    GitSignsAddFaded { fg = clr_over.green_faded },
+    GitSignsAddNrFaded { fg = clr_over.green_faded },
+    GitSignsAddLnFaded { fg = clr_over.green_faded },
+    GitSignsChangeFaded { fg = clr_over.yellow_faded },
+    GitSignsChangeNrFaded { fg = clr_over.yellow_faded },
+    GitSignsChangeLnFaded { fg = clr_over.yellow_faded },
+    GitSignsChangeDeleteFaded { fg = clr_over.purple_faded },
+    GitSignsChangeDeleteNrFaded { fg = clr_over.purple_faded },
+    GitSignsChangeDeleteLnFaded { fg = clr_over.purple_faded },
+    GitSignsDeleteFaded { fg = clr_over.red_faded },
+    GitSignsDeleteNrFaded { fg = clr_over.red_faded },
+    GitSignsDeleteLnFaded { fg = clr_over.red_faded },
+    -- html
+    markdownH {},
+    markdownTSTitle {},
+    SpecialKey {},
+    htmlH1 { fg = "#45a5f8" },
+    htmlH2 { fg = "#45a5e8" },
+    htmlH3 { fg = "#45a5d8" },
+    htmlH4 { fg = "#45a5c8" },
+    htmlH5 { fg = "#45a5b8" },
+    htmlH6 { fg = "#45a5a8" },
+    markdownH1 { fg = "#45a5f8" },
+    markdownH2 { fg = "#45a5e8" },
+    markdownH3 { fg = "#45a5d8" },
+    markdownH4 { fg = "#45a5c8" },
+    markdownH5 { fg = "#45a5b8" },
+    markdownH6 { fg = "#45a5a8" },
+    mkdHeading { fg = "#557588" },
+    markdownLinkText { fg = "#00ccff" },
+    pandocUListItem { gui = "none" },
+
     -- TSStrike = {},
     -- TSUnderline = {},
     -- Underline {},

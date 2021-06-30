@@ -15,7 +15,6 @@ map("n", "<leader>tS", ":luafile %<CR>", { silent = false })
 map("n", "<BS>", "<C-^>")
 map("t", "<C-o>", [[<C-\><C-n>]])
 -- map("n", "<A-t>", ":ToggleTerm<CR>")
-map("t", "<A-t>", [[<C-\><C-n>:ToggleTerm<CR>]])
 map("n", "D", "d$")
 -- map('t', '<ESC>', '&filetype == "fzf" ? "\\<ESC>" : "\\<C-\\>\\<C-n>"' , {expr = true})
 -- map('t', 'jj', '<ESC>', {noremap = false})
@@ -34,8 +33,6 @@ vim.cmd([[cnoremap <C-y>          <C-r>*]])
 -- cnoremap <C-g>          <C-c>
 -- vim.cmd([[au CmdwinEnter : let b:cpt_save = &cpt | set cpt=.]])
 -- vim.cmd([[au CmdwinLeave : let &cpt = b:cpt_save]])
--- vim.cmd([[au CmdwinEnter [/?]  startinsert]])
-
 vim.cmd([[au CmdwinEnter * nnoremap <buffer><esc> <C-c><C-c>]])
 vim.cmd([[au CmdwinEnter * startinsert ]])
 vim.cmd([[au CmdwinEnter * set nonumber norelativenumber]])
@@ -109,7 +106,10 @@ map("n", "p", "p`]")
 
 -- nnoremap <leader>e :exe getline(line('.'))<cr>
 -- Run the current line as if it were a command. Often more convenient than q: when experimenting.
-
+-- call nvim_set_keymap('n', ' <NL>', '', {'nowait': v:true})
+-- vim.api.nvim_del_keymap("i", "<C-S>")
+-- surround insert unmappings
+-- vim.cmd([[iunmap <C-S>]])
 local window_map = {
   ["<s-k>"] = { ":resize -2<CR>" },
   ["<s-j>"] = { ":resize +2<CR>" },
@@ -142,8 +142,8 @@ local buffer_map = {
   -- [":"] = { ":<C-f>", "auto open task window" },
   ["Q"] = { "<nop>" },
   ["_"] = { "<cmd>noh<cr>", "remove highlight" },
-  ["<c-q>"] = { "<cmd>qa<cr>", "Quick exit without saving" },
-  ["<c-x>"] = { "<cmd>xa!<cr>", "Quick exit with saving" },
+  ["<c-q>"] = { "<cmd>silent! tabclose | qa<cr>", "Quick exit without saving" },
+  ["<c-x>"] = { "<cmd>silent! tabclose | xa!<cr>", "Quick exit with saving" },
   ["<C-s>"] = { "<cmd>w<cr><esc>", "Quick save" },
   ["<tab>"] = { "<cmd>bn<CR>", "Cycle buffers" },
   ["<s-tab>"] = { "<cmd>bp<CR>", "Cycle buffers" },
@@ -154,8 +154,11 @@ local buffer_map = {
   -- ["<Leader>S"] = { "<cmd>call scratch#insert(1)<cr>", "scratch reuse"},
   ["<leader>"] = {
     ["<cr>"] = { "<cmd>noh<cr>", "remove highlight" },
-    ["q"] = { "<cmd>Sayonara<cr>", "Close window saving" },
-    ["x"] = { "<cmd>update | bdelete<CR>", "Save and safely remove buffer" },
+    ["q"] = { "<cmd>silent! tabclose | Sayonara<cr>", "Close window saving" },
+    ["x"] = {
+      "<cmd>update | silent! tabclose | bdelete<CR>",
+      "Save and safely remove buffer",
+    },
     -- ["x"] = { "<cmd>Bdelete<cr>", "Delete buffer without messing windows up" },
     ["!"] = {
       "<cmd>BufferCloseAllButCurrent<CR>",
@@ -192,14 +195,14 @@ local opts = {
 require("which-key").register(buffer_map, opts)
 require("which-key").register(window_map, opts)
 
-local insert_map = { ["<c-s>"] = { "<cmd>w<cr><esc>", "Quick save" } }
+local insert_map = { ["<c-s>"] = { "<esc><cmd>w<cr>", "Quick save" } }
 
 local insert_opts = {
   mode = "i",
   buffer = nil,
   silent = true,
   noremap = true,
-  nowait = false,
+  nowait = true,
 }
 
 require("which-key").register(insert_map, insert_opts)

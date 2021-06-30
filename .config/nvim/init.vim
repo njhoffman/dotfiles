@@ -9,12 +9,36 @@ set runtimepath^=~/.config/nvim
 set runtimepath+=~/.local/share/nvim/site/after
 set runtimepath^=~/.local/share/nvim/site
 
+
+if (&term =~ '^xterm' && &t_Co == 256)
+   set t_ut= | set ttyscroll=1
+endif
+
+if has("termguicolors")     " set true colors
+    set t_8f=\[[38;2;%lu;%lu;%lum
+    set t_8b=\[[48;2;%lu;%lu;%lum
+    let &t_8f = "\<Esc>[38;2;%lu;%lu;%lum"
+    let &t_8b = "\<Esc>[48;2;%lu;%lu;%lum"
+    set termguicolors
+endif
+let $NVIM_TUI_ENABLE_CURSOR_SHAPE = 1
+
+" hi! Normal guibg=#000000 ctermbg=16
+" hi! NonText guibg=#000000 ctermbg=16
+" hi! LineNr guibg=#000000 ctermbg=16
+" hi! Folded guibg=#000000 ctermbg=16
+" hi! SpecialKey guibg=#000000 ctermbg=16
+" hi! VertSplit guibg=#000000 ctermbg=16
+" hi! SignColumn guibg=#000000 ctermbg=16
+" hi! EndOfBuffer guibg=#000000 ctermbg=16
+
+
 "clear out previous autocmds to stop them being duplicated when resourcing
 "  this file
 " autocmd!
-
 source $HOME/.config/nvim/functions.fzf.vim
 source $HOME/.config/nvim/functions.unimpaired.vim
+
 
 " use the 'alt' program to quickly load alternate file
 " Run a given vim command on the results of alt from a given path.
@@ -26,6 +50,7 @@ function! AltCommand(path, vim_command)
     exec a:vim_command . " " . l:alternate
   endif
 endfunction
+
 " Find the alternate file for the current path and open it
 " source $HOME/.config/nvim/functions.surround.vim
 
@@ -57,12 +82,10 @@ nnoremap <leader>e :call FzyCommand("find . -type f", ":e")<cr>
 nnoremap <leader>v :call FzyCommand("find . -type f", ":vs")<cr>
 nnoremap <leader>s :call FzyCommand("find . -type f", ":sp")<cr>
 
-let $NVIM_TUI_ENABLE_CURSOR_SHAPE = 0
-
 lua << EOF
    require('init')
    require('lsp_signature').on_attach()
    require('snippets').use_suggested_mappings()
 EOF
 
-source $HOME/.config/nvim/plugins.vim
+" source $HOME/.config/nvim/plugins.vim

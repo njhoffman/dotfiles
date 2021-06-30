@@ -63,6 +63,7 @@ finish_setup() {
 
   # fzf ctrl-r widget: show timestamp of command and add syntax highlighting for preview window
   export FZF_CTRL_R_OPTS="--preview 'echo {1..3}; echo {4..} | bat --style=plain --language=zsh' --preview-window down:3:wrap --bind '?:toggle-preview'"
+  source "${CWD}/bindlast.sh"
 }
 zi0c atinit'zpcompinit; zpcdreplay; finish_setup'
 zinit light zdharma/fast-syntax-highlighting

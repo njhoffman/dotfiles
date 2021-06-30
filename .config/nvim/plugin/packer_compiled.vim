@@ -72,9 +72,17 @@ end
 time([[try_loadstring definition]], false)
 time([[Defining packer_plugins]], true)
 _G.packer_plugins = {
+  ["Dockerfile.vim"] = {
+    loaded = true,
+    path = "/home/nicholas/.local/share/nvim/site/pack/packer/start/Dockerfile.vim"
+  },
   ["JABS.nvim"] = {
     loaded = true,
     path = "/home/nicholas/.local/share/nvim/site/pack/packer/start/JABS.nvim"
+  },
+  ["ansible-vim"] = {
+    loaded = true,
+    path = "/home/nicholas/.local/share/nvim/site/pack/packer/start/ansible-vim"
   },
   ["asyncrun.vim"] = {
     loaded = true,
@@ -92,9 +100,17 @@ _G.packer_plugins = {
     loaded = true,
     path = "/home/nicholas/.local/share/nvim/site/pack/packer/start/barbar.nvim"
   },
+  ["compe-tabnine"] = {
+    loaded = true,
+    path = "/home/nicholas/.local/share/nvim/site/pack/packer/start/compe-tabnine"
+  },
   core = {
     loaded = true,
     path = "/home/nicholas/.local/share/nvim/site/pack/packer/start/core"
+  },
+  ["csv.vim"] = {
+    loaded = true,
+    path = "/home/nicholas/.local/share/nvim/site/pack/packer/start/csv.vim"
   },
   ["dashboard-nvim"] = {
     loaded = true,
@@ -107,6 +123,10 @@ _G.packer_plugins = {
   ["doom-one.vim"] = {
     loaded = true,
     path = "/home/nicholas/.local/share/nvim/site/pack/packer/start/doom-one.vim"
+  },
+  ["editorconfig-vim"] = {
+    loaded = true,
+    path = "/home/nicholas/.local/share/nvim/site/pack/packer/start/editorconfig-vim"
   },
   ["feline.nvim"] = {
     loaded = true,
@@ -144,9 +164,29 @@ _G.packer_plugins = {
     loaded = true,
     path = "/home/nicholas/.local/share/nvim/site/pack/packer/start/gitsigns.nvim"
   },
+  ["glow.nvim"] = {
+    loaded = true,
+    path = "/home/nicholas/.local/share/nvim/site/pack/packer/start/glow.nvim"
+  },
+  ["i3-vim-syntax"] = {
+    loaded = true,
+    path = "/home/nicholas/.local/share/nvim/site/pack/packer/start/i3-vim-syntax"
+  },
+  ["json5.vim"] = {
+    loaded = true,
+    path = "/home/nicholas/.local/share/nvim/site/pack/packer/start/json5.vim"
+  },
+  ["jsonc.vim"] = {
+    loaded = true,
+    path = "/home/nicholas/.local/share/nvim/site/pack/packer/start/jsonc.vim"
+  },
   kommentary = {
     loaded = true,
     path = "/home/nicholas/.local/share/nvim/site/pack/packer/start/kommentary"
+  },
+  ["lsp-colors.nvim"] = {
+    loaded = true,
+    path = "/home/nicholas/.local/share/nvim/site/pack/packer/start/lsp-colors.nvim"
   },
   ["lsp-status.nvim"] = {
     loaded = true,
@@ -173,13 +213,17 @@ _G.packer_plugins = {
     path = "/home/nicholas/.local/share/nvim/site/pack/packer/start/lua-dev.nvim"
   },
   ["lush.nvim"] = {
-    config = { "\27LJ\2\nw\0\0\3\0\4\0\t6\0\0\0009\0\1\0'\2\2\0B\0\2\0016\0\0\0009\0\1\0'\2\3\0B\0\2\1K\0\1\0007source $HOME/.config/nvim/colors/barbar-colors.vim\21colorscheme nord\bcmd\bvim\0" },
+    config = { "\27LJ\2\n|\0\0\3\0\4\0\t6\0\0\0009\0\1\0'\2\2\0B\0\2\0016\0\0\0009\0\1\0'\2\3\0B\0\2\1K\0\1\0007source $HOME/.config/nvim/colors/barbar-colors.vim\26colorscheme nord-nick\bcmd\bvim\0" },
     loaded = true,
     path = "/home/nicholas/.local/share/nvim/site/pack/packer/start/lush.nvim"
   },
   ["neuron.nvim"] = {
     loaded = true,
     path = "/home/nicholas/.local/share/nvim/site/pack/packer/start/neuron.nvim"
+  },
+  ["nginx.vim"] = {
+    loaded = true,
+    path = "/home/nicholas/.local/share/nvim/site/pack/packer/start/nginx.vim"
   },
   ["null-ls.nvim"] = {
     loaded = true,
@@ -261,6 +305,10 @@ _G.packer_plugins = {
     loaded = true,
     path = "/home/nicholas/.local/share/nvim/site/pack/packer/start/packer.nvim"
   },
+  ["php.vim"] = {
+    loaded = true,
+    path = "/home/nicholas/.local/share/nvim/site/pack/packer/start/php.vim"
+  },
   playground = {
     loaded = true,
     path = "/home/nicholas/.local/share/nvim/site/pack/packer/start/playground"
@@ -305,6 +353,10 @@ _G.packer_plugins = {
     loaded = true,
     path = "/home/nicholas/.local/share/nvim/site/pack/packer/start/surround.nvim"
   },
+  tabular = {
+    loaded = true,
+    path = "/home/nicholas/.local/share/nvim/site/pack/packer/start/tabular"
+  },
   ["telescope-asynctasks.nvim"] = {
     loaded = true,
     path = "/home/nicholas/.local/share/nvim/site/pack/packer/start/telescope-asynctasks.nvim"
@@ -328,6 +380,10 @@ _G.packer_plugins = {
   ["telescope.nvim"] = {
     loaded = true,
     path = "/home/nicholas/.local/share/nvim/site/pack/packer/start/telescope.nvim"
+  },
+  ["tmux.vim"] = {
+    loaded = true,
+    path = "/home/nicholas/.local/share/nvim/site/pack/packer/start/tmux.vim"
   },
   ["todo-comments.nvim"] = {
     loaded = true,
@@ -373,17 +429,53 @@ _G.packer_plugins = {
     loaded = true,
     path = "/home/nicholas/.local/share/nvim/site/pack/packer/start/vim-fugitive"
   },
+  ["vim-git"] = {
+    loaded = true,
+    path = "/home/nicholas/.local/share/nvim/site/pack/packer/start/vim-git"
+  },
+  ["vim-gitignore"] = {
+    loaded = true,
+    path = "/home/nicholas/.local/share/nvim/site/pack/packer/start/vim-gitignore"
+  },
+  ["vim-graphql"] = {
+    loaded = true,
+    path = "/home/nicholas/.local/share/nvim/site/pack/packer/start/vim-graphql"
+  },
   ["vim-hexokinase"] = {
     loaded = true,
     path = "/home/nicholas/.local/share/nvim/site/pack/packer/start/vim-hexokinase"
   },
-  ["vim-highlightedyank"] = {
+  ["vim-jq"] = {
     loaded = true,
-    path = "/home/nicholas/.local/share/nvim/site/pack/packer/start/vim-highlightedyank"
+    path = "/home/nicholas/.local/share/nvim/site/pack/packer/start/vim-jq"
+  },
+  ["vim-js"] = {
+    loaded = true,
+    path = "/home/nicholas/.local/share/nvim/site/pack/packer/start/vim-js"
+  },
+  ["vim-json"] = {
+    loaded = true,
+    path = "/home/nicholas/.local/share/nvim/site/pack/packer/start/vim-json"
+  },
+  ["vim-jsx-pretty"] = {
+    loaded = true,
+    path = "/home/nicholas/.local/share/nvim/site/pack/packer/start/vim-jsx-pretty"
+  },
+  ["vim-kubernetes"] = {
+    loaded = true,
+    path = "/home/nicholas/.local/share/nvim/site/pack/packer/start/vim-kubernetes"
   },
   ["vim-liquid"] = {
     loaded = true,
     path = "/home/nicholas/.local/share/nvim/site/pack/packer/start/vim-liquid"
+  },
+  ["vim-log-highlighting"] = {
+    loaded = true,
+    path = "/home/nicholas/.local/share/nvim/site/pack/packer/start/vim-log-highlighting"
+  },
+  ["vim-markdown"] = {
+    loaded = true,
+    path = "/home/nicholas/.local/share/nvim/site/pack/packer/start/vim-markdown"
   },
   ["vim-matchup"] = {
     after_files = { "/home/nicholas/.local/share/nvim/site/pack/packer/opt/vim-matchup/after/plugin/matchit.vim" },
@@ -399,6 +491,22 @@ _G.packer_plugins = {
     loaded = true,
     path = "/home/nicholas/.local/share/nvim/site/pack/packer/start/vim-mundo"
   },
+  ["vim-nix"] = {
+    loaded = true,
+    path = "/home/nicholas/.local/share/nvim/site/pack/packer/start/vim-nix"
+  },
+  ["vim-node"] = {
+    loaded = true,
+    path = "/home/nicholas/.local/share/nvim/site/pack/packer/start/vim-node"
+  },
+  ["vim-pandoc"] = {
+    loaded = true,
+    path = "/home/nicholas/.local/share/nvim/site/pack/packer/start/vim-pandoc"
+  },
+  ["vim-pandoc-syntax"] = {
+    loaded = true,
+    path = "/home/nicholas/.local/share/nvim/site/pack/packer/start/vim-pandoc-syntax"
+  },
   ["vim-plugin-AnsiEsc"] = {
     loaded = true,
     path = "/home/nicholas/.local/share/nvim/site/pack/packer/start/vim-plugin-AnsiEsc"
@@ -406,6 +514,10 @@ _G.packer_plugins = {
   ["vim-profiler"] = {
     loaded = true,
     path = "/home/nicholas/.local/share/nvim/site/pack/packer/start/vim-profiler"
+  },
+  ["vim-puppet"] = {
+    loaded = true,
+    path = "/home/nicholas/.local/share/nvim/site/pack/packer/start/vim-puppet"
   },
   ["vim-renamer"] = {
     loaded = true,
@@ -427,6 +539,10 @@ _G.packer_plugins = {
     loaded = true,
     path = "/home/nicholas/.local/share/nvim/site/pack/packer/start/vim-sayonara"
   },
+  ["vim-sh"] = {
+    loaded = true,
+    path = "/home/nicholas/.local/share/nvim/site/pack/packer/start/vim-sh"
+  },
   ["vim-smoothie"] = {
     loaded = true,
     path = "/home/nicholas/.local/share/nvim/site/pack/packer/start/vim-smoothie"
@@ -435,9 +551,13 @@ _G.packer_plugins = {
     loaded = true,
     path = "/home/nicholas/.local/share/nvim/site/pack/packer/start/vim-symlink"
   },
-  ["vim-taskwarrior"] = {
+  ["vim-systemd-syntax"] = {
     loaded = true,
-    path = "/home/nicholas/.local/share/nvim/site/pack/packer/start/vim-taskwarrior"
+    path = "/home/nicholas/.local/share/nvim/site/pack/packer/start/vim-systemd-syntax"
+  },
+  ["vim-terraform"] = {
+    loaded = true,
+    path = "/home/nicholas/.local/share/nvim/site/pack/packer/start/vim-terraform"
   },
   ["vim-test"] = {
     loaded = true,
@@ -467,16 +587,28 @@ _G.packer_plugins = {
     loaded = true,
     path = "/home/nicholas/.local/share/nvim/site/pack/packer/start/vimux"
   },
+  ["vscode-javascript"] = {
+    loaded = true,
+    path = "/home/nicholas/.local/share/nvim/site/pack/packer/start/vscode-javascript"
+  },
   ["which-key.nvim"] = {
     loaded = true,
     path = "/home/nicholas/.local/share/nvim/site/pack/packer/start/which-key.nvim"
+  },
+  ["yats.vim"] = {
+    loaded = true,
+    path = "/home/nicholas/.local/share/nvim/site/pack/packer/start/yats.vim"
+  },
+  ["zinit-vim-syntax"] = {
+    loaded = true,
+    path = "/home/nicholas/.local/share/nvim/site/pack/packer/start/zinit-vim-syntax"
   }
 }
 
 time([[Defining packer_plugins]], false)
 -- Config for: lush.nvim
 time([[Config for lush.nvim]], true)
-try_loadstring("\27LJ\2\nw\0\0\3\0\4\0\t6\0\0\0009\0\1\0'\2\2\0B\0\2\0016\0\0\0009\0\1\0'\2\3\0B\0\2\1K\0\1\0007source $HOME/.config/nvim/colors/barbar-colors.vim\21colorscheme nord\bcmd\bvim\0", "config", "lush.nvim")
+try_loadstring("\27LJ\2\n|\0\0\3\0\4\0\t6\0\0\0009\0\1\0'\2\2\0B\0\2\0016\0\0\0009\0\1\0'\2\3\0B\0\2\1K\0\1\0007source $HOME/.config/nvim/colors/barbar-colors.vim\26colorscheme nord-nick\bcmd\bvim\0", "config", "lush.nvim")
 time([[Config for lush.nvim]], false)
 vim.cmd [[augroup packer_load_aucmds]]
 vim.cmd [[au!]]
@@ -485,7 +617,7 @@ time([[Defining lazy-load event autocommands]], true)
 vim.cmd [[au BufEnter * ++once lua require("packer.load")({'vim-matchup'}, { event = "BufEnter *" }, _G.packer_plugins)]]
 time([[Defining lazy-load event autocommands]], false)
 vim.cmd("augroup END")
-if should_profile then save_profiles() end
+if should_profile then save_profiles(0) end
 
 END
 

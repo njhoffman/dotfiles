@@ -1,45 +1,3 @@
---     name = "find",
---         a = "code actions",
---         b = "buffers",
--- 		c = "in current buffer",
---         f = "files",
---         g = "grep files",
---         h = "help",
--- 		o = "options",
---         m = "manual pages",
---         r = "recent files",
---         s = "settings",
---         t = "colorschemes"
---     }
--- }, { prefix = "<leader>" })
--- -- Directory
--- wk.register({
---     d = {
---         name = "directory",
---         a = "add directory",
---         l = "list directories",
---         r = "remove directory",
---     }
--- }, { prefix = "<leader>" })
--- -- Window
--- wk.register({
---     w = {
---         name = "window",
---         v = "vertical split",
---         s = "horizontal split",
---         t = "tab split",
---         r = "rotate",
---         l = "load session",
---         a = "archive session"
---     }
--- -- Mappings.
--- local opts = { noremap=true, silent=true }
--- vim.api.nvim_set_keymap("n", "<C-p>", ":lua FindFile()<CR>", {silent = true, noremap = true})
--- vim.api.nvim_set_keymap("n", "<leader>ff", ":lua FindBuffer()<CR>", {silent = true, noremap = true})
--- vim.api.nvim_set_keymap("n", "<leader>fg", ":lua FindString()<CR>", {silent = true, noremap = true})
--- vim.api.nvim_set_keymap("n", "<leader>fl", ":lua FindLive()<CR>", {silent = true, noremap = true})
--- vim.api.nvim_set_keymap("n", "<leader>fd", ":lua FindDot()<CR>", {silent = true, noremap = true})
--- vim.api.nvim_set_keymap("n", "<leader>fb", ":lua FindGit()<CR>", {silent = true, noremap = true})
 --  telescope mappings
 --  nnoremap <leader><space> :Telescope git_files<CR>
 --  nnoremap <leader>ff :Telescope live_grep<CR>
@@ -123,6 +81,49 @@ local opts = {
 }
 
 require("which-key").register(picker_maps, opts)
+
+--     name = "find",
+--         a = "code actions",
+--         b = "buffers",
+-- 		c = "in current buffer",
+--         f = "files",
+--         g = "grep files",
+--         h = "help",
+-- 		o = "options",
+--         m = "manual pages",
+--         r = "recent files",
+--         s = "settings",
+--         t = "colorschemes"
+--     }
+-- }, { prefix = "<leader>" })
+-- -- Directory
+-- wk.register({
+--     d = {
+--         name = "directory",
+--         a = "add directory",
+--         l = "list directories",
+--         r = "remove directory",
+--     }
+-- }, { prefix = "<leader>" })
+-- -- Window
+-- wk.register({
+--     w = {
+--         name = "window",
+--         v = "vertical split",
+--         s = "horizontal split",
+--         t = "tab split",
+--         r = "rotate",
+--         l = "load session",
+--         a = "archive session"
+--     }
+-- -- Mappings.
+-- local opts = { noremap=true, silent=true }
+-- vim.api.nvim_set_keymap("n", "<C-p>", ":lua FindFile()<CR>", {silent = true, noremap = true})
+-- vim.api.nvim_set_keymap("n", "<leader>ff", ":lua FindBuffer()<CR>", {silent = true, noremap = true})
+-- vim.api.nvim_set_keymap("n", "<leader>fg", ":lua FindString()<CR>", {silent = true, noremap = true})
+-- vim.api.nvim_set_keymap("n", "<leader>fl", ":lua FindLive()<CR>", {silent = true, noremap = true})
+-- vim.api.nvim_set_keymap("n", "<leader>fd", ":lua FindDot()<CR>", {silent = true, noremap = true})
+-- vim.api.nvim_set_keymap("n", "<leader>fb", ":lua FindGit()<CR>", {silent = true, noremap = true})
 
 -- map("n", "<leader>fn", ":lua require('utils.core').search_nvim()<CR>")
 -- map("n", "<leader>b", ":Telescope buffers show_all=true sort_lastued=true<CR>")

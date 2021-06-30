@@ -33,9 +33,8 @@
 --    enablesigns = 1,
 --    enablefocusfading = 1
 --  }
-
 vim.cmd([[let g:vimade  = {}]])
-vim.cmd([[let g:vimade.fadelevel = 0.5]])
+vim.cmd([[let g:vimade.fadelevel = 0.6]])
 vim.cmd([[let g:vimade.enabletreesitter = 1]])
 vim.cmd([[let g:vimade.fadepriority = 50]])
 vim.cmd([[let g:vimade.colbufsize = 15]])

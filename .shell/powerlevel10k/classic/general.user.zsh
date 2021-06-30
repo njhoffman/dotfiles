@@ -35,7 +35,8 @@ if [[ $POWERLEVEL9K_MULTILINE_FIRST_PROMPT_GAP_CHAR != ' ' ]]; then
 fi
 
 # Default background color.
-typeset -g POWERLEVEL9K_BACKGROUND=234
+# typeset -g POWERLEVEL9K_BACKGROUND=234
+typeset -g POWERLEVEL9K_BACKGROUND=
 
 # Separator between same-color segments on the left.
 typeset -g POWERLEVEL9K_LEFT_SUBSEGMENT_SEPARATOR='%242F\uE0B1'
@@ -46,9 +47,12 @@ typeset -g POWERLEVEL9K_LEFT_SEGMENT_SEPARATOR='\uE0B0'
 # Separator between different-color segments on the right.
 typeset -g POWERLEVEL9K_RIGHT_SEGMENT_SEPARATOR='\uE0B2'
 # The right end of left prompt.
-typeset -g POWERLEVEL9K_LEFT_PROMPT_LAST_SEGMENT_END_SYMBOL='\uE0B0'
+# typeset -g POWERLEVEL9K_LEFT_PROMPT_LAST_SEGMENT_END_SYMBOL='\uE0B0'
+typeset -g POWERLEVEL9K_LEFT_PROMPT_LAST_SEGMENT_END_SYMBOL=''
 # The left end of right prompt.
-typeset -g POWERLEVEL9K_RIGHT_PROMPT_FIRST_SEGMENT_START_SYMBOL='\uE0B2'
+# typeset -g POWERLEVEL9K_RIGHT_PROMPT_FIRST_SEGMENT_START_SYMBOL='\uE0B2'
+typeset -g POWERLEVEL9K_RIGHT_PROMPT_FIRST_SEGMENT_START_SYMBOL=''
+#  nf-fae-bigger
 
 ########################
 # CUSTOM
@@ -92,6 +96,3 @@ typeset -g POWERLEVEL9K_INSTANT_PROMPT=quiet
 # can slow down prompt by 1-2 milliseconds, so it's better to keep it turned off unless you
 # really need it.
 typeset -g POWERLEVEL9K_DISABLE_HOT_RELOAD=true
-
-
-

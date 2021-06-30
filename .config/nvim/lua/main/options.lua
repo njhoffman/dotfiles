@@ -26,7 +26,8 @@ opt("wrap", false)
 opt("tw", 1000)
 opt("swapfile", false)
 opt("clipboard", "unnamedplus")
-opt("cmdheight", 2)
+-- opt("cmdheight", 2)
+opt("cmdheight", 1)
 opt("cmdwinheight", 7)
 opt("completeopt", "noinsert,noselect,menuone")
 opt("cpoptions", "aABceFs_")
@@ -43,6 +44,7 @@ opt("inccommand", "nosplit")
 opt("joinspaces", false)
 opt("laststatus", 2)
 opt("lazyredraw", true)
+opt("modelines", 5)
 opt("mouse", "nivh")
 opt("previewheight", 7)
 opt("scrolloff", 7)
@@ -84,7 +86,7 @@ opt("wrap", false, window)
 
 -- buffer scope
 opt("expandtab", true, buffer)
-opt("modeline", false, buffer)
+opt("modeline", true , buffer)
 opt("shiftwidth", 2, buffer)
 opt("smartindent", false, buffer)
 opt("softtabstop", 0, buffer)
@@ -104,14 +106,15 @@ function goto_last_pos()
   end
 end
 
+-- " Set to auto read when a file is changed from the outside
+-- au FocusGained,BufEnter * checktime
+-- enable syntax highlighting
+vim.cmd([[syntax on]])
+
 -- " Enable filetype plugins
 vim.cmd([[filetype plugin on]])
 vim.cmd([[filetype indent on]])
 
--- " Set to auto read when a file is changed from the outside
--- au FocusGained,BufEnter * checktime
--- enable syntax highlighting
-vim.cmd("syntax on")
 
 -- vim.cmd('set iskeyword+=-') -- treat dash separated words as a word text object"
 -- vim.cmd('set shortmess+=c') -- Don't pass messages to |ins-completion-menu|.
@@ -119,7 +122,6 @@ vim.cmd("syntax on")
 -- TERMINAL = vim.fn.expand('$TERMINAL')
 -- vim.o.titlestring="%<%F%=%l/%L - nvim"
 -- vim.wo.wrap = O.wrap_lines -- Display long lines as just one line
--- vim.cmd('syntax on') -- syntax highlighting
 -- vim.o.pumheight = 10 -- Makes popup menu smaller
 -- vim.cmd('set colorcolumn=99999') -- fix indentline for now
 -- vim.o.conceallevel = 0 -- So that I can see `` in markdown files

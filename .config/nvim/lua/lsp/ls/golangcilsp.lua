@@ -1,31 +1,42 @@
 local lspconfig = require "lspconfig"
-local lsp_cmds = require("lsp.commands")
+local configs = require "lspconfig/configs"
 local on_attach_hook = require("lsp.on_attach_hook")
+
+if not lspconfig.golangcilsp then
+  configs.golangcilsp = {
+    default_config = {
+      cmd = { "golangci-lint-langserver" },
+      root_dir = lspconfig.util.root_pattern(".git", "go.mod"),
+      init_options = {
+        command = {
+          "golangci-lint",
+          "run",
+          "--enable-all",
+          "--disable",
+          "lll",
+          "--out-format",
+          "json",
+        },
+      },
+    },
+  }
+end
 
 local capabilities = vim.lsp.protocol.make_client_capabilities()
 capabilities.textDocument.completion.completionItem.snippetSupport = true
 
--- function to attach completion when setting up lsp
 local on_attach = function(client, bufnr)
-  -- vim.cmd [[autocmd BufWritePre *.go lua require'lsp.formatters'.format()]]
   on_attach_hook.common_on_attach(client, bufnr)
   print("'" .. client.name .. "' server attached " .. bufnr)
 end
 
-lspconfig.gopls.setup {
-  cmd = lsp_cmds.go,
-  filetypes = { "go", "gomod" },
+lspconfig.golangcilsp.setup {
+  cmd = { "golangci-lint-langserver" },
   root_dir = function(fname)
     return lspconfig.util.root_pattern(".git")(fname) or
                lspconfig.util.root_pattern("go.mod")(fname) or
                lspconfig.util.path.dirname(fname)
   end,
-  settings = {
-    gopls = {
-      experimentalPostfixCompletions = true,
-      analyses = { unusedparams = true, shadow = true },
-      staticcheck = true,
-    },
-  },
+  filetypes = { "go", "gomod" },
   on_attach = on_attach,
 }

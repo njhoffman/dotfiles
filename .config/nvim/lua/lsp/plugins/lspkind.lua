@@ -1,0 +1,52 @@
+require('lspkind').init({
+  with_text = true,
+
+  preset = 'default',
+  -- 'codicons' for codicon preset (requires vscode-codicons font installed)
+  -- preset = 'codicons',
+  -- symbol_map_defaults = {
+  --   Text = '',
+  --   Method = 'ƒ',
+  --   Function = '',
+  --   Constructor = '',
+  --   Variable = '',
+  --   Class = '',
+  --   Interface = 'ﰮ',
+  --   Module = '',
+  --   Property = '',
+  --   Unit = '',
+  --   Value = '',
+  --   Enum = '了',
+  --   Keyword = '',
+  --   Snippet = '﬌',
+  --   Color = '',
+  --   File = '',
+  --   Folder = '',
+  --   EnumMember = '',
+  --   Constant = '',
+  --   Struct = ''
+  -- },
+  symbol_map = {
+    Text = '',
+    Method = '',
+    Function = '',
+    Field = 'ﴲ ',
+    -- Variable = '[]',
+    Class = '',
+    Interface = 'ﰮ',
+    Module = '',
+    Property = '襁',
+    Unit = '',
+    Value = '',
+    Enum = '練',
+    Keyword = '',
+    File = '',
+    Reference = '',
+    Folder = '',
+    Constant = 'ﲀ',
+    Struct = ' ﳤ ',
+    Event = '',
+    Operator = '',
+    TypeParameter = ''
+  }
+})

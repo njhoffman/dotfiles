@@ -1,22 +1,14 @@
-local util = require "lsp.util"
 local lspconfig = require "lspconfig"
-
-require "lsp.efm.formatting"
-local M = require "lsp.efm.handlers"
+local lsp_cmds = require("lsp.commands")
+local on_attach_hook = require "lsp.on_attach_hook"
 
 local efm_on_attach = function(client, bufnr)
   -- Disable some capabilities
-  client.resolved_capabilities.goto_definition = false
+  -- client.resolved_capabilities.goto_definition = false
   client.resolved_capabilities.code_action = false
 
   client.resolved_capabilities.document_formatting = true
-  if client.resolved_capabilities.document_formatting then
-    vim.cmd [[augroup Format]]
-    vim.cmd [[autocmd! * <buffer>]]
-    vim.cmd [[autocmd BufWritePost <buffer> lua require'lsp.efm.formatting'.format()]]
-    vim.cmd [[augroup END]]
-  end
-  M.common_on_attach(client, bufnr)
+  on_attach_hook.common_on_attach(client, bufnr)
 end
 
 -- missing: puppet-lint, haskell (hlint), erlang (elvis), rust (rust-clippy), sql (sqlfluff), php
@@ -50,21 +42,34 @@ local languages = {
   json = { prettier },
   markdown = { prettier },
   scss = { prettier },
-  yaml = { prettier },
+  yaml = {},
   -- python = {black, isort, flake8, mypy},
   -- python = { efm_python },
   typescript = { eslint_prettier, eslint },
   typescriptreact = { eslint_prettier, eslint },
-  -- javascript = { eslint_prettier, eslint },
-  -- javascriptreact = { eslint_prettier, eslint },
-  javascript = efm_tsserver,
-  javascriptreact = efm_tsserver,
+  javascript = { eslint_prettier, eslint },
+  javascriptreact = { eslint_prettier, eslint },
+  -- javascript = efm_tsserver,
+  -- javascriptreact = efm_tsserver,
   rust = { { formatCommand = "rustfmt", formatStdin = true } },
   vue = { eslint_prettier, eslint },
+  go = {
+    formatCommand = "gofmt",
+    formatStdin = true,
+    lintCommand = "golint",
+    lintIgnoreExitCode = true,
+    lintFormats = { "%f:%l:%c: %m" },
+  },
   csv = {},
   eruby = {},
   less = {},
   proto = {},
+  lua = {
+    {
+      formatCommand = "lua-format -i --config=$HOME/.config/efm-langserver/lua-format.cfg",
+      formatStdin = true,
+    },
+  },
 }
 
 -- local filetypes = vim.tbl_keys(languages)
@@ -102,12 +107,22 @@ local filetypes = {
 }
 
 lspconfig.efm.setup {
-  root_dir = require("lspconfig").util.root_pattern(".git", vim.fn.getcwd()),
+  root_dir = function(fname)
+    return lspconfig.util.root_pattern(".git")(fname) or
+               lspconfig.util.path.dirname(fname)
+  end,
+  cmd = lsp_cmds.efm,
   on_attach = efm_on_attach,
-  init_options = { documentFormatting = true, codeAction = true },
+  init_options = {
+    documentFormatting = true,
+    codeAction = true,
+    completion = true,
+    documentSymbol = true,
+    hover = true,
+  },
   filetypes = filetypes,
   settings = {
-    lintDebounce = 500,
+    lintDebounce = 200,
     rootMarkers = {
       ".git",
       "nvim",
@@ -123,8 +138,8 @@ lspconfig.efm.setup {
       ".prettier.config.js",
       ".prettier.config.cjs",
     },
-    -- languages = languages,
+    languages = languages,
     log_level = 5,
-    log_file = "~/.local/log/nvim-efm.log",
+    log_file = "~/.cache/nvim/nvim-efm.log",
   },
 }
