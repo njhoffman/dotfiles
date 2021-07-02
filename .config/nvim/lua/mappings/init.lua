@@ -111,18 +111,20 @@ map("n", "p", "p`]")
 -- surround insert unmappings
 -- vim.cmd([[iunmap <C-S>]])
 local window_map = {
-  ["<s-k>"] = { ":resize -2<CR>" },
-  ["<s-j>"] = { ":resize +2<CR>" },
-  ["<s-h>"] = { ":vertical resize -2<CR>" },
-  ["<s-l>"] = { ":vertical resize +2<CR>" },
-  ["<c-h>"] = { "<c-w>h" },
-  ["<c-j>"] = { "<c-w>j" },
-  ["<c-k>"] = { "<c-w>k" },
-  ["<c-l>"] = { "<c-w>l" },
+  ["<s-k>"] = { "<cmd>resize -2<cr>", "win resize vert -2" },
+  ["<s-j>"] = { "<cmd>resize +2<cr>", "win resize vert +2" },
+  ["<s-h>"] = { "<cmd>vertical resize -2<cr>", "win resize horiz -2" },
+  ["<s-l>"] = { "<cmd>vertical resize +2<cr>", "win resize horiz +2" },
+  ["<c-j>"] = { "<c-w>j", "win nav down" },
+  ["<c-k>"] = { "<c-w>k", "win nav up" },
+  ["<c-h>"] = { "<c-w>h", "win nav left" },
+  ["<c-l>"] = { "<c-w>l", "win nav right" },
+  ["<c-w>;"] = { "<c-w>w", "win nav next" },
   ["<leader>"] = {
-    [";"] = { "<c-w>w" },
-    ["H"] = { "<cmd>vnew<cr>" },
-    ["V"] = { "<cmd>new<cr>" },
+    [":"] = { "<c-w>W", "win nav prev" },
+    [";"] = { "<c-w>w", "win nav next" },
+    ["H"] = { "<cmd>vnew<cr>", "win split horizontal" },
+    ["V"] = { "<cmd>new<cr>", "win split vertical" },
     ["_"] = { "<c-w>_" },
     ["|"] = { "<c-w>|" },
     ["= "] = { "<c-w>=" },
@@ -130,12 +132,21 @@ local window_map = {
   },
   ["<leader>j"] = {
     name = "+jump windows",
-    ["h"] = { "<cmd>wincmd h<cr>", "Left" },
-    ["j"] = { "<cmd>wincmd j<cr>", "Down" },
-    ["k"] = { "<cmd>wincmd k<cr>", "Up" },
-    ["l"] = { "<cmd>wincmd l<cr>", "Right" },
+    ["h"] = { "<cmd>wincmd h<cr>", "win jump left" },
+    ["j"] = { "<cmd>wincmd j<cr>", "win jump down" },
+    ["k"] = { "<cmd>wincmd k<cr>", "win jump up" },
+    ["l"] = { "<cmd>wincmd l<cr>", "win jump right" },
   },
 }
+
+local window_opts = {
+  mode = "n",
+  buffer = nil,
+  silent = true,
+  noremap = true,
+  nowait = false,
+}
+require("which-key").register(window_map, window_opts)
 
 local buffer_map = {
   -- ["q"] = {"<cmd>update | bdelete<CR>", "Save and safely remove buffer"},
@@ -191,9 +202,7 @@ local opts = {
   noremap = true,
   nowait = false,
 }
-
 require("which-key").register(buffer_map, opts)
-require("which-key").register(window_map, opts)
 
 local insert_map = { ["<c-s>"] = { "<esc><cmd>w<cr>", "Quick save" } }
 

@@ -4,6 +4,7 @@
 #    Email: wenxuangm@gmail.com
 #  Created: 2018-04-05 17:37
 #===============================================================================
+# TODO: handle monitor-status window
 
 # $1: option
 # $2: default value

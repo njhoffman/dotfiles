@@ -32,7 +32,8 @@
     exec --no-startup-id "compton"
 
 # TODO: create a service that waits for mpd to be initialized
-    exec --no-startup-id "/home/linuxbrew/.linuxbrew/bin/mpd ~/.mpd && sleep 3 && /usr/local/bin/ntfd"
+    # exec --no-startup-id "/home/linuxbrew/.linuxbrew/bin/mpd ~/.mpd && sleep 3 && /usr/local/bin/ntfd"
+    exec --no-startup-id "mpd"
 
 # start polybars on multiple monitors
     exec --no-startup-id "$dir_bin/launch-polybars.sh"

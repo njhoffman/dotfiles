@@ -1,1351 +1,2429 @@
-0dd27efe17d0f1ce8b70d80ec0e6c548|file:///home/nicholas/projects/infra/ansible-scratch/mol-test2/meta/main.yml|6|1|V|yaml.ansible
-	  platforms:
-	    - name: Fedora
-	      versions:
-	        - all
-	    - name: Debian
-	      versions:
-	        - all
-	    - name: Ubuntu
-	      versions:
-	        - all
-efbf44a8e0da34f951aedf4fc448fbca|file:///home/nicholas/projects/infra/ansible-scratch/mol-temp/meta/main.yml|2|1|V|yaml.ansible
-	  author: Nicholas Hoffman
-	  description: Molecule Role Template
-	  license: MIT
-	  min_ansible_version: 2.9
-	
-	  platforms:
-	    - name: Fedora
-	      versions:
-	        - all
-	    - name: Debian
-	      versions:
-	        - all
-	    - name: Ubuntu
-	      versions:
-	        - all
-	
-	  galaxy_tags: []
-	
-e8418d1d706cd73548f9f16f1d55ad6e|file:///home/nicholas/projects/infra/ansible-scratch/role_template/molecule/default/molecule.yml|36|5|v|yaml
-	verify
-cf2850499daa68ae5e617c600fcfd2af|file:///home/nicholas/projects/infra/ansible-scratch/role_template/molecule/default/molecule.yml|36|13|v|yaml
-	verify.
-09cb2f667928946057f8f1b05af9258c|file:///home/nicholas/projects/infra/ansible-scratch/role_template/molecule/default/molecule.yml|17|1|V|yaml
-	    # image: debian:stretch
-e18de7e810f3cc701493fb810d879f61|file:///home/nicholas/projects/infra/ansible-scratch/main.yml|7|13|v|yaml.ansible
-	mol-test
-f5cf27477777e4be19081f052d7bd07a|file:///home/nicholas/projects/infra/ansible-scratch/role_template/tasks/main.yml|2|1|V|yaml.ansible
-	# tasks file for role_template
-522f29cad18228671c20e25073e4f142|file:///home/nicholas/projects/infra/ansible-scratch/role_template/tasks/main.yml|5|1|V|yaml.ansible
-	- name: Create apps dir
-	  file:
-	    path: /opt/examples
-	    owner: ansible
-	    group: deployer
-	    mode: 0775
-	    state: directory
-	
-	
-a8f98fa7d9969f58f1f18e557691275a|file:///home/nicholas/projects/infra/ansible-scratch/role_template/tasks/main.yml|5|16|v|yaml.ansible
-	apps 
-c8f5cb8074e1cd1b0edd64426c762cff|file:///home/nicholas/projects/infra/ansible-scratch/role_template/tasks/main.yml|7|11|v|yaml.ansible
-	/opt/examples
-65ad1eb4f58b9713645ec8c8ca364916|file:///home/nicholas/projects/infra/ansible-scratch/main.yml|4|3|V|yaml.ansible
-	  connection: docker
-9c5509a35819d69f41a126ddcb736e56|file:///home/nicholas/projects/infra/ansible-scratch/docker/Dockerfile|28|1|V|Dockerfile
-	##########################################
-	# 1.14 GB
-	FROM base AS ansible-base
-	COPY ./ /root/.dotfiles/
-	RUN apt-get install -y \
-	    ansible git python3-apt apt-utils
-	
-	WORKDIR /root/.dotfiles/scripts
-	RUN ./bootstrap
-	
-	RUN apt-get autoremove && apt-get clean
-	
-	##########################################
-	# 3.59 GB
-	FROM ansible-base AS ansible-shell
-	
-	WORKDIR /root/.dotfiles/.provision
-	RUN ./start-ansible.sh zsh && \
-	    ./start-ansible.sh fonts && \
-	    ./start-ansible.sh termite && \
-	    ./start-ansible.sh tmux && \
-	    ./start-ansible.sh cleanup
-	
-	EXPOSE 22
-	CMD ["/usr/sbin/sshd", "-D"]
-	
-	##########################################
-	# 9.57 GB
-	FROM ansible-base AS ansible-devtools
-	WORKDIR /root/.dotfiles/.provision
-	RUN ./start-ansible.sh aws && \
-	    ./start-ansible.sh docker && \
-	    ./start-ansible.sh kubernetes && \
-	    ./start-ansible.sh misc-dev && \
-	    ./start-ansible.sh neovim && \
-	    ./start-ansible.sh terraform && \
-	    ./start-ansible.sh twilio && \
-	    ./start-ansible.sh cleanup
-	
-	EXPOSE 22
-	CMD ["/usr/sbin/sshd", "-D"]
-	
-	##########################################
-	# 5.88 GB
-	FROM ansible-base AS ansible-systemtools
-	
-	WORKDIR /root/.dotfiles/.provision
-	RUN ./start-ansible.sh audio && \
-	    ./start-ansible.sh video && \
-	    ./start-ansible.sh files && \
-	    ./start-ansible.sh network && \
-	    ./start-ansible.sh system-monitors && \
-	    ./start-ansible.sh virtualization && \
-	    ./start-ansible.sh cleanup
-	
-	EXPOSE 22
-	CMD ["/usr/sbin/sshd", "-D"]
-	
-	##########################################
-	# 1.14 GB
-	FROM ansible-base AS ansible-services
-	
-	WORKDIR /root/.dotfiles/.provision
-	RUN ./start-ansible.sh influxdb && \
-	    ./start-ansible.sh telegraf && \
-	    ./start-ansible.sh grafana && \
-	    ./start-ansible.sh kibana && \
-	    ./start-ansible.sh elasticsearch && \
-	    ./start-ansible.sh logstash && \
-	    ./start-ansible.sh postgres && \
-	    ./start-ansible.sh cleanup
-	
-	EXPOSE 22
-	CMD ["/usr/sbin/sshd", "-D"]
-	
-	##########################################
-	# 2.53 GB
-	FROM ansible-base AS ansible-window-management
-	
-	WORKDIR /root/.dotfiles/.provision
-	RUN ./start-ansible.sh conky && \
-	    ./start-ansible.sh compton && \
-	    ./start-ansible.sh i3 && \
-	    ./start-ansible.sh polybar && \
-	    ./start-ansible.sh rofi && \
-	    ./start-ansible.sh cleanup
-	
-	EXPOSE 22
-	CMD ["/usr/sbin/sshd", "-D"]
-	
-	##########################################
-	FROM ansible-base AS ansible-all
-	
-	WORKDIR /root/.dotfiles/.provision
-	RUN ./start-ansible.sh
-4cccfb2edef6f401b40709c5c29a03e0|file:///home/nicholas/projects/infra/ansible-scratch/start-test.sh|5|30|v|sh
-	myubuntu .
-8c55ec2f5de72528ea601e601d5f0197|file:///home/nicholas/projects/infra/ansible-scratch/start-test.sh|9|55|v|sh
-	myplaybook.
-a9f98d0a7de5c5facf3ff93ff3cd1bd8|file:///home/nicholas/projects/infra/ansible-scratch/start-test.sh|9|7|v|sh
-	ansible 
-a0c122079cccbfb077cc7fd486dcb500|file:///home/nicholas/projects/infra/ansible-scratch/start-test.sh|7|1|V|sh
-	docker run -ti --privileged --name $DOCKER_CONTAINER_NAME -d -p 5000:22 myubuntu
-22df0e059cf3cec9be9ad097dce3a47c|file:///home/nicholas/projects/infra/ansible-scratch/start-test.sh|7|14|V|sh
-	docker build -run -ti --privileged --name $DOCKER_CONTAINER_NAME -d -p 5000:22 myubuntu
-aedf24fd663664fdb33e762a75e1ac66|file:///home/nicholas/projects/infra/ansible-scratch/start-test.sh|6|1|V|sh
-	
-	docker run -ti --privileged --name $DOCKER_CONTAINER_NAME -d -p 5000:22 myubuntu
-1dc642b3ddb1b65228a00f4457e74c32|file:///home/nicholas/projects/infra/ansible-scratch/main.yml|3|14|V|yaml.ansible
-	  hosts: docker
-b58c0ee9aeef37ef334c80b60e592346|file:///home/nicholas/projects/infra/ansible-scratch/start-test.sh|7|73|v|sh
-	myubuntu
-26705249771365608573be669ad05680|file:///home/nicholas/projects/infra/ansible-scratch/docker/Dockerfile.deb|17|1|V|Dockerfile
-	RUN apt-get install -y curl git zsh bc python3 python unzip
-90edeae430aa17d5760d5a1f160f1dfa|file:///home/nicholas/projects/infra/ansible-scratch/docker/Dockerfile.deb|32|1|V|Dockerfile
-	# ------- Ansible -------
-	FROM bootstrap AS ansible
-	RUN apt-get install -y ansible
-30c1ece990a4619cd2451832f572a74d|file:///home/nicholas/projects/infra/ansible-scratch/docker/Dockerfile.deb|42|1|V|Dockerfile
-	# ------- launcher -------
-851b26ce5e8bf552c59a5ba5369e9a8e|file:///home/nicholas/projects/infra/ansible-scratch/docker/Dockerfile|29|1|V|Dockerfile
-	EXPOSE 22
-	CMD ["/usr/sbin/sshd", "-D"]
-e942a5f80992ee93b462ea2482b2afc5|file:///home/nicholas/projects/infra/ansible-scratch/docker/Dockerfile|31|6|v|Dockerfile
-	bootstrap 
-e3be5ec543c87e8f3a44b338810bb757|file:///home/nicholas/projects/infra/ansible-scratch/start-test.sh|7|87|v|sh
-	:launcher
-23eeeb4347bdd26bfc6b7ee9a3b755dd|file:///home/nicholas/projects/infra/ansible-scratch/docker/Dockerfile|6|3|v|Dockerfile
-	python
-28cb95fab5307ba4ae98b05e6776e3b1|file:///home/nicholas/projects/infra/ansible-scratch/docker/Dockerfile|14|130|V|Dockerfile
-	docker run -ti --privileged --name $DOCKER_CONTAINER_NAME -d -p 5000:22 -e AUTHORIZED_KEYS="$SSH_PUBLIC_KEY" local/centos7-systemd
-82956decc2c072d76463b055d2a14c3d|file:///home/nicholas/projects/infra/ansible-scratch/start-test.sh|6|48|v|sh
-	ubuntu .
-93df43afeffbc75e172c5f48292d0315|file:///home/nicholas/projects/infra/ansible-scratch/start-test.sh|8|91|v|sh
-	ansible_ubuntu
-3254677a7917c6c01f55212f86c57fbf|file:///home/nicholas/projects/infra/ansible-scratch/start-test.sh|6|48|v|sh
-	Dockerfile
-7bdb47cb903dfe7557b4925ad565c4a7|file:///home/nicholas/projects/infra/ansible-scratch/main.yml|4|14|V|yaml.ansible
-	  # become: true
-1358be48f262e309d182c0a4044e843b|file:///home/nicholas/projects/infra/ansible-scratch/roles/role_template/tasks/main.yml|2|17|V|yaml.ansible
-	- name: "just execute a ls -lrt command"
-	  shell: "ls -lrt"
-	  register: "output"
-	
-	- debug: var=output.stdout_lines
-3bc51475291164a09f1db8aef072bf53|file:///home/nicholas/projects/infra/ansible-scratch/roles/role_template/tasks/main.yml|30|1|V|yaml.ansible
-	#     state: directory
-61a486812bee16cf8a9f12583dabbaca|file:///home/nicholas/projects/infra/ansible-scratch/Vagrantfile|2|7|v|ruby
-	set 
-0891126936cce06fbf4f41cc9e5e9e15|file:///home/nicholas/projects/infra/ansible-scratch/Vagrantfile|10|25|v|ruby
-	playbook.
-9bd56c20dc54262c05273b92dedf4930|file:///home/nicholas/projects/infra/ansible-scratch/Vagrantfile|6|28|v|ruby
-	trusty64
-f322c031ff68adb2e8af83f7d29383de|file:///home/nicholas/projects/infra/ansible-scratch/Vagrantfile|7|10|v|ruby
-	 -> 
-01b6a3196bb0dda79f2e7453a2db10bf|file:///home/nicholas/projects/infra/ansible-scratch/Vagrantfile|6|26|V|ruby
-	  config.vm.box = "ubuntu/focal64"
-0d400bea8ae3bfed9ab4b6eff7f9d8ca|file:///home/nicholas/projects/infra/ansible-scratch/Vagrantfile|14|3|V|ruby
-	  # Run Ansible from the Vagrant VM
-57666c1c5939095036999f98a6ece7e1|file:///home/nicholas/projects/infra/ansible-scratch/Vagrantfile|6|3|V|ruby
-	  # 14.04: trusty, 16.04: xenial, 18.04: bionic, 20.04: focal
-b40000d0c4258656655aa78a93684403|file:///home/nicholas/projects/infra/ansible-scratch/Vagrantfile|6|1|V|ruby
-	  # config.vm.network :forwarded_port, guest: 9000, host: 9200
-	  # config.vm.network :forwarded_port, guest: 9001, host: 9201
-044a7eab4ebe5e69085c0ac8d3adad5e|file:///home/nicholas/projects/infra/ansible-scratch/env/local_vagrant|4|2|V|
-	[web]
-5b8a67c9a0b6e84e52daa1956cff3593|file:///home/nicholas/projects/infra/ansible-scratch/Vagrantfile|7|3|V|ruby
-	  config.vm.define "web01" do |web01|
-d9828cb23e037228eb00d2d1641dc563|file:///home/nicholas/projects/infra/ansible-scratch/Vagrantfile|6|31|v|ruby
-	|web01
-bb31a0c76118997faa7c6c50bc38a913|file:///home/nicholas/projects/infra/ansible-scratch/Vagrantfile|7|5|v|ruby
-	config.
-d6a71ad5c42b1515bd28f437b1a23684|file:///home/nicholas/projects/infra/ansible-scratch/Vagrantfile|1|1|V|ruby
-	#-*- mode: ruby -*-
-	# vim:ft=ruby :
-e71aa1f1ea5070188f286df325890a3c|file:///home/nicholas/projects/infra/ansible-scratch/main.yml|13|1|V|yaml.ansible
-	  #   zsh_dir: "{{ lookup('env', 'ZSHDIR') }}"
-	  #   dotfiles_dir: '{{ playbook_dir }}/..'
-	  #   localsrc_dir: "{{ lookup('env', 'HOME') }}/.local/src"
-	  #   global_tasks: '{{ playbook_dir }}/tasks'
-	  #   versions_dir: '{{ playbook_dir }}/versions'
-	  #   nvm_dir: $HOME/.nvm
-ac0d56d86fbbee12a7bc4a3b318f4d4e|file:///home/nicholas/projects/infra/ansible-scratch/main.yml|13|1|V|yaml.ansible
-	  # roles:
-	  #   - role: shell
-	  #     tags: [shell]
-	  #     vars:
-	  #       termite_version: master
-	  #       tmux_version: 3.2-rc
-	  #       zsh_version: master
-	  #   - role: dev-tools
-	  #     tags: [dev-tools]
-	  #     vars:
-	  #       docker_compose_version: 1.27.4
-	  #       docker_machine_version: 0.16.2
-	  #       helm_version: 3.3.0-rc.1
-	  #       helmfile_version: 0.125.0
-	  #       krew_version: 0.3.3
-	  #       neovim_version: master
-	  #       nvm_version: 0.35.3
-	  #       terraform_version: 0.12.15
-	  #   - role: system-tools
-	  #     tags: [system-tools]
-	  #     vars:
-	  #       atop_version: 2.5.0
-	  #       netatop_version: 3.1
-	  #       expressvpn_version: 3.2.0.8-1
-	  #       mpd_version: 0.22.3
-	  #       youtubedl_version: 2020.11.21.1
-	  #   - role: cleanup
-	  #     tags: [cleanup]
-	  # handlers:
-	  #   - name: install neovim plugins
-	  #     command: nvim --headless +PluginInstall +qall
-	
-	
-	# https://github.com/sherlock-project/sherlock
-	# https://github.com/antonmedv/fx
-	# sudo apt-get install lsscsi procinfo hwinfo
-	#
-	#
-	# sudo add-apt-repository ppa:appimagelauncher-team/stable
-	# sudo apt update
-	# sudo apt install appimagelauncher
-	# - make git notify handler that saves into .version file
-	#   https://github.com/neovim/neovim#master
-	#   v0.6.4-13-geff0894
-	#   ee77d8665ffe327a2158354021bbbcb772b3521a
-	# - write script that lists overview of version differences
-	#
-	# gore : repl for golang
-	# go get github.com/motemen/gore/cmd/gore
-	# go get github.com/mdempsky/gocode   # for code completion
-	#
-	# # succint code counter
-	# go get -u github.com/boyter/scc/
-	#
-	#
-	# pretty-repl
-	#
-	# pip install alive-progress
-	# from alive_progress import show_bars, show_spinners
-	# call them and enjoy the show ;)
-	# from alive_progress import showtime
-	# showtime()
-	#
-	# https://github.com/adi1090x/termite-style
-	#
-	# npm install mathjs
-	#
-	# with alive_bar(3) as bar:
-	#     corpus = read_big_file(file)
-	#     bar()  # file read, tokenizing
-	#     tokens = tokenize(corpus)
-	#     bar()  # tokens ok, processing
-	#     process(tokens)
-	#     bar()  # we're done! 3 calls with total=3
-4a8d188379cad26e43be4abcb2e49f9b|file:///home/nicholas/projects/infra/ansible-scratch/env/local_vagrant|12|1|V|dosini
-	; vim:ft=dosini
-617fb2db3ae364ee0971152c1e5397f2|file:///home/nicholas/.local/keys/address.txt.asc|1|1|V|
-	-----BEGIN PGP MESSAGE-----
-	
-	hQIMA64JUMcWOsbQARAApuixj2Bl25ApZ7YLVK0y5R4RFj6muW2qSsCHlSvJzH0u
-	V5mV2x8EhrYPN3qhwE8c02hv1v8YwXlDWrXZEoRV/sZCj2IKBRZFpLNIAGCTQ1UM
-	jsCD4oNisVMzNTHI2Gag9TQraqnrDdiRp1dEEj3q+uEkbJUwaujMxZjrSppOrbWM
-	YxTzQg7z7aAstvSTAx4zOJoMuGWGrvQLrcancgjMWOPRvuak5+NYOA+UMYVzm65r
-	kVosYTq7zJVrJnY8t0+rH7RfMuiBeQpdWV146NcrYLkKUznzqxpZ+K0pmhOJWSrw
-	JmaES6mJLhlliaT99QU0T8BUhAkIsOYwkdvELCCmwrUzejUXPnmYFenWc0S6syPS
-	q834xpTLOOAZVi1e4H/F2bvFrKX8dshN4u5YvQ2urFk/lEeBMEIFT0oNVf/sghSo
-	9sTlOehgO9cSDUF+FgbfxNJkJ4k1VYbXlEaX2k1cIr6MhpnjYQANz6/r7RGm6fcM
-	WAUPoI7EO77ZS2RejzHkE8mWTlc3LCYUigEgfYOvv0n/OjMWHDhH8JlH0hm0xhZC
-	wOLRS/J15qho98C8McMXkoSHsaEqyqNIn1gR6RHLSxi5aaCECV0C8klDvu+pB3T6
-	22OJLrIwRxAhk+abuxpxBVfYekRqwF7PtFnIm6SoKq5592PvIvxehV0YS5IRVeXS
-	iwHmoGKtXULuLrZy57o8aFhghspe/6HlGmhuk2OqW2K7DKKS9UGlIIaV7/HbcxPp
-	iUbOo9ynXC+rnZORP8ikgC50GEPCeRNPRIKJ9/OaPkrOj7Ci8HeUNZQ6ZfOnnRT7
-	6AnoM/LcEXiXyRFx1IWZK+usCGjNRuGbWwDPPTfFBSr9RbYKX1RgWA5xAmA=
-	=eSoa
-	-----END PGP MESSAGE-----
-c2e162aa5066b2a06f9627d68ddd59d3|file:///home/nicholas/.local/keys/address.txt.asc|1|1|V|
-	-----BEGIN PGP MESSAGE-----
-	
-	hQIMAzbfiwxeyZwOAQ//WNrPz7dp7vQ16PnInFhYPJjXx+qZexxJKcet0b41kH98
-	fJzaWcT6p9Om6/TUPaJ3kMU75ltCRFnMOXSOXcFiH9sVgjDZ64tAuoeUZiHR5/GA
-	P4HQAa1Y84WF2SppLm+ZH/wH3ZUaQs1UZe5HDiB9jhTMBGKPv3TUzj1l+vNQzFny
-	NOo38nbqcnLL9kUKJK0f30zDz0tJdXIjCSMBgY84AfaiZmn3Fu/o8Tx1SOgsD+Yr
-	wbX2LBEEbhFQWvacjj/zrL7qO7mghgWNLIx6sSe4QKz2YjxKyGPDHD/pUBIOWmDl
-	AmdDfMuzuOmhKV1kSF50AF4y+OeYXcSF1NvbgmB4FDaFr9N5FCd2Msxq4ouo6R+n
-	cGH5OU6n2bj3Resz9yzHtmdYqVeTp9zzwNySkSNo/6Bi/81BddP9zRgu4Unbwr3B
-	SSYp08hx8TEXLlyrMd1k03K8jTOfgCCO1h2on+yIEcEnKaFnp5eDpr9WL8fYLhsE
-	GcHPErgGdLv/OoUB9G4zV7SR7SX0Q6dosjujAZDc1hR4aZpuWoIsmowKq1SXKOr9
-	uYcYg61ZtBcwuEsBZ/INiJM5jd5D/xuLxDKCIiNRVARe7Q68AZ9sOnDXusgGaE9T
-	m70py+5tdDrwOa+YLwDRBa+MS2jovyj7uiBiphFCc9CSLHXZ2GX3RNfXmZZDdsnS
-	iwE+4SY/D12GfsKc6RDwpMDLphhb04myUU/spyB29uu+9I1m+TgTkrTwg7yo0Zb3
-	kCQAlc5s+fzbpJr1jnp9TnODmuYKojKKDJrIUen4zWKEoce24WKBsuMwcfdmaPA+
-	TQrmPFjB+ilX+6n5OHzHO7Jmxauvlx10tCSpsCfE+6RkUccaPLpSQmZUUM8=
-	=3G3w
-	-----END PGP MESSAGE-----
-8aabea956b9ae640a0fa558e05e6c788|file:///home/nicholas/.config/ansible/example.cfg|67|1|V|cfg
-	#roles_path = ~/.ansible/roles:/usr/share/ansible/roles:/etc/ansible/roles
-29a7e96467b69a9f5a93332e29e9b0de|file:///home/nicholas/projects/infra/ansible-scratch/main.yml|10|7|v|yaml.ansible
-	role
-0eac301369445b54aefb2f0c03a4b045|file:///home/nicholas/projects/infra/ansible-scratch/main.yml|10|1|V|yaml.ansible
-	    - manala.zsh
-f57c4e385a9dfe278204e6918a890b4a|file:///home/nicholas/projects/infra/ansible-scratch/Vagrantfile|22|21|v|ruby
-	provisioning
-88b2e83a20336ca2259434a6481d3188|file:///home/nicholas/projects/infra/ansible-scratch/Vagrantfile|15|1|V|ruby
-	      ansible.galaxy_role_file = 'requirements.yml'
-	      ansible.galaxy_roles_path = '/etc/ansible/roles'
-9798e5137434e7f8a8008ec2b685e422|file:///home/nicholas/projects/infra/ansible-scratch/Vagrantfile|22|64|v|ruby
-	, nil
-01c4b0863c180ffc2dfbb9fb2113ccb4|file:///home/nicholas/projects/infra/ansible-scratch/main.yml|10|12|V|yaml.ansible
-	    - role: manala.zsh
-178063f4b6db5367a373e81553397909|file:///home/nicholas/projects/infra/ansible-scratch/main.yml|10|13|v|yaml.ansible
-	manala.zsh
-47683ac4e7bc63b78f47480c276e38b3|file:///home/nicholas/projects/infra/ansible-scratch/requirements.yml|6|21|V|yaml.ansible
-	- src: manala.ohmyzsh
-888093142be368ec00994403d115a1d7|file:///home/nicholas/projects/infra/ansible-scratch/main.yml|10|13|v|yaml.ansible
-	viasite-ansible.zsh
-dc5853da9b147d6755fdfcb89a7e67dc|file:///home/nicholas/projects/infra/ansible-scratch/main.yml|10|1|V|yaml.ansible
-	    - role: manala.zsh 
-	      become: true
-3419e8869f9ed9be85e35224a4468970|file:///home/nicholas/projects/infra/ansible-scratch/main.yml|12|20|v|yaml.ansible
-	zsh 
-4c9f9f1d499100a318a7224d9afa32d7|file:///home/nicholas/projects/infra/ansible-scratch/main.yml|13|5|V|yaml.ansible
-	      become: true
-b326b5062b2f0e69046810717534cb09|file:///home/nicholas/projects/infra/ansible-scratch/Vagrantfile|16|26|v|ruby
-	true
-eab885c8f3d508bcb5de56904014cfd4|file:///home/nicholas/projects/infra/ansible-scratch/Vagrantfile|17|7|V|ruby
-	      # ansible.become   = false
-ce05dfc621be9e9e4dde48870a15b890|file:///home/nicholas/projects/personal/dotfiles-bup/zsh/zshenv.symlink|1|1|V|zsh
-	# This file is sourced on all invocations of the shell.
-	# If the -f flag is present or if the NO_RCS option is
-	# set within this file, all other initialization files
-	# are skipped.
-	#
-	# This file should contain commands to set the command
-	# search path, plus other important environment variables.
-	# This file should not contain commands that produce
-	# output or assume the shell is attached to a tty.
-	#
-	# Global Order: zshenv, zprofile, zshrc, zlogin
-	
-	# local to load process, gets unset at the end
-	
-	export _ZSH_VERBOSITY=${_ZSH_VERBOSITY:-2}
-	export _ZSH_LOAD_START=$(date +%s.%N)
-	
-	# default exports shared between non-interactive and interactive shells
-	export ZSH_DIR="$HOME/.zsh"
-	export ZSH_PROFILE=${ZSH_PROFILE:-default}
-	
-	export DOTFILES="$HOME/.dotfiles"
-	export PROJECTS="$HOME/projects"
-	export EDITOR='vim'
-	export VEDITOR='vim'
-	
-	# load helper utility functions
-	source "${ZSH_DIR}/zsh.funcs"
-	
-	if [[ "$ZSH_PERCHECK" > 0  ]]; then
-		_log 0 "starting profile"
-		zmodload zsh/zprof # Output load-time statistics
-		# http://zsh.sourceforge.net/Doc/Release/Prompt-Expansion.html
-		PS4=$'%D{%M%S%.} %N:%i> '
-		exec 3>&2 2>"${XDG_CACHE_HOME:-$HOME/tmp}/zsh_startup.$$"
-		setopt xtrace prompt_subst
-	fi
-	
-	export HISTSIZE=2000
-	export DIRSTACKSIZE=20
-	export SAVEHIST=2000
-	export KEYTIMEOUT=1
-	export HISTFILE=~/.zsh_history
-	export LESS="-c -M -S -i -f -R"
-	#export LESSCHARSET="utf-8"
-	export VISUAL='vim'
-	export EDITOR='vim'
-	export BROWSER='chromium'
-	export TEXDOCVIEW_html="chromium %s"
-	export TEXDOCVIEW_dvi="kdvi %s"
-	export TEXDOCVIEW_pdf="kpdf %s"
-	export OOO_FORCE_DESKTOP=gnome
-	
-	type -p dircolors &>/dev/null && eval `dircolors -b`
-	
-	zmodload -ab zsh/pcre pcre_compile
-	
-	# tie LD_LIBRARY_PATH to the array ldpath
-	export -U path
-	case $(uname -s) in
-		Linux)  export -TU LD_LIBRARY_PATH ldpath;;
-		Darwin) export -TU DYLD_FALLBACK_LIBRARY_PATH ldpath;;
-		*) echo "Don't know how to setup ldpath for $(uname -s)";;
-	esac
-	
-	export -TU PKG_CONFIG_PATH pkg_path
-	export -TU PERL5LIB perl_path
-	
-	export SHELL=/bin/zsh
-	
-	setopt extended_glob
-	
-	if [[ -e "${ZSH_DIR}/profiles/${ZSH_PROFILE}.env.zsh" ]]; then
-		_log 1 "loading env profile: ${ZSH_PROFILE}.env.zsh"
-		source "${ZSH_DIR}/profiles/${ZSH_PROFILE}.env.zsh"
-	fi
-	
-	[[ -r $HOME/.zshenv.local ]] && source $HOME/.zshenv.local
-	
-	if [[ "$ZSH_PEFCHECK" == 1 && ! -o interactive ]]; then
-		_log 0 "ending profile in noninteractive mode"
-		zprof
-		unsetopt xtrace
-		exec 2>&3 3>&-
-	fi
-c28ffe038c0b658915c7cd884b2466b7|file:///home/nicholas/projects/infra/ansible-template/.gitignore|1|1|V|gitignore
-	.vagrant
-d556d0837e28acdc9a33cc64a866f8ff|file:///home/nicholas/projects/infra/ansible-scratch/main.yml|15|1|V|yaml.ansible
-	    - role: viasite.ansible.zsh
-	    - role: role_template
-9681764d6d38364aec65c4f35b5acc22|file:///home/nicholas/projects/infra/provision-scratch/requirements.yml|4|18|V|yaml.ansible
-	  - role: role_template
-c5c6a6e908aefae24f1edc3956ad188d|file:///home/nicholas/projects/infra/provision-scratch/.zshenv|22|8|v|zsh
-	DOTFILES
-c3ae06f70363066574dc6f52338df7f5|file:///home/nicholas/projects/infra/provision-scratch/.zshenv|22|25|v|zsh
-	dotfiles
-e314ebeeb328c015e317857b85c9804b|file:///home/nicholas/projects/personal/dotfiles-bup/zsh/zsh.symlink/zshrc|1|1|V|zsh
-	#!/bin/zsh
-	
-	##################################################
-	# common zshrc functionality between profiles
-	##################################################
-	
-	load_end=$(date +%s.%N)
-	[[ -z "$_ZSH_LOAD_START" ]] && _ZSH_LOAD_START=$(date +%s.%N)
-	
-	typeset -U config_files
-	config_files=($DOTFILES/*/*.zsh)
-	
-	# track directories for termite spawning
-	touch /tmp/whereami
-	
-	# load the path files
-	files_n=0
-	_log 1 "1: beginning zshrc, load path files"
-	for file in ${(M)config_files:#*/path.zsh}; do
-	  files_n=$((files_n+1))
-	  _log 2 "1: sourcing path file: $file"
-	  source "$file"
-	done
-	_log 1 "1: sourced ${files_n} path files"
-	
-	files_n=0
-	_log 1 "2: loading config files that aren't path or completion"
-	for file in ${${config_files:#*/path.zsh}:#*/completion.zsh}; do
-	  files_n=$((files_n+1))
-	  _log 2 "2: sourcing: $file"
-	  source "$file"
-	done
-	_log 1 "2: sourced ${files_n} config files"
-	
-	_log 1 "3: initializing autocomplete with 24-hour expiration"
-	autoload -Uz compinit
-	for dump in ~/.zcompdump(N.mh+24); do
-	  compinit
-	done
-	compinit -C
-	
-	_log 1 "4: loading all completion files"
-	files_n=0
-	for file in ${(M)config_files:#*/completion.zsh}; do
-	  _log 2 "4: loading completion: $file"
-	  files_n=$((files_n+1))
-	  source "$file"
-	done
-	_log 1 "4: loaded ${files_n} completion files"
-	
-	# TODO: perform a check beore reloading
-	if command -v antibody &>/dev/null; then
-	  source "$DOTFILES/antibody/load.sh"
-	  _log 1 "5: loading $(cat ~/.zsh_plugins.sh | wc -l) antibody plugins ..."
-	  source ~/.zsh_plugins.sh
-	else
-	  _log 0 "error: antibody plugin manager not found in path"
-	fi
-	
-	unset config_files updated_at
-	
-	_log 1 "6: looking for profile specific zshrc files"
-	if [[ -e "${ZSH_DIR}/profiles/${ZSH_PROFILE}.zshrc" ]]; then
-	  _log 2 "6: loading rc file: ${ZSH_PROFILE}.zshrc"
-	  source "${ZSH_DIR}/profiles/${ZSH_PROFILE}.zshrc"
-	fi
-	
-	if [[ "$_ZSH_PROFILE_INT" == true ]]; then
-	  _log 0 "ending profile in interactive mode"
-	  zprof | tee -a ~/.zprof
-	  unsetopt xtrace
-	  exec 2>&3 3>&-
-	fi
-	
-	# use .localrc for things not wanted in repo
-	# shellcheck disable=SC1090
-	[ -f ~/.localrc ] && . ~/.localrc
-	load_end=$(date +%s.%N)
-	load_diff=$(printf '%.3g' $(echo "$load_end - $_ZSH_LOAD_START" | bc))
-	_log 0 "7: finished loading in %F{67} ${load_diff}s%f"
-	
-	export _ZSH_LOAD_START=""
-	
-9c9b63077794a580d65cf1d983220008|file:///home/nicholas/projects/personal/dotfiles-bup/zsh/zshrc.symlink|1|1|V|zsh
-	#!/bin/zsh
-	
-	##################################################
-	# bootstrap zshrc from ZSH_DIR directory
-	##################################################
-	
-	if [[ -h "${ZSH_DIR}/zshrc" ]]; then
-	  echo "ERROR: missing zshrc entry point file: ${ZSH_DIR}/zshrc"
-	  ls -alhR "${ZSH_DIR}"
-	  exit 1
-	fi
-	
-	source "${ZSH_DIR}/zshrc"
-4586d651617c4cc407b87f61d91574f6|file:///home/nicholas/projects/infra/provision-scratch/.zsh/zshrc|11|1|V|zsh
-	config_files=($DOTFILES/*/*.zsh)
-759488e2aac337d34c2f9ed09cdef743|file:///home/nicholas/projects/infra/provision-scratch/.zshrc-antigen|19|1|v|zsh
-	curl -sL --proto-redir -all,https https://raw.githubusercontent.com/zplug/installer/master/installer.zsh | zsh
-	
-d147fd8ae284a34255bbd8575425ae0c|file:///home/nicholas/projects/infra/provision-scratch/.zsh/plugins.zsh|27|1|V|zsh
-	# Also prezto
-	zplug "modules/prompt", from:prezto
-f2351215a69ffc043ccb7784b76818f7|file:///home/nicholas/projects/infra/provision-scratch/.zsh/plugins.zsh|48|1|V|zsh
-	# Support bitbucket
-	zplug "b4b4r07/hello_bitbucket", \
-	    from:bitbucket, \
-	    as:command, \
-	    use:"*.sh"
-	
-9f1128b06d291a2a9c3cb4515078a60b|file:///home/nicholas/projects/infra/provision-scratch/.zsh/plugins.zsh|42|33|V|zsh
-	# Can manage gist file just like other packages
-	zplug "b4b4r07/79ee61f7c140c63d2786", \
-	    from:gist, \
-	    as:command, \
-	    use:get_last_pane_path.sh
-1ce8585eff21b2b3313ae0b0352330a7|file:///home/nicholas/projects/infra/provision-scratch/.zsh/plugins.zsh|14|36|v|zsh
-	, frozen:1
-6863c1ef109d5ad80c8c1659c310bc44|file:///home/nicholas/projects/infra/provision-scratch/.zsh/plugins.zsh|16|35|V|zsh
-	# Grab binaries from GitHub Releases
-	# and rename with the "rename-to:" tag
-31473b53478859e43d04588fdb95c71d|file:///home/nicholas/projects/infra/provision-scratch/.zsh/plugins.zsh|13|27|V|zsh
-	# Disable updates using the "frozen" tag
-37b17cf3a3627c42552cb34f03345f2b|file:///home/nicholas/projects/infra/provision-scratch/.zsh/plugins.zsh|10|27|V|zsh
-	# Can manage everything e.g., other person's zshrc
-e23db48bf719e2f54d2e8a275340f391|file:///home/nicholas/projects/infra/provision-scratch/.zsh/plugins.zsh|10|28|v|zsh
-	, use:zshrc
-6e93187ac59ad9a57ffa457f76bc6ab4|file:///home/nicholas/projects/infra/provision-scratch/.zsh/plugins.zsh|6|27|V|zsh
-	# Use the package as a command
-	# And accept glob patterns (e.g., brace, wildcard, ...)
-	zplug "Jxck/dotfiles", as:command, use:"bin/{histuniq,color}"
-a13241eac4155d3facabf75cb785bb91|file:///home/nicholas/projects/infra/provision-scratch/.zsh/plugins.zsh|19|13|V|zsh
-	# Load if "if" tag returns true
-6638e54f9277d5c1a360f5a4e0e47cd8|file:///home/nicholas/projects/infra/provision-scratch/.zsh/plugins.zsh|16|13|V|zsh
-	# Supports oh-my-zsh plugins and the like
-d0d1c950647a07d8e6a6f5b0d893bd65|file:///home/nicholas/projects/infra/provision-scratch/.zsh/plugins.zsh|20|1|V|zsh
-	# Run a command after a plugin is installed/updated
-	# Provided, it requires to set the variable like the following:
-	# ZPLUG_SUDO_PASSWORD="********"
-b00992e2688803a4329c16efc448fb09|file:///home/nicholas/projects/infra/provision-scratch/.zsh/plugins.zsh|25|13|V|zsh
-	# Supports checking out a specific branch/tag/commit
-481346cd5a6077340a8b6d89720ca5ad|file:///home/nicholas/projects/infra/provision-scratch/.zsh/plugins.zsh|25|24|v|zsh
-	, at:v1
-475fa4cbbd38fb889677fcc90b02d1c5|file:///home/nicholas/projects/infra/provision-scratch/.zsh/plugins.zsh|26|27|v|zsh
-	, at:4c23cb60
-844c81738c69a7a435d6bbf11635d473|file:///home/nicholas/projects/infra/provision-scratch/.zsh/plugins.zsh|28|1|V|zsh
-	# Rename a command with the string captured with `use` tag
-36bf8d662cba676b6df24e321e2253d1|file:///home/nicholas/projects/infra/provision-scratch/.zsh/plugins.zsh|33|1|V|zsh
-	# Group dependencies
-	# Load "emoji-cli" if "jq" is installed in this example
-4ce6dcd9a6b4372fad979273598dede1|file:///home/nicholas/projects/infra/provision-scratch/.zsh/plugins.zsh|39|1|V|zsh
-	# Note: To specify the order in which packages should be loaded, use the defer
-	#       tag described in the next section
-	
-	# Set the priority when loading
-	# e.g., zsh-syntax-highlighting must be loaded
-	# after executing compinit command and sourcing other plugins
-	# (If the defer tag is given 2 or above, run after compinit command)
-bc63aac57bb170a87db7e60fa9e594a5|file:///home/nicholas/projects/infra/provision-scratch/.zsh/plugins.zsh|42|1|V|zsh
-	# Can manage local plugins
-	zplug "~/.zsh", from:local
-	
-160cca821ac83f3582410d70a6f1fc8e|file:///home/nicholas/projects/infra/provision-scratch/.zsh/plugins.zsh|23|1|V|zsh
-	zplug "jhawthorn/fzy", \
-	    as:command, \
-	    rename-to:fzy, \
-	    hook-build:"make && sudo make install"
-	
-2bb63d5dee489083eff477eb10e1f41f|file:///home/nicholas/projects/infra/provision-scratch/.zsh/plugins.zsh|21|18|V|zsh
-	zplug "lib/clipboard", from:oh-my-zsh, if:"[[ $OSTYPE == *darwin* ]]"
-d72827b112e29cb1848e463694a0c3f9|file:///home/nicholas/projects/infra/provision-scratch/.zsh/plugins.zsh|19|1|V|zsh
-	zplug "plugins/git",   from:oh-my-zsh
-0b7c713cdfd037d374f6d368752be85c|file:///home/nicholas/projects/infra/provision-scratch/.zsh/plugins.zsh|19|1|V|zsh
-	# git clone https://github.com/asdf-vm/asdf.git ~/.asdf
-	# cd ~/.asdf
-	# git checkout "$(git describe --abbrev=0 --tags)"
-df486ec2bcd95e2668ed38f1f12ce1f8|file:///home/nicholas/projects/infra/provision-scratch/.zsh/plugins.zsh|28|1|V|zsh
-	zplug "plugins/asdf",  from:oh-my-zsh
-dcaec66789018b09e95b1a80a27add9a|file:///home/nicholas/projects/infra/provision-scratch/.zsh/plugins.zsh|55|13|V|zsh
-	    printf "Install? [y/N]: "
-cbb11ed87dc8a95d81400c7f33c7c171|file:///home/nicholas/projects/infra/provision-scratch/.zsh/plugins.zsh|56|5|v|zsh
-	echo
-36ea249dca4f799d162d07e93035e15f|file:///home/nicholas/projects/infra/provision-scratch/.zsh/plugins.zsh|55|5|V|zsh
-	  if read -q; then
-c63b2c277a32379bc5a6f064e4e24dc3|file:///home/nicholas/projects/infra/provision-scratch/.zsh/plugins.zsh|56|4|V|zsh
-	  fi
-9fb3146237200f24549666992f2246eb|file:///home/nicholas/projects/infra/provision-scratch/.zsh/plugins.zsh|17|1|V|zsh
-	zplug "junegunn/fzf-bin", \
-	    from:gh-r, \
-	    as:command, \
-	    rename-to:fzf, \
-	    use:"*darwin*amd64*"
-0d9069d649b43dc10469646b85768104|file:///home/nicholas/projects/infra/provision-scratch/.zsh/plugins.zsh|17|1|V|zsh
-	# git clone https://github.com/asdf-vm/asdf.git ~/.asdf
-	# cd ~/.asdf
-	# git checkout "$(git describe --abbrev=0 --tags)"
-	
-269b9eccc16bc26ae81883946d236b02|file:///home/nicholas/projects/infra/provision-scratch/.zsh/plugins.zsh|15|1|V|zsh
-	zplug "k4rthik/git-cal", as:command
-af7bcee7ab6c2409d703f9ad73f90bc4|file:///home/nicholas/projects/infra/provision-scratch/.zsh/common/plugins/anyframe|2|1|V|zsh
-	zstyle ":anyframe:selector:" use peco
-	# expressly specify to use percol
-	zstyle ":anyframe:selector:" use percol
-4a75d154e69503b6fb8247517bcc2006|file:///home/nicholas/projects/infra/provision-scratch/.zsh/common/plugins.zsh|20|1|V|zsh
-	zplug "mollifier/anyframe"
-fb42c010d26b3b099e43b5c0e9e39155|file:///home/nicholas/projects/infra/provision-scratch/.zsh/common/plugins.zsh|11|1|V|zsh
-	zplug "zsh-users/zsh-history-substring-search"
-e86724963116071f38e68168aaa0fdea|file:///home/nicholas/projects/infra/provision-scratch/.zsh/common/plugins.zsh|20|1|V|zsh
-	zplug "b4b4r07/emoji-cli", on:"stedolan/jq"
-57e8262adbf4d04bab94d45770c51b89|file:///home/nicholas/projects/infra/provision-scratch/.zsh/common/plugins.zsh|22|1|V|zsh
-	zplug "zsh-users/zsh-syntax-highlighting", defer:2
-8466468abef69a2126a38bc8bf2cf2f0|file:///home/nicholas/.shell/plugins.zsh|6|1|V|zsh
-	CWD="${0:A:h}"
-8e8f35fe2b34af7e27e9b1de99ac4acc|file:///home/nicholas/projects/infra/provision-scratch/.zsh/common/plugins.zsh|17|1|V|zsh
-	source "${CWD}/plugins/anyframe.zsh"
-a81456717079a82972a9b91eab62b34d|file:///home/nicholas/projects/infra/provision-scratch/.zsh/common/plugins.zsh|17|24|v|zsh
-	anyframe.
-7f881fa3901cd79e88f3a6a8df675f55|file:///home/nicholas/projects/infra/provision-scratch/.zsh/common/plugins.zsh|16|23|V|zsh
-	zplug "b4b4r07/enhancd"
-a553a58ab4831d9b05e6e019715f9ac3|file:///home/nicholas/projects/infra/provision-scratch/.zsh/common/plugins.zsh|14|31|V|zsh
-	zplug "kiurchv/asdf.plugin.zsh", defer:2
-b68c9bcefda11592f656f18e70f8f614|file:///home/nicholas/projects/infra/provision-scratch/.zsh/common/plugins.zsh|4|1|V|zsh
-	[[ ! -d ~/.asdf ]] &&
-	  git clone https://github.com/asdf-vm/asdf.git ~/.asdf && cd ~/.asdf && \
-	  git checkout "$(git describe --abbrev=0 --tags)"
-	
-7c3e8c566de8d3e111ce915e093ef0e6|file:///home/nicholas/projects/infra/provision-scratch/.zsh/common/plugins.zsh|11|1|V|zsh
-	source "${CWD}/plugins/enhancd.zsh"
-81294018f4c075d9561abc9d4885e887|file:///home/nicholas/projects/infra/provision-scratch/.zsh/common/plugins.zsh|11|24|v|zsh
-	enhancd.
-47449427c568b206c0545c68ea2cc480|file:///home/nicholas/projects/infra/provision-scratch/.zsh/common/plugins.zsh|11|1|V|zsh
-	source "${CWD}/plugins/asdf.zsh"
-3eb3ff419058c2130090a4bacbaf8e36|file:///home/nicholas/projects/infra/provision-scratch/.zsh/common/plugins.zsh|11|24|v|zsh
-	asdf.
-24a2a75753085195818715e953edf4aa|file:///home/nicholas/projects/infra/provision-scratch/.zsh/common/plugins.zsh|11|1|V|zsh
-	source "${CWD}/plugins/alias-tips.zsh"
-222f961f3dffd37640f8a05ee32d4aea|file:///home/nicholas/projects/infra/provision-scratch/.zsh/common/plugins.zsh|12|24|v|zsh
-	alias-
-ecc5888b33dcc6042718b9a65663a886|file:///home/nicholas/projects/infra/provision-scratch/.zsh/common/plugins.zsh|12|31|v|zsh
-	tips.
-05bc684cf979f2dd8e28814d621e8b2a|file:///home/nicholas/projects/infra/provision-scratch/.zsh/common/plugins.zsh|12|1|V|zsh
-	source "${CWD}/plugins/auto-ls.zsh"
-ff3eb6c88b80c190bf61b82a49672cdc|file:///home/nicholas/projects/infra/provision-scratch/.zsh/common/plugins.zsh|13|24|v|zsh
-	auto-
-7c4821f49c7971621be9b1af6552780a|file:///home/nicholas/projects/infra/provision-scratch/.zsh/common/plugins.zsh|13|1|V|zsh
-	source "${CWD}/plugins/zsh-vim-mode.zsh"
-9bd907030b9fca12dd5f68e694638452|file:///home/nicholas/projects/infra/provision-scratch/.zsh/common/plugins.zsh|14|28|v|zsh
-	vim-
-28d34af7dd4cb1d58b838e587d5d22b5|file:///home/nicholas/projects/infra/provision-scratch/.zsh/common/plugins.zsh|14|28|v|zsh
-	mode.
-5ebca3fef170079fcf35c78fd56968e6|file:///home/nicholas/projects/infra/provision-scratch/.zsh/common/plugins.zsh|14|1|V|zsh
-	source "${CWD}/plugins/zsh-autoenv.zsh"
-fa065f65ca37bc56e12abef9c883acb7|file:///home/nicholas/projects/infra/provision-scratch/.zsh/common/plugins.zsh|14|28|v|zsh
-	autoenv.
-9cf14979bb5f7eb44323dc61a5a80485|file:///home/nicholas/projects/infra/provision-scratch/.zsh/common/plugins.zsh|9|27|V|zsh
-	zplug "tcnksm/docker-alias"
-d4e29850edf2e14c0a43180f16f2a8db|file:///home/nicholas/projects/infra/provision-scratch/.zsh/common/plugins.zsh|12|41|V|zsh
-	source "${CWD}/plugins/zsh-vim-mode.zsh"
-	source "${CWD}/plugins/zsh-notify.zsh"
-	source "${CWD}/plugins/zsh-autoenv.zsh"
-2e0b554e623ce9c3bc3ff3eb5cf39ac1|file:///home/nicholas/projects/infra/provision-scratch/.zsh/common/plugins/oh-my-zsh.zsh|3|1|V|zsh
-	  aws
-	  colorize
-	  colored-man-pages
-	  command-not-found
-	  compleat
-	  cp
-	  docker
-	  # dotenv (want to specifically load with autoenv)
-	  extract
-	  git
-	  helm
-	  # jira
-	  kubectl
-	  node
-	  npm
-	  nvm
-	  pass
-	  sudo
-	  systemadmin
-	  taskwarrior
-	  terraform
-	  vi-mode
-	  web-search
-	  zsh_reload
-63dc9087c660611bdf3fcb1a1257247a|file:///home/nicholas/projects/infra/provision-scratch/.zsh/profiles/default.zshrc|7|21|v|zsh
-	plugins
-8a8f56d2190c37dd0a583c7ec84d1bb5|file:///home/nicholas/projects/infra/provision-scratch/.zsh/profiles/default.zshrc|7|50|v|zsh
-	theme-
-32909ac538d6ff015e7c55319ea5610b|file:///home/nicholas/projects/infra/provision-scratch/.zsh/profiles/default.zshrc|7|50|v|zsh
-	pure.
-b03e714a0d65c9d6d21d69831f4f1d9b|file:///home/nicholas/projects/infra/provision-scratch/.zsh/profiles/default.zshrc|8|8|v|zsh
-	$ZPLUG_REPOS/romkatv/powerlevel10k/config/p10k-pure.zsh
-8c7dd922ad47494fc02c388e12c00eac|file:///home/nicholas/projects/infra/provision-scratch/.zsh/profiles/default.zshrc|7|11|v|zsh
-	file
-1b2186a062ee5489d7ffe82c6aaab5ea|file:///home/nicholas/projects/infra/provision-scratch/.zsh/profiles/default.zshrc|9|11|v|zsh
-	$ZSH_DIR/plugins/powerlevel10k/theme-pure.zsh
-45b963397aa40d4a0063e0d85e4fe7a1|file:///home/nicholas/projects/infra/provision-scratch/.zsh/common/plugins.zsh|9|19|v|zsh
-	files
-fa05db3d6b1c10f52a53067907fdc8c3|file:///home/nicholas/projects/infra/provision-scratch/start-ansible.sh|15|1|V|sh
-	# print *task/task.args/task_vars/host/result*
-	# task.args[*key*] = *value*
-	# task_vars[*key*] = *value*
-	# update_task
-	# redo
-385eb6dcd176025d41b416779f9d4ab3|file:///home/nicholas/projects/infra/provision-scratch/start-prebuild.sh|8|1|V|sh
-	export ANSIBLE_FORCE_COLOR=1
-8675f313316da36638328eda35c2c625|file:///home/nicholas/projects/infra/provision-scratch/start-prebuild.sh|9|1|V|sh
-	export PY_COLORS=1
-7d796a36501417595db3b98d49bda321|file:///home/nicholas/projects/infra/provision-scratch/start-ansible.sh|7|24|V|sh
-	# verbosity levels 0 - 4
-91a627e6d6bfcca1f5e072ca622da9ef|file:///home/nicholas/projects/infra/provision-scratch/start-ansible.sh|7|1|V|sh
-	export PY_COLORS=1
-	export ANSIBLE_FORCE_COLOR=1
-	export ANSIBLE_VERBOSITY=1
-	#  best output plugings: debug, unixy, yaml, json, minimal, default, actionable, profile_tasks
-	export ANSIBLE_STDOUT_CALLBACK=yaml
-d46d0fc6af0e049c59fcdc5895dacb40|file:///home/nicholas/projects/infra/provision-scratch/start-docker.sh|5|1|V|sh
-	#  best output plugings: debug, unixy, yaml, json, minimal, default, actionable, profile_tasks
-f1585db8f2a1f0875ea53a1177410f0e|file:///home/nicholas/projects/infra/provision-scratch/roles/dotfiles/tasks/main.yml|2|1|V|yaml.ansible
-	# tasks file for dotfiles
-6bb6287433d5a0a0e940990b159fa4fe|file:///home/nicholas/projects/infra/provision/roles/dotfiles/tasks/main.yml|3|1|V|yaml.ansible
-	  include_tasks: "initialize-key.yml"
-701b5e353c8162fdb30c317d8c7afc65|file:///home/nicholas/projects/infra/provision-scratch/roles/dotfiles/tasks/main.yml|3|19|v|yaml.ansible
-	initialize-key.yml
-4c06cfc2706b443d4ffa90b3723ad9bf|file:///home/nicholas/projects/infra/provision-scratch/roles/dotfiles/tasks/main.yml|2|1|V|yaml.ansible
-	- name: Install dotbare
-	  include_tasks: "install-dotbare.yml"
-58ef5ff43dd29035bd3dac032342bf4f|file:///home/nicholas/projects/infra/provision-scratch/roles/dotfiles/tasks/main.yml|2|17|v|yaml.ansible
-	dotbare
-0397e5a5649404dd668ef7f413aa1048|file:///home/nicholas/projects/infra/provision-scratch/roles/dotfiles/tasks/main.yml|2|19|v|yaml.ansible
-	df package manager
-	  include_tasks: "i
-eb9cdda5bf04591d3a2ba5b064d3711e|file:///home/nicholas/projects/infra/provision-scratch/roles/dotfiles/tasks/main.yml|2|1|V|yaml.ansible
-	- name: Install asdf package manager
-	  include_tasks: "install-dotbare.yml"
-216c30ba91b22cc87c68ccc93ffbb1e5|file:///home/nicholas/projects/infra/provision-scratch/roles/dotfiles/tasks/main.yml|5|22|v|yaml.ansible
-	package manager
-09d3bb24dd1a59410e877fd44bb442e6|file:///home/nicholas/projects/infra/provision-scratch/roles/dotfiles/tasks/main.yml|3|27|v|yaml.ansible
-	dotbare.
-f8f5cc86c0e182e5f5bce7498842824e|file:///home/nicholas/projects/infra/provision-scratch/roles/dotfiles/tasks/main.yml|6|32|v|yaml.ansible
-	base-
-f737f2f72245c435cacd8eb2c45b55fe|file:///home/nicholas/projects/infra/provision-scratch/roles/dotfiles/tasks/main.yml|6|32|v|yaml.ansible
-	plugins.
-770702bea683766561d30242d5074964|file:///home/nicholas/projects/infra/provision-scratch/roles/dotfiles/tasks/main.yml|6|32|v|yaml.ansible
-	packages.
-9d744d49abffd90e9d1f39c3eff45a3c|file:///home/nicholas/projects/infra/provision-scratch/roles/dotfiles/tasks/main.yml|8|1|V|yaml.ansible
-	- name: install asdf package manager
-	  include_tasks: "install-dotbare.yml"
-f7fe9848613d1037533b15e4dd8149d8|file:///home/nicholas/projects/infra/provision-scratch/roles/dotfiles/tasks/install-asdf-base.yml|2|3|v|yaml.ansible
-	install 
-7640a55307ec3bbeec429c6246675b1f|file:///home/nicholas/projects/personal/dotfiles-bup/.provision/roles/dev-tools/tasks/misc.yml|8|1|V|yaml.ansible
-	- name: install dependencies
-	  become: true
-	  package:
-	    name:
-	      - bsdmainutils   # github utility
-	      - cargo          # git-delta installation
-	      - groff          # github utility
-	      - git
-2dc9bca1a0d93c5d97cee4b59be51c09|file:///home/nicholas/projects/infra/provision-scratch/roles/dotfiles/tasks/install-asdf-base.yml|2|9|v|yaml.ansible
-	install dependencies
-6ec678e6d882e5a5b59b73e2ffbc8472|file:///home/nicholas/projects/personal/dotfiles-bup/tmux/tasks/tmux.yml|24|1|V|yaml.ansible
-	  with_items:
-	    - ~/.tmux
-	    - ~/.tmux/plugins
-efe90a8e604a7c840e88d03a67f6b7d8|file:///home/nicholas/projects/infra/provision-scratch/roles/dotfiles/tasks/install-asdf-base.yml|4|3|v|yaml.ansible
-	package
-3e668625666f7a037f56d3b03dddecc6|file:///home/nicholas/projects/infra/provision-scratch/roles/dotfiles/tasks/install-asdf-base.yml|5|1|V|yaml.ansible
-	    name:
-21c71e821092ffd2666bcecfa195d261|file:///home/nicholas/projects/personal/dotfiles-bup/tmux/tasks/tmux.yml|40|1|V|yaml.ansible
-	  shell: "{{ item }}"
-8d880ef02340062d670e634e85bda162|file:///home/nicholas/projects/infra/provision-scratch/roles/dotfiles/tasks/install-asdf-base.yml|6|1|V|yaml.ansible
-	      - bsdmainutils   # github utility
-	      - cargo          # git-delta installation
-	      - groff          # github utility
-	      - git
-2dafc9e81a9832a27f0f2e121ddb8378|file:///home/nicholas/projects/infra/provision-scratch/roles/dotfiles/tasks/install-asdf-base.yml|10|1|V|yaml.ansible
-	- asdf plugin add
-	- asdf-fzf asdf-jq asdf-bat asdf-fzf asdf-ripgrep
-a6e647ab9ed78d8cac3bf3e41e63a6ea|file:///home/nicholas/projects/infra/provision-scratch/roles/dotfiles/tasks/install-asdf-base.yml|2|30|v|yaml.ansible
-	 and packages
-84a3c4e339b953da20cec68f6e6ac215|file:///home/nicholas/projects/infra/provision-scratch/roles/dotfiles/tasks/install-asdf-base.yml|2|1|V|yaml.ansible
-	- name: add asdf base plugins
-	  shell: asdf plugin add "{{ item }}"
-	  shell:
-	  with_items:
-	    - asdf-fzf
-	    - asdf-jq
-	    - asdf-bat
-	    - asdf-ripgrep
-88e9d932f0f77454eb3425c4be07d7ae|file:///home/nicholas/projects/infra/provision-scratch/roles/dotfiles/tasks/install-asdf-base.yml|19|1|V|yaml.ansible
-	    - asdf-tmux
-031a8eccdc971e44d2559dc0d00ae94a|file:///home/nicholas/projects/infra/provision-scratch/roles/dotfiles/tasks/install-asdf-base.yml|12|18|v|yaml.ansible
-	base 
-48d8c9195485afb72331775791c08d66|file:///home/nicholas/projects/infra/provision-scratch/roles/dotfiles/tasks/install-asdf-base.yml|13|15|v|yaml.ansible
-	plugin 
-34ecf7b5f505b34af74c7f7223738868|file:///home/nicholas/projects/infra/provision-scratch/roles/dotfiles/tasks/install-asdf-base.yml|13|15|v|yaml.ansible
-	add 
-3dd4ab81ab88a13255223729f40be6a2|file:///home/nicholas/projects/infra/provision-scratch/roles/dotfiles/tasks/install-asdf-base.yml|16|7|v|yaml.ansible
-	asdf-
-fa1e665a39956978d7fb32bc3b1845e6|file:///home/nicholas/projects/infra/provision-scratch/roles/dotfiles/tasks/install_dotbare.yml|1|1|V|yaml.ansible
-	---
-	
-	git clone https://github.com/kazhala/dotbare.git ~/.dotbare
-f5035326bee65527906b1876d3202571|file:///home/nicholas/projects/personal/dotfiles-bup/.provision/tasks/save-version.yml|4|1|V|yaml.ansible
-	- name: clone repository
-	  git:
-	    repo: "{{ git_repo }}"
-	    dest: "{{ git_dest }}"
-	    version: "{{ git_version | default('HEAD') }}"
-	    update: "{{ git_update | default('false') }}"
-	    recursive: "{{ git_recursive | default('false') }}"
-1255cd57b7a8947a52ec998e47adc8c2|file:///home/nicholas/projects/infra/provision-scratch/roles/dotfiles/tasks/install-dotbare.yml|9|11|v|yaml.ansible
-	https://github.com/kazhala/dotbare.git
-aac5575fe644e27bb9e9be766ba35faa|file:///home/nicholas/projects/infra/provision-scratch/roles/dotfiles/tasks/install-dotbare.yml|4|11|v|yaml.ansible
-	"{{ git_repo }}"
-	
-d36af53fe5b06a220758f65dc8748399|file:///home/nicholas/projects/infra/provision-scratch/roles/dotfiles/tasks/install-dotbare.yml|5|11|v|yaml.ansible
-	"{{ git_dest }}"
-51caeca9c68579f9cc85a30c5f7ca73c|file:///home/nicholas/projects/infra/provision-scratch/roles/dotfiles/tasks/install-dotbare.yml|6|13|v|yaml.ansible
-	 "{{ git_version | default('HEAD') }}"
-8dbad4853e794acb0b675beeda24f96a|file:///home/nicholas/projects/infra/provision-scratch/roles/dotfiles/tasks/install-dotbare.yml|7|1|V|yaml.ansible
-	    update: "{{ git_update | default('false') }}"
-	    recursive: "{{ git_recursive | default('false') }}"
-7de1160db9a84167f6908a17d64ea98a|file:///home/nicholas/projects/infra/provision-scratch/roles/dotfiles/tasks/install-dotbare.yml|7|19|V|yaml.ansible
-	git clone  ~/.dotbare
-eb79066fb3d9c96939977a9384fc3c16|file:///home/nicholas/projects/infra/provision-scratch/roles/dotfiles/tasks/install-dotbare.yml|9|46|v|yaml.ansible
-	git clone https://github.com/kazhala/dotbare.git ~/.dotbare
-e84db63eda0590e681ba5365c4c1f9b2|file:///home/nicholas/projects/infra/provision-scratch/roles/dotfiles/tasks/install-asdf-base.yml|15|1|V|yaml.ansible
-	  with_items:
-	    - fzf
-	    - jq
-	    - bat
-	    - ripgrep
-	    - tmux
-92d3978a7ceeaa0365361bcc3c97d4b1|file:///home/nicholas/projects/infra/provision-scratch/roles/dotfiles/tasks/install-asdf-base.yml|14|3|V|yaml.ansible
-	  shell:
-2591c98b70119fe624898b1e424b5e91|file:///home/nicholas/projects/infra/provision-scratch/roles/dotfiles/tasks/install-asdf-base.yml|22|3|v|yaml.ansible
+7a98b434784e85e598d95aae9fdc5429|file:///home/nicholas/projects/infra/provision-scratch/roles/dotfiles/tasks/install-devtools.yml|125|7|V|yaml.ansible
+	||#|pip|install|thefuck|pyynvim|pgcli|neovim|molecule|molecule-docker|ansible|ansible-lint|bpytop|pypi-cli|xq
+533a67cd629df8fff60b1bf2b185a366|file:///home/nicholas/projects/infra/provision-scratch/roles/dotfiles/tasks/install-devtools.yml|123|17|v|yaml.ansible
+	python3 devtools programs
+53689aacbba32f62a7ee90c641493951|file:///home/nicholas/projects/infra/provision-scratch/roles/dotfiles/tasks/install-devtools.yml|123|36|v|yaml.ansible
+	programs
+57168ef882ecb4812fd6b4991e5b0bb2|file:///home/nicholas/projects/infra/provision-scratch/roles/dotfiles/tasks/install-devtools.yml|123|22|v|yaml.ansible
+	gems 
+7fb2f9442e9ca5108c4410ccc28350ca|file:///home/nicholas/projects/infra/provision-scratch/roles/dotfiles/tasks/install-devtools.yml|127|1|V|yaml.ansible
+	    - ansible
+	    - ansible-docker
+	    - ansible-lint
+	    - bpytop
+	    - molecule
+	    - molecule-docker
+	    - neovim
+	    - pgcli
+	    - pynvim
+	    - pypi-cli
+	    - thefuck
+	    - xq
+c7ab396b9d60281aea3587cc250e94c2|file:///home/nicholas/projects/infra/provision-scratch/roles/dotfiles/tasks/install-devtools.yml|132|1|V|yaml.ansible
+	  # gem install bundler rubocop neovim colorls
+	  #     solargraph rvm
+97384261b8bbf966df16e5ad509922db|file:///home/nicholas/projects/infra/provision-scratch/roles/dotfiles/tasks/install-devtools.yml|133|47|v|yaml.ansible
+	installer
+41f141f7ec328eb8dc23485f6fa4e7b2|file:///home/nicholas/projects/infra/provision-scratch/roles/dotfiles/tasks/install-devtools.yml|15|1|V|yaml.ansible
+	#     name:
+7a88f76d6bc157036035a5a4fa13274f|file:///home/nicholas/projects/infra/provision-scratch/roles/dotfiles/tasks/install-devtools.yml|134|15|v|yaml.ansible
+	 "{{ item }}"
+1b9011a3e589f80e384ae344de505455|file:///home/nicholas/projects/infra/provision-scratch/roles/dotfiles/vars/main.yml|62|5|V|yaml.ansible
+	  - inxi -  apt-get install inxi
+c25f349da65ae3f97c536e610f343f6e|file:///home/nicholas/projects/infra/provision-scratch/roles/dotfiles/tasks/install-devtools.yml|136|14|v|yaml.ansible
+	xgit
+56be68647bb7f0ee578a0939c87545eb|file:///home/nicholas/projects/infra/provision-scratch/roles/dotfiles/vars/main.yml|60|1|V|yaml.ansible
+	  - scli signal-cli https://github.com/isamert/scli
+	    pip install urwid && pip install urwid-readline
+6a0dc950d7fb521f530313b92b1f6e79|file:///home/nicholas/projects/infra/provision-scratch/roles/dotfiles/tasks/install-devtools.yml|141|17|v|yaml.ansible
+	|quote
+34ef7539242ee37d3ea3c9a25a9cb0f1|file:///home/nicholas/projects/infra/provision-scratch/roles/dotfiles/vars/main.yml|56|10|v|yaml.ansible
+	https://github.com/fnord0/hURL/blob/master/hURL
+	
+2591c98b70119fe624898b1e424b5e91|file:///home/nicholas/projects/infra/provision-scratch/roles/dotfiles/tasks/install-devtools.yml|140|3|v|yaml.ansible
 	shell
-6cdc7af66814d2af1d3b67c986bb4a4b|file:///home/nicholas/projects/infra/provision-scratch/roles/dotfiles/tasks/install-dotbare.yml|3|1|V|yaml.ansible
-	  git:
-	    repo: https://github.com/kazhala/dotbare.git
-	    dest: ~/.dotbare
-	    version: master
-06b5c117c8ce875b7e6df201cd17cb63|file:///home/nicholas/projects/infra/provision-scratch/roles/dotfiles/tasks/install-dotbare.yml|12|47|v|yaml.ansible
-	azhala/dotfiles.git
-a7331a2515000c856cd7465582c0b633|file:///home/nicholas/projects/infra/provision-scratch/roles/dotfiles/tasks/install-dotbare.yml|2|1|V|yaml.ansible
-	- name: clone dotbare dotfiles manager
-	  git:
-	    repo: https://github.com/kazhala/dotbare.git
-	    dest: ~/.dotbare
-	    version: master
-3045e02d80d1605f69f8ccfa74804d33|file:///home/nicholas/projects/infra/provision-scratch/roles/dotfiles/tasks/install-asdf.yml|2|15|v|yaml.ansible
-	dotbare dotfiles manager
-4f6f8f62a0dfd0f96edc3fc6b2cae4dc|file:///home/nicholas/projects/infra/provision-scratch/roles/dotfiles/tasks/install-asdf.yml|4|31|v|yaml.ansible
-	azhala/dotbare.git
-eb0a191797624dd3a48fa681d3061212|file:///home/nicholas/projects/infra/provision-scratch/roles/dotfiles/tasks/install-asdf.yml|6|14|v|yaml.ansible
-	master
-812c6ac5f34d88dae31b820e7a120244|file:///home/nicholas/projects/infra/provision-scratch/roles/dotfiles/tasks/install-asdf.yml|10|31|V|yaml.ansible
-	git clone https://github.com/asdf-vm/asdf.git ~/.asdf --branch v0.8.0
-2e07b80b232c2cc543c6ca4eaa241f26|file:///home/nicholas/projects/infra/ansible-template/roles/role_template/molecule/default/molecule.yml|1|1|V|yaml.ansible
-	---
-	dependency:
-	  name: galaxy
-	driver:
-	  name: docker
-	lint: |
-	  set -e
-	  yamllint .
-	  ansible-lint
-	  flake8
-	platforms:
-	  - name: instance
-	    pre_build_image: true
-	    image: docker.io/pycontribs/ubuntu:latest
-	    # image: docker.io/pycontribs/centos:8
-	    # image: docker.io/pycontribs/debian:latest
-	    # image: "geerlingguy/docker-${MOLECULE_DISTRO:-centos8}-ansible:latest"
-	    # image: debian:stretch
-	    # privileged: true
-	    # volumes:
-	    #   - /sys/fs/cgroup:/sys/fs/cgroup:ro
-	    #   - /var/lib/docker
-	provisioner:
-	  name: ansible
-	  log: true
-	  # connection_options:
-	  #   ansible_connection: docker
-	  #   ansible_password: ansible
-	  #   ansible_ssh_user: ansible
-	  inventory:
-	    group_vars:
-	      all:
-	        docker_molecule_test: true
-	  playbooks:
-	    converge: ${MOLECULE_PLAYBOOK:-converge.yml}
-	    # create: create.yml
-	    # destroy: destroy.yml
-	verifier:
-	  name: ansible
-	scenario:
-	  name: default
-	  test_sequence:
-	    - lint
-	    - destroy
-	    # - dependency
-	    - syntax
-	    - create
-	    # - prepare
-	    - converge
-	    - idempotence
-	    # - side_effect
-	    - verify
-	    - destroy
-	  check_sequence:
-	    - dependency
-	    - cleanup
-	    - destroy
-	    - create
-	    # - prepare
-	    - converge
-	    - check
-	    - destroy
-8c515f4511fa4a8efa8d3889ff88375c|file:///home/nicholas/projects/infra/provision-scratch/roles/dotfiles/tasks/install-asdf.yml|10|1|V|yaml.ansible
-	  args:
-51f9ae2228e68985d58f3375c6dc613f|file:///home/nicholas/projects/infra/provision-scratch/roles/dotfiles/tasks/install-asdf-base.yml|3|10|v|yaml.ansible
-	~/.asdf/bin/asdf
-16fb0e7457c86c331f3e4dc23569215f|file:///home/nicholas/projects/infra/provision-scratch/roles/dotfiles/tasks/install-asdf-base.yml|12|10|v|yaml.ansible
-	asdf 
-39a72eee1b38982d4908596669dcd99c|file:///home/nicholas/projects/infra/provision-scratch/roles/dotfiles/tasks/install-asdf-base.yml|14|10|v|yaml.ansible
-	 latest
-c95b509d9e61b7272612272d76904370|file:///home/nicholas/projects/infra/provision-scratch/roles/dotfiles/tasks/install-asdf-base.yml|2|1|V|yaml.ansible
-	- name: add asdf base plugins
-4996c3c58c63f4e8d7f4a1a9b7928edb|file:///home/nicholas/projects/infra/provision-scratch/roles/dotfiles/tasks/install-asdf-base.yml|2|1|V|yaml.ansible
-	- name: add asdf base plugins
-	  shell: ~/.asdf/bin/asdf plugin add "{{ item }}"
-7c37ce53b604d8289b0cd964a36964a1|file:///home/nicholas/projects/infra/provision-scratch/roles/dotfiles/tasks/install-asdf-base.yml|11|9|v|yaml.ansible
-	add asdf base plugins
-7cea750a521218bfa9a9fac2ff3cefdd|file:///home/nicholas/projects/infra/provision-scratch/roles/dotfiles/tasks/install-asdf-base.yml|12|27|v|yaml.ansible
-	plugin add "{{ item }}"
-3eef6bdbef1e69c3fda7c50baa1cf693|file:///home/nicholas/projects/personal/dotfiles-bup/tmux/tasks/plugins.yml|2|1|V|yaml.ansible
-	- name: install plugin dependencies
-	  become: true
-	  package:
-	    state: present
-	    name:
-	      - git
-	      - powerline  # powerline-daemon bindings
-	      - autocutsel # sync between primary and x11 clipboards TODO: install service
-	      - xsel       # tmux-yank
-	      - urlview    # tmux-urlview
-	
-6f8d1e270ccf8adee21f6300d7118e41|file:///home/nicholas/projects/infra/provision-scratch/roles/dotfiles/tasks/install-asdf-base.yml|2|17|v|yaml.ansible
-	plugin dependencies
-622b9310686f7e2d81a5d877f3106768|file:///home/nicholas/projects/infra/provision-scratch/roles/dotfiles/tasks/install-asdf-base.yml|6|1|V|yaml.ansible
-	      - git
-	      - powerline  # powerline-daemon bindings
-	      - autocutsel # sync between primary and x11 clipboards TODO: install service
-	      - xsel       # tmux-yank
-	      - urlview    # tmux-urlview
-	
-34325a46f5a6c5bb285a0131eaceabe4|file:///home/nicholas/projects/infra/provision-scratch/roles/dotfiles/tasks/install-asdf-base.yml|4|5|V|yaml.ansible
-	    state: present
-b068931cc450442b63f5b3d276ea4297|file:///home/nicholas/projects/infra/provision-scratch/roles/dotfiles/tasks/install-asdf-base.yml|4|5|v|yaml.ansible
-	name
-f630ea975d5814c48ab39c7b9446f2ce|file:///home/nicholas/projects/personal/dotfiles-bup/tmux/tasks/plugins.yml|2|1|V|yaml.ansible
-	- name: install plugin dependencies
-	  become: true
-8c4618e2f0514da75e5016426f00485a|file:///home/nicholas/projects/infra/provision-scratch/roles/dotfiles/tasks/install-asdf-base.yml|36|9|v|yaml.ansible
-	verify programs installed
-27f783aa485a90c61c0334e5e79e7020|file:///home/nicholas/projects/infra/provision-scratch/roles/dotfiles/tasks/install-asdf-base.yml|37|35|v|yaml.ansible
-	 --version
-85e932eb8c1db4654a6b231495ff9194|file:///home/nicholas/projects/infra/provision-scratch/roles/dotfiles/tasks/install-asdf-base.yml|6|1|V|yaml.ansible
-	https://github.com/focused-labs/asdf-jq/pull/9
-	AZMCode:master
-208baeef061258cc090494926ee9a7c6|file:///home/nicholas/projects/infra/provision-scratch/roles/dotfiles/tasks/install-asdf-base.yml|28|1|V|yaml.ansible
-	  shell: ~/.asdf/bin/asdf install "{{ item }}" $(asdf list all "{{ item }}" | sort -rn | head -n1)
-0ae15ca05ed1abb445f6f74c6e44ebe4|file:///home/nicholas/projects/infra/provision-scratch/roles/dotfiles/tasks/install-asdf-base.yml|38|3|V|yaml.ansible
-	  shell: asdf install "{{ item }}" $(asdf list all "{{ item }}" | sort -r | head -n 1)
-44ff077f6ed50c6d8aed12fc8cd001e4|file:///home/nicholas/projects/infra/provision-scratch/roles/dotfiles/tasks/install-asdf-base.yml|19|37|V|yaml.ansible
-	    - jq https://github.com/AZMCode/asdf-jq
-c8f2e4d8c8e73109ffb3f3ff9adcb965|file:///home/nicholas/projects/infra/provision-scratch/roles/dotfiles/tasks/install-asdf-base.yml|26|1|V|yaml.ansible
-	- name: update plugins
-	  shell: ~/.asdf/bin/asdf plugin update --all
-	
-65c5f9ff58db9261bfa0148836ec93df|file:///home/nicholas/projects/infra/provision-scratch/roles/dotfiles/tasks/install-asdf.yml|12|1|V|yaml.ansible
-	# - name:
-e938e80b413c85d1b76c0baa1a1a928a|file:///home/nicholas/projects/infra/provision-scratch/roles/dotfiles/tasks/install-asdf-base.yml|23|1|V|yaml.ansible
-	    - yq
-fbc129cb2d6ea5a910ef555105b1c068|file:///home/nicholas/projects/infra/provision-scratch/roles/dotfiles/tasks/install-asdf.yml|10|8|V|yaml.ansible
-	  args:
-	      executable: /bin/bash
-eb9d5fc66fd612766bf16d67328aaaec|file:///home/nicholas/projects/infra/provision-scratch/roles/dotfiles/tasks/install-asdf.yml|8|1|V|yaml.ansible
-	- name: load asdf plugin
-	  shell: source ~/.asdf/asdf.sh
-ee7004c7949d83f130592f15d98ca343|file:///home/nicholas/projects/infra/provision-scratch/roles/dotfiles/tasks/install-asdf.yml|16|7|v|yaml.ansible
-	executable
-e8e1ff4f81f87100b488f2905d510cae|file:///home/nicholas/projects/infra/provision-scratch/roles/dotfiles/tasks/install-asdf.yml|16|12|v|yaml.ansible
-	/bin/bash
-24da7c98f242774c49bce40d82acf9cd|file:///home/nicholas/projects/infra/provision-scratch/roles/dotfiles/tasks/install-asdf.yml|15|8|V|yaml.ansible
-	  args:
-	    chdir: ~/.asdf/bin
-ef8f5f563ab3e8afcf78e466c983f609|file:///home/nicholas/projects/infra/provision-scratch/roles/dotfiles/tasks/install-asdf-base.yml|2|1|V|yaml.ansible
-	- name: Update all packages to their latest version
-	  apt:
-	    name: "*"
-	    state: latest
-	
-	- name: install dependencies
-	  apt:
-	    update_cache: yes
-	    pkg:
-	      - curl
-	      - extract
-	      - unzip
-c01a541c32b1b71806785532cc983b51|file:///home/nicholas/projects/infra/provision-scratch/roles/dotfiles/tasks/install-asdf-base.yml|2|1|V|yaml.ansible
-	
-	- name: add asdf base plugins
-	  shell: ~/.asdf/bin/asdf plugin add "{{ item }}"
+0b43c25ccf2340e23492d4d3141479dc|file:///home/nicholas/projects/infra/provision-scratch/roles/dotfiles/tasks/install-devtools.yml|141|5|v|yaml.ansible
+	dest
+837a23bc064b629f0b5a03cd08ee961a|file:///home/nicholas/projects/infra/provision-scratch/roles/dotfiles/tasks/install-devtools.yml|143|11|V|yaml.ansible
+	    owner: 
+057e7dbd900fd956c42af444e3f7fb2c|file:///home/nicholas/projects/infra/provision-scratch/roles/dotfiles/vars/main.yml|57|1|V|yaml.ansible
+	    ./hURL -b -s "aGVsbG8gd29ybGQ="
+	    ./hURL -X -f /var/www/meterpreter.php
+	    ./hURL --nocolor -Xsf /var/www/revshell1337.php,pythonshell.py
+c83cf0d328744dd9394559a4ae718576|file:///home/nicholas/projects/infra/provision-scratch/.tasks|1|17|V|dosini
+	[molecule-reload]
+c1591be8cb1190718b55431046f4ba4f|file:///home/nicholas/projects/infra/provision-scratch/.tasks|1|1|V|dosini
+	[mol-reload]
+	command=molecule destroy && molecule converge && molecule login
+24bc8a6655a0623a7f4e402c12df4b9c|file:///home/nicholas/projects/infra/provision-scratch/.tasks|4|6|v|dosini
+	reload
+74233d016dfce82c1fd0a7619c111fa7|file:///home/nicholas/projects/infra/provision-scratch/.tasks|5|18|v|dosini
+	destroy && molecule converge && molecule login
+afe76348b19a69a5b4beb8641095dd16|file:///home/nicholas/projects/infra/provision-scratch/.tasks|4|9|v|dosini
+	verge
+13f4eae6db4a80636c7d28e904ec31ad|file:///home/nicholas/projects/infra/provision-scratch/.tasks|1|1|V|dosini
+	[mol-rel]
+	command=molecule destroy && molecule converge && molecule login
+4891edf91e56461d1a889c038bd364af|file:///home/nicholas/projects/infra/provision-scratch/.tasks|5|9|v|dosini
+	EXPORT 
+cf81556357aed29bc2dd09d09b6131e2|file:///home/nicholas/projects/infra/provision-scratch/.tasks|5|9|v|dosini
+	export ANSI_LOAD_CALLBACK_PUGINS=1 && export ANSIBLE_STDOUT_CALLBACK=debug && 
+19c3aea646cacaf5b8322499b320b4f5|file:///home/nicholas/projects/infra/provision-scratch/.tasks|2|79|v|dosini
+	debug 
+18b8193c0149b39755829ce851d46c0b|file:///home/nicholas/projects/infra/provision-scratch/.tasks|7|1|V|dosini
+	[mol-con]
+	command=molecule converge
+727366035e57e2171a7dbf292b72894d|file:///home/nicholas/projects/infra/provision-scratch/roles/dotfiles/tasks/install-devtools.yml|143|1|V|yaml.ansible
+	    # owner:
+	    # group:
+165480ecf732e76d762bf2f108268267|file:///home/nicholas/projects/infra/provision-scratch/roles/dotfiles/tasks/install-devtools.yml|35|1|V|yaml.ansible
+	- name: install python providers
+	  command: "{{ item }}"
 	  with_items:
-	    - bat
-	    - fd
-	    - fzf
-	    - ripgrep
-	    - tmux
-	    - yq
-	
-	- name: add jq plugin
-282b2c39f4465e3c8a4b5165905f2bac|file:///home/nicholas/projects/infra/provision-scratch/roles/dotfiles/tasks/main.yml|12|1|V|yaml.ansible
-	- name: add jq plugin
-bba33457bea270ec76af9fc49f4d22cf|file:///home/nicholas/projects/infra/provision-scratch/roles/dotfiles/tasks/install-asdf-base.yml|2|1|V|yaml.ansible
-	- name: Update all packages to their latest version
-	  apt:
-	    name: "*"
-	    state: latest
-	
-	- name: install dependencies
-	  apt:
-	    update_cache: yes
-	    pkg:
-	      - curl
-	      - extract
-	      - unzip
-	
-4ab44808f92bbd0bfae440a5cad92612|file:///home/nicholas/projects/infra/provision-scratch/roles/dotfiles/molecule/default/molecule.yml|17|1|V|yaml.ansible
-	    # image: "geerlingguy/docker-${MOLECULE_DISTRO:-centos8}-ansible:latest"
-	    # image: debian:stretch
-2af4587151800870a974e2000491381b|file:///home/nicholas/projects/infra/provision-scratch/roles/dotfiles/molecule/default/molecule.yml|40|1|V|yaml.ansible
-	  converge_sequence:
-	     # - dependency
-	     - create
-	     # - prepare
-	     - converge
-	  test_sequence:
-	    - lint
-	    - destroy
-	    # - dependency
-	    - syntax
-	    - create
-	    # - prepare
-	    - converge
-	    - idempotence
-	    # - side_effect
-	    - verify
-	    - destroy
-	  check_sequence:
-	    # - dependency
-	    - cleanup
-	    - destroy
-	    - create
-	    # - prepare
-	    - converge
-	    - check
-	    - destroy
-32f21d8b86f7eb9081b2786d0bb4261e|file:///home/nicholas/projects/infra/provision-scratch/roles/dotfiles/tasks/install-asdf-base.yml|6|1|V|yaml.ansible
-	    - fd
-01ebf5abb106800911c8e44039e3056e|file:///home/nicholas/projects/infra/provision-scratch/roles/dotfiles/tasks/install-asdf-base.yml|29|1|V|yaml.ansible
-	- name: save latest version config
-	  shell: ~/.asdf/bin/asdf local "{{ item }}" $(~/.asdf/bin/asdf list all "{{ item }}" | sort -rn | head -n1)
-	  with_items:
-	    - bat
-	    - fd
-	    - fzf
-	    - jq
-	    - ripgrep
-	    - tmux
-	    - yq
-	
-929586be06b3d8b9b379f79eca6a5ce4|file:///home/nicholas/projects/infra/ansible-template/roles/role_template/molecule/default/molecule.yml|61|3|v|yaml.ansible
-	  - destroy
-055d6a78e273016953a034f0493489f8|file:///home/nicholas/projects/infra/provision-scratch/roles/dotfiles/tasks/install-asdf-base.yml|40|9|v|yaml.ansible
-	save latest version config
-7082cbdbfa1f41143b28ca50833573ff|file:///home/nicholas/projects/infra/provision-scratch/roles/dotfiles/tasks/install-asdf-base.yml|41|27|v|yaml.ansible
-	local 
-fe6f4218590739566b5c01ba9c812be7|file:///home/nicholas/projects/infra/provision-scratch/roles/dotfiles/tasks/install-asdf-base.yml|19|14|V|yaml.ansible
-	  error: false
-6d8454fe84b3e25c037eb18bb0d28075|file:///home/nicholas/projects/infra/provision-scratch/roles/dotfiles/tasks/install-asdf-base.yml|19|1|V|yaml.ansible
-	  ignore_errors: true
-0d6087921eb0487d51c513d0f9fc7467|file:///home/nicholas/projects/infra/provision-scratch/roles/dotfiles/molecule/default/molecule.yml|41|1|V|yaml.ansible
-	     # - dependency
-3e8ccc54abb6ecb73385d9e265b2ba9a|file:///home/nicholas/projects/infra/provision-scratch/roles/dotfiles/molecule/default/molecule.yml|42|1|V|yaml.ansible
-	     # - prepare
-0c2f411f982fbdc78d3d7f1e231deaec|file:///home/nicholas/projects/infra/provision-scratch/roles/dotfiles/molecule/default/molecule.yml|46|1|V|yaml.ansible
-	    # - dependency
-a065d6cbc5c2b220d751b649e6559f6d|file:///home/nicholas/projects/infra/provision-scratch/roles/dotfiles/molecule/default/molecule.yml|48|1|V|yaml.ansible
-	    # - prepare
-2bb64c5cf02105011908e1b640b2e572|file:///home/nicholas/projects/infra/provision-scratch/roles/dotfiles/molecule/default/molecule.yml|50|1|V|yaml.ansible
-	    # - side_effect
-de84b508c4f2e70f7bd987116fd39724|file:///home/nicholas/projects/infra/provision-scratch/roles/dotfiles/molecule/default/molecule.yml|53|1|V|yaml.ansible
-	    # - cleanup
-a9194187583975ad144cc691f5e02d28|file:///home/nicholas/projects/infra/provision-scratch/roles/dotfiles/tasks/install-asdf.yml|2|1|V|yaml.ansible
-	- name: clone asdf
-	  git:
-	    repo: https://github.com/asdf-vm/asdf.git
-	    dest: ~/.asdf
-	    version: v0.8.0
-	
-ea21020fdcf5f0b87a0ca206462ee354|file:///home/nicholas/projects/infra/provision-scratch/roles/dotfiles/tasks/install-asdf.yml|13|1|V|yaml.ansible
-	- name: update plugins
-	  shell: ~/.asdf/bin/asdf plugin update --all
-e9aabfaa84b09782ef73cb82e6d373b9|file:///home/nicholas/projects/infra/provision-scratch/roles/dotfiles/tasks/install-asdf.yml|9|27|v|yaml.ansible
-	plugin update --all
-c7d6561f2964332553d482cdb77ee971|file:///home/nicholas/projects/infra/provision-scratch/roles/dotfiles/tasks/install-asdf.yml|10|1|V|yaml.ansible
-	# - name: load asdf plugin
-	#   shell: source ~/.asdf/asdf.sh
-	#   args:
-	#       executable: /bin/bash
+	    - python3 -m pip install --user --upgrade pynvim
+d75e6ce32b938f3805d588a7a3da845c|file:///home/nicholas/projects/infra/provision-scratch/.tasks|10|1|V|dosini
+	[mol-test]
+	command=molecule test --parallel
+098f6bcd4621d373cade4e832627b4f6|file:///home/nicholas/projects/infra/provision-scratch/.tasks|13|6|v|dosini
+	test
+4568c5b4ea5766f0cd586ed1bbe75a01|file:///home/nicholas/projects/infra/provision-scratch/.tasks|14|18|v|dosini
+	test --
+16e6efb7b5bf9d119d67fb9faf1a1367|file:///home/nicholas/projects/infra/provision-scratch/.tasks|13|1|V|dosini
+	[mol-check]
+	command=molecule check --parallel
+0ba4439ee9a46d9d9f14c60f88f45f87|file:///home/nicholas/projects/infra/provision-scratch/.tasks|16|6|v|dosini
+	check
+fb14982288108e1fbd6207ef55f05027|file:///home/nicholas/projects/infra/provision-scratch/.tasks|16|6|v|dosini
+	destroy
+8e7d848d79573412e0b142aff6e098cc|file:///home/nicholas/projects/infra/provision-scratch/.tasks|17|18|v|dosini
+	check --
+5a00894bb14253be3851ad6c234d997e|file:///home/nicholas/.shell/aliases.sh|12|1|V|sh
+	alias gh-search="ghs repo --sort=stars"
+9f2f2f010414c6d68601c167ed5a3399|file:///home/nicholas/.shell/aliases.colorize.zsh|3|1|V|zsh
+	export GRC='grc -es --colour=on'
+e7eef50c4babddf610b027e6b8cf5ad5|file:///home/nicholas/projects/personal/zsh-grc/zsh-grc.zsh|14|11|v|zsh
+	colorify
+70c445db9dd1802b531875c651ab4d1c|file:///home/nicholas/projects/personal/zsh-grc/zsh-grc.zsh|6|1|V|zsh
+	# common grc.zsh paths
+b00bdfe3288cf0d2f24c7a1e209a044a|file:///home/nicholas/projects/personal/zsh-grc/zsh-grc.zsh|3|1|V|zsh
+	# I use grc to colorize the output of some commands for clarity.
 	#
-b57e09684b31050d841aa3e1a4ceda9a|file:///home/nicholas/projects/infra/provision-scratch/roles/dotfiles/tasks/install-asdf.yml|8|1|V|yaml.ansible
-	- name: update asdf
-	  shell: ~/.asdf/bin/asdf update
-f6e5dce60dd5abe3a8aef3e749c951d0|file:///home/nicholas/projects/infra/provision-scratch/roles/dotfiles/molecule/default/molecule.yml|34|1|V|yaml.ansible
-	    # create: create.yml
-	    # destroy: destroy.yml
-baf3cab3904bd9e934f252205916f27f|file:///home/nicholas/projects/infra/provision-scratch/roles/dotfiles/molecule/default/molecule.yml|24|1|V|yaml.ansible
-	  # connection_options:
-	  #   ansible_connection: docker
-	  #   ansible_password: ansible
-	  #   ansible_ssh_user: ansible
-dae24f1760a3638ae5f737b3e56e2fc8|file:///home/nicholas/projects/infra/provision-scratch/roles/dotfiles/molecule/default/molecule.yml|18|1|V|yaml.ansible
-	    # volumes:
-	    #   - /sys/fs/cgroup:/sys/fs/cgroup:ro
-	    #   - /var/lib/docker
-4ba73c858a0f152eb5dac9e0675d48d4|file:///home/nicholas/projects/infra/provision-scratch/roles/dotfiles/tasks/install-asdf-base.yml|7|1|V|yaml.ansible
-	    - delta
-0a1737b3844ac4cc076f31b728785635|file:///home/nicholas/projects/infra/provision-scratch/roles/dotfiles/tasks/install-dotbare.yml|8|1|V|yaml.ansible
-	# - name: load dotbare plugin
-	#   shell: source ~/.dotbare/dotbare.plugin.zsh
-	#   args:
-	#       executable: /bin/bash
-b151814faf94e456ce763ac97e1fae52|file:///home/nicholas/projects/infra/provision-scratch/roles/dotfiles/tasks/main.yml|27|61|v|yaml.ansible
-	terraform-lsp
-37f829f4291281c2ac8a86a4d243f90c|file:///home/nicholas/.zsh/common/plugins.zsh|31|1|V|zsh
-	zplug "plugins/kubectl",   from:oh-my-zsh
-0f12ee5c9f1dd90158580f1c292b0d37|file:///home/nicholas/.zsh/common/plugins.zsh|32|16|v|zsh
-	kubectl
-99955fad12fa32da616751b66c3f48a3|file:///home/nicholas/.zsh/common/plugins.zsh|32|1|V|zsh
-	zplug "plugins/node",   from:oh-my-zsh
-36c4536996ca5615dcf9911f068786dc|file:///home/nicholas/.zsh/common/plugins.zsh|33|16|v|zsh
-	node
-7c957bd2948653be6ec4ef2a88e6d9a9|file:///home/nicholas/.zsh/common/plugins.zsh|34|1|V|zsh
-	zplug "plugins/nvm",   from:oh-my-zsh
-31babb1f8ce81791f34009862e3f8018|file:///home/nicholas/.zsh/common/plugins.zsh|35|1|V|zsh
-	zplug "plugins/pass",   from:oh-my-zsh
-1a1dc91c907325c69271ddf0c944bc72|file:///home/nicholas/.zsh/common/plugins.zsh|36|16|v|zsh
-	pass
-9ea7c3f6948671e8441c48a19eaecc4b|file:///home/nicholas/.zsh/common/plugins.zsh|37|1|V|zsh
-	zplug "plugins/systemadmin",   from:oh-my-zsh
-f19826e36a24ce639a7036c19b33f97d|file:///home/nicholas/.zsh/common/plugins.zsh|38|16|v|zsh
-	systemadmin
-08b94712311974e08597682258a5b79b|file:///home/nicholas/.zsh/common/plugins.zsh|38|1|V|zsh
-	zplug "plugins/terraform",   from:oh-my-zsh
-1b1ed905d54c18e3dd8828986c14be17|file:///home/nicholas/.zsh/common/plugins.zsh|39|16|v|zsh
-	terraform
-66f58416f3a78c0be3a567a4f101706d|file:///home/nicholas/.zsh/common/plugins.zsh|39|1|V|zsh
-	zplug "plugins/vi-mode",   from:oh-my-zsh
-15d61712450a686a7f365adf4fef581f|file:///home/nicholas/.zsh/common/plugins.zsh|40|20|v|zsh
-	mode
-dfd622eb7eaa1c8456f927c6260c0a2e|file:///home/nicholas/.zsh/common/plugins.zsh|40|1|V|zsh
-	zplug "plugins/web-search",   from:oh-my-zsh
-0a3069cfc46aeb89559a49e9dadbe751|file:///home/nicholas/.zsh/common/plugins.zsh|41|16|v|zsh
-	web-
-06a943c59f33a34bb5924aaf72cd2995|file:///home/nicholas/.zsh/common/plugins.zsh|41|20|v|zsh
-	search
-e422b3fe9e902714707fce4460183c76|file:///home/nicholas/.zsh/common/plugins.zsh|39|16|v|zsh
-	vi-mode
-5f5686131bbaeb62d0ed5bdc57f838d1|file:///home/nicholas/.zsh/common/plugins.zsh|46|1|V|zsh
-	# aws
-	# colorize
-	# colored-man-pages
-	# command-not-found
-	# compleat
-	# cp
-	# docker
-	# # dotenv (want to specifically load with autoenv)
-	# extract
-	# git
-	# helm
-	# # jira
-	# kubectl
-	# node
-	# npm
-	# nvm
-	# pass
-	# sudo
-	# systemadmin
-	# taskwarrior
-	# terraform
-	# vi-mode
-	# web-search
-	# zsh_reload
+	# brew install grc on OS X to check it out.
+60df1ae85b49884d54d354f1d95d0858|file:///home/nicholas/projects/personal/zsh-grc/zsh-grc.zsh|11|1|V|zsh
+	for file in $files; do
+	  if [[ -r "$file" ]]; then
+	    source "$file"
+	    break
+	  fi
+	done
+45b963397aa40d4a0063e0d85e4fe7a1|file:///home/nicholas/projects/personal/zsh-grc/zsh-grc.zsh|4|1|v|zsh
+	files
+b81321cf0c971b722c6098e89e514147|file:///home/nicholas/projects/personal/zsh-grc/zsh-grc.zsh|4|1|v|zsh
+	grc_files
+b0aa6afb91bb399922195c8742e9609d|file:///home/nicholas/projects/personal/zsh-grc/zsh-grc.zsh|4|1|v|zsh
+	GRC_
+c935a4e21742b5a03a15b05834e2d82c|file:///home/nicholas/projects/personal/zsh-grc/zsh-grc.zsh|4|1|v|zsh
+	FILES
+c98e078b0ed6784c7fd24cf31aa2c05a|file:///home/nicholas/projects/personal/zsh-grc/zsh-grc.zsh|10|43|V|zsh
+	# verify the file is readable and source it
+880477937792613bdebd313ca7b90327|file:///home/nicholas/projects/personal/zsh-grc/zsh-grc.zsh|12|45|V|zsh
+	unset file default_files PLUGIN_BIN GRC_FILES
+6403097b29ad26f409aadd0b4abd3664|file:///home/nicholas/projects/personal/zsh-grc/zsh-grc.zsh|27|1|V|zsh
+	    # Use functions so we can still take advantage of ZSH completion functions
 	
-30390acad85d12860979c485b91b631e|file:///home/nicholas/.zsh/common/plugins.zsh|49|3|v|zsh
-	Load theme file
-6a6c35e7135c05262357b0d2940c48dc|file:///home/nicholas/.zsh/common/plugins.zsh|10|1|V|zsh
-	# Make sure to use double quotes
-de5986d4a51c8c17882f0bfef53deeb0|file:///home/nicholas/resources/bin/completions-list|5|5|V|zsh
-	    printf "\t%-32s %s\n" "Command" "Completion"
-0a712d3f50769d02c45ab1caec527f5a|file:///home/nicholas/resources/bin/completions-list|4|3|V|zsh
-	  printf "\t%-32s %s\n" "Command" "Completion"
-1d7501701c6b0a7b5036b95b08e2892c|file:///home/nicholas/bin/fb|28|17|v|javascript
-	\033[1;33m
-10faca24e3bd57677fbcadbb3bc5e75a|file:///home/nicholas/resources/bin/completions-list|3|46|v|zsh
-	\e[1;33m
-25236bea816cd7d2e770b9a8f3957b77|file:///home/nicholas/resources/bin/completions-list|6|5|v|zsh
-	=(( n + 1 ))
-83aa6630671b808a40efa61837f0adec|file:///home/nicholas/resources/bin/completions-list|12|13|v|zsh
-	\e[1;36m;%d \e[0mCompletion Commands" $n
-a866421bef11898ca2bd2de8434814a1|file:///home/nicholas/resources/bin/completions-list|8|4|V|zsh
-	  n=1
-64d936a9251c9a4d5c5625ba75ee2c04|file:///home/nicholas/resources/bin/completions-list|8|14|V|zsh
-	  echo "HELLO"
-fe7e54e044c976035f5b6e137a454a2e|file:///home/nicholas/resources/bin/completions-list|8|5|v|zsh
-	$(( n + 1 ))
-fcd2487e4a647696d8e24ad0174ebde1|file:///home/nicholas/resources/bin/completions-list|8|5|v|zsh
-	(($n++))
-1c1d74460d23ea6fd66d9c124e52ce61|file:///home/nicholas/resources/bin/completions-list|8|7|v|zsh
-	$n++
-736e9682b6d4fa4c36fb63be8fdbe59a|file:///home/nicholas/resources/bin/completions-list|9|11|V|zsh
-	  echo "$n"
-f83089e3a48526832167c40e4c672ee5|file:///home/nicholas/resources/bin/completions-list|8|16|v|zsh
-	(( n+=1 ))
-2cd2c273eccee3ff1c9506ba7058fcdd|file:///home/nicholas/resources/bin/completions-list|5|1|v|zsh
-	global 
-ad322a445a571c1e1ac9423b0b9f1577|file:///home/nicholas/resources/bin/completions-list|8|15|V|zsh
-	  n=$(($n + 1))
-5971ad71b18ebf329b0ed8ddc21ffa2e|file:///home/nicholas/resources/bin/completions-list|10|9|V|zsh
-	echo "$n"
-26592204b2431852c94375d4bfc36dcd|file:///home/nicholas/resources/bin/completions-list|10|17|V|zsh
-	printf "\n %s" $n
-c79a103c254bd72c97417267585c7327|file:///home/nicholas/.zsh/common/plugins.zsh|19|1|V|zsh
-	source "${CWD}/plugins/zsh-syntax-highlighting.zsh"
-0d4529a933e505e9d19a48b573ba2e08|file:///home/nicholas/.zsh/common/plugins.zsh|19|28|v|zsh
-	syntax-highlighting
-263aadcc3b5746bd097701404bde0620|file:///home/nicholas/.zsh/common/plugins.zsh|16|1|V|zsh
-	source "${CWD}/plugins/zsh-auto-notify.zsh"
-1a7f15a0b8e200488d900422b537b4e1|file:///home/nicholas/.zsh/common/plugins.zsh|16|28|v|zsh
-	auto-notify.zsh
-666a295bb095bf0136a07232023d9b33|file:///home/nicholas/.zsh/common/plugins.zsh|16|1|V|zsh
-	source "${CWD}/plugins/zsh-autocomplete.zsh"
-a0c0bf2d168429026f3dcfe977a0a8b8|file:///home/nicholas/.zsh/common/plugins.zsh|16|28|v|zsh
-	autocomplete.
-a376717ba9041c0adf9c344a92bb6f20|file:///home/nicholas/.zsh/common/plugins.zsh|10|1|V|zsh
-	zplug "kazhala/dotbare"
+	    function as(){
+	      \grc --colour=auto /usr/bin/as "$@"
+	    }
+	
+	    function diff(){
+	      \grc --colour=auto /usr/bin/diff "$@"
+	    }
+	
+	    if [ -x /usr/bin/dig ]; then
+	      function dig(){
+	        \grc --colour=auto /usr/bin/dig "$@"
+	      }
+	    fi
+	
+	    if [ -x /usr/bin/gas ]; then
+	      function gas(){
+	        \grc --colour=auto /usr/bin/gas "$@"
+	      }
+	    fi
+	
+	    if [ -x /usr/bin/gcc ]; then
+	      function gcc(){
+	        \grc --colour=auto /usr/bin/gcc "$@"
+	      }
+	    fi
+	
+	    if [ -x /usr/bin/g++ ]; then
+	      function g++(){
+	        \grc --colour=auto /usr/bin/g++ "$@"
+	      }
+	    fi
+	
+	    if [ -x /usr/bin/last ]; then
+	      function last(){
+	        \grc --colour=auto /usr/bin/last "$@"
+	      }
+	    fi
+	
+	    if [ -x /usr/bin/ld ]; then
+	      function ld(){
+	        \grc --colour=auto /usr/bin/ld "$@"
+	      }
+	    fi
+	
+	    if [ -x /sbin/ifconfig ]; then
+	      function ifconfig(){
+	        \grc --colour=auto /sbin/ifconfig "$@"
+	      }
+	    fi
+	
+	    # mount was in primordial Unix, but OS X and Linux have it in different paths.
+	    if [ -x /bin/mount ]; then
+	      function mount(){
+	        \grc --colour=auto /bin/mount "$@"
+	      }
+	    fi
+	    if [ -x /sbin/mount ]; then
+	      function mount(){
+	        \grc --colour=auto /sbin/mount "$@"
+	      }
+	    fi
+	
+	    # OS X and Linux have different paths to mtr
+	    if [ -x /usr/local/sbin/mtr ]; then
+	      function mtr(){
+	        \grc --colour=auto /usr/local/sbin/mtr "$@"
+	      }
+	    fi
+	    if [ -x /usr/sbin/mtr ]; then
+	      function mtr(){
+	        \grc --colour=auto /usr/sbin/mtr "$@"
+	      }
+	    fi
+	
+	    # OS X and Linux have different paths to netstat
+	    if [ -x /usr/sbin/netstat ]; then
+	      function netstat(){
+	        \grc --colour=auto /usr/sbin/netstat "$@"
+	      }
+	    fi
+	    if [ -x /bin/netstat ]; then
+	      function netstat(){
+	        \grc --colour=auto /bin/netstat "$@"
+	      }
+	    fi
+	
+	    # OS X and Linux have different paths to ping, of course
+	    if [ -x /sbin/ping ]; then
+	      function ping(){
+	        \grc --colour=auto /sbin/ping "$@"
+	      }
+	    fi
+	    if [ -x /sbin/ping6 ]; then
+	      function ping6(){
+	        \grc --colour=auto /sbin/ping6 "$@"
+	      }
+	    fi
+	    if [ -x /bin/ping ]; then
+	      function ping(){
+	        \grc --colour=auto /bin/ping "$@"
+	      }
+	    fi
+	
+	    if [ -x /bin/ps ]; then
+	      function ps(){
+	        \grc --colour=auto /bin/ps "$@"
+	      }
+	    fi
+	
+	    # OS X and Linux have different paths to traceroute
+	    if [ -x /usr/sbin/traceroute ]; then
+	      function traceroute(){
+	        \grc --colour=auto /usr/sbin/traceroute "$@"
+	      }
+	    fi
+	    if [ -x /bin/traceroute ]; then
+	      function traceroute(){
+	        \grc --colour=auto /bin/traceroute "$@"
+	      }
+	    fi
+	    # OS X and Linux have different paths to traceroute6 too
+	    if [ -x /usr/sbin/traceroute6 ]; then
+	      function traceroute6(){
+	        \grc --colour=auto /usr/sbin/traceroute6 "$@"
+	      }
+	    fi
+	    if [ -x /bin/traceroute6 ]; then
+	      function traceroute6(){
+	        \grc --colour=auto /bin/traceroute6 "$@"
+	      }
+	    fi
+077102bcbd9221496d897f4d3eb41f65|file:///home/nicholas/projects/personal/zsh-grc/zsh-grc.zsh|13|1|V|zsh
+	PLUGIN_BIN="$(dirname $0)/bin"
+ff7028c750e2b19e9e71b32d80b73f9b|file:///home/nicholas/projects/personal/zsh-grc/zsh-grc.zsh|32|1|V|zsh
+	unset debug_mode file default_files PLUGIN_BIN GRC_FILES
+	
+95c6dd970c3af91ff6b7b0efc80dfda3|file:///home/nicholas/projects/personal/zsh-grc/zsh-grc.zsh|89|21|v|zsh
+	; then
+e243ce5c815089362c2c1d8c3cb143c0|file:///home/nicholas/projects/personal/zsh-grc/zsh-grc.zsh|85|1|V|zsh
+	# Yes, these are a pain to customize. Fortunately, Geoff Greer made an online
+	# tool that makes it easy to customize your color scheme and keep them in sync
+	# across Linux and OS X/*BSD at http://geoff.greer.fm/lscolors/
+	
+1db44e0ec402caa85d0583aceea7fab8|file:///home/nicholas/projects/personal/zsh-grc/zsh-grc.zsh|28|13|V|zsh
+	        break
+589677a675fc3edc7f1616af08a1b4b1|file:///home/nicholas/projects/personal/zsh-grc/zsh-grc.zsh|13|1|V|zsh
+	include_commands=${GRC_INCLUDE:-}
+84de53352b4e3287e6e12392a69dddc3|file:///home/nicholas/projects/personal/zsh-grc/zsh-grc.zsh|14|1|v|zsh
+	include_
+04ff6a9583ba9957ebe1128d0f988ad8|file:///home/nicholas/projects/personal/zsh-grc/zsh-grc.zsh|14|24|v|zsh
+	INCLUDE
+19991a91bdb7d89aa012682218c43bec|file:///home/nicholas/projects/personal/zsh-grc/zsh-grc.zsh|95|49|v|zsh
+	RC_FILES
+d2fcd0f71522309a3495f21db45ccf28|file:///home/nicholas/projects/personal/zsh-grc/zsh-grc.zsh|95|47|v|zsh
+	 grc_files
+027e0e74e19736ff844a03cd5b231835|file:///home/nicholas/projects/personal/zsh-grc/zsh-grc.zsh|17|23|v|zsh
+	PLUGIN_
+7bf6c54c78079afb43e2354a82dd2357|file:///home/nicholas/projects/personal/zsh-grc/zsh-grc.zsh|3|10|V|zsh
+	plugin_bin="$(dirname $0)/bin"
+b408de7cbd9a491d1678e06dda310197|file:///home/nicholas/projects/personal/zsh-grc/zsh-grc.zsh|11|1|V|zsh
+	include_commands=${GRC_INCLUDE:-}
+	exclude_commands=${GRC_EXCLUDE:-}
+a0b3bdbcebc21d25f000f9f3e7edcc05|file:///home/nicholas/projects/personal/zsh-grc/zsh-grc.zsh|30|1|V|zsh
+	  GRC=$(which -p grc)
+	  if [ "$TERM" != dumb ] && [ -n "$GRC" ]; then
+	    alias colorize="${GRC} -es --colour=auto"
+	    for file in $grc_files; do
+	      if [[ -r "$file" ]]; then
+	        source "$file" && _log "zsh-grc sourcing: $file"
+	      fi
+	    done
+	  fi
+cce3d32f3a6079fef724a2d6d215408f|file:///home/nicholas/projects/personal/zsh-grc/zsh-grc.zsh|28|23|V|zsh
+	    alias colorize="${GRC} -es --colour=auto"
+cce7ceee95eacde081cba8bccb60620a|file:///home/nicholas/projects/personal/zsh-grc/zsh-grc.zsh|26|21|V|zsh
+	  GRC=$(which -p grc)
+9299da2529c98fccce0e32b476ba3266|file:///home/nicholas/projects/personal/zsh-grc/zsh-grc.zsh|28|9|v|zsh
+	aliases
+9d5c234aef52c2b7c9e2dd818ded2ad3|file:///home/nicholas/projects/personal/zsh-grc/zsh-grc.zsh|36|14|v|zsh
+	include "/configs/projectname.conf"
+1dcaf0d8a794bb92b956db19642f92b5|file:///home/nicholas/projects/personal/zsh-grc/zsh-grc.zsh|36|33|v|zsh
+	foo.bar 
+04f98100995b2f5633210e10f21ee022|file:///home/nicholas/projects/personal/zsh-grc/zsh-grc.zsh|36|76|v|zsh
+	foo.bar
+61734f5642068887d531c1734824ec33|file:///home/nicholas/projects/personal/zsh-grc/zsh-grc.zsh|28|32|V|zsh
+	  local sourcefiles="# zsh-grc aliases"
+4f9e412d55efb33d0da0d885bb8c021b|file:///home/nicholas/projects/personal/zsh-grc/zsh-grc.zsh|33|1|V|zsh
+	        _log "zsh-grc sourcing: $file"
+15ab7e771214f5a2f0becf19b17a6ddd|file:///home/nicholas/projects/personal/zsh-grc/zsh-grc.zsh|37|49|v|zsh
+	/root/.bashrc 
+17ad75017d9c9b5aa7de37a475e0e051|file:///home/nicholas/projects/personal/zsh-grc/zsh-grc.zsh|37|79|v|zsh
+	/root/.bashrc
+e1e5228274f83ad15d8889c72c14e09e|file:///home/nicholas/projects/personal/zsh-grc/zsh-grc.zsh|39|50|v|zsh
+	|| \
+d57a20d66e3bdd4f190c4ae6e5b92260|file:///home/nicholas/projects/personal/zsh-grc/zsh-grc.zsh|40|51|v|zsh
+	&& \
+55da4e6e27459a142986d488b2b865b1|file:///home/nicholas/projects/personal/zsh-grc/zsh-grc.zsh|43|32|v|zsh
+	$sourcefiles
+dbc1c772bb2ba3d84759cbbde0d68686|file:///home/nicholas/projects/personal/zsh-grc/zsh-grc.zsh|43|1|V|zsh
+	      echo -e "$sourcefiles" >> "$root_target" \
+	        && _log "adding $files_n sourcefiles to $root_target"
+7b021c096ad29c95338369de8229ed53|file:///home/nicholas/projects/personal/zsh-grc/zsh-grc.zsh|42|8|V|zsh
+	      echo -e "$sourcefiles" >> "$root_target" \
+7c8915d322600ac7a33da086e97e07fa|file:///home/nicholas/projects/personal/zsh-grc/zsh-grc.zsh|42|15|v|zsh
+	adding $files_n sourcefiles to $root_target
+f30419e85b5f0d588ee8f4c8b221d30d|file:///home/nicholas/.shell/aliases.colorize.zsh|88|1|V|zsh
+	for cmd in $cmds ; do
+	  if (( $+commands[$cmd] )) ; then
+	    $cmd() {
+	      grc --colour=auto ${commands[$0]} "$@"
+	    }
+	  fi
+	done
+	
+13aa94e218d5b58b4d0712c03969d8d9|file:///home/nicholas/projects/personal/zsh-grc/zsh-grc.zsh|68|1|V|zsh
+	# ANSI Color
+	# Attributes are in #;#;#...;#
+	# 0 reset, 1 bold, 4 underline, 5 flashing, 7 inverse
+	# Text
+	# 30 black, 31 red, 32 green, 33 yellow, 34 blue, 35 magenta, 36 cyan, 37 white
+	# Background colors are 40-47
+	# 100-107 are lighter variants
+	ANSI_RESET="\033[0;0m"
+	ANSI_BOLD="\033[1;1m"
+	ANSI_UNDERLINE="\033[4;4m"
+	ANSI_FLASH="\033[5;5m"
+	ANSI_INVERSE="\033[7;7m"
+	
+	# text colors
+	ANSI_BLACK="\033[30;30m"
+	ANSI_RED="\033[31;31m"
+	ANSI_GREEN="\033[32;32m"
+	ANSI_YELLOW="\033[33;33m"
+	ANSI_BLUE="\033[34;34m"
+	ANSI_MAGENTA="\033[35;35m"
+	ANSI_CYAN="\033[36;36m"
+	ANSI_WHITE="\033[36;36m"
+	
+	# background colors
+	ANSI_BG_BLACK="\033[40;40m"
+	ANSI_BG_RED="\033[41;41m"
+	ANSI_BG_GREEN="\033[42;42m"
+	ANSI_BG_YELLOW="\033[43;43m"
+	ANSI_BG_BLUE="\033[44;44m"
+	ANSI_BG_MAGENTA="\033[45;45m"
+	ANSI_BG_CYAN="\033[46;46m"
+	ANSI_BG_WHITE="\033[47;47m"
+	
+	# Configure colors, if available.
+	if (( $+commands[tput] )); then
+	  tput setaf 1 >&/dev/null
+	  c_reset='\[\e[0m\]'
+	  # c_user='\[\033[1;33m\]'
+	  # c_path='\[\e[0;33m\]'
+	  # c_git_clean='\[\e[0;36m\]'
+	  # c_git_dirty='\[\e[0;35m\]'
+	  c_user=${ANSI_CYAN}
+	  c_path=${ANSI_LIGHT_BLUE}
+	  c_git_clean=${ANSI_LIGHT_GREEN}
+	  c_git_dirty=${ANSI_LIGHT_RED}
+	else
+	  c_reset=
+	  c_user=
+	  c_path=
+	  c_git_clean=
+	  c_git_dirty=
+	fi
+	
+	[[ -z "$LSCOLORS" ]] &&
+	  export LSCOLORS='exfxcxdxbxegedAbAgacad'
+	
+	[[ -z "$LS_COLORS" ]] &&
+	  export LS_COLORS="di=34;40:ln=35;40:so=32;40:pi=33;40:ex=31;40:bd=34;46:cd=34;43:su=1;;41:sg=1;;46:tw=0;42:ow=0;43:"
+fe0c80de2b835986a3fbddd6d2ec37c2|file:///home/nicholas/projects/personal/zsh-grc/zsh-grc.zsh|20|13|v|zsh
+	$(dirname $0)/bin
+1afc049404dac191b0892c47836fe790|file:///home/nicholas/projects/personal/zsh-grc/zsh-grc.zsh|69|9|v|zsh
+	$(dirname $0)/src
+75fce724bba0481034daf1272d93beff|file:///home/nicholas/projects/personal/zsh-grc/zsh-grc.zsh|20|1|V|zsh
+	plugin_src="$(dirname $0)/src"
+fc9316a677f7d1b64edc78cee37f2f54|file:///home/nicholas/projects/personal/zsh-grc/zsh-grc.zsh|69|1|V|zsh
+	source "$plugin_src/ansi-colors.zsh"
+1a1a1b7181bdbc82bf6b4cc79e67ce36|file:///home/nicholas/projects/personal/zsh-grc/zsh-grc.zsh|70|23|v|zsh
+	ansi-colors
+31d01e07c2075eb48be4d1b83dc42f8a|file:///home/nicholas/projects/personal/zsh-grc/zsh-grc.zsh|27|1|V|zsh
+	  [[ -n "$debug_mode" ]] && logger -s "$@"
+01f5953245b95ac0dee850a4dee7e1fd|file:///home/nicholas/projects/personal/zsh-grc/zsh-grc.zsh|28|3|v|zsh
+	[ -n "$debug_mode" ]] && 
+297aa5b81b96a7e0a763959fc01275d6|file:///home/nicholas/projects/personal/zsh-grc/zsh-grc.zsh|20|11|V|zsh
+	grc_files=${GRC_FILES:-$default_files}
+88b295410206cc31776c0c37b7ab74d7|file:///home/nicholas/projects/personal/zsh-grc/zsh-grc.zsh|19|20|V|zsh
+	declare -A grc_files
+7d68e0adf5f585f6b64ca73e27a9704a|file:///home/nicholas/projects/personal/zsh-grc/zsh-grc.zsh|29|16|V|zsh
+	  logger -s "$@"
+65c51c729bf810a6cfd1fbc29b72f5f8|file:///home/nicholas/projects/personal/zsh-grc/zsh-grc.zsh|47|9|V|zsh
+	        _log "adding $files_n sourcefiles to $root_target"
+c8f49cce798970f910fddfbe88f73900|file:///home/nicholas/projects/personal/zsh-grc/zsh-grc.zsh|43|11|V|zsh
+	    sudo -i
+66ffc29895d0bca4a72b6ac29cb43cbb|file:///home/nicholas/projects/personal/zsh-grc/zsh-grc.zsh|39|15|V|zsh
+	        logger 
+1e302a061bf6ca532d71551e4955374d|file:///home/nicholas/projects/personal/zsh-grc/zsh-grc.zsh|47|7|v|zsh
+	logger 
+9e3f87476d9c0690351546ef3fd09ed1|file:///home/nicholas/projects/personal/zsh-grc/zsh-grc.zsh|53|21|V|zsh
+	alias zsh-grc-root="sudo -E _zsh-grc-root"
+061d61e50f3af3c5e11a7327c46dfddd|file:///home/nicholas/projects/personal/zsh-grc/zsh-grc.zsh|27|1|V|zsh
+	function _log {
+	  [[ -n "$debug_mode" ]] && logger --id -t "zsh-grc" -s "$@"
+	}
+	
+	function zsh-grc-root {
+	  if [ "$TERM" != dumb ] && [ -n "$GRC" ]; then
+	    local sourcefiles="\n# zsh-grc aliases"
+	    local files_n=0
+	    _log "attempting to add colors to root aliases"
+	
+	    for file in $grc_files; do
+	      if [[ -r "$file" ]]; then
+	        sourcefiles="${sourcefiles}\n source $file"
+	        files_n=(( $files_n + 1 ))
+	      fi
+	    done
+	
+	    # only append if not already exists
+	    if grep -qxF '# zsh-grc aliases' "$root_target"; then
+	      logger --id -t "zsh-grc-root" -s "error: zsh-grc aliases already saved to $root_target"
+	    else
+	      logger --id -t "zsh-grc-root" -s "adding $files_n sourcefiles to $root_target"
+	      echo -e "$sourcefiles" >> "$root_target"
+	    fi
+	  fi
+	}
+d29d60cdb4ab6eeed4eca73ed779cf68|file:///home/nicholas/projects/personal/zsh-grc/bin/zsh-grc-root.zsh|8|1|V|zsh
+	function zsh-grc-root {
+4259192d2c54b564e694440608a56e9d|file:///home/nicholas/projects/personal/zsh-grc/zsh-grc.zsh|5|1|V|zsh
+	# common grc.zsh paths
+	default_files=(
+	  /etc/grc.zsh                           # default
+	  /usr/local/etc/grc.zsh                 # homebrew
+	  /home/linuxbrew/.linuxbrew/etc/grc.zsh # linuxbrew
+	)
+644757648190825b99a17597a81b61e9|file:///home/nicholas/projects/personal/zsh-grc/zsh-grc.zsh|12|1|V|zsh
+	# debug_mode=${ZSH_GRC_DEBUG:-true}
+	debug_mode=true
+	# include_commands=${ZSH_GRC_INCLUDE:-}
+	# exclude_commands=${ZSH_GRC_EXCLUDE:-}
+	# include_root_commands=${ZSH_GRC_ROOT_INCLUDE:-}
+	# exclude_root_commands=${ZSH_GRC_ROOT_EXCLUDE:-}
+	
+	grc_files=(${GRC_FILES:-${default_files}})
+	
+	root_target=${GRC_ROOT_TARGET:-/root/.bashrc}
+	plugin_src="$(dirname $0)/src"
+f6c1f4fa510c3157967ce9f47ef8c8b6|file:///home/nicholas/projects/personal/zsh-grc/bin/zsh-grc-root.zsh|12|1|V|zsh
+	# include_commands=${ZSH_GRC_INCLUDE:-}
+	# exclude_commands=${ZSH_GRC_EXCLUDE:-}
+d3e72497af417da6a7ae39f2e9c8d3c6|file:///home/nicholas/projects/personal/zsh-grc/zsh-grc.zsh|3|1|V|zsh
+	GRC=$(which -p grc)
+bb39173da8bd7099256d67c7efd09375|file:///home/nicholas/projects/personal/zsh-grc/zsh-grc.zsh|16|1|V|zsh
+	# include_root_commands=${ZSH_GRC_ROOT_INCLUDE:-}
+	# exclude_root_commands=${ZSH_GRC_ROOT_EXCLUDE:-}
+9aaf132c10594cbab452f49adfac8b6c|file:///home/nicholas/projects/personal/zsh-grc/zsh-grc.zsh|19|1|V|zsh
+	root_target=${GRC_ROOT_TARGET:-/root/.bashrc}
+2763192c363d5791b9e3c7c0dbdb5ccb|file:///home/nicholas/projects/personal/zsh-grc/bin/zsh-grc-root.zsh|38|5|v|zsh
+	logger --id -t "zsh-grc-root" -
+3dbb19634ff8d39e1dcf2e1123b6393e|file:///home/nicholas/projects/personal/zsh-grc/bin/zsh-grc-root.zsh|40|5|v|zsh
+	logger --id -t 
+b0dd772f661841d0d036d08919e6fdf8|file:///home/nicholas/projects/personal/zsh-grc/bin/zsh-grc-root.zsh|40|5|v|zsh
+	"zsh-grc-root
+911089a9dd9a3eca2f676e8755329900|file:///home/nicholas/projects/personal/zsh-grc/bin/zsh-grc-root.zsh|40|5|v|zsh
+	" -s 
+edd2f205b6886816e1c833ee25fc2986|file:///home/nicholas/projects/personal/zsh-grc/bin/zsh-grc-root|3|31|v|zsh
+	bash 
+95fa70433769febf12fe0854ed5734c1|file:///home/nicholas/projects/personal/zsh-grc/bin/zsh-grc-root|34|15|v|zsh
+	(( $files_n + 1 ))
+2ecf70fbd3025ec764d7a8210b40cf02|file:///home/nicholas/projects/personal/zsh-grc/bin/zsh-grc-root|10|22|v|zsh
+	zsh                 
+b37bd68e9d11a427abd51ad8641a218b|file:///home/nicholas/projects/personal/zsh-grc/bin/zsh-grc-root|9|12|v|zsh
+	sh                           
+7a8e97298b9261f8b07f58c0dad6e8be|file:///home/nicholas/.zshrc|46|19|V|zsh
+	alias sudo='noglob do_sudo '
+9f70465a198b5375e5f4b560847b249c|file:///home/nicholas/.shell/aliases.sh|7|1|V|sh
+	# alias _="sudo "
+882312b278b9af6b7e070e9a7b3e1a52|file:///home/nicholas/.zshrc|50|1|V|zsh
+	# If you prefer to call this function sudo, uncomment the following
+	# line which will make sure it can be called that
+fd8670d48fb55fe6ca83a9e023082c0c|file:///home/nicholas/.zshrc|49|1|V|zsh
+	
+	#typeset -f sudo >/dev/null && unset sudo
+aa1734db0b9452e571c28a09385ba6e5|file:///home/nicholas/.zshrc|51|1|V|zsh
+	{
+	    local c="" t="" parse=""
+2574212378b75d9a5364c8be3b5e9de3|file:///home/nicholas/.zshrc|61|4|V|zsh
+	#  If SetTerminalStyle is a program that interfaces with your terminal to set its
+	#  color.
+5717d68c0ab718faedd3ee8501e87fe2|file:///home/nicholas/.zshrc|45|1|V|zsh
+	
+	# If you prefer to call this function sudo, uncomment the following
+	# line which will make sure it can be called that
+	typeset -f sudo >/dev/null && unset sudo
+	
+	#  You can also wrap it in a script that changes your terminal color, like so:
+	function setclr() {
+	  local t=0
+	  # SetTerminalStyle $1
+	  shift
+	  "$@"
+	  t=$?
+	  # SetTerminalStyle default
+	  return $t
+	}
+	alias sudo="setclr sudo sudowrap"
+	
+	sudowrap ()
+	{
+	  local c="" t="" parse=""
+	  local -a opt
+	  #parse sudo args
+	  OPTIND=1
+	  i=0
+	  while getopts xVhlLvkKsHPSb:p:c:a:u: t; do
+	    if [ "$t" = x ]; then
+	      parse=true
+	    else
+	      opt[$i]="-$t"
+	      let i++
+	      if [ "$OPTARG" ]; then
+	        opt[$i]="$OPTARG"
+	        let i++
+	      fi
+	    fi
+	  done
+	  shift $(( $OPTIND - 1 ))
+	  if [ $# -ge 1 ]; then
+	    c="$1";
+	    shift;
+	    case $(type -t "$c") in
+	      "")
+	        echo No such command "$c"
+	        return 127
+	        ;;
+	      alias)
+	        c="$(type "$c")"
+	        # Strip "... is aliased to `...'"
+	        c="${c#*\`}"
+	        c="${c%\'}"
+	        ;;
+	      function)
+	        c="$(type "$c")"
+	        # Strip first line
+	        c="${c#* is a function}"
+	        c="$c;\"$c\""
+	        ;;
+	      *)
+	        c="\"$c\""
+	        ;;
+	    esac
+	    if [ -n "$parse" ]; then
+	      # Quote the rest once, so it gets processed by bash.
+	      # Done this way so variables can get expanded.
+	      while [ -n "$1" ]; do
+	        c="$c \"$1\""
+	        shift
+	      done
+	    else
+	      # Otherwise, quote the arguments. The echo gets an extra
+	      # space to prevent echo from parsing arguments like -n
+	      while [ -n "$1" ]; do
+	        t="${1//\'/\'\\\'\'}"
+	        c="$c '$t'"
+	        shift
+	      done
+	    fi
+	    echo sudo "${opt[@]}" -- bash -xvc \""$c"\" >&2
+	    command sudo "${opt[@]}" bash -xvc "$c"
+	  else
+	    echo sudo "${opt[@]}" >&2
+	    command sudo "${opt[@]}"
+	  fi
+	}
+	# Allow sudowrap to be used in subshells
+	export -f sudowrap
+9d899d2363bfda7c2412bf3e5214b8f0|file:///home/nicholas/.zshrc|46|30|V|zsh
+	source ~/.shell/sudo-wrapper.sh
+bed7d58f8bc5c4dad0d9a2518cc18adf|file:///home/nicholas/.shell/aliases.colorize.zsh|93|5|V|zsh
+	    export -f $cmd
+8268f81d4e5ee2e338d9cbcbf70dbc37|file:///home/nicholas/.shell/aliases.colorize.zsh|93|5|V|zsh
+	    alias ${cmd}="_$cmd"
+58503625106f045585942e528e063390|file:///home/nicholas/.shell/aliases.colorize.zsh|94|3|V|zsh
+	  alias $cmd="grc --colour=auto $cmd"
+5a117bc88111cf6c6a2087ac9a67b7ec|file:///home/nicholas/.shell/aliases.colorize.zsh|90|5|V|zsh
+	    alias $cmd="grc --colour=auto $cmd"
+223fa5e3f7ecacbf9b7c12e22c1caa43|file:///home/nicholas/.shell/aliases.colorize.zsh|91|25|v|zsh
+	${commands[$0]} "$@"
+4aefa78ae264003ac4d5215d6113398c|file:///home/nicholas/.shell/aliases.colorize.zsh|93|30|v|zsh
+	auto 
+c74cac3d0632fe5fab52a32dd52de611|file:///home/linuxbrew/.linuxbrew/etc/grc.zsh|10|1|V|zsh
+	  as
+	  ant
+	  blkid
+	  cc
+	  configure
+	  curl
+	  cvs
+	  df
+	  diff
+	  dig
+	  dnf
+	  docker
+	  docker-compose
+	  docker-machine
+	  du
+	  env
+	  fdisk
+	  findmnt
+	  free
+	  g++
+	  gas
+	  gcc
+	  getfacl
+	  getsebool
+	  gmake
+	  id
+	  ifconfig
+	  iostat
+	  ip
+	  iptables
+	  iwconfig
+	  journalctl
+	  kubectl
+	  last
+	  ldap
+	  lolcat
+	  ld
+	  ls
+	  lsattr
+	  lsblk
+	  lsmod
+	  lsof
+	  lspci
+	  make
+	  mount
+	  mtr
+	  mvn
+	  netstat
+	  nmap
+	  ntpdate
+	  php
+	  ping
+	  ping6
+	  proftpd
+	  ps
+	  sar
+	  semanage
+	  sensors
+	  showmount
+	  sockstat
+	  ss
+	  stat
+	  sysctl
+	  systemctl
+	  tcpdump
+	  traceroute
+	  traceroute6
+	  tune2fs
+	  ulimit
+	  uptime
+	  vmstat
+	  wdiff
+	  whois
+0b2bed5d69eacf7330ce9b884b5e0426|file:///home/nicholas/.shell/aliases.colorize.sh|89|1|v|sh
+	  cc
+	  configure
+	  cvs
+	  df
+	  dig
+	  du
+	  env
+	  fdisk
+	  free
+	  g++
+	  gcc
+	  getfacl
+	  getsebool
+	  id
+	  ifconfig
+	  ip
+	  ipaddr
+	  ipneighbor
+	  iproute
+	  iptables
+	  iwconfig
+	  last
+	  ldap
+	  lsattr
+	  lsblk
+	  lsmod
+	  lsof
+	  lspci
+	  mount
+	  mtr
+	  netstat
+	  nmap
+	  ping
+	  ping2
+	  php
+	  ps
+	#  pv
+	  sensors
+	  sql
+	  ss
+	  stat
+	  sysctl
+	  systemctl
+	  tcpdump
+	  traceroute
+	  ulimit
+	  uptime
+	  vmstat
+	  wdiff
+	 
+64925d7853ed770cbeda1c534a579822|file:///home/nicholas/.shell/aliases.colorize.sh|5|1|V|sh
+	# grc_cmds=(
+	# e ant
+	#   blkid
+	#   configure
+	#   cvs
+	#   df
+	#   diff
+	#   dig
+	#   dnf
+	#   docker-machinels
+	#   dockerimages
+	#   dockerinfo
+	#   dockernetwork
+	#   dockerps
+	#   dockerpull
+	#   dockersearch
+	#   dockerversion
+	#   du
+	#   env
+	#   esperanto
+	#   fdisk
+	#   findmnt
+	#   free
+	#   g++
+	#   gcc
+	#   getfacl
+	#   getsebool
+	#   id
+	#   ifconfig
+	#   iostat_sar
+	#   ip
+	#   ipaddr
+	#   ipneighbor
+	#   iproute
+	#   iptables
+	#   irclog
+	#   iwconfig
+	#   jobs
+	#   last
+	#   ldap
+	#   log
+	#   lolcat
+	#   lsattr
+	#   lsblk
+	#   lsmod
+	#   lsof
+	#   lspci
+	#   ls
+	#   mount
+	#   mtr
+	#   mvn
+	#   netstat
+	#   nmap
+	#   ntpdate
+	#   php
+	#   ping
+	#   ping2
+	#   proftpd
+	#   ps
+	##   pv
+	#   semanageboolean
+	#   semanagefcontext
+	#   semanageuser
+	#   sensors
+	#   showmount
+	#   sql
+	#   ss
+	#   stat
+	#   sysctl
+	#   systemctl
+	#   tail
+	#   tcpdump
+	#   traceroute
+	#   traceroute6
+	#   tune2fs
+	#   ulimit
+	#   uptime
+	#   vmstat
+	#   wdiff
+	#   whois
+	# )
+2a3f5bfda82bdb7447945b2e87298e6b|file:///home/nicholas/resources/bin/pkg-search|10|20|v|sh
+	yamllint
+f4561ff5e10cbec3d1e8b68fd92c50ce|file:///home/nicholas/resources/bin/pkg-search|11|1|V|sh
+	[[ $? -eq 0 ]] && echo "\napt results:\n${apt}"
+98434eafab271dd8a0122aea49f7d22b|file:///home/nicholas/resources/bin/pkg-search|13|27|v|sh
+	apt 
+50af332533aca0d2871f79f8464350e2|file:///home/nicholas/resources/bin/pkg-search|13|1|V|sh
+	[[ $? -eq 0 ]] && echo "\nbrew results:\n${brew}"
+36ad32bf8a0c84c2ab0103e85ee6b960|file:///home/nicholas/resources/bin/pkg-search|14|1|v|sh
+	brew
+b7d3d2089300f091d37e51e7fd2599aa|file:///home/nicholas/resources/bin/pkg-search|13|1|V|sh
+	brew=$(brew search "$pkg")
+	[[ $? -eq 0 ]] && echo "\nbrew results:\n${brew}"
+83c790b10b7b9de406b9642c9f1c3d07|file:///home/nicholas/resources/bin/pkg-search|16|8|v|sh
+	brew 
+ad1a5628dda985822c6b16f826688e6b|file:///home/nicholas/resources/bin/pkg-search|17|14|v|sh
+	 -eq 0 
+b53d3318f332c9d68d57f733b3771469|file:///home/nicholas/resources/bin/pkg-search|17|1|V|sh
+	[[ -n "$ruby" ]] && echo -e "\nbrew results:\n${ruby}"
+3637e4ecda1e00265aee40cf9f357f04|file:///home/nicholas/resources/bin/pkg-search|22|1|V|sh
+	[[ -n "$rust" ]] && echo -e "\nrust cargo results:\n${rust}"
+e1bebc900acc4cb67d3921c4013e6c5a|file:///home/nicholas/resources/bin/pkg-search|14|1|V|sh
+	[[ $? -eq 0 ]] && echo -e "\nbrew results:\n${brew}"
+72812e30873455dcee2ce2d1ee26e4ab|file:///home/nicholas/resources/bin/pkg-search|25|55|v|sh
+	rust
+d2ec7f78dad06505e213f381a8c8d01e|file:///home/nicholas/resources/bin/pkg-search|25|32|v|sh
+	rust 
+469526bf5d9e259a2cf7066026ec194d|file:///home/nicholas/resources/bin/pkg-search|25|37|v|sh
+	cargo 
+6eeee417ecd1d83e83e87f99cd9e83d4|file:///home/nicholas/resources/bin/pkg-search|19|1|V|sh
+	# python results
+	
+c004f2796e890c4065d1b4c9a0bc0e64|file:///home/nicholas/resources/bin/pkg-search|23|1|V|sh
+	[[ -n "$asdf" ]] && echo -e "\nasdf plugins results:\n${asdf}"
+06601703f13f51c5350beeda0fe87913|file:///home/nicholas/resources/bin/pkg-search|26|32|v|sh
+	rust ca
+d8a27b3d5f79992293304f364f6f0599|file:///home/nicholas/resources/bin/pkg-search|26|37|v|sh
+	rgo 
+9ce7f38686f78d32c795187e663992a3|file:///home/nicholas/resources/bin/pkg-search|28|18|V|sh
+	No matches found for "sjdkfjdkf"
+9a1012bedd49754de717f216c63af90e|file:///home/nicholas/resources/bin/pkg-search|26|30|v|sh
+	\n\n--
+16199d77bde6e01031aa4811c219a01e|file:///home/nicholas/resources/bin/pkg-search|23|28|v|sh
+	\n  
+04fc2d7033f886fe16eaa0618b324ab6|file:///home/nicholas/projects/personal/zsh-grc/src/ansi-colors.zsh|15|1|V|zsh
+	ANSI_BLACK="\033[30;30m"
+	ANSI_RED="\033[31;31m"
+	ANSI_GREEN="\033[32;32m"
+	ANSI_YELLOW="\033[33;33m"
+	ANSI_BLUE="\033[34;34m"
+	ANSI_MAGENTA="\033[35;35m"
+	ANSI_CYAN="\033[36;36m"
+	ANSI_WHITE="\033[36;36m"
+3cdab9c34940b02a3126ae1447982e09|file:///home/nicholas/resources/bin/pkg-search|4|1|V|sh
+	$clr_green="\033[32m;"
+6642f57162d77381eeb262b4844de3c5|file:///home/nicholas/resources/bin/pkg-search|20|9|v|sh
+	grc -es --colour=on
+c5dfc5bd27efdbac7ee7bde2e7d07214|file:///home/nicholas/resources/bin/pkg-search|20|8|V|sh
+	grconf=""
+ea38c9601bc5af9b85453b4eb6814788|file:///home/nicholas/resources/bin/pkg-search|22|1|V|sh
+	  && echo -e "$apt" | grcat conf.docker-machinels
+9f65a13a5324ab051c195defb59d259e|file:///home/nicholas/resources/bin/pkg-search|26|1|V|sh
+	&& echo -e "$brew" | grcat conf.docker-machinels
+7e4bda0a4255c618e1649b87792996be|file:///home/nicholas/resources/bin/pkg-search|30|1|V|sh
+	  && echo -e "$ruby" | grcat conf.docker-machinels
+58e53d1324eef6265fdb97b08ed9aadf|file:///home/nicholas/resources/bin/pkg-search|34|16|v|sh
+	ruby
+e0d4bfc3680acdd0648e32341641a44d|file:///home/nicholas/resources/bin/pkg-search|34|1|V|sh
+	  && echo -e "$rust" | grcat conf.docker-machinels
+98139570f37e2094ef5964a712382fff|file:///home/nicholas/resources/bin/pkg-search|38|15|v|sh
+	$rust
+dbb649aaabf068a90f5be19a36881763|file:///home/nicholas/resources/bin/pkg-search|38|1|V|sh
+	  && echo -e "$asdf" | grcat conf.docker-machinels
+912ec803b2ce49e4a541068d495ab570|file:///home/nicholas/resources/bin/pkg-search|42|16|v|sh
+	asdf
+36c4536996ca5615dcf9911f068786dc|file:///home/nicholas/resources/bin/pkg-search|42|9|v|sh
+	node
+0f988a66da2a5729ea4641a41b86e44a|file:///home/nicholas/resources/bin/pkg-search|43|35|v|sh
+	dockerinfo
+caf9b6b99962bf5c2264824231d7a40c|file:///home/nicholas/resources/bin/pkg-search|38|41|v|sh
+	info
+8611612b363dabfe79fb7decc4c8912f|file:///home/nicholas/.local/src/ccze/src/ccze.h|25|13|V|cpp
+	#ifdef HAVE_SYSTEM_H
+	# include "system.h"
+	#endif
+02a91016b72c91d246589d243baa78f3|file:///home/nicholas/.local/src/ccze/src/ccze-compat.c|24|1|V|c
+	#include "system.h"
+a2626dd3cea5bf872da644e9e341d491|file:///etc/cczerc|1|1|V|conf
+	# Configuration file for ccze
+	#
+	# Available 'pre' attributes: bold, underline, underscore, blink, reverse
+	# Available colors:  black, red, green, yellow, blue, magenta, cyan, white
+	# Available bgcolors: on_black, on_red, on_green, on_yellow, on_blue, on_magenta, on_cyan, on_white
+	#
+	# You can also use item names in color definition, like:
+	#
+	# default   blue
+	# date      'default'
+	#
+	# Here you defined default color to blue, and date color to default value's color, so
+	# your date color is blue. (You can only use predefined item names!)
+	
+	# item          color                   # comment (what is color, or why it's that ;)
+	
+	date            bold cyan               # Dates and times
+	host            bold blue               # Host names and IP numbers
+	process         green                   # Sender process
+	pid             bold white              # PIDs (Process IDs)
+	pid-sqbr        bold green              # Brackets around PIDs
+	default         cyan                    # Default (not colorised)
+	email           bold green              # E-mail addresses
+	subject         magenta                 # Subject lines (procmail)
+	dir             bold cyan               # Directory names
+	file            bold cyan               # File names
+	size            bold white              # Sizes
+	user            bold yellow             # Usernames
+	httpcodes       bold white              # HTTP status codes (200, 404, etc)
+	getsize         magenta                 # Transfer sizes
+	get             green                   # HTTP GET
+	post            bold green              # HTTP POST
+	head            green                   # HTTP HEAD
+	put             bold green              # HTTP PUT
+	connect         green                   # HTTP CONNECT
+	trace           green                   # HTTP TRACE
+	unknown         cyan                    # Unknown message
+	gettime         bold magenta            # Transfer times
+	uri             bold green              # URIs (http://, ftp://, etc)
+	ident           bold white              # Remote user (proxy/http)
+	ctype           white                   # Content type (http/proxy)
+	error           bold red                # Error messages
+	miss            red                     # Proxy MISS
+	hit             bold yellow             # Proxy HIT
+	deny            bold red                # Proxy DENIED
+	refresh         bold white              # Proxy REFRESH
+	swapfail        bold white              # Proxy SWAPFAIL
+	debug           white                   # Debug messages
+	warning         red                     # Warnings
+	direct          bold white              # Proxy DIRECT
+	parent          bold yellow             # Proxy PARENT
+	swapnum         blue on_white           # Proxy swap number
+	create          bold white              # Proxy CREATE
+	swapin          bold white              # Proxy SWAPIN
+	swapout         bold white              # Proxy SWAPOUT
+	release         bold white              # Proxy RELEASE
+	mac             bold white              # MAC addresses
+	version         bold white              # Version numbers
+	address         bold white              # Memory addresses
+	numbers         white                   # Numbers
+	signal          bold yellow             # Signal names
+	service         bold magenta            # Services
+	prot            magenta                 # Protocols
+	bad             bold yellow             # "Bad words"
+	good            bold green              # "Good words"
+	system          bold cyan               # "System words"
+	incoming        bold white              # Incoming mail (exim)
+	outgoing        white                   # Outgoing mail (exim)
+	uniqn           bold white              # Unique ID (exim)
+	repeat          white                   # 'last message repeated N times'
+	field           green                   # RFC822 Field
+	chain           cyan                    # Chain names (ulogd)
+	percentage      bold yellow             # Percentages
+	ftpcodes        cyan                    # FTP codes
+	keyword         bold yellow             # Various keywords (like PHP in php.log, etc)
+	pkgstatus       green                   # package status (dpkg)
+	pkg             bold red                # package name (dpkg)
+	
+	# CSS codes for the HTML output
+	cssblack        black
+	cssboldblack    black
+	cssred          darkred
+	cssboldred      red
+	cssgreen        #00C000
+	cssboldgreen    lime
+	cssyellow       brown
+	cssboldyellow   yellow
+	cssblue         blue
+	cssboldblue     slateblue
+	csscyan         darkcyan
+	cssboldcyan     cyan
+	cssmagenta      darkmagenta
+	cssboldmagenta  magenta
+	csswhite        grey
+	cssboldwhite    white
+	cssbody         #404040
+31ed932e58293e565fc6b7722201790b|file:///home/nicholas/.cczerc|64|17|v|conf
+	bold 
+d37fe6ff3750b81fe1f8aa0bd0c51014|file:///home/nicholas/.config/colorls/dark_colors.yaml|1|1|V|yaml
+	# Mao
+	# n Colors
+b55851aa45a5a1f47c87db71c3f6a353|file:///home/nicholas/.config/nvim/plugins.vim|272|1|V|vim
+	" If you want to display icons, then use one of these plugins:
+1eb5efdb2cb406ccb13b847a4831a7be|file:///home/nicholas/.config/nvim/plugins.vim|269|1|V|vim
+	source $plugins/barbar.vim              " barbar bufferline
+9b89f94d48f0a3b520d44f4e7c7c0ced|file:///home/nicholas/.config/nvim/plugins/buffers.vim|24|1|V|vim
+	" bufferline
+	map <silent> H :BufMRUPrev<CR>
+	map <silent> L :BufMRUNext<CR>
+e78ce8dd2e31d48517848866f092a359|file:///home/nicholas/.config/nvim/plugins/buffers.vim|17|1|V|vim
+	" barbar
+	map <silent> H :BufferPrev<CR>
+	map <silent> L :BufferNext<CR>
+0faacbbdf5657e6026f9c01efc142916|file:///home/nicholas/.config/nvim/plugins/galaxyline-post-2.vim|1|1|V|lua
+	
+	lua <<EOF
+c96d4d09429987b1d8eabc71be28839c|file:///home/nicholas/.config/nvim/plugins/barbar.vim|9|1|V|vim
+	
+	" bufferline
+	" map <silent> H :BufMRUPrev<CR>
+	" map <silent> L :BufMRUNext<CR>
+5154811e58831b51875db580696d6afa|file:///home/nicholas/.config/nvim/plugins/barbar.vim|51|1|V|vim
+	" Magic buffer-picking mode
+	nnoremap <silent> <C-s>    :BufferPick<CR>
+e2db64c16bcb135b63ec477c5b9d49ad|file:///home/nicholas/.config/nvim/mappings.vim|128|24|V|vim
+	" tab switches between two most recently used buffers
+	" nnoremap <TAB> :e#<CR>
+7fd779a69700134d0436914e9c4b46e4|file:///home/nicholas/.config/nvim/mappings.vim|128|1|V|vim
+	" Open tig
+	nnoremap <Leader>gg :tabnew<CR>:terminal tig<CR>
+bc8c0b1164fe82e1f8f430ef2140b3ed|file:///home/nicholas/.config/nvim/plugins/buffers.vim|20|1|V|vim
+	
+	"  Shift H/L to navigate in normal mode
+0c7142f84a9833fecb858de067c7ee64|file:///home/nicholas/.config/nvim/plugins.vim|180|1|V|vim
+	" nnoremap <silent> <Leader>d :bd<CR>
+	nnoremap <silent> <Leader>d :Sayonara<CR>
+8d644fb4d40ecef81fb9ce5ccbfb3073|file:///home/nicholas/.config/nvim/plugins.vim|178|1|V|vim
+	" map close buffer
+	" TODO: close window if exists, if not close buffer
+	" nnoremap <silent> <Leader>d :bd<CR>
+	nnoremap <silent> <Leader>d :Sayonara<CR>
+	
+edd00eaf38cf2e54b33714f8e6057a7a|file:///home/nicholas/.config/nvim/plugins.vim|178|1|V|vim
+	" map close buffer
+	" TODO: close window if exists, if not close buffer
+	" nnoremap <silent> <Leader>d :bd<CR>
+	nnoremap <silent> <Leader>d :Sayonara<CR>
+f60e0fe36f7d246705a2293f98b06291|file:///home/nicholas/.config/nvim/mappings.vim|107|1|V|vim
+	" barbar
+7cb8b958b280f07ab93cb32500c40175|file:///home/nicholas/.config/nvim/mappings.vim|132|24|V|vim
+	Plug 'famiu/nvim-reload'
+575960d7e29f8efefbec1a30f6e2e80d|file:///home/nicholas/.config/nvim/mappings.vim|131|1|V|vim
+	" nnoremap <Leader>r :so $HOME/.config/nvim/init.vim<CR>:echo 'Reloaded $HOME/.nvim/init.vim'<CR>
+a0b17c3d66b518ef468b4ab6a6ce3622|file:///home/nicholas/.config/nvim/mappings.vim|132|21|v|vim
+	so $HOME/.config/nvim/init.vim
+4d980dafb7f73617ab53f7270de2afb7|file:///home/nicholas/.config/nvim/mappings.vim|132|21|v|vim
+	<CR>:echo 'Reloaded $HOME/.nvim/init.vim'<CR>
+64468d5267162f28cc043373309b8fce|file:///home/nicholas/.config/nvim/mappings.vim|130|3|v|vim
+	source .vimrc
+892f36e729f3bfa1aea7a638a08fdb82|file:///home/nicholas/.config/nvim/plugins/feline-post.vim|284|1|V|lua
+	    colors = colors,
+	    separators = separators,
+	    components = components,
+	    properties = properties,
+	    vi_mode_colors = vi_mode_colors
+a97a4f3e3bbd87aae86875e1ebfe1f20|file:///home/nicholas/.config/nvim/plugins/feline-post.vim|281|25|V|lua
+	require('feline').setup({
+	    default_bg = '#1F1F23',
+	    default_fg = '#D0D0D0',
+	})
+	
+a38df8b0ee63c64a5976b04aa0410e54|file:///home/nicholas/.config/nvim/plugins/feline-post-3.vim|5|1|V|lua
+	-- ~/.config/nvim/lua/plugins/feline/colors.lua
+	-- One-dark colors
+	
+	local _M = {
+	    bg = '#2c323c',
+	    fg = none,
+	    yellow = '#e5c07b',
+	    cyan = '#8abeb7',
+	    darkblue = '#528bff',
+	    green = '#98c379',
+	    orange = '#d19a66',
+	    violet = '#b294bb',
+	    magenta = '#ff80ff',
+	    blue = '#61afef';
+	    red = '#e88388';
+	}
+b3eebbdaacd1859fb8b64924c996ef66|file:///home/nicholas/.config/nvim/plugins/feline-post-3.vim|20|2|V|lua
+	local colors = require 'plugins/feline/colors'
+b22cf159784a058db02154f25ae7c877|file:///home/nicholas/.config/nvim/plugins/feline-post-3.vim|199|18|v|lua
+	require("plugins/feline/file_name")
+3ae1a94cfcb47b970bd176b9be561c1d|file:///home/nicholas/.config/nvim/plugins.vim|27|1|V|vim
+	# Using Plug:
+cca2cc175d92579f4699159f72481ab3|file:///home/nicholas/.config/nvim/plugins.vim|432|1|V|vim
+	source $plugins/feline-post.vim
+2d47f8a29405b5c2562743de1b325a3b|file:///home/nicholas/.config/nvim/plugins.vim|432|17|v|vim
+	feline-post
+5b636d7937054c695a725c7ee4efc22e|file:///home/nicholas/.config/nvim/plugins/feline-post.vim|2|1|V|lua
+	lua <<EOF
+db74d78e98b7d56a529b0533c81418be|file:///home/nicholas/.config/nvim/plugins/feline-post.vim|290|1|V|lua
+	EOF
+	
+	" vim:ft=lua
+968627203dd4d636beb6634285557f8b|file:///home/nicholas/.config/nvim/nvim-lspconfig.vim|2|1|V|vim
+	  require(‘lspconfig’).tsserver.setup{}
+21f865c9c810beb5f335e9b541bff2c4|file:///home/nicholas/.config/nvim/plugins.vim|29|1|V|vim
+	" npm install -g typescript typescript-language-server
+4245e31da21a54b717ed167f10465e5f|file:///home/nicholas/.config/nvim/nvim-lspconfig.vim|29|5|V|vim
+	  -- npm install -g typescript typescript-language-server
+01d413309eacc66ddf086d4fc2f480d2|file:///home/nicholas/.config/nvim/nvim-lspconfig.vim|31|6|v|lua
+	npm i -g pyright
+	
+b3f55d9167532fb43af330eaddb01413|file:///home/nicholas/.config/nvim/plugins.vim|28|1|V|vim
+	Plug 'neovim/nvim-lspconfig'
+440ea58f8dccfd50613da2dbed57d8e2|file:///home/nicholas/.config/nvim/nvim-lspconfig.vim|4|1|V|lua
+	  vim.o.completeopt = “menuone,noselect”
+dd9e4ffd4c5b919a32333863cfdb7548|file:///home/nicholas/.config/nvim/plugins.vim|29|52|V|vim
+	" bash, cpp, css, dockerfile, go, graphql, html, json, lua, php, python, ruby,
+	" rust, tailwindcss, terraform, typescript, vim, vue
+5263a401db8975f5d20fb3b0d4e54e38|file:///home/nicholas/.config/nvim/nvim-lspconfig.vim|49|1|V|lua
+	  --bash, cpp, css, dockerfile, go, graphql, html, json, lua, php, python, ruby,
+	  --rust, tailwindcss, terraform, tsserver, typescript, vim, vue
+f3692420c6803e4fb0ea94b37bc12331|file:///home/nicholas/.config/nvim/nvim-lspconfig.vim|64|1|V|lua
+	  --bash, cpp, css, dockerfile, go, graphql, html, json, lua, php, python, ruby,
+	  --rust, tailwindcss, terraform, tsserver, typescript, vim, vue
+	  --LspInstall typescript
+0b20642f88e4b14fcb0ac227e3073663|file:///home/nicholas/.config/nvim/nvim-lspconfig.vim|34|1|V|lua
+	  -- npm install -g typescript typescript-language-server
+	  require(‘lspconfig’).tsserver.setup{}
+	
+a75ba5d757b5806e54b3dd7d9866894f|file:///home/nicholas/.config/nvim/nvim-lspconfig.vim|34|1|V|lua
+	  -- npm install -g typescript typescript-language-server
+	  require(‘lspconfig’).tsserver.setup{}
+	
+	  -- npm i -g pyright
+	  require('lspconfig').pyright.setup{
+	    settings = {
+	      python = {
+	        analysis = {
+	          autoSearchPaths = true,
+	          useLibraryCodeForTypes = true
+	        }
+	      }
+	    }
+	  }
+	
+3e9e1a5250399b6d6a8f151e1cda8756|file:///home/nicholas/.config/nvim/nvim-lspconfig.vim|48|25|V|lua
+	  -- Automatically reload after `:LspInstall <server>` so we don't have to restart neovim
+aaf8dd77e16c8565ab4a165480c494b0|file:///home/nicholas/.config/nvim/plugins.vim|30|1|V|vim
+	Plug 'hrsh7th/nvim-compe'
+68efb1c943bf37d2d8485c0854e5f00c|file:///home/nicholas/.config/nvim/plugins.vim|30|1|V|vim
+	Plug 'nvim-lua/completion-nvim'
+9f9bde07705a89fb72be71d5dd722539|file:///home/nicholas/.config/nvim/nvim-lspconfig.vim|58|1|V|lua
+	    settings = {
+	      python = {
+	        analysis = {
+	          autoSearchPaths = true,
+	          useLibraryCodeForTypes = true
+	        }
+	      }
+	    }
+	  }
+432715596d17306860f3699c5573338c|file:///home/nicholas/.config/nvim/plugins.vim|33|1|V|vim
+	Plug 'sbdchd/neoformat'
+20a032bc13a9aff1c3d77c3b7f488f51|file:///home/nicholas/.config/nvim/plugins.vim|126|4|V|vim
+	" Or
+f269e5356dfe34b91b129bc70972f8c8|file:///home/nicholas/.config/nvim/plugins.vim|215|9|V|vim
+	set fillchars+=vert:\│
+873d2bb4dff25ec5079c6cc59051cc43|file:///home/nicholas/.config/nvim/plugins.vim|158|17|V|vim
+	let g:ormolu_ghc_opt=["TypeApplications", "RankNTypes"]
+	You must use formatter's name without "-"
+	" right
+	let g:neoformat_enabled_haskell = ['sortimports', 'stylishhaskell']
+	" wrong
+	let g:neoformat_enabled_haskell = ['sort-imports', 'stylish-haskell']
+94653c92f519b831e9bda0caf9f97e5c|file:///home/nicholas/.config/nvim/plugins.vim|110|1|V|vim
+	" auto formatting for most file types
+	Plug 'sbdchd/neoformat'
+	
+	" :Neoformat
+	" :Neoformat jsbeauty
+	" Enable alignment
+	" format alignment when filetype not known
+	let g:neoformat_basic_format_align = 0
+	
+	" Enable tab to spaces conversion
+	let g:neoformat_basic_format_retab = 1
+	
+	" Enable trimmming of trailing whitespace
+	let g:neoformat_basic_format_trim = 1
+	let g:neoformat_run_all_formatters = 1
+	let g:neoformat_only_msg_on_error = 1
+	let g:neoformat_verbose = 1 " only affects the verbosity of Neoformat
+	" let &verbose            = 1 " also increases verbosity of the editor as a whole
+	let g:shfmt_opt="-ci"
+	
+	" Arduino     uncrustify, clang-format, astyle
+	" Assembly    asmfmt
+	" Bazel       buildifier
+	" Beancount   bean-format
+	" Bib         bibclean
+	" C           uncrustify, clang-format, astyle
+	" C#          uncrustify, astyle, clang-format
+	" C++         uncrustify, clang-format, astyle
+	" Cabal       cabal-fmt
+	" CMake       cmake_format
+	" Crystal     crystal tool format (ships with crystal)
+	" CSS         css-beautify (ships with js-beautify), prettydiff, stylefmt, stylelint, csscomb, prettier
+	" CSV         prettydiff
+	" D           uncrustify, dfmt
+	" Dart        dartfmt
+	" Dhall       dhall format
+	" dune        dune format
+	" Elixir      mix format
+	" Elm         elm-format
+	" Erlang      erlfmt
+	" Fish        fish_indent
+	" F#          fantomas
+	" GDScript    gdformat
+	" Gleam       gleam format
+	" Go          gofmt, goimports, gofumpt, gofumports
+	" GLSL        clang-format
+	" GraphQL     prettier
+	" Haskell     stylishhaskell, hindent, hfmt, brittany, sortimports, floskell ormolu
+	" Puppet      puppet-lint
+	" PureScript  purty
+	" HTML        html-beautify (ships with js-beautify), prettier, prettydiff
+	" Jade        pug-beautifier
+	" Java        uncrustify, astyle, prettier
+	" JavaScript  js-beautify, prettier, prettydiff, clang-format, esformatter, prettier-eslint, eslint_d, standard, semistandard, deno fmt,
+	" JSON        js-beautify, prettydiff, prettier, jq, fixjson
+	" Kotlin      ktlint, prettier
+	" LaTeX       latexindent
+	" Less        csscomb, prettydiff, prettier, stylelint
+	" Lua         luaformatter lua-fmt lua-format
+	" Markdown    remark prettier
+	" Matlab      matlab-formatter-vscode
+	" Nginx       nginxbeautifier
+	" Nim         nimpretty (ships with nim)
+	" Nix         nixfmt nixpkgs-fmt
+	" Objective-C uncrustify, clang-format, astyle
+	" OCaml       ocp-indent, ocamlformat
+	" Pandoc      Markdown pandoc
+	" Pawn        uncrustify
+	" Perl        perltidy
+	" PHP         php_beautifier, php-cs-fixer, phpcbf
+	" PowerShell  PSScriptAnalyzer, PowerShell-Beautifier
+	" Proto       clang-format
+	" Pug         (formally Jade) pug-beautifier
+	" Python      yapf, autopep8, black, pydevf, isort, docformatter, pyment
+	" R           styler, formatR
+	" Reason      refmt bsrefmt
+	" Ruby        rufo, ruby-beautify, rubocop
+	" Rust        rustfmt
+	" Sass        sass-convert, stylelint, csscomb
+	" Sbt         scalafmt
+	" Scala       scalariform, scalafmt
+	" SCSS        sass-convert, stylelint, stylefmt, prettydiff, csscomb, prettier
+	" Shell       shfmt let g:shfmt_opt="-ci"
+	" SQL         sqlfmt, sqlformat (ships with sqlparse), pg_format (ships with pgFormatter)
+	" Starlark    buildifier
+	" Svelte      prettier-plugin-svelte
+	" Swift       Swiftformat
+	" Terraform   terraform,
+	" TypeScript  tsfmt, prettier, prettier-eslint, tslint, eslint_d, clang-format, deno fmt
+	" V           v fmt (ships with v)
+	" VALA        uncrustify
+	" Vue         prettier
+	" XHTML       tidy, prettydiff
+	" XML         tidy, prettydiff, prettier
+	" YAML        pyaml, prettier
+	" zig         zig fmt
+	" zsh         shfmt
+	
+eb8c3751f131914749bc79c6b6e2c7e0|file:///home/nicholas/.config/nvim/plugins.vim|105|1|V|vim
+	source $plugins/editorconfig.vim " load project .editorconfig settings
+e09e7f32063909b80102ab7dafe583fc|file:///home/nicholas/.config/nvim/plugins.vim|106|17|v|vim
+	editorconfig
+99b8b6f995ef713d8f59006a0a189eb7|file:///home/nicholas/.config/nvim/plugins.vim|106|37|v|vim
+	oad project .editorconfig settings
+eb03429948a033beb80053b6a26aabec|file:///home/nicholas/.config/nvim/plugins.vim|69|1|V|vim
+	Plug 'metakirby5/codi.vim'
+	" available repl
+	" Codi [filetype] activates Codi for the current buffer, using the provided filetype or the buffer's filetype.
+	" Codi! deactivates Codi for the current buffer.
+	" Codi!! [filetype] toggles Codi for the current buffer, using the provided filetype or the buffer's filetype.
+	" g:codi#interpreters is a list of user-defined interpreters. See the documentation for more information.
+	" g:codi#aliases is a list of user-defined interpreter filetype aliases. See the documentation for more information.
+	" The below options can also be set on a per-interpreter basis via g:codi#interpreters:
+	"
+	" g:codi#autocmd determines what autocommands trigger updates. See the documentation for more information.
+	" g:codi#width is the width of the Codi split.
+	" g:codi#rightsplit is whether or not Codi spawns on the right side.
+	" g:codi#rightalign is whether or not to right-align the Codi buffer.
+	" g:codi#autoclose is whether or not to close Codi when the associated buffer is closed.
+	" g:codi#raw is whether or not to display interpreter results without alignment formatting (useful for debugging).
+	" g:codi#sync is whether or not to force synchronous execution. No reason to touch this unless you want to compare async to sync.
+	" Autocommands
+	" CodiEnterPre, CodiEnterPost: When a Codi pane enters.
+	" CodiUpdatePre, CodiUpdatePost: When a Codi pane updates.
+	" CodiLeavePre, CodiLeavePost: When a Codi pane leaves.
+69e3b2d9a0a49f4c84a5479dd8bc7fff|file:///home/nicholas/.config/nvim/plugins.vim|68|17|v|vim
+	editorconfig.
+beb299f77e580894b9ddd6a5318101b3|file:///home/nicholas/.config/nvim/plugins.vim|69|1|V|vim
+	" load project .editorconfig settings
+4d01ac5555fc3984adc86dc18459c8b9|file:///home/nicholas/.config/nvim/plugins/feline-post.vim|77|31|v|lua
+	oceanblue
+09f31ceabe783fd3f150c68a9c9a4706|file:///home/nicholas/.config/nvim/plugins/feline-post.vim|79|17|v|lua
+	slant_right_2
+73d8ec0e3cc097bb0c5a44346919d7ae|file:///home/nicholas/projects/infra/provision/roles/dotfiles/requirements.yml|5|1|V|yaml.ansible
+	    compe#confirm('
+	    ')compe#confirm('
+	    ')compe#confirm('
+	    ')
+385336baccb369b8f2f5988aff0abc47|file:///home/nicholas/.config/nvim/plugins/nvim-lspconfig.vim|1|1|V|lua
+	set completeopt=menuone,noselect
+	
+	inoremap <silent><expr> <C-Space> compe#complete()
+	inoremap <silent><expr> <CR>      compe#confirm('<CR>')
+	inoremap <silent><expr> <C-e>     compe#close('<C-e>')
+	inoremap <silent><expr> <C-f>     compe#scroll({ 'delta': +4 })
+	inoremap <silent><expr> <C-d>     compe#scroll({ 'delta': -4 })
+61bb28f85e512302e4070a8f7e691971|file:///home/nicholas/.config/nvim/plugins.vim|28|1|V|vim
+	Plug 'neovim/nvim-lspconfig'
+	Plug 'kabouzeid/nvim-lspinstall'
+	Plug 'nvim-lua/completion-nvim'
+	Plug 'nvim-lua/lsp-status.nvim'
+	Plug 'nvim-lua/diagnostic-nvim'
+43ab1428eea436b5bf6d19ff2f5f59be|file:///home/nicholas/.config/nvim/plugins.vim|25|1|V|vim
+	source $plugins/vitality.vim           " cursor enhancement
+0d8e19ef9043247e5cb7c79044a2bfa7|file:///home/nicholas/.config/nvim/plugins.vim|26|17|v|vim
+	vitality
+885e888a0cf8bc25d701e0145cbe0910|file:///home/nicholas/.config/nvim/plugins.vim|26|48|v|vim
+	cursor enhancement
+dfdc2ab3af681d82ee2b6ad481d76898|file:///home/nicholas/.config/nvim/plugins.vim|396|1|V|vim
+	" source $plugins/galaxyline-post-1.vim
+255dd5affa192357a9af99aa257c1c7c|file:///home/nicholas/.config/nvim/plugins/nvim-lspconfig.vim|28|1|V|lua
+	  local function setup_servers()
+	    require'lspinstall'.setup()
+	    local servers = require'lspinstall'.installed_servers()
+	    for _, server in pairs(servers) do
+	      require'lspconfig'[server].setup{}
+	    end
+	  end
+	
+	  setup_servers()
+	
+	  --bash, cpp, css, dockerfile, go, graphql, html, json, lua, php, python, ruby,
+	  --rust, tailwindcss, terraform, tsserver, typescript, vim, vue
+	  --LspInstall typescript
+	  require'lspinstall'.post_install_hook = function ()
+	    setup_servers() -- reload installed servers
+	    vim.cmd("bufdo e") -- this triggers the FileType autocmd that starts the server
+	  end
+	
+964949ce3c02cd9fe83cb80f3c15b580|file:///home/nicholas/.config/nvim/settings.vim|20|37|V|vim
+	set completeopt=menuone,preview		 	 " omnicomplete inserts longest common text of all matches instead of 1st match
+4a2902dcdb6db0cd9a57dd2d0fd5e0a7|file:///home/nicholas/.config/nvim/settings.vim|103|1|v|vim
+	set completeopt=menuone,preview		 	 
+0ad9f3a05f142a3ee9cb1f89a1d8109d|file:///home/nicholas/.config/nvim/settings.vim|103|1|V|vim
+	" omnicomplete inserts longest common text of all matches instead of 1st match
+c329ba2fa6aae7dc8ee68287393a9d1a|file:///home/nicholas/.config/nvim/settings.vim|99|1|V|vim
+	set pumheight=20                     " menu hegiht
+2b43cd1196489e2bbc598c2785035277|file:///home/nicholas/.config/nvim/plugins/nvim-lspconfig.vim|98|3|V|lua
+	  -- npm install -g typescript typescript-language-server
+	  require(‘lspconfig’).tsserver.setup{}
+	
+	  -- npm i -g pyright
+	  require('lspconfig').pyright.setup{}
+a3bed2d67e6c9ced13a085aee2b62dfe|file:///home/nicholas/.config/nvim/plugins/nvim-lspconfig.vim|88|14|V|lua
+	      require(‘lspconfig’).tsserver.setup{}
+84fba7a8a52c77486212f7e417ec1599|file:///home/nicholas/.config/nvim/plugins/nvim-lspconfig.vim|89|14|V|lua
+	      require('lspconfig').pyright.setup{}
+2510566cb0874c474ea8943df25c3925|file:///home/nicholas/.config/nvim/plugins/nvim-lspconfig.vim|87|7|V|lua
+	      -- npm install -g typescript typescript-language-server
+	      -- npm i -g pyright
+8a84dec6d7d892713ee953439557551f|file:///home/nicholas/.config/nvim/plugins/nvim-lspconfig.vim|79|1|V|lua
+	      if server == "sourcekit" then
+	        config.filetypes = {"swift", "objective-c", "objective-cpp"}; -- we don't want c and cpp!
+	      end
+d9d36df0582172a66ac33e3c68f4e3e7|file:///home/nicholas/.config/nvim/plugins/nvim-lspconfig.vim|70|1|V|lua
+	    table.insert(servers, "sourcekit")
+f97e2455df73bbbf73560ef090b61f00|file:///home/nicholas/.config/nvim/plugins.vim|147|1|V|vim
+	" source $plugins/coc.vim            " full featured intellisense code completion
+e53307bea8e2fa20fb64904f9714b896|file:///home/nicholas/.config/nvim/plugins.vim|26|22|V|vim
+	source $plugins/nvim-lspconfig.vim   " language server
+ca846d39df3618a8d712e3016acec3ff|file:///home/nicholas/.shell/aliases.colorize.sh|53|1|V|sh
+	  netstat
+	  nmap
+ae795227dd3403923184c7750f8b030c|file:///home/nicholas/.shell/aliases.colorize.sh|68|1|V|sh
+	  tcpdump
+	  traceroute
+55f3cfed6a1cdbf729ebd26522be8f64|file:///home/nicholas/.shell/aliases.colorize.sh|68|1|V|sh
+	  tcpdump
+a23624e1412c1f47b6210a79d82b572e|file:///home/nicholas/.shell/aliases.colorize.sh|47|3|V|sh
+	  lsof
+4e47fb76189d0d0d9db9bec351289860|file:///home/nicholas/.shell/aliases.colorize.sh|66|3|V|sh
+	  systemctl
+dace33ce1171b66ec6360e893d4d317a|file:///home/nicholas/.shell/aliases.colorize.sh|48|3|V|sh
+	  make
+fb7484c82ad83d6ace6586e87f20b76c|file:///home/nicholas/.shell/aliases.colorize.sh|37|3|V|sh
+	  journalctl
+41cd62cc5bb60967b92352aba364b345|file:///home/nicholas/.shell/aliases.colorize.sh|47|3|V|sh
+	  mount
+bfa1efdef6cb9f3d7d67eb3fb4d681b2|file:///home/nicholas/.shell/aliases.colorize.sh|62|1|V|sh
+	  sysctl
+d4cdb4e7c8fe1b31aa577062f9489e6c|file:///home/linuxbrew/.linuxbrew/etc/grc.zsh|86|1|V|zsh
+	for cmd in $cmds ; do
+	  if (( $+commands[$cmd] )) ; then
+	    $cmd() {
+	      grc --colour=auto ${commands[$0]} "$@"
+	    }
+	  fi
+	done
+4e1f40468d1ed3724ef7f448c9733334|file:///home/nicholas/.shell/aliases.colorize.sh|92|1|V|sh
+	# TODO: make quick undo color aliases
+	# loop through known commands plus all those with named conf files
+dd523c03f1e89e75a3ef6f7c37f875a5|file:///home/nicholas/.shell/aliases.colorize.sh|94|1|V|sh
+	for cmd in "${grc_alias_cmds[@]}"; do
+9002ec1e5d8dcb85ddfee7eec071ac74|file:///home/nicholas/.shell/aliases.colorize.sh|86|3|V|sh
+	for cmd in $cmds ; do
+b60d35f8b9e296184d8cc7ca8a81afd2|file:///home/nicholas/.shell/aliases.colorize.sh|96|3|v|sh
+	type "$cmd" >/dev/null 2>&1 &&
+4d1e4f3846cbbe225aea8daef7a55ede|file:///home/nicholas/.shell/aliases.colorize.sh|87|5|V|sh
+	  if (( $+commands[$cmd] )) ; then
+c63b2c277a32379bc5a6f064e4e24dc3|file:///home/nicholas/.shell/aliases.colorize.sh|91|4|V|sh
+	  fi
+5f6bc08c46cee6f21bfcdd08aff6e8aa|file:///home/nicholas/.shell/aliases.colorize.sh|90|27|v|sh
+	commands
+8c6829e2809fe044eaae31d1729580ea|file:///home/nicholas/.shell/aliases.colorize.zsh|94|27|V|zsh
+	    setopt COMPLETE_ALIASES
+3b0684a3718869a7a59aa9df7b1ef51d|file:///home/nicholas/.shell/aliases.colorize.sh|94|1|V|sh
+	setopt COMPLETE_ALIASES
+04d989a28e423522419ae11faa30a9f8|file:///home/nicholas/.shell/aliases.colorize.sh|86|17|V|sh
+	for cmd in "${grc_cmds[@]}"; do
+	  type "$cmd" >/dev/null 2>&1 &&
+	    function $cmd
+	    {
+	      grc --colour=auto ${grc_cmds[$0]} "$@"
+	    }
+	done
+c9cc3d1692b09737af427e7cb55542b4|file:///home/nicholas/.shell/aliases.colorize.sh|5|1|v|sh
+	grc_cmds=(
+	  as
+	  ant
+	  blkid
+	  cc
+	  configure
+	  curl
+	  cvs
+	  df
+	  diff
+	  dig
+	  dnf
+	  docker
+	  docker-compose
+	  docker-machine
+	  du
+	  env
+	  fdisk
+	  findmnt
+	  free
+	  g++
+	  gas
+	  gcc
+	  getfacl
+	  getsebool
+	  gmake
+	  id
+	  ifconfig
+	  iostat
+	  ip
+	  iptables
+	  iwconfig
+	  kubectl
+	  last
+	  ldap
+	  lolcat
+	  ld
+	  ls
+	  lsattr
+	  lsblk
+	  lsmod
+	  lspci
+	  mtr
+	  mvn
+	  ntpdate
+	  php
+	  ping
+	  ping6
+	  proftpd
+	  ps
+	  sar
+	  semanage
+	  sensors
+	  showmount
+	  sockstat
+	  ss
+	  stat
+	  traceroute
+	  traceroute6
+	  tune2fs
+	  ulimit
+	  uptime
+	  vmstat
+	  wdiff
+	  whois
+	  whois
+	)
+d052c05dd8fac97fc9b4e9bd0aec8efa|file:///home/nicholas/.shell/aliases.colorize.zsh|11|6|v|zsh
+	(
+	  as
+	  ant
+	  blkid
+	  cc
+	  configure
+	  curl
+	  cvs
+	  df
+	  diff
+	  dig
+	  dnf
+	  # docker
+	  docker-compose
+	  docker-machine
+	  du
+	  env
+	  fdisk
+	  findmnt
+	  free
+	  g++
+	  gas
+	  gcc
+	  getfacl
+	  getsebool
+	  gmake
+	  id
+	  ifconfig
+	  iostat
+	  ip
+	  iptables
+	  iwconfig
+	  journalctl
+	  kubectl
+	  last
+	  ldap
+	  lolcat
+	  ld
+	  ls
+	  lsattr
+	  lsblk
+	  lsmod
+	  lsof
+	  lspci
+	  make
+	  mount
+	  mtr
+	  mvn
+	  netstat
+	  nmap
+	  ntpdate
+	  php
+	  ping
+	  ping6
+	  proftpd
+	  ps
+	  sar
+	  semanage
+	  sensors
+	  showmount
+	  sockstat
+	  ss
+	  stat
+	  sysctl
+	  systemctl
+	  tcpdump
+	  traceroute
+	  traceroute6
+	  tune2fs
+	  ulimit
+	  uptime
+	  vmstat
+	  wdiff
+	  whois
+	)
+7fbaa230d05ddb49eeff71f0aa236bf8|file:///home/nicholas/.shell/aliases.colorize.zsh|11|6|v|zsh
+	grc_cmds=(
+d8616c667d7cc60fa87cc6f5d4352ab5|untitled:8|122|1|V|
+	jellybeans
+	jellybeans
+	jellybeans
+	jellybeans
+	jellybeans
+	jellybeans
+	jellybeans
+	jellybeans
+	jellybeans
+	jellybeans
+	jellybeans
+	jellybeans
+	jellybeans
+	jellybeans
+	jellybeans
+	jellybeans
+	jellybeans
+	jellybeans
+	jellybeans
+	jellybeans
+	jellybeans
+	jellybeans
+	jellybeans
+	jellybeans
+	jellybeans
+	jellybeans
+	jellybeans
+	jellybeans
+	jellybeans
+	jellybeans
+	jellybeans
+	jellybeans
+	jellybeans
+	jellybeans
+	jellybeans
+	jellybeans
+	jellybeans
+	jellybeans
+36c10889b9414dfe16950a8f4e77052b|untitled:8|1|1|V|
+	
+	jellybeans
+	jellybeans
+	jellybeans
+	jellybeans
+	jellybeans
+	jellybeans
+	jellybeans
+	jellybeans
+	jellybeans
+	jellybeans
+	jellybeans
+	jellybeans
+e07adc0f7e06b49322e0a2a26c4a37a9|untitled:8|4633|1|V|
+	jellybeans
+	jellybeans
+	jellybeans
+	jellybeans
+	jellybeans
+	jellybeans
+	jellybeans
+	jellybeans
+	jellybeans
+	jellybeans-- VISUAL LINE --
+	jellybeans
+	jellybeans
+	jellybeans
+	jellybeans
+	jellybeans
+	jellybeans
+	jellybeans
+	jellybeans
+	jellybeans
+	jellybeans
+	jellybeans
+	jellybeans
+	jellybeans
+	jellybeans
+	jellybeans
+	jellybeans
+	jellybeans
+	jellybeans
+	jellybeans
+	jellybeans
+	jellybeans
+	jellybeans
+	jellybeans
+	jellybeans
+	jellybeans
+	jellybeans
+	107 fewer lines
+19d87c3d2f9a2f787faf364cef5ebaa0|untitled:8|1|1|V|
+	
+	jellybeans
+	jellybeans
+	jellybeans
+	jellybeans
+	jellybeans
+	jellybeans
+	jellybeans
+	jellybeans
+	jellybeans
+	jellybeans
+	jellybeans
+	jellybeans
+	jellybeans
+	jellybeans
+	jellybeans
+	jellybeans
+	jellybeans
+	jellybeans
+	jellybeans
+	jellybeans
+	jellybeans
+	jellybeans
+	jellybeans
+	jellybeans
+	jellybeans
+	jellybeans
+	jellybeans
+	jellybeans
+	jellybeans
+	jellybeans
+	jellybeans
+	jellybeans
+	jellybeans
+	jellybeans
+	jellybeans
+	jellybeans
+	jellybeans
+	jellybeans
+	jellybeans
+	jellybeans
+	jellybeans
+	jellybeans
+	jellybeans
+	jellybeans
+	jellybeans
+	jellybeans
+	jellybeans
+	jellybeans
+	jellybeans
+	jellybeans
+	jellybeans
+	jellybeans
+	jellybeans
+	jellybeans
+	jellybeans
+	jellybeans
+	jellybeans
+	jellybeans
+	jellybeans
+	jellybeans
+37507888b21eedb2a31533501e332b34|untitled:8|1|1|v|
+	
+	jellybeans
+	jellybeans
+	jellybeans
+	jellybeans
+	jellybeans
+	jellybeans
+	jellybeans
+	jellybeans
+	jellybeans
+	jellybeans
+	jellybeans
+	jellybeans
+	jellybeans
+	jellybeans
+	jellybeans
+	jellybeans
+	jellybeans
+	jellybeans
+	jellybeans
+	jellybeans
+	
+	
+e536ea4a6fb0ce012e52658a84aa883f|untitled:8|2172|1|V|
+	jellybeans
+	jellybeans
+	jellybeans
+	jellybeans
+	jellybeans
+	jellybeans
+	jellybeans
+	jellybeans
+	jellybeans
+	jellybeans
+	jellybeans
+	jellybeans
+	jellybeans
+	jellybeans
+	jellybeans
+	jellybeans
+	jellybeans
+	jellybeans
+	jellybeans
+	jellybeans
+	jellybeans
+	jellybeans
+b3dfbd42b3326418de86f34cc2228ca2|file:///home/nicholas/.config/nvim/tests/perf/perf.sh|13|35|V|sh
+	I'm a little teapot short and stout
+2392fdc316a78114fec3caca7ad0d6bc|file:///home/nicholas/.config/nvim/tests/perf/perf.sh|13|1|V|sh
+	jellybeans
+	jellybeans
+	jellybeans
+	jellybeans-- INSERT --
+	jellybeans
+	jellybeans
+	  1 %a + "perf.sh"                      line 12
+	  2u h   "[No Name]"                    line 0
+	jellybeans
+	jellybeans
+	jellybeans
+	jellybeans
+	jellybeans
+	jellybeans
+	jellybeans
+	jellybeans
+	jellybeans
+	jellybeans
+	jellybeans
+	jellybeans
+	jellybeans
+	jellybeans
+	jellybeans
+	jellybeans
+	jellybeans
+	jellybeans
+	jellybeans
+	jellybeans
+	jellybeans
+	jellybeans
+	jellybeans
+	jellybeans
+	jellybeans
+	jellybeans
+	jellybeans
+	jellybeans
+	jellybeans
+	jellybeans
+	jellybeans
+	jellybeans
+	jellybeans
+	jellybeans
+	
+	jellybeans
+	jellybeans
+	jellybeans
+	jellybeans
+	jellybeans
+	jellybeans
+	jellybeans
+	jellybeans
+	jellybeans
+	jellybeans
+	jellybeans
+	jellybeans
+	jellybeans
+	jellybeans
+	
+	"perf.sh" 
+	"perf.sh" 11L, 320C [w]
+	  1 %a   "perf.sh"                      line 11
+	  2u h   "[No Name]"                    line 0
+	  1 %a   "perf.sh"                      line 11
+	  2u h   "[No Name]"                    line 0
+	"perf.sh" 11L, 320C [w]
+	  1 %a   "perf.sh"                      line 11
+	  2u h   "[No Name]"                    line 0
+	jellybeans
+	jellybeans
+	jellybeans
+	jellybeans
+	jellybeans
+	jellybeans
+	jellybeans
+	jellybeans
+	jellybeans
+	jellybeans
+cd9f2a0d1ab4409e3691c763b5d05982|file:///home/nicholas/.config/nvim/tests/perf/perf.sh|7|1|V|sh
+	# :noautocmd qall!
+4cec8be6ff1a2d34e148bfa21edbe85b|file:///home/nicholas/.config/nvim/tests/perf/perf.sh|27|1|V|sh
+	# alacritty: 146 - 282, termite: 277 - 288
+5a4255d800af5a106af4aea96817531c|file:///home/nicholas/.config/nvim/tests/perf/perf.sh|31|3|v|sh
+	alacritty
+41e2d58ec33eb8dacd6caf820bb48da9|file:///home/nicholas/.config/nvim/tests/perf/perf.sh|31|15|v|sh
+	termite: 
+0cf31b2c283ce3431794586df7b0996d|file:///home/nicholas/.config/nvim/tests/perf/perf.sh|30|12|v|sh
+	    
+f9fbd892aa584fabed61aa92554f3602|file:///home/nicholas/.config/nvim/tests/perf/perf.sh|30|14|v|sh
+	 alacritty
+99dd01319f75f929b689c635a2b77f16|file:///home/nicholas/.config/nvim/tests/perf/perf.sh|5|16|V|sh
+	# profile func *
+a1dae78bc62b1c82129edb5faa778ed8|file:///home/nicholas/.config/nvim/tests/perf/perf.sh|17|54|v|sh
+	kill 
+dbcbc0ac529e1baddd510436eef6fe7a|file:///home/nicholas/.config/nvim/tests/perf/perf.sh|17|54|v|sh
+	one 
+0921b37c0e91a6f4d141bd700702bf80|file:///home/nicholas/.config/nvim/tests/perf/files/parameter-expansions.md|1|1|V|vimwiki
+	---
+	title: Bash scripting parameter expansions
+	category: CLI
+	---
+	
+	Parameter expansions
+	--------------------
+	
+	### Basics
+	
+	```sh
+	name="John"
+	echo ${name}
+	echo ${name/J/j}    #=> "john" (substitution)
+	echo ${name:0:2}    #=> "Jo" (slicing)
+	echo ${name::2}     #=> "Jo" (slicing)
+	echo ${name::-1}    #=> "Joh" (slicing)
+	echo ${name:(-1)}   #=> "n" (slicing from right)
+	echo ${name:(-2):1} #=> "h" (slicing from right)
+	echo ${food:-Cake}  #=> $food or "Cake"
+	```
+	
+	```sh
+	length=2
+	echo ${name:0:length}  #=> "Jo"
+	```
+	
+	
+	```sh
+	STR="/path/to/foo.cpp"
+	echo ${STR%.cpp}    # /path/to/foo
+	echo ${STR%.cpp}.o  # /path/to/foo.o
+	echo ${STR%/*}      # /path/to
+	
+	echo ${STR##*.}     # cpp (extension)
+	echo ${STR##*/}     # foo.cpp (basepath)
+	
+	echo ${STR#*/}      # path/to/foo.cpp
+	echo ${STR##*/}     # foo.cpp
+	
+	echo ${STR/foo/bar} # /path/to/bar.cpp
+	```
+	
+	```sh
+	STR="Hello world"
+	echo ${STR:6:5}   # "world"
+	echo ${STR: -5:5}  # "world"
+	```
+	
+	```sh
+	SRC="/path/to/foo.cpp"
+	BASE=${SRC##*/}   #=> "foo.cpp" (basepath)
+	DIR=${SRC%$BASE}  #=> "/path/to/" (dirpath)
+	```
+	
+	### Substitution
+	
+	| Code              | Description         |
+	| ----------------- | ------------------- |
+	| `${FOO%suffix}`   | Remove suffix       |
+	| `${FOO#prefix}`   | Remove prefix       |
+	| ---               | ---                 |
+	| `${FOO%%suffix}`  | Remove long suffix  |
+	| `${FOO##prefix}`  | Remove long prefix  |
+	| ---               | ---                 |
+	| `${FOO/from/to}`  | Replace first match |
+	| `${FOO//from/to}` | Replace all         |
+	| ---               | ---                 |
+	| `${FOO/%from/to}` | Replace suffix      |
+	| `${FOO/#from/to}` | Replace prefix      |
+	
+	### Comments
+	
+	```sh
+	# Single line comment
+	```
+	
+	```sh
+	: '
+	This is a
+	multi line
+	comment
+	'
+	```
+	
+	### Substrings
+	
+	| Expression      | Description                    |
+	| --------------- | ------------------------------ |
+	| `${FOO:0:3}`    | Substring _(position, length)_ |
+	| `${FOO:(-3):3}` | Substring from the right       |
+	
+	### Length
+	
+	| Expression | Description      |
+	| ---------- | ---------------- |
+	| `${#FOO}`  | Length of `$FOO` |
+	
+	### Manipulation
+	
+	```sh
+	STR="HELLO WORLD!"
+	echo ${STR,}   #=> "hELLO WORLD!" (lowercase 1st letter)
+	echo ${STR,,}  #=> "hello world!" (all lowercase)
+	
+	STR="hello world!"
+	echo ${STR^}   #=> "Hello world!" (uppercase 1st letter)
+	echo ${STR^^}  #=> "HELLO WORLD!" (all uppercase)
+	```
+	
+	### Default values
+	
+	| Expression        | Description                                              |
+	| ----------------- | -------------------------------------------------------- |
+	| `${FOO:-val}`     | `$FOO`, or `val` if unset (or null)                      |
+	| `${FOO:=val}`     | Set `$FOO` to `val` if unset (or null)                   |
+	| `${FOO:+val}`     | `val` if `$FOO` is set (and not null)                    |
+	| `${FOO:?message}` | Show error message and exit if `$FOO` is unset (or null) |
+	
+	Omitting the `:` removes the (non)nullity checks, e.g. `${FOO-val}` expands to `val` if unset otherwise `$FOO`.
+28c4b5b8de0b658e3136af37c052135f|file:///home/nicholas/.config/nvim/tests/perf/files/parameter-expansions.md|1|1|V|vimwiki
+	---
+	title: Bash scripting parameter expansions
+	category: CLI
+	---
+	
+	Parameter expansions
+	--------------------
+	
+	### Basics
+	
+	```sh
+	name="John"
+	echo ${name}
+	echo ${name/J/j}    #=> "john" (substitution)
+	echo ${name:0:2}    #=> "Jo" (slicing)
+	echo ${name::2}     #=> "Jo" (slicing)
+	echo ${name::-1}    #=> "Joh" (slicing)
+	echo ${name:(-1)}   #=> "n" (slicing from right)
+	echo ${name:(-2):1} #=> "h" (slicing from right)
+	echo ${food:-Cake}  #=> $food or "Cake"
+	```
+	
+	```sh
+	length=2
+	echo ${name:0:length}  #=> "Jo"
+	```
+	
+	
+	```sh
+	STR="/path/to/foo.cpp"
+	echo ${STR%.cpp}    # /path/to/foo
+	echo ${STR%.cpp}.o  # /path/to/foo.o
+	echo ${STR%/*}      # /path/to
+	
+	echo ${STR##*.}     # cpp (extension)
+	echo ${STR##*/}     # foo.cpp (basepath)
+	
+	echo ${STR#*/}      # path/to/foo.cpp
+	echo ${STR##*/}     # foo.cpp
+	
+	echo ${STR/foo/bar} # /path/to/bar.cpp
+	```
+	
+	```sh
+	STR="Hello world"
+	echo ${STR:6:5}   # "world"
+	echo ${STR: -5:5}  # "world"
+	```
+	
+	```sh
+	SRC="/path/to/foo.cpp"
+	BASE=${SRC##*/}   #=> "foo.cpp" (basepath)
+	DIR=${SRC%$BASE}  #=> "/path/to/" (dirpath)
+	```
+	
+	### Substitution
+	
+	| Code              | Description         |
+	| ----------------- | ------------------- |
+	| `${FOO%suffix}`   | Remove suffix       |
+	| `${FOO#prefix}`   | Remove prefix       |
+	| ---               | ---                 |
+	| `${FOO%%suffix}`  | Remove long suffix  |
+	| `${FOO##prefix}`  | Remove long prefix  |
+	| ---               | ---                 |
+	| `${FOO/from/to}`  | Replace first match |
+	| `${FOO//from/to}` | Replace all         |
+	| ---               | ---                 |
+	| `${FOO/%from/to}` | Replace suffix      |
+	| `${FOO/#from/to}` | Replace prefix      |
+	
+	### Comments
+	
+	```sh
+	# Single line comment
+	```
+	
+	```sh
+	: '
+	This is a
+	multi line
+	comment
+	'
+	```
+	
+	### Substrings
+	
+	| Expression      | Description                    |
+	| --------------- | ------------------------------ |
+	| `${FOO:0:3}`    | Substring _(position, length)_ |
+	| `${FOO:(-3):3}` | Substring from the right       |
+	
+	### Length
+	
+	| Expression | Description      |
+	| ---------- | ---------------- |
+	| `${#FOO}`  | Length of `$FOO` |
+	
+	### Manipulation
+	
+	```sh
+	STR="HELLO WORLD!"
+	echo ${STR,}   #=> "hELLO WORLD!" (lowercase 1st letter)
+	echo ${STR,,}  #=> "hello world!" (all lowercase)
+	
+	STR="hello world!"
+	echo ${STR^}   #=> "Hello world!" (uppercase 1st letter)
+	echo ${STR^^}  #=> "HELLO WORLD!" (all uppercase)
+	```
+	
+	### Default values
+	
+	| Expression        | Description                                              |
+	| ----------------- | -------------------------------------------------------- |
+	| `${FOO:-val}`     | `$FOO`, or `val` if unset (or null)                      |
+	| `${FOO:=val}`     | Set `$FOO` to `val` if unset (or null)                   |
+	| `${FOO:+val}`     | `val` if `$FOO` is set (and not null)                    |
+	| `${FOO:?message}` | Show error message and exit if `$FOO` is unset (or null) |
+	
+	Omitting the `:` removes the (non)nullity checks, e.g. `${FOO-val}` expands to `val` if unset otherwise `$FOO`.
+	
+	---
+	title: Bash scripting parameter expansions
+	category: CLI
+	---
+	
+	Parameter expansions
+	--------------------
+	
+	### Basics
+	
+	```sh
+	name="John"
+	echo ${name}
+	echo ${name/J/j}    #=> "john" (substitution)
+	echo ${name:0:2}    #=> "Jo" (slicing)
+	echo ${name::2}     #=> "Jo" (slicing)
+	echo ${name::-1}    #=> "Joh" (slicing)
+	echo ${name:(-1)}   #=> "n" (slicing from right)
+	echo ${name:(-2):1} #=> "h" (slicing from right)
+	echo ${food:-Cake}  #=> $food or "Cake"
+	```
+	
+	```sh
+	length=2
+	echo ${name:0:length}  #=> "Jo"
+	```
+	
+	
+	```sh
+	STR="/path/to/foo.cpp"
+	echo ${STR%.cpp}    # /path/to/foo
+	echo ${STR%.cpp}.o  # /path/to/foo.o
+	echo ${STR%/*}      # /path/to
+	
+	echo ${STR##*.}     # cpp (extension)
+	echo ${STR##*/}     # foo.cpp (basepath)
+	
+	echo ${STR#*/}      # path/to/foo.cpp
+	echo ${STR##*/}     # foo.cpp
+	
+	echo ${STR/foo/bar} # /path/to/bar.cpp
+	```
+	
+	```sh
+	STR="Hello world"
+	echo ${STR:6:5}   # "world"
+	echo ${STR: -5:5}  # "world"
+	```
+	
+	```sh
+	SRC="/path/to/foo.cpp"
+	BASE=${SRC##*/}   #=> "foo.cpp" (basepath)
+	DIR=${SRC%$BASE}  #=> "/path/to/" (dirpath)
+	```
+	
+	### Substitution
+	
+	| Code              | Description         |
+	| ----------------- | ------------------- |
+	| `${FOO%suffix}`   | Remove suffix       |
+	| `${FOO#prefix}`   | Remove prefix       |
+	| ---               | ---                 |
+	| `${FOO%%suffix}`  | Remove long suffix  |
+	| `${FOO##prefix}`  | Remove long prefix  |
+	| ---               | ---                 |
+	| `${FOO/from/to}`  | Replace first match |
+	| `${FOO//from/to}` | Replace all         |
+	| ---               | ---                 |
+	| `${FOO/%from/to}` | Replace suffix      |
+	| `${FOO/#from/to}` | Replace prefix      |
+	
+	### Comments
+	
+	```sh
+	# Single line comment
+	```
+	
+	```sh
+	: '
+	This is a
+	multi line
+	comment
+	'
+	```
+	
+	### Substrings
+	
+	| Expression      | Description                    |
+	| --------------- | ------------------------------ |
+	| `${FOO:0:3}`    | Substring _(position, length)_ |
+	| `${FOO:(-3):3}` | Substring from the right       |
+	
+	### Length
+	
+	| Expression | Description      |
+	| ---------- | ---------------- |
+	| `${#FOO}`  | Length of `$FOO` |
+	
+	### Manipulation
+	
+	```sh
+	STR="HELLO WORLD!"
+	echo ${STR,}   #=> "hELLO WORLD!" (lowercase 1st letter)
+	echo ${STR,,}  #=> "hello world!" (all lowercase)
+	
+	STR="hello world!"
+	echo ${STR^}   #=> "Hello world!" (uppercase 1st letter)
+	echo ${STR^^}  #=> "HELLO WORLD!" (all uppercase)
+	```
+	
+	### Default values
+	
+	| Expression        | Description                                              |
+	| ----------------- | -------------------------------------------------------- |
+	| `${FOO:-val}`     | `$FOO`, or `val` if unset (or null)                      |
+	| `${FOO:=val}`     | Set `$FOO` to `val` if unset (or null)                   |
+	| `${FOO:+val}`     | `val` if `$FOO` is set (and not null)                    |
+	| `${FOO:?message}` | Show error message and exit if `$FOO` is unset (or null) |
+	
+	Omitting the `:` removes the (non)nullity checks, e.g. `${FOO-val}` expands to `val` if unset otherwise `$FOO`.
+	---
+	title: Bash scripting parameter expansions
+	category: CLI
+	---
+	
+	Parameter expansions
+	--------------------
+	
+	### Basics
+	
+	```sh
+	name="John"
+	echo ${name}
+	echo ${name/J/j}    #=> "john" (substitution)
+	echo ${name:0:2}    #=> "Jo" (slicing)
+	echo ${name::2}     #=> "Jo" (slicing)
+	echo ${name::-1}    #=> "Joh" (slicing)
+	echo ${name:(-1)}   #=> "n" (slicing from right)
+	echo ${name:(-2):1} #=> "h" (slicing from right)
+	echo ${food:-Cake}  #=> $food or "Cake"
+	```
+	
+	```sh
+	length=2
+	echo ${name:0:length}  #=> "Jo"
+	```
+	
+	
+	```sh
+	STR="/path/to/foo.cpp"
+	echo ${STR%.cpp}    # /path/to/foo
+	echo ${STR%.cpp}.o  # /path/to/foo.o
+	echo ${STR%/*}      # /path/to
+	
+	echo ${STR##*.}     # cpp (extension)
+	echo ${STR##*/}     # foo.cpp (basepath)
+	
+	echo ${STR#*/}      # path/to/foo.cpp
+	echo ${STR##*/}     # foo.cpp
+	
+	echo ${STR/foo/bar} # /path/to/bar.cpp
+	```
+	
+	```sh
+	STR="Hello world"
+	echo ${STR:6:5}   # "world"
+	echo ${STR: -5:5}  # "world"
+	```
+	
+	```sh
+	SRC="/path/to/foo.cpp"
+	BASE=${SRC##*/}   #=> "foo.cpp" (basepath)
+	DIR=${SRC%$BASE}  #=> "/path/to/" (dirpath)
+	```
+	
+	### Substitution
+	
+	| Code              | Description         |
+	| ----------------- | ------------------- |
+	| `${FOO%suffix}`   | Remove suffix       |
+	| `${FOO#prefix}`   | Remove prefix       |
+	| ---               | ---                 |
+	| `${FOO%%suffix}`  | Remove long suffix  |
+	| `${FOO##prefix}`  | Remove long prefix  |
+	| ---               | ---                 |
+	| `${FOO/from/to}`  | Replace first match |
+	| `${FOO//from/to}` | Replace all         |
+	| ---               | ---                 |
+	| `${FOO/%from/to}` | Replace suffix      |
+	| `${FOO/#from/to}` | Replace prefix      |
+	
+	### Comments
+	
+	```sh
+	# Single line comment
+	```
+	
+	```sh
+	: '
+	This is a
+	multi line
+	comment
+	'
+	```
+	
+	### Substrings
+	
+	| Expression      | Description                    |
+	| --------------- | ------------------------------ |
+	| `${FOO:0:3}`    | Substring _(position, length)_ |
+	| `${FOO:(-3):3}` | Substring from the right       |
+	
+	### Length
+	
+	| Expression | Description      |
+	| ---------- | ---------------- |
+	| `${#FOO}`  | Length of `$FOO` |
+	
+	### Manipulation
+	
+	```sh
+	STR="HELLO WORLD!"
+	echo ${STR,}   #=> "hELLO WORLD!" (lowercase 1st letter)
+	echo ${STR,,}  #=> "hello world!" (all lowercase)
+	
+	STR="hello world!"
+	echo ${STR^}   #=> "Hello world!" (uppercase 1st letter)
+	echo ${STR^^}  #=> "HELLO WORLD!" (all uppercase)
+	```
+	
+	### Default values
+	
+	| Expression        | Description                                              |
+	| ----------------- | -------------------------------------------------------- |
+	| `${FOO:-val}`     | `$FOO`, or `val` if unset (or null)                      |
+	| `${FOO:=val}`     | Set `$FOO` to `val` if unset (or null)                   |
+	| `${FOO:+val}`     | `val` if `$FOO` is set (and not null)                    |
+	| `${FOO:?message}` | Show error message and exit if `$FOO` is unset (or null) |
+	
+	Omitting the `:` removes the (non)nullity checks, e.g. `${FOO-val}` expands to `val` if unset otherwise `$FOO`.
+9adcb166bad34e210b4033503a770d31|file:///home/nicholas/.config/nvim/plugins/comments.vim|9|6|v|vim
+	https:
+06bcae6c0f349f5d9c4505a4cbea0cae|file:///home/nicholas/.config/nvim/plugins/comments.vim|9|6|v|vim
+	/github.com
+1d0072f218042dd49b5be623eac90ad9|file:///home/nicholas/.config/nvim/plugins/comments.vim|13|140|v|vim
+	. That's it.
+104d47aa93a42f12299e270fe2105f52|file:///home/nicholas/.config/nvim/plugins.vim|398|1|V|vim
+	s require('feline').reset_highlights()
+4d7f3c9eea248dfe3cb4ee06186b97ce|file:///home/nicholas/.config/nvim/tests/perf/files/parameter-expansions.md|11235|1|V|vimwiki
+	echo ${name}
+	echo ${name/J/j}    #=> "john" (substitution)
+c29cf4da9c11ad5f2e1cecef40662fbc|file:///home/nicholas/.config/nvim/plugins/tmux.vim|10|1|V|vim
+	" fix FocusGained and FocusLost problems with tmux
+	" Plug 'tmux-plugins/vim-tmux-focus-events'
+	
+	" hack to turn on paste mode automatically
+	" function! WrapForTmux(s)
+	"   if !exists('$TMUX')
+	"     return a:s
+	"   endif
+	
+	"   let tmux_start = "\<Esc>Ptmux;"
+	"   let tmux_end = "\<Esc>\\"
+	
+	"   return tmux_start . substitute(a:s, "\<Esc>", "\<Esc>\<Esc>", 'g') . tmux_end
+	" endfunction
+	
+	" let &t_SI .= WrapForTmux("\<Esc>[?2004h")
+	" let &t_EI .= WrapForTmux("\<Esc>[?2004l")
+72e4b6e34147ef274d495f186e99888d|file:///home/nicholas/.config/nvim/mappings.vim|300|30|v|vim
+	all CocActionA
+648f1868d540986af1b96a5a4ecfb354|file:///home/nicholas/.config/nvim/mappings.vim|300|30|V|vim
+	autocmd CursorHold * silent csync('highlight')
+	"
+2a3d0dd8772d1142bc11b3ac2be304b0|file:///home/nicholas/.config/nvim/mappings.vim|299|30|V|vim
+	" Highlight symbol under cursor on CursorHold
+251a330ad056659edf2a79ba21e831e7|file:///home/nicholas/.config/nvim/mappings.vim|299|30|V|vim
+	" " Remap for rename current word

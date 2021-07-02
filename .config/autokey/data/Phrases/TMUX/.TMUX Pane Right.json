@@ -4,7 +4,7 @@
     "modes": [
         3
     ],
-    "usageCount": 31,
+    "usageCount": 49,
     "prompt": false,
     "omitTrigger": false,
     "matchCase": false,
@@ -22,7 +22,7 @@
             "<ctrl>",
             "<shift>"
         ],
-        "hotKey": "h"
+        "hotKey": "l"
     },
     "filter": {
         "regex": "Alacritty.Alacritty",

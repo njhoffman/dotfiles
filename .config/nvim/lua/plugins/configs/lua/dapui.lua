@@ -4,73 +4,63 @@ local Plugin = {}
 -- require("dapui").close()
 -- require("dapui").toggle()
 
-Plugin.load = function()
-  require("dapui").setup {
-    icons = {
-      expanded = "|>",
-      collapsed = "λ"
+require("dapui").setup {
+  icons = { expanded = "|>", collapsed = "λ" },
+  mappings = {
+    -- Use a table to apply multiple mappings
+    expand = { "<CR>", "<2-LeftMouse>" },
+    open = "o",
+    remove = "d",
+    edit = "e",
+  },
+  sidebar = {
+    open_on_start = true,
+    elements = {
+      -- You can change the order of elements in the sidebar
+      "scopes",
+      "breakpoints",
+      "stacks",
+      "watches",
     },
-    mappings = {
-      -- Use a table to apply multiple mappings
-      expand = {"<CR>", "<2-LeftMouse>"},
-      open = "o",
-      remove = "d",
-      edit = "e"
-    },
-    sidebar = {
-      elements = {
-        -- You can change the order of elements in the sidebar
-        "scopes",
-        "breakpoints",
-        "stacks",
-        "watches"
-      },
-      width = 40,
-      position = "left" -- Can be "left" or "right"
-    },
-    tray = {
-      elements = {
-        "repl"
-      },
-      height = 10,
-      position = "bottom" -- Can be "bottom" or "top"
-    },
-    floating = {
-      max_height = nil, -- These can be integers or a float between 0 and 1.
-      max_width = nil -- Floats will be treated as percentage of your screen.
-    }
-  }
-  vim.fn.sign_define("DapBreakpoint", {text = "■", texthl = "DAPBreakpointSign", linehl = "", numhl = ""})
-  vim.fn.sign_define("DapStopped", {text = "🛑", texthl = "", linehl = "", numhl = ""})
-  -- vim.fn.sign_define("DapLogPoint", {text = "🛑", texthl = "", linehl = "", numhl = ""})
-  -- if !hlexists('DAPBreakpointSign')
-  --   highlight link DAPBreakpointSign error
-  -- endif
-  -- if !hlexists('DAPLogPointSign')
-  --   highlight link DAPLogPointSign todo
-  -- endif
+    width = 40,
+    position = "left", -- Can be "left" or "right"
+  },
+  tray = {
+    open_on_start = false,
+    elements = { "repl" },
+    height = 10,
+    position = "bottom", -- Can be "bottom" or "top"
+  },
+  floating = {
+    max_height = nil, -- These can be integers or a float between 0 and 1.
+    max_width = nil, -- Floats will be treated as percentage of your screen.
+  },
+}
 
-  -- " Completion
-  -- au FileType dap-repl lua require('dap.ext.autocompl').attach()
-  -- automatic completion trigger
-  -- au FileType dap-repl lua require('dap.ext.autocompl').attach()
-  -- vim.fn.sign_define('DapBreakpoint', {text='■', texthl='DAPBreakpointSign', linehl='', numhl='DAPBreakpointSign'})
-  -- vim.fn.sign_define('DapLogPoint', {text='◆', texthl='DAPLogPointSign', linehl='', numhl='DAPLogPointSign'})
-  -- vim.fn.sign_define('DapStopped', {text='→', texthl='', linehl='debugPC', numhl=''})
-end
+--     🛑   ■
+vim.fn.sign_define("DapBreakpoint", {
+  text = "■",
+  texthl = "DAPBreakpointSign",
+  linehl = "",
+  -- numhl = "DAPBreakpointSign",
+})
+vim.fn.sign_define("DapLogPoint", {
+  text = "◆",
+  texthl = "DAPLogPointSign",
+  linehl = "",
+  -- numhl = "DAPLogPointSign",
+})
+vim.fn.sign_define("DapStopped", {
+  text = "",
+  texthl = "DAPStopSign",
+  linehl = "DAPStopSignText",
+  numhl = "DAPStopSign",
+})
 
-Plugin.setup = function(use)
-  use {
-    "rcarriga/nvim-dap-ui",
-    requires = {
-      "theHamsta/nvim-dap-virtual-text",
-      "mfussenegger/nvim-dap"
-    },
-    config = Plugin.load
-  }
-end
-
-return Plugin
+-- " Completion
+-- au FileType dap-repl lua require('dap.ext.autocompl').attach()
+-- automatic completion trigger
+-- au FileType dap-repl lua require('dap.ext.autocompl').attach()
 
 -- require("dapui").float_element(<element ID>)
 -- require("dapui").eval(<expression>)

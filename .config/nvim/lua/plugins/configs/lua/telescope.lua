@@ -98,7 +98,7 @@ telescope.setup {
       "--vimgrep",
     },
     find_command = { "rg", "--ignore", "--hidden", "--files prompt_prefix=🔍" },
-    prompt_position = "top",
+    layout_config = { prompt_position = "top", width = 0.5 },
     prompt_prefix = "> ",
     selection_caret = "> ",
     -- prompt_prefix = "λ ",
@@ -107,7 +107,6 @@ telescope.setup {
     sorting_strategy = "ascending",
     layout_strategy = "flex", -- flex, horizontal, veritical, center
     scroll_strategy = "cycle",
-    width = 0.5,
     color_devicons = true,
     winblend = 15,
     horizontal = {

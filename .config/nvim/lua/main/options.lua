@@ -81,12 +81,12 @@ opt("conceallevel", 2, window)
 opt("cursorline", true, window)
 opt("number", true, window)
 opt("relativenumber", true, window)
-opt("signcolumn", "yes:1", window)
+opt("signcolumn", "auto:1", window)
 opt("wrap", false, window)
 
 -- buffer scope
 opt("expandtab", true, buffer)
-opt("modeline", true , buffer)
+opt("modeline", true, buffer)
 opt("shiftwidth", 2, buffer)
 opt("smartindent", false, buffer)
 opt("softtabstop", 0, buffer)
@@ -114,7 +114,6 @@ vim.cmd([[syntax on]])
 -- " Enable filetype plugins
 vim.cmd([[filetype plugin on]])
 vim.cmd([[filetype indent on]])
-
 
 -- vim.cmd('set iskeyword+=-') -- treat dash separated words as a word text object"
 -- vim.cmd('set shortmess+=c') -- Don't pass messages to |ins-completion-menu|.

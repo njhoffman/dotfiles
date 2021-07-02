@@ -1,33 +1,22 @@
-bars = {thick = " ▎", thin = " │"}
+bars = { thick = "▎", thin = "│" }
 signs_config_1 = {
-  add = {
-    hl = "GitSignsAddFaded",
-    text = bars.thin
-  },
-  change = {
-    hl = "GitSignsChangeFaded",
-    text = bars.thin
-  },
-  delete = {
-    hl = "GitSignsDeleteFaded",
-    text = bars.thin
-  },
-  topdelete = {
-    hl = "GitSignsDeleteFaded",
-    text = bars.thin
-  },
-  changedelete = {
-    hl = "GitSignsChangeDeleteFaded",
-    text = bars.thin
-  }
+  add = { hl = "GitSignsAddFaded", text = bars.thin },
+  change = { hl = "GitSignsChangeFaded", text = bars.thin },
+  delete = { hl = "GitSignsDeleteFaded", text = bars.thin },
+  topdelete = { hl = "GitSignsDeleteFaded", text = bars.thin },
+  changedelete = { hl = "GitSignsChangeDeleteFaded", text = bars.thin },
 }
 
 signs_config_2 = {
-  add = {hl = "GreenSign", text = bars.thick, numhl = "GitSignsAddNr"},
-  change = {hl = "BlueSign", text = bars.thick, numhl = "GitSignsChangeNr"},
-  delete = {hl = "RedSign", text = bars.thick, numhl = "GitSignsDeleteNr"},
-  topdelete = {hl = "RedSign", text = bars.thick, numhl = "GitSignsDeleteNr"},
-  changedelete = {hl = "PurpleSign", text = bars.thick, numhl = "GitSignsChangeDeleteNr"}
+  add = { hl = "GreenSign", text = bars.thick, numhl = "GitSignsAddNr" },
+  change = { hl = "BlueSign", text = bars.thick, numhl = "GitSignsChangeNr" },
+  delete = { hl = "RedSign", text = bars.thick, numhl = "GitSignsDeleteNr" },
+  topdelete = { hl = "RedSign", text = bars.thick, numhl = "GitSignsDeleteNr" },
+  changedelete = {
+    hl = "PurpleSign",
+    text = bars.thick,
+    numhl = "GitSignsChangeDeleteNr",
+  },
 }
 
 require("gitsigns").setup {
@@ -49,7 +38,7 @@ require("gitsigns").setup {
   --   ["o ih"] = ':<C-U>lua require"gitsigns".text_object()<CR>',
   --   ["x ih"] = ':<C-U>lua require"gitsigns".text_object()<CR>'
   -- },
-  watch_index = {interval = 1000},
+  watch_index = { interval = 1000 },
   current_line_blame = false,
   current_line_blame_delay = 1000,
   current_line_blame_position = "eol",
@@ -57,7 +46,7 @@ require("gitsigns").setup {
   update_debounce = 200,
   status_formatter = nil, -- Use default
   use_decoration_api = true,
-  use_internal_diff = true
+  use_internal_diff = true,
 }
 
 -- signs = {

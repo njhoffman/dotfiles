@@ -20,6 +20,12 @@ local Opts = config.Opts
 --     vim.wo.relativenumber = false
 --   end
 -- )
+-- local M = {}
+
+-- M.vimadeCheck = function()
+--   if vim.bo.filetype == "dapui_scopes" then vim.cmd([[VimadeBufDisable]]) end
+--   -- print(vim.bo.filetype)
+-- end
 
 local autocmds = {
   Mundo = { { "FileType", "Mundo", "noremap <buffer>  :q<cr>" } },
@@ -28,6 +34,7 @@ local autocmds = {
     { "FileType", "help", "noremap <buffer>  :q<cr>" },
   },
   fasd = { { "BufWinEnter,BufFilePost", "*", [[call Fasd_update()]] } },
+
   FiletypeDetect = {
     { "BufNewFile,BufRead", "*.ejs", "set ft=html" },
     { "BufNewFile,BufRead", "*bash*", "let b:is_bash = 1 | setfiletype sh" },
@@ -37,6 +44,7 @@ local autocmds = {
     { "BufNewFile,BufRead", ".vimtasks", "setlocal ft=dosini" },
     { "BufNewFile,BufRead", "Dockerfile*", "setlocal ft=dockerfile" },
     { "BufNewFile,BufRead", ".dockerignore", "setlocal ft=gitignore" },
+
     --   au BufNewFile,BufRead *.module setlocal ft=php syn=php
     --   " force bash syntax for shell scripts by default custom syntax extension assignments
     --   au BufNewFile,BufRead .pa set ft=config
@@ -54,9 +62,16 @@ local autocmds = {
     --   " au BufEnter * if &bufhidden =~ 'wipe' && &buftype =~ 'nofile' | setf preview | endif
   },
   vimade = {
-    { "CompleteChanged", "*", "redraw" },
-    { "FocusLost", "*", "VimadeFadeActive" },
+    -- { "CompleteChanged", "*", "redraw" },
+    -- { "FocusLost", "*", "VimadeFadeActive" },
     -- { "FocusGained", "*", "VimadeUnfadeActive" },
+    -- { "BufLeave,FocusLost", "*", M.vimadeCheck() },
+    -- { "BufEnter", "dapui_scopes", "VimadeBufDisable" },
+    -- { "BufEnter", "dapui_breakpoints", "VimadeBufDisable" },
+    -- { "BufEnter", "dapui_watches", "VimadeBufDisable" },
+    -- { "BufEnter", "dapui_stacks", "VimadeBufDisable" },
+    -- { "BufEnter", "dap-repl", "VimadeBufDisable" },
+
   },
   filetypes = {
     { "FileType", "pandoc", "set conceallevel=3 nospell wrap" },

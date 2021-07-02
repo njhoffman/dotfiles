@@ -1,6 +1,6 @@
-fzf-preview.Yankround
-fzf-preview.DirectoryFiles
 fzf-preview.CommandPalette
+fzf-preview.DirectoryFiles
+fzf-preview.Yankround
 fzf-preview.AllBuffers
 fzf-preview.GitActions
 prettier.formatFile

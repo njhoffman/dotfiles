@@ -1,0 +1,653 @@
+---
+version: 2
+# log-file: /tmp/efm.log
+# log-level: 4
+root-markers:
+  - RCS/
+  - SCCS/
+  - CVS/
+  - .git/
+  - .svn/
+  - .hg/
+  - .bzr/
+  - _darcs/
+  - .git
+# command define
+commands:
+  - title: Reload
+    command: :reload-config
+
+  - title: Editor
+    os: windows
+    command: notepad
+    arguments:
+      - '${FILENAME}'
+  - title: Editor
+    os: linux
+    command: gedit
+    # Linux no method generic GUI editor open
+    arguments:
+      - ${FILENAME}
+  - title: Editor
+    os: darwin
+    command: open
+    arguments:
+      - '-e'
+      - ${FILENAME}
+
+  - title: Filer
+    os: windows
+    command: cmd
+    arguments:
+      - '/c'
+      - 'explorer /select,${FILENAME}'
+  - title: Filer
+    os: darwin
+    # Linux   no method generic filer open
+    command: open
+    arguments:
+      - '-R'
+      - ${FILENAME}
+
+  - title: Browser
+    os: darwin
+    # Windows no method generic browser open
+    # Linux   no method generic browser open
+    command: open
+    arguments:
+      - '-a'
+      - 'Safari'
+      - ${FILENAME}
+
+  - title: Open
+    os: windows
+    command: rundll32
+    arguments:
+      - 'url.dll,FileProtocolHandler'
+      - '${FILENAME}'
+  - title: Open
+    os: linux
+    command: xdg-open
+    arguments:
+      - ${FILENAME}
+  - title: Open
+    os: darwin
+    command: open
+    arguments:
+      - ${FILENAME}
+tools:
+  black-action-format: &black-action-format
+    commands:
+      - command: 'black --quiet --safe ${INPUT}'
+        title: 'black format'
+
+  buf-lint: &buf-lint
+    lint-command: 'buf lint --path'
+    root-markers:
+      - buf.yaml
+
+  checkmake-lint: &checkmake-lint
+    lint-command: 'checkmake'
+    lint-stdin: true
+
+  cpplint-lint: &cpplint-lint
+    lint-command: 'cpplint ${INPUT}'
+    lint-stdin: true
+
+  cppcheck-lint: &cppcheck-lint
+    lint-command:
+      'cppcheck --quiet --force --enable=all --error-exitcode=1 ${INPUT}'
+    lint-stdin: false
+    lint-ignore-exit-code: true
+    lint-formats:
+      - '%f:%l:%c: %m'
+    root-markers:
+      - compile_commands.json
+
+  csv-csvlint: &csv-csvlint
+    lint-command: 'csvlint'
+
+  javascript-eslint: &javascript-eslint
+    lint-command: 'eslint -f unix --stdin'
+    lint-ignore-exit-code: true
+    lint-stdin: true
+    lint-formats:
+      - '%f:%l:%c: %m [%trror/%r'
+      - '%f:%l:%c: %m [%tarning/%r'
+
+  eslint-lint: &eslint-lint
+    lint-command:
+      'npx --no-install eslint -f unix --stdin --stdin-filename ${INPUT}'
+    lint-ignore-exit-code: true
+    lint-stdin: true
+    root-markers:
+      - package.json
+      - .eslintrc
+      - .eslintrc.js
+      - .eslintrc.yaml
+      - .eslintrc.yml
+      - .eslintrc.json
+    commands:
+      - command: 'npx --no-install eslint --fix ${INPUT}'
+        title: 'eslint fix'
+
+  eslint_d-lint: &eslint_d-lint
+    lint-command: 'eslint_d -f unix --stdin --stdin-filename ${INPUT}'
+    lint-ignore-exit-code: true
+    lint-stdin: true
+    lint-formats:
+      - '%f:%l:%c: %m'
+    format-command:
+      'eslint_d -f unix --stdin --stdin-filename ${INPUT} --fix-to-stdout'
+    format-stdin: true
+    root-markers:
+      - package.json
+      - .eslintrc
+      - .eslintrc.js
+      - .eslintrc.yaml
+      - .eslintrc.yml
+      - .eslintrc.json
+
+  excitetranslate-hover: &excitetranslate-hover
+    hover-command: 'excitetranslate'
+    hover-stdin: true
+
+  erb-lint: &erb-lint
+    lint-command: 'erb -x -T - | ruby -c'
+    lint-stdin: true
+    lint-offset: 1
+    format-command: htmlbeautifier
+
+  flake8-lint: &flake8-lint
+    lint-command: 'flake8 --max-line-length 160 --stdin-display-name ${INPUT} -'
+    lint-stdin: true
+    lint-ignore-exit-code: true
+    lint-formats:
+      - '%f:%l:%c: %t%m'
+    root-markers:
+      - setup.cfg
+      - tox.ini
+      - .flake8
+
+  golangcilint-lint: &golangcilint-lint
+    lint-command: 'golangci-lint run --disable-all -E errcheck'
+    lint-ignore-exit-code: true
+    lint-stdin: true
+    # format-command: gofmt
+
+  golint-lint: &golint-lint
+    lint-command: 'golint'
+    lint-ignore-exit-code: true
+    lint-formats:
+      - '%f:%l:%c: %m'
+
+  goimports-format: &goimports-format
+    format-command: 'goimports'
+    format-stdin: true
+
+  gofmt-format: &gofmt-format
+    format-command: 'gofmt'
+    format-stdin: true
+
+  hadolint-lint: &hadolint-lint
+    lint-command: 'hadolint'
+    lint-formats:
+      - '%f:%l %m'
+
+  htmllint-lint: &htmllint-lint
+    lint-command: 'npx --no-install htmllint ${INPUT}'
+    lint-stdin: false
+    lint-formats:
+      - '%f: line %l, col %c, %m'
+    root-markers:
+      - .htmllintrc
+
+  luacheck-lint: &luacheck-lint
+    lint-command: 'luacheck --globals vim --formatter visual_studio -'
+    lint-ignore-exit-code: true
+    lint-stdin: true
+    lint-formats:
+      - '%f(%l,%c) : %tarning %m'
+      - '%f(%l,%c) : %trror %m'
+
+  lua-format-format: &lua-format-format
+    format-command:
+      'lua-format -i --config=$HOME/.config/efm-langserver/lua-format.cfg'
+    format-stdin: true
+
+  jsonlint-lint: &jsonlint-lint
+    lint-command: 'jsonlint -c'
+    lint-stdin: true
+    lint-formats:
+      - 'line %l, col %c, found: %m'
+
+    # not work
+    # jq-lint: &jq-lint
+    #   lint-command: 'jq'
+    #   lint-stdin: true
+    #   lint-offset: 1
+    #   lint-formats:
+    #     - '%m at line %l, column %c'
+
+  jq-format: &jq-format
+    format-command: 'jq .'
+    format-stdin: true
+
+  fixjson-format: &fixjson-format
+    format-command: 'fixjson'
+    format-stdin: true
+
+  markdownlint-lint: &markdownlint-lint
+    lint-command: 'markdownlint --stdin'
+    lint-stdin: true
+    lint-formats:
+      - '%f:%l:%c MD%n/%*[^ ] %m'
+      - '%f:%l MD%n/%*[^ ] %m'
+      # - '%f:%l %m'
+      # - '%f:%l:%c %m'
+      # - '%f: %l: %m'
+    commands:
+      - command: 'markdownlint --fix ${INPUT}'
+        title: 'markdownlint fix'
+    lint-ignore-exit-code: true
+
+  mypy-lint: &mypy-lint
+    lint-command: 'mypy --show-column-numbers --strict --strict-equality'
+    lint-formats:
+      - '%f:%l:%c: %t%*[^:]: %m'
+    root-markers:
+      - setup.cfg
+      - mypy.ini
+
+  nvcheck-lint: &nvcheck-lint
+    lint-command: 'nvcheck ${INPUT}'
+    lint-stdin: false
+    lint-formats:
+      - '%f:%l: %m'
+    root-markers:
+      - dict.yml
+    commands:
+      - command: 'nvcheck -i ${INPUT}'
+        title: 'nvcheck fix'
+
+  pandoc-markdown-format: &pandoc-markdown-format
+    format-command: 'pandoc -f markdown -t markdown -sp --tab-stop=2'
+    format-stdin: true
+
+  pandoc-markdown-gfm-format: &pandoc-markdown-format
+    format-command: 'pandoc -f markdown -t gfm -sp --tab-stop=2'
+    format-stdin: true
+
+  pandoc-rst-format: &pandoc-rst-format
+    format-command: 'pandoc -f rst -t rst -s --columns=79'
+    format-stdin: true
+
+  php-phpstan: &php-phpstan
+    lint-command:
+      './vendor/bin/phpstan analyze --error-format raw --no-progress'
+
+  php-psalm: &php-psalm
+    lint-command: './vendor/bin/psalm --output-format=emacs --no-progress'
+    lint-formats:
+      - '%f:%l:%c:%trror - %m'
+      - '%f:%l:%c:%tarning - %m'
+
+  prettier-action-fix: &prettier-action-fix
+    commands:
+      - command: 'npx --no-install prettier --fix --write ${INPUT}'
+        title: 'prettier fix'
+
+  prettier-format: &prettier-format
+    format-command:
+      "prettier --stdin-filepath ${INPUT} --single-quote --arrow-parens 'avoid'
+      --trailing-comma all"
+    format-stdin: true
+
+  html-prettier: &html-prettier
+    format-command: 'prettier --stdin-filepath ${INPUT}'
+    format-stdin: true
+    # format-command: 'prettier --parser html'
+
+  css-prettier: &css-prettier
+    format-command: './node_modules/.bin/prettier --parser css'
+
+  json-prettier: &json-prettier
+    format-command: './node_modules/.bin/prettier --parser json'
+
+  pydocstyle-lint: &pydocstyle-lint
+    lint-command: 'pydocstyle ${INPUT}'
+    lint-stdin: false
+    lint-ignore-exit-code: true
+    lint-formats:
+      - '%I%f:%l %.%#:'
+      - '%Z%*\sD%n: %m'
+
+  pylint-lint: &pylint-lint
+    lint-command: 'pylint --output-format=text --reports=no --score=no ${INPUT}'
+    lint-stdin: false
+    lint-formats:
+      - '%f:%l:%c: C%n: %m'
+    root-markers:
+      - setup.cfg
+      - .pylintrc
+
+  # rbprettier-action-format: &rbprettier-action-format
+  #   commands:
+  #     - command: 'bundle exec rbprettier --write ${INPUT}'
+  #       title: 'rbprettier format'
+
+  redpen-lint-core: &redpen-lint-core
+    lint-command: 'redpen -l 9999 -r plain ${INPUT}'
+    lint-stdin: false
+    lint-ignore-exit-code: true
+    lint-formats:
+      - '%f:%l: Validation%t%*[a-z][%*[a-zA-Z]], %m at line:%r'
+    root-markers:
+      - redpen-conf.xml
+      - redpen-conf-??.xml
+
+  redpen-lint: &redpen-lint
+    <<: *redpen-lint-core
+
+  redpen-text-lint: &redpen-text-lint
+    <<: *redpen-lint-core
+    lint-command: 'redpen -l 9999 -f plain -r plain ${INPUT}'
+
+  restructuredtext-lint-lint: &restructuredtext-lint-lint
+    lint-command:
+      'rst-lint --encoding utf-8 --level warning --format text ${INPUT}'
+    lint-stdin: false
+    lint-ignore-exit-code: true
+    lint-formats:
+      - '%t%*[A-Z] %f:%l %m'
+
+  rstcheck-lint: &rstcheck-lint
+    lint-command: 'rstcheck --report warning -'
+    lint-stdin: true
+    lint-formats:
+      - '%f:%l: (%t%*[^/]/%n) %m'
+
+  rubocop-lint: &rubocop-lint
+    lint-command: 'rubocop --format emacs --force-exclusion --stdin ${INPUT}'
+    lint-ignore-exit-code: true
+    lint-stdin: true
+    lint-formats:
+      - '%f:%l:%c: %m'
+    root-markers:
+      - Gemfile
+      - Rakefile
+      - .rubocop.yml
+    commands:
+      - command: 'rubocop --auto-correct-all ${INPUT}'
+        title: 'rubocop fix'
+
+  rufo-format: &rufo-format
+    format-command: 'rufo'
+    format-stdin: true
+    root-markers:
+      - Gemfile
+      - Rakefile
+      - .rufo
+
+  rustfmt-format: &rustfmt-format
+    format-command: 'rustfmt'
+    format-stdin: true
+
+  shellcheck-lint: &shellcheck-lint
+    lint-command: 'shellcheck -f gcc -x -'
+    lint-stdin: true
+    lint-formats:
+      - '%f:%l:%c: %t%*[^:]: %m [SC%n]'
+
+  shfmt-format: &shfmt-format
+    format-command: 'shfmt -ln bash -i 2 -bn -ci -sr -kp'
+    # format-command: 'shfmt -ci -s -bn'
+    format-stdin: true
+
+  stylelint-lint: &stylelint-lint
+    lint-command:
+      'npx --no-install stylelint --formatter unix --stdin --stdin-filename
+      ${INPUT}'
+    lint-ignore-exit-code: false
+    lint-stdin: true
+    lint-formats:
+      - '%f:%l:%c: %m [%t%*[a-z]]'
+    root-markers:
+      - .stylelintrc.json
+    commands:
+      - command: 'npx --no-install stylelint --fix ${INPUT}'
+        title: 'stylelint fix'
+
+  terraform-fmt-format: &terraform-fmt-format
+    format-command: 'terraform fmt -'
+    format-stdin: true
+
+  textlint-lint: &textlint-lint
+    lint-command:
+      'npx --no-install textlint -f unix --stdin --stdin-filename ${INPUT}'
+    lint-ignore-exit-code: true
+    lint-stdin: true
+    lint-formats:
+      - '%f:%l:%c: %m [%trror/%r]'
+      - '%f:%l:%c: 【%r】 %m'
+      - '%E%f:%l:%c: %m'
+      - '%Z%m [%trror/%r]'
+      - '%C%m'
+    root-markers:
+      - .textlintrc
+    commands:
+      - command: 'npx --no-install textlint --fix ${INPUT}'
+        title: 'textlint fix'
+
+  vale-lint: &vale-lint
+    lint-command: 'vale --relative --output line ${INPUT}'
+    lint-stdin: false
+    lint-ignore-exit-code: true
+    lint-formats:
+      - '%f:%l:%c:%*[^:]:%m'
+
+  vint-lint: &vint-lint
+    lint-command:
+      'vint --enable-neovim --style-problem --stdin-display-name ${INPUT} -'
+    lint-stdin: true
+    lint-formats:
+      - '%f:%l:%c: %m'
+
+  yamllint-lint: &yamllint-lint
+    lint-command: 'yamllint --strict --format parsable ${INPUT}'
+    lint-stdin: false
+    lint-ignore-exit-code: true
+    lint-formats:
+      - '%f:%l:%c: [%t%*[a-z]] %m'
+    env:
+      - 'PYTHONIOENCODING=UTF-8'
+
+# languages setting
+languages:
+  asciidoc:
+    - <<: *textlint-lint
+    - <<: *redpen-lint
+
+  c:
+    - <<: *cpplint-lint
+    - <<: *cppcheck-lint
+
+  cpp:
+    - <<: *cpplint-lint
+    # - <<: *cppcheck-lint
+    # - <<: *clang-tidy-lint
+    # - <<: *clang-format
+
+  css:
+    - <<: *stylelint-lint
+    - <<: *prettier-action-fix
+    # - <<: *css-prettier
+
+  csv:
+    - <<: *csv-csvlint
+
+  dockerfile:
+    - <<: *hadolint-lint
+
+  eruby:
+    - <<: *erb-lint
+
+  go:
+    - <<: *golint-lint
+    # - <<: *golangcilint-lint
+    - <<: *gofmt-format
+    # - <<: *goimports-format
+
+  graphql:
+    - <<: *prettier-action-fix
+
+  help:
+    - <<: *textlint-lint
+    - <<: *redpen-text-lint
+    - <<: *vale-lint
+    - <<: *nvcheck-lint
+
+  html:
+    - <<: *textlint-lint
+    - <<: *htmllint-lint
+    - <<: *stylelint-lint
+    - <<: *prettier-action-fix
+    - <<: *html-prettier
+
+  javascript:
+    - <<: *eslint_d-lint
+
+  json:
+    - <<: *jsonlint-lint
+    - <<: *jq-format
+    - <<: *fixjson-format
+    - <<: *prettier-action-fix
+
+  json5:
+    - <<: *fixjson-format
+    - <<: *prettier-action-fix
+
+  less:
+    - <<: *stylelint-lint
+
+  lua:
+    - <<: *luacheck-lint
+    - <<: *lua-format-format
+
+  make:
+    - <<: *checkmake-lint
+
+  markdown:
+    - <<: *markdownlint-lint
+    - <<: *textlint-lint
+    # - <<: *redpen-lint
+    - <<: *vale-lint
+    - <<: *nvcheck-lint
+    - <<: *stylelint-lint
+    - <<: *prettier-action-fix
+    # - <<: *pandoc-markdown-format
+
+  php:
+    - <<: *php-phpstan
+    - <<: *php-psalm
+
+  python:
+    - <<: *flake8-lint
+    - <<: *pylint-lint
+    - <<: *mypy-lint
+    - <<: *black-action-format
+    - <<: *pydocstyle-lint
+
+  proto:
+    - <<: *buf-lint
+
+  review:
+    - <<: *textlint-lint
+    - <<: *redpen-lint
+
+  rst:
+    - <<: *restructuredtext-lint-lint
+    - <<: *rstcheck-lint
+    - <<: *textlint-lint
+    - <<: *redpen-lint
+    - <<: *vale-lint
+    - <<: *nvcheck-lint
+    - <<: *pandoc-rst-format
+
+  ruby:
+    - <<: *rubocop-lint
+    - <<: *rufo-format
+    # - <<: *rbprettier-action-format
+    - <<: *prettier-action-fix
+
+  rust:
+    - <<: *rustfmt-format
+    # - <<: *rustclippy-lint
+
+  sass:
+    - <<: *stylelint-lint
+
+  sugarss:
+    - <<: *stylelint-lint
+
+  scss:
+    - <<: *stylelint-lint
+    - <<: *prettier-action-fix
+
+  sh:
+    - <<: *shellcheck-lint
+    - <<: *shfmt-format
+
+  text:
+    - <<: *textlint-lint
+    - <<: *redpen-text-lint
+    - <<: *vale-lint
+    - <<: *nvcheck-lint
+
+  terraform:
+    - <<: *terraform-fmt-format
+  #   - <<: *tflint-lint
+
+  typescript:
+    - <<: *eslint_d-lint
+    - <<: *prettier-action-fix
+    # - <<: *javascript-eslint
+
+  vim:
+    - <<: *vint-lint
+
+  vue:
+    - <<: *prettier-action-fix
+
+  yaml:
+    - <<: *yamllint-lint
+    # - <<: *prettier-action-fix
+
+  _:
+    - <<: *excitetranslate-hover
+#  prettier-parser
+# angular
+# babel
+# babel-flow
+# babel-ts
+# css
+# espree
+# flow
+# glimmer
+# graphql
+# haml
+# html
+# json
+# json-stringify
+# json5
+# less
+# lwc
+# markdown
+# mdx
+# meriyah
+# rbs
+# ruby
+# scss
+# typescript
+# vue
+# yaml

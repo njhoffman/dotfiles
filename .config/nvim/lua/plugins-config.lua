@@ -1,7 +1,8 @@
 local config = require "config"
 
 if config.DAP.enabled ~= 0 and config.DAP.enabled ~= false then
-  require("plugins.configs.lua.dap")
+  require("plugins.configs.lua.dapui")
+  require("plugins.configs.lua.nvim-dap")
 end
 
 -- basic key mappings
@@ -132,6 +133,27 @@ table.insert(components.right.active, 1, {
   provider = LspStatus,
   hl = { fg = "cyan", bg = "bg", style = "bold" },
 })
+table.insert(properties.force_inactive.filetypes, "dapui_scopes")
+table.insert(properties.force_inactive.filetypes, "dapui_watches")
+table.insert(properties.force_inactive.filetypes, "dapui_breakpoints")
+table.insert(properties.force_inactive.filetypes, "dapui_stacks")
+table.insert(properties.force_inactive.filetypes, "dap-repl")
+
+-- properties = {
+--   force_inactive = {
+--     bufnames = {},
+--     buftypes = { "terminal" },
+--     filetypes = {
+--       "NvimTree",
+--       "dbui",
+--       "packer",
+--       "startify",
+--       "fugitive",
+--       "fugitiveblame",
+--       "dashboard",
+--     },
+--   },
+-- }
 
 local separators = {
   vertical_bar = "┃",

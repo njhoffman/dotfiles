@@ -137,5 +137,5 @@ end
 log.new(default_config, true)
 -- }}}
 
-log.info(string.format("Started logging at %s", os.date("%H:%M:%S")))
+-- log.info(string.format("Started logging at %s", os.date("%H:%M:%S")))
 return log

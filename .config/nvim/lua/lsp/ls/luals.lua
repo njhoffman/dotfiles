@@ -9,7 +9,7 @@ capabilities.textDocument.completion.completionItem.snippetSupport = true
 
 local on_attach = function(client, bufnr)
   on_attach_hook.common_on_attach(client, bufnr)
-  print("'" .. client.name .. "' server attached")
+  -- print("'" .. client.name .. "' server attached")
 end
 
 lspconfig.sumneko_lua.setup {

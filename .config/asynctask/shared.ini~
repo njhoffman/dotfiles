@@ -1,0 +1,93 @@
+; shared tasks between vim and command line
+
+[lint]
+; command:helm=helm lint . && helm template "$(VIM_FILEDIR)" | kubeval --force-color --strict
+; https://github.com/caramelomartins/awesome-linters
+command:dockerfile=dockerfilelint "${VIM_FILEPATH}"
+command:go=golangci-lint run "${VIM_FILEPATH}"
+command:go=golangci-lint run --disable-all -E errcheck "${VIM_FILEPATH}"
+command:go=golint "${VIM_FILEPATH}"
+command:helm=helm template "$(VIM_FILEDIR)" | kubescore -
+command:helm=helm template "$(VIM_FILEDIR)" | kubeval --force-color --strict
+command:json=jsonlint --strict --verbose  "$(VIM_FILEPATH)"
+command:lua=lua-check "${VIM_FILEPATH}"
+command:make=checkmake "${VIM_FILEPATH}"
+command:md=markdownlint "${VIM_FILEPATH}"
+command:sh=shellcheck "$(VIM_FILEPATH)"
+command:vim=vint --style-problem --color --enable-neovim --stat --format '{file_name}:{line_number}:{column_number}: {description}' "${VIM_FILEPATH}"
+command:yaml=yamllint --strict -f colored "$(VIM_FILEPATH)"
+output=terminal
+pos=floaterm
+raw=autoclose=0,width=100
+; raw=position=bottomright,focus=1,autoclose=1,width=80,height=10
+; output=vim,terminal,left/r/b/t,quickfix
+
+[format]
+command:lua=lua-format "${VIM_FILEPATH}"
+command:pgsql=sqlformat --reindent_aligned --keywords upper --identifiers lower "${VIM_FILEPATH}" -o "${VIM_FILEPATH}"
+command:sql=sqlformat --reindent_aligned --keywords upper --identifiers lower "${VIM_FILEPATH}" -o "${VIM_FILEPATH}"
+output=terminal
+pos=floaterm
+raw=autoclose=1,width=300
+save=2
+
+[format-preview]
+command:sql=sqlformat --reindent_aligned --keywords upper --identifiers lower "${VIM_FILEPATH}" | bat --color=always --theme ansi-dark --plain -l sql
+command:pgsql=sqlformat --reindent_aligned --keywords upper --identifiers lower "${VIM_FILEPATH}" | bat --color=always --theme ansi-dark --plain -l sql
+pos=right
+output=terminal
+; raw=autoclose=0,width=300
+save=2
+
+[helm-template]
+; command:helm=helm template "$(VIM_FILEDIR)" | yq r -P -C -
+command:helm=helm template "$(VIM_FILEDIR)" | vimcat -c 'set filetype=yaml'
+output=terminal
+pos=floaterm
+raw=autoclose=0
+
+[helm-score]
+command:helm=helm template "$(VIM_FILEDIR)" | kube-score score -
+output=terminal
+pos=floaterm
+raw=autoclose=0
+
+[helm-dry-run]
+command:helm=helm install --dry-run --debug app-admin ./ | vimcat -c 'set filetype=yaml'
+output=terminal
+pos=floaterm
+raw=autoclose=0
+
+[file-run]
+; command="$(VIM_FILEPATH)"
+command:c,cpp="$(VIM_PATHNOEXT)"
+command:go="$(VIM_PATHNOEXT)"
+command:python=python "$(VIM_FILENAME)"
+command:make=make -f "$(VIM_FILENAME)" run
+command:emake=emake -e "$(VIM_FILENAME)"
+command:javascript=node "$(VIM_FILENAME)"
+command:sh=sh "$(VIM_FILENAME)"
+command:lua=lua "$(VIM_FILENAME)"
+command:perl=perl "$(VIM_FILENAME)"
+command:ruby=ruby "$(VIM_FILENAME)"
+command:zsh=zsh "$(VIM_FILENAME)"
+command:bash=bash "$(VIM_FILENAME)"
+command:fish=fish "$(VIM_FILENAME)"
+command:php=php "$(VIM_FILENAME)"
+command:erlang=escript "$(VIM_FILENAME)"
+command:ps1=powershell -file "$(VIM_FILENAME)"
+command:scala=scala "$(VIM_FILENAME)"
+command:haskell=ghci "$(VIM_FILENAME)"
+command:applescript=osascript "$(VIM_FILENAME)"
+command:vim=:source %
+output=terminal
+cwd=$(VIM_FILEDIR)
+save=2
+
+[file-build]
+command:c,cpp=gcc -O2 -Wall "$(VIM_FILEPATH)" -o "$(VIM_PATHNOEXT)" -lstdc++ -lm -msse3
+command:go=go build -o "$(VIM_PATHNOEXT)" "$(VIM_FILEPATH)"
+command:make=make -f "$(VIM_FILEPATH)"
+output=quickfix
+cwd=$(VIM_FILEDIR)
+save=2

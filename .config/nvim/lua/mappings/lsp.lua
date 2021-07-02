@@ -58,8 +58,13 @@
 -- -- vim.cmd('nnoremap <silent><leader>cc <cmd>lua<CR> require"lspsaga.diagnostic".show_cursor_diagnostics()<CR>')
 -- -- float terminal also you can pass the cli command in open_float_terminal function
 -- map("n", "<leader>tv", ":lua diagnostic_toggle_virtual_text()<CR>")
+--
+-- TODO: create generic goto next/prev with [[ , ]] that handles loc lists, qf lists, diagnostics
+--
 local lsp_maps = {
   ["K"] = { "<cmd>Lspsaga hover_doc<cr>", "hover document" },
+  ["[d"] = { "<cmd>lua vim.lsp.diagnostic.goto_prev()<cr>", "prev diag" },
+  ["]d"] = { "<cmd>lua vim.lsp.diagnostic.goto_next()<cr>", "next diag" },
   ["g"] = {
     name = "+goto actions",
     ["d"] = { "<cmd>Telescope lsp_definitions<cr>", "lsp definitions" },
@@ -114,39 +119,20 @@ local lsp_maps = {
     ["S"] = { "<cmd>Telescope lsp_workspace_symbols<cr>", "workspace symbols" },
     [".a"] = { "<cmd>LspStop<cr>", "stop all" },
   },
-  --- DAP interactions
-  ["<F8>"] = { "[[ lua require('dap').continue()<CR>]]" },
-  ["<F9>"] = { "[[ lua require('dap').step_over()<CR>]]" },
-  ["<F10>"] = { "[[ lua require('dap').step_into()<CR>]]" },
-  ["<F11>"] = { "[[ lua require('dap').step_out()<CR>]]" },
-  ["<S-F12>"] = { "[[ lua require('dap').repl.run_last()<CR>]]" },
-  ["<leader>d"] = {
-    name = "+dap",
-    ["t"] = { "[[ lua require\"dap\".toggle_breakpoint()<CR>]]" },
-    ["c"] = {
-      "[[ lua require\"dap\".set_breakpoint(vim.fn.input(\"Breakpoint condition: \"))<CR>]]",
-    },
-    ["l"] = {
-      "[[ lua require\"dap\".set_breakpoint(nil, nil, vim.fn.input(\"Log point message: \"))<CR>]]",
-    },
-  },
 }
 
--- map("n", "<c-p>", ":Lspsaga diagnostic_jump_prev<CR>")
--- map("n", "<c-n>", ":Lspsaga diagnostic_jump_next<CR>")
--- map("n", "<Leader>/", ":Ack!<Space>")
--- map("n", "<Leader>/", "<Plug>AgActionWord")
--- map("v", "<Leader>/", "<Plug>AgActionVisual")
-
-local opts = {
+local lsp_opts = {
   mode = "n",
   buffer = nil,
   silent = true,
   noremap = true,
   nowait = false,
 }
+require("which-key").register(lsp_maps, lsp_opts)
 
-require("which-key").register(lsp_maps, opts)
+-- map("n", "<Leader>/", ":Ack!<Space>")
+-- map("n", "<Leader>/", "<Plug>AgActionWord")
+-- map("v", "<Leader>/", "<Plug>AgActionVisual")
 
 -- -- lsp-saga
 --   -- vim.cmd('nnoremap <silent><leader>cd <cmd>lua<CR> require"lspsaga.diagnostic".show_line_diagnostics()<CR>')

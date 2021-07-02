@@ -131,6 +131,14 @@ return packer.startup({
         "rcarriga/nvim-dap-ui",
         requires = { "theHamsta/nvim-dap-virtual-text", "mfussenegger/nvim-dap" },
       }
+      use {
+        "jbyuki/one-small-step-for-vimkind",
+        requires = { "mfussenegger/nvim-dap" },
+      }
+      use {
+        "mfussenegger/nvim-dap-python",
+        requires = { "mfussenegger/nvim-dap" },
+      }
     end
 
     -- ====================================

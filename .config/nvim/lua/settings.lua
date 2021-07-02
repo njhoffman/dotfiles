@@ -14,7 +14,7 @@ settings.Opts = {
   updatetime      = 300,
   scrolloff       = 10,
   explorer_side   = "right",
-  log_path        = '~/.local/log/nvim.log',
+  log_path        = vim.fn.stdpath('cache') .. '/nvim.log',
   log_stdout       = false,
 }
 
@@ -30,8 +30,8 @@ settings.Theming = {
 
 settings.DAP = {
   enabled      = true,
-  log_level    = 'trace',
-  log_path     = '~/.local/log/nvim-dap.log',
+  log_level    = 'error',
+  log_path     = vim.fn.stdpath('cache') .. '/dap.log',
   virtual_text = true,
   python       = true,
   go           = true,

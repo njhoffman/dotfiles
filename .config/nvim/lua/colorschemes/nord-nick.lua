@@ -78,7 +78,8 @@ local spec = lush.extends({ nord }).with(function()
     Underline = { gui = "none" },
     Underlined = { gui = "none" },
     -- ui components
-    NormalFloat { fg = "#8f93a2", bg = "#090b10" }, -- normal text and background color for floating windows
+    NormalFloat { fg = "#8f93a2", bg = "#090b20" }, -- normal text and background color for floating windows
+    FloatBorder { fg = "#8f93a2", bg = "#090b20" }, --
     Pmenu { fg = "#718cc4", bg = "#060614" },
     PmenuSel { fg = "#84ffff", bg = "#1a1c2b" },
     PmenuSbar { fg = "#717cb4", bg = "#202331" },
@@ -213,6 +214,33 @@ local spec = lush.extends({ nord }).with(function()
     -- vim.cmd("hi! link jsTemplateVar javascriptTemplateVar")
     -- vim.cmd("hi! link jsTemplateDelim javascriptTemplateDelim")
     -- vim.cmd("hi! link jsTemplateString javascriptTemplateString")
+
+    DAPLogPointSign { fg = "#00f1f5" },
+    DAPBreakpointSign { fg = "#4790ff" },
+    DAPStopSign { fg = "#07ffc0" },
+    DAPStopSignText { bg = "#280000" },
+    DapUIScope { fg = "#00F1F5" },
+    DapUIType { fg = "#74b4cF" },
+    DapUIDecoration { fg = "#00F1F5" },
+    DapUIThread { fg = "#A9FF68" },
+    DapUIStoppedThread { fg = "#00f1f5" },
+    DapUISource { fg = "#8484FF" },
+    DapUILineNumber { fg = "#00f1f5" },
+    DapUIFloatBorder { fg = "#00F1F5" },
+    DapUIWatchesHeader { fg = "#00F1F5" },
+    DapUIWatchesEmpty { fg = "#F70067" },
+    DapUIWatchesValue { fg = "#A9FF68" },
+    DapUIWatchesError { fg = "#F70067" },
+    DapUIBreakpointsPath { fg = "#00F1F5" },
+    DapUIBreakpointsInfo { fg = "#A9FF68" },
+    DapUIBreakpointsCurrentLine { fg = "#A9FF68", gui = "bold" },
+    DapUIVariable { fg = "#6484cF" },
+    -- DapUIFrameName { Normal },
+    -- DapUIBreakpointsLive { DapUILineNumber },
+    -- DapVariableTreeType { Comment },
+    -- DapVariableTreeOperator { Operator },
+    -- DapVariableTreeString { String },
+    -- DapVariableTreeNumber { Number },
   }
 end)
 

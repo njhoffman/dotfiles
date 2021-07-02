@@ -1,4 +1,4 @@
-ocal test = {}
+local test = {}
 
 local ido = require('ido')
 

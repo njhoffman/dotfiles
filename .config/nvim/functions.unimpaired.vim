@@ -530,6 +530,12 @@ call s:map('n', '=p', ":<C-U>call <SID>putline(v:count1 . ']p', 'Below')<CR>=']"
 " call UnimpairedMapTransform('xml_encode','[x')
 " call UnimpairedMapTransform('xml_decode',']x')
 
+" Section: Custom entries
+" call s:map('n', '[d', '<cmd>lua vim.lsp.diagnostic.goto_prev()<CR>')
+" call s:map('n', ']d', '<cmd>lua vim.lsp.diagnostic.goto_next()<CR>')
+" call s:map('n', '[w', '<c-w>h')
+" call s:map('n', ']w', '<c-w>l')
+
 " Section: Activation
 
 call s:maps()

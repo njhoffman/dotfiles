@@ -18,6 +18,10 @@ function lsp_diagnostics.configure()
   vim.cmd("hi LspDiagnosticsFloatingInformation guifg=#183380 guibg=#3f3f3f")
   vim.cmd("hi LspDiagnosticsFloatingHint guifg=#484841 guibg=#3f3f3f")
 
+  -- TODO: create custom highlights for current line nr
+  -- highlight CustomError ctermfg=red guifg=red
+  -- sign define error numhl=CustomError
+  -- sign place 2 name=error line=7
   if (LSP.signs == "hidden") then
     -- just color numbers, dont show icons
     vim.fn.sign_define("LspDiagnosticsSignError",
@@ -37,17 +41,17 @@ function lsp_diagnostics.configure()
     vim.fn.sign_define("LspDiagnosticsSignWarning", {
       texthl = "LspDiagnosticsSignWarning",
       text = "",
-      numhl = "LspDiagnosticsSignWarning",
+      -- numhl = "LspDiagnosticsSignWarning",
     })
     vim.fn.sign_define("LspDiagnosticsSignInformation", {
       texthl = "LspDiagnosticsSignInformation",
       text = "",
-      numhl = "LspDiagnosticsSignInformation",
+      -- numhl = "LspDiagnosticsSignInformation",
     })
     vim.fn.sign_define("LspDiagnosticsSignHint", {
       texthl = "LspDiagnosticsSignHint",
       text = "",
-      numhl = "LspDiagnosticsSignHint",
+      -- numhl = "LspDiagnosticsSignHint",
     })
   end
   -- vim.api.nvim_exec([[

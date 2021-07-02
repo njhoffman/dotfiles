@@ -8,7 +8,7 @@ require("compe").setup {
   enabled = config.enabled,
   autocomplete = true,
   debug = false,
-  min_length = 1,
+  min_length = 0,
   preselect = "enable", -- enable, always
   throttle_time = 80,
   source_timeout = 200,

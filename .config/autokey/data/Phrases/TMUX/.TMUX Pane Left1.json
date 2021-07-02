@@ -1,8 +1,10 @@
 {
     "type": "phrase",
     "description": "TMUX Pane Left",
-    "modes": [3],
-    "usageCount": 23,
+    "modes": [
+        3
+    ],
+    "usageCount": 35,
     "prompt": false,
     "omitTrigger": false,
     "matchCase": false,
@@ -16,8 +18,11 @@
         "wordChars": "[\\w]"
     },
     "hotkey": {
-        "modifiers": ["<ctrl>", "<shift>"],
-        "hotKey": "l"
+        "modifiers": [
+            "<ctrl>",
+            "<shift>"
+        ],
+        "hotKey": "h"
     },
     "filter": {
         "regex": "termite.Termite|Alacritty.Alacritty",

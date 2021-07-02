@@ -14,27 +14,24 @@ notification_timeout = 10
 cover_name = "cover.jpg"
 skip_missing_cover = true
 
-# GitHub configuration
 [github]
-# Enable / disable GitHub integration
 enabled = false
+api_key = "file:~/.config/ntfd/github.txt"
+notification_timeout = 20
+show_avatar = true
+sync_frequency = 30
+display = "{{ unread_count }}"
 # Go to https://github.com/settings/tokens
 # Click on "Generate a new token", give it a name and check the "notifications" checkbox
 # Use one of the following forms to set your token:
 # api_key = "file:~/your_folder/some-token.txt"   # Read from a file
 # api_key = "env:GITHUB_TOKEN"                    # Read from an environment variable
 # api_key = "PLAINTEXT_VALUE"                     # Read the value directly
-api_key = "file:~/.config/ntfd/github.txt"
 # How long GitHub notifications should stay up (in seconds)
-notification_timeout = 20
 # Whether or not the organization/owner avatar should be shown in the notification
-show_avatar = true
 # How often should we fetch from the GitHub API (in seconds)
 # Will default to 10 seconds for values under 10 seconds
-sync_frequency = 30
 # Output format, using Handlebars syntax, meaning variables should be used like {{ this }}
 # Available tokens are:
 # - unread_count
 # - first_time_count
-display = " {{ unread_count }}"
-

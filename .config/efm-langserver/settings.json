@@ -1,0 +1,185 @@
+[
+{
+  "cmd": "vint",
+  "whitelist": [
+    "vim"
+  ]
+},
+{
+  "cmd": "markdownlint",
+  "whitelist": [
+    "markdown"
+  ]
+},
+{
+  "cmd": "vale",
+  "whitelist": [
+    "text",
+    "markdown",
+    "rst",
+    "help"
+  ]
+},
+{
+  "cmd": "redpen",
+  "whitelist": [
+    "text",
+    "markdown",
+    "rst",
+    "asciidoc",
+    "review",
+    "help"
+  ]
+},
+{
+  "cmd": "nvcheck",
+  "whitelist": [
+    "text",
+    "markdown",
+    "rst",
+    "help"
+  ]
+},
+{
+  "cmd": "cppcheck",
+  "whitelist": [
+    "c",
+    "cpp"
+  ]
+},
+{
+  "cmd": "shellcheck",
+  "whitelist": [
+    "sh"
+  ]
+},
+{
+  "cmd": "shfmt",
+  "whitelist": [
+    "sh"
+  ]
+},
+{
+  "cmd": "jsonlint",
+  "whitelist": [
+    "json"
+  ]
+},
+{
+  "cmd": "jq",
+  "whitelist": [
+    "json"
+  ]
+},
+{
+  "cmd": "fixjson",
+  "whitelist": [
+    "json",
+    "json5"
+  ]
+},
+{
+  "cmd": "yamllint",
+  "whitelist": [
+    "yaml"
+  ]
+},
+{
+  "cmd": "flake8",
+  "whitelist": [
+    "python"
+  ]
+},
+{
+  "cmd": "pylint",
+  "whitelist": [
+    "python"
+  ]
+},
+{
+  "cmd": "mypy",
+  "whitelist": [
+    "python"
+  ]
+},
+{
+  "cmd": "black",
+  "whitelist": [
+    "python"
+  ]
+},
+{
+  "cmd": "pydocstyle",
+  "whitelist": [
+    "python"
+  ]
+},
+{
+  "cmd": "bundle",
+  "whitelist": [
+    "ruby"
+  ]
+},
+{
+  "cmd": "restructuredtext-lint",
+  "whitelist": [
+    "rst"
+  ]
+},
+{
+  "cmd": "rstcheck",
+  "whitelist": [
+    "rst"
+  ]
+},
+{
+  "cmd": "pandoc",
+  "whitelist": [
+    "markdown",
+    "rst"
+  ]
+},
+{
+  "cmd": "htmllint",
+  "whitelist": [
+    "html"
+  ]
+},
+{
+  "cmd": "npx",
+  "whitelist": [
+    "css",
+    "scss",
+    "sass",
+    "less",
+    "sugarss",
+    "graphql",
+    "html",
+    "text",
+    "markdown",
+    "rst",
+    "asciidoc",
+    "review",
+    "help",
+    "ruby",
+    "javascript",
+    "typescript",
+    "vue",
+    "yaml",
+    "json",
+    "json5"
+  ]
+},
+{
+  "cmd": "buf",
+  "whitelist": [
+    "proto"
+  ]
+},
+{
+  "cmd": "excitetranslate",
+  "whitelist": [
+    "*"
+  ]
+}
+]
