@@ -50,7 +50,7 @@ opt("previewheight", 7)
 opt("scrolloff", 7)
 opt("shada", [[!,'2000,<2000,s300,:3000,n~/.vim/.shada]])
 -- opt("shortmess", o.shortmess .. "cS") F echoes filename
-opt("shortmess", "afilnxtToOcSIsF")
+opt("shortmess", "filnxtToOcSIsF")
 opt("showmatch", true)
 opt("showmode", false)
 opt("sidescrolloff", 5)

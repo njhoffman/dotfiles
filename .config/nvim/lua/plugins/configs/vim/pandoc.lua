@@ -45,37 +45,13 @@ vim.cmd([[let g:pandoc#syntax#conceal#urls = 1]])
 -- - quotes
 -- - inlinecode
 
--- let g:pandoc#syntax#codeblocks#embeds#langs = ["ruby", "python", "cpp", "sh", "html", "javascript", "css", "zsh", "terraform", "ansible", "bash=sh"]
 vim.cmd([[
-  let g:pandoc#syntax#codeblocks#embeds#langs = ["shell=sh", "javascript", "cpp", "c", "go", "sh", "bash=sh", "cpp", "ruby", "python", "sql", "lua"]
+  let g:pandoc#syntax#codeblocks#embeds#langs = ["shell=sh", "javascript", "cpp", "c", "go", "sh", "bash=sh", "cpp", "ruby", "python", "sql", "lua", "css", "terraform"]
 ]])
 
 -- vim.cmd([[let g:pandoc#syntax#conceal#cchar_overrides = {"footnote" : "*"}]])
 -- + *g:pandoc#syntax#conceal#use*
 --   Use |conceal| for pretty highlighting. Default is 1 for vim version > 7.3
-
--- + *g:pandoc#syntax#conceal#blacklist* A list of rules |conceal| should not be
---   used with. Works as a blacklist, and defaults to [] (use conceal everywhere).
-
---   This is a list of the rules wich can be used here:
-
---   - titleblock
---   - image
---   - block
---   - subscript
---   - superscript
---   - strikeout
---   - atx
---   - codeblock_start
---   - codeblock_delim
---   - footnote
---   - definition
---   - list
---   - newline
---   - dashes
---   - ellipses
---   - quotes
---   - inlinecode
 
 --   To review what are the rules for, look for the call to |s:WithConceal| in
 --   syntax/pandoc.vim that takes the corresponding  rulename as first argument.

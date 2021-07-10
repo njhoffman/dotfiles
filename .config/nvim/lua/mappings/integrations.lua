@@ -2,9 +2,16 @@
 -- gitsigns
 --   buffer = true?
 local integrations_map = {
-  ["E"] = { "<cmd>NvimTreeToggle<cr>", "toggle explorer" },
+  ["<CR>"] = { "enter zettel link" },
+  ["<F2>"] = { "<cmd>WhichKey<cr>", "toggle whichkey" },
+  ["<F3>"] = { "<cmd>NvimTreeToggle<cr>", "toggle explorer" },
+  ["<F4>"] = { "<cmd>MundoToggle<cr>", "toggle undo tree" },
+  ["<F5>"] = { "<cmd>FloatermToggle<cr>", "terminal" },
+  ["<F6>"] = { "<cmd>TSPlaygroundToggle<cr>", "terminal" },
   ["U"] = { "<cmd>MundoToggle<cr>", "toggle undo tree" },
   ["T"] = { "<cmd>FloatermToggle<cr>", "terminal" },
+  ["<leader>tt"] = { "toggle markdown checkbox " },
+  ["<leader>tm"] = { "toggle table mode" },
   ["<leader>."] = { [[:call AltCommand(expand('%'), ':e')<cr>]], "load alt file" },
   ["<leader>o"] = {
     name = "+open",
@@ -20,6 +27,20 @@ local integrations_map = {
     ["c"] = { "<cmd>PackerClean<cr>", "clean" },
     ["S"] = { "<cmd>PackerStatus<cr>", "status" },
   },
+  ["z"] = {
+    name = "+zettelkasten",
+    ["n"] = { "create new note" },
+    ["i"] = { "open zettel home" },
+    ["z"] = { "search, open/create note" },
+    ["Z"] = { "search, insert id" },
+    ["b"] = { "find backlinks" },
+    ["B"] = { "find backlinks, insert" },
+    ["t"] = { "find tags, insert" },
+    ["s"] = { "start server" },
+    ["]"] = { "next zettel link" },
+    ["["] = { "prev zettel link" },
+  },
+
   ["<leader>g"] = {
     name = "+git",
     ["f"] = { "<cmd>Telescope git_files<cr>", "files" },

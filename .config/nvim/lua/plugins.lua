@@ -35,8 +35,10 @@ return packer.startup({
       use { "p00f/nvim-ts-rainbow", requires = "nvim-treesitter" }
       use { "windwp/nvim-ts-autotag", requires = "nvim-treesitter" }
       use { "nvim-treesitter/playground", requires = "nvim-treesitter" }
+      use { "romgrk/nvim-treesitter-context", requires = "nvim-treesitter" }
       use { "nvim-treesitter/nvim-treesitter-refactor", requires = "nvim-treesitter" }
       use { "nvim-treesitter/nvim-treesitter-textobjects", requires = "nvim-treesitter" }
+
     end
 
     -- ====================================
@@ -247,6 +249,8 @@ return packer.startup({
     use "folke/todo-comments.nvim"
     use "b3nj5m1n/kommentary"
     use "terryma/vim-multiple-cursors"
+    use "dhruvasagar/vim-table-mode"
+    use "nicwest/vim-camelsnek"
 
     -- ====================================
     -- System utils

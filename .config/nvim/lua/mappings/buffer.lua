@@ -7,10 +7,8 @@ map("n", "<leader>ns", [[:vsp <C-R>=expand("%:p:h") . "/" <CR>]], { silent = fal
 map("n", "<leader>nt", [[:tabedit <C-R>=expand("%:p:h") . "/" <CR>]], { silent = false })
 
 -- map("n", ",gdb", "<Plug>(EasyAlign)", {noremap = false, silent = true})
--- map("n", "<F6>", ":NvimTreeToggle<CR>")
 -- map("n", "<C-n>", ":NvimTreeToggle<CR>")
 -- vim.api.nvim_set_keymap("n", "<Leader>d", ":Sayonara<CR>", {noremap = true, silent = true})
--- map("n", "<leader>wk", ":WhichKey<CR>", {silent = true})
 
 -- " toggle fold under cursor
 -- nnoremap <silent> zz zA
@@ -30,6 +28,8 @@ map("n", "<leader>nt", [[:tabedit <C-R>=expand("%:p:h") . "/" <CR>]], { silent =
 local buffer_map = {
   -- ["q"] = {"<cmd>update | bdelete<CR>", "Save and safely remove buffer"},
   -- [":"] = { ":<C-f>", "auto open task window" },
+  -- ["<Leader>s"] = { "<cmd>call scratch#insert(0)<cr>", "scratch clear"},
+  -- ["<Leader>S"] = { "<cmd>call scratch#insert(1)<cr>", "scratch reuse"},
   ["Q"] = { "<nop>" },
   ["_"] = { "<cmd>noh<cr> | :nohlsearch<cr>", "remove highlight" },
   ["<c-q>"] = { "<cmd>silent! tabclose | qa<cr>", "Quick exit without saving" },
@@ -42,8 +42,6 @@ local buffer_map = {
   ["L"] = { "<cmd>BufferNext<CR>", "Buffer right" },
   ["ZZ"] = "Write if modified and exit",
   ["p"] = { "p`]", "Jump to end of pasted text" },
-  -- ["<Leader>s"] = { "<cmd>call scratch#insert(0)<cr>", "scratch clear"},
-  -- ["<Leader>S"] = { "<cmd>call scratch#insert(1)<cr>", "scratch reuse"},
   ["<leader>"] = {
     ["<cr>"] = { "<cmd>noh<cr>", "remove highlight" },
     ["q"] = { "<cmd>silent! tabclose | Sayonara<cr>", "Close window saving" },
@@ -54,12 +52,21 @@ local buffer_map = {
     -- ["*"] = "save all buffers",
     -- ["["] = {"<cmd>bprev<cr>", "prev buffer"},
     -- ["]"] = {"<cmd>bnext<cr>", "next buffer"},
-    ["<leader>n"] = {
+    ["n"] = {
       name = "+new",
       ["f"] = "create new file",
       ["s"] = "create new file in a split",
       ["t"] = "create new file in tab",
     },
+    ["cl"] = {
+      name = "+conceallevel",
+      ["l"] = { "<cmd>set conceallevel=0<cr>", "(clear) conceallevel 0" },
+      ["0"] = { "<cmd>set conceallevel=0<cr>", "set conceallevel 0" },
+      ["1"] = { "<cmd>set conceallevel=1<cr>", "set conceallevel 1" },
+      ["2"] = { "<cmd>set conceallevel=2<cr>", "set conceallevel 2" },
+      ["3"] = { "<cmd>set conceallevel=3<cr>", "set conceallevel 3" },
+    },
+
     -- ["<leader>s"] = {
     --   name = "+session",
     --   ["s"] = {"<cmd>SSave<cr>", "session save"},

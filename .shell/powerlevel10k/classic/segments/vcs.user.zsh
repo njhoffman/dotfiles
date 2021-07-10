@@ -85,6 +85,11 @@ function my_git_formatter() {
   # ⇡42 if ahead of the remote; no leading space if also behind the remote: ⇣42⇡42.
   (( VCS_STATUS_COMMITS_AHEAD && !VCS_STATUS_COMMITS_BEHIND )) && res+=" "
   (( VCS_STATUS_COMMITS_AHEAD  )) && res+="${clean} ${VCS_STATUS_COMMITS_AHEAD}"
+  # ⇠42 if behind the push remote.
+  (( VCS_STATUS_PUSH_COMMITS_BEHIND )) && res+=" ${clean}⇠${VCS_STATUS_PUSH_COMMITS_BEHIND}"
+  (( VCS_STATUS_PUSH_COMMITS_AHEAD && !VCS_STATUS_PUSH_COMMITS_BEHIND )) && res+=" "
+  # ⇢42 if ahead of the push remote; no leading space if also behind: ⇠42⇢42.
+  (( VCS_STATUS_PUSH_COMMITS_AHEAD  )) && res+="${clean}⇢${VCS_STATUS_PUSH_COMMITS_AHEAD}"
   # *42 if have stashes.
   (( VCS_STATUS_STASHES        )) && res+=" ${clean} ${VCS_STATUS_STASHES}"
   # 'merge' if the repo is in an unusual state.
@@ -99,12 +104,31 @@ function my_git_formatter() {
   # See POWERLEVEL9K_VCS_UNTRACKED_ICON above if you want to use a different icon.
   # Remove the next line if you don't want to see untracked files at all.
   (( VCS_STATUS_NUM_UNTRACKED  )) && res+=" ${untracked}${POWERLEVEL9K_VCS_UNTRACKED_ICON}${VCS_STATUS_NUM_UNTRACKED}"
+    # "─" if the number of unstaged files is unknown. This can happen due to
+    # POWERLEVEL9K_VCS_MAX_INDEX_SIZE_DIRTY (see below) being set to a non-negative number lower
+    # than the number of files in the Git index, or due to bash.showDirtyState being set to false
+    # in the repository config. The number of staged and untracked files may also be unknown
+    # in this case.
+    (( VCS_STATUS_HAS_UNSTAGED == -1 )) && res+=" ${modified}─"
   #
   ##################
 
   typeset -g my_git_format=$res
 }
 functions -M my_git_formatter 2>/dev/null
+# Don't count the number of unstaged, untracked and conflicted files in Git repositories with
+# more than this many files in the index. Negative value means infinity.
+#
+# If you are working in Git repositories with tens of millions of files and seeing performance
+# sagging, try setting POWERLEVEL9K_VCS_MAX_INDEX_SIZE_DIRTY to a number lower than the output
+# of `git ls-files | wc -l`. Alternatively, add `bash.showDirtyState = false` to the repository's
+# config: `git config bash.showDirtyState false`.
+typeset -g POWERLEVEL9K_VCS_MAX_INDEX_SIZE_DIRTY=-1
+
+# Don't show Git status in prompt for repositories whose workdir matches this pattern.
+# For example, if set to '~', the Git repository at $HOME/.git will be ignored.
+# Multiple patterns can be combined with '|': '~(|/foo)|/bar/baz/*'.
+typeset -g POWERLEVEL9K_VCS_DISABLED_WORKDIR_PATTERN='~'
 
 # Disable the default Git status formatting.
 typeset -g POWERLEVEL9K_VCS_DISABLE_GITSTATUS_FORMATTING=true
@@ -133,5 +157,3 @@ typeset -g POWERLEVEL9K_VCS_BACKENDS=(git)
 typeset -g POWERLEVEL9K_VCS_CLEAN_FOREGROUND=76
 typeset -g POWERLEVEL9K_VCS_UNTRACKED_FOREGROUND=76
 typeset -g POWERLEVEL9K_VCS_MODIFIED_FOREGROUND=178
-
-

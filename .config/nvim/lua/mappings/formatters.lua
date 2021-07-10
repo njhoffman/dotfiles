@@ -26,6 +26,12 @@
 -- Try adding this to your .vimrc:
 -- nmap <expr> p yoink#canSwap() ? '<plug>(YoinkPostPasteSwapBack)' : '<plug>(YoinkPaste_p)'
 -- nmap <expr> P yoink#canSwap() ? '<plug>(YoinkPostPasteSwapForward)' : '<plug>(YoinkPaste_P)'
+-- --
+-- :Snek         " converts to snake case     ('foo bar' -> 'foo_bar')
+-- :Camel        " converts to camel case     ('foo bar' -> 'FooBar')
+-- :CamelB       " converts to camelback case ('foo bar' -> 'fooBar')
+-- :Kebab        " converts to kebab case     ('foo bar' -> 'foo-bar')
+--
 local formatters_map = {
   ["<leader>s"] = {
     name = "+surround",
@@ -46,12 +52,5 @@ local formatters_map = {
   },
 }
 
-local opts = {
-  mode = "n",
-  buffer = nil,
-  silent = true,
-  noremap = true,
-  nowait = false,
-}
-
+local opts = { mode = "n", buffer = nil, silent = true, noremap = true, nowait = false }
 require("which-key").register(formatters_map, opts)

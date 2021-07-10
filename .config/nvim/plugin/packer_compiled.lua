@@ -298,6 +298,10 @@ _G.packer_plugins = {
     loaded = true,
     path = "/home/nicholas/.local/share/nvim/site/pack/packer/start/nvim-treesitter"
   },
+  ["nvim-treesitter-context"] = {
+    loaded = true,
+    path = "/home/nicholas/.local/share/nvim/site/pack/packer/start/nvim-treesitter-context"
+  },
   ["nvim-treesitter-refactor"] = {
     loaded = true,
     path = "/home/nicholas/.local/share/nvim/site/pack/packer/start/nvim-treesitter-refactor"
@@ -425,6 +429,10 @@ _G.packer_plugins = {
   ["vim-bbye"] = {
     loaded = true,
     path = "/home/nicholas/.local/share/nvim/site/pack/packer/start/vim-bbye"
+  },
+  ["vim-camelsnek"] = {
+    loaded = true,
+    path = "/home/nicholas/.local/share/nvim/site/pack/packer/start/vim-camelsnek"
   },
   ["vim-checkbox"] = {
     loaded = true,
@@ -575,6 +583,10 @@ _G.packer_plugins = {
   ["vim-systemd-syntax"] = {
     loaded = true,
     path = "/home/nicholas/.local/share/nvim/site/pack/packer/start/vim-systemd-syntax"
+  },
+  ["vim-table-mode"] = {
+    loaded = true,
+    path = "/home/nicholas/.local/share/nvim/site/pack/packer/start/vim-table-mode"
   },
   ["vim-terraform"] = {
     loaded = true,

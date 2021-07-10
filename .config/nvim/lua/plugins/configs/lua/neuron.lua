@@ -7,7 +7,6 @@ require"neuron".setup {
   neuron_dir = "~/zettelkasten",
   leader = "gz", -- the leader key to for all mappings, remember with 'go zettel'
 }
-vim.cmd([[nnoremap <buffer> <CR> <cmd>lua require'neuron'.enter_link()<CR>]])
 -- " click enter on [[my_link]] or [[[my_link]]] to enter it
 -- nnoremap <buffer> <CR> <cmd>lua require'neuron'.enter_link()<CR>
 -- " create a new note

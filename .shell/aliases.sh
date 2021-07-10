@@ -140,7 +140,10 @@ alias open_command="xdg-open"
 alias googler="googler --colors GKmgxy"
 alias g="googler --colors GKmgxy -j --first --lucky"
 alias gs="googler --colors GKmgxy -j"
-alias fakercli="node $HOME/projects/fakercli/lib/index.js"
+if [[ -d "$HOME/projects/personal/fakercli" && -n "$NODE_PATH" ]]; then
+  alias fakercli="node $HOME/projects/personal/fakercli/lib/index.js"
+fi
+
 alias fbt="fb --test"
 
 alias fd="fdfind --hidden -L"
@@ -272,6 +275,7 @@ alias cz="ccze -A"
 alias atask="asynctask -f"
 
 ## TaskWarrior
+# alias task="dstask"
 alias t='task'
 alias tl='task list'
 alias tlp='task list project:'
@@ -326,11 +330,15 @@ alias docker-vis-containers="dockviz containers -d | dot  -Tpng -o containers.pn
 alias docker-vis-networking="docker run --rm -v /var/run/docker.sock:/var/run/docker.sock leoverto/docker-network-graph | dot  -Tpng -o networking.png && feh networking.png && rm networking.png"
 alias docker-vis-compose="docker run --rm -it --name dcv -v $(pwd):/input pmsipilot/docker-compose-viz render -m image docker-compose.yml"
 # reset competion system
+
 alias reset_completion="rm ~/.zcompdump && autoload -U compinit && compinit && autoload -U bashcompinit && bashcompinit"
 
 alias pip-outdated="pip-review && apt-get list --upgradable" # pip-review --local
 alias pip-upgrade-all="pip list --outdated --format=freeze | grep -v '^\-e' | cut -d = -f 1  | xargs -n1 pip install -U"
 
+alias mdless="TERM=screen-256color mdless --theme nick --no-pager"
+
+alias go=richgo
 # GO111MODULE=on go get mvdan.cc/sh/v3/cmd/shfmt
 # TODO: make nvim function that loads exact match, fzf if none found
 if which fasd > /dev/null; then

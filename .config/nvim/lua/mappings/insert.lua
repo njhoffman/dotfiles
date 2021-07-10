@@ -1,6 +1,11 @@
 local map = require("utils.core").map
 
-local insert_map = { ["<c-s>"] = { "<esc><cmd>w<cr>", "Quick save" } }
+local insert_map = {
+  ["<c-s>"] = { "<esc><cmd>w<cr>", "Quick save" },
+  ["||"] = { "enable table mode" },
+  ["__"] = { "disable table mode" },
+
+}
 local insert_opts = { mode = "i", buffer = nil, silent = true, noremap = true, nowait = true }
 
 map("i", "jk", [[col('.') == 1 ? '<esc>' : '<esc>l']], { expr = true })

@@ -7,25 +7,6 @@ vim.g.vim_jsx_pretty_highlight_close_tag = 1
 
 vim.g.javascript_sql_dialect = "pgsql"
 vim.o.background = "dark" -- or "light" for light mode
-vim.g.vim_markdown_conceal_code_blocks = 0
--- vim.g.markdown_fenced_languages = {
---   -- "coffee",
---   -- "css",
---   -- "erb=eruby",
---   "javascript",
---   -- "js=javascript",
---   -- "json=javascript",
---   -- "python",
---   -- "css",
---   "sh",
---   "bash=sh",
---   "sh",
---   -- "html",
---   -- "zsh",
---   -- "ruby",
---   -- "sass",
---   -- "xml",
--- }
 
 local nord = require("colorschemes.lush-themes.nord-nvim")
 
@@ -47,13 +28,6 @@ local nord = require("colorschemes.lush-themes.nord-nvim")
 -- " hi mkdCode ctermfg=88  guifg=#427b58 ctermbg=None cterm=bold
 -- "
 
--- nord_cursor_line_number_background  0 Use the same background on number when cursorline enabled
--- hi VimWikiTag guifg=#994444 gui=italic
--- vim.cmd([[hi! Underlined guibg=none gui=none]]);
--- vim.cmd([[hi! pandocReferenceURL guibg=none gui=none]])
--- vim.cmd([[hi! pandocUListItem guibg=none gui=none]])
--- vim.cmd([[hi! NonText guibg=none gui=none]])
--- vim.cmd([[hi! Folded guibg=none gui=none]])
 
 local clr_over = {
   -- selection = "#2F3243",
@@ -175,7 +149,7 @@ local spec = lush.extends({ nord }).with(function()
     GitSignsDeleteNrFaded { fg = clr_over.red_faded },
     GitSignsDeleteLnFaded { fg = clr_over.red_faded },
     -- html
-    markdownH {},
+    -- markdownH {},
     markdownTSTitle {},
     SpecialKey {},
     htmlH1 { fg = "#45a5f8" },
@@ -259,6 +233,7 @@ local spec = lush.extends({ nord }).with(function()
     -- DapVariableTreeOperator { Operator },
     -- DapVariableTreeString { String },
     -- DapVariableTreeNumber { Number },
+    -- TreesitterContext { NormalFloat  },
     -- -- WhichKey
     WhichKey { fg = "#f78077", style = "bold" },
     WhichKeyGroup { fg = "#619cf4" },
