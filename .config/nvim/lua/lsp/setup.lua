@@ -8,67 +8,46 @@ if config.LSP.enabled ~= 0 and config.LSP.enabled ~= false then
   require("lsp.plugins.lspsaga")
   require("lsp.plugins.lsp_signature")
   require("lsp.plugins.lspkind")
+  require("lsp.plugins.lsp-status")
   require("lsp.plugins.nvim_compe")
-  require("lsp-colors").setup({
-    Error = "#db4b4b",
-    Warning = "#e0af68",
-    Information = "#0db9d7",
-    Hint = "#10B981",
-  })
+  require("lsp-colors").setup({ Error = "#db4b4b", Warning = "#e0af68", Information = "#0db9d7", Hint = "#10B981" })
+
   require("lsp.diagnostics").setup()
   require("lsp.formatters").setup()
-  require("lsp.lsp-status").activate()
   require("snippets").use_suggested_mappings()
 
-  -- require("lspinstall").setup()
-  -- -- Load omnifunc popup icons
-
-  -- -- Load Bash Language Server configuration
-  -- require('lsp.ls.bashls')
-
-  -- -- Load CSS Language Server configuration
+  require("lsp.ls.bashls")
+  require("lsp.ls.cssls")
+  -- require('lsp.ls.clangd') - ccls
+  -- require('lsp.ls.cmake')
   -- require('lsp.ls.cssls')
-
-  -- -- Load Dockerfile Language Server configuration
-  -- require('lsp.ls.dockerls')
-
-  -- Load EFM Language Server configuration
+  -- require('lsp.ls.dhall-lsp') - hls
+  require("lsp.ls.dockerls")
   require("lsp.ls.efmls")
-
-  -- -- Load Gloang Server configuration
+  -- require("lsp.ls.flow")
+  -- require('lsp.ls.graphql')
   require("lsp.ls.gopls")
   -- go get github.com/nametake/golangci-lint-langserver
   -- require("lsp.ls.golangcilsp")
-
-  -- -- Load HTML Language Server configuration
-  -- require('lsp.ls.html')
-
-  -- -- Load Json Language Server configuration
-  -- require('lsp.ls.jsonls')
-
-  -- -- Load Lua Language Server configuration
+  require("lsp.ls.html")
+  require("lsp.ls.jsonls")
   require("lsp.ls.luals")
-
-  -- -- Python Language Server configuration
-  -- require('lsp.ls.pyright')
-
-  -- -- Ruby Language configuration
+  require("lsp.ls.null-ls")
+  -- require('lsp.ls.perlls')
+  -- require('lsp.ls.phpactor')
+  -- require('lsp.ls.pyright') -- pyls, pylsp
   -- require "lsp.ls.solargraph"
-
-  -- -- Rust Language configuration
-  -- require "lsp.ls.rust_analyzer"
-
-  -- -- SQL Language Server configuration
+  -- require "lsp.ls.rust_analyzer" - rls
   -- require('lsp.ls.sqlls')
-
-  -- -- Load TypeScript Language Server (tsserver) configuration
-  -- require('lsp.ls.tsserver')
-
-  -- -- Load Vim Language Server (vls) configuration
-  -- require('lsp.ls.vimls')
-
-  -- -- Load Yaml Language Server (yaml) configuration
+  -- require('lsp.ls.solargraph')
+  -- require('lsp.ls.stylelint-lsp')
+  -- require('lsp.ls.tailwindcss')
+  -- require('lsp.ls.tflint')
+  -- require('lsp.ls.terraformls')
+  require("lsp.ls.tsserver")
+  require("lsp.ls.vimls")
   require("lsp.ls.yamlls")
+  require("lsp.ls.zeta_note")
 
 end
 

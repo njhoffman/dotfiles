@@ -1,5 +1,5 @@
 -- In: lua/rc/telescope/my_make_entry.lua
-local my_make_entry = {}
+local leaderf = {}
 
 local devicons = require "nvim-web-devicons"
 local entry_display = require("telescope.pickers.entry_display")
@@ -7,7 +7,7 @@ local entry_display = require("telescope.pickers.entry_display")
 local filter = vim.tbl_filter
 local map = vim.tbl_map
 
-function my_make_entry.gen_from_buffer_like_leaderf(opts)
+function leaderf.gen_from_buffer(opts)
   opts = opts or {}
   local default_icons, _ = devicons.get_icon("file", "", {default = true})
 
@@ -84,4 +84,4 @@ function my_make_entry.gen_from_buffer_like_leaderf(opts)
   end
 end
 
-return my_make_entry
+return leaderf

@@ -5,10 +5,7 @@ local integrations_map = {
   ["E"] = { "<cmd>NvimTreeToggle<cr>", "toggle explorer" },
   ["U"] = { "<cmd>MundoToggle<cr>", "toggle undo tree" },
   ["T"] = { "<cmd>FloatermToggle<cr>", "terminal" },
-  ["<leader>."] = {
-    [[:call AltCommand(expand('%'), ':e')<cr>]],
-    "load alt file",
-  },
+  ["<leader>."] = { [[:call AltCommand(expand('%'), ':e')<cr>]], "load alt file" },
   ["<leader>o"] = {
     name = "+open",
     ["t"] = { "<cmd>FloatermToggle<cr>", "terminal" },
@@ -19,9 +16,9 @@ local integrations_map = {
     name = "+plugins",
     ["u"] = { "<cmd>PackerUpdate<cr>", "update" },
     ["i"] = { "<cmd>PackerInstall<cr>", "install" },
-    ["S"] = { "<cmd>PackerSync<cr>", "sync" },
+    ["s"] = { "<cmd>PackerSync<cr>", "sync" },
     ["c"] = { "<cmd>PackerClean<cr>", "clean" },
-    ["s"] = { "<cmd>PackerStatus<cr>", "status" },
+    ["S"] = { "<cmd>PackerStatus<cr>", "status" },
   },
   ["<leader>g"] = {
     name = "+git",
@@ -47,13 +44,7 @@ local integrations_map = {
   },
 }
 
-local opts = {
-  mode = "n",
-  buffer = nil,
-  silent = true,
-  noremap = true,
-  nowait = false,
-}
+local opts = { mode = "n", buffer = nil, silent = true, noremap = true, nowait = false }
 
 require("which-key").register(integrations_map, opts)
 

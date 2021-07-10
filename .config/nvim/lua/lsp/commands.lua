@@ -10,6 +10,10 @@ local lsp_commands = {
         "css/vscode-css/css-language-features/server/dist/node/cssServerMain.js",
     "--stdio",
   },
+  dockerls = {
+    lspinstall .. "dockerfile/node_modules/.bin/docker-langserver",
+    "--stdio",
+  },
   go = { lspinstall .. "go/gopls" },
   html = {
     "node",

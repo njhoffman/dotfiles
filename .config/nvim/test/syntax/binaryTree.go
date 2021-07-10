@@ -39,7 +39,7 @@ func (n *Node) insert(data byte) {
 }
 
 func main() {
-	var t Tree
+  var t Tree
 
 	t.insert('F')
 	t.insert('B')

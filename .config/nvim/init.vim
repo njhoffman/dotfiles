@@ -88,4 +88,4 @@ lua << EOF
    require('snippets').use_suggested_mappings()
 EOF
 
-" source $HOME/.config/nvim/plugins.vim
+source $HOME/.config/nvim/plugins.vim

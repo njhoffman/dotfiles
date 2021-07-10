@@ -76,7 +76,7 @@ console.log("inorder traversal");
 // prints 9 10 13 17 22 25 27
 BST.inorder(root);
 
-console.log("postorder traversal");
+  console.log("postorder traversal");
 BST.postorder(root);
 console.log("preorder traversal");
 BST.preorder(root);

@@ -29,21 +29,21 @@ local Opts = config.Opts
 
 local autocmds = {
   Mundo = { { "FileType", "Mundo", "noremap <buffer>  :q<cr>" } },
-  helpfile = {
-    { "FileType", "help", "noremap <buffer> q :q<cr>" },
-    { "FileType", "help", "noremap <buffer>  :q<cr>" },
-  },
+  helpfile = { { "FileType", "help", "noremap <buffer> q :q<cr>" }, { "FileType", "help", "noremap <buffer>  :q<cr>" } },
   fasd = { { "BufWinEnter,BufFilePost", "*", [[call Fasd_update()]] } },
 
   FiletypeDetect = {
     { "BufNewFile,BufRead", "*.ejs", "set ft=html" },
-    { "BufNewFile,BufRead", "*bash*", "let b:is_bash = 1 | setfiletype sh" },
+    { "BufNewFile,BufRead", "*.bash*", "let b:is_bash = 1 | setfiletype sh" },
     { "BufNewFile,BufRead", ".env.*", "setlocal ft=config syn=config" },
     { "BufNewFile,BufRead", "*.env", "setlocal ft=config syn=config" },
+    { "BufNewFile,BufRead", "*.md", "setlocal ft=markdown.pandoc conceallevel=3 nospell wrap" },
     { "BufNewFile,BufRead", ".tasks", "setlocal ft=dosini" },
     { "BufNewFile,BufRead", ".vimtasks", "setlocal ft=dosini" },
     { "BufNewFile,BufRead", "Dockerfile*", "setlocal ft=dockerfile" },
     { "BufNewFile,BufRead", ".dockerignore", "setlocal ft=gitignore" },
+    { "BufNewFile,BufRead", "nord-nick.lua", "setlocal ft=lua.lush" },
+    { "BufNewFile,BufRead", "nord-nvim.lua", "setlocal ft=lua.lush" },
 
     --   au BufNewFile,BufRead *.module setlocal ft=php syn=php
     --   " force bash syntax for shell scripts by default custom syntax extension assignments
@@ -74,10 +74,8 @@ local autocmds = {
 
   },
   filetypes = {
-    { "FileType", "pandoc", "set conceallevel=3 nospell wrap" },
-    { "FileType", "pandoc", "hi! Underlined gui=NONE" },
-    -- { "FileType", "pandoc", "hi! pandocAtxStart guibg=#45a5f8" },
-    { "FileType", "pandoc", "hi! pandocAtxHeader guifg=#4575b8 gui=bold" },
+    { "FileType", "lua.lush", "" },
+    { "FileType", "markdown.pandoc", "set conceallevel=3 nospell wrap" },
     -- { "FileType", "markdown", "hi! markdownH1 guifg=#45a5f8" },
     -- { "FileType", "markdown", "hi! markdownH2 guifg=#45a5e8" },
     -- { "FileType", "markdown", "hi! markdownH3 guifg=#45a5d8" },
@@ -92,10 +90,7 @@ local autocmds = {
     -- { "FocusGained", "*", "hi TermCursor cterm=reverse gui=reverse"},
     { "VimLeave,VimSuspend", "*", "set guicursor=a:block-blinkon90" },
   },
-  terminal = {
-    { "TermOpen", "*", [[tnoremap <buffer> <Esc> <c-\><c-n>]] },
-    { "TermOpen", "*", "set nonu" },
-  },
+  terminal = { { "TermOpen", "*", [[tnoremap <buffer> <Esc> <c-\><c-n>]] }, { "TermOpen", "*", "set nonu" } },
   packer = {
     { "BufWritePost", "plugins.lua", "PackerCompile" },
     { "BufWritePost", "plugins-config.lua", "PackerCompile" },
@@ -111,20 +106,10 @@ local autocmds = {
 }
 
 -- define tables to insert
-local hl_yank = {
-  {
-    "TextYankPost",
-    "*",
-    "silent! lua vim.highlight.on_yank { higroup='IncSearch', timeout=400 }",
-  },
-}
+local hl_yank = { { "TextYankPost", "*", "silent! lua vim.highlight.on_yank { higroup='IncSearch', timeout=400 }" } }
 
 local preserve_cursor = {
-  {
-    "BufReadPost",
-    "*",
-    [[if line("'\"") > 1 && line("'\"") <= line("$") | exe "normal! g'\"" | endif]],
-  },
+  { "BufReadPost", "*", [[if line("'\"") > 1 && line("'\"") <= line("$") | exe "normal! g'\"" | endif]] },
 }
 
 local trim_whitespaces = {
@@ -134,19 +119,16 @@ local trim_whitespaces = {
 }
 
 -- insert tables if true or nil
-if Opts.preserve_cursor == true or Opts.preserve_cursor == nil then
-  table.insert(autocmds, preserve_cursor)
-end
+if Opts.preserve_cursor == true or Opts.preserve_cursor == nil then table.insert(autocmds, preserve_cursor) end
 
-if Opts.highlight_yank == true or Opts.highlight_yank == nil then
-  table.insert(autocmds, hl_yank)
-end
+if Opts.highlight_yank == true or Opts.highlight_yank == nil then table.insert(autocmds, hl_yank) end
 
 --[[ if Formatting.format_on_save == true or Formatting.format_on_save == nil then
   -- table.insert(autocmds, format)
 end ]]
 
-if Formatting.trim_trailing_space == true or Formatting.trim_trailing_space ==
-    nil then table.insert(autocmds, trim_whitespaces) end
+if Formatting.trim_trailing_space == true or Formatting.trim_trailing_space == nil then
+  table.insert(autocmds, trim_whitespaces)
+end
 
 u.define_augroups(autocmds)

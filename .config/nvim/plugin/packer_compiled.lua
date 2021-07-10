@@ -1,17 +1,14 @@
-" Automatically generated packer.nvim plugin loader code
+-- Automatically generated packer.nvim plugin loader code
 
-if !has('nvim-0.5')
-  echohl WarningMsg
-  echom "Invalid Neovim version for packer.nvim!"
-  echohl None
-  finish
-endif
+if vim.api.nvim_call_function('has', {'nvim-0.5'}) ~= 1 then
+  vim.api.nvim_command('echohl WarningMsg | echom "Invalid Neovim version for packer.nvim! | echohl None"')
+  return
+end
 
-packadd packer.nvim
+vim.api.nvim_command('packadd packer.nvim')
 
-try
+local no_errors, error_msg = pcall(function()
 
-lua << END
   local time
   local profile_info
   local should_profile = false
@@ -80,6 +77,10 @@ _G.packer_plugins = {
     loaded = true,
     path = "/home/nicholas/.local/share/nvim/site/pack/packer/start/JABS.nvim"
   },
+  ["TrueZen.nvim"] = {
+    loaded = true,
+    path = "/home/nicholas/.local/share/nvim/site/pack/packer/start/TrueZen.nvim"
+  },
   ["ansible-vim"] = {
     loaded = true,
     path = "/home/nicholas/.local/share/nvim/site/pack/packer/start/ansible-vim"
@@ -99,6 +100,10 @@ _G.packer_plugins = {
   ["barbar.nvim"] = {
     loaded = true,
     path = "/home/nicholas/.local/share/nvim/site/pack/packer/start/barbar.nvim"
+  },
+  ["cheatsheet.nvim"] = {
+    loaded = true,
+    path = "/home/nicholas/.local/share/nvim/site/pack/packer/start/cheatsheet.nvim"
   },
   ["compe-tabnine"] = {
     loaded = true,
@@ -229,6 +234,10 @@ _G.packer_plugins = {
     loaded = true,
     path = "/home/nicholas/.local/share/nvim/site/pack/packer/start/null-ls.nvim"
   },
+  ["nvim-anywise-reg.lua"] = {
+    loaded = true,
+    path = "/home/nicholas/.local/share/nvim/site/pack/packer/start/nvim-anywise-reg.lua"
+  },
   ["nvim-bqf"] = {
     loaded = true,
     path = "/home/nicholas/.local/share/nvim/site/pack/packer/start/nvim-bqf"
@@ -292,6 +301,10 @@ _G.packer_plugins = {
   ["nvim-treesitter-refactor"] = {
     loaded = true,
     path = "/home/nicholas/.local/share/nvim/site/pack/packer/start/nvim-treesitter-refactor"
+  },
+  ["nvim-treesitter-textobjects"] = {
+    loaded = true,
+    path = "/home/nicholas/.local/share/nvim/site/pack/packer/start/nvim-treesitter-textobjects"
   },
   ["nvim-ts-autotag"] = {
     loaded = true,
@@ -413,6 +426,10 @@ _G.packer_plugins = {
     loaded = true,
     path = "/home/nicholas/.local/share/nvim/site/pack/packer/start/vim-bbye"
   },
+  ["vim-checkbox"] = {
+    loaded = true,
+    path = "/home/nicholas/.local/share/nvim/site/pack/packer/start/vim-checkbox"
+  },
   ["vim-cool"] = {
     loaded = true,
     path = "/home/nicholas/.local/share/nvim/site/pack/packer/start/vim-cool"
@@ -506,10 +523,6 @@ _G.packer_plugins = {
   ["vim-node"] = {
     loaded = true,
     path = "/home/nicholas/.local/share/nvim/site/pack/packer/start/vim-node"
-  },
-  ["vim-pandoc"] = {
-    loaded = true,
-    path = "/home/nicholas/.local/share/nvim/site/pack/packer/start/vim-pandoc"
   },
   ["vim-pandoc-syntax"] = {
     loaded = true,
@@ -627,11 +640,8 @@ time([[Defining lazy-load event autocommands]], false)
 vim.cmd("augroup END")
 if should_profile then save_profiles(0) end
 
-END
+end)
 
-catch
-  echohl ErrorMsg
-  echom "Error in packer_compiled: " .. v:exception
-  echom "Please check your config for correctness"
-  echohl None
-endtry
+if not no_errors then
+  vim.api.nvim_command('echohl ErrorMsg | echom "Error in packer_compiled: '..error_msg..'" | echom "Please check your config for correctness" | echohl None')
+end

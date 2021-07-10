@@ -61,7 +61,7 @@ vim.g.vimade = {
   -- },
   rowbufsize = 15,
   colbufsize = 15,
-  fadelevel = 0.6,
+  fadelevel = 0.5,
   signsretentionperiod = 1000,
   fadepriority = 50,
   enablesigns = 1,

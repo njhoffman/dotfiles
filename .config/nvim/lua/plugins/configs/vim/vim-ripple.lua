@@ -8,13 +8,14 @@ vim.g.ripple_enable_mappings = 0
 -- <Plug>(ripple_send_line)	yrr (nmap)	Send line to REPL
 -- <Plug>(ripple_send_buffer)	yr<cr> (nmap)	Send whole buffer to REPL
 
-vim.g.default_repls = {
-  python = {"ipython", "\\<c-u>\\<esc>[200~", "\\<esc>[201~", 1},
+vim.g.ripple_repls = {
+  javascript = "baapan",
+  python = { "ipython", "\\<c-u>\\<esc>[200~", "\\<esc>[201~", 1 },
   julia = "julia",
   lua = "lua",
   r = "R",
   ruby = "irb",
   scheme = "guile",
   sh = "bash",
-  zsh = {"zsh", "", "", 0, vim.fn.Remove_comments}
+  zsh = { "zsh", "", "", 0, vim.fn.Remove_comments },
 }

@@ -1,4 +1,5 @@
 #!/usr/bin/env bash
+
 set -e
 
 # packer
@@ -12,7 +13,7 @@ if [ "$system_type" = "Darwin" ]; then
   brew install markdownlint-cli
   fd 'clangd$' /usr/local/ --exec ln -s '{}' "$HOME"/.local/bin | :
 
-  curl -L https://github.com/rust-analyzer/rust-analyzer/releases/download/nightly/rust-analyzer-mac.gz | gunzip -f >"$HOME"/.local/bin/rust-analyzer && chmod +x "$HOME"/.local/bin/rust-analyzer
+  curl -L https://github.com/rust-analyzer/rust-analyzer/releases/download/nightly/rust-analyzer-mac.gz | gunzip -f > "$HOME"/.local/bin/rust-analyzer && chmod +x "$HOME"/.local/bin/rust-analyzer
 
 else
   sudo apt-get install -y \
@@ -20,7 +21,7 @@ else
     clang-tools \
     ;
 
-  curl -L https://github.com/rust-analyzer/rust-analyzer/releases/download/nightly/rust-analyzer-linux.gz | gunzip -f >"$HOME"/.local/bin/rust-analyzer && chmod +x "$HOME"/.local/bin/rust-analyzer
+  curl -L https://github.com/rust-analyzer/rust-analyzer/releases/download/nightly/rust-analyzer-linux.gz | gunzip -f > "$HOME"/.local/bin/rust-analyzer && chmod +x "$HOME"/.local/bin/rust-analyzer
 fi
 
 sudo npm install -g -f \

@@ -14,14 +14,22 @@ local on_attach = function(client, bufnr)
   print("'" .. client.name .. "' server attached")
 end
 
-lspconfig.bashls.setup {
+lspconfig.zeta_note.setup {
   capabilities = capabilities,
-  cmd = lsp_cmds.bash,
-  cmd_env = { GLOB_PATTERN = "*@(.sh|.inc|.bash|.command)" },
-  --   root_dir = function(fname)
-  --   return lspconfig.util.root_pattern(".git")(fname) or
-  --              lspconfig.util.path.dirname(fname)
-  -- end,
-  filetypes = { "sh", "bash", "conf", "zsh" },
   on_attach = on_attach,
+  root_dir = lspconfig.util.root_pattern(".zeta.toml"),
+  -- root_dir = function(fname)
+  --   return lspconfig.util.root_pattern(".git")(fname) or lspconfig.util.path.dirname(fname)
+  -- end,
+  cmd = { "/home/nicholas/.cargo/bin/zeta-note" },
+  filetypes = { "markdown", "markdown.pandoc" },
+  settings = {
+    zetaNote = {
+      customCommand = "zeta-note",
+      customCommandDir = "",
+      trace = {
+        server = "messages", -- enum { "off", "messages", "verbose" }
+      },
+    },
+  },
 }

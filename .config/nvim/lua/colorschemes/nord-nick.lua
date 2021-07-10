@@ -1,11 +1,4 @@
--- -- vim.cmd([[set background=dark]])
--- vim.cmd([[hi clear]])
--- vim.cmd([[
--- if exists('syntax_on')
---   syntax reset
---   endif
--- ]])
--- vim.cmd([[let g:colors_name='nord']])
+
 local lush = require("lush")
 local hsl = lush.hsl
 
@@ -15,24 +8,24 @@ vim.g.vim_jsx_pretty_highlight_close_tag = 1
 vim.g.javascript_sql_dialect = "pgsql"
 vim.o.background = "dark" -- or "light" for light mode
 vim.g.vim_markdown_conceal_code_blocks = 0
-vim.g.markdown_fenced_languages = {
-  -- "coffee",
-  -- "css",
-  -- "erb=eruby",
-  "javascript",
-  -- "js=javascript",
-  -- "json=javascript",
-  -- "python",
-  -- "css",
-  "sh",
-  "bash=sh",
-  "sh",
-  -- "html",
-  -- "zsh",
-  -- "ruby",
-  -- "sass",
-  -- "xml",
-}
+-- vim.g.markdown_fenced_languages = {
+--   -- "coffee",
+--   -- "css",
+--   -- "erb=eruby",
+--   "javascript",
+--   -- "js=javascript",
+--   -- "json=javascript",
+--   -- "python",
+--   -- "css",
+--   "sh",
+--   "bash=sh",
+--   "sh",
+--   -- "html",
+--   -- "zsh",
+--   -- "ruby",
+--   -- "sass",
+--   -- "xml",
+-- }
 
 local nord = require("colorschemes.lush-themes.nord-nvim")
 
@@ -86,23 +79,29 @@ local spec = lush.extends({ nord }).with(function()
     PmenuThumb { fg = "#8f93a2", bg = "#84ffff" },
     SignColumn { bg = "none" },
     -- CursorLine { bg = nord.CursorLine.bg.darken(50), gui = "none" },
-    CursorLine { bg = "#142028", gui = "none" },
+    CursorLine { bg = "#101018", gui = "none" },
     CursorLineNr { fg = "#afd7ff", bg = CursorLine.bg },
     CursorColumn {},
     -- base groups
     -- Normal { fg = nord.Normal.fg.darken(15), bg = "#000000" },
-    Normal { fg = nord.Normal.fg.darken(15), bg = "none" },
-    String { fg = "#22bb99" },
+    Normal { fg = nord.Normal.fg.darken(25), bg = "none" },
+    -- String { fg = "#22bb99" },
+    Function { fg = "#6e99c6" },
+    String { fg = "#00a0a9" },
     Comment { fg = "#5c667a", gui = "italic" },
     Constant { fg = "#6699aa" },
-    Identifier { fg = "#8eb9c6" },
-    Type { fg = "#818cc4" },
+    Identifier { fg = "#6e99c6" },
+    Keyword { fg = "#6177b8" },
+    -- Type { fg = "#818cc4" },
+    Type { fg = "#518cb4" },
     MatchParen { fg = "#60a0a0", bg = "000022" },
     MatchParenCursor { fg = "#a0c0b0" },
     Visual { fg = "none", bg = clr_over.selection },
     VisualNOS { fg = "none", bg = clr_over.selection },
-    Search { fg = "#7dafff" },
+    -- Search { fg = "#7dafff" },
+    Search { bg = "#0d314c" },
     IncSearch { fg = "#eceff4", bg = "#5d81ac" },
+    -- IncSearch { fg = "#eceff4", bg = "#5d81ac" },
     -- IncSearch =				{ fg = material.highlight, bg = material.title, style = 'reverse' },
     -- IncSearch { fg = clrs.nord6, bg = clrs.nord10, gui = spec.underline },
 
@@ -157,6 +156,7 @@ local spec = lush.extends({ nord }).with(function()
     -- jsExportDefaultGroup {jsExportDefault},
     -- jsLabel {Label},
     --- nvim-hlslens
+    Conceal { bg = "none" }, -- fg = Normal.fg.ro(10)
     HlSearchLensCur { fg = "#ff2266", bg = "#003333" },
     HlSearchLens { fg = "#00ddff", bg = "none" },
     HlSearchCur { fg = "#00ffdd", bg = "none" },
@@ -192,7 +192,25 @@ local spec = lush.extends({ nord }).with(function()
     markdownH6 { fg = "#45a5a8" },
     mkdHeading { fg = "#557588" },
     markdownLinkText { fg = "#00ccff" },
-    pandocUListItem { gui = "none" },
+    pandocUListItem { gui = "none", bg = "none" },
+    pandocNoFormatted { bg = "none" },
+    pandocOperator { bg = "none" },
+    pandocReferenceDefinition { fg = "#7788ff", bg = "none" },
+    pandocAtxHeader { fg = "#4575b8" },
+    pandocAtxHeaderMark { fg = "#4575f8" },
+    pandocAtxStart { fg = "#4575f8" },
+    helpHyperTextJump { fg = "#6585b8" },
+    VertSplit { fg = "#646Dcf", bg = "#2C2343", gui = "NONE" },
+    Folded { fg = "#6D778a", bg = "#121212", gui = "bold" },
+    FoldColumn { fg = "#4D576A", bg = "#121212" },
+    Scrollbar { bg = "#111111", fg = "#334863" },
+
+    -- FoldColumn { fg = clrs.nord3, bg = clrs.nord0 },
+    -- SignColumn { fg = clrs.nord1.li(2), bg = clrs.nord0 },
+
+    -- { "FileType", "markdown.pandoc", "hi! Underlined gui=NONE" },
+    -- { "FileType", "markdown.pandoc", "hi! pandocAtxStart guifg=#45a5f8" },
+    -- { "FileType", "markdown.pandoc", "hi! pandocAtxHeader guifg=#4575b8 gui=bold" },
 
     -- TSStrike = {},
     -- TSUnderline = {},
@@ -241,6 +259,13 @@ local spec = lush.extends({ nord }).with(function()
     -- DapVariableTreeOperator { Operator },
     -- DapVariableTreeString { String },
     -- DapVariableTreeNumber { Number },
+    -- -- WhichKey
+    WhichKey { fg = "#f78077", style = "bold" },
+    WhichKeyGroup { fg = "#619cf4" },
+    -- WhichKeyDesc = { fg = clrs.nord7, style = "italic" },
+    -- WhichKeySeperator = { fg = clrs.fg },
+    -- WhichKeyFloating = { bg = clrs.float },
+    -- WhichKeyFloat = { bg = clrs.float },
   }
 end)
 

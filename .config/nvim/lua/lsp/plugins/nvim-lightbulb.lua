@@ -1,6 +1,6 @@
 local af = require("utils.autofunc")
 -- Showing defaults
-require"nvim-lightbulb".update_lightbulb {
+return require"nvim-lightbulb".update_lightbulb {
   sign = {
     enabled = false,
     -- Priority of the gutter sign
@@ -27,16 +27,16 @@ require"nvim-lightbulb".update_lightbulb {
     win_opts = {},
   },
   virtual_text = {
-    enabled = true,
+    enabled = false,
     -- Text to show at virtual text
     text = "💡",
   },
   status_text = {
-    enabled = false,
+    enabled = true,
     -- Text to provide when code actions are available
     text = "💡",
     -- Text to provide when no actions are available
-    text_unavailable = "",
+    text_unavailable = "(none)",
   },
 }
 

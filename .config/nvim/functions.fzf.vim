@@ -205,3 +205,89 @@ command! -bang Clips call s:fzf_yanks()
 command! Fasd call fzf#run(fzf#wrap({'source': 'fasd -a', 'options': '--no-sort --tac --tiebreak=index', 'window': _fzf_get_window_props() }))
 command! Fasdd call fzf#run(fzf#wrap({'source': 'fasd -dl', 'options': '--no-sort --tac --tiebreak=index', 'window': _fzf_get_window_props()}))
 command! Fasdf call fzf#run(fzf#wrap({'source': 'fasd -fl', 'options': '--no-sort --tac --tiebreak=index', 'window': _fzf_get_window_props()}))
+
+""""""""""""
+" :VMaps
+function! GetVMaps()
+  redir => cout
+  silent vmap
+  redir END
+  return reverse(split(cout, "\n")[1:])
+endfunction
+
+function! VmapHandler(vmap)
+  echo a:vmap
+  " let vmapkeys = split(a:vmap, '\s\+')[0]
+  " execute "normal " . vmapkeys . "\<c-o>"
+endfunction
+
+command! VMaps call fzf#run(fzf#wrap({ 'source': GetVMaps(), 'sink': function('VmapHandler'),  'window': _fzf_get_window_props()}))
+
+""""""""""""
+" :IMaps
+function! GetIMaps()
+  redir => cout
+  silent imap
+  redir END
+  return reverse(split(cout, "\n")[1:])
+endfunction
+
+function! ImapHandler(imap)
+  echo a:imap
+  " let imapkeys = split(a:imap, '\s\+')[0]
+  " execute "normal " . imapkeys . "\<c-o>"
+endfunction
+
+command! IMaps call fzf#run(fzf#wrap({ 'source': GetIMaps(), 'sink': function('ImapHandler'),  'window': _fzf_get_window_props()}))
+
+""""""""""""
+" :CMaps
+function! GetCMaps()
+  redir => cout
+  silent cmap
+  redir END
+  return reverse(split(cout, "\n")[1:])
+endfunction
+
+function! CmapHandler(cmap)
+  echo a:cmap
+  " let cmapkeys = split(a:cmap, '\s\+')[0]
+  " execute "normal " . cmapkeys . "\<c-o>"
+endfunction
+
+command! CMaps call fzf#run(fzf#wrap({ 'source': GetCMaps(), 'sink': function('CmapHandler'),  'window': _fzf_get_window_props()}))
+
+""""""""""""
+" :OMaps
+function! GetOMaps()
+  redir => cout
+  silent omap
+  redir END
+  return reverse(split(cout, "\n")[1:])
+endfunction
+
+function! OmapHandler(omap)
+  echo a:omap
+  " let omapkeys = split(a:omap, '\s\+')[0]
+  " execute "normal " . omapkeys . "\<c-o>"
+endfunction
+
+command! OMaps call fzf#run(fzf#wrap({ 'source': GetOMaps(), 'sink': function('OmapHandler'),  'window': _fzf_get_window_props()}))
+
+
+""""""""""""
+" :TMaps
+function! GetTMaps()
+  redir => cout
+  silent tmap
+  redir END
+  return reverse(split(cout, "\n")[1:])
+endfunction
+
+function! TmapHandler(tmap)
+  echo a:tmap
+  " let tmapkeys = split(a:tmap, '\s\+')[0]
+  " execute "normal " . tmapkeys . "\<c-o>"
+endfunction
+
+command! TMaps call fzf#run(fzf#wrap({ 'source': Gettmaps(), 'sink': function('tmapHandler'),  'window': _fzf_get_window_props()}))

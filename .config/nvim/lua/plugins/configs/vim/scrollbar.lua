@@ -1,16 +1,8 @@
 local af = require("../utils/autofunc")
 
 vim.g.scrollbar_right_offset = 0
-vim.g.scrollbar_highlight = {
-  head = "NonText",
-  body = "NonText",
-  tail = "NonText"
-}
-vim.g.scrollbar_shape = {
-  head = "▖",
-  body = "▌",
-  tail = "▘"
-}
+vim.g.scrollbar_highlight = { head = "Scrollbar", body = "Scrollbar", tail = "Scrollbar" }
+vim.g.scrollbar_shape = { head = "▖", body = "▌", tail = "▘" }
 
 af("CursorMoved,VimResized,QuitPre", "*", "silent! lua require('scrollbar').show()")
 af("WinEnter,FocusGained", "*", "silent! lua require('scrollbar').show()")

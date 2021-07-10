@@ -46,44 +46,44 @@ colors:
   # COLORSCHEME: horizon-dark.yaml
   # Primary colors
   primary:
-    background: '#000000'
-    foreground: '#839496'
+    background: "#000000"
+    foreground: "#839496"
 
   # Normal colors
   normal:
-    black: '#444444'
-    red: '#b03638'
-    green: '#3fd4b7'
+    black: "#444444"
+    red: "#b03638"
+    green: "#3fd4b7"
     # green:   '#22bb99'
-    yellow: '#bba397'
-    blue: '#3182ad'
-    magenta: '#6a7bef'
-    cyan: '#60b1cc'
-    white: '#ded8c5'
+    yellow: "#bba397"
+    blue: "#3182ad"
+    magenta: "#6a7bef"
+    cyan: "#60b1cc"
+    white: "#ded8c5"
 
     # Bright colors
   bright:
-    black: '#666666'
-    red: '#dc6a78'
+    black: "#666666"
+    red: "#dc6a78"
     # green:   '#33ccaa'
-    green: '#4fffd7'
-    yellow: '#dbb397'
-    blue: '#71a2ff'
-    magenta: '#8aabff'
-    cyan: '#80d1f3'
-    white: '#a5a8aa'
+    green: "#4fffd7"
+    yellow: "#dbb397"
+    blue: "#71a2ff"
+    magenta: "#8aabff"
+    cyan: "#80d1f3"
+    white: "#a5a8aa"
 
     # Dim colors
   dim:
-    black: '#222222'
-    red: '#9c2326'
+    black: "#222222"
+    red: "#9c2326"
     # green:   '#22aa88'
-    green: '#4fd4a7'
-    yellow: '#97822e'
-    blue: '#31829d'
-    magenta: '#5e4bcf'
-    cyan: '#398eba'
-    white: '#686879'
+    green: "#4fd4a7"
+    yellow: "#97822e"
+    blue: "#31829d"
+    magenta: "#5e4bcf"
+    cyan: "#398eba"
+    white: "#686879"
 
   # cursor:
   #   text: '0xf1c1c1'
@@ -106,19 +106,16 @@ cursor:
 live_config_reload: true
 
 key_bindings:
-  - {key: L, mods: Control, action: ReceiveChar}
-  - {key: U, mods: Control, action: ReceiveChar}
+  - { key: L, mods: Control, action: ReceiveChar }
+  - { key: U, mods: Control, action: ReceiveChar }
 
 env:
   TERM: xterm-256color
-
   #debug:
   # Display the time it takes to redraw each frame.
   #render_timer: false
-
   # Keep the log file after quitting Alacritty.
   #persistent_logging: false
-
   # Log level
   #
   # Values for `log_level`:
@@ -129,9 +126,7 @@ env:
   #   - Debug
   #   - Trace
   #log_level: Warn
-
   # Print all received window events.
   #print_events: false
-
   # Record all characters and escape sequences as test data.
   # ref_test: false

@@ -23,6 +23,8 @@ end
 
 M.format = function()
   if not vim.g[format_disabled_var()] then
+    --     [[ autocmd BufWritePre * :lua vim.lsp.buf.formatting_sync(nil, 500) ]])
+    -- vim.api.nvim_command([[autocmd BufWritePost <buffer> lua vim.lsp.buf.formatting_sync(nil, 500)]])
     vim.lsp.buf.formatting(vim.g[format_options_var()] or {})
   end
 end

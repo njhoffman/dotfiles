@@ -2,17 +2,6 @@ local plugin = {}
 local actions = require("telescope.actions")
 local map = require("utils.core").map
 
--- local center_list =
---   require "telescope.themes".get_dropdown(
---   {
---     width = 0.5,
---     results_title = false,
---     results_height = 20,
---     previewer = false,
---     color_devicons = true
---   }
--- )
-
 -- local with_preview =
 --   require "telescope.themes".get_dropdown(
 --   {
@@ -36,18 +25,17 @@ local map = require("utils.core").map
 -- Dropdown list theme using a builtin theme definitions :
 local center_list = require"telescope.themes".get_dropdown({
   winblend = 10,
-  width = 0.5,
+  layout_config = { width = 0.5 },
   prompt = " ",
-  results_height = 15,
+  -- results_height = 15,
   previewer = false,
 })
 
 local center_list_preview = require"telescope.themes".get_dropdown({
   winblend = 10,
-  width = 0.5,
   prompt = " ",
-  results_height = 15,
-  layout_config = { preview_width = 0.5 },
+  -- results_height = 15,
+  layout_config = { width = 0.5 },
 })
 
 -- Settings for with preview option
@@ -56,7 +44,7 @@ local with_preview = {
   show_line = false,
   results_title = false,
   preview_title = false,
-  layout_config = { preview_width = 0.5 },
+  -- layout_config = { preview_width = 0.5 },
 }
 local sorters = require "telescope.sorters"
 local previewers = require "telescope.previewers"
@@ -98,7 +86,18 @@ telescope.setup {
       "--vimgrep",
     },
     find_command = { "rg", "--ignore", "--hidden", "--files prompt_prefix=🔍" },
-    layout_config = { prompt_position = "top", width = 0.5 },
+    layout_config = {
+      center = { preview_cutoff = 40 },
+      height = 0.9,
+      width = 0.9,
+      horizontal = {
+        preview_cutoff = 120,
+        prompt_position = "top",
+        preview_width = 0.6,
+        -- mirror = fals
+      },
+      vertical = { preview_height = 0.5, preview_cutoff = 40 },
+    },
     prompt_prefix = "> ",
     selection_caret = "> ",
     -- prompt_prefix = "λ ",
@@ -109,18 +108,6 @@ telescope.setup {
     scroll_strategy = "cycle",
     color_devicons = true,
     winblend = 15,
-    horizontal = {
-      width_padding = 0.1,
-      height_padding = 0.1,
-      preview_width = 0.6,
-      -- mirror = false,
-    },
-    vertical = {
-      width_padding = 0.05,
-      height_padding = 1,
-      preview_height = 0.5,
-      -- mirror = true,
-    },
     mappings = {
       -- actions.add_selection, remove_selection, preview_scrolling_up/down, center, send/add_selected_to_loclist,
       -- open_qflist/loclist, cycle_previewers_next/previous, move_to_bottom/middle/top, smart_send, set_horizontal, set_vertical
@@ -147,28 +134,26 @@ telescope.setup {
     generic_sorter = require"telescope.sorters".get_generic_fuzzy_sorter,
     grep_previewer = previewers.vim_buffer_vimgrep.new,
     qflist_previewer = previewers.vim_buffer_qflist.new,
-    shorten_path = true,
+    path_display = "shorten", -- tail, hidden, absolute, shorten
     file_ignore_patterns = {},
   },
-  extensions = {
-    fzy_native = { override_generic_sorter = false, override_file_sorter = true },
-  },
+  extensions = { fzy_native = { override_generic_sorter = false, override_file_sorter = true } },
 }
 -- set_mappings()
 
-_G.FindFile = function()
+_G.FindFileCenter = function()
   local opts = vim.deepcopy(center_list)
   opts.prompt_title = "Find in project (CTRL-P)"
   opts.find_command = { "rg", "--hidden", "--files" }
   require("telescope.builtin").find_files(opts)
 end
 
-_G.FindBuffer = function()
-  local my_make_entry = require("rc.telescope.my_make_entry")
+_G.FindBufferCenter = function()
+  local leaderf = require("plugins.configs.lua.telescope-leaderf")
   local opts = vim.deepcopy(center_list_preview)
   opts.prompt_title = "Find in open buffers"
   opts.find_command = { "rg", "--hidden", "--files", "--color=never" }
-  opts.entry_maker = my_make_entry.gen_from_buffer_like_leaderf()
+  opts.entry_maker = leaderf.gen_from_buffer()
   require("telescope.builtin").buffers(opts)
 end
 
@@ -182,7 +167,7 @@ _G.FindString = function()
   require("telescope.builtin").grep_string(opts)
 end
 
-_G.FindLive = function()
+_G.FindLiveIvy = function()
   -- local opts = vim.deepcopy(with_preview)
   -- local opts = require "telescope.themes".get_dropdown({ winblend = 10 })
   local opts = require"telescope.themes".get_ivy({ winblend = 10 })
@@ -190,23 +175,27 @@ _G.FindLive = function()
   require("telescope.builtin").live_grep(opts)
 end
 
-_G.FindDot = function()
+_G.FindDotFiles = function()
   local opts = vim.deepcopy(center_list)
   opts.prompt_title = "Find in dotfiles"
   opts.cwd = "$HOME/.config"
-  opts.results_height = 10
+  opts.layout_config.height = 10
   require("telescope.builtin").find_files(opts)
 end
 
-_G.FindGit = function()
+_G.FindGitBranches = function()
   require("telescope.builtin").git_branches({
-    attach_mappings = function(_, map)
-      map("i", "<c-d>", actions.git_delete_branch)
-      map("n", "<c-d>", actions.git_delete_branch)
+    attach_mappings = function(_, mapKey)
+      mapKey("i", "<c-d>", actions.git_delete_branch)
+      mapKey("n", "<c-d>", actions.git_delete_branch)
       return true
     end,
   })
 end
+
+_G.FindBuffer = _G.FindBufferCenter
+_G.FindFile = _G.FindFileCenter
+_G.FindLive = _G.FindLiveIvy
 
 -- vim.cmd([[autocmd User TelescopePrompt setlocal wrap]])
 

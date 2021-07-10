@@ -2,20 +2,17 @@
 -- require("debug.typescript")
 local logger = require("logger");
 
--- install 3rd party plugin packages
-
+require "plugins-bootstrap"
 require "plugins"
 require "plugins-config"
 logger.debug("Loaded plugins")
-
-require "lsp.setup"
-logger.debug("Loaded LSP")
 
 -- general settings
 require "main.options"
 -- require "main.colorscheme"
 
-require "main.autocommands"
+require "lsp.setup"
+logger.debug("Loaded LSP")
 
 require "mappings"
 require "mappings.lsp"
@@ -26,8 +23,15 @@ require "mappings.unimpaired"
 require "mappings.formatters"
 require "mappings.movement"
 require "mappings.ignored"
+require "mappings.buffer"
+require "mappings.window"
+require "mappings.insert"
+require "mappings.visual"
+require "mappings.command"
 -- logger.info(vim.inspect(packer_plugins))
 -- logger.info(string.format("Finished at %s", os.date("%H:%M:%S")))
+
+require "main.autocommands"
 
 if packer_plugins ~= nil then
   local count = 0

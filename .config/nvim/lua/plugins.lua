@@ -17,6 +17,8 @@ return packer.startup({
     use "mhinz/vim-sayonara"
     use "aymericbeaumet/vim-symlink"
     use "lambdalisue/suda.vim"
+    use "jkramer/vim-checkbox"
+
     -- Project management
     use "airblade/vim-rooter"
     use "rmagatti/auto-session"
@@ -33,20 +35,17 @@ return packer.startup({
       use { "p00f/nvim-ts-rainbow", requires = "nvim-treesitter" }
       use { "windwp/nvim-ts-autotag", requires = "nvim-treesitter" }
       use { "nvim-treesitter/playground", requires = "nvim-treesitter" }
-      use {
-        "nvim-treesitter/nvim-treesitter-refactor",
-        requires = "nvim-treesitter",
-      }
+      use { "nvim-treesitter/nvim-treesitter-refactor", requires = "nvim-treesitter" }
+      use { "nvim-treesitter/nvim-treesitter-textobjects", requires = "nvim-treesitter" }
     end
 
     -- ====================================
-    use "njhoffman/vim-liquid"
-    use "vim-pandoc/vim-pandoc"
+    -- -- Syntax
     use "vim-pandoc/vim-pandoc-syntax"
     use "yuezk/vim-js"
     use "HerringtonDarkholme/yats.vim"
     use "maxmellon/vim-jsx-pretty"
-
+    -- use { "xolox/vim-lua-ftplugin", requires = "xolox/vim-misc" }
     use "godlygeek/tabular"
     -- use "kchmck/vim-coffee-script"
 
@@ -77,6 +76,8 @@ return packer.startup({
     use "plasticboy/vim-markdown"
     use "bfrg/vim-jq"
     use "mtdl9/vim-log-highlighting"
+    use "njhoffman/vim-liquid"
+    -- use "tpope/vim-liquid"
 
     -- ====================================
     -- LSP, Autocomplete and snippets
@@ -106,11 +107,7 @@ return packer.startup({
       use "hrsh7th/nvim-compe"
 
       -- might have to: cd .local/share/nvim/site/pack/packer/start/compe-tabnine && ./install.sh
-      use {
-        "tzachar/compe-tabnine",
-        run = "./install.sh",
-        requires = "hrsh7th/nvim-compe",
-      }
+      use { "tzachar/compe-tabnine", run = "./install.sh", requires = "hrsh7th/nvim-compe" }
 
       -- snippets
       use "hrsh7th/vim-vsnip"
@@ -127,18 +124,9 @@ return packer.startup({
     -- ====================================
     -- DAP
     if config.DAP.enabled ~= 0 and config.DAP.enabled ~= false then
-      use {
-        "rcarriga/nvim-dap-ui",
-        requires = { "theHamsta/nvim-dap-virtual-text", "mfussenegger/nvim-dap" },
-      }
-      use {
-        "jbyuki/one-small-step-for-vimkind",
-        requires = { "mfussenegger/nvim-dap" },
-      }
-      use {
-        "mfussenegger/nvim-dap-python",
-        requires = { "mfussenegger/nvim-dap" },
-      }
+      use { "rcarriga/nvim-dap-ui", requires = { "theHamsta/nvim-dap-virtual-text", "mfussenegger/nvim-dap" } }
+      use { "jbyuki/one-small-step-for-vimkind", requires = { "mfussenegger/nvim-dap" } }
+      use { "mfussenegger/nvim-dap-python", requires = { "mfussenegger/nvim-dap" } }
     end
 
     -- ====================================
@@ -147,11 +135,6 @@ return packer.startup({
     -- use "tools-life/taskwiki"
     -- use "xarthurx/vim-taskwarrior"
 
-    use {
-      "njhoffman/neuron.nvim",
-      branch = "unstable",
-      requires = { "nvim-lua/popup.nvim", "nvim-lua/plenary.nvim" },
-    }
     -- use {"vimwiki/vimwiki", branch = "dev"}
     -- use "chiefnoah/neuron-v2.vim"
     use { "skywind3000/asynctasks.vim", requires = "skywind3000/asyncrun.vim" }
@@ -194,10 +177,7 @@ return packer.startup({
     -- Pickers (telescope, fzf)
     use "matbme/JABS.nvim"
     use { "camspiers/snap", rocks = { "fzy" } }
-    use {
-      "junegunn/fzf.vim",
-      requires = { "junegunn/fzf", dir = "~/.fzf", run = "./install --all" },
-    }
+    use { "junegunn/fzf.vim", requires = { "junegunn/fzf", dir = "~/.fzf", run = "./install --all" } }
     use {
       "yuki-yano/fzf-preview.vim",
       dir = "~/.fzf",
@@ -221,33 +201,26 @@ return packer.startup({
     -- FzyBuffer - fzy select :ls
 
     use {
-      "nvim-telescope/telescope-fzy-native.nvim",
-      requires = { "nvim-telescope/telescope.nvim", "Dkendal/fzy-vim" },
+      "oberblastmeister/neuron.nvim", -- "njhoffman/neuron.nvim",
+      branch = "unstable",
+      requires = { "nvim-lua/popup.nvim", "nvim-lua/plenary.nvim", "nvim-telescope/telescope.nvim" },
     }
+    use { "nvim-telescope/telescope-fzy-native.nvim", requires = { "nvim-telescope/telescope.nvim", "Dkendal/fzy-vim" } }
     --[[ use {
     "nvim-telescope/telescope-project.nvim",
     requires = "nvim-telescope/telescope.nvim"
   } ]]
-    use {
-      "nvim-telescope/telescope-fzf-native.nvim",
-      requires = "nvim-telescope/telescope.nvim",
-    }
-    use {
-      "nvim-telescope/telescope-packer.nvim",
-      requires = "nvim-telescope/telescope.nvim",
-    }
-    use {
-      "nvim-telescope/telescope-dap.nvim",
-      requires = { "mfussenegger/nvim-dap", "nvim-telescope/telescope.nvim" },
-    }
-    use {
-      "rmagatti/session-lens",
-      requires = { "rmagatti/auto-session", "nvim-telescope/telescope.nvim" },
-    }
+    use { "nvim-telescope/telescope-fzf-native.nvim", requires = "nvim-telescope/telescope.nvim" }
+    use { "nvim-telescope/telescope-packer.nvim", requires = "nvim-telescope/telescope.nvim" }
+    use { "nvim-telescope/telescope-dap.nvim", requires = { "mfussenegger/nvim-dap", "nvim-telescope/telescope.nvim" } }
+    use { "rmagatti/session-lens", requires = { "rmagatti/auto-session", "nvim-telescope/telescope.nvim" } }
     use {
       "GustavoKatel/telescope-asynctasks.nvim",
-      requires = { "skywind3000/asynctasks.vim",
-                   "nvim-telescope/telescope.nvim" },
+      requires = { "skywind3000/asynctasks.vim", "nvim-telescope/telescope.nvim" },
+    }
+    use {
+      "sudormrfbin/cheatsheet.nvim",
+      requires = { { "nvim-telescope/telescope.nvim" }, { "nvim-lua/popup.nvim" }, { "nvim-lua/plenary.nvim" } },
     }
 
     -- ====================================
@@ -259,13 +232,14 @@ return packer.startup({
     use "Xuyuanp/scrollbar.nvim"
     use "TaDaa/vimade"
     use "romainl/vim-cool"
+    use "Pocco81/TrueZen.nvim"
 
     -- ====================================
     -- Motion plugins
     use "psliwka/vim-smoothie"
     use "chaoren/vim-wordmotion"
     use { "andymass/vim-matchup", event = "BufEnter" }
-
+    use { "AckslD/nvim-anywise-reg.lua" }
     -- ====================================
     -- Formatting utils
     use "junegunn/vim-easy-align"
@@ -300,6 +274,7 @@ return packer.startup({
     use "ncm2/float-preview.nvim"
     use "voldikss/vim-floaterm"
     use "voldikss/fzf-floaterm"
+
     -- use { "voldikss/LeaderF-floaterm", requires = "Yggdroot/LeaderF" }
     -- use 'windwp/vim-floaterm-repl'
     -- use "mtth/scratch.vim"
@@ -328,9 +303,7 @@ return packer.startup({
       threshold = 0, -- the amount in ms that a plugins load time must be over for it to be included in the profile
     },
     display = {
-      open_fn = function()
-        return require("packer.util").float({ border = "single" })
-      end,
+      open_fn = function() return require("packer.util").float({ border = "single" }) end,
       keybindings = { -- Keybindings for the display window
         quit = "<esc>",
         toggle_info = "<CR>",
@@ -361,7 +334,6 @@ return packer.startup({
 --    use 'tools-life/taskwiki'
 -- use 'justinmk/vim-dirvish'
 -- Plugin development
--- use 'folke/lua-dev.nvim'
 --  Plug "rafcamlet/nvim_luapad"
 -- "machakann/vim_sandwich",
 --   "windwp/nvim_autopairs",

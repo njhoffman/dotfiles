@@ -2,26 +2,27 @@
 local lspconfig = require "lspconfig"
 local lsp_cmds = require("lsp.commands")
 local on_attach_hook = require("lsp.on_attach_hook")
+local lsp_status = require("lsp.plugins.lsp-status")
 
 local capabilities = vim.lsp.protocol.make_client_capabilities()
 capabilities.textDocument.completion.completionItem.snippetSupport = true
-require"logger".debug(capabilities)
+capabilities = vim.tbl_extend("keep", capabilities or {}, lsp_status.capabilities)
 
 -- function to attach completion when setting up lsp
 local on_attach = function(client, bufnr)
   client.resolved_capabilities.document_formatting = true
+  -- require"logger".debug(client.resolved_capabilities)
   on_attach_hook.common_on_attach(client, bufnr)
-  print("'" .. client.name .. "' server attached " .. bufnr)
+  -- print("'" .. client.name .. "' server attached " .. bufnr)
 end
 
 lspconfig.yamlls.setup {
+  on_attach = on_attach,
+  capabilities = capabilities,
   cmd = lsp_cmds.yaml,
   filetypes = { "yaml", "yml" },
-  root_dir = function(fname)
-    return lspconfig.util.root_pattern(".git")(fname) or
-               lspconfig.util.path.dirname(fname)
-  end,
-  settings = { yaml = { format = { enable = true } } },
+  root_dir = function(fname) return lspconfig.util.root_pattern(".git")(fname) or lspconfig.util.path.dirname(fname) end,
+  settings = { yaml = { format = { enable = true, printWidth = 120, proseWrap = "preserve" } } },
 
   -- redhat.telemetry.enabled: boolean Default: vim.NIL null
   -- yaml.completion: boolean Default: true Enable/disable completion feature
@@ -40,5 +41,4 @@ lspconfig.yamlls.setup {
   -- yaml.trace.server: enum { "off", "messages", "verbose" } Default: "off" Traces the communication between VSCode and the YAML language service.
   -- yaml.validate: boolean Default: true Enable/disable validation feature
   -- filetypes = {"Dockerfile"},
-  on_attach = on_attach,
 }

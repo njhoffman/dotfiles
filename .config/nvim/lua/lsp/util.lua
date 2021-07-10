@@ -1,5 +1,5 @@
 
-local g, o, bo = vim.g, vim.o, vim.bo
+  local g, o, bo = vim.g, vim.o, vim.bo
 local util, api, cmd, fn, lsp = vim.lsp.util, vim.api, vim.cmd, vim.fn, vim.lsp
 local fnamemodify = fn.fnamemodify
 local U = {}

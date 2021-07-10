@@ -8,7 +8,7 @@ g.nvim_tree_side = config.explorer_side
 g.nvim_tree_auto_close = 1
 g.nvim_tree_auto_open = 1
 g.nvim_tree_disable_keybindings = 0
-g.nvim_tree_disable_netrw = 1
+g.nvim_tree_disable_netrw = 0
 g.nvim_tree_follow = 1
 g.nvim_tree_git_hl = 1
 g.nvim_tree_hijack_netrw = 1
@@ -19,10 +19,7 @@ g.nvim_tree_tab_open = 0
 g.nvim_tree_width = 40
 g.nvim_tree_auto_ignore_ft = { "startify", "dashboard" }
 g.nvim_tree_ignore = { ".git", "node_modules", ".cache" }
-g.nvim_tree_window_picker_exclude = {
-  filetype = { "packer", "qf" },
-  buftype = { "terminal" },
-}
+g.nvim_tree_window_picker_exclude = { filetype = { "packer", "qf" }, buftype = { "terminal" } }
 
 g.nvim_tree_icons = {
   default = "",
@@ -37,14 +34,7 @@ g.nvim_tree_icons = {
     deleted = "",
     ignored = "◌",
   },
-  folder = {
-    default = "",
-    open = "",
-    empty = "",
-    empty_open = "",
-    symlink = "",
-    symlink_open = "",
-  },
+  folder = { default = "", open = "", empty = "", empty_open = "", symlink = "", symlink_open = "" },
 }
 -- g.nvim_tree_bindings = {
 --   -- custom mapping
@@ -87,9 +77,7 @@ g.nvim_tree_icons = {
 
 -- require("nvim-tree").on_enter()
 
-require("nvim-tree.events").on_nvim_tree_ready(function()
-  vim.cmd("NvimTreeRefresh")
-end)
+require("nvim-tree.events").on_nvim_tree_ready(function() vim.cmd("NvimTreeRefresh") end)
 
 -- g.nvim_tree_icons = {
 --   default = "",

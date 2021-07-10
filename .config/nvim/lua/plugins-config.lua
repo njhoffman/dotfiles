@@ -25,6 +25,7 @@ require("plugins.configs.lua.telescope")
 require("plugins.configs.lua.nvim_web_devicons")
 
 -- syntax
+require("plugins.configs.vim.pandoc")
 -- Don't highlight builtin functions/filters (default: 1)
 vim.g.jq_highlight_builtin_functions = 0
 
@@ -85,7 +86,6 @@ require("plugins.configs.lua.neuron")
 require("plugins.configs.vim.vimux")
 require("plugins.configs.vim.asynctasks")
 require("plugins.configs.vim.vim-ripple")
-require("plugins.configs.vim.pandoc")
 
 -- interfaces
 require("plugins.configs.lua.nvim_bqf")
@@ -108,11 +108,13 @@ require("plugins.configs.vim.float-preview")
 require("plugins.configs.vim.vim_smoothie")
 require("plugins.configs.vim.vim_wordmotion")
 require("plugins.configs.vim.vim_matchup")
+require("plugins.configs.lua.anywise-reg")
 
 -- visual
 require("plugins.configs.vim.vim_hexokinase")
 require("plugins.configs.vim.vimade")
 require("plugins.configs.vim.scrollbar")
+require("plugins.configs.lua.truezen")
 require("plugins.configs.vim.vim_plugin_AnsiEsc")
 
 -- reload
@@ -127,12 +129,21 @@ local properties = require("feline.presets")["default"].properties
 local function LspStatus()
   if #vim.lsp.buf_get_clients() > 0 then return require("lsp-status").status() end
   return ""
+  -- return require("lsp-status").status_progress()
 end
 
-table.insert(components.right.active, 1, {
-  provider = LspStatus,
-  hl = { fg = "cyan", bg = "bg", style = "bold" },
-})
+local function LspLightbulb()
+  if #vim.lsp.buf_get_clients() > 0 then return require"nvim-lightbulb".get_status_text() end
+  return ""
+end
+
+table.insert(components.right.active, 1, { provider = LspStatus, hl = { fg = "cyan", bg = "bg", style = "bold" } })
+-- table.insert(components.right.active, { provider = LspStatus, hl = { fg = "cyan", bg = "bg", style = "bold" } })
+
+-- table.insert(components.right.active, 1, {
+--   provider = LspLightbulb, -- hl = { fg = "cyan", bg = "bg", style = "bold" },
+-- })
+
 table.insert(properties.force_inactive.filetypes, "dapui_scopes")
 table.insert(properties.force_inactive.filetypes, "dapui_watches")
 table.insert(properties.force_inactive.filetypes, "dapui_breakpoints")

@@ -5,7 +5,6 @@ require"neuron".setup {
   mappings = true,
   run = nil, -- function to run when in neuron dir
   neuron_dir = "~/zettelkasten",
-  -- neuron_dir = "~/reference/zettel/neuron-docs",
   leader = "gz", -- the leader key to for all mappings, remember with 'go zettel'
 }
 vim.cmd([[nnoremap <buffer> <CR> <cmd>lua require'neuron'.enter_link()<CR>]])

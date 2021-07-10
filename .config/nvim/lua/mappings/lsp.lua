@@ -81,6 +81,8 @@ local lsp_maps = {
     ["y"] = { "<cmd>lua vim.lsp.buf.type_definition()<cr>", "buffer definition" },
     -- other goto/transforms under cursor
     ["f"] = { "Edit file under cursor" },
+    -- TODO: create fallback function goto definition
+    ["F"] = { ":exec 'normal ^f\'''<bar>exec 'normal f\"'<bar> exec 'normal gf'<cr>", "Edit file under line" },
     ["x"] = { "Open file under cursor" }, -- map X to background
     ["i"] = { "Move to last insertion" },
     ["I"] = { "Insert at beginning" },
@@ -89,25 +91,26 @@ local lsp_maps = {
     ["U"] = { "Uppercase motion" },
     ["n"] = { "Select last search match" },
     ["v"] = { "visually select last edited/pasted text" },
+    ["zi"] = { "zettel open home" },
+    ["zz"] = { "<cmd>lua require'neuron/telescope'.find_zettels()<cr>", "zettels search" },
     -- ["c"] = { "comment text" },
+  },
+  --- repl
+  ["<leader>r"] = {
+    name = "+repl actions",
+    ["t"] = { "<cmd>call ripple#send_buffer()<cr>", "repl buffer" },
+    ["m"] = { "<cmd>call ripple#send_motion()<cr>", "repl motion" },
+    ["p"] = { "<cmd>call ripple#send_previous()<cr>", "repl previous" },
+    ["r"] = { "<cmd>call ripple#send_buffer()<cr>", "repl buffer" },
   },
   --- lsp actions
   ["<leader>l"] = {
     name = "+lsp",
     ["a"] = { "<cmd>Lspsaga code_action<cr>", "code action" },
     ["A"] = { "<cmd>Lspsaga range_code_action<cr>", "selected action" },
-    ["d"] = {
-      "<cmd>Telescope lsp_document_diagnostics<cr>",
-      "document diagnostics",
-    },
-    ["D"] = {
-      "<cmd>Telescope lsp_workspace_diagnostics<cr>",
-      "workspace diagnostics",
-    },
-    ["e"] = {
-      "<cmd>lua vim.cmd('e'..vim.lsp.get_log_path())<cr>",
-      "view lsp log",
-    },
+    ["d"] = { "<cmd>Telescope lsp_document_diagnostics<cr>", "document diagnostics" },
+    ["D"] = { "<cmd>Telescope lsp_workspace_diagnostics<cr>", "workspace diagnostics" },
+    ["e"] = { "<cmd>lua vim.cmd('e'..vim.lsp.get_log_path())<cr>", "view lsp log" },
     ["l"] = { "<cmd>Lspsaga show_line_diagnostics<cr>", "line diagnostics" },
     ["f"] = { "<cmd>Lspsaga lsp_finder<cr>", "lsp finder" },
     ["i"] = { "<cmd>LspInfo<cr>", "lsp server info" },
@@ -121,13 +124,7 @@ local lsp_maps = {
   },
 }
 
-local lsp_opts = {
-  mode = "n",
-  buffer = nil,
-  silent = true,
-  noremap = true,
-  nowait = false,
-}
+local lsp_opts = { mode = "n", buffer = nil, silent = true, noremap = true, nowait = false }
 require("which-key").register(lsp_maps, lsp_opts)
 
 -- map("n", "<Leader>/", ":Ack!<Space>")

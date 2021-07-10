@@ -8,10 +8,10 @@ vim.cmd([[
 
 vim.cmd([[ let g:pandoc#syntax#style#underline_special = 0 ]])
 
-vim.cmd([[ hi! Underlined gui=NONE ]])
+vim.cmd([[let g:pandoc#syntax#conceal#use = 1]])
 
+vim.cmd([[let g:pandoc#syntax#conceal#urls = 1]])
 -- + *g:pandoc#syntax#conceal#urls*
-
 -- a = accents/ligatures
 -- b = bold and italic
 -- d = delimiters
@@ -44,13 +44,10 @@ vim.cmd([[ hi! Underlined gui=NONE ]])
 -- - ellipses
 -- - quotes
 -- - inlinecode
-vim.cmd([[let g:pandoc#syntax#conceal#urls = 1]])
 
-vim.cmd([[let g:pandoc#syntax#conceal#use = 1]])
 -- let g:pandoc#syntax#codeblocks#embeds#langs = ["ruby", "python", "cpp", "sh", "html", "javascript", "css", "zsh", "terraform", "ansible", "bash=sh"]
-
 vim.cmd([[
-  let g:pandoc#syntax#codeblocks#embeds#langs = ["shell=sh", "javascript", "sh", "bash=sh"]
+  let g:pandoc#syntax#codeblocks#embeds#langs = ["shell=sh", "javascript", "cpp", "c", "go", "sh", "bash=sh", "cpp", "ruby", "python", "sql", "lua"]
 ]])
 
 -- vim.cmd([[let g:pandoc#syntax#conceal#cchar_overrides = {"footnote" : "*"}]])

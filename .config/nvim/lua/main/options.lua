@@ -27,7 +27,7 @@ opt("tw", 1000)
 opt("swapfile", false)
 opt("clipboard", "unnamedplus")
 -- opt("cmdheight", 2)
-opt("cmdheight", 1)
+opt("cmdheight", 2)
 opt("cmdwinheight", 7)
 opt("completeopt", "noinsert,noselect,menuone")
 opt("cpoptions", "aABceFs_")
@@ -49,8 +49,8 @@ opt("mouse", "nivh")
 opt("previewheight", 7)
 opt("scrolloff", 7)
 opt("shada", [[!,'2000,<2000,s300,:3000,n~/.vim/.shada]])
--- opt("shortmess", o.shortmess .. "cS")
-opt("shortmess", "filnxtToOcSIs")
+-- opt("shortmess", o.shortmess .. "cS") F echoes filename
+opt("shortmess", "afilnxtToOcSIsF")
 opt("showmatch", true)
 opt("showmode", false)
 opt("sidescrolloff", 5)
@@ -63,7 +63,7 @@ opt("undolevels", 1000)
 opt("updatetime", 300)
 opt("whichwrap", o.whichwrap .. "<,>,h,l")
 opt("wildignore", "*.o,*~,*.pyc")
-opt("wildmode", "longest,full")
+opt("wildmode", "longest:full,full")
 opt("writebackup", false)
 opt("timeoutlen", 500)
 opt("pumheight", 20)
@@ -81,7 +81,7 @@ opt("conceallevel", 2, window)
 opt("cursorline", true, window)
 opt("number", true, window)
 opt("relativenumber", true, window)
-opt("signcolumn", "auto:1", window)
+opt("signcolumn", "yes:1", window)
 opt("wrap", false, window)
 
 -- buffer scope
@@ -101,15 +101,13 @@ opt("fileformat", "unix", buffer)
 vim.cmd [[autocmd BufReadPost * lua goto_last_pos()]]
 function goto_last_pos()
   local last_pos = vim.fn.line("'\"")
-  if last_pos > 0 and last_pos <= vim.fn.line("$") then
-    vim.api.nvim_win_set_cursor(0, { last_pos, 0 })
-  end
+  if last_pos > 0 and last_pos <= vim.fn.line("$") then vim.api.nvim_win_set_cursor(0, { last_pos, 0 }) end
 end
 
 -- " Set to auto read when a file is changed from the outside
 -- au FocusGained,BufEnter * checktime
 -- enable syntax highlighting
-vim.cmd([[syntax on]])
+vim.cmd([[set syntax=on]])
 
 -- " Enable filetype plugins
 vim.cmd([[filetype plugin on]])

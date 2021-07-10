@@ -1,15 +1,28 @@
+-- Blink current search match
+-- vim.cmd('nnoremap <silent> n n:call <SID>BlinkCurrentMatch()<CR>')
+-- vim.cmd('nnoremap <silent> N N:call <SID>BlinkCurrentMatch()<CR>')
+-- ["<C-f>"] = {"<Plug>(SmoothieForwards)", "Scroll forward"},
+-- TODO: fork and add option to limit overshot
+-- TODO: add shift mapping for twice the speed
 local movement_map = {
-  ["<C-f>"] = {"<Plug>(SmoothieDownwards)<Plug>(SmoothieDownwards)", "Scroll forward"},
-  ["<C-b>"] = {"<Plug>(SmoothieBackwards)", "Scroll backwards"},
-  ["G"] = {"<Plug>(Smoothie_G)", "Scroll to bottom"},
-  ["gg"] = {"<Plug>(Smoothie_gg)", "Scroll to top"},
+  ["<C-f>"] = {
+    "<Plug>(SmoothieDownwards)<Plug>(SmoothieDownwards)",
+    "Scroll forward",
+  },
+  ["<C-b>"] = { "<Plug>(SmoothieBackwards)", "Scroll backwards" },
+  ["G"] = { "<Plug>(Smoothie_G)", "Scroll to bottom" },
+  ["gg"] = { "<Plug>(Smoothie_gg)", "Scroll to top" },
   -- HlsLens
-  ["n"] = {"<Cmd>execute('normal! ' . v:count1 . 'n')<CR><Cmd>lua require('hlslens').start()<CR>"},
-  ["N"] = {"<Cmd>execute('normal! ' . v:count1 . 'N')<CR><Cmd>lua require('hlslens').start()<CR>"},
-  ["*"] = {"*<Cmd>lua require('hlslens').start()<CR>"},
-  ["#"] = {"#<Cmd>lua require('hlslens').start()<CR>"},
-  ["g*"] = {"g*<Cmd>lua require('hlslens').start()<CR>"},
-  ["g#"] = {"g#<Cmd>lua require('hlslens').start()<CR>"}
+  ["n"] = {
+    "<Cmd>execute('normal! ' . v:count1 . 'n')<CR><Cmd>lua require('hlslens').start()<CR>",
+  },
+  ["N"] = {
+    "<Cmd>execute('normal! ' . v:count1 . 'N')<CR><Cmd>lua require('hlslens').start()<CR>",
+  },
+  ["*"] = { "*<Cmd>lua require('hlslens').start()<CR>" },
+  ["#"] = { "#<Cmd>lua require('hlslens').start()<CR>" },
+  ["g*"] = { "g*<Cmd>lua require('hlslens').start()<CR>" },
+  ["g#"] = { "g#<Cmd>lua require('hlslens').start()<CR>" },
 }
 
 local opts = {
@@ -17,7 +30,7 @@ local opts = {
   buffer = nil,
   silent = true,
   noremap = true,
-  nowait = false
+  nowait = false,
 }
 --- Spectre
 -- vim.api.nvim_set_keymap('n', '<leader>S', ":lua require('spectre').open()<CR>", {noremap = true, silent = false})

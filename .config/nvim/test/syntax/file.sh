@@ -1,3 +1,5 @@
+#!/bin/bash
+
 left=()
 right=()
 value=()
@@ -31,10 +33,10 @@ node 9
 # walk NODE# ORDER
 
 walk() {
-  local nx=${1-"Missing index"}
-  shift
-  for branch in "$@" ; do
-    case "$branch" in
+  for branch in "$@"; do
+    case
+      left)  if [[ "${left[$nx]}" ]]; then      walk ${left[$nx]}  $@;  fi ;;
+      right) if [[ "${right[$nx]}" ]]; then     walk ${right[$nx]} $@;  fi ;;
       left)  if [[ "${left[$nx]}" ]];      then walk ${left[$nx]}  $@ ; fi ;;
       right) if [[ "${right[$nx]}" ]];     then walk ${right[$nx]} $@ ; fi ;;
       self)  printf "%d " "${value[$nx]}"  ;;
@@ -56,19 +58,19 @@ showdata() {
   shift
   walk "$@"
   echo ''
-}
-
-preorder()  { showdata $FUNCNAME $1 self left right ; }
+preorder()  { showdata $FUNCNAME $1 self left right;  }
+inorder()   { showdata $FUNCNAME $1 left self right;  }
+postorder() { showdata $FUNCNAME $1 left right self;  }
 inorder()   { showdata $FUNCNAME $1 left self right ; }
 postorder() { showdata $FUNCNAME $1 left right self ; }
-levelorder() {
+  queue=($1)
   showname 'level-order'
   queue=( $1 )
   x=0
   while [[ $x < ${#queue[*]} ]]; do
-    value="${queue[$x]}"
+    for more in "${left[$value]}" "${right[$value]}"; do
     printf "%d " "$value"
-    for more in "${left[$value]}" "${right[$value]}" ; do
+        apush queue "$more"
       if [[ -n "$more" ]]; then
 	apush queue "$more"
       fi
