@@ -5,6 +5,7 @@ local logger = require("logger");
 require "plugins-bootstrap"
 require "plugins"
 require "plugins-config"
+
 logger.debug("Loaded plugins")
 
 -- general settings

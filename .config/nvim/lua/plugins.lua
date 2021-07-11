@@ -1,5 +1,6 @@
 -- require"utils.bootstrap_packer"
-local packer = require "packer"
+-- local packer = require "packer"
+local packer = require "/home/nicholas/.local/share/nvim/site/pack/packer/start/packer.nvim"
 local config = require "config"
 
 return packer.startup({
@@ -292,14 +293,8 @@ return packer.startup({
     -- ====================================
     -- Themes
     use { "romgrk/barbar.nvim", requires = "romgrk/doom-one.vim" }
-    use "famiu/feline.nvim"
-    use {
-      "rktjmp/lush.nvim",
-      config = function()
-        vim.cmd("colorscheme nord-nick")
-        vim.cmd("source $HOME/.config/nvim/colors/barbar-colors.vim")
-      end,
-    }
+    use { "famiu/feline.nvim" }
+    use { "rktjmp/lush.nvim" }
   end,
   config = {
     profile = {

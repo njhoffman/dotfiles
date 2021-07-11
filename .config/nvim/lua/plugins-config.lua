@@ -195,4 +195,8 @@ require("feline").setup({
   components = components,
   separators = separators,
 })
+
+vim.cmd("colorscheme nord-nick")
+vim.cmd("source $HOME/.config/nvim/colors/barbar-colors.vim")
+
 -- require("plugins.configs.lua.barbar")

@@ -63,11 +63,11 @@ local spec = lush.extends({ nord }).with(function()
     Function { fg = "#6e99c6" },
     String { fg = "#00a0a9" },
     Comment { fg = "#5c667a", gui = "italic" },
-    Constant { fg = "#6699aa" },
+    Constant { fg = "#5679b3" },
     Identifier { fg = "#6e99c6" },
     Keyword { fg = "#6177b8" },
     -- Type { fg = "#818cc4" },
-    Type { fg = "#518cb4" },
+    Type { fg = "#718cb4" },
     MatchParen { fg = "#60a0a0", bg = "000022" },
     MatchParenCursor { fg = "#a0c0b0" },
     Visual { fg = "none", bg = clr_over.selection },
@@ -227,6 +227,9 @@ local spec = lush.extends({ nord }).with(function()
     DapUIBreakpointsInfo { fg = "#A9FF68" },
     DapUIBreakpointsCurrentLine { fg = "#A9FF68", gui = "bold" },
     DapUIVariable { fg = "#6484cF" },
+    jsonKeyword { fg = '#446688' },
+    TSLabel { fg = '#6688ba' }, -- For labels: `label:` in C and `:label:` in Lua.
+
     -- DapUIFrameName { Normal },
     -- DapUIBreakpointsLive { DapUILineNumber },
     -- DapVariableTreeType { Comment },
